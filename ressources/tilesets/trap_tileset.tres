@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://m5ulicf6wm0o"]
+
+[ext_resource type="PackedScene" uid="uid://dwyc1xb3bavyv" path="res://prefabs/traps/Spikes.tscn" id="1_16bj3"]
+[ext_resource type="PackedScene" uid="uid://cq0dyrn14nfnf" path="res://prefabs/traps/Trampoline.tscn" id="2_83s44"]
+[ext_resource type="PackedScene" uid="uid://cc8s1kq0yww6p" path="res://prefabs/traps/FallingPlatform.tscn" id="3_80cw5"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_83s44"]
+resource_name = "Traps"
+scenes/1/scene = ExtResource("1_16bj3")
+scenes/2/scene = ExtResource("2_83s44")
+scenes/3/scene = ExtResource("3_80cw5")
+
+[resource]
+sources/0 = SubResource("TileSetScenesCollectionSource_83s44")

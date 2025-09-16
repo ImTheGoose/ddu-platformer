@@ -1,0 +1,10 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dm0uv7n0xo0sl"]
+
+[ext_resource type="PackedScene" uid="uid://btu7xbmgfkame" path="res://prefabs/collectables/apple.tscn" id="1_58wtd"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ehek2"]
+resource_name = "Collectables"
+scenes/1/scene = ExtResource("1_58wtd")
+
+[resource]
+sources/0 = SubResource("TileSetScenesCollectionSource_ehek2")

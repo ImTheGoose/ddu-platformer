@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwjypqfmpettn"]
+
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="1_fos0i"]
+[ext_resource type="Script" uid="uid://cecm80ev4s47o" path="res://map_loader.gd" id="1_glv2v"]
+[ext_resource type="Texture2D" uid="uid://cfyrwu5jj40ea" path="res://asset_pack/Background/Green.png" id="2_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://drvkqcspsfdm0" path="res://test_scene.tscn" id="2_uu6xs"]
+[ext_resource type="Theme" uid="uid://cr0fp3bqdhf5g" path="res://ressources/ui_theme.tres" id="3_r0du0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
+shader = ExtResource("1_fos0i")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+
+[sub_resource type="InputEventKey" id="InputEventKey_uu6xs"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_r0du0"]
+events = [SubResource("InputEventKey_uu6xs")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_r0du0"]
+device = -1
+keycode = 80
+unicode = 112
+
+[sub_resource type="Shortcut" id="Shortcut_cm0pq"]
+events = [SubResource("InputEventKey_r0du0")]
+
+[node name="Main" type="Node"]
+process_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -50
+texture_repeat = 2
+material = SubResource("ShaderMaterial_lgr22")
+offset_left = 3.0
+offset_top = 17.0
+offset_right = 634.0
+offset_bottom = 381.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_3dxm6")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Map_Loader" type="Node2D" parent="."]
+process_mode = 1
+script = ExtResource("1_glv2v")
+map_prefab = ExtResource("2_uu6xs")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -964.0
+offset_top = -536.0
+offset_right = 964.0
+offset_bottom = 541.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="restartButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 8.0
+offset_right = 249.0
+offset_bottom = 47.0
+theme = ExtResource("3_r0du0")
+shortcut = SubResource("Shortcut_r0du0")
+text = "Restart"
+
+[node name="pauseButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 55.0
+offset_right = 250.0
+offset_bottom = 94.0
+focus_mode = 0
+theme = ExtResource("3_r0du0")
+toggle_mode = true
+shortcut = SubResource("Shortcut_cm0pq")
+text = "Pause"
+
+[connection signal="pressed" from="UI/restartButton" to="Map_Loader" method="_on_restart_button_pressed"]
+[connection signal="toggled" from="UI/pauseButton" to="Map_Loader" method="_on_pause_button_toggled"]
