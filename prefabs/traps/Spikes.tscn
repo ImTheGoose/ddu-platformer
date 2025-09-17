@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwyc1xb3bavyv"]
 
-[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/spikes.gd" id="1_fysbu"]
+[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="1_fysbu"]
 [ext_resource type="Texture2D" uid="uid://cd23tadwq2v3c" path="res://asset_pack/Traps/Spikes/Idle.png" id="1_xh5ig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fysbu"]

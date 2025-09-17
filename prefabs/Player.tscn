@@ -401,6 +401,8 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 visibility_layer = 3
 scale = Vector2(3, 3)
+collision_layer = 15
+collision_mask = 15
 safe_margin = 2.5
 script = ExtResource("1_0ep8a")
 
