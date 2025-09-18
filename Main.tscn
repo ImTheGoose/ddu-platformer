@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cecm80ev4s47o" path="res://map_loader.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cfyrwu5jj40ea" path="res://asset_pack/Background/Green.png" id="2_3dxm6"]
 [ext_resource type="Theme" uid="uid://cr0fp3bqdhf5g" path="res://ressources/ui_theme.tres" id="3_r0du0"]
-[ext_resource type="PackedScene" uid="uid://fx0t20b4cmre" path="res://maps/map_02.tscn" id="4_fos0i"]
+[ext_resource type="PackedScene" uid="uid://ds7c3nyx5ey48" path="res://maps/Map_01.tscn" id="4_fos0i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
 shader = ExtResource("1_fos0i")
@@ -34,10 +34,10 @@ process_mode = 3
 z_index = -50
 texture_repeat = 2
 material = SubResource("ShaderMaterial_lgr22")
-offset_left = 3.0
-offset_top = 17.0
-offset_right = 634.0
-offset_bottom = 381.0
+offset_left = 28.0
+offset_top = -18.0
+offset_right = 659.0
+offset_bottom = 346.0
 scale = Vector2(3, 3)
 texture = ExtResource("2_3dxm6")
 stretch_mode = 1
