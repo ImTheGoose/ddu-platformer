@@ -11,11 +11,23 @@ var height :float = 0
 var current_connection_type :MapInfo.connection_type
 
 func _ready() -> void:
+	if map_arr.is_empty():
+		map_arr = transition_arr.duplicate()
+		map_arr_full = map_arr.duplicate()
+	
+	GameManager.on_reset_game.connect(_clear_map)
 	_insert_map(start_map, _get_map_global_position())
 	return
 
 func _process(delta: float) -> void:
 	_update_view_zone()
+
+func _clear_map():
+	for child in get_children():
+		child.queue_free()
+	height = 0
+	current_connection_type = MapInfo.connection_type.typeA
+	_insert_map(start_map, _get_map_global_position())
 
 func _get_part() -> MapInfo:
 	if map_arr.is_empty():

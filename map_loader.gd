@@ -24,8 +24,8 @@ func _on_restart_button_pressed() -> void:
 
 func _on_pause_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
-		StateManager.pause_game()
+		GameManager.pause_game()
 	else:
-		StateManager.un_pause_game()
+		GameManager.un_pause_game()
 	
 	pass # Replace with function body.
