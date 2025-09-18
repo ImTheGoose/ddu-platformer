@@ -1,15 +1,111 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwjypqfmpettn"]
+[gd_scene load_steps=38 format=3 uid="uid://bwjypqfmpettn"]
 
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="1_fos0i"]
-[ext_resource type="Script" uid="uid://cecm80ev4s47o" path="res://map_loader.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cfyrwu5jj40ea" path="res://asset_pack/Background/Green.png" id="2_3dxm6"]
-[ext_resource type="PackedScene" uid="uid://drvkqcspsfdm0" path="res://test_scene.tscn" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://map_loader_test/start_map.tscn" id="2_5tuhn"]
+[ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_cm0pq"]
 [ext_resource type="Theme" uid="uid://cr0fp3bqdhf5g" path="res://ressources/ui_theme.tres" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://084dse05megq" path="res://map_loader_test/map_sample_1.tscn" id="4_fos0i"]
+[ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://map_loader_test/MapInfo.gd" id="4_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://dfr6jafaes8sf" path="res://map_loader_test/map_sample_5.tscn" id="6_kjvhd"]
+[ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://map_loader_test/trans_A_to_C.tscn" id="6_sc1dx"]
+[ext_resource type="PackedScene" uid="uid://dxct3442088nm" path="res://map_loader_test/map_sample_3.tscn" id="7_5vvyt"]
+[ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://map_loader_test/trans_B_to_C.tscn" id="7_kjvhd"]
+[ext_resource type="PackedScene" uid="uid://co51mwkw4pyh8" path="res://map_loader_test/trans_D_to_C.tscn" id="8_5tuhn"]
+[ext_resource type="PackedScene" uid="uid://dhurwbghalss0" path="res://map_loader_test/map_sample_4.tscn" id="8_c6i3y"]
+[ext_resource type="PackedScene" uid="uid://ck0t6e8l7ph1a" path="res://map_loader_test/trans_E_to_C.tscn" id="9_2gh4u"]
+[ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://map_loader_test/trans_C_to_A.tscn" id="10_devvj"]
+[ext_resource type="PackedScene" uid="uid://daixf013bdduf" path="res://map_loader_test/trans_C_to_B.tscn" id="11_3b0ty"]
+[ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="12_5vvyt"]
+[ext_resource type="PackedScene" uid="uid://by6dsb2rxmexr" path="res://map_loader_test/trans_C_to_D.tscn" id="12_bg4s2"]
+[ext_resource type="PackedScene" uid="uid://da8ypldv2i7b3" path="res://map_loader_test/trans_C_to_E.tscn" id="13_hhcpw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
-shader = ExtResource("1_fos0i")
-shader_parameter/direction = Vector2(1, 1)
-shader_parameter/speed = 0.2
+[sub_resource type="Resource" id="Resource_2gh4u"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("2_5tuhn")
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_j4qnp"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("4_fos0i")
+start_connection = 4
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_sc1dx"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("7_5vvyt")
+start_connection = 4
+end_connection = 1
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_kjvhd"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("8_c6i3y")
+start_connection = 1
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_5tuhn"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("6_kjvhd")
+start_connection = 1
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_mxvw5"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("6_sc1dx")
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_xrxkg"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("7_kjvhd")
+start_connection = 1
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_sqvbp"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("8_5tuhn")
+start_connection = 3
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_hri7i"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("9_2gh4u")
+start_connection = 4
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_w3rk5"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("10_devvj")
+start_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_5mvff"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("11_3b0ty")
+start_connection = 2
+end_connection = 1
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_oye8v"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("12_bg4s2")
+start_connection = 2
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_40n85"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("13_hhcpw")
+start_connection = 2
+end_connection = 4
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="InputEventKey" id="InputEventKey_uu6xs"]
 device = -1
@@ -27,26 +123,19 @@ unicode = 112
 [sub_resource type="Shortcut" id="Shortcut_cm0pq"]
 events = [SubResource("InputEventKey_r0du0")]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
+shader = ExtResource("1_fos0i")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+
 [node name="Main" type="Node"]
 process_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="."]
-z_index = -50
-texture_repeat = 2
-material = SubResource("ShaderMaterial_lgr22")
-offset_left = 3.0
-offset_top = 17.0
-offset_right = 634.0
-offset_bottom = 381.0
-scale = Vector2(3, 3)
-texture = ExtResource("2_3dxm6")
-stretch_mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Map_Loader" type="Node2D" parent="."]
-process_mode = 1
-script = ExtResource("1_glv2v")
-map_prefab = ExtResource("2_uu6xs")
+[node name="map_generator" type="Node2D" parent="."]
+script = ExtResource("3_cm0pq")
+start_map = SubResource("Resource_2gh4u")
+map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_j4qnp"), SubResource("Resource_sc1dx"), SubResource("Resource_kjvhd"), SubResource("Resource_5tuhn")])
+transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85")])
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -84,5 +173,19 @@ toggle_mode = true
 shortcut = SubResource("Shortcut_cm0pq")
 text = "Pause"
 
-[connection signal="pressed" from="UI/restartButton" to="Map_Loader" method="_on_restart_button_pressed"]
-[connection signal="toggled" from="UI/pauseButton" to="Map_Loader" method="_on_pause_button_toggled"]
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("12_5vvyt")
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
+z_index = -50
+texture_repeat = 2
+material = SubResource("ShaderMaterial_lgr22")
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 641.0
+offset_bottom = 358.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_3dxm6")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
