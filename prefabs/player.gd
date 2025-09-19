@@ -11,7 +11,6 @@ var dead = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
 
-
 func _process(delta: float) -> void:
 	if dead:
 		var col = $CollisionShape2D
@@ -99,6 +98,7 @@ func _reduce_horizontal_velocity(delta: float, amount_per_second: int):
 
 func _die(): #TEMPOARY
 	dead = true
+	GameManager.stop_game()
 	
 	anim.play("Die")
 

@@ -1,0 +1,120 @@
+[gd_scene load_steps=19 format=3 uid="uid://bwjypqfmpettn"]
+
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="1_fos0i"]
+[ext_resource type="Texture2D" uid="uid://cfyrwu5jj40ea" path="res://asset_pack/Background/Green.png" id="2_3dxm6"]
+[ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_cm0pq"]
+[ext_resource type="Theme" uid="uid://cr0fp3bqdhf5g" path="res://ressources/ui_theme.tres" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://084dse05megq" path="res://map_loader_test/map_sample_1.tscn" id="4_fos0i"]
+[ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://map_loader_test/MapInfo.gd" id="4_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://dxct3442088nm" path="res://map_loader_test/map_sample_3.tscn" id="7_5vvyt"]
+[ext_resource type="PackedScene" uid="uid://dhurwbghalss0" path="res://map_loader_test/map_sample_4.tscn" id="8_c6i3y"]
+[ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="12_5vvyt"]
+
+[sub_resource type="Resource" id="Resource_j4qnp"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("4_fos0i")
+start_connection = 4
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_sc1dx"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("7_5vvyt")
+start_connection = 4
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_kjvhd"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("8_c6i3y")
+start_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_03owx"]
+script = ExtResource("4_wkp8b")
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="InputEventKey" id="InputEventKey_uu6xs"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_r0du0"]
+events = [SubResource("InputEventKey_uu6xs")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_r0du0"]
+device = -1
+keycode = 80
+unicode = 112
+
+[sub_resource type="Shortcut" id="Shortcut_cm0pq"]
+events = [SubResource("InputEventKey_r0du0")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
+shader = ExtResource("1_fos0i")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+
+[node name="Main" type="Node"]
+process_mode = 3
+
+[node name="map_generator" type="Node2D" parent="."]
+script = ExtResource("3_cm0pq")
+map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_j4qnp"), SubResource("Resource_sc1dx"), SubResource("Resource_kjvhd")])
+transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_03owx"), null, null, null, null])
+safe_zone = null
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -964.0
+offset_top = -536.0
+offset_right = 964.0
+offset_bottom = 541.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="restartButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 8.0
+offset_right = 249.0
+offset_bottom = 47.0
+theme = ExtResource("3_r0du0")
+shortcut = SubResource("Shortcut_r0du0")
+text = "Restart"
+
+[node name="pauseButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 55.0
+offset_right = 250.0
+offset_bottom = 94.0
+focus_mode = 0
+theme = ExtResource("3_r0du0")
+toggle_mode = true
+shortcut = SubResource("Shortcut_cm0pq")
+text = "Pause"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-8258, -8900)
+anchor_mode = 0
+zoom = Vector2(0.1, 0.1)
+script = ExtResource("12_5vvyt")
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
+z_index = -50
+texture_repeat = 2
+material = SubResource("ShaderMaterial_lgr22")
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 641.0
+offset_bottom = 358.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_3dxm6")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
