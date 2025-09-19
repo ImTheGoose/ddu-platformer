@@ -4,7 +4,7 @@ extends Node2D
 @export var prefab :PackedScene
 
 func _ready() -> void:
-	GameManager.on_start_game.connect(_spawn_player)
+	GameManager.spawn_player.connect(_spawn_player)
 
 
 func _spawn_player():

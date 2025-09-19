@@ -98,9 +98,9 @@ func _reduce_horizontal_velocity(delta: float, amount_per_second: int):
 
 
 func _die(): #TEMPOARY
+	print("player dying")
 	dead = true
-	GameManager.stop_game()
-	
+	GameManager.player_died()
 	anim.play("Die")
 
 func hit(vec: Vector2):

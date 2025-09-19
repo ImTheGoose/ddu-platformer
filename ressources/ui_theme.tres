@@ -1,4 +1,9 @@
-[gd_resource type="Theme" format=3 uid="uid://cr0fp3bqdhf5g"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cr0fp3bqdhf5g"]
+
+[sub_resource type="SystemFont" id="SystemFont_rsob0"]
+font_names = PackedStringArray("Comic Sans MS")
+oversampling = 3.0
 
 [resource]
-Button/styles/normal = null
+default_font = SubResource("SystemFont_rsob0")
+Button/font_sizes/font_size = 64

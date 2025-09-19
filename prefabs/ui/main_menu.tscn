@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://mh1npkurre1h"]
+
+[ext_resource type="Script" uid="uid://qhnvl23gbubp" path="res://prefabs/ui/main_menu.gd" id="1_enkug"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5tuhn"]
+font_size = 136
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -386.0
+offset_top = -200.49997
+offset_right = 386.0
+offset_bottom = 200.49997
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_enkug")
+menu_name = "main_menu"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_5tuhn")
+horizontal_alignment = 1
+
+[node name="start_game" type="Button" parent="."]
+layout_mode = 2
+text = "Start Game
+"
+
+[node name="quit_game" type="Button" parent="."]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="quit_game" to="." method="_on_quit_game_pressed"]

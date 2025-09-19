@@ -1,7 +1,7 @@
 extends Camera2D
 
-var speed = 1200
-var safe_distance = 500
+@export var speed := 1800
+@export var safe_distance = 300
 @onready var origin_position = position
 var player :CharacterBody2D
 
