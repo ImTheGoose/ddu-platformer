@@ -31,6 +31,7 @@ tile_set = ExtResource("4_spbry")
 
 [node name="Player" parent="." instance=ExtResource("5_yayvx")]
 position = Vector2(1472, 800)
+scale = Vector2(3, 2.994245)
 
 [connection signal="body_entered" from="TrapTiles/Spike" to="TrapTiles/Spike" method="_on_body_entered"]
 [connection signal="body_entered" from="TrapTiles/@Area2D@69879" to="TrapTiles/@Area2D@69879" method="_on_body_entered"]
