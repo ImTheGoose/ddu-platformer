@@ -271,7 +271,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3vsw"]
-size = Vector2(20, 19)
+size = Vector2(18, 15)
 
 [node name="Mushroom" type="Node2D"]
 script = ExtResource("1_rn6i1")

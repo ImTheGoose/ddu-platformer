@@ -36,5 +36,5 @@ func _initiate_platform_fall():
 
 func _on_player_detection_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		touched = true
-		pass
+		if body.velocity.y <= 0:
+			touched = true

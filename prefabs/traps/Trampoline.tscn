@@ -81,7 +81,6 @@ size = Vector2(23, 10)
 
 [node name="Trampoline" type="Area2D"]
 script = ExtResource("1_e7khr")
-jump_force = 1800
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)
