@@ -369,7 +369,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3vsw"]
-size = Vector2(20, 24)
+size = Vector2(17, 20)
 
 [node name="Trunk" type="Node2D"]
 script = ExtResource("1_nud6c")
@@ -397,7 +397,7 @@ script = ExtResource("7_64ke1")
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-position = Vector2(0, -4)
+position = Vector2(0.5, -5)
 shape = SubResource("RectangleShape2D_b3vsw")
 debug_color = Color(0.90848535, 0.29889786, 0.067487344, 0.41960785)
 

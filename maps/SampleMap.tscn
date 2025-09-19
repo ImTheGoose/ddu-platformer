@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_si0pi"]
 [ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_l36ww"]
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="3_a5383"]
+[ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_lhnv5"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="4_vn1lp"]
-[ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="6_kxl4m"]
 
 [node name="Map" type="Node2D"]
 texture_filter = 1
@@ -16,6 +16,7 @@ tile_set = ExtResource("1_si0pi")
 [node name="GUIDE_TILE" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
 tile_set = ExtResource("2_l36ww")
+script = ExtResource("3_lhnv5")
 
 [node name="TrapTiles" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
@@ -24,6 +25,3 @@ tile_set = ExtResource("3_a5383")
 [node name="EnemyTiles" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
 tile_set = ExtResource("4_vn1lp")
-
-[node name="Player" parent="." instance=ExtResource("6_kxl4m")]
-position = Vector2(694, 616)
