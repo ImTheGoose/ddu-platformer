@@ -120,6 +120,7 @@ transition_arr = Array[ExtResource("5_2ibyy")]([SubResource("Resource_mxvw5"), S
 safe_zone = 2000
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 anchor_mode = 0
 script = ExtResource("22_jgigv")
 
