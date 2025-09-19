@@ -143,6 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MenuManager" type="Control" parent="Camera2D" node_paths=PackedStringArray("map_gen")]
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -151,7 +152,6 @@ script = ExtResource("20_2gh4u")
 map_gen = NodePath("../../map_generator")
 
 [node name="MainMenu" type="VBoxContainer" parent="Camera2D/MenuManager"]
-visible = false
 layout_mode = 0
 offset_left = 504.00003
 offset_top = 353.00006
