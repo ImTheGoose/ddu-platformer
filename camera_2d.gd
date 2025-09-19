@@ -17,10 +17,12 @@ func _process(delta: float) -> void:
 	
 	
 	if GameManager.is_game_running() && !GameManager.is_game_paused():
-		if Input.is_action_pressed("ui_up"):
-			position.y -= speed * delta
-		else:
-			position.y -= speed / 20 * delta
+		position.y -= speed / 20 * delta
+	
+	if Input.is_action_just_pressed("fullscreen_toggle"):
+		var mode := DisplayServer.window_get_mode()
+		var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
 
 
 func _on_player_follow_area_body_entered(body: Node2D) -> void:
