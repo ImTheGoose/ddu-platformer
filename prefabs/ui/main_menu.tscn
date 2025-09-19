@@ -16,7 +16,7 @@ anchor_bottom = 0.5
 offset_left = -386.0
 offset_top = -200.49997
 offset_right = 386.0
-offset_bottom = 200.49997
+offset_bottom = 200.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -31,12 +31,21 @@ horizontal_alignment = 1
 
 [node name="start_game" type="Button" parent="."]
 layout_mode = 2
-text = "Start Game
-"
+text = "Play"
+
+[node name="shop_menu" type="Button" parent="."]
+layout_mode = 2
+text = "Shop"
+
+[node name="settings_menu" type="Button" parent="."]
+layout_mode = 2
+text = "Settings"
 
 [node name="quit_game" type="Button" parent="."]
 layout_mode = 2
 text = "Quit"
 
 [connection signal="pressed" from="start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="shop_menu" to="." method="_on_shop_menu_pressed"]
+[connection signal="pressed" from="settings_menu" to="." method="_on_settings_menu_pressed"]
 [connection signal="pressed" from="quit_game" to="." method="_on_quit_game_pressed"]

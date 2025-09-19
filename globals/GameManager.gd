@@ -13,10 +13,6 @@ enum state {
 	dead
 }
 
-func _input(event: InputEvent) -> void:
-	if event.is_action("restart") && event.is_action_released("restart"):
-		reset_game()
-
 func pause_game(isPaused: bool):
 	print(isPaused)
 	get_tree().paused = isPaused

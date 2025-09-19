@@ -40,3 +40,7 @@ text = "Restart"
 [node name="back_to_menu" type="Button" parent="."]
 layout_mode = 2
 text = "Main Menu"
+
+[connection signal="pressed" from="continue_game" to="." method="_on_continue_game_pressed"]
+[connection signal="pressed" from="restart_game" to="." method="_on_restart_game_pressed"]
+[connection signal="pressed" from="back_to_menu" to="." method="_on_back_to_menu_pressed"]

@@ -1,8 +1,6 @@
 extends GameMenu
 
 
-func _on_back_to_menu_pressed() -> void:
-	pass # Replace with function body.
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
@@ -18,3 +16,25 @@ func _process(delta: float) -> void:
 		else:
 			GameManager.pause_game(true)
 			MenuManager.show_menu.emit("pause_menu")
+
+
+func _on_continue_game_pressed() -> void:
+	GameManager.pause_game(false)
+	MenuManager.hide_all_menus.emit()
+	pass # Replace with function body.
+
+
+func _on_restart_game_pressed() -> void:
+	GameManager.pause_game(false)
+	GameManager.reset_game()
+	MenuManager.hide_all_menus.emit()
+	pass # Replace with function body.
+
+
+func _on_back_to_menu_pressed() -> void:
+	GameManager.pause_game(false)
+	GameManager.reset_game()
+	MenuManager.hide_all_menus.emit()
+	MenuManager.toggle_game_visibillity.emit(false)
+	MenuManager.show_menu.emit("main_menu")
+	pass # Replace with function body.

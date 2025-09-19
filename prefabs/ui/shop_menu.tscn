@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg3m8ri8mydgw"]
+
+[ext_resource type="Script" uid="uid://dben33ofntex3" path="res://prefabs/ui/shop_menu.gd" id="1_4tlx8"]
+[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://asset_pack/Main Characters/Mask Dude/Jump (32x32).png" id="2_cp07i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5tuhn"]
+font_size = 136
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="shop_menu" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_4tlx8")
+menu_name = "shop_menu"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Shop"
+label_settings = SubResource("LabelSettings_5tuhn")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 154
+alignment = 1
+
+[node name="previous" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 44
+
+[node name="display_rect" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture = ExtResource("2_cp07i")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="price_tag" type="RichTextLabel" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://asset_pack/Items/Fruits/Apple_16x16.png[/img] 1000000
+"
+fit_content = true
+vertical_alignment = 1
+
+[node name="buy_button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Buy"
+
+[node name="next" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = ">"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

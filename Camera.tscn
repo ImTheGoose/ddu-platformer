@@ -1,0 +1,129 @@
+[gd_scene load_steps=16 format=3 uid="uid://dxyonb6hgvrx"]
+
+[ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="1_a0f6b"]
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="2_07nfj"]
+[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://asset_pack/Background/Brown.png" id="3_we8rk"]
+[ext_resource type="PackedScene" uid="uid://mh1npkurre1h" path="res://prefabs/ui/main_menu.tscn" id="4_4656x"]
+[ext_resource type="PackedScene" uid="uid://svonac2lqa68" path="res://prefabs/ui/pause_menu.tscn" id="5_gmjel"]
+[ext_resource type="PackedScene" uid="uid://cg5d56ttwrrar" path="res://prefabs/ui/settings_menu.tscn" id="6_07nfj"]
+[ext_resource type="PackedScene" uid="uid://bs3ofj5vwbwxi" path="res://prefabs/ui/death_menu.tscn" id="6_8yu0k"]
+[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
+[ext_resource type="PackedScene" uid="uid://brbl8q6qb2l7r" path="res://prefabs/ui/start_game_menu.tscn" id="7_we8rk"]
+[ext_resource type="PackedScene" uid="uid://dg3m8ri8mydgw" path="res://prefabs/ui/shop_menu.tscn" id="8_4656x"]
+[ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/ui/version_label.gd" id="10_gmjel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
+shader = ExtResource("2_07nfj")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+
+[sub_resource type="LabelSettings" id="LabelSettings_8yu0k"]
+font_size = 46
+font_color = Color(1, 1, 1, 0.53333336)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3b0ty"]
+size = Vector2(1945, 83)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gh4u"]
+size = Vector2(1948, 557.5)
+
+[node name="Camera2D" type="Camera2D"]
+process_mode = 3
+anchor_mode = 0
+script = ExtResource("1_a0f6b")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -50
+texture_repeat = 2
+material = SubResource("ShaderMaterial_lgr22")
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 641.0
+offset_bottom = 358.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_we8rk")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 1924.0
+offset_bottom = 1081.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuManager" type="Control" parent="."]
+texture_filter = 2
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" parent="MenuManager" instance=ExtResource("4_4656x")]
+layout_mode = 1
+offset_left = -338.0
+offset_top = -197.0
+offset_right = 338.0
+offset_bottom = 197.0
+
+[node name="PauseMenu" parent="MenuManager" instance=ExtResource("5_gmjel")]
+layout_mode = 1
+offset_top = -248.0
+offset_bottom = 248.0
+
+[node name="SettingsMenu" parent="MenuManager" instance=ExtResource("6_07nfj")]
+layout_mode = 1
+
+[node name="start_game_menu" parent="MenuManager" instance=ExtResource("7_we8rk")]
+layout_mode = 1
+
+[node name="shop_menu" parent="MenuManager" instance=ExtResource("8_4656x")]
+layout_mode = 1
+
+[node name="DeathMenu" parent="MenuManager" instance=ExtResource("6_8yu0k")]
+layout_mode = 1
+
+[node name="version_label" type="Label" parent="MenuManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005
+anchor_top = 0.995
+anchor_right = 0.005
+anchor_bottom = 1.0
+offset_top = -17.0
+offset_right = 32.0
+grow_vertical = 0
+text = "V0.1"
+label_settings = SubResource("LabelSettings_8yu0k")
+script = ExtResource("10_gmjel")
+
+[node name="HitArea" type="Area2D" parent="."]
+script = ExtResource("7_tim8x")
+metadata/_custom_type_script = "uid://csjcberb4rmwa"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(962, 1147)
+shape = SubResource("RectangleShape2D_3b0ty")
+
+[node name="PlayerFollowArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollowArea"]
+position = Vector2(969, -38)
+shape = SubResource("RectangleShape2D_2gh4u")
+
+[connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]
+[connection signal="body_entered" from="PlayerFollowArea" to="." method="_on_player_follow_area_body_entered"]
+[connection signal="body_exited" from="PlayerFollowArea" to="." method="_on_player_follow_area_body_exited"]
