@@ -29,10 +29,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		_attempt_jump()
 	
-	if !is_on_floor():
-		air_time += delta
-	else:
+	if is_on_floor() or is_on_wall():
 		air_time = 0
+	else:
+		air_time += delta
+
 	
 	if is_on_floor() or is_on_wall():
 		double_jumped = false
