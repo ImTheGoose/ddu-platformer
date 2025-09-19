@@ -1,149 +1,94 @@
-[gd_scene load_steps=48 format=3 uid="uid://bwjypqfmpettn"]
+[gd_scene load_steps=34 format=3 uid="uid://wnla5mxi8tl"]
 
-[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="1_fos0i"]
-[ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://maps/start_map.tscn" id="2_5tuhn"]
-[ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_cm0pq"]
-[ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://ressources/MapInfo.gd" id="4_wkp8b"]
-[ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://maps/transitions/trans_A_to_C.tscn" id="6_sc1dx"]
-[ext_resource type="PackedScene" uid="uid://ds7c3nyx5ey48" path="res://maps/map_parts/wilf_01_E_to_D.tscn" id="6_xrxkg"]
-[ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://maps/transitions/trans_B_to_C.tscn" id="7_kjvhd"]
-[ext_resource type="PackedScene" uid="uid://fx0t20b4cmre" path="res://maps/map_parts/wilf_02_E_to_D.tscn" id="7_sqvbp"]
-[ext_resource type="PackedScene" uid="uid://co51mwkw4pyh8" path="res://maps/transitions/trans_D_to_C.tscn" id="8_5tuhn"]
-[ext_resource type="PackedScene" uid="uid://c5lp5uujgx0yg" path="res://maps/map_parts/wilf_03_D_to_D.tscn" id="8_hri7i"]
-[ext_resource type="PackedScene" uid="uid://ck0t6e8l7ph1a" path="res://maps/transitions/trans_E_to_C.tscn" id="9_2gh4u"]
-[ext_resource type="PackedScene" uid="uid://dpxbnrxga5hx6" path="res://maps/map_parts/wilf_04_D_to_D.tscn" id="9_w3rk5"]
-[ext_resource type="PackedScene" uid="uid://jtbhbtbjhb7e" path="res://maps/map_parts/wilf_05_D_to_C.tscn" id="10_5mvff"]
-[ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://maps/transitions/trans_C_to_A.tscn" id="10_devvj"]
-[ext_resource type="PackedScene" uid="uid://daixf013bdduf" path="res://maps/transitions/trans_C_to_B.tscn" id="11_3b0ty"]
-[ext_resource type="PackedScene" uid="uid://br7b3gvv1v1v1" path="res://maps/map_parts/willum_01_D_to_E.tscn" id="11_oye8v"]
-[ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="12_5vvyt"]
-[ext_resource type="PackedScene" uid="uid://dykb0nm6ggl61" path="res://maps/map_parts/willum_02_E_to_C.tscn" id="12_40n85"]
-[ext_resource type="PackedScene" uid="uid://by6dsb2rxmexr" path="res://maps/transitions/trans_C_to_D.tscn" id="12_bg4s2"]
-[ext_resource type="PackedScene" uid="uid://oewahg7jjfrl" path="res://maps/map_parts/willum_05_E_to_A.tscn" id="13_gb15f"]
-[ext_resource type="PackedScene" uid="uid://da8ypldv2i7b3" path="res://maps/transitions/trans_C_to_E.tscn" id="13_hhcpw"]
-[ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="16_devvj"]
-[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://asset_pack/Background/Brown.png" id="16_kjvhd"]
-[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://playerspawn.gd" id="17_3b0ty"]
-[ext_resource type="Script" uid="uid://bl5nlov7086j2" path="res://menu_manager.gd" id="20_2gh4u"]
-[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="20_devvj"]
+[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://playerspawn.gd" id="1_guadk"]
+[ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="2_xefmm"]
+[ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_q362l"]
+[ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://maps/start_map.tscn" id="4_74heq"]
+[ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://ressources/MapInfo.gd" id="5_2ibyy"]
+[ext_resource type="PackedScene" uid="uid://fx0t20b4cmre" path="res://maps/map_parts/wilf_02_E_to_D.tscn" id="7_j2rdw"]
+[ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://maps/transitions/trans_A_to_C.tscn" id="14_2em3n"]
+[ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://maps/transitions/trans_B_to_C.tscn" id="15_50bud"]
+[ext_resource type="PackedScene" uid="uid://co51mwkw4pyh8" path="res://maps/transitions/trans_D_to_C.tscn" id="16_mqdvq"]
+[ext_resource type="PackedScene" uid="uid://ck0t6e8l7ph1a" path="res://maps/transitions/trans_E_to_C.tscn" id="17_31axe"]
+[ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://maps/transitions/trans_C_to_A.tscn" id="18_ioghr"]
+[ext_resource type="PackedScene" uid="uid://daixf013bdduf" path="res://maps/transitions/trans_C_to_B.tscn" id="19_hp0mu"]
+[ext_resource type="PackedScene" uid="uid://by6dsb2rxmexr" path="res://maps/transitions/trans_C_to_D.tscn" id="20_h4rye"]
+[ext_resource type="PackedScene" uid="uid://da8ypldv2i7b3" path="res://maps/transitions/trans_C_to_E.tscn" id="21_on8st"]
+[ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="22_jgigv"]
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="23_ckto0"]
+[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://asset_pack/Background/Brown.png" id="24_n43ab"]
+[ext_resource type="Script" uid="uid://bl5nlov7086j2" path="res://menu_manager.gd" id="25_8jpxy"]
+[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="26_v3bpb"]
 
 [sub_resource type="Resource" id="Resource_2gh4u"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("2_5tuhn")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("4_74heq")
 end_connection = 3
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
-[sub_resource type="Resource" id="Resource_sph85"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("6_xrxkg")
-start_connection = 4
-end_connection = 2
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_o7g6l"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("7_sqvbp")
+[sub_resource type="Resource" id="Resource_fisr1"]
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("7_j2rdw")
 start_connection = 4
 end_connection = 3
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_vi5kq"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("8_hri7i")
-start_connection = 3
-end_connection = 3
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_5mkgo"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("9_w3rk5")
-start_connection = 3
-end_connection = 3
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_3ccbu"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("10_5mvff")
-start_connection = 3
-end_connection = 2
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_ny7u2"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("11_oye8v")
-start_connection = 3
-end_connection = 4
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_x3yn0"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("12_40n85")
-start_connection = 4
-end_connection = 2
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_1w2xm"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("13_gb15f")
-start_connection = 4
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_mxvw5"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("6_sc1dx")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("14_2em3n")
 end_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_xrxkg"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("7_kjvhd")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("15_50bud")
 start_connection = 1
 end_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_sqvbp"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("8_5tuhn")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("16_mqdvq")
 start_connection = 3
 end_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_hri7i"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("9_2gh4u")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("17_31axe")
 start_connection = 4
 end_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_w3rk5"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("10_devvj")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("18_ioghr")
 start_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_5mvff"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("11_3b0ty")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("19_hp0mu")
 start_connection = 2
 end_connection = 1
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_oye8v"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("12_bg4s2")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("20_h4rye")
 start_connection = 2
 end_connection = 3
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_40n85"]
-script = ExtResource("4_wkp8b")
-prefab = ExtResource("13_hhcpw")
+script = ExtResource("5_2ibyy")
+prefab = ExtResource("21_on8st")
 start_connection = 2
 end_connection = 4
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
-shader = ExtResource("1_fos0i")
+shader = ExtResource("23_ckto0")
 shader_parameter/direction = Vector2(1, 1)
 shader_parameter/speed = 0.2
 
@@ -162,22 +107,21 @@ size = Vector2(1948, 325)
 
 [node name="Playerspawn" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
 position = Vector2(1029, 865)
-script = ExtResource("17_3b0ty")
+script = ExtResource("1_guadk")
 parent = NodePath("../map_generator")
-prefab = ExtResource("16_devvj")
+prefab = ExtResource("2_xefmm")
 
 [node name="map_generator" type="Node2D" parent="."]
 position = Vector2(0, 64)
-script = ExtResource("3_cm0pq")
+script = ExtResource("3_q362l")
 start_map = SubResource("Resource_2gh4u")
-map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_sph85"), SubResource("Resource_o7g6l"), SubResource("Resource_vi5kq"), SubResource("Resource_5mkgo"), SubResource("Resource_3ccbu"), SubResource("Resource_ny7u2"), SubResource("Resource_x3yn0"), SubResource("Resource_1w2xm")])
-transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85")])
+map_arr = Array[ExtResource("5_2ibyy")]([SubResource("Resource_fisr1")])
+transition_arr = Array[ExtResource("5_2ibyy")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85")])
 safe_zone = 2000
 
 [node name="Camera2D" type="Camera2D" parent="."]
-process_mode = 3
 anchor_mode = 0
-script = ExtResource("12_5vvyt")
+script = ExtResource("22_jgigv")
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
 z_index = -50
@@ -188,7 +132,7 @@ offset_top = -2.0
 offset_right = 641.0
 offset_bottom = 358.0
 scale = Vector2(3, 3)
-texture = ExtResource("16_kjvhd")
+texture = ExtResource("24_n43ab")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -212,7 +156,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-script = ExtResource("20_2gh4u")
+script = ExtResource("25_8jpxy")
 map_gen = NodePath("../../map_generator")
 
 [node name="MainMenu" type="VBoxContainer" parent="Camera2D/MenuManager"]
@@ -291,7 +235,7 @@ layout_mode = 2
 text = "Main Menu"
 
 [node name="HitArea" type="Area2D" parent="Camera2D"]
-script = ExtResource("20_devvj")
+script = ExtResource("26_v3bpb")
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/HitArea"]

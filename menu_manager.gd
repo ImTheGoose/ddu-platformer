@@ -31,6 +31,7 @@ func _on_game_stop():
 
 func _ready() -> void:
 	GameManager.on_stop_game.connect(_on_game_stop)
+	GameManager.on_reset_game.connect(_hide_menus)
 	_hide_menus()
 	_show_menu(main_menu)
 	map_gen.visible = false
@@ -64,10 +65,10 @@ func _on_restart_game_pressed() -> void:
 
 func _on_back_to_menu_pressed() -> void:
 	_hide_menus()
-	_show_menu(main_menu)
 	GameManager.reset_game()
 	GameManager.pause_game(true)
 	map_gen.visible = false
+	_show_menu(main_menu)
 	pass # Replace with function body.
 
 

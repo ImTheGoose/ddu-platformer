@@ -11,6 +11,7 @@ func _input(event: InputEvent) -> void:
 		reset_game()
 
 func pause_game(isPaused: bool):
+	print(isPaused)
 	get_tree().paused = isPaused
 	game_paused = isPaused
 
