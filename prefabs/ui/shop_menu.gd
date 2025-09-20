@@ -7,15 +7,15 @@ extends GameMenu
 		"sprite": preload("res://asset_pack/Main Characters/Ninja Frog/Jump (32x32).png")
 	}, {
 		"name": "Tiki",
-		"price": 2500,
+		"price": 250,
 		"sprite": preload("res://asset_pack/Main Characters/Mask Dude/Jump (32x32).png")
 	}, {
 		"name": "Castro",
-		"price": 5000,
+		"price": 500,
 		"sprite": preload("res://asset_pack/Main Characters/Pink Man/Jump (32x32).png")
 	}, {
 		"name": "Edward",
-		"price": 69420,
+		"price": 1000,
 		"sprite": preload("res://asset_pack/Main Characters/Virtual Guy/Jump (32x32).png")
 	}
 ]

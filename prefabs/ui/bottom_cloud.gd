@@ -5,6 +5,12 @@ func _ready() -> void:
 	GameManager.on_start_game.connect(_start_emitting)
 	GameManager.on_reset_game.connect(_stop_emitting)
 
+func _process(delta: float) -> void:
+	var video_settings = DataManager.get_video_settings()
+	visible = video_settings.particles_enabled
+	if video_settings.particles_enabled == false:
+		emitting = false
+
 func _toggle_visible(isVisible):
 	if isVisible:
 		_start_emitting()

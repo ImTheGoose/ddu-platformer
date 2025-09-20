@@ -21,6 +21,7 @@ var default_game_data: Dictionary = {
 }
 
 func _init() -> void:
+	create_config()
 	game_data = default_game_data.duplicate()
 	load_save_data()
 	load_config()
@@ -103,6 +104,7 @@ func create_config():
 	config.set_value("video", "fullscreen", false)
 	config.set_value("video", "color_theme", "Brown")
 	config.set_value("video", "color_theme_id", 0)
+	config.set_value("video", "particles_enabled", true)
 	
 	config.save(SETTINGS_FILE_PATH)
 	

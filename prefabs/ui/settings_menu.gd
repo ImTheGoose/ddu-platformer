@@ -6,6 +6,7 @@ extends GameMenu
 @onready var resolution_dropdown = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/resolution
 @onready var fullscreen_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fullscreen_toggle
 @onready var color_theme_dropdown = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/color_theme
+@onready var particle_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/particles_toggle
 
 func _ready() -> void:
 	super()
@@ -15,6 +16,7 @@ func _ready() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	fullscreen_toggle.button_pressed = video_settings.fullscreen
 	color_theme_dropdown.selected = color_theme_dropdown.get_item_index(video_settings.color_theme_id)
+	particle_toggle.button_pressed = video_settings.particles_enabled
 	
 	var audio_settings = DataManager.get_audio_settings()
 	master_vol_slider.value = min(audio_settings.master_volume, 1.0) * 100
@@ -79,4 +81,9 @@ func _on_color_theme_item_selected(index: int) -> void:
 	var theme_id = color_theme_dropdown.get_item_id(index)
 	DataManager.save_video_setting("color_theme", theme_name)
 	DataManager.save_video_setting("color_theme_id", theme_id)
+	pass # Replace with function body.
+
+
+func _on_particles_toggle_toggled(toggled_on: bool) -> void:
+	DataManager.save_video_setting("particles_enabled", toggled_on)
 	pass # Replace with function body.
