@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://ck0t6e8l7ph1a"]
+[gd_scene load_steps=7 format=4 uid="uid://ck0t6e8l7ph1a"]
 
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_g3sdj"]
 [ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_1qvr6"]
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="3_1a8ry"]
 [ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_g3sdj"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="4_qi0ew"]
+[ext_resource type="TileSet" uid="uid://dm0uv7n0xo0sl" path="res://ressources/tilesets/collectables_tileset.tres" id="6_0tvon"]
 
 [node name="Map" type="Node2D"]
 texture_filter = 1
@@ -31,11 +32,7 @@ scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAlABQAAAAAAAAABAAjABQAAAAAAAAAAQAYABMAAAAAAAAAAgAVABMAAAAAAAAAAQAbABMAAAAAAAAAAQA=")
 tile_set = ExtResource("4_qi0ew")
 
-[connection signal="body_entered" from="TrapTiles/@Area2D@262094" to="TrapTiles/@Area2D@262094" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@262096" to="TrapTiles/@Area2D@262096" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@262098" to="TrapTiles/@Area2D@262098" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@262099" to="TrapTiles/@Area2D@262099" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@262413" to="TrapTiles/@Area2D@262413" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@262414" to="TrapTiles/@Area2D@262414" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@262415" to="TrapTiles/@Area2D@262415" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
+[node name="CollectableTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAXABMAAAAAAAAAAQAYABMAAAAAAAAAAQAZABMAAAAAAAAAAQAfABQAAAAAAAAAAQARABIAAAAAAAAAAQARABEAAAAAAAAAAQA=")
+tile_set = ExtResource("6_0tvon")

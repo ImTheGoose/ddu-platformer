@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://dykb0nm6ggl61"]
+[gd_scene load_steps=7 format=4 uid="uid://dykb0nm6ggl61"]
 
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_xad42"]
 [ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_w0v7j"]
 [ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_veh2u"]
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="4_a3l15"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="5_4gb2u"]
+[ext_resource type="TileSet" uid="uid://dm0uv7n0xo0sl" path="res://ressources/tilesets/collectables_tileset.tres" id="6_w0v7j"]
 
 [node name="Map" type="Node2D"]
 texture_filter = 1
@@ -31,12 +32,7 @@ scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAHAA8AAAAAAAAABAAIAA8AAAAAAAAAAQARABAAAAAAAAAAAQAYABAAAAAAAAAAAQASABAAAAAAAAAABAA=")
 tile_set = ExtResource("5_4gb2u")
 
-[connection signal="body_entered" from="TrapTiles/Spike" to="TrapTiles/Spike" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34758" to="TrapTiles/@Area2D@34758" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34759" to="TrapTiles/@Area2D@34759" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34760" to="TrapTiles/@Area2D@34760" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34761" to="TrapTiles/@Area2D@34761" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34762" to="TrapTiles/@Area2D@34762" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34768" to="TrapTiles/@Area2D@34768" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34769" to="TrapTiles/@Area2D@34769" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@34770" to="TrapTiles/@Area2D@34770" method="_on_body_entered"]
+[node name="CollectableTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAUABAAAAAAAAAAAQAVABAAAAAAAAAAAQAWABAAAAAAAAAAAQAKAA8AAAAAAAAAAQALAA8AAAAAAAAAAQAMAA8AAAAAAAAAAQADAAoAAAAAAAAAAQADAAkAAAAAAAAAAQAFAAcAAAAAAAAAAQAFAAYAAAAAAAAAAQADAAIAAAAAAAAAAQAmAAgAAAAAAAAAAQAXAAMAAAAAAAAAAQAYAAMAAAAAAAAAAQAWAAgAAAAAAAAAAQAcAAgAAAAAAAAAAQA=")
+tile_set = ExtResource("6_w0v7j")
