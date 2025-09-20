@@ -29,9 +29,9 @@ var owned_skins = {
 
 var selected_skin_name :String = "Ninja Frog"
 var current_shop_index :int = 0
-@onready var price_tag = $MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/price_tag
-@onready var display_rect = $MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/display_rect
-@onready var buy_button = $MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button
+@onready var price_tag = $VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/price_tag
+@onready var display_rect = $VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/display_rect
+@onready var buy_button = $VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button
 
 
 func _ready() -> void:
@@ -49,7 +49,7 @@ func _refresh_shop_contents():
 
 	if owned_skins[skin["name"]]:
 		buy_button.text = "Select"
-		price_tag.text = "Owned"
+		price_tag.text = BBCode_Icon + "Owned"
 		
 		if selected_skin_name == skin["name"]:
 			buy_button.text = "Selected"

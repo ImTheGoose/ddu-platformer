@@ -2,6 +2,7 @@ extends GameMenu
 
 @onready var input_button_prefab = preload("res://prefabs/ui/input_button.tscn")
 @onready var action_list = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/action_list
+@onready var vol_slider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/volume
 
 var is_remapping = false
 var action_to_remap = null
@@ -18,6 +19,7 @@ var input_actions = {
 func _ready() -> void:
 	super()
 	_create_action_list()
+	vol_slider.value = AudioServer.get_bus_volume_db(0)
 
 func _create_action_list():
 	for child in action_list.get_children():

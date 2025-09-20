@@ -3,6 +3,7 @@ extends Node
 signal hide_all_menus
 signal show_menu(target: String)
 signal toggle_game_visibillity(isVisible: bool)
+signal toggle_background_seperator(isVisible: bool)
 
 var game_visible = false
 
