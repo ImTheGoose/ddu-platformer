@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dxyonb6hgvrx"]
+[gd_scene load_steps=27 format=3 uid="uid://dxyonb6hgvrx"]
 
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="1_a0f6b"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="2_07nfj"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://asset_pack/Main Characters/Mask Dude/Jump (32x32).png" id="9_tim8x"]
 [ext_resource type="Script" uid="uid://bn07tyaxxjnsu" path="res://prefabs/ui/death_menu.gd" id="10_8yu0k"]
 [ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/ui/version_label.gd" id="10_gmjel"]
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://asset_pack/Other/Dust Particle.png" id="16_c3fr5"]
+[ext_resource type="Script" uid="uid://bnk08qohdlepr" path="res://prefabs/ui/bottom_cloud.gd" id="17_8t6hx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
 shader = ExtResource("2_07nfj")
@@ -31,6 +33,28 @@ outline_color = Color(0, 0, 0, 0.8117647)
 [sub_resource type="LabelSettings" id="LabelSettings_8yu0k"]
 font_size = 11
 font_color = Color(1, 1, 1, 0.53333336)
+
+[sub_resource type="Gradient" id="Gradient_8t6hx"]
+colors = PackedColorArray(1, 1, 1, 1, 0.973535, 0.9735351, 0.973535, 0.7647059)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rq4tw"]
+gradient = SubResource("Gradient_8t6hx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8t6hx"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 28.635, 0)
+angle_min = -49.99999
+angle_max = 65.40001
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 85.34
+angular_velocity_min = -19.200016
+angular_velocity_max = 7.6799836
+gravity = Vector3(0, 48, 0)
+scale_min = 5.0
+scale_max = 12.0
+color_ramp = SubResource("GradientTexture1D_rq4tw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3b0ty"]
 size = Vector2(1945, 83)
@@ -555,6 +579,15 @@ grow_vertical = 0
 text = "V0.1"
 label_settings = SubResource("LabelSettings_8yu0k")
 script = ExtResource("10_gmjel")
+
+[node name="bottom_cloud" type="GPUParticles2D" parent="."]
+position = Vector2(960, 1061)
+amount = 350
+texture = ExtResource("16_c3fr5")
+lifetime = 3.0
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_8t6hx")
+script = ExtResource("17_8t6hx")
 
 [node name="HitArea" type="Area2D" parent="."]
 script = ExtResource("7_tim8x")

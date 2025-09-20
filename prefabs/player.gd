@@ -7,6 +7,10 @@ extends CharacterBody2D
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
 
+@onready var dust_particles = $dust_particles
+@onready var jump_particles = $jump_particles
+@onready var death_particles = $die_particles
+
 var dead = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
@@ -66,8 +70,10 @@ func _attempt_jump():
 			velocity.x = -max_speed
 		
 		anim.flip_h = !anim.flip_h
+		jump_particles.restart(false)
 	
 	elif is_on_floor() or air_time < jump_buffer_time:
+		jump_particles.restart(false)
 		air_time = jump_buffer_time
 		velocity.y = -jump_strength
 
@@ -75,6 +81,7 @@ func _attempt_jump():
 		double_jumped = true
 		velocity.y = -jump_strength * 0.85
 		anim.play("Double_Jump")
+		jump_particles.restart(false)
 
 func _apply_gravity(delta: float, gravity_scale: float = 1):
 	velocity += get_gravity() * delta * gravity_scale
@@ -101,6 +108,7 @@ func _die(): #TEMPOARY
 	print("player dying")
 	dead = true
 	GameManager.player_died()
+	death_particles.restart()
 	anim.play("Die")
 
 func hit(vec: Vector2):
@@ -114,10 +122,14 @@ func _update_anim(m):
 	if is_on_floor():
 		if m == 0:
 			anim.play("Idle")
+			dust_particles.emitting = false
 		else:
 			anim.play("Run")
+			dust_particles.emitting = true
 	elif !is_on_wall_only():
 		if velocity.y < 0 && !double_jumped:
+			dust_particles.emitting = false
 			anim.play("Jump")
 		if velocity.y > 0:
 			anim.play("Fall")
+			dust_particles.emitting = false

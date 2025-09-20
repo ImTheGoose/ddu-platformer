@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://517bp8gq433n"]
+[gd_scene load_steps=68 format=3 uid="uid://517bp8gq433n"]
 
 [ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player.gd" id="1_0ep8a"]
 [ext_resource type="Texture2D" uid="uid://dyn5d37gdpk5o" path="res://asset_pack/Main Characters/Ninja Frog/Hit (32x32).png" id="2_70wo7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://boqjobpu65xsa" path="res://asset_pack/Main Characters/Ninja Frog/Jump (32x32).png" id="6_beuee"]
 [ext_resource type="Texture2D" uid="uid://d4f544543y0kf" path="res://asset_pack/Main Characters/Ninja Frog/Run (32x32).png" id="7_632n6"]
 [ext_resource type="Texture2D" uid="uid://bqpjj68l4bh4w" path="res://asset_pack/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="8_sf8ex"]
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://asset_pack/Other/Dust Particle.png" id="10_rwuho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dw41"]
 size = Vector2(16.6667, 24.3333)
@@ -398,6 +399,73 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_yhksc"]
+colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_634ti"]
+gradient = SubResource("Gradient_yhksc")
+
+[sub_resource type="Curve" id="Curve_rwuho"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5947059), -1.00219, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yhksc"]
+curve = SubResource("Curve_rwuho")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwuho"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6.955, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+velocity_pivot = Vector3(1, 1, 0)
+direction = Vector3(0, -1, 0)
+spread = 50.0
+initial_velocity_min = 5.0
+initial_velocity_max = 24.689999
+gravity = Vector3(0, 15, 0)
+scale_curve = SubResource("CurveTexture_yhksc")
+color_ramp = SubResource("GradientTexture1D_634ti")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhksc"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6.955, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -236.2
+angle_max = 174.70001
+velocity_pivot = Vector3(1, 1, 0)
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 24.689999
+gravity = Vector3(0, 15, 0)
+scale_curve = SubResource("CurveTexture_yhksc")
+color_ramp = SubResource("GradientTexture1D_634ti")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_634ti"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -236.2
+angle_max = 174.70001
+velocity_pivot = Vector3(1, 1, 0)
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 24.689999
+gravity = Vector3(0, 45, 0)
+scale_min = 0.19999999
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_yhksc")
+color = Color(0.81960785, 0, 0.05490196, 1)
+color_ramp = SubResource("GradientTexture1D_634ti")
+
 [node name="Player" type="CharacterBody2D"]
 visibility_layer = 3
 scale = Vector2(3, 3)
@@ -419,3 +487,30 @@ autoplay = "Idle"
 frame = 6
 frame_progress = 1.0
 flip_h = true
+
+[node name="dust_particles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-0.6666667, 14.333334)
+amount = 30
+texture = ExtResource("10_rwuho")
+process_material = SubResource("ParticleProcessMaterial_rwuho")
+
+[node name="jump_particles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-0.6666667, 14.333334)
+emitting = false
+amount = 30
+texture = ExtResource("10_rwuho")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yhksc")
+
+[node name="die_particles" type="GPUParticles2D" parent="."]
+position = Vector2(-0.33333334, 2.3333333)
+emitting = false
+amount = 60
+texture = ExtResource("10_rwuho")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_634ti")
