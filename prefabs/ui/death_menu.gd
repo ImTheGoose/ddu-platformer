@@ -1,11 +1,5 @@
 extends GameMenu
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("restart"):
-		if GameManager.game_state == GameManager.state.dead:
-			MenuManager.hide_all_menus.emit()
-			GameManager.reset_game()
-
 func _hide():
 	super()
 	MenuManager.toggle_background_seperator.emit(false)

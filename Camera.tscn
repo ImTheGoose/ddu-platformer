@@ -270,11 +270,11 @@ alignment = 1
 text_overrun_behavior = 1
 selected = 1
 item_count = 3
-popup/item_0/text = "Hard"
+popup/item_0/text = "Easy"
 popup/item_0/id = 0
 popup/item_1/text = "Normal"
 popup/item_1/id = 1
-popup/item_2/text = "Easy"
+popup/item_2/text = "Hard"
 popup/item_2/id = 2
 
 [node name="start_game" type="Button" parent="Menu_Renderer/Control/start_game_menu"]
@@ -287,7 +287,6 @@ layout_mode = 2
 text = "Back"
 
 [node name="shop_menu" type="MarginContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -336,6 +335,9 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../next")
+focus_neighbor_top = NodePath("../next")
+focus_neighbor_right = NodePath("../next")
 text = "<"
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu_Renderer/Control/shop_menu/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
@@ -371,6 +373,9 @@ text = "Buy"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../previous")
+focus_neighbor_top = NodePath("../../../../back")
+focus_neighbor_right = NodePath("../previous")
 text = ">"
 
 [node name="back" type="Button" parent="Menu_Renderer/Control/shop_menu/VBoxContainer"]
