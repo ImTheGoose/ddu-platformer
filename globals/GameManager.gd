@@ -39,5 +39,10 @@ func player_died():
 	MenuManager.show_menu.emit("death_menu")
 	game_state = state.dead
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		quit_game()
+
 func quit_game():
+	DataManager.save_game_data()
 	get_tree().quit()
