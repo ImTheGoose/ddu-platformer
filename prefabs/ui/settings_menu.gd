@@ -5,7 +5,7 @@ extends GameMenu
 @onready var music_vol_slider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume
 @onready var resolution_dropdown = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/resolution
 @onready var fullscreen_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fullscreen_toggle
-
+@onready var color_theme_dropdown = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/color_theme
 
 func _ready() -> void:
 	super()
@@ -14,6 +14,7 @@ func _ready() -> void:
 	resolution_dropdown.selected = video_settings.resolution
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	fullscreen_toggle.button_pressed = video_settings.fullscreen
+	color_theme_dropdown.selected = color_theme_dropdown.get_item_index(video_settings.color_theme_id)
 	
 	var audio_settings = DataManager.get_audio_settings()
 	master_vol_slider.value = min(audio_settings.master_volume, 1.0) * 100
@@ -61,4 +62,21 @@ func _on_keybinds_pressed() -> void:
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("fullscreen", toggled_on)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED)
+	pass # Replace with function body.
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey && event.pressed:
+		if event.is_action("fullscreen_toggle"):
+			var mode := DisplayServer.window_get_mode()
+			var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
+			fullscreen_toggle.button_pressed = is_window
+			DataManager.save_video_setting("fullscreen", is_window)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+func _on_color_theme_item_selected(index: int) -> void:
+	var theme_name = color_theme_dropdown.get_item_text(index)
+	var theme_id = color_theme_dropdown.get_item_id(index)
+	DataManager.save_video_setting("color_theme", theme_name)
+	DataManager.save_video_setting("color_theme_id", theme_id)
 	pass # Replace with function body.

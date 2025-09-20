@@ -101,6 +101,8 @@ func create_config():
 	
 	config.set_value("video", "resolution", 0)
 	config.set_value("video", "fullscreen", false)
+	config.set_value("video", "color_theme", "Brown")
+	config.set_value("video", "color_theme_id", 0)
 	
 	config.save(SETTINGS_FILE_PATH)
 	
