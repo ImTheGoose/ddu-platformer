@@ -2,9 +2,11 @@ shader_type canvas_item;
 
 uniform vec2 direction;
 uniform float speed;
+uniform vec2 offset;
 
 void vertex() {
-	// Called for every vertex the material is visible on.
-	UV.x -= TIME * direction.x * speed;
-	UV.y -= TIME * direction.y * speed;
+    UV.x -= TIME * direction.x * speed;
+    UV.y -= TIME * direction.y * speed;
+
+    UV += offset;
 }

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ctra8hn3ielyk" path="res://prefabs/enemies/trunk.gd" id="1_nud6c"]
 [ext_resource type="PackedScene" uid="uid://dxnatyslk4ik6" path="res://prefabs/enemies/TrunkProjectile.tscn" id="2_kyy33"]
-[ext_resource type="Texture2D" uid="uid://0iatuva5p6ag" path="res://asset_pack/Enemies/Trunk/Attack (64x32).png" id="2_xmyx0"]
-[ext_resource type="Texture2D" uid="uid://dyxua7nfc66ad" path="res://asset_pack/Enemies/Trunk/Hit (64x32).png" id="3_kyy33"]
-[ext_resource type="Texture2D" uid="uid://veyhh7ovq274" path="res://asset_pack/Enemies/Trunk/Idle (64x32).png" id="4_o7ajs"]
-[ext_resource type="Texture2D" uid="uid://dlxvufnd6mxiy" path="res://asset_pack/Enemies/Trunk/Run (64x32).png" id="5_odpwh"]
+[ext_resource type="Texture2D" uid="uid://0iatuva5p6ag" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Attack (64x32).png" id="2_xmyx0"]
+[ext_resource type="Texture2D" uid="uid://dyxua7nfc66ad" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Hit (64x32).png" id="3_kyy33"]
+[ext_resource type="Texture2D" uid="uid://veyhh7ovq274" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Idle (64x32).png" id="4_o7ajs"]
+[ext_resource type="Texture2D" uid="uid://dlxvufnd6mxiy" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Run (64x32).png" id="5_odpwh"]
 [ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedEntitySprite2D.gd" id="6_yuq46"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_64ke1"]
 

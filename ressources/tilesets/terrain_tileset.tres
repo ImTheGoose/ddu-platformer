@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=16 format=3 uid="uid://cgeebl2fbdu4m"]
 
-[ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://asset_pack/Terrain/Terrain (16x16).png" id="1_bei6h"]
+[ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://assets/pixel_adventure_assets/Terrain/Terrain (16x16).png" id="1_bei6h"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_5cew0"]
 tile_data = PackedInt32Array(0, 851968, 1, 65536, 851968, 2, 1, 917504, 1, 65537, 917504, 2)

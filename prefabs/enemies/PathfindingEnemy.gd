@@ -19,6 +19,13 @@ enum axis {
 	horizontal
 }
 
+func _init() -> void:
+	var spawn_rate = min(GameManager.get_difficulty_value("enemy_spawn_rate"), 1.0)
+	var rand_float = randf()
+	if rand_float > spawn_rate:
+		queue_free()
+	
+
 func _process(delta: float) -> void:
 	if !checked_points:
 		if path_axis == axis.vertical:
@@ -79,7 +86,6 @@ func _get_points(vec: Vector2):
 	ray.force_raycast_update()
 	var c = ray.get_collider()
 	if c is not PathfindingPoint:
-		print("Point_negative is invalid. Hit: " + str(c))
 		return
 	
 	point_negative = c
@@ -88,13 +94,11 @@ func _get_points(vec: Vector2):
 	ray.force_raycast_update()
 	c = ray.get_collider()
 	if c is not PathfindingPoint:
-		print("Point_positive is invalid. Hit: " + str(c))
 		return
 	
 	point_positive = c
 	target_point = point_positive
 	valid_path_direction = global_position.direction_to(target_point.global_position)
-	print("Found valid pathfinding points")
 
 func _get_direction() -> Vector2:
 	if _is_valid_pathfinding():
