@@ -10,7 +10,7 @@ var config = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 100000,
+	"money" : 0,
 	"selected_skin" : "Osvald",
 	"owned_skins": {
 		"Osvald": true,
