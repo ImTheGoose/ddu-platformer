@@ -1,22 +1,22 @@
 extends GameMenu
 
-@export var BBCode_Icon :String = "[img]res://asset_pack/Items/Fruits/Apple_16x16.png[/img]"
+@export var BBCode_Icon :String = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]"
 @export var skins :Array[Dictionary] = [{
 		"name": "Osvald",
 		"price": 0,
-		"sprite": preload("res://asset_pack/Main Characters/Ninja Frog/Jump (32x32).png")
+		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Jump (32x32).png")
 	}, {
 		"name": "Tiki",
 		"price": 250,
-		"sprite": preload("res://asset_pack/Main Characters/Mask Dude/Jump (32x32).png")
+		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png")
 	}, {
 		"name": "Castro",
 		"price": 500,
-		"sprite": preload("res://asset_pack/Main Characters/Pink Man/Jump (32x32).png")
+		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Pink Man/Jump (32x32).png")
 	}, {
 		"name": "Edward",
 		"price": 1000,
-		"sprite": preload("res://asset_pack/Main Characters/Virtual Guy/Jump (32x32).png")
+		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Virtual Guy/Jump (32x32).png")
 	}
 ]
 

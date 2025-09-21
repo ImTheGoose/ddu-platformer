@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="1_a0f6b"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="2_07nfj"]
-[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://asset_pack/Background/Brown.png" id="3_we8rk"]
+[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="3_we8rk"]
 [ext_resource type="Script" uid="uid://do22tf2kjinhv" path="res://utility/rich_value_label.gd" id="4_8pq3l"]
 [ext_resource type="Script" uid="uid://qhnvl23gbubp" path="res://prefabs/ui/main_menu.gd" id="4_gmjel"]
 [ext_resource type="Script" uid="uid://ukg6syf006m4" path="res://prefabs/ui/background_seperator.gd" id="4_tim8x"]
@@ -14,12 +14,12 @@
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
 [ext_resource type="Script" uid="uid://dben33ofntex3" path="res://prefabs/ui/shop_menu.gd" id="8_8yu0k"]
 [ext_resource type="Script" uid="uid://coi31hch185wt" path="res://prefabs/ui/keybinds_menu.gd" id="9_6usox"]
-[ext_resource type="Texture2D" uid="uid://cfww4vh32t164" path="res://ressources/logo.png" id="9_l7vkd"]
-[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://asset_pack/Main Characters/Mask Dude/Jump (32x32).png" id="9_tim8x"]
+[ext_resource type="Texture2D" uid="uid://cfww4vh32t164" path="res://assets/logo.png" id="9_l7vkd"]
+[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="9_tim8x"]
 [ext_resource type="Script" uid="uid://bn07tyaxxjnsu" path="res://prefabs/ui/death_menu.gd" id="10_8yu0k"]
 [ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/ui/version_label.gd" id="10_gmjel"]
-[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://ressources/Jersey15-Regular.ttf" id="11_r54rh"]
-[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://asset_pack/Other/Dust Particle.png" id="16_c3fr5"]
+[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="11_r54rh"]
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="16_c3fr5"]
 [ext_resource type="Script" uid="uid://bnk08qohdlepr" path="res://prefabs/ui/bottom_cloud.gd" id="17_8t6hx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
@@ -120,7 +120,7 @@ anchor_bottom = 0.02
 offset_right = 470.0
 offset_bottom = 16.0
 bbcode_enabled = true
-text = "[img]res://asset_pack/Items/Fruits/Apple_16x16.png[/img] 0000"
+text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] 0000"
 fit_content = true
 script = ExtResource("4_8pq3l")
 
@@ -540,7 +540,7 @@ stretch_mode = 5
 [node name="price_tag" type="RichTextLabel" parent="Menu_Renderer/Control/shop_menu/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://asset_pack/Items/Fruits/Apple_16x16.png[/img] 1000000
+text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] 1000000
 "
 fit_content = true
 autowrap_mode = 0

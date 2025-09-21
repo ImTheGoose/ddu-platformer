@@ -1,13 +1,13 @@
 [gd_resource type="SpriteFrames" load_steps=57 format=3 uid="uid://b4t3asxpw884d"]
 
-[ext_resource type="Texture2D" uid="uid://8bhamqvj2w0l" path="res://asset_pack/Main Characters/Desappearing (96x96).png" id="1_qd3sw"]
-[ext_resource type="Texture2D" uid="uid://dyn5d37gdpk5o" path="res://asset_pack/Main Characters/Ninja Frog/Hit (32x32).png" id="2_lwstu"]
-[ext_resource type="Texture2D" uid="uid://dq3sj4afav4kb" path="res://asset_pack/Main Characters/Ninja Frog/Double Jump (32x32).png" id="3_j33h6"]
-[ext_resource type="Texture2D" uid="uid://h2labry2s7qq" path="res://asset_pack/Main Characters/Ninja Frog/Fall (32x32).png" id="4_hv8kq"]
-[ext_resource type="Texture2D" uid="uid://bpxmxj2wk062r" path="res://asset_pack/Main Characters/Ninja Frog/Idle (32x32).png" id="5_g6ev1"]
-[ext_resource type="Texture2D" uid="uid://boqjobpu65xsa" path="res://asset_pack/Main Characters/Ninja Frog/Jump (32x32).png" id="6_j6d1w"]
-[ext_resource type="Texture2D" uid="uid://d4f544543y0kf" path="res://asset_pack/Main Characters/Ninja Frog/Run (32x32).png" id="7_4jlxw"]
-[ext_resource type="Texture2D" uid="uid://bqpjj68l4bh4w" path="res://asset_pack/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="8_b78cs"]
+[ext_resource type="Texture2D" uid="uid://8bhamqvj2w0l" path="res://assets/pixel_adventure_assets/Main Characters/Desappearing (96x96).png" id="1_qd3sw"]
+[ext_resource type="Texture2D" uid="uid://dyn5d37gdpk5o" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Hit (32x32).png" id="2_lwstu"]
+[ext_resource type="Texture2D" uid="uid://dq3sj4afav4kb" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Double Jump (32x32).png" id="3_j33h6"]
+[ext_resource type="Texture2D" uid="uid://h2labry2s7qq" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Fall (32x32).png" id="4_hv8kq"]
+[ext_resource type="Texture2D" uid="uid://bpxmxj2wk062r" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Idle (32x32).png" id="5_g6ev1"]
+[ext_resource type="Texture2D" uid="uid://boqjobpu65xsa" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Jump (32x32).png" id="6_j6d1w"]
+[ext_resource type="Texture2D" uid="uid://d4f544543y0kf" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Run (32x32).png" id="7_4jlxw"]
+[ext_resource type="Texture2D" uid="uid://bqpjj68l4bh4w" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="8_b78cs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhksc"]
 atlas = ExtResource("1_qd3sw")

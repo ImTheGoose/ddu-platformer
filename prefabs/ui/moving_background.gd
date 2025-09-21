@@ -3,13 +3,13 @@ extends TextureRect
 @export var position_scale = 0.004
 
 var background_textures :Dictionary = {
-	"Blue": preload("res://asset_pack/Background/Blue.png"),
-	"Brown": preload("res://asset_pack/Background/Brown.png"),
-	"Gray": preload("res://asset_pack/Background/Gray.png"),
-	"Green": preload("res://asset_pack/Background/Green.png"),
-	"Pink": preload("res://asset_pack/Background/Pink.png"),
-	"Purple": preload("res://asset_pack/Background/Purple.png"),
-	"Yellow": preload("res://asset_pack/Background/Yellow.png"),
+	"Blue": preload("res://assets/pixel_adventure_assets/Background/Blue.png"),
+	"Brown": preload("res://assets/pixel_adventure_assets/Background/Brown.png"),
+	"Gray": preload("res://assets/pixel_adventure_assets/Background/Gray.png"),
+	"Green": preload("res://assets/pixel_adventure_assets/Background/Green.png"),
+	"Pink": preload("res://assets/pixel_adventure_assets/Background/Pink.png"),
+	"Purple": preload("res://assets/pixel_adventure_assets/Background/Purple.png"),
+	"Yellow": preload("res://assets/pixel_adventure_assets/Background/Yellow.png"),
 }
 
 func _process(delta: float) -> void:

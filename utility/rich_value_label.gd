@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-@export var BB_Code :String = "[img]res://asset_pack/Items/Fruits/Apple_16x16.png[/img]"
+@export var BB_Code :String = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]"
 @export var data_key :String = "money"
 
 func _process(delta: float) -> void:

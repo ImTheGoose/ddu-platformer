@@ -1,0 +1,164 @@
+[gd_scene load_steps=42 format=3 uid="uid://bwjypqfmpettn"]
+
+[ext_resource type="Script" uid="uid://ci6778jvgv16f" path="res://main.gd" id="1_w3rk5"]
+[ext_resource type="Script" uid="uid://ctjb6mvogl6by" path="res://game_container.gd" id="2_5mvff"]
+[ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://maps/start_map.tscn" id="2_5tuhn"]
+[ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_cm0pq"]
+[ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://ressources/MapInfo.gd" id="4_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://maps/transitions/trans_A_to_C.tscn" id="6_sc1dx"]
+[ext_resource type="PackedScene" uid="uid://ds7c3nyx5ey48" path="res://maps/map_parts/wilf_01_E_to_D.tscn" id="6_xrxkg"]
+[ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://maps/transitions/trans_B_to_C.tscn" id="7_kjvhd"]
+[ext_resource type="PackedScene" uid="uid://fx0t20b4cmre" path="res://maps/map_parts/wilf_02_E_to_D.tscn" id="7_sqvbp"]
+[ext_resource type="PackedScene" uid="uid://co51mwkw4pyh8" path="res://maps/transitions/trans_D_to_C.tscn" id="8_5tuhn"]
+[ext_resource type="PackedScene" uid="uid://c5lp5uujgx0yg" path="res://maps/map_parts/wilf_03_D_to_D.tscn" id="8_hri7i"]
+[ext_resource type="PackedScene" uid="uid://ck0t6e8l7ph1a" path="res://maps/transitions/trans_E_to_C.tscn" id="9_2gh4u"]
+[ext_resource type="PackedScene" uid="uid://dpxbnrxga5hx6" path="res://maps/map_parts/wilf_04_D_to_D.tscn" id="9_w3rk5"]
+[ext_resource type="PackedScene" uid="uid://jtbhbtbjhb7e" path="res://maps/map_parts/wilf_05_D_to_C.tscn" id="10_5mvff"]
+[ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://maps/transitions/trans_C_to_A.tscn" id="10_devvj"]
+[ext_resource type="PackedScene" uid="uid://daixf013bdduf" path="res://maps/transitions/trans_C_to_B.tscn" id="11_3b0ty"]
+[ext_resource type="PackedScene" uid="uid://br7b3gvv1v1v1" path="res://maps/map_parts/willum_01_D_to_E.tscn" id="11_oye8v"]
+[ext_resource type="PackedScene" uid="uid://dykb0nm6ggl61" path="res://maps/map_parts/willum_02_E_to_C.tscn" id="12_40n85"]
+[ext_resource type="PackedScene" uid="uid://by6dsb2rxmexr" path="res://maps/transitions/trans_C_to_D.tscn" id="12_bg4s2"]
+[ext_resource type="PackedScene" uid="uid://oewahg7jjfrl" path="res://maps/map_parts/willum_05_E_to_E.tscn" id="13_gb15f"]
+[ext_resource type="PackedScene" uid="uid://da8ypldv2i7b3" path="res://maps/transitions/trans_C_to_E.tscn" id="13_hhcpw"]
+[ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="16_devvj"]
+[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://utility/playerspawn.gd" id="17_3b0ty"]
+[ext_resource type="PackedScene" uid="uid://dxyonb6hgvrx" path="res://Camera.tscn" id="24_hhcpw"]
+
+[sub_resource type="Resource" id="Resource_2gh4u"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("2_5tuhn")
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_sph85"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("6_xrxkg")
+start_connection = 4
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_o7g6l"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("7_sqvbp")
+start_connection = 4
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_vi5kq"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("8_hri7i")
+start_connection = 3
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_5mkgo"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("9_w3rk5")
+start_connection = 3
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_3ccbu"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("10_5mvff")
+start_connection = 3
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_ny7u2"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("11_oye8v")
+start_connection = 3
+end_connection = 4
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_x3yn0"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("12_40n85")
+start_connection = 4
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_1w2xm"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("13_gb15f")
+start_connection = 4
+end_connection = 4
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_mxvw5"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("6_sc1dx")
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_xrxkg"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("7_kjvhd")
+start_connection = 1
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_sqvbp"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("8_5tuhn")
+start_connection = 3
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_hri7i"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("9_2gh4u")
+start_connection = 4
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_w3rk5"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("10_devvj")
+start_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_5mvff"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("11_3b0ty")
+start_connection = 2
+end_connection = 1
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_oye8v"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("12_bg4s2")
+start_connection = 2
+end_connection = 3
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_40n85"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("13_hhcpw")
+start_connection = 2
+end_connection = 4
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[node name="Main" type="Node"]
+script = ExtResource("1_w3rk5")
+
+[node name="game_container" type="Node2D" parent="."]
+script = ExtResource("2_5mvff")
+
+[node name="Playerspawn" type="Node2D" parent="game_container" node_paths=PackedStringArray("parent")]
+position = Vector2(1029, 865)
+script = ExtResource("17_3b0ty")
+parent = NodePath("../map_generator")
+prefab = ExtResource("16_devvj")
+
+[node name="map_generator" type="Node2D" parent="game_container"]
+position = Vector2(0, 64)
+script = ExtResource("3_cm0pq")
+start_map = SubResource("Resource_2gh4u")
+map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_sph85"), SubResource("Resource_o7g6l"), SubResource("Resource_vi5kq"), SubResource("Resource_5mkgo"), SubResource("Resource_3ccbu"), SubResource("Resource_ny7u2"), SubResource("Resource_x3yn0"), SubResource("Resource_1w2xm")])
+transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85")])
+safe_zone = 2000
+
+[node name="Camera2D" parent="." instance=ExtResource("24_hhcpw")]
