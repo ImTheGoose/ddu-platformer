@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dxyonb6hgvrx"]
+[gd_scene load_steps=30 format=3 uid="uid://dxyonb6hgvrx"]
 
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="1_a0f6b"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="2_07nfj"]
@@ -14,9 +14,11 @@
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
 [ext_resource type="Script" uid="uid://dben33ofntex3" path="res://prefabs/ui/shop_menu.gd" id="8_8yu0k"]
 [ext_resource type="Script" uid="uid://coi31hch185wt" path="res://prefabs/ui/keybinds_menu.gd" id="9_6usox"]
+[ext_resource type="Texture2D" uid="uid://cfww4vh32t164" path="res://ressources/logo.png" id="9_l7vkd"]
 [ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://asset_pack/Main Characters/Mask Dude/Jump (32x32).png" id="9_tim8x"]
 [ext_resource type="Script" uid="uid://bn07tyaxxjnsu" path="res://prefabs/ui/death_menu.gd" id="10_8yu0k"]
 [ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/ui/version_label.gd" id="10_gmjel"]
+[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://ressources/Jersey15-Regular.ttf" id="11_r54rh"]
 [ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://asset_pack/Other/Dust Particle.png" id="16_c3fr5"]
 [ext_resource type="Script" uid="uid://bnk08qohdlepr" path="res://prefabs/ui/bottom_cloud.gd" id="17_8t6hx"]
 
@@ -27,8 +29,8 @@ shader_parameter/speed = 0.2
 shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_5tuhn"]
+font = ExtResource("11_r54rh")
 font_size = 50
-outline_size = 12
 outline_color = Color(0, 0, 0, 0.8117647)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8yu0k"]
@@ -164,30 +166,39 @@ offset_right = 75.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 26
 alignment = 1
 script = ExtResource("4_gmjel")
 menu_name = "main_menu"
-intial_focus_button = NodePath("start_game")
+intial_focus_button = NodePath("MarginContainer/VBoxContainer/start_game")
 
-[node name="Label" type="Label" parent="Menu_Renderer/Control/MainMenu"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="Menu_Renderer/Control/MainMenu"]
+custom_minimum_size = Vector2(300, 58.76)
 layout_mode = 2
-label_settings = SubResource("LabelSettings_5tuhn")
-horizontal_alignment = 1
+texture = ExtResource("9_l7vkd")
+stretch_mode = 5
 
-[node name="start_game" type="Button" parent="Menu_Renderer/Control/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu_Renderer/Control/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_Renderer/Control/MainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="start_game" type="Button" parent="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="shop_menu" type="Button" parent="Menu_Renderer/Control/MainMenu"]
+[node name="shop_menu" type="Button" parent="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Shop"
 
-[node name="settings_menu" type="Button" parent="Menu_Renderer/Control/MainMenu"]
+[node name="settings_menu" type="Button" parent="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="quit_game" type="Button" parent="Menu_Renderer/Control/MainMenu"]
+[node name="quit_game" type="Button" parent="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
@@ -445,7 +456,6 @@ layout_mode = 2
 text = "Back"
 
 [node name="shop_menu" type="MarginContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -553,6 +563,7 @@ layout_mode = 2
 text = "Back"
 
 [node name="DeathMenu" type="VBoxContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -622,10 +633,10 @@ shape = SubResource("RectangleShape2D_3b0ty")
 position = Vector2(969, -38)
 shape = SubResource("RectangleShape2D_2gh4u")
 
-[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/start_game" to="Menu_Renderer/Control/MainMenu" method="_on_start_game_pressed"]
-[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/shop_menu" to="Menu_Renderer/Control/MainMenu" method="_on_shop_menu_pressed"]
-[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/settings_menu" to="Menu_Renderer/Control/MainMenu" method="_on_settings_menu_pressed"]
-[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/quit_game" to="Menu_Renderer/Control/MainMenu" method="_on_quit_game_pressed"]
+[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer/start_game" to="Menu_Renderer/Control/MainMenu" method="_on_start_game_pressed"]
+[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer/shop_menu" to="Menu_Renderer/Control/MainMenu" method="_on_shop_menu_pressed"]
+[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer/settings_menu" to="Menu_Renderer/Control/MainMenu" method="_on_settings_menu_pressed"]
+[connection signal="pressed" from="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer/quit_game" to="Menu_Renderer/Control/MainMenu" method="_on_quit_game_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/PauseMenu/continue_game" to="Menu_Renderer/Control/PauseMenu" method="_on_continue_game_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/PauseMenu/restart_game" to="Menu_Renderer/Control/PauseMenu" method="_on_restart_game_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/PauseMenu/back_to_menu" to="Menu_Renderer/Control/PauseMenu" method="_on_back_to_menu_pressed"]

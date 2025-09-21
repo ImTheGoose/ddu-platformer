@@ -10,11 +10,15 @@ config_version=5
 
 [application]
 
-config/name="DDU-platformer"
+config/name="Upward"
 config/version="0.6"
 run/main_scene="uid://bwjypqfmpettn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/use_filter=false
+boot_splash/image="uid://cq6wk715ju8co"
+config/icon="uid://dx78aab6600bl"
+config/windows_native_icon="res://ressources/favicon.ico"
+boot_splash/minimum_display_time=5000
 
 [autoload]
 
