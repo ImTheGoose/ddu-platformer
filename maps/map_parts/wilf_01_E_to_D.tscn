@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://ds7c3nyx5ey48"]
+[gd_scene load_steps=7 format=4 uid="uid://ds7c3nyx5ey48"]
 
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_g3npj"]
 [ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_lbvl1"]
 [ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_l83ln"]
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="4_4k7mu"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="5_1op7u"]
+[ext_resource type="TileSet" uid="uid://dm0uv7n0xo0sl" path="res://ressources/tilesets/collectables_tileset.tres" id="6_lbvl1"]
 
 [node name="Map" type="Node2D"]
 texture_filter = 1
@@ -31,5 +32,10 @@ tile_set = ExtResource("4_4k7mu")
 [node name="EnemyTiles" type="TileMapLayer" parent="."]
 position = Vector2(0, -48)
 scale = Vector2(3, 3)
-tile_map_data = PackedByteArray("AAADABUAAAAAAAAAAQAFABUAAAAAAAAAAgAWABUAAAAAAAAAAQALAAcAAAAAAAAAAgAMAAcAAAAAAAAAAQAWAAoAAAAAAAAAAgAIAAcAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAADABUAAAAAAAAAAQAFABUAAAAAAAAAAgAWABUAAAAAAAAAAQALAAcAAAAAAAAAAgAMAAcAAAAAAAAAAQAWAAoAAAAAAAAAAgAIAAcAAAAAAAAAAQADABAAAAAAAAAAAQAKABAAAAAAAAAAAQAQABAAAAAAAAAAAQAGABAAAAAAAAAAAgANABAAAAAAAAAAAgA=")
 tile_set = ExtResource("5_1op7u")
+
+[node name="CollectableTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAGABMAAAAAAAAAAQAHABMAAAAAAAAAAQAIABMAAAAAAAAAAQAJABMAAAAAAAAAAQAKABMAAAAAAAAAAQALABMAAAAAAAAAAQAMABMAAAAAAAAAAQANABMAAAAAAAAAAQAOABMAAAAAAAAAAQAPABMAAAAAAAAAAQAQABMAAAAAAAAAAQAmAAsAAAAAAAAAAQAmAAoAAAAAAAAAAQAmAAwAAAAAAAAAAQAmAAkAAAAAAAAAAQAbAAwAAAAAAAAAAQAaAAwAAAAAAAAAAQAKAAYAAAAAAAAAAQAJAAYAAAAAAAAAAQALAAYAAAAAAAAAAQAGAAQAAAAAAAAAAQAGAAMAAAAAAAAAAQAGAAIAAAAAAAAAAQAJAA8AAAAAAAAAAQAKAA8AAAAAAAAAAQALAA8AAAAAAAAAAQAMAA8AAAAAAAAAAQANAA8AAAAAAAAAAQAdAAEAAAAAAAAAAQAdAAIAAAAAAAAAAQARAAQAAAAAAAAAAQA=")
+tile_set = ExtResource("6_lbvl1")
