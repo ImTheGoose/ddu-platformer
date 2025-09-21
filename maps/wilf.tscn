@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwvssfkpyev4e"]
+
+[ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_bv85x"]
+[ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_d0243"]
+[ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_uxld6"]
+[ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="4_322nx"]
+[ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="5_cojqs"]
+
+[node name="Map" type="Node2D"]
+texture_filter = 1
+
+[node name="TerrainTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_set = ExtResource("1_bv85x")
+
+[node name="GUIDE_TILE" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_set = ExtResource("2_d0243")
+script = ExtResource("3_uxld6")
+
+[node name="TrapTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_set = ExtResource("4_322nx")
+
+[node name="EnemyTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_set = ExtResource("5_cojqs")
