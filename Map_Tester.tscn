@@ -1,14 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://wnla5mxi8tl"]
+[gd_scene load_steps=34 format=3 uid="uid://wnla5mxi8tl"]
 
 [ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://playerspawn.gd" id="1_guadk"]
 [ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="2_xefmm"]
 [ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_q362l"]
 [ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://maps/start_map.tscn" id="4_74heq"]
 [ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://ressources/MapInfo.gd" id="5_2ibyy"]
-[ext_resource type="PackedScene" uid="uid://3y8wdr2nvtrp" path="res://maps/wilf_transition_01_D_to_C.tscn" id="7_2oe6y"]
-[ext_resource type="PackedScene" uid="uid://fx0t20b4cmre" path="res://maps/map_parts/wilf_02_E_to_D.tscn" id="7_j2rdw"]
-[ext_resource type="PackedScene" uid="uid://bwvssfkpyev4e" path="res://maps/wilf_09_C_to_B.tscn" id="9_7cds4"]
-[ext_resource type="PackedScene" uid="uid://cnn75omrtwgnu" path="res://maps/wilf_08_B_to_A.tscn" id="11_pxq4i"]
+[ext_resource type="PackedScene" uid="uid://c0xp7dfidmrmo" path="res://maps/wilf_10_B_to_C.tscn" id="10_tofh3"]
 [ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://maps/transitions/trans_A_to_C.tscn" id="14_2em3n"]
 [ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://maps/transitions/trans_B_to_C.tscn" id="15_50bud"]
 [ext_resource type="PackedScene" uid="uid://co51mwkw4pyh8" path="res://maps/transitions/trans_D_to_C.tscn" id="16_mqdvq"]
@@ -29,31 +26,11 @@ prefab = ExtResource("4_74heq")
 end_connection = 3
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
-[sub_resource type="Resource" id="Resource_fisr1"]
+[sub_resource type="Resource" id="Resource_pxq4i"]
 script = ExtResource("5_2ibyy")
-prefab = ExtResource("7_j2rdw")
-start_connection = 4
-end_connection = 3
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_fyqcr"]
-script = ExtResource("5_2ibyy")
-prefab = ExtResource("7_2oe6y")
-start_connection = 3
-end_connection = 2
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_sji7c"]
-script = ExtResource("5_2ibyy")
-prefab = ExtResource("11_pxq4i")
+prefab = ExtResource("10_tofh3")
 start_connection = 1
-metadata/_custom_type_script = "uid://ca53ws1nshywn"
-
-[sub_resource type="Resource" id="Resource_tofh3"]
-script = ExtResource("5_2ibyy")
-prefab = ExtResource("9_7cds4")
-start_connection = 2
-end_connection = 1
+end_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [sub_resource type="Resource" id="Resource_mxvw5"]
@@ -138,7 +115,7 @@ prefab = ExtResource("2_xefmm")
 position = Vector2(0, 64)
 script = ExtResource("3_q362l")
 start_map = SubResource("Resource_2gh4u")
-map_arr = Array[ExtResource("5_2ibyy")]([SubResource("Resource_fisr1"), SubResource("Resource_fyqcr"), SubResource("Resource_sji7c"), SubResource("Resource_tofh3")])
+map_arr = Array[ExtResource("5_2ibyy")]([SubResource("Resource_pxq4i")])
 transition_arr = Array[ExtResource("5_2ibyy")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85")])
 safe_zone = 2000
 
