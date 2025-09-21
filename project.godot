@@ -32,6 +32,17 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "green",
+"res://globals/": "pink",
+"res://maps/": "orange",
+"res://prefabs/": "purple",
+"res://ressources/": "blue",
+"res://utility/": "blue"
+}
+
 [gui]
 
 theme/custom="uid://b826k6lvqtor5"
