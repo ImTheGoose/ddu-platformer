@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://wnla5mxi8tl"]
 
-[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://playerspawn.gd" id="1_guadk"]
+[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://utility/playerspawn.gd" id="1_guadk"]
 [ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="2_xefmm"]
 [ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_q362l"]
 [ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://maps/start_map.tscn" id="4_74heq"]

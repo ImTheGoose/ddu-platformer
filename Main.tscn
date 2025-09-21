@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://oewahg7jjfrl" path="res://maps/map_parts/willum_05_E_to_E.tscn" id="13_gb15f"]
 [ext_resource type="PackedScene" uid="uid://da8ypldv2i7b3" path="res://maps/transitions/trans_C_to_E.tscn" id="13_hhcpw"]
 [ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/Player.tscn" id="16_devvj"]
-[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://playerspawn.gd" id="17_3b0ty"]
+[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://utility/playerspawn.gd" id="17_3b0ty"]
 [ext_resource type="PackedScene" uid="uid://dxyonb6hgvrx" path="res://Camera.tscn" id="24_hhcpw"]
 
 [sub_resource type="Resource" id="Resource_2gh4u"]

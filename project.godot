@@ -17,8 +17,6 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/use_filter=false
 boot_splash/image="uid://cq6wk715ju8co"
 config/icon="uid://dx78aab6600bl"
-config/windows_native_icon="res://ressources/favicon.ico"
-boot_splash/minimum_display_time=5000
 
 [autoload]
 

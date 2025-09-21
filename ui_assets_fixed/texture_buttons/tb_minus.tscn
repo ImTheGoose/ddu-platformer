@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://GuiAssets/sprites/gdp_styles.png" id="1_its6c"]
-[ext_resource type="Texture2D" uid="uid://b5h20s54fmkcw" path="res://GuiAssets/styles/buttons/btn_13p_textured_focus.tres" id="2_ywroe"]
+[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://ui_assets_fixed/sprites/gdp_styles.png" id="1_its6c"]
+[ext_resource type="Texture2D" path="res://GuiAssets/styles/buttons/btn_13p_textured_focus.tres" id="2_ywroe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h3xiq"]
 atlas = ExtResource("1_its6c")

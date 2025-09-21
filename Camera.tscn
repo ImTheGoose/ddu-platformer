@@ -433,18 +433,20 @@ text = "Setup"
 label_settings = SubResource("LabelSettings_5tuhn")
 horizontal_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Menu_Renderer/Control/start_game_menu"]
+[node name="difficulty_dropdown" type="OptionButton" parent="Menu_Renderer/Control/start_game_menu"]
 layout_mode = 2
 alignment = 1
 text_overrun_behavior = 1
 selected = 1
-item_count = 3
+item_count = 4
 popup/item_0/text = "Easy"
 popup/item_0/id = 0
 popup/item_1/text = "Normal"
 popup/item_1/id = 1
 popup/item_2/text = "Hard"
 popup/item_2/id = 2
+popup/item_3/text = "Impossible"
+popup/item_3/id = 3
 
 [node name="start_game" type="Button" parent="Menu_Renderer/Control/start_game_menu"]
 layout_mode = 2
@@ -651,6 +653,7 @@ shape = SubResource("RectangleShape2D_2gh4u")
 [connection signal="pressed" from="Menu_Renderer/Control/SettingsMenu/back" to="Menu_Renderer/Control/SettingsMenu" method="_on_back_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/KeybindsMenu/PanelContainer/VBoxContainer/ScrollContainer/SettingsList/reset_to_default" to="Menu_Renderer/Control/KeybindsMenu" method="_on_reset_to_default_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/KeybindsMenu/back" to="Menu_Renderer/Control/KeybindsMenu" method="_on_back_pressed"]
+[connection signal="item_selected" from="Menu_Renderer/Control/start_game_menu/difficulty_dropdown" to="Menu_Renderer/Control/start_game_menu" method="_on_difficulty_dropdown_item_selected"]
 [connection signal="pressed" from="Menu_Renderer/Control/start_game_menu/start_game" to="Menu_Renderer/Control/start_game_menu" method="_on_start_game_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/start_game_menu/back" to="Menu_Renderer/Control/start_game_menu" method="_on_back_pressed"]
 [connection signal="pressed" from="Menu_Renderer/Control/shop_menu/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/previous" to="Menu_Renderer/Control/shop_menu" method="_on_previous_pressed"]

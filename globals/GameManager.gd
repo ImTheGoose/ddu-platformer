@@ -6,12 +6,46 @@ signal on_stop_game
 signal spawn_player
 var game_state :state
 var game_paused := false
+var game_difficulty :difficulty = difficulty.normal
+
+var difficulty_settings = {
+	difficulty.easy : {
+		"camera_speed" : 0.8,
+		"enemy_spawn_rate": 0.70,
+	},difficulty.normal : {
+		"camera_speed" : 1,
+		"enemy_spawn_rate": 0.85,
+	},difficulty.hard : {
+		"camera_speed" : 1.1,
+		"enemy_spawn_rate": 1.0,
+	},difficulty.impossible : {
+		"camera_speed" : 1.3,
+		"enemy_spawn_rate": 1.0,
+	},
+}
+
+enum difficulty {
+	easy,
+	normal,
+	hard,
+	impossible
+}
 
 enum state {
 	pregame,
 	running,
 	dead
 }
+
+func get_difficulty_value(key: String):
+	var dif_settings = difficulty_settings[game_difficulty]
+	return dif_settings[key]
+
+func get_difficulty():
+	return game_difficulty
+
+func set_difficulty(dif: difficulty):
+	game_difficulty = dif
 
 func pause_game(isPaused: bool):
 	print(isPaused)

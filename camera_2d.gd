@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var speed := 1800
+@export var speed := 90
 @export var safe_distance = 300
 @onready var origin_position = position
 var player :CharacterBody2D
@@ -17,7 +17,8 @@ func _process(delta: float) -> void:
 	
 	
 	if GameManager.is_game_running() && !GameManager.is_game_paused():
-		position.y -= speed / 20 * delta
+		var speed_scale = GameManager.get_difficulty_value("camera_speed")
+		position.y -= speed_scale * speed * delta
 
 func _on_player_follow_area_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:

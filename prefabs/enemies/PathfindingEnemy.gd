@@ -19,6 +19,13 @@ enum axis {
 	horizontal
 }
 
+func _init() -> void:
+	var spawn_rate = min(GameManager.get_difficulty_value("enemy_spawn_rate"), 1.0)
+	var rand_float = randf()
+	if rand_float > spawn_rate:
+		queue_free()
+	
+
 func _process(delta: float) -> void:
 	if !checked_points:
 		if path_axis == axis.vertical:
