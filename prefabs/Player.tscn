@@ -78,6 +78,7 @@ color_ramp = SubResource("GradientTexture1D_634ti")
 
 [node name="Player" type="CharacterBody2D"]
 visibility_layer = 3
+z_index = 9
 scale = Vector2(3, 3)
 collision_layer = 15
 collision_mask = 15
@@ -128,5 +129,5 @@ process_material = SubResource("ParticleProcessMaterial_634ti")
 script = ExtResource("11_yhksc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -14.0
+volume_db = -20.0
 bus = &"SFX"

@@ -7,6 +7,9 @@ func _ready() -> void:
 	MenuManager.toggle_game_visibillity.connect(_toggle_visible)
 
 func _process(delta: float) -> void:	
+	if GameManager.game_paused:
+		return
+	
 	match GameManager.game_state:
 		GameManager.state.running:
 			time += delta

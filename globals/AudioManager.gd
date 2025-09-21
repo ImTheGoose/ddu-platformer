@@ -11,7 +11,8 @@ func _enter_tree() -> void:
 
 	# Create a polyphonic stream so we can play sounds directly from it
 	var stream = AudioStreamPolyphonic.new()
-	stream.polyphony = 32
+	stream.polyphony = 64
+	player.max_polyphony = 64
 	player.stream = stream
 	player.play()
 	# Get the polyphonic playback stream to play sounds

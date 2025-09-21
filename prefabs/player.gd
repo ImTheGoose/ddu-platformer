@@ -80,6 +80,7 @@ func _attempt_jump():
 		anim.flip_h = !anim.flip_h
 		jump_particles.restart(false)
 		audio_stream.stream = audio_files["jump"]
+		audio_stream.volume_db = -20
 		audio_stream.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream.play()
 	
@@ -88,6 +89,7 @@ func _attempt_jump():
 		air_time = jump_buffer_time
 		velocity.y = -jump_strength
 		audio_stream.stream = audio_files["jump"]
+		audio_stream.volume_db = -20
 		audio_stream.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream.play()
 
@@ -97,6 +99,7 @@ func _attempt_jump():
 		anim.play("Double_Jump")
 		jump_particles.restart(false)
 		audio_stream.stream = audio_files["jump"]
+		audio_stream.volume_db = -20
 		audio_stream.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream.play()
 
@@ -128,6 +131,7 @@ func _die(): #TEMPOARY
 	death_particles.restart()
 	anim.play("Die")
 	audio_stream.stream = audio_files["die"]
+	audio_stream.volume_db = -8
 	audio_stream.pitch_scale = randf_range(0.9, 1.1)
 	audio_stream.play()
 
@@ -149,6 +153,7 @@ func _update_anim(m):
 			dust_particles.emitting = true
 			if audio_stream.stream != audio_files["running"] or !audio_stream.playing:
 				audio_stream.stream = audio_files["running"]
+				audio_stream.volume_db = -14
 				audio_stream.pitch_scale = randf_range(0.9, 1.1)
 				audio_stream.play()
 	elif !is_on_wall_only():
