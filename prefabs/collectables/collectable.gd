@@ -9,6 +9,8 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		anim.play("Collect")
+		var money = DataManager.get_value("money")
+		DataManager.set_value("money", money + 1) 
 		pass
 
 func _on_anim_finished():

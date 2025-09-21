@@ -10,14 +10,20 @@ config_version=5
 
 [application]
 
-config/name="DDU-platformer"
+config/name="Upward"
+config/version="0.6"
 run/main_scene="uid://bwjypqfmpettn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/use_filter=false
+boot_splash/image="uid://cq6wk715ju8co"
+config/icon="uid://dx78aab6600bl"
 
 [autoload]
 
 GameManager="*res://globals/GameManager.gd"
+MenuManager="*res://globals/MenuManager.gd"
+DataManager="*res://globals/DataManager.gd"
+AudioManager="*res://globals/AudioManager.gd"
 
 [display]
 
@@ -25,7 +31,22 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/window_width_override=1280
 window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "green",
+"res://globals/": "pink",
+"res://maps/": "orange",
+"res://prefabs/": "purple",
+"res://ressources/": "blue",
+"res://utility/": "blue"
+}
+
+[gui]
+
+theme/custom="uid://b826k6lvqtor5"
 
 [input]
 

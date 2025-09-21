@@ -1,7 +1,7 @@
 extends Camera2D
 
-var speed = 1200
-var safe_distance = 500
+@export var speed := 90
+@export var safe_distance = 300
 @onready var origin_position = position
 var player :CharacterBody2D
 
@@ -17,13 +17,8 @@ func _process(delta: float) -> void:
 	
 	
 	if GameManager.is_game_running() && !GameManager.is_game_paused():
-		position.y -= speed / 20 * delta
-	
-	if Input.is_action_just_pressed("fullscreen_toggle"):
-		var mode := DisplayServer.window_get_mode()
-		var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
-
+		var speed_scale = GameManager.get_difficulty_value("camera_speed")
+		position.y -= speed_scale * speed * delta
 
 func _on_player_follow_area_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
