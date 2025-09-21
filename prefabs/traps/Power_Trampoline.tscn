@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://bh3pdvlpgdufq"]
 
 [ext_resource type="Script" uid="uid://dckcrbhtnaktm" path="res://prefabs/traps/trampoline.gd" id="1_7fog4"]
-[ext_resource type="Texture2D" uid="uid://bdlpe3shus1y6" path="res://asset_pack/Traps/Blue Trampoline/Idle.png" id="2_k5q4v"]
-[ext_resource type="Texture2D" uid="uid://cha2e4akx0wk6" path="res://asset_pack/Traps/Blue Trampoline/Jump (28x28).png" id="3_7fog4"]
+[ext_resource type="Texture2D" uid="uid://bdlpe3shus1y6" path="res://assets/pixel_adventure_assets/Traps/Blue Trampoline/Idle.png" id="2_k5q4v"]
+[ext_resource type="Texture2D" uid="uid://cha2e4akx0wk6" path="res://assets/pixel_adventure_assets/Traps/Blue Trampoline/Jump (28x28).png" id="3_7fog4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ncv0"]
 atlas = ExtResource("3_7fog4")

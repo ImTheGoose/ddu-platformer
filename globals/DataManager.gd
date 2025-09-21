@@ -21,7 +21,6 @@ var default_game_data: Dictionary = {
 }
 
 func _init() -> void:
-	create_config()
 	game_data = default_game_data.duplicate()
 	load_save_data()
 	load_config()
@@ -42,6 +41,7 @@ func clear_game_data():
 	DirAccess.remove_absolute(PATH)
 	game_data = default_game_data
 	load_save_data()
+	create_config()
 	
 func save_game_data():
 	var save_file = FileAccess.open(PATH, FileAccess.WRITE)
@@ -97,8 +97,8 @@ func create_config():
 	config.set_value("keybinding", "restart", "R")
 	config.set_value("keybinding", "escape", "Escape")
 	
-	config.set_value("audio", "master_volume", 1.0)
-	config.set_value("audio", "music_volume", 1.0)
+	config.set_value("audio", "master_volume", 0)
+	config.set_value("audio", "music_volume", -15)
 	
 	config.set_value("video", "resolution", 0)
 	config.set_value("video", "fullscreen", false)

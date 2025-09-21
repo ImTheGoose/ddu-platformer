@@ -23,6 +23,7 @@ config/icon="uid://dx78aab6600bl"
 GameManager="*res://globals/GameManager.gd"
 MenuManager="*res://globals/MenuManager.gd"
 DataManager="*res://globals/DataManager.gd"
+AudioManager="*res://globals/AudioManager.gd"
 
 [display]
 

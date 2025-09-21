@@ -10,7 +10,10 @@ extends GameMenu
 
 func _ready() -> void:
 	super()
+	_load_config_variables()
 
+
+func _load_config_variables():
 	var video_settings = DataManager.get_video_settings()
 	resolution_dropdown.selected = video_settings.resolution
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
@@ -19,15 +22,16 @@ func _ready() -> void:
 	particle_toggle.button_pressed = video_settings.particles_enabled
 	
 	var audio_settings = DataManager.get_audio_settings()
-	master_vol_slider.value = min(audio_settings.master_volume, 1.0) * 100
-	music_vol_slider.value = min(audio_settings.music_volume, 1.0) * 100
-	
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), audio_settings.master_volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), audio_settings.music_volume)
+	master_vol_slider.value = audio_settings.master_volume
+	music_vol_slider.value = audio_settings.music_volume
 
 var res_list :Array[Vector2] = [Vector2(1280, 720), Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
 
 func _on_volume_value_changed(value: float) -> void:
-	DataManager.save_audio_setting("master_volume", value / 100)
-	AudioServer.set_bus_volume_db(0, value / 100)
+	DataManager.save_audio_setting("master_volume", value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 	pass # Replace with function body.
 
 
@@ -46,12 +50,13 @@ func _on_back_pressed() -> void:
 
 func _on_clear_game_data_pressed() -> void:
 	DataManager.clear_game_data()
+	_load_config_variables()
 	pass # Replace with function body.
 
 
 func _on_music_volume_value_changed(value: float) -> void:
-	DataManager.save_audio_setting("music_volume", value / 100)
-	AudioServer.set_bus_volume_db(0, value / 100)
+	DataManager.save_audio_setting("music_volume", value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
 	pass # Replace with function body.
 
 

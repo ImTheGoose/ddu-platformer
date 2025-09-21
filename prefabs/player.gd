@@ -7,9 +7,17 @@ extends CharacterBody2D
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
 
+@onready var audio_files = {
+	"running" : preload("res://assets/audio/sfx/fast_footsteps.mp3"),
+	"jump" : preload("res://assets/audio/sfx/jump.mp3"),
+	"die" : preload("res://assets/audio/sfx/death.mp3"),
+}
+
 @onready var dust_particles = $dust_particles
 @onready var jump_particles = $jump_particles
 @onready var death_particles = $die_particles
+@onready var audio_stream = $AudioStreamPlayer
+
 
 var dead = false #TEMPOARY
 var double_jumped :bool = false
@@ -71,17 +79,26 @@ func _attempt_jump():
 		
 		anim.flip_h = !anim.flip_h
 		jump_particles.restart(false)
+		audio_stream.stream = audio_files["jump"]
+		audio_stream.pitch_scale = randf_range(0.8, 1.1)
+		audio_stream.play()
 	
 	elif is_on_floor() or air_time < jump_buffer_time:
 		jump_particles.restart(false)
 		air_time = jump_buffer_time
 		velocity.y = -jump_strength
+		audio_stream.stream = audio_files["jump"]
+		audio_stream.pitch_scale = randf_range(0.8, 1.1)
+		audio_stream.play()
 
 	elif !double_jumped:
 		double_jumped = true
 		velocity.y = -jump_strength * 0.85
 		anim.play("Double_Jump")
 		jump_particles.restart(false)
+		audio_stream.stream = audio_files["jump"]
+		audio_stream.pitch_scale = randf_range(0.8, 1.1)
+		audio_stream.play()
 
 func _apply_gravity(delta: float, gravity_scale: float = 1):
 	velocity += get_gravity() * delta * gravity_scale
@@ -110,6 +127,9 @@ func _die(): #TEMPOARY
 	GameManager.player_died()
 	death_particles.restart()
 	anim.play("Die")
+	audio_stream.stream = audio_files["die"]
+	audio_stream.pitch_scale = randf_range(0.9, 1.1)
+	audio_stream.play()
 
 func hit(vec: Vector2):
 	velocity = vec * max_speed * 1.5
@@ -123,13 +143,19 @@ func _update_anim(m):
 		if m == 0:
 			anim.play("Idle")
 			dust_particles.emitting = false
+			audio_stream.stop()
 		else:
 			anim.play("Run")
 			dust_particles.emitting = true
+			if audio_stream.stream != audio_files["running"] or !audio_stream.playing:
+				audio_stream.stream = audio_files["running"]
+				audio_stream.pitch_scale = randf_range(0.9, 1.1)
+				audio_stream.play()
 	elif !is_on_wall_only():
 		if velocity.y < 0 && !double_jumped:
 			dust_particles.emitting = false
 			anim.play("Jump")
+
 		if velocity.y > 0:
 			anim.play("Fall")
 			dust_particles.emitting = false

@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://dxyonb6hgvrx"]
+[gd_scene load_steps=32 format=3 uid="uid://dxyonb6hgvrx"]
 
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="1_a0f6b"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="2_07nfj"]
+[ext_resource type="AudioStream" uid="uid://bi7c73m7bggnj" path="res://assets/audio/music/looped_song1.mp3" id="2_ibjqg"]
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="3_we8rk"]
 [ext_resource type="Script" uid="uid://do22tf2kjinhv" path="res://utility/rich_value_label.gd" id="4_8pq3l"]
 [ext_resource type="Script" uid="uid://qhnvl23gbubp" path="res://prefabs/ui/main_menu.gd" id="4_gmjel"]
@@ -21,6 +22,12 @@
 [ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="11_r54rh"]
 [ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="16_c3fr5"]
 [ext_resource type="Script" uid="uid://bnk08qohdlepr" path="res://prefabs/ui/bottom_cloud.gd" id="17_8t6hx"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
+shuffle = true
+fade_time = 0.2
+stream_count = 1
+stream_0 = ExtResource("2_ibjqg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgr22"]
 shader = ExtResource("2_07nfj")
@@ -69,6 +76,11 @@ size = Vector2(1948, 557.5)
 process_mode = 3
 anchor_mode = 0
 script = ExtResource("1_a0f6b")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPlaylist_j253g")
+autoplay = true
+bus = &"Music"
 
 [node name="moving_background" type="TextureRect" parent="."]
 z_index = -50
@@ -240,7 +252,6 @@ layout_mode = 2
 text = "Main Menu"
 
 [node name="SettingsMenu" type="VBoxContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -291,6 +302,9 @@ text = "Master Volume"
 [node name="master_volume" type="HSlider" parent="Menu_Renderer/Control/SettingsMenu/PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -25.0
+max_value = 12.0
+step = 0.2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Menu_Renderer/Control/SettingsMenu/PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
 layout_mode = 2
@@ -302,6 +316,9 @@ text = "Music Volume"
 [node name="music_volume" type="HSlider" parent="Menu_Renderer/Control/SettingsMenu/PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -72.0
+max_value = 12.0
+step = 0.2
 
 [node name="fullscreen_toggle" type="CheckBox" parent="Menu_Renderer/Control/SettingsMenu/PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
 layout_mode = 2
@@ -458,6 +475,7 @@ layout_mode = 2
 text = "Back"
 
 [node name="shop_menu" type="MarginContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

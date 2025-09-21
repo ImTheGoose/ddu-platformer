@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player.gd" id="1_0ep8a"]
 [ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/osvald_spriteframes.tres" id="2_wuy1y"]
 [ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player_skin.gd" id="10_634ti"]
-[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://asset_pack/Other/Dust Particle.png" id="10_rwuho"]
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="10_rwuho"]
 [ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="11_yhksc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dw41"]
@@ -126,3 +126,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_634ti")
 script = ExtResource("11_yhksc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -14.0
+bus = &"SFX"
