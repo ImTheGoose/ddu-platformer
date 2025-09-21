@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg5d56ttwrrar"]
+
+[ext_resource type="Script" uid="uid://doovow1ubdcjp" path="res://prefabs/ui/settings_menu.gd" id="1_d0kmf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d0kmf"]
+font_size = 136
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SettingsMenu" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.5
+offset_top = -95.0
+offset_right = 272.5
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_d0kmf")
+menu_name = "settings_menu"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_d0kmf")
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="SettingsList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="vol_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
+layout_mode = 2
+text = "Volume"
+
+[node name="volume" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
+layout_mode = 2
+
+[node name="res_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
+layout_mode = 2
+
+[node name="resolution" type="OptionButton" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560x1440"
+popup/item_2/id = 2
+popup/item_3/text = "3840x2160"
+popup/item_3/id = 3
+
+[node name="action_list" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
+layout_mode = 2
+
+[node name="reset_to_default" type="Button" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList"]
+layout_mode = 2
+text = "Reset to default"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 2
+text = "Back"
+
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/volume" to="." method="_on_volume_value_changed"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/resolution" to="." method="_on_resolution_item_selected"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/reset_to_default" to="." method="_on_reset_to_default_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

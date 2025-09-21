@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://cocuafbfox40i"]
 
 [ext_resource type="Script" uid="uid://dt8vikjch0vqk" path="res://prefabs/traps/fire_plate.gd" id="1_vhx8u"]
-[ext_resource type="Texture2D" uid="uid://c0jpup3cmereq" path="res://asset_pack/Traps/Fire/Hit (16x32).png" id="2_0dhi1"]
-[ext_resource type="Texture2D" uid="uid://cij8w400ojbyr" path="res://asset_pack/Traps/Fire/Off.png" id="3_s08ra"]
-[ext_resource type="Texture2D" uid="uid://djm51vgtccqc4" path="res://asset_pack/Traps/Fire/On (16x32).png" id="4_vdro8"]
+[ext_resource type="Texture2D" uid="uid://c0jpup3cmereq" path="res://assets/pixel_adventure_assets/Traps/Fire/Hit (16x32).png" id="2_0dhi1"]
+[ext_resource type="Texture2D" uid="uid://cij8w400ojbyr" path="res://assets/pixel_adventure_assets/Traps/Fire/Off.png" id="3_s08ra"]
+[ext_resource type="Texture2D" uid="uid://djm51vgtccqc4" path="res://assets/pixel_adventure_assets/Traps/Fire/On (16x32).png" id="4_vdro8"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="5_s08ra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uc8s0"]
