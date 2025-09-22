@@ -631,6 +631,7 @@ script = ExtResource("10_gmjel")
 
 [node name="bottom_cloud" type="GPUParticles2D" parent="."]
 process_mode = 1
+z_index = 11
 position = Vector2(962, 1068)
 amount = 250
 texture = ExtResource("16_c3fr5")
