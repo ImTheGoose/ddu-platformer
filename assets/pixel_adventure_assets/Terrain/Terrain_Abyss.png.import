@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn7a53xq84u84"
-path="res://.godot/imported/Terrain (16x16).png-f528f394a994606e174ba4b2a2330aa9.ctex"
+uid="uid://vc56e8nljq03"
+path="res://.godot/imported/Terrain_Abyss.png-4c7ea8e822523b4441be4d6f74d70a86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pixel_adventure_assets/Terrain/Terrain (16x16).png"
-dest_files=["res://.godot/imported/Terrain (16x16).png-f528f394a994606e174ba4b2a2330aa9.ctex"]
+source_file="res://assets/pixel_adventure_assets/Terrain/Terrain_Abyss.png"
+dest_files=["res://.godot/imported/Terrain_Abyss.png-4c7ea8e822523b4441be4d6f74d70a86.ctex"]
 
 [params]
 

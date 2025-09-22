@@ -13,8 +13,7 @@ var background_textures :Dictionary = {
 }
 
 func _process(delta: float) -> void:
-	var video_settings = DataManager.get_video_settings()
-	var theme_name = video_settings.color_theme
+	var theme_name = DataManager.get_value("selected_accent")
 	
 	var mat: ShaderMaterial = material
 	mat.set_shader_parameter("offset", global_position * position_scale)
