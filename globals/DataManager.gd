@@ -10,13 +10,29 @@ var config = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 0,
+	"money" : 999999,
 	"selected_skin" : "Osvald",
-	"owned_skins": {
+	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
 		"Edward": false,
 		"Tiki": false
+	},
+	"selected_accent" : "Brown",
+	"owned_accent" : {
+		"Brown" : true,
+		"Blue" : false,
+		"Gray" : false,
+		"Green" : false,
+		"Pink" : false,
+		"Purple" : false,
+		"Yellow" : false,
+	},
+	"selected_theme" : "Default",
+	"owned_theme" : {
+		"Default" : true,
+		"Wooden" : false,
+		"Abyss" : false,
 	}
 }
 
@@ -29,9 +45,14 @@ func update_game_data():
 	var v: float = float(game_data["version"])
 	print(PREFIX, "Updating save data, from: ", v, " to: ", ProjectSettings.get_setting("application/config/version"))
 	
-	#Example of how version specifik handling could look like.
-	#if v < 0.7:
-	#	print("Updating to 0.7")
+	if v < 0.7:
+		print("Updating to 0.7")
+		game_data["owned_skin"] = game_data["owned_skins"]
+		game_data["selected_theme"] = "Default"
+		game_data["selected_accent"] = "Brown"
+		game_data["owned_theme"] = default_game_data["owned_theme"]
+		game_data["owned_accent"] = default_game_data["owned_accent"]
+		
 		
 	game_data["version"] = ProjectSettings.get_setting("application/config/version")
 	save_game_data()

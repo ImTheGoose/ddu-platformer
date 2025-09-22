@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=8 format=3 uid="uid://bkj06jyku7bya"]
 
-[ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://assets/pixel_adventure_assets/Terrain/Terrain (16x16).png" id="1_55wfe"]
+[ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://assets/pixel_adventure_assets/Terrain/Terrain_Default.png" id="1_55wfe"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_55wfe"]
 tile_data = PackedInt32Array(0, 786432, 8, 1, 917504, 8, 2, 65536, 5, 3, 65536, 5, 4, 65536, 5, 5, 131072, 5, 6, 1114112, 8, 7, 1179648, 8, 8, 1179648, 8, 9, 1179648, 8, 10, 1179648, 8, 11, 1179648, 8, 12, 1179648, 8, 13, 1179648, 8, 14, 1179648, 8, 15, 1179648, 8, 16, 1179648, 8, 17, 1179648, 8, 18, 1179648, 8, 19, 1179648, 8, 20, 1179648, 8, 21, 1179648, 8, 22, 1179648, 8, 23, 1179648, 8, 24, 1179648, 8, 25, 1179648, 8, 26, 1179648, 8, 27, 1179648, 8, 28, 1179648, 8, 29, 1179648, 8, 30, 1179648, 8, 31, 1179648, 8, 32, 1179648, 8, 33, 1245184, 8, 34, 0, 5, 35, 65536, 5, 36, 65536, 5, 37, 65536, 5, 38, 786432, 8, 39, 917504, 8)

@@ -20,5 +20,5 @@ func _on_settings_menu_pressed() -> void:
 
 func _on_shop_menu_pressed() -> void:
 	MenuManager.hide_all_menus.emit()
-	MenuManager.show_menu.emit("shop_menu")
+	MenuManager.show_menu.emit("shop_selection_menu")
 	pass # Replace with function body.
