@@ -70,7 +70,7 @@ color_ramp = SubResource("GradientTexture1D_rq4tw")
 size = Vector2(1945, 83)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2gh4u"]
-size = Vector2(1948, 557.5)
+size = Vector2(1948, 2716)
 
 [node name="Camera2D" type="Camera2D"]
 process_mode = 3
@@ -650,7 +650,7 @@ shape = SubResource("RectangleShape2D_3b0ty")
 [node name="PlayerFollowArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollowArea"]
-position = Vector2(969, -38)
+position = Vector2(969, -659)
 shape = SubResource("RectangleShape2D_2gh4u")
 
 [connection signal="pressed" from="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer/start_game" to="Menu_Renderer/Control/MainMenu" method="_on_start_game_pressed"]

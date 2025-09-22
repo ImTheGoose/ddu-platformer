@@ -1,7 +1,7 @@
 extends Camera2D
 
 @export var speed := 90
-@export var safe_distance = 300
+@export var safe_distance = 400
 @onready var origin_position = position
 var player :CharacterBody2D
 
@@ -13,7 +13,14 @@ func _reset_position():
 
 func _process(delta: float) -> void:
 	if player:
-		global_position.y = lerp(global_position.y, player.global_position.y - safe_distance, delta)
+		if player.global_position.y < global_position.y + safe_distance:
+			var target_y = player.global_position.y - safe_distance
+			var distance = abs(target_y - global_position.y)
+
+			var m_speed = distance * distance * 0.0045
+
+			global_position.y = move_toward(global_position.y, target_y, m_speed * delta)
+
 	
 	
 	if GameManager.is_game_running() && !GameManager.is_game_paused():
@@ -23,11 +30,4 @@ func _process(delta: float) -> void:
 func _on_player_follow_area_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		player = body
-	pass # Replace with function body.
-
-
-func _on_player_follow_area_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		if body.global_position.y > global_position.y:
-			player = null
 	pass # Replace with function body.

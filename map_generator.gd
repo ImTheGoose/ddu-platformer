@@ -10,7 +10,7 @@ var px_per_tile :int = 16
 var height :float = 0
 var current_connection_type :MapInfo.connection_type
 
-func _ready() -> void:
+func _ready() -> void: 
 	if map_arr.is_empty():
 		map_arr = transition_arr.duplicate()
 		map_arr_full = map_arr.duplicate()

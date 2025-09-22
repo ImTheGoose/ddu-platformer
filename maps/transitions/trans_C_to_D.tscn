@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://by6dsb2rxmexr"]
+[gd_scene load_steps=7 format=4 uid="uid://by6dsb2rxmexr"]
 
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_jgxfv"]
 [ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_hx16i"]
 [ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_5n7up"]
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="3_y3i7y"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="4_f2m0g"]
+[ext_resource type="TileSet" uid="uid://dm0uv7n0xo0sl" path="res://ressources/tilesets/collectables_tileset.tres" id="6_3dpob"]
 
 [node name="Map" type="Node2D"]
 texture_filter = 1
@@ -31,8 +32,7 @@ scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAJABMAAAAAAAAAAQAFABMAAAAAAAAAAQAHABMAAAAAAAAABAA=")
 tile_set = ExtResource("4_f2m0g")
 
-[connection signal="body_entered" from="TrapTiles/Spike" to="TrapTiles/Spike" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@266893" to="TrapTiles/@Area2D@266893" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@266894" to="TrapTiles/@Area2D@266894" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@266896" to="TrapTiles/@Area2D@266896" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@266897" to="TrapTiles/@Area2D@266897" method="_on_body_entered"]
+[node name="CollectableTiles" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAALABEAAAAAAAAAAQAMABEAAAAAAAAAAQAGABMAAAAAAAAAAQAHABMAAAAAAAAAAQAIABMAAAAAAAAAAQAVABEAAAAAAAAAAQAUABEAAAAAAAAAAQA=")
+tile_set = ExtResource("6_3dpob")

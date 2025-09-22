@@ -372,6 +372,7 @@ animations = [{
 size = Vector2(17, 20)
 
 [node name="Trunk" type="Node2D"]
+z_index = 10
 script = ExtResource("1_nud6c")
 projectile = ExtResource("2_kyy33")
 seconds_between_attacks = 1.2
