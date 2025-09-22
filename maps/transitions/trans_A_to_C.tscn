@@ -33,5 +33,16 @@ tile_set = ExtResource("4_a47vv")
 
 [node name="CollectableTiles" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
-tile_map_data = PackedByteArray("AAATABEAAAAAAAAAAQAUABEAAAAAAAAAAQAaABIAAAAAAAAAAQAZABIAAAAAAAAAAQAOABIAAAAAAAAAAQANABIAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAATABEAAAAAAAAAAQANABIAAAAAAAAAAQAOABIAAAAAAAAAAQAUABEAAAAAAAAAAQAaABIAAAAAAAAAAQAZABIAAAAAAAAAAQA=")
 tile_set = ExtResource("6_ol7p3")
+
+[connection signal="body_entered" from="TrapTiles/Spike" to="TrapTiles/Spike" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@85428" to="TrapTiles/@Area2D@85428" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@85429" to="TrapTiles/@Area2D@85429" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@85430" to="TrapTiles/@Area2D@85430" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/Area2D" to="CollectableTiles/Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@85438" to="CollectableTiles/@Area2D@85438" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@85439" to="CollectableTiles/@Area2D@85439" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@85440" to="CollectableTiles/@Area2D@85440" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@85441" to="CollectableTiles/@Area2D@85441" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@85442" to="CollectableTiles/@Area2D@85442" method="_on_body_entered"]
