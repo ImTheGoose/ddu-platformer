@@ -97,7 +97,19 @@ func _get_points(vec: Vector2):
 		return
 	
 	point_positive = c
-	target_point = point_positive
+	if randf() < 0.5:
+		target_point = point_positive
+	else:
+		target_point = point_negative
+	
+
+	if point_negative.global_position.y == point_positive.global_position.y:
+		var ran_gpos = randf_range(point_negative.global_position.x, point_positive.global_position.x)
+		global_position.x = ran_gpos
+	else: 
+		var ran_gpos = randf_range(point_negative.global_position.y, point_positive.global_position.y)
+		global_position.y = ran_gpos
+
 	valid_path_direction = global_position.direction_to(target_point.global_position)
 
 func _get_direction() -> Vector2:

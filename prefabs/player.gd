@@ -42,17 +42,12 @@ func _process(delta: float) -> void:
 		_attempt_jump()
 	
 	if is_on_floor() or is_on_wall():
+		double_jumped = false
 		air_time = 0
 	else:
 		air_time += delta
-
-	
-	if is_on_floor() or is_on_wall():
-		double_jumped = false
 	
 	velocity.x += m * speed_per_second * delta
-	
-
 
 	if is_on_wall_only() && velocity.y > 0:
 		anim.play("Wall_Jump")
@@ -62,11 +57,6 @@ func _process(delta: float) -> void:
 	
 
 	move_and_slide()
-	
-	if m > 0:
-		anim.flip_h = false
-	if m < 0:
-		anim.flip_h = true
 	_update_anim(m)
 
 func _attempt_jump():
@@ -142,6 +132,11 @@ func hit(vec: Vector2):
 func _update_anim(m):
 	if dead:
 		return
+		
+	if m > 0:
+		anim.flip_h = false
+	if m < 0:
+		anim.flip_h = true
 
 	if is_on_floor():
 		if m == 0:
