@@ -12,6 +12,14 @@ extends ShopMenu
 		"name": "Abyss",
 		"price": 1500,
 		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Abyss.png")
+	},{
+		"name": "Candy",
+		"price": 1500,
+		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Candy.png")
+	},{
+		"name": "Castle",
+		"price": 2000,
+		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Castle.png")
 	},
 ]
 
