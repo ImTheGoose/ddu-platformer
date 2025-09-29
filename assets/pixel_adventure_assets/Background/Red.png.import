@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj0icgt68gwop"
-path="res://.godot/imported/Terrain_Wooden.png-727e4e7abf00376eb2e7354461f428c4.ctex"
+uid="uid://cyo6dhvlxakth"
+path="res://.godot/imported/Red.png-1530bb4d9e221b49c99df2d218590b86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pixel_adventure_assets/Terrain/Terrain_Wooden.png"
-dest_files=["res://.godot/imported/Terrain_Wooden.png-727e4e7abf00376eb2e7354461f428c4.ctex"]
+source_file="res://assets/pixel_adventure_assets/Background/Red.png"
+dest_files=["res://.godot/imported/Red.png-1530bb4d9e221b49c99df2d218590b86.ctex"]
 
 [params]
 
