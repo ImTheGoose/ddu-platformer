@@ -11,6 +11,8 @@ var detected_player := false
 
 func _process(delta: float) -> void:
 	super(delta)
+	if dead:
+		return
 	
 	seconds_since_attack += delta
 

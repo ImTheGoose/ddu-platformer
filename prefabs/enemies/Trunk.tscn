@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://veyhh7ovq274" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Idle (64x32).png" id="4_o7ajs"]
 [ext_resource type="Texture2D" uid="uid://dlxvufnd6mxiy" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Run (64x32).png" id="5_odpwh"]
 [ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedEntitySprite2D.gd" id="6_yuq46"]
-[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_64ke1"]
+[ext_resource type="Script" uid="uid://bt2wqe4vapk3f" path="res://prefabs/enemies/enemy_hit_area.gd" id="8_xmyx0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuvm5"]
 atlas = ExtResource("2_xmyx0")
@@ -394,8 +394,7 @@ script = ExtResource("6_yuq46")
 [node name="HitArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("7_64ke1")
-metadata/_custom_type_script = "uid://csjcberb4rmwa"
+script = ExtResource("8_xmyx0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 position = Vector2(0.5, -5)

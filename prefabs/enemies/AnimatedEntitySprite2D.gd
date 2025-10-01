@@ -2,6 +2,21 @@ extends AnimatedSprite2D
 
 class_name AnimatedEntitySprite2D
 
+var target_rot :float = 0.0
+var start_vel :Vector2 = Vector2.ZERO
+
+func _process(delta: float) -> void:	
+	if target_rot == 0:
+		return
+
+	start_vel.y += 1100 * delta
+	global_position += start_vel * delta
+	rotation = lerp_angle(rotation, target_rot, delta)
+
+func death():
+	target_rot = randf_range(-35, 35)
+	start_vel = Vector2(randf_range(-150, 150), randf_range(-100, -600))
+
 var queued_anim :String = ""
 
 

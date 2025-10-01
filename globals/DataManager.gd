@@ -35,13 +35,13 @@ var default_game_data: Dictionary = {
 		"Abyss" : false,
 		"Candy" : false,
 		"Castle" : false,
-		"Icey" : false,
+		"Icey" : false, 
 	}
 }
 
 func _init() -> void:
 	game_data = default_game_data.duplicate()
-	clear_game_data()
+	#clear_game_data()
 	load_save_data()
 	load_config()
 
