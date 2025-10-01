@@ -129,6 +129,8 @@ func _get_direction() -> Vector2:
 func die():
 	anim.play("Hit")
 	anim.death()
+	$HitArea.set_deferred("monitoring", false)
+	$HitArea.set_deferred("monitorable", false)
 	dead = true
 
 func _is_valid_pathfinding() -> bool:

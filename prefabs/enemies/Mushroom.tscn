@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://6buevbuadrfb" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Idle (32x32).png" id="3_apt1k"]
 [ext_resource type="Texture2D" uid="uid://08qr8fcio77j" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Run (32x32).png" id="4_55w7g"]
 [ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedEntitySprite2D.gd" id="5_uuv8h"]
-[ext_resource type="Script" uid="uid://bt2wqe4vapk3f" path="res://prefabs/enemies/enemy_hit_area.gd" id="6_rn6i1"]
+[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_rn6i1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lksun"]
 atlas = ExtResource("2_x722j")
@@ -291,6 +291,7 @@ script = ExtResource("5_uuv8h")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("6_rn6i1")
+metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 position = Vector2(0, -1.5)
