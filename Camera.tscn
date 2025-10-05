@@ -285,7 +285,6 @@ scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="Control" type="Control" parent="Menu_Renderer"]
-texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
@@ -422,6 +421,7 @@ layout_mode = 2
 text = "Main Menu"
 
 [node name="SettingsMenu" type="VBoxContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -577,7 +577,6 @@ layout_mode = 2
 text = "Back"
 
 [node name="start_game_menu" type="VBoxContainer" parent="Menu_Renderer/Control" node_paths=PackedStringArray("intial_focus_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -601,20 +600,32 @@ text = "Setup"
 label_settings = SubResource("LabelSettings_5tuhn")
 horizontal_alignment = 1
 
+[node name="difficulty_stats" type="RichTextLabel" parent="Menu_Renderer/Control/start_game_menu"]
+texture_filter = 1
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img]100%[br][img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]100%[br][img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img]100%
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
 [node name="difficulty_dropdown" type="OptionButton" parent="Menu_Renderer/Control/start_game_menu"]
 layout_mode = 2
 alignment = 1
 text_overrun_behavior = 1
-selected = 1
-item_count = 4
-popup/item_0/text = "Easy"
+selected = 2
+item_count = 5
+popup/item_0/text = "Very_Easy"
 popup/item_0/id = 0
-popup/item_1/text = "Normal"
+popup/item_1/text = "Easy"
 popup/item_1/id = 1
-popup/item_2/text = "Hard"
+popup/item_2/text = "Normal"
 popup/item_2/id = 2
-popup/item_3/text = "Impossible"
+popup/item_3/text = "Hard"
 popup/item_3/id = 3
+popup/item_4/text = "Impossible"
+popup/item_4/id = 4
 
 [node name="start_game" type="Button" parent="Menu_Renderer/Control/start_game_menu"]
 layout_mode = 2
@@ -1267,7 +1278,7 @@ shape = SubResource("RectangleShape2D_3b0ty")
 [node name="PlayerFollowArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFollowArea"]
-position = Vector2(969, -659)
+position = Vector2(919, -634)
 shape = SubResource("RectangleShape2D_2gh4u")
 
 [connection signal="pressed" from="Menu_Renderer/Control/MainMenu/MarginContainer/VBoxContainer/start_game" to="Menu_Renderer/Control/MainMenu" method="_on_start_game_pressed"]

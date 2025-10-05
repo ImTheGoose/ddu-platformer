@@ -2,6 +2,7 @@ extends Node2D
 
 class_name PathfindingEnemy
 
+@export var death_sound :AudioStreamMP3 
 @export var seconds_waiting :float = 2
 var seconds_waited :float = 0
 @export var speed :int = 100
@@ -131,6 +132,7 @@ func die():
 	anim.death()
 	$HitArea.set_deferred("monitoring", false)
 	$HitArea.set_deferred("monitorable", false)
+	AudioManager.play_global_sound(death_sound, 0)
 	dead = true
 
 func _is_valid_pathfinding() -> bool:

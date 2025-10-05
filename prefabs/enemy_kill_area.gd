@@ -8,4 +8,5 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.get_parent() is PathfindingEnemy:
 		area.get_parent().die()
 		get_parent().velocity.y = -1000
+		get_parent().double_jumped = false
 	pass # Replace with function body.

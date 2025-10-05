@@ -3,6 +3,13 @@ extends Area2D
 @onready var anim = $AnimatedSprite2D
 @onready var audio_collect = preload("res://assets/audio/sfx/collectable.mp3")
 
+
+func _init() -> void:
+	var spawn_rate = min(GameManager.get_difficulty_value("collectable_spawn_rate"), 1.0)
+	var rand_float = randf()
+	if rand_float > spawn_rate:
+		queue_free()
+
 func _ready() -> void:
 	anim.animation_finished.connect(_on_anim_finished)
 
