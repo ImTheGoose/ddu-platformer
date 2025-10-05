@@ -22,7 +22,6 @@ func _refresh_stats():
 	tex += str( int(GameManager.get_difficulty_value("collectable_spawn_rate") * 100)) + "%[br]"
 	tex += speed_bbcode
 	tex += str( int(GameManager.get_difficulty_value("camera_speed") * 100)) + "%"
-	print(tex)
 	diffculty_stat_label.text = tex
 
 func _on_start_game_pressed() -> void:
