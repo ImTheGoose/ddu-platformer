@@ -9,22 +9,31 @@ var game_paused := false
 var game_difficulty :difficulty = difficulty.normal
 
 var difficulty_settings = {
-	difficulty.easy : {
+	difficulty.very_easy : {
+		"camera_speed" : 0.4,
+		"enemy_spawn_rate": 0.15,
+		"collectable_spawn_rate": 0.15,
+	},difficulty.easy : {
 		"camera_speed" : 0.8,
 		"enemy_spawn_rate": 0.70,
+		"collectable_spawn_rate": 0.7,
 	},difficulty.normal : {
 		"camera_speed" : 1,
 		"enemy_spawn_rate": 0.85,
+		"collectable_spawn_rate": 1.0,
 	},difficulty.hard : {
 		"camera_speed" : 1.1,
 		"enemy_spawn_rate": 1.0,
+		"collectable_spawn_rate": 1.0,
 	},difficulty.impossible : {
 		"camera_speed" : 1.3,
 		"enemy_spawn_rate": 1.0,
+		"collectable_spawn_rate": 1.0,
 	},
 }
 
 enum difficulty {
+	very_easy,
 	easy,
 	normal,
 	hard,

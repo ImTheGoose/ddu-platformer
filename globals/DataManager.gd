@@ -25,19 +25,23 @@ var default_game_data: Dictionary = {
 		"Gray" : false,
 		"Green" : false,
 		"Pink" : false,
-		"Purple" : false,
-		"Yellow" : false,
+		"Red" : false,
+		"Black" : false,
 	},
 	"selected_theme" : "Default",
 	"owned_theme" : {
 		"Default" : true,
-		"Wooden" : false,
+		"Hell" : false,
 		"Abyss" : false,
+		"Candy" : false,
+		"Castle" : false,
+		"Icey" : false, 
 	}
 }
 
 func _init() -> void:
 	game_data = default_game_data.duplicate()
+	#clear_game_data()
 	load_save_data()
 	load_config()
 
