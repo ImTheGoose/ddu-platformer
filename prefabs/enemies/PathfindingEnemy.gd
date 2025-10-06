@@ -2,6 +2,7 @@ extends Node2D
 
 class_name PathfindingEnemy
 
+@export var death_sound :AudioStreamMP3 
 @export var seconds_waiting :float = 2
 var seconds_waited :float = 0
 @export var speed :int = 100
@@ -13,6 +14,7 @@ var point_negative :PathfindingPoint
 var checked_points = false
 var target_point :PathfindingPoint
 var valid_path_direction :Vector2
+var dead = false
 
 enum axis {
 	vertical,
@@ -27,6 +29,9 @@ func _init() -> void:
 	
 
 func _process(delta: float) -> void:
+	if dead:
+		return
+		
 	if !checked_points:
 		if path_axis == axis.vertical:
 			_get_points(Vector2(0, 1))
@@ -121,6 +126,14 @@ func _get_direction() -> Vector2:
 		return global_position.direction_to(point_negative.global_position)
 	else:
 		return Vector2(1, 0)
+
+func die():
+	anim.play("Hit")
+	anim.death()
+	$HitArea.set_deferred("monitoring", false)
+	$HitArea.set_deferred("monitorable", false)
+	AudioManager.play_global_sound(death_sound, 0)
+	dead = true
 
 func _is_valid_pathfinding() -> bool:
 	return point_negative != null && point_positive != null

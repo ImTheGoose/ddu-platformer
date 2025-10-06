@@ -8,8 +8,8 @@ var background_textures :Dictionary = {
 	"Gray": preload("res://assets/pixel_adventure_assets/Background/Gray.png"),
 	"Green": preload("res://assets/pixel_adventure_assets/Background/Green.png"),
 	"Pink": preload("res://assets/pixel_adventure_assets/Background/Pink.png"),
-	"Purple": preload("res://assets/pixel_adventure_assets/Background/Purple.png"),
-	"Yellow": preload("res://assets/pixel_adventure_assets/Background/Yellow.png"),
+	"Red": preload("res://assets/pixel_adventure_assets/Background/Red.png"),
+	"Black": preload("res://assets/pixel_adventure_assets/Background/Black.png"),
 }
 
 func _process(delta: float) -> void:

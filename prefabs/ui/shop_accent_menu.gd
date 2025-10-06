@@ -21,13 +21,13 @@ extends ShopMenu
 		"price": 500,
 		"texture": preload("res://assets/pixel_adventure_assets/Background/Pink.png")
 	},{
-		"name": "Purple",
+		"name": "Red",
 		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Purple.png")
+		"texture": preload("res://assets/pixel_adventure_assets/Background/Red.png")
 	},{
-		"name": "Yellow",
+		"name": "Black",
 		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Yellow.png")
+		"texture": preload("res://assets/pixel_adventure_assets/Background/Black.png")
 	},
 ]
 
