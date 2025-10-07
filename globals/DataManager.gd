@@ -10,13 +10,13 @@ var config = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 0,
+	"money" : 6426,
 	"selected_skin" : "Osvald",
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
 		"Edward": false,
-		"Tiki": true
+		"Tiki": false,
 	},
 	"selected_accent" : "Brown",
 	"owned_accent" : {
@@ -26,14 +26,14 @@ var default_game_data: Dictionary = {
 		"Green" : false,
 		"Pink" : false,
 		"Red" : false,
-		"Black" : true,
+		"Black" : false,
 	},
 	"selected_theme" : "Default",
 	"owned_theme" : {
 		"Default" : true,
 		"Hell" : false,
 		"Abyss" : false,
-		"Candy" : true,
+		"Candy" : false,
 		"Castle" : false,
 		"Icey" : false, 
 	}
@@ -41,7 +41,7 @@ var default_game_data: Dictionary = {
 
 func _init() -> void:
 	game_data = default_game_data.duplicate()
-	#clear_game_data()
+	clear_game_data()
 	load_save_data()
 	load_config()
 
@@ -107,7 +107,6 @@ func _create_new_save_data():
 
 func set_value(key: String, value) -> void:
 	game_data[key] = value
-	save_game_data()
 
 func get_value(key: String):
 	var val = game_data[key]

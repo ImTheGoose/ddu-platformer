@@ -80,6 +80,7 @@ func start_game():
 
 func player_died():
 	MenuManager.show_menu.emit("death_menu")
+	DataManager.save_game_data()
 	game_state = state.dead
 
 func _notification(what: int) -> void:
