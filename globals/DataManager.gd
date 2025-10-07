@@ -10,13 +10,13 @@ var config = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 999999,
+	"money" : 0,
 	"selected_skin" : "Osvald",
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
 		"Edward": false,
-		"Tiki": false
+		"Tiki": true
 	},
 	"selected_accent" : "Brown",
 	"owned_accent" : {
@@ -26,14 +26,14 @@ var default_game_data: Dictionary = {
 		"Green" : false,
 		"Pink" : false,
 		"Red" : false,
-		"Black" : false,
+		"Black" : true,
 	},
 	"selected_theme" : "Default",
 	"owned_theme" : {
 		"Default" : true,
 		"Hell" : false,
 		"Abyss" : false,
-		"Candy" : false,
+		"Candy" : true,
 		"Castle" : false,
 		"Icey" : false, 
 	}
