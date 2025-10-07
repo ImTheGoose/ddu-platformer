@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		air_time = 0
 	else:
 		air_time += delta
-	
+
 	velocity.x += m * speed_per_second * delta
 
 	if is_on_wall_only() && velocity.y > 0:
