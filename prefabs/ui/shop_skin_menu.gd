@@ -4,17 +4,17 @@ extends ShopMenu
 		"name": "Osvald",
 		"price": 0,
 		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Jump (32x32).png")
-	}, {
-		"name": "Tiki",
-		"price": 500,
-		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png")
-	}, {
+	},{
 		"name": "Castro",
 		"price": 1000,
 		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Pink Man/Jump (32x32).png")
 	}, {
+		"name": "Tiki",
+		"price": 1500,
+		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png")
+	},  {
 		"name": "Edward",
-		"price": 2500,
+		"price": 2000,
 		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Virtual Guy/Jump (32x32).png")
 	}
 ]
