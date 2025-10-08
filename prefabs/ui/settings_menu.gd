@@ -3,9 +3,9 @@ extends GameMenu
 
 @onready var master_vol_slider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer/master_volume
 @onready var music_vol_slider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume
-@onready var resolution_dropdown = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/resolution
 @onready var fullscreen_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fullscreen_toggle
 @onready var particle_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/particles_toggle
+@onready var vsync_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/vsync_toggle
 
 func _ready() -> void:
 	super()
@@ -14,7 +14,11 @@ func _ready() -> void:
 
 func _load_config_variables():
 	var video_settings = DataManager.get_video_settings()
-	resolution_dropdown.selected = video_settings.resolution
+	if video_settings.vsync == true:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	vsync_toggle.button_pressed = video_settings.vsync
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	fullscreen_toggle.button_pressed = video_settings.fullscreen
 	particle_toggle.button_pressed = video_settings.particles_enabled
@@ -31,14 +35,6 @@ func _on_volume_value_changed(value: float) -> void:
 	DataManager.save_audio_setting("master_volume", value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 	pass # Replace with function body.
-
-
-func _on_resolution_item_selected(index: int) -> void:
-	DataManager.save_video_setting("resolution", index)
-	DisplayServer.window_set_size(res_list[index])
-	
-	pass # Replace with function body.
-
 
 func _on_back_pressed() -> void:
 	MenuManager.hide_all_menus.emit()
@@ -80,4 +76,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_particles_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("particles_enabled", toggled_on)
+	pass # Replace with function body.
+
+
+func _on_vsync_toggle_toggled(toggled_on: bool) -> void:
+	DataManager.save_video_setting("vsync", toggled_on)
+	if toggled_on:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	pass # Replace with function body.

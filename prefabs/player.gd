@@ -23,7 +23,8 @@ var dead = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	print(delta)
 	if dead:
 		var col = $CollisionShape2D
 		col.disabled = true
@@ -46,7 +47,7 @@ func _process(delta: float) -> void:
 		air_time = 0
 	else:
 		air_time += delta
-	
+
 	velocity.x += m * speed_per_second * delta
 
 	if is_on_wall_only() && velocity.y > 0:

@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="10_rwuho"]
 [ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="11_yhksc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dw41"]
-size = Vector2(16.6667, 24.3333)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
+points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
 
 [sub_resource type="Gradient" id="Gradient_yhksc"]
 colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
@@ -78,7 +78,7 @@ color = Color(0.81960785, 0, 0.05490196, 1)
 color_ramp = SubResource("GradientTexture1D_634ti")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
-size = Vector2(14.457832, 6.0240984)
+size = Vector2(17.670685, 6.0240984)
 
 [node name="Player" type="CharacterBody2D"]
 visibility_layer = 3
@@ -92,12 +92,12 @@ jump_buffer_time = 0.18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.16666)
-shape = SubResource("RectangleShape2D_2dw41")
+shape = SubResource("ConvexPolygonShape2D_1nynx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 7
 sprite_frames = ExtResource("2_wuy1y")
-animation = &"Die"
+animation = &"Wall_Jump"
 autoplay = "Idle"
 flip_h = true
 script = ExtResource("10_634ti")
@@ -146,7 +146,7 @@ priority = 30
 script = ExtResource("6_1nynx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.9150087e-07, 2.8212862)
+position = Vector2(-4.787522e-08, 2.8212862)
 shape = SubResource("RectangleShape2D_1nynx")
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]

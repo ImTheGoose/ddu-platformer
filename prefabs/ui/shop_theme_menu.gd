@@ -5,24 +5,24 @@ extends ShopMenu
 		"price": 0,
 		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Default.png")
 	},{
-		"name": "Hell",
-		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Hell.png")
-	},{
-		"name": "Abyss",
-		"price": 1500,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Abyss.png")
-	},{
 		"name": "Candy",
-		"price": 1500,
+		"price": 500,
 		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Candy.png")
 	},{
+		"name": "Hell",
+		"price": 750,
+		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Hell.png")
+	},{
 		"name": "Castle",
-		"price": 2000,
+		"price": 750,
 		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Castle.png")
 	},{
+		"name": "Abyss",
+		"price": 1000,
+		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Abyss.png")
+	},{
 		"name": "Icey",
-		"price": 2500,
+		"price": 1000,
 		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Icey.png")
 	},
 ]

@@ -10,13 +10,13 @@ var config = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 999999,
+	"money" : 6426,
 	"selected_skin" : "Osvald",
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
 		"Edward": false,
-		"Tiki": false
+		"Tiki": false,
 	},
 	"selected_accent" : "Brown",
 	"owned_accent" : {
@@ -41,7 +41,7 @@ var default_game_data: Dictionary = {
 
 func _init() -> void:
 	game_data = default_game_data.duplicate()
-	#clear_game_data()
+	clear_game_data()
 	load_save_data()
 	load_config()
 
@@ -56,7 +56,10 @@ func update_game_data():
 		game_data["selected_accent"] = "Brown"
 		game_data["owned_theme"] = default_game_data["owned_theme"]
 		game_data["owned_accent"] = default_game_data["owned_accent"]
-		
+	
+	if v < 0.8:
+		print("Updating to 0.8")
+		create_config()
 		
 	game_data["version"] = ProjectSettings.get_setting("application/config/version")
 	save_game_data()
@@ -125,7 +128,7 @@ func create_config():
 	config.set_value("audio", "master_volume", 0)
 	config.set_value("audio", "music_volume", -15)
 	
-	config.set_value("video", "resolution", 0)
+	config.set_value("video", "vsync", false)
 	config.set_value("video", "fullscreen", false)
 	config.set_value("video", "color_theme", "Brown")
 	config.set_value("video", "color_theme_id", 0)
