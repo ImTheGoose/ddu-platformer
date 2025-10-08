@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cdu4lip2jydf5" path="res://prefabs/ui/start_game_menu.gd" id="7_8yu0k"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
 [ext_resource type="Script" uid="uid://coi31hch185wt" path="res://prefabs/ui/keybinds_menu.gd" id="9_6usox"]
-[ext_resource type="Texture2D" uid="uid://cfww4vh32t164" path="res://assets/logo.png" id="9_l7vkd"]
+[ext_resource type="Texture2D" uid="uid://cfww4vh32t164" path="res://assets/branding/logo.png" id="9_l7vkd"]
 [ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="9_tim8x"]
 [ext_resource type="Script" uid="uid://bn07tyaxxjnsu" path="res://prefabs/ui/death_menu.gd" id="10_8yu0k"]
 [ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/ui/version_label.gd" id="10_gmjel"]

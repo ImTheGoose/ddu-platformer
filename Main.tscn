@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://bwjypqfmpettn"]
+[gd_scene load_steps=76 format=3 uid="uid://bwjypqfmpettn"]
 
 [ext_resource type="Script" uid="uid://ci6778jvgv16f" path="res://main.gd" id="1_w3rk5"]
 [ext_resource type="Script" uid="uid://ctjb6mvogl6by" path="res://game_container.gd" id="2_5mvff"]
@@ -39,6 +39,8 @@
 [ext_resource type="PackedScene" uid="uid://c8wcx6s2exaw2" path="res://maps/map_parts/wilf_11_C_to_E.tscn" id="26_ny7u2"]
 [ext_resource type="PackedScene" uid="uid://bs8hlvygny72p" path="res://maps/transitions/wilf_transition_02_D_to_E.tscn" id="26_w3rk5"]
 [ext_resource type="PackedScene" uid="uid://761pblppngco" path="res://maps/map_parts/willum_09_C_to_A.tscn" id="27_x3yn0"]
+[ext_resource type="PackedScene" uid="uid://bw8des2c5me6n" path="res://maps/map_parts/wilf_12_A_to_C.tscn" id="28_1w2xm"]
+[ext_resource type="PackedScene" uid="uid://5gbotovc43rr" path="res://maps/map_parts/wilf_13_C_to_E.tscn" id="29_gngx1"]
 
 [sub_resource type="Resource" id="Resource_2gh4u"]
 script = ExtResource("4_wkp8b")
@@ -181,6 +183,19 @@ prefab = ExtResource("27_x3yn0")
 start_connection = 2
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
+[sub_resource type="Resource" id="Resource_a34eg"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("28_1w2xm")
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
+[sub_resource type="Resource" id="Resource_via5u"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("29_gngx1")
+start_connection = 2
+end_connection = 4
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
+
 [sub_resource type="Resource" id="Resource_mxvw5"]
 script = ExtResource("4_wkp8b")
 prefab = ExtResource("6_sc1dx")
@@ -271,7 +286,7 @@ prefab = ExtResource("16_devvj")
 position = Vector2(0, 64)
 script = ExtResource("3_cm0pq")
 start_map = SubResource("Resource_2gh4u")
-map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_sph85"), SubResource("Resource_o7g6l"), SubResource("Resource_vi5kq"), SubResource("Resource_5mkgo"), SubResource("Resource_3ccbu"), SubResource("Resource_ny7u2"), SubResource("Resource_x3yn0"), SubResource("Resource_1w2xm"), SubResource("Resource_v8qla"), SubResource("Resource_y1tbi"), SubResource("Resource_c2s76"), SubResource("Resource_f4ese"), SubResource("Resource_rchyr"), SubResource("Resource_pljue"), SubResource("Resource_nx4yo"), SubResource("Resource_5tfui"), SubResource("Resource_38apo"), SubResource("Resource_khphd"), SubResource("Resource_g4yo4"), SubResource("Resource_im7ls")])
+map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_sph85"), SubResource("Resource_o7g6l"), SubResource("Resource_vi5kq"), SubResource("Resource_5mkgo"), SubResource("Resource_3ccbu"), SubResource("Resource_ny7u2"), SubResource("Resource_x3yn0"), SubResource("Resource_1w2xm"), SubResource("Resource_v8qla"), SubResource("Resource_y1tbi"), SubResource("Resource_c2s76"), SubResource("Resource_f4ese"), SubResource("Resource_rchyr"), SubResource("Resource_pljue"), SubResource("Resource_nx4yo"), SubResource("Resource_5tfui"), SubResource("Resource_38apo"), SubResource("Resource_khphd"), SubResource("Resource_g4yo4"), SubResource("Resource_im7ls"), SubResource("Resource_a34eg"), SubResource("Resource_via5u")])
 transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85"), SubResource("Resource_gb15f"), SubResource("Resource_gngx1"), SubResource("Resource_jt61w")])
 safe_zone = 2000
 

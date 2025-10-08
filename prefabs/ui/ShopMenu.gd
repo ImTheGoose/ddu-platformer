@@ -86,3 +86,4 @@ func _buy(item):
 	var owned_contents = DataManager.get_value("owned_" + shop_category)
 	owned_contents[item["name"]] = true
 	DataManager.set_value("owned_" + shop_category, owned_contents)
+	DataManager.save_game_data()
