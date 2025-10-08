@@ -110,6 +110,7 @@ position = Vector2(0, -16.465)
 monitoring = false
 monitorable = false
 script = ExtResource("5_s08ra")
+kill_type = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 0.9825001)

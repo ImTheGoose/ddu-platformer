@@ -293,6 +293,7 @@ script = ExtResource("5_uuv8h")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("6_rn6i1")
+kill_type = 0
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]

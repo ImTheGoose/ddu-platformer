@@ -10,7 +10,6 @@ func _process(delta: float) -> void:
 	
 	seconds_passed += delta
 	if seconds_passed >= seconds_before_clear:
-		print("test")
 		for c in get_children():
 			c.queue_free()
 		
@@ -21,4 +20,3 @@ func _ready() -> void:
 		var p :GPUParticles2D = pn.instantiate()
 		p.emitting = true
 		add_child(p)
-		print(p.emitting)

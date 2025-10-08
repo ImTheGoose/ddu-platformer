@@ -19,6 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 		anim.play("Collect")
 		var money = DataManager.get_value("money")
 		DataManager.set_value("money", money + 1) 
+		StatisticManager.add_value("apples_collected", 1)
 		AudioManager.play_global_sound(audio_collect, -9)
 		pass
 

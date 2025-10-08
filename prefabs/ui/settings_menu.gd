@@ -11,6 +11,10 @@ func _ready() -> void:
 	super()
 	_load_config_variables()
 
+func _show(target):
+	super(target)
+	if target == menu_name:
+		_load_config_variables()
 
 func _load_config_variables():
 	var video_settings = DataManager.get_video_settings()
@@ -29,8 +33,6 @@ func _load_config_variables():
 	master_vol_slider.value = audio_settings.master_volume
 	music_vol_slider.value = audio_settings.music_volume
 
-var res_list :Array[Vector2] = [Vector2(1280, 720), Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
-
 func _on_volume_value_changed(value: float) -> void:
 	DataManager.save_audio_setting("master_volume", value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
@@ -43,8 +45,8 @@ func _on_back_pressed() -> void:
 
 
 func _on_clear_game_data_pressed() -> void:
-	DataManager.clear_game_data()
-	_load_config_variables()
+	MenuManager.hide_all_menus.emit()
+	MenuManager.show_menu.emit("reset_game_menu")
 	pass # Replace with function body.
 
 

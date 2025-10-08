@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://bwjypqfmpettn"]
+[gd_scene load_steps=94 format=3 uid="uid://bwjypqfmpettn"]
 
 [ext_resource type="Script" uid="uid://ci6778jvgv16f" path="res://main.gd" id="1_w3rk5"]
 [ext_resource type="Script" uid="uid://ctjb6mvogl6by" path="res://game_container.gd" id="2_5mvff"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="6_38apo"]
 [ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://maps/transitions/trans_A_to_C.tscn" id="6_sc1dx"]
 [ext_resource type="PackedScene" uid="uid://ds7c3nyx5ey48" path="res://maps/map_parts/wilf_01_E_to_D.tscn" id="6_xrxkg"]
+[ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="7_khphd"]
 [ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://maps/transitions/trans_B_to_C.tscn" id="7_kjvhd"]
 [ext_resource type="PackedScene" uid="uid://fx0t20b4cmre" path="res://maps/map_parts/wilf_02_E_to_D.tscn" id="7_sqvbp"]
 [ext_resource type="PackedScene" uid="uid://co51mwkw4pyh8" path="res://maps/transitions/trans_D_to_C.tscn" id="8_5tuhn"]
@@ -330,7 +331,7 @@ top_level = true
 z_index = -150
 position = Vector2(719, 306)
 script = ExtResource("47_rchyr")
-particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo")])
+particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd")])
 
 [node name="game_container" type="Node2D" parent="."]
 script = ExtResource("2_5mvff")
