@@ -1,10 +1,11 @@
-[gd_scene load_steps=88 format=3 uid="uid://bwjypqfmpettn"]
+[gd_scene load_steps=93 format=3 uid="uid://bwjypqfmpettn"]
 
 [ext_resource type="Script" uid="uid://ci6778jvgv16f" path="res://main.gd" id="1_w3rk5"]
 [ext_resource type="Script" uid="uid://ctjb6mvogl6by" path="res://game_container.gd" id="2_5mvff"]
 [ext_resource type="PackedScene" uid="uid://cyciws70qsov8" path="res://maps/start_map.tscn" id="2_5tuhn"]
 [ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://map_generator.gd" id="3_cm0pq"]
 [ext_resource type="Script" uid="uid://ca53ws1nshywn" path="res://ressources/MapInfo.gd" id="4_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="6_38apo"]
 [ext_resource type="PackedScene" uid="uid://cy6kbiqj5gdas" path="res://maps/transitions/trans_A_to_C.tscn" id="6_sc1dx"]
 [ext_resource type="PackedScene" uid="uid://ds7c3nyx5ey48" path="res://maps/map_parts/wilf_01_E_to_D.tscn" id="6_xrxkg"]
 [ext_resource type="PackedScene" uid="uid://dflwa63628yq1" path="res://maps/transitions/trans_B_to_C.tscn" id="7_kjvhd"]
@@ -47,6 +48,10 @@
 [ext_resource type="PackedScene" uid="uid://0vna0b5g7p4t" path="res://maps/transitions/wilf_transition_06_D_to_E.tscn" id="44_nx4yo"]
 [ext_resource type="PackedScene" uid="uid://4if533kokaln" path="res://maps/transitions/wilf_transition_07_A_to_C.tscn" id="45_5tfui"]
 [ext_resource type="PackedScene" uid="uid://ben4al44xiv75" path="res://maps/transitions/wilf_transition_08_E_to_B.tscn" id="46_38apo"]
+[ext_resource type="Script" uid="uid://2wk5j2o4ng1c" path="res://particle_pre_renderer.gd" id="47_rchyr"]
+[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="48_5tfui"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="49_38apo"]
+[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
 
 [sub_resource type="Resource" id="Resource_2gh4u"]
 script = ExtResource("4_wkp8b")
@@ -319,6 +324,13 @@ metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
 [node name="Main" type="Node"]
 script = ExtResource("1_w3rk5")
+
+[node name="ParticlePreRenderer" type="Node2D" parent="."]
+top_level = true
+z_index = -150
+position = Vector2(719, 306)
+script = ExtResource("47_rchyr")
+particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo")])
 
 [node name="game_container" type="Node2D" parent="."]
 script = ExtResource("2_5mvff")

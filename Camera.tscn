@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dxyonb6hgvrx"]
+[gd_scene load_steps=41 format=4 uid="uid://dxyonb6hgvrx"]
 
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://camera_2d.gd" id="1_a0f6b"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="2_07nfj"]
@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://bn07tyaxxjnsu" path="res://prefabs/ui/death_menu.gd" id="10_8yu0k"]
 [ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/ui/version_label.gd" id="10_gmjel"]
 [ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="11_r54rh"]
-[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="16_c3fr5"]
 [ext_resource type="Script" uid="uid://bnk08qohdlepr" path="res://prefabs/ui/bottom_cloud.gd" id="17_8t6hx"]
 [ext_resource type="Script" uid="uid://cru13khgiwkpx" path="res://prefabs/ui/shop_accent_menu.gd" id="18_anor8"]
 [ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://assets/pixel_adventure_assets/Terrain/Terrain_Default.png" id="18_d5bi7"]
@@ -30,6 +29,7 @@
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="20_ifxbr"]
 [ext_resource type="Texture2D" uid="uid://cfyrwu5jj40ea" path="res://assets/pixel_adventure_assets/Background/Green.png" id="20_mg1ud"]
 [ext_resource type="Texture2D" uid="uid://bxwx3outaa45n" path="res://assets/pixel_adventure_assets/Background/Pink.png" id="21_anor8"]
+[ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
 shuffle = true
@@ -213,28 +213,6 @@ shader_parameter/offset = Vector2(0, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_8yu0k"]
 font_size = 11
 font_color = Color(1, 1, 1, 0.53333336)
-
-[sub_resource type="Gradient" id="Gradient_8t6hx"]
-colors = PackedColorArray(1, 1, 1, 1, 0.973535, 0.9735351, 0.973535, 0.7647059)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rq4tw"]
-gradient = SubResource("Gradient_8t6hx")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8t6hx"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(960, 28.635, 0)
-angle_min = -49.99999
-angle_max = 65.40001
-direction = Vector3(0, -1, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 85.34
-angular_velocity_min = -19.200016
-angular_velocity_max = 7.6799836
-gravity = Vector3(0, 48, 0)
-scale_min = 5.0
-scale_max = 12.0
-color_ramp = SubResource("GradientTexture1D_rq4tw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3b0ty"]
 size = Vector2(1945, 83)
@@ -1246,15 +1224,8 @@ text = "V0.1"
 label_settings = SubResource("LabelSettings_8yu0k")
 script = ExtResource("10_gmjel")
 
-[node name="bottom_cloud" type="GPUParticles2D" parent="."]
-process_mode = 1
-z_index = 11
+[node name="bottom_cloud" parent="." instance=ExtResource("28_anor8")]
 position = Vector2(962, 1068)
-amount = 250
-texture = ExtResource("16_c3fr5")
-lifetime = 3.0
-draw_order = 2
-process_material = SubResource("ParticleProcessMaterial_8t6hx")
 script = ExtResource("17_8t6hx")
 
 [node name="HitArea" type="Area2D" parent="."]
