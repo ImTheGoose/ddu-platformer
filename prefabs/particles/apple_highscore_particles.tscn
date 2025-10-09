@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://f1jx5l623brv"]
 
-[ext_resource type="Texture2D" uid="uid://lylj8dhv2e4c" path="res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png" id="1_2jmvl"]
+[ext_resource type="Texture2D" uid="uid://u83i0nghdq00" path="res://assets/icons/star_red (16x16).png" id="1_2jmvl"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x1363"]
 particle_flag_disable_z = true
