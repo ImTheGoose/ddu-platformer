@@ -67,7 +67,7 @@ var default_game_data: Dictionary = {
 
 func _init() -> void:
 	game_data = default_game_data.duplicate()
-	#clear_game_data()
+	clear_game_data()
 	load_save_data()
 	load_config()
 
@@ -161,6 +161,8 @@ func create_config():
 	config.set_value("audio", "master_volume", 0)
 	config.set_value("audio", "music_volume", -15)
 	
+	config.set_value("video", "max_fps", 600)
+	config.set_value("video", "show_fps", false)
 	config.set_value("video", "vsync", false)
 	config.set_value("video", "fullscreen", false)
 	config.set_value("video", "color_theme", "Brown")

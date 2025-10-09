@@ -6,6 +6,13 @@ extends GameMenu
 @onready var fullscreen_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fullscreen_toggle
 @onready var particle_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/particles_toggle
 @onready var vsync_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/vsync_toggle
+@onready var fps_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fps_toggle
+@onready var max_fps_slider :HSlider= $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3/fps_limit
+@onready var fps_value_label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3/fps_limit_value
+@onready var musicvol_value_label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume_value
+@onready var mastervol_value_label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer/master_volume_value
+
+
 
 func _ready() -> void:
 	super()
@@ -22,6 +29,10 @@ func _load_config_variables():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	
+	fps_toggle.button_pressed = video_settings.show_fps
+	_on_fps_limit_value_changed(video_settings.max_fps)
+	max_fps_slider.value = video_settings.max_fps
 	vsync_toggle.button_pressed = video_settings.vsync
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	fullscreen_toggle.button_pressed = video_settings.fullscreen
@@ -32,8 +43,11 @@ func _load_config_variables():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), audio_settings.music_volume)
 	master_vol_slider.value = audio_settings.master_volume
 	music_vol_slider.value = audio_settings.music_volume
+	mastervol_value_label.text = str( int(audio_settings.master_volume)) + "db "
+	musicvol_value_label.text = str( int(audio_settings.music_volume)) + "db "
 
 func _on_volume_value_changed(value: float) -> void:
+	mastervol_value_label.text = str( int(value)) + "db "
 	DataManager.save_audio_setting("master_volume", value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 	pass # Replace with function body.
@@ -51,6 +65,7 @@ func _on_clear_game_data_pressed() -> void:
 
 
 func _on_music_volume_value_changed(value: float) -> void:
+	musicvol_value_label.text = str( int(value)) + "db "
 	DataManager.save_audio_setting("music_volume", value)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
 	pass # Replace with function body.
@@ -87,4 +102,19 @@ func _on_vsync_toggle_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	pass # Replace with function body.
+
+
+func _on_fps_limit_value_changed(value: float) -> void:
+	DataManager.save_video_setting("max_fps", value)
+	fps_value_label.text = str( int(value)) + "fps "
+	if value >= max_fps_slider.max_value - 20:
+		fps_value_label.text = "Unlimited"
+		value = 0
+	Engine.max_fps = value
+	pass # Replace with function body.
+
+
+func _on_fps_toggle_toggled(toggled_on: bool) -> void:
+	DataManager.save_video_setting("show_fps", toggled_on)
 	pass # Replace with function body.

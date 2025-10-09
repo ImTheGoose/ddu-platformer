@@ -20,7 +20,7 @@ const bbcode_string = "[img]res://assets/icons/time (16x16).png[/img] Time playe
 [img]res://assets/pixel_adventure_assets/Traps/Fire/Icon (16x16).png[/img] Fire deaths - {fire_deaths}
 [img]res://assets/pixel_adventure_assets/Other/Dust Particle.png[/img] Cloud deaths - {cloud_deaths}
 
-[img]res://assets/icons/sword (16x16).png[/img] Total Killed - {total_killed}
+[img]res://assets/icons/dual_enemy (16x16).png[/img] Total kills - {total_killed}
 [img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms killed - {mushroom_killed}
 [img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks killed - {trunk_killed}"
 

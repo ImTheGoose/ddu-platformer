@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bxcjhs0rkn1ie" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Bullet.png" id="1_uqess"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vcn0"]
-size = Vector2(11, 7)
+size = Vector2(9, 5)
 
 [node name="TrunkProjectile" type="Area2D"]
 script = ExtResource("1_6vcn0")
