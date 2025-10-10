@@ -16,6 +16,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		audio_stream.pitch_scale = randf_range(0.9, 1.1)
 		audio_stream.play()
+		StatisticManager.add_value("trampoline_jump", 1)
 		pass
 
 

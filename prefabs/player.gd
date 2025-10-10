@@ -24,7 +24,6 @@ var double_jumped :bool = false
 var air_time :float = 0
 
 func _physics_process(delta: float) -> void:
-	print(delta)
 	if dead:
 		var col = $CollisionShape2D
 		col.disabled = true
@@ -74,6 +73,7 @@ func _attempt_jump():
 		audio_stream.volume_db = -20
 		audio_stream.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream.play()
+		StatisticManager.add_value("wall_jump", 1)
 	
 	elif is_on_floor() or air_time < jump_buffer_time:
 		jump_particles.restart(false)
@@ -83,6 +83,7 @@ func _attempt_jump():
 		audio_stream.volume_db = -20
 		audio_stream.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream.play()
+		StatisticManager.add_value("ground_jump", 1)
 
 	elif !double_jumped:
 		double_jumped = true
@@ -93,6 +94,7 @@ func _attempt_jump():
 		audio_stream.volume_db = -20
 		audio_stream.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream.play()
+		StatisticManager.add_value("double_jump", 1)
 
 func _apply_gravity(delta: float, gravity_scale: float = 1):
 	velocity += get_gravity() * delta * gravity_scale

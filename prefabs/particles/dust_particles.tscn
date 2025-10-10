@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpjwyw8kvil3y"]
+
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_one4i"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="2_mxusi"]
+
+[sub_resource type="Gradient" id="Gradient_yhksc"]
+colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_634ti"]
+gradient = SubResource("Gradient_yhksc")
+
+[sub_resource type="Curve" id="Curve_rwuho"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5947059), -1.00219, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yhksc"]
+curve = SubResource("Curve_rwuho")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwuho"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6.955, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+velocity_pivot = Vector3(1, 1, 0)
+direction = Vector3(0, -1, 0)
+spread = 50.0
+initial_velocity_min = 5.0
+initial_velocity_max = 24.689999
+gravity = Vector3(0, 15, 0)
+scale_curve = SubResource("CurveTexture_yhksc")
+color_ramp = SubResource("GradientTexture1D_634ti")
+
+[node name="dust_particles" type="GPUParticles2D"]
+amount = 30
+texture = ExtResource("1_one4i")
+process_material = SubResource("ParticleProcessMaterial_rwuho")
+script = ExtResource("2_mxusi")
