@@ -1,81 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://517bp8gq433n"]
+[gd_scene load_steps=10 format=3 uid="uid://517bp8gq433n"]
 
 [ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player.gd" id="1_0ep8a"]
 [ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/osvald_spriteframes.tres" id="2_wuy1y"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_64pgi"]
+[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_0ep8a"]
 [ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/enemy_kill_area.gd" id="6_1nynx"]
+[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_70wo7"]
 [ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player_skin.gd" id="10_634ti"]
-[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="10_rwuho"]
-[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="11_yhksc"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
-
-[sub_resource type="Gradient" id="Gradient_yhksc"]
-colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_634ti"]
-gradient = SubResource("Gradient_yhksc")
-
-[sub_resource type="Curve" id="Curve_rwuho"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5947059), -1.00219, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_yhksc"]
-curve = SubResource("Curve_rwuho")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwuho"]
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(6.955, 1, 1)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-angle_min = 1.0728835e-05
-angle_max = 1.0728835e-05
-velocity_pivot = Vector3(1, 1, 0)
-direction = Vector3(0, -1, 0)
-spread = 50.0
-initial_velocity_min = 5.0
-initial_velocity_max = 24.689999
-gravity = Vector3(0, 15, 0)
-scale_curve = SubResource("CurveTexture_yhksc")
-color_ramp = SubResource("GradientTexture1D_634ti")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhksc"]
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(6.955, 1, 1)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-angle_min = -236.2
-angle_max = 174.70001
-velocity_pivot = Vector3(1, 1, 0)
-direction = Vector3(0, -1, 0)
-spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 24.689999
-gravity = Vector3(0, 15, 0)
-scale_curve = SubResource("CurveTexture_yhksc")
-color_ramp = SubResource("GradientTexture1D_634ti")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_634ti"]
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 1.0
-emission_ring_inner_radius = 0.0
-emission_ring_cone_angle = 90.0
-angle_min = -236.2
-angle_max = 174.70001
-velocity_pivot = Vector3(1, 1, 0)
-direction = Vector3(0, -1, 0)
-spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 24.689999
-gravity = Vector3(0, 45, 0)
-scale_min = 0.19999999
-scale_max = 1.5
-scale_curve = SubResource("CurveTexture_yhksc")
-color = Color(0.81960785, 0, 0.05490196, 1)
-color_ramp = SubResource("GradientTexture1D_634ti")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(17.670685, 6.0240984)
@@ -102,35 +36,14 @@ autoplay = "Idle"
 flip_h = true
 script = ExtResource("10_634ti")
 
-[node name="dust_particles" type="GPUParticles2D" parent="."]
-show_behind_parent = true
+[node name="dust_particles" parent="." instance=ExtResource("4_64pgi")]
 position = Vector2(-0.6666667, 14.333334)
-amount = 30
-texture = ExtResource("10_rwuho")
-process_material = SubResource("ParticleProcessMaterial_rwuho")
-script = ExtResource("11_yhksc")
 
-[node name="jump_particles" type="GPUParticles2D" parent="."]
-show_behind_parent = true
+[node name="jump_particles" parent="." instance=ExtResource("5_0ep8a")]
 position = Vector2(-0.6666667, 14.333334)
-emitting = false
-amount = 30
-texture = ExtResource("10_rwuho")
-lifetime = 0.3
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_yhksc")
-script = ExtResource("11_yhksc")
 
-[node name="die_particles" type="GPUParticles2D" parent="."]
+[node name="die_particles" parent="." instance=ExtResource("6_70wo7")]
 position = Vector2(-0.33333334, 2.3333333)
-emitting = false
-amount = 60
-texture = ExtResource("10_rwuho")
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_634ti")
-script = ExtResource("11_yhksc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -20.0

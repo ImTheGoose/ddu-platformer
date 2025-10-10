@@ -2,6 +2,7 @@ extends Node2D
 
 class_name PathfindingEnemy
 
+@export var enemy_name :String = "mushroom"
 @export var death_sound :AudioStreamMP3 
 @export var seconds_waiting :float = 2
 var seconds_waited :float = 0
@@ -134,6 +135,7 @@ func die():
 	$HitArea.set_deferred("monitorable", false)
 	AudioManager.play_global_sound(death_sound, 0)
 	dead = true
+	StatisticManager.add_value(enemy_name + "_killed", 1)
 
 func _is_valid_pathfinding() -> bool:
 	return point_negative != null && point_positive != null

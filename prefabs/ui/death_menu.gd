@@ -1,5 +1,16 @@
 extends GameMenu
 
+@export var time_bbcode :String = "[img]res://assets/icons/time (16x16).png[/img]Time alive - "
+@export var apple_bbcode :String = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]Apples collected - "
+@export var highscore_text :String = " (new highscore)"
+
+var new_highscore_sound :AudioStreamMP3 = AudioStreamMP3.load_from_file("res://assets/audio/sfx/new_highscore.mp3")
+@onready var stat_text_node :RichTextLabel = $stat_text
+@onready var apple_highscore_particle1 :GPUParticles2D = $apple_highscore_particles
+@onready var apple_highscore_particle2 :GPUParticles2D = $apple_highscore_particles2
+@onready var time_highscore_particle1 :GPUParticles2D = $time_highscore_particles
+@onready var time_highscore_particle2 :GPUParticles2D = $time_highscore_particles2
+
 func _hide():
 	super()
 	MenuManager.toggle_background_seperator.emit(false)
@@ -8,6 +19,35 @@ func _show(target):
 	super(target)
 	if target == menu_name:
 		MenuManager.toggle_background_seperator.emit(true)
+		_refresh_stat_text()
+
+
+func _refresh_stat_text() -> void:
+	var text :String = ""
+	var time_alive = StatisticManager.get_value("time_alive")
+	if time_alive >= DataManager.get_value("statistics")["time_highscore"]:
+		text += time_bbcode + TimeFormat.get_time_string(time_alive) + highscore_text + "[br]"
+		time_highscore_particle1.restart()
+		time_highscore_particle2.restart()
+		time_highscore_particle1.emitting = true
+		time_highscore_particle2.emitting = true
+	else:
+		text += time_bbcode + TimeFormat.get_time_string(time_alive) +  "[br]"
+	
+	var apples_collected = StatisticManager.get_value("apples_collected")
+	text += apple_bbcode + str( int(apples_collected))
+	
+	if apples_collected >= DataManager.get_value("statistics")["apple_highscore"]:
+		text += highscore_text
+		apple_highscore_particle1.restart()
+		apple_highscore_particle2.restart()
+		apple_highscore_particle1.emitting = true
+		apple_highscore_particle2.emitting = true
+	
+	if text.contains("highscore"):
+		AudioManager.play_global_sound(new_highscore_sound, -3)
+	
+	stat_text_node.text = text
 
 func _on_play_again_pressed() -> void:
 	MenuManager.hide_all_menus.emit()

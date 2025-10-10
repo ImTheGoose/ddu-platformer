@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 		GameManager.state.pregame:
 			time = 0
 	
-	text = prefix + str(int(time))
+	text = prefix + TimeFormat.get_time_string(time)
 
 func _toggle_visible(isVisible):
 	visible = isVisible

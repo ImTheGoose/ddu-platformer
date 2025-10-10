@@ -10,7 +10,8 @@ var config = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 6426,
+	"money" : 0,
+	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
 	"owned_skin": {
 		"Osvald": true,
@@ -36,6 +37,31 @@ var default_game_data: Dictionary = {
 		"Candy" : false,
 		"Castle" : false,
 		"Icey" : false, 
+	},
+	"statistics" : {
+		"time_played" : 0,
+		"time_alive" : 0,
+		"total_apples_collected" : 0,
+		"time_highscore" : 0,
+		"apple_highscore" : 0,
+		"deaths" : {
+			"mushroom" : 0,
+			"trunk" : 0,
+			"spike" : 0,
+			"fire" : 0,
+			"cloud" : 0,
+		},
+		"kills" : {
+			"mushroom" : 0,
+			"trunk" : 0,
+		},
+		"jumps" : {
+			"ground" : 0,
+			"wall" : 0,
+			"double" : 0,
+			"trampoline" : 0,
+			"kill" : 0,
+		}
 	}
 }
 
@@ -45,13 +71,16 @@ func _init() -> void:
 	load_save_data()
 	load_config()
 
+func _process(delta: float) -> void:
+	game_data["statistics"]["time_played"] += delta
+
 func update_game_data():
 	var v: float = float(game_data["version"])
 	print(PREFIX, "Updating save data, from: ", v, " to: ", ProjectSettings.get_setting("application/config/version"))
-	
+	game_data["changelog_seen"] = false
 	if v < 0.7:
 		print("Updating to 0.7")
-		game_data["owned_skin"] = game_data["owned_skins"]
+		game_data["owned_skin"] = default_game_data["owned_skins"]
 		game_data["selected_theme"] = "Default"
 		game_data["selected_accent"] = "Brown"
 		game_data["owned_theme"] = default_game_data["owned_theme"]
@@ -60,6 +89,10 @@ func update_game_data():
 	if v < 0.8:
 		print("Updating to 0.8")
 		create_config()
+	
+	if v < 0.9:
+		print("Updating to 0.9")
+		game_data["statistics"] = default_game_data["statistics"]
 		
 	game_data["version"] = ProjectSettings.get_setting("application/config/version")
 	save_game_data()
@@ -128,6 +161,8 @@ func create_config():
 	config.set_value("audio", "master_volume", 0)
 	config.set_value("audio", "music_volume", -15)
 	
+	config.set_value("video", "max_fps", 600)
+	config.set_value("video", "show_fps", false)
 	config.set_value("video", "vsync", false)
 	config.set_value("video", "fullscreen", false)
 	config.set_value("video", "color_theme", "Brown")

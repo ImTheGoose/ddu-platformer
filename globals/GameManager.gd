@@ -2,7 +2,7 @@ extends Node
 
 signal on_start_game
 signal on_reset_game
-signal on_stop_game
+signal on_player_death
 signal spawn_player
 var game_state :state
 var game_paused := false
@@ -57,7 +57,6 @@ func set_difficulty(dif: difficulty):
 	game_difficulty = dif
 
 func pause_game(isPaused: bool):
-	print(isPaused)
 	get_tree().paused = isPaused
 	game_paused = isPaused
 
@@ -80,7 +79,7 @@ func start_game():
 
 func player_died():
 	MenuManager.show_menu.emit("death_menu")
-	DataManager.save_game_data()
+	on_player_death.emit()
 	game_state = state.dead
 
 func _notification(what: int) -> void:
