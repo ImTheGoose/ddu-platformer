@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://2v32sa53s5e0"]
+[gd_resource type="TileSet" format=3 uid="uid://2v32sa53s5e0"]
 
 [ext_resource type="PackedScene" uid="uid://dvuu00ynhqps7" path="res://prefabs/enemies/PathfindingPoint.tscn" id="1_gac34"]
 [ext_resource type="PackedScene" uid="uid://bm73fykqwqf6j" path="res://prefabs/enemies/Mushroom.tscn" id="2_77kvj"]

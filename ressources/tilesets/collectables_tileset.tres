@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dm0uv7n0xo0sl"]
+[gd_resource type="TileSet" format=3 uid="uid://dm0uv7n0xo0sl"]
 
 [ext_resource type="PackedScene" uid="uid://btu7xbmgfkame" path="res://prefabs/collectables/apple.tscn" id="1_58wtd"]
 

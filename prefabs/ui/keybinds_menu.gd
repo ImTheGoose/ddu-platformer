@@ -19,13 +19,14 @@ func _ready() -> void:
 	super()
 	_load_keybindings_from_settings()
 	_create_action_list()
+	
 
 func _load_keybindings_from_settings():
 	var keybindings = DataManager.get_keybindings()
 	for action in keybindings.keys():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, keybindings[action])
-	
+	InputMap.load_from_project_settings()
 	return
 
 

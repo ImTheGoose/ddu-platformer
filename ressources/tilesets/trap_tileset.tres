@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://m5ulicf6wm0o"]
+[gd_resource type="TileSet" format=3 uid="uid://m5ulicf6wm0o"]
 
 [ext_resource type="PackedScene" uid="uid://dwyc1xb3bavyv" path="res://prefabs/traps/Spikes.tscn" id="1_16bj3"]
 [ext_resource type="PackedScene" uid="uid://cnh6641embbwk" path="res://prefabs/traps/Spikes_down.tscn" id="2_1ix3v"]

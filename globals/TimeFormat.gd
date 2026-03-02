@@ -1,6 +1,6 @@
 extends Node
 
-func get_time_string(t: float) -> String:
+static func get_time_string(t: float) -> String:
 	var seconds = get_seconds(t)
 	var minutes = get_minutes(t)
 	var hours = get_hours(t)
@@ -17,20 +17,20 @@ func get_time_string(t: float) -> String:
 	
 	return time_string
 
-func get_seconds(t):
+static func get_seconds(t):
 	t = floor(t)
 	var mnts = floor(t/60)
 	return t - (mnts * 60)
 
-func get_minutes(t):
+static func get_minutes(t):
 	t = floor(t)
 	var hrs = floor(t/3600)
 	return floor((t - (hrs * 3600))/60)
 
-func get_hours(t):
+static func get_hours(t):
 	t = floor(t)
 	var dys = floor(t/86400)
 	return floor((t - (dys * 86400))/3600)
 
-func get_days(t):
+static func get_days(t):
 	return floor(t/86400)
