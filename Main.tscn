@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bwjypqfmpettn"]
+[gd_scene load_steps=96 format=3 uid="uid://bwjypqfmpettn"]
 
 [ext_resource type="Script" uid="uid://ci6778jvgv16f" path="res://main.gd" id="1_w3rk5"]
 [ext_resource type="Script" uid="uid://ctjb6mvogl6by" path="res://game_container.gd" id="2_5mvff"]
@@ -53,6 +53,7 @@
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="48_5tfui"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="49_38apo"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
+[ext_resource type="PackedScene" uid="uid://c238qdbqtvaoe" path="res://maps/transitions/wilf_transition_09_D_to_C.tscn" id="53_g4yo4"]
 
 [sub_resource type="Resource" id="Resource_2gh4u"]
 script = ExtResource("4_wkp8b")
@@ -323,15 +324,14 @@ start_connection = 4
 end_connection = 1
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
-[sub_resource type="Environment" id="Environment_khphd"]
-tonemap_mode = 4
-tonemap_exposure = 1.15
-adjustment_enabled = true
-adjustment_brightness = 0.99
+[sub_resource type="Resource" id="Resource_gdb40"]
+script = ExtResource("4_wkp8b")
+prefab = ExtResource("53_g4yo4")
+start_connection = 3
+end_connection = 2
+metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_g4yo4"]
-
-[node name="Main" type="Node" unique_id=2321650]
+[node name="Main" type="Node"]
 script = ExtResource("1_w3rk5")
 
 [node name="ParticlePreRenderer" type="Node2D" parent="." unique_id=1987328683]
@@ -355,7 +355,7 @@ position = Vector2(0, 64)
 script = ExtResource("3_cm0pq")
 start_map = SubResource("Resource_2gh4u")
 map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_sph85"), SubResource("Resource_o7g6l"), SubResource("Resource_vi5kq"), SubResource("Resource_5mkgo"), SubResource("Resource_3ccbu"), SubResource("Resource_ny7u2"), SubResource("Resource_x3yn0"), SubResource("Resource_1w2xm"), SubResource("Resource_v8qla"), SubResource("Resource_y1tbi"), SubResource("Resource_c2s76"), SubResource("Resource_f4ese"), SubResource("Resource_rchyr"), SubResource("Resource_pljue"), SubResource("Resource_nx4yo"), SubResource("Resource_5tfui"), SubResource("Resource_38apo"), SubResource("Resource_khphd"), SubResource("Resource_g4yo4"), SubResource("Resource_im7ls"), SubResource("Resource_a34eg"), SubResource("Resource_via5u")])
-transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85"), SubResource("Resource_gb15f"), SubResource("Resource_gngx1"), SubResource("Resource_jt61w"), SubResource("Resource_ac6pf"), SubResource("Resource_ek63v"), SubResource("Resource_oaklg"), SubResource("Resource_4bst2"), SubResource("Resource_uy3go"), SubResource("Resource_yf3a2")])
+transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), SubResource("Resource_xrxkg"), SubResource("Resource_sqvbp"), SubResource("Resource_hri7i"), SubResource("Resource_w3rk5"), SubResource("Resource_5mvff"), SubResource("Resource_oye8v"), SubResource("Resource_40n85"), SubResource("Resource_gb15f"), SubResource("Resource_gngx1"), SubResource("Resource_jt61w"), SubResource("Resource_ac6pf"), SubResource("Resource_ek63v"), SubResource("Resource_oaklg"), SubResource("Resource_4bst2"), SubResource("Resource_uy3go"), SubResource("Resource_yf3a2"), SubResource("Resource_gdb40")])
 safe_zone = 2000
 
 [node name="Camera2D" parent="." unique_id=1311093804 instance=ExtResource("24_hhcpw")]
