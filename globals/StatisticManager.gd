@@ -59,7 +59,6 @@ func _save_recording():
 			
 		death_type.cloud:
 			glo_stats["deaths"]["cloud"] += 1
-			
 	
 	if glo_stats["time_highscore"] < stat_recording["time_alive"]:
 		print(prefix, "player reached new time highscore. New time: ", stat_recording["time_alive"])

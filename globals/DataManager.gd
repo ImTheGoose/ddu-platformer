@@ -67,7 +67,6 @@ var default_game_data: Dictionary = {
 
 func _init() -> void:
 	game_data = default_game_data.duplicate()
-	clear_game_data()
 	load_save_data()
 	load_config()
 
@@ -170,7 +169,6 @@ func create_config():
 	config.set_value("video", "particles_enabled", true)
 	
 	config.save(SETTINGS_FILE_PATH)
-	
 
 func load_config():
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):

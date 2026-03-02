@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=139 format=4 uid="uid://b826k6lvqtor5"]
+[gd_resource type="Theme" format=4 uid="uid://b826k6lvqtor5"]
 
 [ext_resource type="Texture2D" path="res://assets/ui_assets_fixed/styles/checks/checked_7px.tres" id="2_4j11b"]
 [ext_resource type="StyleBox" path="res://assets/ui_assets_fixed/styles/containers/square/focus_square.tres" id="2_y56dm"]
@@ -528,6 +528,15 @@ style_name = "Medium"
 font_weight = 500
 subpixel_positioning = 0
 msdf_pixel_range = 8
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
 cache/0/16/0/ascent = 14.0
 cache/0/16/0/descent = 3.0
 cache/0/16/0/underline_position = 2.39063

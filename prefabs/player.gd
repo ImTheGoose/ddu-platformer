@@ -18,10 +18,57 @@ extends CharacterBody2D
 @onready var death_particles = $die_particles
 @onready var audio_stream = $AudioStreamPlayer
 
+var player_idx := 0:
+	set(value):
+		player_idx = value
+		if skin_outlines:
+			$AnimatedSprite2D.material.set_shader_parameter("color", player_colors[player_idx])
+		if uniqe_skins:
+			$AnimatedSprite2D.sprite_frames = $AnimatedSprite2D.skin_sprites[player_skins[player_idx]]
+			
+const uniqe_skins := true
+const skin_outlines := true
+
+const player_skins :Array[String] = [
+	"Osvald",
+	"Tiki",
+	"Castro",
+	"Edward",
+]
+
+const player_colors :Array[Color]= [
+	Color("59ff007c"),
+	Color("ff2f1cb5"),
+	Color("ff00d9b5"),
+	Color("ffd000b5"),
+]
+const controls :Array[Dictionary] = [
+	{
+		"left" : "move_left",
+		"right" : "move_right",
+		"jump" : "jump",
+	},
+	{
+		"left" : "move_left_p2",
+		"right" : "move_right_p2",
+		"jump" : "jump_p2",
+	},
+	{
+		"left" : "move_left_p3",
+		"right" : "move_right_p3",
+		"jump" : "jump_p3",
+	},
+	{
+		"left" : "move_left_p4",
+		"right" : "move_right_p4",
+		"jump" : "jump_p4",
+	},
+]
 
 var dead = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
+
 
 func _physics_process(delta: float) -> void:
 	if dead:
@@ -33,12 +80,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
-	var m = Input.get_axis("move_left","move_right")
+	var m = Input.get_axis(controls[player_idx]["left"], controls[player_idx]["right"])
 	_limit_horizontal_velocity(max_speed)
 	if m == 0:
 		_reduce_horizontal_velocity(delta, speed_per_second)
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed(controls[player_idx]["jump"]):
 		_attempt_jump()
 	
 	if is_on_floor() or is_on_wall():

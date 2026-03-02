@@ -8,6 +8,8 @@ var game_state :state
 var game_paused := false
 var game_difficulty :difficulty = difficulty.normal
 
+var players_dead := 0
+
 var difficulty_settings = {
 	difficulty.very_easy : {
 		"camera_speed" : 0.4,
@@ -70,6 +72,7 @@ func reset_game():
 	on_reset_game.emit()
 	spawn_player.emit()
 	game_state = state.pregame
+	players_dead = 0
 	print("Resetting game")
 
 func start_game():
@@ -78,6 +81,10 @@ func start_game():
 	print("starting game")
 
 func player_died():
+	players_dead += 1
+	if players_dead < 4:
+		return
+	
 	MenuManager.show_menu.emit("death_menu")
 	on_player_death.emit()
 	game_state = state.dead

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://bkj06jyku7bya"]
+[gd_resource type="TileSet" format=3 uid="uid://bkj06jyku7bya"]
 
 [ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://assets/pixel_adventure_assets/Terrain/Terrain_Default.png" id="1_55wfe"]
 

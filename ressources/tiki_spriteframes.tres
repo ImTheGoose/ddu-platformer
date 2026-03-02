@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=59 format=3 uid="uid://copebinntgo64"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://copebinntgo64"]
 
 [ext_resource type="Texture2D" uid="uid://8bhamqvj2w0l" path="res://assets/pixel_adventure_assets/Main Characters/Desappearing (96x96).png" id="1_nbasp"]
 [ext_resource type="Texture2D" uid="uid://bbkbpe2sgpnpa" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Hit (32x32).png" id="2_nbasp"]

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=57 format=3 uid="uid://b4t3asxpw884d"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b4t3asxpw884d"]
 
 [ext_resource type="Texture2D" uid="uid://8bhamqvj2w0l" path="res://assets/pixel_adventure_assets/Main Characters/Desappearing (96x96).png" id="1_qd3sw"]
 [ext_resource type="Texture2D" uid="uid://dyn5d37gdpk5o" path="res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Hit (32x32).png" id="2_lwstu"]

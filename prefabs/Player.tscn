@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://517bp8gq433n"]
+[gd_scene format=3 uid="uid://517bp8gq433n"]
 
 [ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player.gd" id="1_0ep8a"]
 [ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/osvald_spriteframes.tres" id="2_wuy1y"]
@@ -11,10 +11,83 @@
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
 
+[sub_resource type="Shader" id="Shader_64pgi"]
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color = vec4(1.0);
+uniform float width : hint_range(0, 10) = 1.0;
+uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
+uniform bool inside = false;
+uniform bool add_margins = true; // only useful when inside is false
+
+void vertex() {
+	if (add_margins) {
+		VERTEX += (UV * 2.0 - 1.0) * width;
+	}
+}
+
+bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
+	for (float i = -ceil(width); i <= ceil(width); i++) {
+		float x = abs(i) > width ? width * sign(i) : i;
+		float offset;
+		
+		if (pattern == 0) {
+			offset = width - abs(x);
+		} else if (pattern == 1) {
+			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
+		} else if (pattern == 2) {
+			offset = width;
+		}
+		
+		for (float j = -ceil(offset); j <= ceil(offset); j++) {
+			float y = abs(j) > offset ? offset * sign(j) : j;
+			vec2 xy = uv + texture_pixel_size * vec2(x, y);
+			
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == inside) {
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	if (add_margins) {
+		vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
+		
+		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
+		
+		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
+			COLOR.a = 0.0;
+		} else {
+			COLOR = texture(TEXTURE, uv);
+		}
+	} else {
+		COLOR = texture(TEXTURE, uv);
+	}
+	
+	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
+		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70wo7"]
+resource_local_to_scene = true
+shader = SubResource("Shader_64pgi")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0000000475
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = false
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(17.670685, 6.0240984)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=2067965372]
 visibility_layer = 3
 z_index = 9
 scale = Vector2(3, 3)
@@ -24,32 +97,33 @@ safe_margin = 2.5
 script = ExtResource("1_0ep8a")
 jump_buffer_time = 0.18
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]
 position = Vector2(0, 3.16666)
 shape = SubResource("ConvexPolygonShape2D_1nynx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151]
 visibility_layer = 7
+material = SubResource("ShaderMaterial_70wo7")
 sprite_frames = ExtResource("2_wuy1y")
-animation = &"Wall_Jump"
+animation = &"Fall"
 autoplay = "Idle"
 flip_h = true
 script = ExtResource("10_634ti")
 
-[node name="dust_particles" parent="." instance=ExtResource("4_64pgi")]
+[node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_64pgi")]
 position = Vector2(-0.6666667, 14.333334)
 
-[node name="jump_particles" parent="." instance=ExtResource("5_0ep8a")]
+[node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_0ep8a")]
 position = Vector2(-0.6666667, 14.333334)
 
-[node name="die_particles" parent="." instance=ExtResource("6_70wo7")]
+[node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_70wo7")]
 position = Vector2(-0.33333334, 2.3333333)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=473809169]
 volume_db = -20.0
 bus = &"SFX"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=541735558]
 position = Vector2(0, 11.325)
 scale = Vector2(0.83, 0.83)
 collision_layer = 3
@@ -58,7 +132,7 @@ monitorable = false
 priority = 30
 script = ExtResource("6_1nynx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=350452057]
 position = Vector2(-4.787522e-08, 2.8212862)
 shape = SubResource("RectangleShape2D_1nynx")
 
