@@ -26,7 +26,7 @@ var player_idx := 0:
 		if uniqe_skins:
 			$AnimatedSprite2D.sprite_frames = $AnimatedSprite2D.skin_sprites[player_skins[player_idx]]
 			
-const uniqe_skins := true
+const uniqe_skins := false
 const skin_outlines := true
 
 const player_skins :Array[String] = [
