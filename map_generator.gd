@@ -95,6 +95,6 @@ func _get_height_from_instance(inst: Node2D) -> float:
 	var terrain_node :TileMapLayer = inst.get_node("TerrainTiles")
 	var size_in_tiles = terrain_node.get_used_rect().size
 	var size = size_in_tiles * px_per_tile
-	var global_size = size * terrain_node.scale.y
+	var global_size = size * terrain_node.scale.y * global_scale.y
 	var h = global_size.y
 	return h

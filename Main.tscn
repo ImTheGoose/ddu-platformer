@@ -323,14 +323,6 @@ start_connection = 4
 end_connection = 1
 metadata/_custom_type_script = "uid://ca53ws1nshywn"
 
-[sub_resource type="Environment" id="Environment_khphd"]
-tonemap_mode = 4
-tonemap_exposure = 1.15
-adjustment_enabled = true
-adjustment_brightness = 0.99
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_g4yo4"]
-
 [node name="Main" type="Node" unique_id=2321650]
 script = ExtResource("1_w3rk5")
 
@@ -359,7 +351,3 @@ transition_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_mxvw5"), S
 safe_zone = 2000
 
 [node name="Camera2D" parent="." unique_id=1311093804 instance=ExtResource("24_hhcpw")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=736629380]
-environment = SubResource("Environment_khphd")
-camera_attributes = SubResource("CameraAttributesPractical_g4yo4")

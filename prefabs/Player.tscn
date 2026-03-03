@@ -8,9 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_70wo7"]
 [ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player_skin.gd" id="10_634ti"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
-points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
-
 [sub_resource type="Shader" id="Shader_64pgi"]
 code = "shader_type canvas_item;
 
@@ -84,6 +81,9 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = false
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
+points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(17.670685, 6.0240984)
 
@@ -97,10 +97,6 @@ safe_margin = 2.5
 script = ExtResource("1_0ep8a")
 jump_buffer_time = 0.18
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]
-position = Vector2(0, 3.16666)
-shape = SubResource("ConvexPolygonShape2D_1nynx")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151]
 visibility_layer = 7
 material = SubResource("ShaderMaterial_70wo7")
@@ -109,6 +105,12 @@ animation = &"Fall"
 autoplay = "Idle"
 flip_h = true
 script = ExtResource("10_634ti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]
+position = Vector2(0, 3.16666)
+shape = SubResource("ConvexPolygonShape2D_1nynx")
+one_way_collision = true
+one_way_collision_margin = 30.0
 
 [node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_64pgi")]
 position = Vector2(-0.6666667, 14.333334)

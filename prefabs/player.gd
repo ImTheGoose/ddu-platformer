@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var death_particles = $die_particles
 @onready var audio_stream = $AudioStreamPlayer
 
+
 var player_idx := 0:
 	set(value):
 		player_idx = value
@@ -25,7 +26,7 @@ var player_idx := 0:
 			$AnimatedSprite2D.material.set_shader_parameter("color", player_colors[player_idx])
 		if uniqe_skins:
 			$AnimatedSprite2D.sprite_frames = $AnimatedSprite2D.skin_sprites[player_skins[player_idx]]
-			
+
 const uniqe_skins := false
 const skin_outlines := true
 
