@@ -25,8 +25,10 @@
 [ext_resource type="Texture2D" path="res://assets/ui_assets_fixed/styles/checks/unchecked.tres" id="12_krpu0"]
 [ext_resource type="StyleBox" path="res://assets/ui_assets_fixed/styles/scrollbars/h_scroll_7x5px.tres" id="12_oo5et"]
 [ext_resource type="Texture2D" path="res://assets/ui_assets_fixed/styles/checks/unchecked_disabled.tres" id="13_7jyrj"]
-[ext_resource type="StyleBox" path="res://assets/ui_assets_fixed/styles/panels/popup_item_hover.tres" id="20_r63wo"]
-[ext_resource type="StyleBox" path="res://assets/ui_assets_fixed/styles/panels/popup_panel.tres" id="21_h1gc1"]
+[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="13_ymv0j"]
+[ext_resource type="FontFile" uid="uid://cpje3x7fttxss" path="res://assets/Jersey10-Regular.ttf" id="14_mb4or"]
+[ext_resource type="StyleBox" uid="uid://bwqqmfmra6283" path="res://assets/ui_assets_fixed/styles/panels/popup_item_hover.tres" id="20_r63wo"]
+[ext_resource type="StyleBox" uid="uid://bsu5fnxq5rkfm" path="res://assets/ui_assets_fixed/styles/panels/popup_panel.tres" id="21_h1gc1"]
 [ext_resource type="StyleBox" path="res://assets/ui_assets_fixed/styles/panels/popup_panel_disabled.tres" id="22_mmeej"]
 [ext_resource type="StyleBox" path="res://assets/ui_assets_fixed/styles/scrollbars/v_grabber_5x7px.tres" id="30_a7ufr"]
 [ext_resource type="Texture2D" path="res://assets/ui_assets_fixed/styles/checks/unchecked_7px.tres" id="30_ko7hs"]
@@ -5057,6 +5059,10 @@ HSlider/icons/tick = SubResource("AtlasTexture_bhxlc")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_n0a2v")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_ghuhf")
 HSlider/styles/slider = SubResource("StyleBoxTexture_apolk")
+HeaderLarge/font_sizes/font_size = 50
+HeaderLarge/fonts/font = ExtResource("13_ymv0j")
+HeaderMedium/font_sizes/font_size = 21
+HeaderMedium/fonts/font = ExtResource("14_mb4or")
 ItemList/constants/h_separation = 3
 ItemList/constants/icon_margin = 0
 ItemList/constants/line_separation = 0

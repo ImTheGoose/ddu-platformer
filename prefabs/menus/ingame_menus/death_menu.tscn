@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://din2cplqt3gvv"]
+
+[ext_resource type="Script" uid="uid://bn07tyaxxjnsu" path="res://prefabs/menus/ingame_menus/death_menu.gd" id="1_aavvi"]
+[ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="3_d258s"]
+[ext_resource type="PackedScene" uid="uid://cfxlmi8qaxa7k" path="res://prefabs/particles/time_highscore_particles.tscn" id="4_tfdma"]
+
+[node name="death_menu" type="VBoxContainer" unique_id=1525325848 node_paths=PackedStringArray("intial_focus_button")]
+custom_minimum_size = Vector2(250, 180)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -92.0
+offset_right = 125.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_aavvi")
+menu_name = "death_menu"
+intial_focus_button = NodePath("play_again")
+
+[node name="Label" type="Label" parent="." unique_id=190051959]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="stat_text" type="RichTextLabel" parent="." unique_id=381627957]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="play_again" type="Button" parent="." unique_id=489721930]
+layout_mode = 2
+text = "Play again"
+
+[node name="back_to_menu" type="Button" parent="." unique_id=1744017188]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="apple_highscore_particles" parent="." unique_id=1440854082 instance=ExtResource("3_d258s")]
+position = Vector2(-130.25, 221.99998)
+rotation = 0.36651915
+
+[node name="time_highscore_particles" parent="." unique_id=926235825 instance=ExtResource("4_tfdma")]
+position = Vector2(-130.25, 221.99998)
+rotation = 0.36651915
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="time_highscore_particles2" parent="." unique_id=2032224000 instance=ExtResource("4_tfdma")]
+position = Vector2(355.5, 221.5)
+rotation = -0.36651915
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="apple_highscore_particles2" parent="." unique_id=374437080 instance=ExtResource("3_d258s")]
+position = Vector2(355.5, 221.5)
+rotation = -0.36651915
+
+[connection signal="pressed" from="play_again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="back_to_menu" to="." method="_on_back_to_menu_pressed"]

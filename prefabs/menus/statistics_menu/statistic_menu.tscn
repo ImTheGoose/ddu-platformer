@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ydagk3w3a17a"]
+
+[ext_resource type="Script" uid="uid://07w71pvnll6q" path="res://prefabs/menus/statistics_menu/statistic_menu.gd" id="1_88qfe"]
+
+[node name="StatisticMenu" type="VBoxContainer" unique_id=1022312052 node_paths=PackedStringArray("intial_focus_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -120.5
+offset_right = 153.0
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_88qfe")
+menu_name = "statistics_menu"
+intial_focus_button = NodePath("back")
+
+[node name="Label" type="Label" parent="." unique_id=778064404]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Statistics"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1805799840]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=198002262]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=1021044628]
+custom_minimum_size = Vector2(240, 155.72)
+layout_mode = 2
+size_flags_vertical = 0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="StatisticsList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=661438016]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Statistic_Field" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/StatisticsList" unique_id=1770995271]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[img]res://assets/icons/time (16x16).png[/img]Time played - {time_played}
+[img]res://assets/icons/heart (16x16).png[/img]Time alive - {time_alive}
+[img]res://assets/icons/medal (16x16).png[/img]Highscore - {time_highscore}
+Most apples in a round - {apple_highscore}
+[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] Apples collected - {total_apples_collected}
+
+Total Jumps - {total_jumps}
+Ground jumps - {ground_jumps}
+Wall jumps - {wall_jumps}
+Double jumps - {double_jumps}
+Trampoline jumps - {trampoline_jumps}
+Enemy jums - {enemy_jumps}
+
+Total Deaths - {total_deaths}
+[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms deaths - {mushroom_deaths}
+[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks deaths - {trunk_deaths}
+[img]res://assets/pixel_adventure_assets/Traps/Spikes/Icon (16x16).png[/img] Spike deaths - {spike_deaths}
+[img]res://assets/pixel_adventure_assets/Traps/Fire/Icon (16x16).png[/img] Fire deaths - {fire_deaths}
+[img]res://assets/pixel_adventure_assets/Other/Dust Particle.png[/img] Cloud deaths - {cloud_deaths}
+
+Total Killed - {total_killed}
+[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms killed - {mushroom_killed}
+[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks killed - {trunk_killed}"
+fit_content = true
+autowrap_mode = 0
+
+[node name="back" type="Button" parent="." unique_id=1387869707]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

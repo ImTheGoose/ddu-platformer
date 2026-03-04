@@ -1,0 +1,123 @@
+[gd_scene format=4 uid="uid://ddy24w71nrv3k"]
+
+[ext_resource type="Script" uid="uid://tssy5paosbwh" path="res://prefabs/menus/shop_menus/shop_theme_menu.gd" id="1_igay0"]
+[ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="3_3bc5h"]
+
+[node name="shop_theme_menu" type="MarginContainer" unique_id=1320604940 node_paths=PackedStringArray("display_tilemap", "price_tag", "buy_button", "name_tag", "intial_focus_button")]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -112.5
+offset_right = 110.5
+offset_bottom = 112.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_igay0")
+display_tilemap = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/Control/TileMapLayer")
+shop_category = "theme"
+price_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/price_tag")
+buy_button = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button")
+name_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/skin_name_tag")
+menu_name = "shop_theme_menu"
+intial_focus_button = NodePath("VBoxContainer/back")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=909520858]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1979888022]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderLarge"
+text = "Themes"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=480252640]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer" unique_id=487103513]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer" unique_id=1986911432]
+layout_mode = 2
+theme_override_constants/separation = 29
+alignment = 1
+
+[node name="previous" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=1309060032]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../next")
+focus_neighbor_top = NodePath("../next")
+focus_neighbor_right = NodePath("../next")
+text = "<"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=687832485]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer" unique_id=788187446]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="skin_name_tag" type="RichTextLabel" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1063191045]
+layout_mode = 2
+text = "placeholder"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1636748808]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TileMapLayer" type="TileMapLayer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/Control" unique_id=1089702242]
+scale = Vector2(0.625, 0.625)
+tile_map_data = PackedByteArray("AAAJAAQAAAACAAYAAAAJAAMAAAACAAQAAAAIAAMAAAABAAQAAAAIAAQAAAABAAYAAAAHAAMAAAABAAAAAAAGAAMAAAABAAAAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAMAAAABAAgAAAAFAAQAAAABAAoAAAAEAAMAAAAAAAgAAAAEAAQAAAAAAAoAAAAJAAAAAAAIAAAAAAAJAAEAAAAIAAEAAAAJAAIAAAAIAAIAAAAIAAAAAAAHAAQAAAAIAAEAAAAHAAUAAAAIAAIAAAAHAAYAAAAHAAAAAAAGAAgAAAAHAAEAAAAGAAkAAAAHAAIAAAAGAAoAAAAEAAAAAAARAAAAAAAEAAEAAAARAAEAAAAEAAIAAAARAAIAAAAFAAAAAAASAAAAAAAFAAEAAAASAAEAAAAFAAIAAAASAAIAAAAGAAAAAAATAAAAAAAGAAEAAAATAAEAAAAGAAIAAAATAAIAAAACAAMAAAARAAQAAAADAAQAAAATAAYAAAACAAQAAAARAAYAAAADAAMAAAATAAQAAAABAAIAAAAUAAgAAAABAAMAAAAUAAkAAAABAAQAAAAUAAoAAAAAAAIAAAAPAAgAAAAAAAMAAAAPAAkAAAAAAAQAAAAPAAoAAAACAAEAAAANAAUAAAACAAIAAAANAAYAAAADAAEAAAAOAAUAAAADAAIAAAAOAAYAAAAAAAAAAAANAAEAAAAAAAEAAAANAAIAAAABAAAAAAAOAAEAAAABAAEAAAAOAAIAAAADAAAAAAAMAAUAAAACAAAAAAAMAAEAAAA=")
+tile_set = ExtResource("3_3bc5h")
+
+[node name="price_tag" type="RichTextLabel" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=2057063120]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] 1000000
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="buy_button" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1151600767]
+layout_mode = 2
+text = "Buy"
+
+[node name="next" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=1597620425]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../previous")
+focus_neighbor_top = NodePath("../../../../back")
+focus_neighbor_right = NodePath("../previous")
+text = ">"
+
+[node name="back" type="Button" parent="VBoxContainer" unique_id=853033276]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

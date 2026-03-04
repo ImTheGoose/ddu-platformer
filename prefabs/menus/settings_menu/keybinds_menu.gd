@@ -1,6 +1,6 @@
 extends GameMenu
 
-@onready var input_button_prefab = preload("res://prefabs/ui/input_button.tscn")
+@onready var input_button_prefab = preload("uid://dkcts8eojesfj")
 @onready var action_list = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/action_list
 
 var is_remapping = false
