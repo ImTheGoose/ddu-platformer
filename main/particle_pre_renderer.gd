@@ -10,8 +10,7 @@ func _process(delta: float) -> void:
 	
 	seconds_passed += delta
 	if seconds_passed >= seconds_before_clear:
-		for c: Node in get_children():
-			c.queue_free()
+		queue_free()
 		
 	
 
