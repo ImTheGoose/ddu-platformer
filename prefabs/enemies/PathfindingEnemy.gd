@@ -9,7 +9,7 @@ var seconds_waited :float = 0
 @export var speed :int = 100
 @export var path_axis :axis = axis.horizontal
 @onready var ray :RayCast2D = $RayCast2D
-@onready var anim :AnimatedEntitySprite2D = $AnimatedSprite2D
+@onready var anim :AnimatedSpriteComponent = $AnimatedSprite2D
 var point_positive :PathfindingPoint
 var point_negative :PathfindingPoint
 var checked_points = false

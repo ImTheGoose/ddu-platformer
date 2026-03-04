@@ -1,13 +1,13 @@
-[gd_scene load_steps=60 format=3 uid="uid://cl3ty1bxj7fwe"]
+[gd_scene format=3 uid="uid://cl3ty1bxj7fwe"]
 
-[ext_resource type="Script" uid="uid://ctra8hn3ielyk" path="res://prefabs/enemies/trunk.gd" id="1_nud6c"]
-[ext_resource type="PackedScene" uid="uid://dxnatyslk4ik6" path="res://prefabs/enemies/TrunkProjectile.tscn" id="2_kyy33"]
+[ext_resource type="Script" uid="uid://ctra8hn3ielyk" path="res://prefabs/enemies/trunk/trunk.gd" id="1_nud6c"]
+[ext_resource type="PackedScene" uid="uid://dxnatyslk4ik6" path="res://prefabs/enemies/trunk/TrunkProjectile.tscn" id="2_kyy33"]
 [ext_resource type="Texture2D" uid="uid://0iatuva5p6ag" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Attack (64x32).png" id="2_xmyx0"]
 [ext_resource type="Texture2D" uid="uid://dyxua7nfc66ad" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Hit (64x32).png" id="3_kyy33"]
 [ext_resource type="AudioStream" uid="uid://cbuameslh5ybr" path="res://assets/audio/sfx/trunk_death.mp3" id="3_o7ajs"]
 [ext_resource type="Texture2D" uid="uid://veyhh7ovq274" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Idle (64x32).png" id="4_o7ajs"]
 [ext_resource type="Texture2D" uid="uid://dlxvufnd6mxiy" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Run (64x32).png" id="5_odpwh"]
-[ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedEntitySprite2D.gd" id="6_yuq46"]
+[ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedSpriteComponent.gd" id="6_yuq46"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="8_xmyx0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuvm5"]
@@ -372,7 +372,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3vsw"]
 size = Vector2(17, 20)
 
-[node name="Trunk" type="Node2D"]
+[node name="Trunk" type="Node2D" unique_id=451175048]
 z_index = 10
 script = ExtResource("1_nud6c")
 projectile = ExtResource("2_kyy33")
@@ -380,13 +380,13 @@ seconds_between_attacks = 1.2
 enemy_name = "trunk"
 death_sound = ExtResource("3_o7ajs")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1100985406]
 collide_with_areas = true
 
-[node name="PlayerRay" type="RayCast2D" parent="."]
+[node name="PlayerRay" type="RayCast2D" parent="." unique_id=697095699]
 position = Vector2(0, -4.565)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=47335679]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_tw06p")
 animation = &"Attack"
@@ -394,19 +394,19 @@ autoplay = "Idle"
 frame = 10
 script = ExtResource("6_yuq46")
 
-[node name="HitArea" type="Area2D" parent="."]
+[node name="HitArea" type="Area2D" parent="." unique_id=2038112279]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("8_xmyx0")
 kill_type = 1
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=43827704]
 position = Vector2(0.5, -5)
 shape = SubResource("RectangleShape2D_b3vsw")
 debug_color = Color(0.90848535, 0.29889786, 0.067487344, 0.41960785)
 
-[node name="ProjectileSpawn" type="Node2D" parent="."]
+[node name="ProjectileSpawn" type="Node2D" parent="." unique_id=560250659]
 position = Vector2(-12, -5)
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_looped"]

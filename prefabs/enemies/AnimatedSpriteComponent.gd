@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-class_name AnimatedEntitySprite2D
+class_name AnimatedSpriteComponent
 
 var target_rot :float = 0.0
 var start_vel :Vector2 = Vector2.ZERO

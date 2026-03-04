@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpql1ujcn3sd7"]
 
 [ext_resource type="Script" uid="uid://cru13khgiwkpx" path="res://prefabs/menus/shop_menus/shop_accent_menu.gd" id="1_dfh52"]
-[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="3_naxsf"]
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="3_naxsf"]
 [ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="4_pij7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg1ud"]

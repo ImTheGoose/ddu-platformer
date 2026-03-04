@@ -1,10 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://dqlgqmqcu7uo4"]
+[gd_scene format=3 uid="uid://dvs0ll2an71s2"]
 
 [ext_resource type="Script" uid="uid://bmk40585djfsk" path="res://prefabs/enemies/PathfindingEnemy.gd" id="1_hcqil"]
-[ext_resource type="Texture2D" uid="uid://dfq04fji2abk4" path="res://asset_pack/Enemies/Mushroom/Hit.png" id="2_ipdrh"]
-[ext_resource type="Texture2D" uid="uid://6buevbuadrfb" path="res://asset_pack/Enemies/Mushroom/Idle (32x32).png" id="3_f7jr2"]
-[ext_resource type="Texture2D" uid="uid://08qr8fcio77j" path="res://asset_pack/Enemies/Mushroom/Run (32x32).png" id="4_88ra2"]
-[ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedEntitySprite2D.gd" id="5_inbip"]
+[ext_resource type="Texture2D" uid="uid://dfq04fji2abk4" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Hit.png" id="2_ipdrh"]
+[ext_resource type="Texture2D" uid="uid://6buevbuadrfb" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Idle (32x32).png" id="3_f7jr2"]
+[ext_resource type="Texture2D" uid="uid://08qr8fcio77j" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Run (32x32).png" id="4_88ra2"]
+[ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/enemies/AnimatedSpriteComponent.gd" id="5_inbip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lksun"]
 atlas = ExtResource("2_ipdrh")
@@ -269,16 +269,16 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="SampleEnemy" type="Node2D"]
+[node name="SampleEnemy" type="Node2D" unique_id=1437384067]
 script = ExtResource("1_hcqil")
 seconds_waiting = 3.0
 speed = 70
 path_axis = 0
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1712911530]
 collide_with_areas = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=76299216]
 self_modulate = Color(1, 0.6, 0, 1)
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_e5cyv")

@@ -15,12 +15,16 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Upward"
-config/version="0.9"
+config/version="0.10"
 run/main_scene="uid://bwjypqfmpettn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/use_filter=false
 boot_splash/image="uid://cq6wk715ju8co"
 config/icon="uid://dx78aab6600bl"
+
+[audio]
+
+buses/default_bus_layout="res://main/default_bus_layout.tres"
 
 [autoload]
 
@@ -46,6 +50,7 @@ window/vsync/vsync_mode=0
 folder_colors={
 "res://assets/": "green",
 "res://globals/": "pink",
+"res://main/": "red",
 "res://maps/": "orange",
 "res://prefabs/": "purple",
 "res://ressources/": "blue",

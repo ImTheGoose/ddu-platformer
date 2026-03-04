@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cku2a45ihyea0" path="res://prefabs/menus/shop_menus/shop_selection_menu.gd" id="1_vceo7"]
 [ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="3_khke4"]
 [ext_resource type="Texture2D" uid="uid://dn7a53xq84u84" path="res://assets/pixel_adventure_assets/Terrain/Terrain_Default.png" id="4_xr7c0"]
-[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://scroll.gdshader" id="5_6t20l"]
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="5_6t20l"]
 [ext_resource type="Texture2D" uid="uid://hp36vp4rgh30" path="res://assets/pixel_adventure_assets/Background/Blue.png" id="6_sbe3r"]
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="7_ykdtd"]
 [ext_resource type="Texture2D" uid="uid://cfyrwu5jj40ea" path="res://assets/pixel_adventure_assets/Background/Green.png" id="8_jd7ar"]

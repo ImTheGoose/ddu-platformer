@@ -1,16 +1,14 @@
 [gd_resource type="TileSet" format=3 uid="uid://2v32sa53s5e0"]
 
 [ext_resource type="PackedScene" uid="uid://dvuu00ynhqps7" path="res://prefabs/enemies/PathfindingPoint.tscn" id="1_gac34"]
-[ext_resource type="PackedScene" uid="uid://bm73fykqwqf6j" path="res://prefabs/enemies/Mushroom.tscn" id="2_77kvj"]
-[ext_resource type="PackedScene" uid="uid://dqlgqmqcu7uo4" path="res://prefabs/enemies/sample_enemy_vert.tscn" id="3_77kvj"]
-[ext_resource type="PackedScene" uid="uid://cl3ty1bxj7fwe" path="res://prefabs/enemies/Trunk.tscn" id="4_g4pij"]
+[ext_resource type="PackedScene" uid="uid://bm73fykqwqf6j" path="res://prefabs/enemies/mushroom/Mushroom.tscn" id="2_77kvj"]
+[ext_resource type="PackedScene" uid="uid://cl3ty1bxj7fwe" path="res://prefabs/enemies/trunk/Trunk.tscn" id="3_g4pij"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wrtas"]
 resource_name = "Enemies"
 scenes/1/scene = ExtResource("1_gac34")
 scenes/2/scene = ExtResource("2_77kvj")
-scenes/3/scene = ExtResource("3_77kvj")
-scenes/4/scene = ExtResource("4_g4pij")
+scenes/4/scene = ExtResource("3_g4pij")
 
 [resource]
 sources/0 = SubResource("TileSetScenesCollectionSource_wrtas")
