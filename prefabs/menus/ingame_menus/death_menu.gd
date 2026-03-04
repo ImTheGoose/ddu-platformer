@@ -27,22 +27,31 @@ func _refresh_stat_text() -> void:
 	var time_alive :Variant = StatisticManager.get_value("time_alive")
 	if time_alive >= DataManager.get_value("statistics")["time_highscore"]:
 		text += time_bbcode + TimeFormat.get_time_string(time_alive) + highscore_text + "[br]"
+		time_highscore_particle1.visible = true
+		time_highscore_particle2.visible = true
 		time_highscore_particle1.restart()
 		time_highscore_particle2.restart()
 		time_highscore_particle1.emitting = true
 		time_highscore_particle2.emitting = true
 	else:
 		text += time_bbcode + TimeFormat.get_time_string(time_alive) +  "[br]"
+		time_highscore_particle1.visible = false
+		time_highscore_particle2.visible = false
 	
 	var apples_collected :int = StatisticManager.get_value("apples_collected")
-	text += apple_bbcode + str( int(apples_collected))
 	
 	if apples_collected >= DataManager.get_value("statistics")["apple_highscore"]:
-		text += highscore_text
+		text += apple_bbcode + str( int(apples_collected)) + highscore_text
+		apple_highscore_particle1.visible = true
+		apple_highscore_particle2.visible = true
 		apple_highscore_particle1.restart()
 		apple_highscore_particle2.restart()
 		apple_highscore_particle1.emitting = true
 		apple_highscore_particle2.emitting = true
+	else:
+		apple_highscore_particle1.visible = false
+		apple_highscore_particle2.visible = false
+		text += apple_bbcode + str( int(apples_collected))
 	
 	if text.contains("highscore"):
 		AudioManager.play_global_sound(new_highscore_sound, -3)

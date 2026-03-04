@@ -333,10 +333,6 @@ text = "Cancel"
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/reset_game_popup" unique_id=1828037624]
 layout_mode = 2
 
-[node name="Menu_Renderer" type="CanvasLayer" parent="." unique_id=1128487479]
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
-
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 0
 position = Vector2(962, 1068)
