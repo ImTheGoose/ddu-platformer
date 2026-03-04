@@ -10,11 +10,11 @@ extends GameMenu
 
 func _ready() -> void:
 	super()
-	var dif = GameManager.get_difficulty()
+	var dif :GameManager.difficulty = GameManager.get_difficulty()
 	difficulty_dropdown.selected = difficulty_dropdown.get_item_index(dif)
 	_refresh_stats()
 
-func _refresh_stats():
+func _refresh_stats() -> void:
 	var tex :String = enemy_bbcode
 	
 	tex += str( int(GameManager.get_difficulty_value("enemy_spawn_rate") * 100)) + "%[br]"

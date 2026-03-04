@@ -17,11 +17,11 @@ func _process(delta: float) -> void:
 			GameManager.pause_game(true)
 			MenuManager.show_menu.emit("pause_menu")
 
-func _hide():
+func _hide() -> void:
 	super()
 	MenuManager.toggle_background_seperator.emit(false)
 
-func _show(target):
+func _show(target: String) -> void:
 	super(target)
 	if target == menu_name:
 		MenuManager.toggle_background_seperator.emit(true)

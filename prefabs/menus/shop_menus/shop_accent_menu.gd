@@ -37,7 +37,7 @@ func _ready() -> void:
 	shop_items = accent_items.duplicate()
 	super()
 
-func _refresh_shop_contents():
+func _refresh_shop_contents() -> void:
 	super()
-	var item = shop_items[current_shop_index]
+	var item :Dictionary = shop_items[current_shop_index]
 	display_rect.texture = item["texture"]

@@ -1,7 +1,7 @@
 extends RichTextLabel
 
-@export var prefix = "Time: "
-var time = 0
+@export var prefix :String = "Time: "
+var time :float = 0
 
 func _ready() -> void:
 	MenuManager.toggle_game_visibillity.connect(_toggle_visible)
@@ -18,5 +18,5 @@ func _process(delta: float) -> void:
 	
 	text = prefix + TimeFormat.get_time_string(time)
 
-func _toggle_visible(isVisible):
+func _toggle_visible(isVisible: bool ) -> void:
 	visible = isVisible

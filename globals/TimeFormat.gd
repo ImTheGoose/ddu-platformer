@@ -1,12 +1,12 @@
 extends Node
 
 static func get_time_string(t: float) -> String:
-	var seconds = get_seconds(t)
-	var minutes = get_minutes(t)
-	var hours = get_hours(t)
-	var days = get_days(t)
+	var seconds :float = get_seconds(t)
+	var minutes :float = get_minutes(t)
+	var hours :float = get_hours(t)
+	var days :float = get_days(t)
 	
-	var time_string = ""
+	var time_string :String = ""
 	if days >= 1:
 		time_string += str( int(days)) + "d "
 	if hours >= 1:
@@ -17,20 +17,20 @@ static func get_time_string(t: float) -> String:
 	
 	return time_string
 
-static func get_seconds(t):
+static func get_seconds(t: float) -> float:
 	t = floor(t)
-	var mnts = floor(t/60)
+	var mnts :float = floor(t/60)
 	return t - (mnts * 60)
 
-static func get_minutes(t):
+static func get_minutes(t: float) -> float:
 	t = floor(t)
-	var hrs = floor(t/3600)
+	var hrs :float = floor(t/3600)
 	return floor((t - (hrs * 3600))/60)
 
-static func get_hours(t):
+static func get_hours(t: float) -> float:
 	t = floor(t)
-	var dys = floor(t/86400)
+	var dys :float = floor(t/86400)
 	return floor((t - (dys * 86400))/3600)
 
-static func get_days(t):
+static func get_days(t: float) -> float:
 	return floor(t/86400)

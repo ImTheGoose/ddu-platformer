@@ -3,7 +3,7 @@ extends Area2D
 @export var jump_force :int = 1600
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
-@onready var boing_easteregg_file = preload("res://assets/audio/sfx/boing_easteregg.mp3")
+@onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")
 
 
 func _on_body_entered(body: Node2D) -> void:

@@ -1,19 +1,19 @@
 extends TextureRect
 
-@export var position_scale = 0.004
+@export var position_scale :float = 0.004
 
-var background_textures :Dictionary = {
-	"Blue": preload("res://assets/pixel_adventure_assets/Background/Blue.png"),
-	"Brown": preload("res://assets/pixel_adventure_assets/Background/Brown.png"),
-	"Gray": preload("res://assets/pixel_adventure_assets/Background/Gray.png"),
-	"Green": preload("res://assets/pixel_adventure_assets/Background/Green.png"),
-	"Pink": preload("res://assets/pixel_adventure_assets/Background/Pink.png"),
-	"Red": preload("res://assets/pixel_adventure_assets/Background/Red.png"),
-	"Black": preload("res://assets/pixel_adventure_assets/Background/Black.png"),
+var background_textures :Dictionary[String, CompressedTexture2D] = {
+	"Blue": preload("uid://hp36vp4rgh30"),
+	"Brown": preload("uid://djvdn4edth2po"),
+	"Gray": preload("uid://ob77turt7mcj"),
+	"Green": preload("uid://cfyrwu5jj40ea"),
+	"Pink": preload("uid://bxwx3outaa45n"),
+	"Red": preload("uid://cyo6dhvlxakth"),
+	"Black": preload("uid://cjnmrel60l871"),
 }
 
 func _process(delta: float) -> void:
-	var theme_name = DataManager.get_value("selected_accent")
+	var theme_name :String = DataManager.get_value("selected_accent")
 	
 	var mat: ShaderMaterial = material
 	mat.set_shader_parameter("offset", global_position * position_scale)

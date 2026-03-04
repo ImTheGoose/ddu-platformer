@@ -11,11 +11,11 @@ var new_highscore_sound :AudioStreamMP3 = AudioStreamMP3.load_from_file("res://a
 @onready var time_highscore_particle1 :GPUParticles2D = $time_highscore_particles
 @onready var time_highscore_particle2 :GPUParticles2D = $time_highscore_particles2
 
-func _hide():
+func _hide() -> void:
 	super()
 	MenuManager.toggle_background_seperator.emit(false)
 
-func _show(target):
+func _show(target: String) -> void:
 	super(target)
 	if target == menu_name:
 		MenuManager.toggle_background_seperator.emit(true)
@@ -24,7 +24,7 @@ func _show(target):
 
 func _refresh_stat_text() -> void:
 	var text :String = ""
-	var time_alive = StatisticManager.get_value("time_alive")
+	var time_alive :Variant = StatisticManager.get_value("time_alive")
 	if time_alive >= DataManager.get_value("statistics")["time_highscore"]:
 		text += time_bbcode + TimeFormat.get_time_string(time_alive) + highscore_text + "[br]"
 		time_highscore_particle1.restart()
@@ -34,7 +34,7 @@ func _refresh_stat_text() -> void:
 	else:
 		text += time_bbcode + TimeFormat.get_time_string(time_alive) +  "[br]"
 	
-	var apples_collected = StatisticManager.get_value("apples_collected")
+	var apples_collected :int = StatisticManager.get_value("apples_collected")
 	text += apple_bbcode + str( int(apples_collected))
 	
 	if apples_collected >= DataManager.get_value("statistics")["apple_highscore"]:

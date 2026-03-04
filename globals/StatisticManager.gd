@@ -27,8 +27,8 @@ func _ready() -> void:
 	GameManager.on_player_death.connect(_save_recording)
 	GameManager.on_reset_game.connect(_clear_recording)
 
-func _save_recording():
-	var glo_stats = DataManager.get_value("statistics")
+func _save_recording() -> void:
+	var glo_stats :Dictionary = DataManager.get_value("statistics")
 	
 	glo_stats["total_apples_collected"] += stat_recording["apples_collected"]
 	glo_stats["time_alive"] += stat_recording["time_alive"]
@@ -36,7 +36,7 @@ func _save_recording():
 	glo_stats["kills"]["mushroom"] += stat_recording["mushroom_killed"]
 	glo_stats["kills"]["trunk"] += stat_recording["trunk_killed"]
 	
-	var jumps = glo_stats["jumps"]
+	var jumps :Variant = glo_stats["jumps"]
 	jumps["ground"] += stat_recording["ground_jump"]
 	jumps["wall"] += stat_recording["wall_jump"]
 	jumps["double"] += stat_recording["double_jump"]
@@ -72,19 +72,18 @@ func _save_recording():
 	DataManager.set_value("statistics", glo_stats)
 	DataManager.save_game_data()
 
-func set_value(key: String, value):
+func set_value(key: String, value: Variant) -> void:
 	stat_recording[key] = value
 
-func add_value(key: String, value):
+func add_value(key: String, value: Variant) -> void:
 	stat_recording[key] += value
 
-func get_value(key:String):
+func get_value(key:String) -> Variant:
 	return stat_recording[key]
 
 func _process(delta: float) -> void:
 	if GameManager.game_state == GameManager.state.running:
 		stat_recording["time_alive"] += delta
 
-func _clear_recording():
+func _clear_recording() -> void:
 	stat_recording = stat_template.duplicate()
-	return

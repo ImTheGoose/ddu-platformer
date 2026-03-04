@@ -6,7 +6,7 @@ const PREFIX :String = "[DataManager] "
 
 signal save_game_completed
 
-var config = ConfigFile.new()
+var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"version" : float(ProjectSettings.get_setting("application/config/version")),
@@ -73,7 +73,7 @@ func _init() -> void:
 func _process(delta: float) -> void:
 	game_data["statistics"]["time_played"] += delta
 
-func update_game_data():
+func update_game_data() -> void:
 	var v: float = float(game_data["version"])
 	print(PREFIX, "Updating save data, from: ", v, " to: ", ProjectSettings.get_setting("application/config/version"))
 	game_data["changelog_seen"] = false
@@ -96,30 +96,30 @@ func update_game_data():
 	game_data["version"] = ProjectSettings.get_setting("application/config/version")
 	save_game_data()
 	
-func clear_game_data():
+func clear_game_data() -> void:
 	print(PREFIX, "Clearing game data: ", game_data)
 	DirAccess.remove_absolute(PATH)
 	game_data = default_game_data
 	load_save_data()
 	create_config()
 	
-func save_game_data():
-	var save_file = FileAccess.open(PATH, FileAccess.WRITE)
-	var json_string = JSON.stringify(game_data)
+func save_game_data() -> void:
+	var save_file :FileAccess = FileAccess.open(PATH, FileAccess.WRITE)
+	var json_string :String = JSON.stringify(game_data)
 	save_file.store_line(json_string)
 	save_game_completed.emit()
 
-func load_save_data():
+func load_save_data() -> void:
 	if not FileAccess.file_exists(PATH):
 		_create_new_save_data()
 	
-	var save_file = FileAccess.open(PATH, FileAccess.READ)
+	var save_file :FileAccess = FileAccess.open(PATH, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
+		var json_string :String = save_file.get_line()
 		
-		var json = JSON.new()
+		var json :JSON = JSON.new()
 		
-		var parse_result = json.parse(json_string)
+		var parse_result :Error = json.parse(json_string)
 		if not parse_result == OK:
 			print(PREFIX, "Json parsing error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
@@ -132,16 +132,16 @@ func load_save_data():
 		
 	return
 
-func _create_new_save_data():
+func _create_new_save_data() -> void:
 	print(PREFIX + "No save data found. Creating default save data, using default values.")
 	save_game_data()
 	return
 
-func set_value(key: String, value) -> void:
+func set_value(key: String, value: Variant) -> void:
 	game_data[key] = value
 
-func get_value(key: String):
-	var val = game_data[key]
+func get_value(key: String) -> Variant:
+	var val :Variant = game_data[key]
 	if val == null:
 		print(PREFIX, "Value missing for key: ", key)
 		return null
@@ -149,7 +149,7 @@ func get_value(key: String):
 	return val
 
 #region Config stuff
-func create_config():
+func create_config() -> void:
 	config.set_value("keybinding", "move_left", "A")
 	config.set_value("keybinding", "move_right", "D")
 	config.set_value("keybinding", "jump", "W")
@@ -170,36 +170,36 @@ func create_config():
 	
 	config.save(SETTINGS_FILE_PATH)
 
-func load_config():
+func load_config() -> void:
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
 		create_config()
 	else:
-		var err = config.load(SETTINGS_FILE_PATH)
+		var err :Error = config.load(SETTINGS_FILE_PATH)
 	
 		if err != OK:
 			create_config()
 
-func save_video_setting(key: String, value):
+func save_video_setting(key: String, value: Variant) -> void:
 	config.set_value("video", key, value)
 	config.save(SETTINGS_FILE_PATH)
 
-func get_video_settings():
-	var video_settings = {}	
+func get_video_settings() -> Dictionary:
+	var video_settings :Dictionary = {}	
 	for key in config.get_section_keys("video"):
 		video_settings[key] = config.get_value("video", key)
 	return video_settings
 
-func save_audio_setting(key: String, value):
+func save_audio_setting(key: String, value: Variant) -> void:
 	config.set_value("audio", key, value)
 	config.save(SETTINGS_FILE_PATH)
 
-func get_audio_settings():
-	var audio_settings = {}	
-	for key in config.get_section_keys("audio"):
+func get_audio_settings() -> Dictionary:
+	var audio_settings :Dictionary = {}	
+	for key: String in config.get_section_keys("audio"):
 		audio_settings[key] = config.get_value("audio", key)
 	return audio_settings
 
-func save_keybinding(key: String, event: InputEvent):
+func save_keybinding(key: String, event: InputEvent) -> void:
 	var event_str: String
 	if event is InputEventKey:
 		event_str = OS.get_keycode_string(event.physical_keycode)
@@ -209,11 +209,11 @@ func save_keybinding(key: String, event: InputEvent):
 	config.set_value("keybinding", key, event_str)
 	config.save(SETTINGS_FILE_PATH)
 
-func get_keybindings():
-	var keybindings = {}
-	for key in config.get_section_keys("keybinding"):
+func get_keybindings() -> Dictionary:
+	var keybindings :Dictionary = {}
+	for key: String in config.get_section_keys("keybinding"):
 		var input_event: InputEvent
-		var event_str = config.get_value("keybinding", key)
+		var event_str :Variant = config.get_value("keybinding", key)
 		
 		if event_str.contains("mouse_"):
 			input_event = InputEventMouseButton.new()

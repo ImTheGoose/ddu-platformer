@@ -26,14 +26,14 @@ const bbcode_string = "[img]res://assets/icons/time (16x16).png[/img] Time playe
 
 @onready var text_node :RichTextLabel = $PanelContainer/VBoxContainer/ScrollContainer/StatisticsList/Statistic_Field
 
-func _show(target):
+func _show(target: String) -> void:
 	super(target)
 	if target == menu_name:
 		_refresh_text()
 		
 		
 func _refresh_text() -> void:
-	var stats = DataManager.get_value("statistics")
+	var stats :Dictionary = DataManager.get_value("statistics")
 	text_node.text = bbcode_string.format({
 		"time_played" : TimeFormat.get_time_string(stats["time_played"]),
 		"time_alive" : TimeFormat.get_time_string(stats["time_alive"]),

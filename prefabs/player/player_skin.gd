@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-@onready var skin_sprites = {
+@onready var skin_sprites :Dictionary[String, SpriteFrames]= {
 	"Osvald": preload("uid://b4t3asxpw884d"),
 	"Tiki": preload("uid://copebinntgo64"),
 	"Castro": preload("uid://blcdmj7rjkeo3"),
@@ -9,5 +9,5 @@ extends AnimatedSprite2D
 
 
 func _ready() -> void:
-	var skin_name = DataManager.get_value("selected_skin")
+	var skin_name :String = DataManager.get_value("selected_skin")
 	sprite_frames = skin_sprites[skin_name]

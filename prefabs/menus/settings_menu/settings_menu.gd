@@ -1,16 +1,16 @@
 extends GameMenu
 
 
-@onready var master_vol_slider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer/master_volume
-@onready var music_vol_slider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume
-@onready var fullscreen_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fullscreen_toggle
-@onready var particle_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/particles_toggle
-@onready var vsync_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/vsync_toggle
-@onready var fps_toggle = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fps_toggle
+@onready var master_vol_slider :HSlider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer/master_volume
+@onready var music_vol_slider :HSlider = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume
+@onready var fullscreen_toggle :CheckBox = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fullscreen_toggle
+@onready var particle_toggle :CheckBox = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/particles_toggle
+@onready var vsync_toggle :CheckBox = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/vsync_toggle
+@onready var fps_toggle :CheckBox = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/fps_toggle
 @onready var max_fps_slider :HSlider= $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3/fps_limit
-@onready var fps_value_label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3/fps_limit_value
-@onready var musicvol_value_label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume_value
-@onready var mastervol_value_label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer/master_volume_value
+@onready var fps_value_label :Label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3/fps_limit_value
+@onready var musicvol_value_label :Label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2/music_volume_value
+@onready var mastervol_value_label :Label = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer/master_volume_value
 
 
 
@@ -18,13 +18,13 @@ func _ready() -> void:
 	super()
 	_load_config_variables()
 
-func _show(target):
+func _show(target: String) -> void:
 	super(target)
 	if target == menu_name:
 		_load_config_variables()
 
-func _load_config_variables():
-	var video_settings = DataManager.get_video_settings()
+func _load_config_variables() -> void:
+	var video_settings :Dictionary = DataManager.get_video_settings()
 	if video_settings.vsync == true:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
@@ -38,7 +38,7 @@ func _load_config_variables():
 	fullscreen_toggle.button_pressed = video_settings.fullscreen
 	particle_toggle.button_pressed = video_settings.particles_enabled
 	
-	var audio_settings = DataManager.get_audio_settings()
+	var audio_settings :Dictionary = DataManager.get_audio_settings()
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), audio_settings.master_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), audio_settings.music_volume)
 	master_vol_slider.value = audio_settings.master_volume

@@ -2,16 +2,16 @@ extends PlayerDetectingEnemy
 
 @export var projectile :PackedScene
 @onready var projectile_spawn :Node2D = $ProjectileSpawn
-@onready var audio_on_fire = preload("res://assets/audio/sfx/tree_sound.mp3")
+@onready var audio_on_fire :AudioStreamMP3 = preload("uid://u1tef53jrusq")
 
-func _attack():
+func _attack() -> void:
 	super()
 	AudioManager.play_global_sound(audio_on_fire, -3)
 	
 	var p: Projectile = projectile.instantiate()
 	p.direction = _get_direction()
 	add_sibling(p)
-	var pos = projectile_spawn.position
+	var pos :Vector2 = projectile_spawn.position
 	
 	projectile_spawn.position.x = pos.x * -_get_direction().x
 	

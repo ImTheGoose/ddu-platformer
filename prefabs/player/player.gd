@@ -7,19 +7,19 @@ extends CharacterBody2D
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
 
-@onready var audio_files = {
-	"running" : preload("res://assets/audio/sfx/fast_footsteps.mp3"),
-	"jump" : preload("res://assets/audio/sfx/jump.mp3"),
-	"die" : preload("res://assets/audio/sfx/death.mp3"),
+@onready var audio_files :Dictionary[String, AudioStreamMP3]= {
+	"running" : preload("uid://cap73awyf8ake"),
+	"jump" : preload("uid://we1luimcp6fb"),
+	"die" : preload("uid://dafct6iqadbur"),
 }
 
-@onready var dust_particles = $dust_particles
-@onready var jump_particles = $jump_particles
-@onready var death_particles = $die_particles
-@onready var audio_stream = $AudioStreamPlayer
+@onready var dust_particles :GPUParticles2D = $dust_particles
+@onready var jump_particles :GPUParticles2D = $jump_particles
+@onready var death_particles :GPUParticles2D = $die_particles
+@onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 
 
-var dead = false #TEMPOARY
+var dead :bool = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
 
@@ -27,7 +27,7 @@ var air_time :float = 0
 func _physics_process(delta: float) -> void:
 
 	if dead:
-		var col = $CollisionShape2D
+		var col :CollisionShape2D = $CollisionShape2D
 		col.disabled = true
 		_limit_horizontal_velocity(max_speed * 4)
 		_reduce_horizontal_velocity(delta, speed_per_second / 20)
@@ -35,9 +35,9 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
-	var m = Input.get_axis("move_left", "move_right")
+	var move_axis :float = Input.get_axis("move_left", "move_right")
 	_limit_horizontal_velocity(max_speed)
-	if m == 0:
+	if move_axis == 0:
 		_reduce_horizontal_velocity(delta, speed_per_second)
 	
 	if Input.is_action_just_pressed("jump"):
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		air_time += delta
 
-	velocity.x += m * speed_per_second * delta
+	velocity.x += move_axis * speed_per_second * delta
 
 	if is_on_wall_only() && velocity.y > 0:
 		anim.play("Wall_Jump")
@@ -59,9 +59,9 @@ func _physics_process(delta: float) -> void:
 	
 
 	move_and_slide()
-	_update_anim(m)
+	_update_anim(move_axis)
 
-func _attempt_jump():
+func _attempt_jump() -> void:
 	if is_on_wall_only():
 		velocity.y = -jump_strength * 0.85
 		if anim.flip_h:
@@ -98,11 +98,11 @@ func _attempt_jump():
 		audio_stream.play()
 		StatisticManager.add_value("double_jump", 1)
 
-func _apply_gravity(delta: float, gravity_scale: float = 1):
+func _apply_gravity(delta: float, gravity_scale: float = 1) -> void:
 	velocity += get_gravity() * delta * gravity_scale
 	
 
-func _limit_horizontal_velocity(max_vel: int):
+func _limit_horizontal_velocity(max_vel: int) -> void:
 	if velocity.x > 20:
 		if velocity.x > max_vel:
 			velocity.x = max_vel
@@ -112,14 +112,14 @@ func _limit_horizontal_velocity(max_vel: int):
 	else:
 		velocity.x = 0
 
-func _reduce_horizontal_velocity(delta: float, amount_per_second: int):
+func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void:
 	if velocity.x < -20:
 		velocity.x += amount_per_second * delta
 	elif velocity.x > 20:
 		velocity.x -= amount_per_second * delta
 
 
-func _die(): #TEMPOARY
+func _die() -> void: #TEMPOARY
 	print("player dying")
 	dead = true
 	GameManager.player_died()
@@ -130,21 +130,21 @@ func _die(): #TEMPOARY
 	audio_stream.pitch_scale = randf_range(0.9, 1.1)
 	audio_stream.play()
 
-func hit(vec: Vector2):
+func hit(vec: Vector2) -> void:
 	velocity = vec * max_speed * 1.5
 	_die()
 
-func _update_anim(m):
+func _update_anim(move_axis: float) -> void:
 	if dead:
 		return
 		
-	if m > 0:
+	if move_axis > 0:
 		anim.flip_h = false
-	if m < 0:
+	if move_axis < 0:
 		anim.flip_h = true
 
 	if is_on_floor():
-		if m == 0:
+		if move_axis == 0:
 			anim.play("Idle")
 			dust_particles.emitting = false
 			audio_stream.stop()

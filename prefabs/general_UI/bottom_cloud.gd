@@ -6,21 +6,21 @@ func _ready() -> void:
 	GameManager.on_reset_game.connect(_stop_emitting)
 
 func _process(delta: float) -> void:
-	var video_settings = DataManager.get_video_settings()
+	var video_settings :Dictionary = DataManager.get_video_settings()
 	visible = video_settings.particles_enabled
 	if video_settings.particles_enabled == false:
 		emitting = false
 
-func _toggle_visible(isVisible):
+func _toggle_visible(isVisible: bool) -> void:
 	if isVisible:
 		_start_emitting()
 	else:
 		_stop_emitting()
 
 
-func _stop_emitting():
+func _stop_emitting() -> void:
 	restart()
 	emitting = false
 
-func _start_emitting():
+func _start_emitting() -> void:
 	emitting = true

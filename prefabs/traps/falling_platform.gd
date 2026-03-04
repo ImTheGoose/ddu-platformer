@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	if fall_time > seconds_before_fall:
 		_initiate_platform_fall()
 
-func _initiate_platform_reappear():
+func _initiate_platform_reappear() -> void:
 	anim.play("On")
 	anim.frame = 0
 	gravity_scale = 0
@@ -29,7 +29,7 @@ func _initiate_platform_reappear():
 	touched = false
 	linear_velocity.y = 0
 	
-func _initiate_platform_fall():
+func _initiate_platform_fall() -> void:
 	anim.pause()
 	col.disabled = true
 	gravity_scale = 1

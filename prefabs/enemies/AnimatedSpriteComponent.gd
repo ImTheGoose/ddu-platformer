@@ -13,14 +13,14 @@ func _process(delta: float) -> void:
 	global_position += start_vel * delta
 	rotation = lerp_angle(rotation, target_rot, delta)
 
-func death():
+func death() -> void:
 	target_rot = randf_range(-35, 35)
 	start_vel = Vector2(randf_range(-150, 150), randf_range(-100, -600))
 
 var queued_anim :String = ""
 
 
-func queue_animation(_name: String):
+func queue_animation(_name: String) -> void:
 	queued_anim = _name	
 
 func _on_animation_looped() -> void:
