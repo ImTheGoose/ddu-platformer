@@ -94,6 +94,9 @@ func _update_view_zone():
 	
 	for child: Node2D in get_children():
 		if child.global_position.y > cam_rect_global_end.y + safe_zone:
+			if child is CharacterBody2D:
+				return
+			
 			child.queue_free()
 
 

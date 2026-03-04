@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciguwwv8we0y0"]
+[gd_scene format=3 uid="uid://ciguwwv8we0y0"]
 
-[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_06cxy"]
 [ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="2_x8b13"]
 
 [sub_resource type="Gradient" id="Gradient_yhksc"]
@@ -29,19 +28,18 @@ angle_max = 174.70001
 velocity_pivot = Vector3(1, 1, 0)
 direction = Vector3(0, -1, 0)
 spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 24.689999
-gravity = Vector3(0, 45, 0)
-scale_min = 0.19999999
-scale_max = 1.5
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 90, 0)
+scale_min = 1.5999999
+scale_max = 12.0
 scale_curve = SubResource("CurveTexture_yhksc")
 color = Color(0.81960785, 0, 0.05490196, 1)
 color_ramp = SubResource("GradientTexture1D_634ti")
 
-[node name="die_particles" type="GPUParticles2D"]
+[node name="die_particles" type="GPUParticles2D" unique_id=1681671350]
 emitting = false
 amount = 60
-texture = ExtResource("1_06cxy")
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_634ti")
