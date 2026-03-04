@@ -26,7 +26,6 @@ func _load_keybindings_from_settings():
 	for action in keybindings.keys():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, keybindings[action])
-	InputMap.load_from_project_settings()
 	return
 
 

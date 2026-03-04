@@ -82,7 +82,7 @@ func start_game():
 
 func player_died():
 	players_dead += 1
-	if players_dead < 4:
+	if players_dead < 1:
 		return
 	
 	MenuManager.show_menu.emit("death_menu")

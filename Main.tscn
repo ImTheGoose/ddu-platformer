@@ -334,16 +334,16 @@ script = ExtResource("47_rchyr")
 particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd")])
 
 [node name="game_container" type="Node2D" parent="." unique_id=235652747]
+scale = Vector2(3, 3)
 script = ExtResource("2_5mvff")
 
 [node name="Playerspawn" type="Node2D" parent="game_container" unique_id=1262602405 node_paths=PackedStringArray("parent")]
-position = Vector2(1029, 865)
+position = Vector2(222, 196)
 script = ExtResource("17_3b0ty")
 parent = NodePath("../map_generator")
 prefab = ExtResource("16_devvj")
 
 [node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912]
-position = Vector2(0, 64)
 script = ExtResource("3_cm0pq")
 start_map = SubResource("Resource_2gh4u")
 map_arr = Array[ExtResource("4_wkp8b")]([SubResource("Resource_sph85"), SubResource("Resource_o7g6l"), SubResource("Resource_vi5kq"), SubResource("Resource_5mkgo"), SubResource("Resource_3ccbu"), SubResource("Resource_ny7u2"), SubResource("Resource_x3yn0"), SubResource("Resource_1w2xm"), SubResource("Resource_v8qla"), SubResource("Resource_y1tbi"), SubResource("Resource_c2s76"), SubResource("Resource_f4ese"), SubResource("Resource_rchyr"), SubResource("Resource_pljue"), SubResource("Resource_nx4yo"), SubResource("Resource_5tfui"), SubResource("Resource_38apo"), SubResource("Resource_khphd"), SubResource("Resource_g4yo4"), SubResource("Resource_im7ls"), SubResource("Resource_a34eg"), SubResource("Resource_via5u")])

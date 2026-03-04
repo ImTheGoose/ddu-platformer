@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 				var distance = abs(target_y - global_position.y)
 
 				var m_speed = distance * distance * 0.0045
-
+				
 				global_position.y = move_toward(global_position.y, target_y, m_speed * delta)
 
 	
