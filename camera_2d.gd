@@ -3,17 +3,24 @@ extends Camera2D
 @export var speed := 90
 @export var safe_distance = 400
 @onready var origin_position = position
-var players :Array[CharacterBody2D]
 
 const nudge_camera :bool = true
 
 func _ready() -> void:
 	GameManager.on_reset_game.connect(_reset_position)
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
+
+func _on_viewport_size_changed() -> void:
+	var rect = get_viewport_rect()
+	var boundary_size = rect.size - Vector2(1920, 1080)
+	var pos_offset = boundary_size / 2
+	offset.x = -pos_offset.x
 
 func _reset_position():
 	position = origin_position
 
 func _process(delta: float) -> void:
+	var players := get_tree().get_nodes_in_group("Players")
 	if players.size() > 0 && nudge_camera:
 		for p in players:
 			if !p:
@@ -31,9 +38,3 @@ func _process(delta: float) -> void:
 	if GameManager.is_game_running() && !GameManager.is_game_paused():
 		var speed_scale = GameManager.get_difficulty_value("camera_speed")
 		position.y -= speed_scale * speed * delta
-
-func _on_player_follow_area_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		if !players.has(body):
-			players.append(body)
-	pass # Replace with function body.

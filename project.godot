@@ -52,6 +52,10 @@ folder_colors={
 "res://utility/": "blue"
 }
 
+[global_group]
+
+Players=""
+
 [gui]
 
 theme/custom="uid://b826k6lvqtor5"

@@ -14,7 +14,7 @@ points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7,
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(17.670685, 6.0240984)
 
-[node name="Player" type="CharacterBody2D" unique_id=2067965372]
+[node name="Player" type="CharacterBody2D" unique_id=2067965372 groups=["Players"]]
 visibility_layer = 3
 z_index = 9
 collision_layer = 15
