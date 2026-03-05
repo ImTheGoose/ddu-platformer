@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7emrreriad81"]
 
-[ext_resource type="Script" uid="uid://bhrfoyqvura7p" path="res://prefabs/menus/reset_game_popup.gd" id="1_8uedp"]
+[ext_resource type="Script" uid="uid://bhrfoyqvura7p" path="res://prefabs/menus/popups/reset_game_popup.gd" id="1_8uedp"]
 [ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="2_o40v3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5tuhn"]
@@ -8,7 +8,7 @@ font = ExtResource("2_o40v3")
 font_size = 50
 outline_color = Color(0, 0, 0, 0.8117647)
 
-[node name="reset_game_popup" type="VBoxContainer" unique_id=337198406]
+[node name="reset_game_popup" type="VBoxContainer" unique_id=337198406 node_paths=PackedStringArray("initial_focus")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -23,6 +23,7 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_8uedp")
 menu_name = "reset_game_menu"
+initial_focus = NodePath("cancel")
 
 [node name="title" type="Label" parent="." unique_id=138045775]
 layout_mode = 2

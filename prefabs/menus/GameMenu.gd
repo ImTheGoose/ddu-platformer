@@ -4,10 +4,14 @@ class_name GameMenu
 
 @export var menu_name :String
 @export var require_seperator :bool = false
+@export var initial_focus :Control
 
 func _ready() -> void:
 	MenuHandler.changed_menu_visibillity.connect(_on_visibillity_changed)
 	MenuHandler.register_menu_name(menu_name)
+	
+	if !initial_focus:
+		print("Missing initial focus on " + menu_name)
 
 func _on_visibillity_changed(target : String, isVisible : bool) -> void:
 	if target == menu_name:
@@ -15,6 +19,9 @@ func _on_visibillity_changed(target : String, isVisible : bool) -> void:
 		
 		if isVisible:
 			_on_show()
+			if initial_focus:
+				initial_focus.grab_focus()
+			
 			if require_seperator:
 				MenuHandler.show_background_seperator()
 		else:

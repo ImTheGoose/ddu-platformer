@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdu4lip2jydf5" path="res://prefabs/menus/start_game_menu/start_game_menu.gd" id="1_myjiq"]
 
-[node name="start_game_menu" type="VBoxContainer" unique_id=1988316049]
+[node name="start_game_menu" type="VBoxContainer" unique_id=1988316049 node_paths=PackedStringArray("initial_focus")]
 custom_minimum_size = Vector2(150, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,6 +18,7 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_myjiq")
 menu_name = "start_game_menu"
+initial_focus = NodePath("start_game")
 
 [node name="Label" type="Label" parent="." unique_id=1519841733]
 layout_mode = 2

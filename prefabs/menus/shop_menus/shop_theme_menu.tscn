@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://tssy5paosbwh" path="res://prefabs/menus/shop_menus/shop_theme_menu.gd" id="1_igay0"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="3_3bc5h"]
 
-[node name="shop_theme_menu" type="MarginContainer" unique_id=1320604940 node_paths=PackedStringArray("display_tilemap", "price_tag", "buy_button", "name_tag", "intial_focus_button")]
+[node name="shop_theme_menu" type="MarginContainer" unique_id=1320604940 node_paths=PackedStringArray("display_tilemap", "price_tag", "buy_button", "name_tag", "initial_focus")]
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -23,7 +23,7 @@ price_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer
 buy_button = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button")
 name_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/skin_name_tag")
 menu_name = "shop_theme_menu"
-intial_focus_button = NodePath("VBoxContainer/back")
+initial_focus = NodePath("VBoxContainer/back")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=909520858]
 layout_mode = 2

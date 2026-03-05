@@ -4,7 +4,7 @@ extends StaticBody2D
 @onready var audio_clicked :AudioStreamMP3 = preload("uid://m6484ap3pala")
 
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
-@onready var hit_area :HitArea = $Area2D
+@onready var hit_area :HitArea = $HitArea
 @export var seconds_before_fire :float = 1
 @export var seconds_burning_for :float = 2
 var time_since_hit :float = 0

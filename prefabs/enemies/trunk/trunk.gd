@@ -1,11 +1,12 @@
 extends PlayerDetectingEnemy
 
 @export var projectile :PackedScene
-@onready var projectile_spawn :Node2D = $ProjectileSpawn
+@onready var projectile_spawn :Node2D = %ProjectileSpawn
 @onready var audio_on_fire :AudioStreamMP3 = preload("uid://u1tef53jrusq")
 
 func _attack() -> void:
 	super()
+	
 	AudioManager.play_global_sound(audio_on_fire, -3)
 	
 	var p: Projectile = projectile.instantiate()

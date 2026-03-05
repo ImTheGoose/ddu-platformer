@@ -21,9 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://ddy24w71nrv3k" path="res://prefabs/menus/shop_menus/shop_theme_menu.tscn" id="17_lviju"]
 [ext_resource type="PackedScene" uid="uid://c84ru0s4q2ncy" path="res://prefabs/menus/shop_menus/shop_selection_menu.tscn" id="18_anor8"]
 [ext_resource type="PackedScene" uid="uid://din2cplqt3gvv" path="res://prefabs/menus/ingame_menus/death_menu.tscn" id="21_hx0qg"]
-[ext_resource type="PackedScene" uid="uid://bqicsp8cjtktf" path="res://main/changelog_popup.tscn" id="21_l4l7y"]
+[ext_resource type="PackedScene" uid="uid://bqicsp8cjtktf" path="res://prefabs/menus/popups/changelog_popup.tscn" id="21_l4l7y"]
 [ext_resource type="PackedScene" uid="uid://dyhe508sj45sf" path="res://prefabs/menus/ingame_menus/pause_menu.tscn" id="22_anor8"]
-[ext_resource type="PackedScene" uid="uid://b7emrreriad81" path="res://main/reset_game_popup.tscn" id="22_mcvie"]
+[ext_resource type="PackedScene" uid="uid://b7emrreriad81" path="res://prefabs/menus/popups/reset_game_popup.tscn" id="22_mcvie"]
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="23_ggyxd"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="24_iix3i"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
@@ -184,11 +184,12 @@ script = ExtResource("4_vjk6h")
 metadata/_edit_use_anchors_ = true
 
 [node name="background_seperator" type="ColorRect" parent="." unique_id=31424905]
-visible = false
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.39215687)

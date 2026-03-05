@@ -407,4 +407,7 @@ shape = SubResource("RectangleShape2D_b3vsw")
 debug_color = Color(0.90848535, 0.29889786, 0.067487344, 0.41960785)
 
 [node name="ProjectileSpawn" type="Node2D" parent="." unique_id=560250659]
+unique_name_in_owner = true
 position = Vector2(-12, -5)
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

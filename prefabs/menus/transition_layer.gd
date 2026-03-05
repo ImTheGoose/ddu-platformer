@@ -7,6 +7,7 @@ func _ready() -> void:
 	MenuHandler.changed_blackout_visibillity.connect(_on_visibillity_changed)
 	anim.animation_finished.connect(_on_animation_finished)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	_on_viewport_size_changed()
 
 func _on_viewport_size_changed() -> void:
 	var rect :Rect2 = get_viewport_rect()
