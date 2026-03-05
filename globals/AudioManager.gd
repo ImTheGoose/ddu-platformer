@@ -12,12 +12,11 @@ func _enter_tree() -> void:
 	# Create a polyphonic stream so we can play sounds directly from it
 	var stream :AudioStreamPolyphonic = AudioStreamPolyphonic.new()
 	stream.polyphony = 64
-	player.max_polyphony = 64
 	player.stream = stream
 	player.play()
 	# Get the polyphonic playback stream to play sounds
 	playback = player.get_stream_playback()
-
+	
 	get_tree().node_added.connect(_on_node_added)
 
 

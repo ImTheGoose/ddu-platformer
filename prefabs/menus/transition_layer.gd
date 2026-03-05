@@ -37,9 +37,18 @@ func _on_visibillity_changed(isVisible: bool) -> void:
 	else:
 		hide_animation()
 
+func is_transition_skipped() -> bool:
+	var video_settings :Dictionary = DataManager.get_video_settings()
+	return video_settings.skip_transitions
 
 func show_animation() -> void:
+	if is_transition_skipped():
+		_on_animation_finished("show_blackout")
+		return
 	anim.play("show_blackout")
 
 func hide_animation() -> void:
+	if is_transition_skipped():
+		_on_animation_finished("hide_blackout")
+		return
 	anim.play("hide_blackout")

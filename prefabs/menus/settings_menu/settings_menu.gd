@@ -8,6 +8,7 @@ extends GameMenu
 @onready var fullscreen_toggle :CheckBox = %fullscreen_toggle
 @onready var particle_toggle :CheckBox = %particles_toggle
 @onready var vsync_toggle :CheckBox = %vsync_toggle
+@onready var skip_transitions_toggle :CheckBox = %skip_transitions_toggle
 
 
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 	fullscreen_toggle.toggled.connect(_on_fullscreen_toggle_toggled)
 	particle_toggle.toggled.connect(_on_particles_toggle_toggled)
 	vsync_toggle.toggled.connect(_on_vsync_toggle_toggled)
+	skip_transitions_toggle.toggled.connect(_on_skip_transition_toggle_toggled)
 	
 
 func _on_show() -> void:
@@ -33,6 +35,7 @@ func _load_config_variables() -> void:
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	
+	skip_transitions_toggle.button_pressed = video_settings.skip_transitions
 	fps_toggle.button_pressed = video_settings.show_fps
 	_on_fps_limit_value_changed(video_settings.max_fps)
 	max_fps_slider.value = video_settings.max_fps
@@ -65,6 +68,9 @@ func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
 func _on_particles_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("particles_enabled", toggled_on)
 	
+func _on_skip_transition_toggle_toggled(toggled_on: bool) -> void:
+	DataManager.save_video_setting("skip_transitions", toggled_on)
+
 
 func _on_vsync_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("vsync", toggled_on)

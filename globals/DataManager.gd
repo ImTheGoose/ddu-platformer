@@ -155,6 +155,7 @@ func create_config() -> void:
 	config.set_value("video", "color_theme", "Brown")
 	config.set_value("video", "color_theme_id", 0)
 	config.set_value("video", "particles_enabled", true)
+	config.set_value("video", "skip_transitions", false)
 	
 	config.save(SETTINGS_FILE_PATH)
 
