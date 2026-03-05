@@ -1,7 +1,7 @@
 extends GameMenu
 
 @onready var input_button_prefab :PackedScene = preload("uid://dkcts8eojesfj")
-@onready var action_list :VBoxContainer = $PanelContainer/VBoxContainer/ScrollContainer/SettingsList/action_list
+@onready var action_list :VBoxContainer = %action_list
 
 var is_remapping :bool = false
 var action_to_remap :String
@@ -87,6 +87,5 @@ func _on_reset_to_default_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	MenuManager.hide_all_menus.emit()
-	MenuManager.show_menu.emit("settings_menu")
+	MenuHandler.change_menu("settings_menu")
 	pass # Replace with function body.

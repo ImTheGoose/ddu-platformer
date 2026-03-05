@@ -3,31 +3,31 @@ extends ShopMenu
 @onready var accent_items :Array[Dictionary] = [{
 		"name": "Brown",
 		"price": 0,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Brown.png")
+		"texture": preload("uid://djvdn4edth2po")
 	},{
 		"name": "Red",
 		"price": 250,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Red.png")
+		"texture": preload("uid://cyo6dhvlxakth")
 	},{
 		"name": "Gray",
 		"price": 250,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Gray.png")
+		"texture": preload("uid://ob77turt7mcj")
 	},{
 		"name": "Pink",
 		"price": 250,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Pink.png")
+		"texture": preload("uid://bxwx3outaa45n")
 	},{
 		"name": "Blue",
 		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Blue.png")
+		"texture": preload("uid://hp36vp4rgh30")
 	},{
 		"name": "Green",
 		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Green.png")
+		"texture": preload("uid://cfyrwu5jj40ea")
 	},{
 		"name": "Black",
 		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Background/Black.png")
+		"texture": preload("uid://cjnmrel60l871")
 	},
 ]
 

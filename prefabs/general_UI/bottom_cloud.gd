@@ -1,7 +1,7 @@
 extends GPUParticles2D
 
 func _ready() -> void:
-	MenuManager.toggle_game_visibillity.connect(_toggle_visible)
+	MenuHandler.changed_game_visibillity.connect(_on_game_visibillity_changed)
 	GameManager.on_start_game.connect(_start_emitting)
 	GameManager.on_reset_game.connect(_stop_emitting)
 
@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	if video_settings.particles_enabled == false:
 		emitting = false
 
-func _toggle_visible(isVisible: bool) -> void:
+func _on_game_visibillity_changed(isVisible: bool) -> void:
 	if isVisible:
 		_start_emitting()
 	else:

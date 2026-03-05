@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="3_d258s"]
 [ext_resource type="PackedScene" uid="uid://cfxlmi8qaxa7k" path="res://prefabs/particles/time_highscore_particles.tscn" id="4_tfdma"]
 
-[node name="death_menu" type="VBoxContainer" unique_id=1525325848 node_paths=PackedStringArray("intial_focus_button")]
+[node name="death_menu" type="VBoxContainer" unique_id=1525325848 node_paths=PackedStringArray("time_highscore_particles", "apple_highscore_particles")]
 custom_minimum_size = Vector2(250, 180)
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,27 +19,30 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("1_aavvi")
+time_highscore_particles = [NodePath("time_highscore_particles"), NodePath("time_highscore_particles2")]
+apple_highscore_particles = [NodePath("apple_highscore_particles"), NodePath("apple_highscore_particles2")]
 menu_name = "death_menu"
-intial_focus_button = NodePath("play_again")
+require_seperator = true
 
-[node name="Label" type="Label" parent="." unique_id=190051959]
+[node name="title" type="Label" parent="." unique_id=190051959]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "You Died"
 horizontal_alignment = 1
 
-[node name="stat_text" type="RichTextLabel" parent="." unique_id=381627957]
+[node name="stat_label" type="RichTextLabel" parent="." unique_id=381627957]
+unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="play_again" type="Button" parent="." unique_id=489721930]
+[node name="play_again_button" type="Button" parent="." unique_id=489721930]
 layout_mode = 2
 text = "Play again"
 
-[node name="back_to_menu" type="Button" parent="." unique_id=1744017188]
+[node name="back_button" type="Button" parent="." unique_id=1744017188]
 layout_mode = 2
 text = "Main Menu"
 
@@ -61,5 +64,5 @@ scale = Vector2(0.99999994, 0.99999994)
 position = Vector2(355.5, 221.5)
 rotation = -0.36651915
 
-[connection signal="pressed" from="play_again" to="." method="_on_play_again_pressed"]
-[connection signal="pressed" from="back_to_menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="play_again_button" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_to_menu_pressed"]

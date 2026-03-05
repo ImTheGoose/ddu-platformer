@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bqicsp8cjtktf"]
+
+[ext_resource type="Script" uid="uid://bcneuwxqfn4y" path="res://prefabs/menus/changelog_popup.gd" id="1_dqj8n"]
+
+[node name="changelog_popup" type="VBoxContainer" unique_id=272473621]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -112.0
+offset_right = 98.5
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_dqj8n")
+title = "Update 0.9!"
+added_bbcode = "[color=green]+ "
+added_list = Array[String](["Added Themes", "Added Accents", "Added menu for statistics", "Added abillity to kill enemies", "Added changelog popup", "Added 5 new maps", "Added 6 transition maps", "Added enemy spawn randomisation", "Added VSync setting", "Added kill sounds to enemies", "Added fps settings", "Added slider visual values"])
+changed_bbcode = "[color=orange]~ "
+changed_list = Array[String](["Fixed game saving", "Refined 16 maps", "Refined hitbox sizes", "Balanced shop prices", "Fixed Lag spikes from particles", "Fixed falling platform false activations", "Changed some sound effects", "Fixed various other bugs"])
+removed_bbcode = "[color=red]- "
+removed_list = Array[String](["Removed resolution dropdown", "Removed background color dropdown"])
+menu_name = "changelog"
+
+[node name="Label" type="Label" parent="." unique_id=1308204999]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Changelog"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=625110978]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=588126592]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=1695569115]
+custom_minimum_size = Vector2(190.22, 138.775)
+layout_mode = 2
+size_flags_vertical = 0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ContentList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=849843577]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Changelog_Titel" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/ContentList" unique_id=469217031]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Update 0.8!"
+horizontal_alignment = 1
+
+[node name="Changelog_Description" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/ContentList" unique_id=1526422643]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 7
+bbcode_enabled = true
+text = "[color=green]+[/color] Added Themes
+[color=green]+[/color] Added Accent
+[color=green]+[/color] Added abillity to kill enemies
+[color=green]+[/color] Added 5 new maps
+[color=green]+[/color] Added 6 transition maps
+[color=green]+[/color] Added enemy spawn randomisation
+[color=yellow]~[/color] Refined all 16 maps
+[color=yellow]~[/color] Balanced shop prices
+[color=yellow]~[/color] Fixed Game saving
+[color=yellow]~[/color] Fixed lag spikes from particles
+"
+fit_content = true
+
+[node name="close" type="Button" parent="." unique_id=873924847]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

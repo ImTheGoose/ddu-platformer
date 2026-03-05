@@ -1,11 +1,10 @@
 extends GameMenu
 
-@onready var difficulty_dropdown :OptionButton = $difficulty_dropdown
-@onready var diffculty_stat_label :RichTextLabel = $difficulty_stats
+@onready var difficulty_dropdown :OptionButton = %difficulty_dropdown
+@onready var diffculty_stat_label :RichTextLabel = %difficulty_stats
 @export var collectable_bbcode :String = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]"
 @export var enemy_bbcode :String = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img]"
 @export var speed_bbcode :String = "[img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img]"
-
 
 
 func _ready() -> void:
@@ -25,15 +24,14 @@ func _refresh_stats() -> void:
 	diffculty_stat_label.text = tex
 
 func _on_start_game_pressed() -> void:
-	MenuManager.hide_all_menus.emit()
-	MenuManager.toggle_game_visibillity.emit(true)
+	MenuHandler.hide_all_menus()
+	MenuHandler.show_game()
 	GameManager.reset_game()
 	pass # Replace with function body.
 
 
 func _on_back_pressed() -> void:
-	MenuManager.hide_all_menus.emit()
-	MenuManager.show_menu.emit("main_menu")
+	MenuHandler.change_menu("main_menu")
 	pass # Replace with function body.
 
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
-	MenuManager.toggle_game_visibillity.connect(_on_game_visibillity_toggled)
+	MenuHandler.changed_game_visibillity.connect(_on_game_visibillity_changed)
 
-func _on_game_visibillity_toggled(isVisible: bool) -> void:
+func _on_game_visibillity_changed(isVisible: bool) -> void:
 	visible = isVisible

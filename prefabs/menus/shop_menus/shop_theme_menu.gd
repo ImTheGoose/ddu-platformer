@@ -3,34 +3,33 @@ extends ShopMenu
 @onready var theme_items :Array[Dictionary] = [{
 		"name": "Default",
 		"price": 0,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Default.png")
+		"texture": preload("uid://dn7a53xq84u84")
 	},{
 		"name": "Candy",
 		"price": 500,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Candy.png")
+		"texture": preload("uid://i34411mdywpl")
 	},{
 		"name": "Hell",
 		"price": 750,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Hell.png")
+		"texture": preload("uid://cyhcx4oa7q2v7")
 	},{
 		"name": "Castle",
 		"price": 750,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Castle.png")
+		"texture": preload("uid://dm3sasdp6uenx")
 	},{
 		"name": "Abyss",
 		"price": 1000,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Abyss.png")
+		"texture": preload("uid://vc56e8nljq03")
 	},{
 		"name": "Icey",
 		"price": 1000,
-		"texture": preload("res://assets/pixel_adventure_assets/Terrain/Terrain_Icey.png")
+		"texture": preload("uid://85kx44r5tjpi")
 	},
 ]
 
 @export var display_tilemap :TileMapLayer
 
-func _hide() -> void:
-	super()
+func _on_hide() -> void:
 	if shop_items.size() == 0:
 		return
 	var selected_item_name :String = DataManager.get_value("selected_" + shop_category)

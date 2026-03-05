@@ -24,13 +24,10 @@ const bbcode_string = "[img]res://assets/icons/time (16x16).png[/img] Time playe
 [img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms killed - {mushroom_killed}
 [img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks killed - {trunk_killed}"
 
-@onready var text_node :RichTextLabel = $PanelContainer/VBoxContainer/ScrollContainer/StatisticsList/Statistic_Field
+@onready var text_node :RichTextLabel = %stat_rich_label
 
-func _show(target: String) -> void:
-	super(target)
-	if target == menu_name:
-		_refresh_text()
-		
+func _on_show() -> void:
+	_refresh_text()
 		
 func _refresh_text() -> void:
 	var stats :Dictionary = DataManager.get_value("statistics")
@@ -56,12 +53,6 @@ func _refresh_text() -> void:
 		"mushroom_killed" : int(stats["kills"]["mushroom"]),
 		"trunk_killed" : int(stats["kills"]["trunk"]),
 	})
-	
-	
-	
-	return
 
 func _on_back_pressed() -> void:
-	MenuManager.hide_all_menus.emit()
-	MenuManager.show_menu.emit("main_menu")
-	pass # Replace with function body.
+	MenuHandler.change_menu("main_menu")

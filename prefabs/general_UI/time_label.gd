@@ -4,7 +4,7 @@ extends RichTextLabel
 var time :float = 0
 
 func _ready() -> void:
-	MenuManager.toggle_game_visibillity.connect(_toggle_visible)
+	MenuHandler.changed_game_visibillity.connect(_on_game_visibillity_changed)
 
 func _process(delta: float) -> void:	
 	if GameManager.game_paused:
@@ -18,5 +18,5 @@ func _process(delta: float) -> void:
 	
 	text = prefix + TimeFormat.get_time_string(time)
 
-func _toggle_visible(isVisible: bool ) -> void:
+func _on_game_visibillity_changed(isVisible: bool ) -> void:
 	visible = isVisible

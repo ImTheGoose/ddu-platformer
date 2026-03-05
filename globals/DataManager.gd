@@ -9,8 +9,8 @@ signal save_game_completed
 var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
-	"version" : float(ProjectSettings.get_setting("application/config/version")),
-	"money" : 0,
+	"save_version" : 0.1,
+	"money" : 1000000,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
 	"owned_skin": {
@@ -74,26 +74,14 @@ func _process(delta: float) -> void:
 	game_data["statistics"]["time_played"] += delta
 
 func update_game_data() -> void:
-	var v: float = float(game_data["version"])
-	print(PREFIX, "Updating save data, from: ", v, " to: ", ProjectSettings.get_setting("application/config/version"))
+	var v: float = float(game_data["save_version"])
+	print(PREFIX, "Updating save data, from: ", v, " to: ", default_game_data["save_version"])
 	game_data["changelog_seen"] = false
-	if v < 0.7:
-		print("Updating to 0.7")
-		game_data["owned_skin"] = default_game_data["owned_skins"]
-		game_data["selected_theme"] = "Default"
-		game_data["selected_accent"] = "Brown"
-		game_data["owned_theme"] = default_game_data["owned_theme"]
-		game_data["owned_accent"] = default_game_data["owned_accent"]
 	
-	if v < 0.8:
-		print("Updating to 0.8")
-		create_config()
+	#if v < 0.2:
+	# game_data["new_key"] = default_game_data["new_key"]
 	
-	if v < 0.9:
-		print("Updating to 0.9")
-		game_data["statistics"] = default_game_data["statistics"]
-		
-	game_data["version"] = ProjectSettings.get_setting("application/config/version")
+	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
 	
 func clear_game_data() -> void:
@@ -125,7 +113,7 @@ func load_save_data() -> void:
 			continue
 		
 		game_data = json.data
-		if float(json.data["version"]) < float(ProjectSettings.get_setting("application/config/version")):
+		if float(game_data["save_version"]) < float(default_game_data["save_version"]):
 			update_game_data()
 		
 		print(PREFIX, "Succesfully loaded save data: ", json.data)

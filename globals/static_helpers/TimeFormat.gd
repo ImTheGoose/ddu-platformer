@@ -1,5 +1,7 @@
 extends Node
 
+class_name TimeFormat
+
 static func get_time_string(t: float) -> String:
 	var seconds :float = get_seconds(t)
 	var minutes :float = get_minutes(t)

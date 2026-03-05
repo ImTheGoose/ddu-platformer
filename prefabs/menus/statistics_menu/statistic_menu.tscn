@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://07w71pvnll6q" path="res://prefabs/menus/statistics_menu/statistic_menu.gd" id="1_88qfe"]
 
-[node name="StatisticMenu" type="VBoxContainer" unique_id=1022312052 node_paths=PackedStringArray("intial_focus_button")]
+[node name="StatisticMenu" type="VBoxContainer" unique_id=1022312052]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -17,7 +17,6 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_88qfe")
 menu_name = "statistics_menu"
-intial_focus_button = NodePath("back")
 
 [node name="Label" type="Label" parent="." unique_id=778064404]
 layout_mode = 2
@@ -42,7 +41,8 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Statistic_Field" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/StatisticsList" unique_id=1770995271]
+[node name="stat_rich_label" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/StatisticsList" unique_id=1770995271]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 11
 bbcode_enabled = true

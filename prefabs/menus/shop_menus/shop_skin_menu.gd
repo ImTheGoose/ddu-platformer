@@ -3,19 +3,19 @@ extends ShopMenu
 @onready var skin_items :Array[Dictionary] = [{
 		"name": "Osvald",
 		"price": 0,
-		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Ninja Frog/Jump (32x32).png")
+		"sprite": preload("uid://boqjobpu65xsa")
 	},{
 		"name": "Castro",
 		"price": 1000,
-		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Pink Man/Jump (32x32).png")
+		"sprite": preload("uid://c6vxl4bmc78k2")
 	}, {
 		"name": "Tiki",
 		"price": 1500,
-		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png")
+		"sprite": preload("uid://hwtu0ruywc7s")
 	},  {
 		"name": "Edward",
 		"price": 2000,
-		"sprite": preload("res://assets/pixel_adventure_assets/Main Characters/Virtual Guy/Jump (32x32).png")
+		"sprite": preload("uid://dyjqt68qoppon")
 	}
 ]
 

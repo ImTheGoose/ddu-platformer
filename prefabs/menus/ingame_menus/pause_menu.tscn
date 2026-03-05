@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tqxqpfq0l5w4" path="res://prefabs/menus/ingame_menus/pause_menu.gd" id="1_m3mx5"]
 
-[node name="PauseMenu" type="VBoxContainer" unique_id=710775371 node_paths=PackedStringArray("intial_focus_button")]
+[node name="PauseMenu" type="VBoxContainer" unique_id=710775371]
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,9 +18,9 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_m3mx5")
 menu_name = "pause_menu"
-intial_focus_button = NodePath("continue_game")
+require_seperator = true
 
-[node name="Label" type="Label" parent="." unique_id=741049188]
+[node name="title" type="Label" parent="." unique_id=741049188]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Paused"

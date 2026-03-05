@@ -28,3 +28,4 @@ explosiveness = 1.0
 visibility_rect = Rect2(-100, -100, 195.73, 200)
 process_material = SubResource("ParticleProcessMaterial_x1363")
 script = ExtResource("2_8n5uq")
+process_updated = false

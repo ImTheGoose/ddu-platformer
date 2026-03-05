@@ -85,7 +85,7 @@ func player_died() -> void:
 	if players_dead < 1:
 		return
 	
-	MenuManager.show_menu.emit("death_menu")
+	MenuHandler.show_menu("death_menu")
 	on_player_death.emit()
 	game_state = state.dead
 

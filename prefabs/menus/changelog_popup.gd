@@ -14,29 +14,26 @@ extends GameMenu
 @export var removed_bbcode :String = ""
 @export var removed_list :Array[String] = [""]
 
-@onready var title_node :Label = $PanelContainer/VBoxContainer/ScrollContainer/ContentList/Changelog_Titel
-@onready var description_rich_node :RichTextLabel = $PanelContainer/VBoxContainer/ScrollContainer/ContentList/Changelog_Description
+@onready var title_node :Label = %Changelog_Titel
+@onready var description_rich_node :RichTextLabel = %Changelog_Description
 
 func _ready() -> void:
 	super()
 	title_node.text = title
 	
 	var desc := ""
-	for ai in added_list:
-		desc += added_bbcode + ai + "[br]"
+	for a in added_list:
+		desc += added_bbcode + a + "[br]"
 	
-	for ci in changed_list:
-		desc += changed_bbcode + ci + "[br]"
+	for c in changed_list:
+		desc += changed_bbcode + c + "[br]"
 	
-	for ri in removed_list:
-		desc += removed_bbcode + ri + "[br]"
+	for r in removed_list:
+		desc += removed_bbcode + r + "[br]"
 	
 	description_rich_node.text = desc
 
 
-
 func _on_close_pressed() -> void:
-	MenuManager.hide_all_menus.emit()
-	MenuManager.show_menu.emit("main_menu")
+	MenuHandler.change_menu("main_menu")
 	DataManager.set_value("changelog_seen", true)
-	pass # Replace with function body.

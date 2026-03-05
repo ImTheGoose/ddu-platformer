@@ -3,16 +3,28 @@ extends Control
 class_name GameMenu 
 
 @export var menu_name :String
-@export var intial_focus_button :Button
+@export var require_seperator :bool = false
 
 func _ready() -> void:
-	MenuManager.hide_all_menus.connect(_hide)
-	MenuManager.show_menu.connect(_show)
+	MenuHandler.changed_menu_visibillity.connect(_on_visibillity_changed)
+	MenuHandler.register_menu_name(menu_name)
 
-func _show(target: String) -> void:
+func _on_visibillity_changed(target : String, isVisible : bool) -> void:
 	if target == menu_name:
-		visible = true
-		intial_focus_button.grab_focus.call_deferred()
+		visible = isVisible
+		
+		if isVisible:
+			_on_show()
+			if require_seperator:
+				MenuHandler.show_background_seperator()
+		else:
+			_on_hide()
+			if require_seperator:
+					MenuHandler.hide_background_seperator()
+		
 
-func _hide() -> void:
-	visible = false
+func _on_show() -> void:
+	pass
+
+func _on_hide() -> void:
+	pass

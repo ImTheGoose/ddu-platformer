@@ -11,11 +11,8 @@
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
 [ext_resource type="Script" uid="uid://ckrs8y06bpf0i" path="res://prefabs/general_UI/fps_label.gd" id="8_psn7d"]
 [ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="10_25ya2"]
-[ext_resource type="Script" uid="uid://c4wl05c7cjmuj" path="res://prefabs/general_UI/version_label.gd" id="10_gmjel"]
 [ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="11_25ya2"]
-[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="11_r54rh"]
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="12_25ya2"]
-[ext_resource type="Script" uid="uid://bcneuwxqfn4y" path="res://prefabs/menus/changelog_popup.gd" id="12_nqwcy"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="13_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="14_25ya2"]
 [ext_resource type="PackedScene" uid="uid://xvfmjoenq114" path="res://prefabs/menus/shop_menus/shop_skin_menu.tscn" id="15_25ya2"]
@@ -24,8 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://ddy24w71nrv3k" path="res://prefabs/menus/shop_menus/shop_theme_menu.tscn" id="17_lviju"]
 [ext_resource type="PackedScene" uid="uid://c84ru0s4q2ncy" path="res://prefabs/menus/shop_menus/shop_selection_menu.tscn" id="18_anor8"]
 [ext_resource type="PackedScene" uid="uid://din2cplqt3gvv" path="res://prefabs/menus/ingame_menus/death_menu.tscn" id="21_hx0qg"]
+[ext_resource type="PackedScene" uid="uid://bqicsp8cjtktf" path="res://main/changelog_popup.tscn" id="21_l4l7y"]
 [ext_resource type="PackedScene" uid="uid://dyhe508sj45sf" path="res://prefabs/menus/ingame_menus/pause_menu.tscn" id="22_anor8"]
-[ext_resource type="Script" uid="uid://bhrfoyqvura7p" path="res://prefabs/menus/reset_game_popup.gd" id="28_25ya2"]
+[ext_resource type="PackedScene" uid="uid://b7emrreriad81" path="res://main/reset_game_popup.tscn" id="22_mcvie"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="28_mg1ud"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="29_anor8"]
@@ -41,11 +39,6 @@ shader = ExtResource("2_07nfj")
 shader_parameter/direction = Vector2(1, 1)
 shader_parameter/speed = 0.2
 shader_parameter/offset = Vector2(0, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_5tuhn"]
-font = ExtResource("11_r54rh")
-font_size = 50
-outline_color = Color(0, 0, 0, 0.8117647)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3b0ty"]
 size = Vector2(1945, 83)
@@ -135,8 +128,7 @@ offset_right = 26.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 11
-text = "V0.1"
-script = ExtResource("10_gmjel")
+text = "Legacy"
 
 [node name="Control" type="Control" parent="." unique_id=884807155]
 z_index = 1
@@ -213,125 +205,13 @@ layout_mode = 1
 offset_top = -90.0
 offset_bottom = 90.0
 
-[node name="changelog_popup" type="VBoxContainer" parent="Control" unique_id=914801104 node_paths=PackedStringArray("intial_focus_button")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -98.5
-offset_top = -112.0
-offset_right = 98.5
-offset_bottom = 112.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-script = ExtResource("12_nqwcy")
-title = "Update 0.9!"
-added_bbcode = "[color=green]+ "
-added_list = Array[String](["Added Themes", "Added Accents", "Added menu for statistics", "Added abillity to kill enemies", "Added changelog popup", "Added 5 new maps", "Added 6 transition maps", "Added enemy spawn randomisation", "Added VSync setting", "Added kill sounds to enemies", "Added fps settings", "Added slider visual values"])
-changed_bbcode = "[color=orange]~ "
-changed_list = Array[String](["Fixed game saving", "Refined 16 maps", "Refined hitbox sizes", "Balanced shop prices", "Fixed Lag spikes from particles", "Fixed falling platform false activations", "Changed some sound effects", "Fixed various other bugs"])
-removed_bbcode = "[color=red]- "
-removed_list = Array[String](["Removed resolution dropdown", "Removed background color dropdown"])
-menu_name = "changelog"
-intial_focus_button = NodePath("close")
-
-[node name="Label" type="Label" parent="Control/changelog_popup" unique_id=793820299]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Changelog"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="Control/changelog_popup" unique_id=1995776405]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/changelog_popup/PanelContainer" unique_id=1286531758]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/changelog_popup/PanelContainer/VBoxContainer" unique_id=536575321]
-custom_minimum_size = Vector2(190.22, 138.775)
-layout_mode = 2
-size_flags_vertical = 0
-follow_focus = true
-horizontal_scroll_mode = 0
-
-[node name="ContentList" type="VBoxContainer" parent="Control/changelog_popup/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1450959895]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Changelog_Titel" type="Label" parent="Control/changelog_popup/PanelContainer/VBoxContainer/ScrollContainer/ContentList" unique_id=133724110]
-layout_mode = 2
-theme_type_variation = &"HeaderMedium"
-text = "Update 0.8!"
-horizontal_alignment = 1
-
-[node name="Changelog_Description" type="RichTextLabel" parent="Control/changelog_popup/PanelContainer/VBoxContainer/ScrollContainer/ContentList" unique_id=483835183]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 7
-bbcode_enabled = true
-text = "[color=green]+[/color] Added Themes
-[color=green]+[/color] Added Accent
-[color=green]+[/color] Added abillity to kill enemies
-[color=green]+[/color] Added 5 new maps
-[color=green]+[/color] Added 6 transition maps
-[color=green]+[/color] Added enemy spawn randomisation
-[color=yellow]~[/color] Refined all 16 maps
-[color=yellow]~[/color] Balanced shop prices
-[color=yellow]~[/color] Fixed Game saving
-[color=yellow]~[/color] Fixed lag spikes from particles
-"
-fit_content = true
-
-[node name="close" type="Button" parent="Control/changelog_popup" unique_id=1627038230]
-layout_mode = 2
-text = "Close"
-
-[node name="reset_game_popup" type="VBoxContainer" parent="Control" unique_id=1869015435 node_paths=PackedStringArray("intial_focus_button")]
+[node name="changelog_popup" parent="Control" unique_id=272473621 instance=ExtResource("21_l4l7y")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -129.0
-offset_top = -389.0
-offset_right = 129.0
-offset_bottom = 389.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-script = ExtResource("28_25ya2")
-menu_name = "reset_game_menu"
-intial_focus_button = NodePath("cancel")
 
-[node name="title" type="Label" parent="Control/reset_game_popup" unique_id=1593456898]
-layout_mode = 2
-text = "Are you sure?"
-label_settings = SubResource("LabelSettings_5tuhn")
-horizontal_alignment = 1
-
-[node name="disclaimer" type="RichTextLabel" parent="Control/reset_game_popup" unique_id=1371422744]
-layout_mode = 2
-bbcode_enabled = true
-text = "You are about to [color=#FF2424]delete[/color] your save data. This will erase [color=#FF2424]EVERYTHING.[/color]"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="delete_data" type="Button" parent="Control/reset_game_popup" unique_id=273914950]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Delete Data!"
-
-[node name="cancel" type="Button" parent="Control/reset_game_popup" unique_id=1548823645]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cancel"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/reset_game_popup" unique_id=1828037624]
-layout_mode = 2
+[node name="reset_game_popup" parent="Control" unique_id=337198406 instance=ExtResource("22_mcvie")]
+visible = false
+layout_mode = 1
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 0
@@ -355,7 +235,4 @@ tile_set = ExtResource("28_mg1ud")
 navigation_enabled = false
 script = ExtResource("29_anor8")
 
-[connection signal="pressed" from="Control/changelog_popup/close" to="Control/changelog_popup" method="_on_close_pressed"]
-[connection signal="pressed" from="Control/reset_game_popup/delete_data" to="Control/reset_game_popup" method="_on_delete_data_pressed"]
-[connection signal="pressed" from="Control/reset_game_popup/cancel" to="Control/reset_game_popup" method="_on_cancel_pressed"]
 [connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]
