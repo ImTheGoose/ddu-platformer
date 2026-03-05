@@ -300,6 +300,3 @@ metadata/_custom_type_script = "uid://csjcberb4rmwa"
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_b3vsw")
 debug_color = Color(0.90848535, 0.29889786, 0.067487344, 0.41960785)
-
-[connection signal="animation_looped" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_looped"]
-[connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]

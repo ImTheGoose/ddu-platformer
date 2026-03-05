@@ -365,5 +365,3 @@ tile_map_data = PackedByteArray("AADY/wAAAAABAAEAAADY/wEAAAABAAEAAADY/wIAAAABAAE
 tile_set = ExtResource("28_mg1ud")
 navigation_enabled = false
 script = ExtResource("29_anor8")
-
-[connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]

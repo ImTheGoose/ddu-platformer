@@ -6,6 +6,9 @@ class_name Projectile
 @onready var col :CollisionShape2D = $CollisionShape2D
 var direction :Vector2 = Vector2(-1, 0)
 
+func _init() -> void:
+	body_entered.connect(_on_body_entered)
+
 func _process(delta: float) -> void:
 	global_position += direction * speed * delta
 	

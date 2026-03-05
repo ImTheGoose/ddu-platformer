@@ -408,7 +408,3 @@ debug_color = Color(0.90848535, 0.29889786, 0.067487344, 0.41960785)
 
 [node name="ProjectileSpawn" type="Node2D" parent="." unique_id=560250659]
 position = Vector2(-12, -5)
-
-[connection signal="animation_looped" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_looped"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="body_entered" from="HitArea" to="HitArea" method="_on_body_entered"]

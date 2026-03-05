@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwyc1xb3bavyv"]
+[gd_scene format=3 uid="uid://dwyc1xb3bavyv"]
 
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="1_fysbu"]
 [ext_resource type="Texture2D" uid="uid://cd23tadwq2v3c" path="res://assets/pixel_adventure_assets/Traps/Spikes/Idle.png" id="1_xh5ig"]
@@ -6,16 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fysbu"]
 size = Vector2(11, 5)
 
-[node name="Spike" type="Area2D"]
+[node name="Spike" type="Area2D" unique_id=184768431]
 texture_filter = 1
 monitorable = false
 script = ExtResource("1_fysbu")
 
-[node name="Idle" type="Sprite2D" parent="."]
+[node name="Idle" type="Sprite2D" parent="." unique_id=371863716]
 texture = ExtResource("1_xh5ig")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1252797556]
 position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_fysbu")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -5,6 +5,9 @@ class_name AnimatedSpriteComponent
 var target_rot :float = 0.0
 var start_vel :Vector2 = Vector2.ZERO
 
+func _init() -> void:
+	animation_looped.connect(_on_animation_looped)
+
 func _process(delta: float) -> void:	
 	if target_rot == 0:
 		return

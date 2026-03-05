@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bh3pdvlpgdufq"]
+[gd_scene format=3 uid="uid://bh3pdvlpgdufq"]
 
 [ext_resource type="Script" uid="uid://dckcrbhtnaktm" path="res://prefabs/traps/trampoline.gd" id="1_7fog4"]
 [ext_resource type="Texture2D" uid="uid://bdlpe3shus1y6" path="res://assets/pixel_adventure_assets/Traps/Blue Trampoline/Idle.png" id="2_k5q4v"]
@@ -80,23 +80,22 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6n1a3"]
 size = Vector2(23, 10)
 
-[node name="Trampoline" type="Area2D"]
+[node name="Trampoline" type="Area2D" unique_id=634334736]
 script = ExtResource("1_7fog4")
 jump_force = 3200
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=805781376]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_7fog4")
 animation = &"Jump"
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342050869]
 position = Vector2(0, 3.1)
 shape = SubResource("RectangleShape2D_6n1a3")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=878024416]
 stream = ExtResource("4_4ncv0")
 volume_db = 1.5
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animatable_body_2d_animation_finished"]

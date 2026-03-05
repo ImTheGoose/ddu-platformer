@@ -6,6 +6,9 @@ extends Area2D
 @onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")
 
 
+func _init() -> void:
+	body_entered.connect(_on_body_entered)
+
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		body.velocity.y = -jump_force
