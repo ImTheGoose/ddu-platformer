@@ -10,10 +10,10 @@ func _process(delta: float) -> void:
 	if GameManager.game_paused:
 		return
 	
-	match GameManager.game_state:
-		GameManager.state.running:
+	match GameManager.get_state():
+		GameManager.STATE.PLAYING:
 			time += delta
-		GameManager.state.pregame:
+		GameManager.STATE.PREGAME:
 			time = 0
 	
 	text = prefix + TimeFormat.get_time_string(time)

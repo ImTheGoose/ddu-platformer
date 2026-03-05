@@ -2,9 +2,6 @@ extends Area2D
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if GameManager.game_state == GameManager.state.dead:
-		return
-	
 	if area.get_parent() is PathfindingEnemy:
 		if get_parent().is_on_floor():
 			return

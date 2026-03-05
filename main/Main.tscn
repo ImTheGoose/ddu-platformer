@@ -338,7 +338,7 @@ scale = Vector2(3, 3)
 script = ExtResource("2_5mvff")
 
 [node name="Playerspawn" type="Node2D" parent="game_container" unique_id=1262602405 node_paths=PackedStringArray("parent")]
-position = Vector2(222, 196)
+position = Vector2(363, 300)
 script = ExtResource("17_3b0ty")
 parent = NodePath("../map_generator")
 prefab = ExtResource("16_devvj")

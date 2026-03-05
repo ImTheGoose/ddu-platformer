@@ -5,7 +5,7 @@ func _input(event: InputEvent) -> void:
 		if !MenuHandler.is_game_visible():
 			return
 		
-		if GameManager.game_state == GameManager.state.dead:
+		if GameManager.get_state() == GameManager.STATE.DEAD:
 			return
 		
 		if GameManager.is_game_paused():
@@ -22,14 +22,9 @@ func _on_continue_game_pressed() -> void:
 
 
 func _on_restart_game_pressed() -> void:
-	GameManager.pause_game(false)
 	GameManager.reset_game()
-	MenuHandler.hide_all_menus()
 
 
 func _on_back_to_menu_pressed() -> void:
-	GameManager.pause_game(false)
-	GameManager.reset_game()
-	MenuHandler.hide_game()
-	MenuHandler.change_menu("main_menu")
+	GameManager.quit_to_main()
 	

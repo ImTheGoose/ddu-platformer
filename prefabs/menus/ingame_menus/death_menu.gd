@@ -47,12 +47,10 @@ func _refresh_stat_text() -> void:
 	stat_text_node.text = text
 
 func _on_play_again_pressed() -> void:
-	MenuHandler.hide_all_menus()
 	GameManager.reset_game()
 	pass # Replace with function body.
 
 
 func _on_back_to_menu_pressed() -> void:
-	MenuHandler.hide_game()
-	MenuHandler.change_menu("main_menu")
+	GameManager.quit_to_main()
 	pass # Replace with function body.

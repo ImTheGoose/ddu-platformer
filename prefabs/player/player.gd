@@ -25,7 +25,6 @@ var air_time :float = 0
 
 
 func _physics_process(delta: float) -> void:
-
 	if dead:
 		var col :CollisionShape2D = $CollisionShape2D
 		col.disabled = true

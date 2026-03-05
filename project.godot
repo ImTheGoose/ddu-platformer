@@ -28,7 +28,6 @@ buses/default_bus_layout="res://main/default_bus_layout.tres"
 [autoload]
 
 GameManager="*res://globals/GameManager.gd"
-MenuManager="*res://globals/MenuManager.gd"
 DataManager="*res://globals/DataManager.gd"
 AudioManager="*res://globals/AudioManager.gd"
 StatisticManager="*res://globals/StatisticManager.gd"

@@ -5,16 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://cfxlmi8qaxa7k" path="res://prefabs/particles/time_highscore_particles.tscn" id="4_tfdma"]
 
 [node name="death_menu" type="VBoxContainer" unique_id=1525325848 node_paths=PackedStringArray("time_highscore_particles", "apple_highscore_particles")]
-custom_minimum_size = Vector2(250, 180)
+custom_minimum_size = Vector2(200, 180)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -92.0
-offset_right = 125.0
-offset_bottom = 88.0
+offset_left = -100.0
+offset_top = -90.0
+offset_right = 100.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1

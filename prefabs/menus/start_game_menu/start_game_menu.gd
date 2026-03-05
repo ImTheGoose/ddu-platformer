@@ -24,9 +24,8 @@ func _refresh_stats() -> void:
 	diffculty_stat_label.text = tex
 
 func _on_start_game_pressed() -> void:
-	MenuHandler.hide_all_menus()
-	MenuHandler.show_game()
-	GameManager.reset_game()
+	GameManager.set_state(GameManager.STATE.AWAITING_RESTART)
+	MenuHandler.show_blackout()
 	pass # Replace with function body.
 
 
