@@ -39,14 +39,15 @@ func _physics_process(delta: float) -> void:
 	if move_axis == 0:
 		_reduce_horizontal_velocity(delta, speed_per_second)
 	
-	if Input.is_action_just_pressed("jump"):
-		_attempt_jump()
-	
 	if is_on_floor() or is_on_wall():
 		double_jumped = false
 		air_time = 0
 	else:
 		air_time += delta
+		
+	#Has to be after to ensure air_time is igonered if player jumps while on floor.
+	if Input.is_action_just_pressed("jump"):
+		_attempt_jump()
 
 	velocity.x += move_axis * speed_per_second * delta
 
@@ -67,7 +68,7 @@ func _attempt_jump() -> void:
 			velocity.x = max_speed
 		else:
 			velocity.x = -max_speed
-		
+		air_time = jump_buffer_time
 		anim.flip_h = !anim.flip_h
 		jump_particles.restart(false)
 		audio_stream.stream = audio_files["jump"]
