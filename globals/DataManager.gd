@@ -10,7 +10,7 @@ var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"save_version" : 0.1,
-	"money" : 1000000,
+	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
 	"owned_skin": {
@@ -156,6 +156,7 @@ func create_config() -> void:
 	config.set_value("video", "color_theme_id", 0)
 	config.set_value("video", "particles_enabled", true)
 	config.set_value("video", "skip_transitions", false)
+	config.set_value("general", "default_controls", true)
 	
 	config.save(SETTINGS_FILE_PATH)
 
@@ -167,6 +168,16 @@ func load_config() -> void:
 	
 		if err != OK:
 			create_config()
+
+func get_general_settings() -> Dictionary:
+	var general_settings :Dictionary = {}
+	for key in config.get_section_keys("general"):
+		general_settings[key] = config.get_value("general", key)
+	return general_settings
+
+func save_general_setting(key: String, value: Variant) -> void:
+	config.set_vale("general", key, value)
+	config.save(SETTINGS_FILE_PATH)
 
 func save_video_setting(key: String, value: Variant) -> void:
 	config.set_value("video", key, value)

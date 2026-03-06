@@ -338,6 +338,10 @@ layout_mode = 1
 [node name="changelog_popup" parent="Control" unique_id=272473621 instance=ExtResource("21_l4l7y")]
 visible = false
 layout_mode = 1
+title = "Legacy Update"
+added_list = Array[String](["Added Transitions", "Added support for widescreen", "Added basic controller support"])
+changed_list = Array[String](["Changed internal menu system", "Internal file restructering", "Minor optimisations", "Enforced static typing for reliabillity", "Fixed memory leak"])
+removed_list = Array[String](["Removed uneeded binaries"])
 
 [node name="reset_game_popup" parent="Control" unique_id=337198406 instance=ExtResource("22_mcvie")]
 visible = false

@@ -22,6 +22,11 @@ func _ready() -> void:
 	
 
 func _load_keybindings_from_settings() -> void:
+	var general_settings :Dictionary = DataManager.get_general_settings()
+	if general_settings.default_controls:
+		_on_reset_to_default_pressed()
+		return
+	
 	var keybindings :Dictionary = DataManager.get_keybindings()
 	for action: String in keybindings.keys():
 		InputMap.action_erase_events(action)
