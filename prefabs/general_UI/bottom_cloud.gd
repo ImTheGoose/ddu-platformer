@@ -3,7 +3,7 @@ extends GPUParticles2D
 func _ready() -> void:
 	MenuHandler.changed_game_visibillity.connect(_on_game_visibillity_changed)
 	GameManager.on_start_game.connect(_start_emitting)
-	GameManager.on_reset_game.connect(_stop_emitting)
+	GameManager.reset_game.connect(_stop_emitting)
 
 func _is_particles_enabled() -> bool:
 	var video_settings :Dictionary = DataManager.get_video_settings()

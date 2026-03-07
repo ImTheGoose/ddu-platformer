@@ -87,7 +87,6 @@ func update_game_data() -> void:
 func clear_game_data() -> void:
 	print(PREFIX, "Clearing game data: ", game_data)
 	DirAccess.remove_absolute(PATH)
-	game_data = default_game_data
 	load_save_data()
 	create_config()
 	
@@ -122,6 +121,8 @@ func load_save_data() -> void:
 
 func _create_new_save_data() -> void:
 	print(PREFIX + "No save data found. Creating default save data, using default values.")
+	game_data = default_game_data
+	create_config()
 	save_game_data()
 	return
 

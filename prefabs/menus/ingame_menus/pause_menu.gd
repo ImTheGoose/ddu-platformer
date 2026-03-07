@@ -22,7 +22,7 @@ func _on_continue_game_pressed() -> void:
 
 
 func _on_restart_game_pressed() -> void:
-	GameManager.reset_game()
+	GameManager.restart_game()
 
 
 func _on_back_to_menu_pressed() -> void:

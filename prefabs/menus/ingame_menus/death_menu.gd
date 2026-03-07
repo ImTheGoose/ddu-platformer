@@ -47,7 +47,7 @@ func _refresh_stat_text() -> void:
 	stat_text_node.text = text
 
 func _on_play_again_pressed() -> void:
-	GameManager.reset_game()
+	GameManager.restart_game()
 	pass # Replace with function body.
 
 

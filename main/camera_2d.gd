@@ -7,7 +7,7 @@ extends Camera2D
 const nudge_camera :bool = true
 
 func _ready() -> void:
-	GameManager.on_reset_game.connect(_reset_position)
+	GameManager.reset_game.connect(_reset_position)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 func _on_viewport_size_changed() -> void:

@@ -1,7 +1,8 @@
 extends Node
 
 signal on_start_game
-signal on_reset_game
+signal reset_game
+signal spawn_level
 signal on_player_death
 signal spawn_player
 var game_paused :bool = false
@@ -56,12 +57,14 @@ func _ready() -> void:
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_RESTART:
 		force_reset_game()
+		spawn_game()
 		MenuHandler.hide_blackout()
 		MenuHandler.hide_all_menus()
 		MenuHandler.show_game()
 		if is_game_paused():
 			pause_game(false)
 	elif state == STATE.AWAITING_QUIT_TO_MAIN:
+		force_reset_game()
 		MenuHandler.change_menu("main_menu")
 		MenuHandler.hide_game()
 		MenuHandler.hide_blackout()
@@ -96,12 +99,15 @@ func is_game_paused() -> bool:
 func is_game_running() -> bool:
 	return state == STATE.PLAYING
 
-func reset_game() -> void:
+func restart_game() -> void:
 	set_state(STATE.AWAITING_RESTART)
 	MenuHandler.show_blackout()
 
 func force_reset_game() -> void:
-	on_reset_game.emit()
+	reset_game.emit()
+
+func spawn_game() -> void:
+	spawn_level.emit()
 	spawn_player.emit()
 	set_state(STATE.PREGAME)
 	players_dead = 0
@@ -126,6 +132,10 @@ func player_died() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		quit_game()
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		if get_state() == STATE.PREGAME or get_state() == STATE.PLAYING:
+			pause_game(true)
+			MenuHandler.change_menu("pause_menu")
 
 func quit_game() -> void:
 	DataManager.save_game_data()

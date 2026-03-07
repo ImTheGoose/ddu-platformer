@@ -15,7 +15,8 @@ func _ready() -> void:
 		map_arr = transition_arr.duplicate()
 		map_arr_full = map_arr.duplicate()
 	
-	GameManager.on_reset_game.connect(_clear_map)
+	GameManager.reset_game.connect(_clear_map)
+	GameManager.spawn_level.connect(_on_spawn_level)
 	_insert_map(start_map, _get_map_global_position())
 	return
 
@@ -27,7 +28,12 @@ func _clear_map() -> void:
 		child.queue_free()
 	height = 360
 	current_connection_type = MapInfo.connection_type.typeA
+
+func _on_spawn_level() -> void:
+	height = 360
+	current_connection_type = MapInfo.connection_type.typeA
 	_insert_map(start_map, _get_map_global_position())
+	
 
 func _get_part() -> MapInfo:
 	if map_arr.is_empty():

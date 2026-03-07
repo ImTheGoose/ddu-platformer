@@ -269,7 +269,7 @@ offset_right = 26.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 11
-text = "Legacy"
+text = "Legacy-1"
 
 [node name="Control" type="Control" parent="." unique_id=884807155]
 z_index = 1
