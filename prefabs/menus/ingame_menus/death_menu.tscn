@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="3_d258s"]
 [ext_resource type="PackedScene" uid="uid://cfxlmi8qaxa7k" path="res://prefabs/particles/time_highscore_particles.tscn" id="4_tfdma"]
 
-[node name="death_menu" type="VBoxContainer" unique_id=1525325848 node_paths=PackedStringArray("time_highscore_particles", "apple_highscore_particles", "initial_focus")]
+[node name="death_menu" type="VBoxContainer" unique_id=1525325848 node_paths=PackedStringArray("time_highscore_particles", "apple_highscore_particles", "initial_focus", "back_button")]
 custom_minimum_size = Vector2(200, 180)
 anchors_preset = 8
 anchor_left = 0.5
@@ -24,6 +24,7 @@ apple_highscore_particles = [NodePath("apple_highscore_particles"), NodePath("ap
 menu_name = "death_menu"
 require_seperator = true
 initial_focus = NodePath("play_again_button")
+back_button = NodePath("back_button")
 
 [node name="title" type="Label" parent="." unique_id=190051959]
 layout_mode = 2

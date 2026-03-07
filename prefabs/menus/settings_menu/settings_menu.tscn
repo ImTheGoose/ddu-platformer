@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://doovow1ubdcjp" path="res://prefabs/menus/settings_menu/settings_menu.gd" id="1_j2ip3"]
 [ext_resource type="Script" uid="uid://bbqfxplkacax7" path="res://prefabs/menus/SliderValueLabel.gd" id="2_j2ip3"]
 
-[node name="SettingsMenu" type="VBoxContainer" unique_id=463999452 node_paths=PackedStringArray("initial_focus")]
+[node name="SettingsMenu" type="VBoxContainer" unique_id=463999452 node_paths=PackedStringArray("initial_focus", "back_button")]
 custom_minimum_size = Vector2(220, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,6 +20,7 @@ alignment = 1
 script = ExtResource("1_j2ip3")
 menu_name = "settings_menu"
 initial_focus = NodePath("back")
+back_button = NodePath("back")
 
 [node name="Label" type="Label" parent="." unique_id=1151351386]
 layout_mode = 2

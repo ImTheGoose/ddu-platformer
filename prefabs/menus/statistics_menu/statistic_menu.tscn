@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://07w71pvnll6q" path="res://prefabs/menus/statistics_menu/statistic_menu.gd" id="1_88qfe"]
 
-[node name="StatisticMenu" type="VBoxContainer" unique_id=1022312052 node_paths=PackedStringArray("initial_focus")]
+[node name="StatisticMenu" type="VBoxContainer" unique_id=1022312052 node_paths=PackedStringArray("initial_focus", "back_button")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -18,6 +18,7 @@ alignment = 1
 script = ExtResource("1_88qfe")
 menu_name = "statistics_menu"
 initial_focus = NodePath("back")
+back_button = NodePath("back")
 
 [node name="Label" type="Label" parent="." unique_id=778064404]
 layout_mode = 2

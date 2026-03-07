@@ -1,5 +1,6 @@
 extends Node
 
+signal request_back_from_menu()
 signal changed_menu_visibillity(target: String, isVisible: bool)
 signal changed_seperator_visibillity(isVisible: bool)
 signal changed_blackout_visibillity(isVisible: bool)
@@ -15,6 +16,7 @@ var visible_menu_names :Array[String] = []
 var previous_menu :String
 
 func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	changed_seperator_visibillity.connect(_background_visible_changed)
 	changed_game_visibillity.connect(_on_game_visible_changed)
 
@@ -69,7 +71,11 @@ func get_previous_menu() -> String:
 
 func is_game_visible() -> bool:
 	return game_is_visible
-	
+
+func _input(event: InputEvent) -> void:
+	if event.is_action("ui_cancel") && event.is_pressed():
+		request_back_from_menu.emit()
+
 func change_menu(menu_name : String) -> void:
 	if visible_menu_names.size() > 0:
 		previous_menu = visible_menu_names[0]

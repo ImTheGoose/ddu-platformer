@@ -1,7 +1,7 @@
 extends Node
 
 @export var hold_threshold: float = 0.5  # How long to hold before "gradual" kicks in
-@export var max_speed: float = 20.0     # Buttons per second at full tilt
+@export var max_speed: float = 12.0     # Buttons per second at full tilt
 @export var deadzone: float = 0.3
 
 var hold_time: float = 0.0

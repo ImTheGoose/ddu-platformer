@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coi31hch185wt" path="res://prefabs/menus/settings_menu/keybinds_menu.gd" id="1_0tsa6"]
 
-[node name="KeybindsMenu" type="VBoxContainer" unique_id=1372291090 node_paths=PackedStringArray("initial_focus")]
+[node name="KeybindsMenu" type="VBoxContainer" unique_id=1372291090 node_paths=PackedStringArray("initial_focus", "back_button")]
 custom_minimum_size = Vector2(230, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,6 +19,7 @@ alignment = 1
 script = ExtResource("1_0tsa6")
 menu_name = "keybinding_menu"
 initial_focus = NodePath("back")
+back_button = NodePath("back")
 
 [node name="Label" type="Label" parent="." unique_id=327186328]
 layout_mode = 2
