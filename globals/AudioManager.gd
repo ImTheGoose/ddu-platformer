@@ -4,6 +4,9 @@ extends Node
 
 var playback:AudioStreamPlaybackPolyphonic
 
+func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func _enter_tree() -> void:
 	# Create an audio player
 	var player :AudioStreamPlayer = AudioStreamPlayer.new()

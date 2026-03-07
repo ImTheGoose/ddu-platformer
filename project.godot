@@ -33,6 +33,7 @@ AudioManager="*res://globals/AudioManager.gd"
 StatisticManager="*res://globals/StatisticManager.gd"
 GameHandler="*uid://dapkibmitjx82"
 MenuHandler="*uid://boqav6yfiyrq2"
+GlobalFocusManager="*uid://cej3huoix0m5b"
 
 [debug]
 
@@ -119,6 +120,10 @@ escape={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":3,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[input_devices]
+
+buffering/agile_event_flushing=true
 
 [physics]
 

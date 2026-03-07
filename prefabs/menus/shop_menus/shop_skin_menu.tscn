@@ -99,6 +99,8 @@ vertical_alignment = 1
 
 [node name="buy_button" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1760919881]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../previous")
+focus_neighbor_right = NodePath("../../../next")
 text = "Buy"
 
 [node name="next" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=1336492967]

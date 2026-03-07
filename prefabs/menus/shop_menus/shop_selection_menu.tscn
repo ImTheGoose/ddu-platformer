@@ -389,7 +389,9 @@ text = "Open"
 
 [node name="back" type="Button" parent="VBoxContainer" unique_id=1386292497]
 layout_mode = 2
+focus_neighbor_left = NodePath("../HBoxContainer/Skins_Card/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/open_skin_button")
 focus_neighbor_top = NodePath("../HBoxContainer/Themes_Card/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/open_theme_button")
+focus_neighbor_right = NodePath("../HBoxContainer/Accent_Card/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/open_accent_button")
 text = "Back"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Skins_Card/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/open_skin_button" to="." method="_on_open_skin_button_pressed"]

@@ -360,6 +360,12 @@ texture_margin_right = 1.0
 texture_margin_bottom = 1.0
 region_rect = Rect2(50, 98, 9, 6)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymv0j"]
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 1
+expand_margin_left = 2.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5am0d"]
 atlas = ExtResource("7_iwi3x")
 region = Rect2(2, 1, 8, 10)
@@ -5115,6 +5121,7 @@ PopupPanel/styles/panel = SubResource("StyleBoxTexture_p1af6")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_po6rv")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_wp402")
 RichTextLabel/font_sizes/normal_font_size = 11
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_ymv0j")
 TabContainer/constants/icon_separation = 4
 TabContainer/constants/side_margin = 4
 TabContainer/icons/decrement = SubResource("AtlasTexture_5am0d")

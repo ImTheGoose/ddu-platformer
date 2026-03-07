@@ -39,39 +39,9 @@ follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="StatisticsList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=661438016]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="stat_rich_label" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/StatisticsList" unique_id=1770995271]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 11
-bbcode_enabled = true
-text = "[img]res://assets/icons/time (16x16).png[/img]Time played - {time_played}
-[img]res://assets/icons/heart (16x16).png[/img]Time alive - {time_alive}
-[img]res://assets/icons/medal (16x16).png[/img]Highscore - {time_highscore}
-Most apples in a round - {apple_highscore}
-[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] Apples collected - {total_apples_collected}
-
-Total Jumps - {total_jumps}
-Ground jumps - {ground_jumps}
-Wall jumps - {wall_jumps}
-Double jumps - {double_jumps}
-Trampoline jumps - {trampoline_jumps}
-Enemy jums - {enemy_jumps}
-
-Total Deaths - {total_deaths}
-[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms deaths - {mushroom_deaths}
-[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks deaths - {trunk_deaths}
-[img]res://assets/pixel_adventure_assets/Traps/Spikes/Icon (16x16).png[/img] Spike deaths - {spike_deaths}
-[img]res://assets/pixel_adventure_assets/Traps/Fire/Icon (16x16).png[/img] Fire deaths - {fire_deaths}
-[img]res://assets/pixel_adventure_assets/Other/Dust Particle.png[/img] Cloud deaths - {cloud_deaths}
-
-Total Killed - {total_killed}
-[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms killed - {mushroom_killed}
-[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks killed - {trunk_killed}"
-fit_content = true
-autowrap_mode = 0
+size_flags_horizontal = 3
 
 [node name="back" type="Button" parent="." unique_id=1387869707]
 layout_mode = 2

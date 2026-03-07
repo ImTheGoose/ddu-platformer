@@ -23,6 +23,9 @@ enum death_type {
 	cloud
 }
 
+func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func _ready() -> void:
 	GameManager.on_player_death.connect(_save_recording)
 	GameManager.on_reset_game.connect(_clear_recording)
