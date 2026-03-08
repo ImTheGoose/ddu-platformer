@@ -68,7 +68,8 @@ var default_game_data: Dictionary = {
 }
 
 func _init() -> void:
-	GAME_FILE_DIRECTORY_PATH = DEFAULT_DIR + 'saves/' + str(Steam.getSteamID()) + "/" #C:\Program Files (x86)\Steam\steamapps\common\Upward
+	var steam_dir :String = Steam.getAppInstallDir(Steam.getAppID()).replace("\\", "/")
+	GAME_FILE_DIRECTORY_PATH = steam_dir + '/Saves/' + str(Steam.getSteamID()) + "/" #C:\Program Files (x86)\Steam\steamapps\common\Upward
 	
 	if !DirAccess.dir_exists_absolute(GAME_FILE_DIRECTORY_PATH):
 		var err :Error = DirAccess.make_dir_recursive_absolute(GAME_FILE_DIRECTORY_PATH)
