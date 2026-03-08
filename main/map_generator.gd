@@ -11,6 +11,8 @@ var height :float = 0
 var current_connection_type :MapInfo.connection_type
 
 func _ready() -> void: 
+	seed(int(Time.get_unix_time_from_system())) # Sikrer at alle map spawns er forskellige.
+	
 	if map_arr.is_empty():
 		map_arr = transition_arr.duplicate()
 		map_arr_full = map_arr.duplicate()

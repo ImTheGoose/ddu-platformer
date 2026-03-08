@@ -12,6 +12,6 @@ func _on_tree_ready() -> void:
 		await get_tree().process_frame
 		_on_tree_ready()
 		return
-	
+
 	if init_response.status != Steam.STEAM_API_INIT_RESULT_OK:
 		MenuHandler.change_menu("steam_error_popup")

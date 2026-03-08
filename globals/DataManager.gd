@@ -1,7 +1,9 @@
 extends Node
 
-const PATH :String = "user://savegame.save"
-const SETTINGS_FILE_PATH :String = "user://settings.ini"
+const DEFAULT_DIR :String = "user://"
+const SAVE_FILE_NAME :String = "savegame.save"
+const SETTINSG_FILE_NAME :String = "settings.ini"
+var GAME_FILE_DIRECTORY_PATH :String = ""
 const PREFIX :String = "[DataManager] "
 
 signal save_game_completed
@@ -66,6 +68,13 @@ var default_game_data: Dictionary = {
 }
 
 func _init() -> void:
+	GAME_FILE_DIRECTORY_PATH = DEFAULT_DIR + 'saves/' + str(Steam.getSteamID()) + "/" #C:\Program Files (x86)\Steam\steamapps\common\Upward
+	
+	if !DirAccess.dir_exists_absolute(GAME_FILE_DIRECTORY_PATH):
+		var err :Error = DirAccess.make_dir_recursive_absolute(GAME_FILE_DIRECTORY_PATH)
+		if err != OK:
+			print(PREFIX, "Failed to create directory at: \"", GAME_FILE_DIRECTORY_PATH, "\" With error code: \"", err, "\"")
+	
 	game_data = default_game_data.duplicate()
 	load_save_data()
 	load_config()
@@ -86,21 +95,26 @@ func update_game_data() -> void:
 	
 func clear_game_data() -> void:
 	print(PREFIX, "Clearing game data: ", game_data)
-	DirAccess.remove_absolute(PATH)
+	DirAccess.remove_absolute(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME)
 	load_save_data()
 	create_config()
 	
 func save_game_data() -> void:
-	var save_file :FileAccess = FileAccess.open(PATH, FileAccess.WRITE)
+	var save_file :FileAccess = FileAccess.open(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME, FileAccess.WRITE)
+	
+	if !save_file:
+		print(PREFIX, "Failed to open file access for saves. Error code: " ,FileAccess.get_open_error())
+		
 	var json_string :String = JSON.stringify(game_data)
+	print(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME)
 	save_file.store_line(json_string)
 	save_game_completed.emit()
 
 func load_save_data() -> void:
-	if not FileAccess.file_exists(PATH):
+	if not FileAccess.file_exists(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME):
 		_create_new_save_data()
 	
-	var save_file :FileAccess = FileAccess.open(PATH, FileAccess.READ)
+	var save_file :FileAccess = FileAccess.open(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string :String = save_file.get_line()
 		
@@ -159,13 +173,13 @@ func create_config() -> void:
 	config.set_value("video", "skip_transitions", false)
 	config.set_value("general", "default_controls", true)
 	
-	config.save(SETTINGS_FILE_PATH)
+	config.save(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME)
 
 func load_config() -> void:
-	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
+	if !FileAccess.file_exists(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME):
 		create_config()
 	else:
-		var err :Error = config.load(SETTINGS_FILE_PATH)
+		var err :Error = config.load(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME)
 	
 		if err != OK:
 			create_config()
@@ -178,11 +192,11 @@ func get_general_settings() -> Dictionary:
 
 func save_general_setting(key: String, value: Variant) -> void:
 	config.set_vale("general", key, value)
-	config.save(SETTINGS_FILE_PATH)
+	config.save(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME)
 
 func save_video_setting(key: String, value: Variant) -> void:
 	config.set_value("video", key, value)
-	config.save(SETTINGS_FILE_PATH)
+	config.save(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME)
 
 func get_video_settings() -> Dictionary:
 	var video_settings :Dictionary = {}	
@@ -192,7 +206,7 @@ func get_video_settings() -> Dictionary:
 
 func save_audio_setting(key: String, value: Variant) -> void:
 	config.set_value("audio", key, value)
-	config.save(SETTINGS_FILE_PATH)
+	config.save(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME)
 
 func get_audio_settings() -> Dictionary:
 	var audio_settings :Dictionary = {}	
@@ -208,7 +222,7 @@ func save_keybinding(key: String, event: InputEvent) -> void:
 		event_str = "mouse_" + str(event.button_index)
 	
 	config.set_value("keybinding", key, event_str)
-	config.save(SETTINGS_FILE_PATH)
+	config.save(GAME_FILE_DIRECTORY_PATH + SETTINSG_FILE_NAME)
 
 func get_keybindings() -> Dictionary:
 	var keybindings :Dictionary = {}
