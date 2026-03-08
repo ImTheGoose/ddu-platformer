@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://b7emrreriad81" path="res://prefabs/menus/popups/reset_game_popup.tscn" id="22_mcvie"]
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="23_ggyxd"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="24_iix3i"]
+[ext_resource type="PackedScene" uid="uid://cejmty2271kf5" path="res://prefabs/menus/popups/steam_error_popup.tscn" id="24_o55x0"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="28_mg1ud"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="29_anor8"]
@@ -343,8 +344,10 @@ added_list = Array[String](["Added Transitions", "Added support for widescreen",
 changed_list = Array[String](["Changed internal menu system", "Internal file restructering", "Minor optimisations", "Enforced static typing for reliabillity", "Fixed memory leak"])
 removed_list = Array[String](["Removed uneeded binaries"])
 
+[node name="steam_error_popup" parent="Control" unique_id=1151020849 instance=ExtResource("24_o55x0")]
+layout_mode = 1
+
 [node name="reset_game_popup" parent="Control" unique_id=337198406 instance=ExtResource("22_mcvie")]
-visible = false
 layout_mode = 1
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]

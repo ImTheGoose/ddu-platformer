@@ -36,13 +36,9 @@ tile_map_data = PackedByteArray("AAATABEAAAAAAAAAAQANABIAAAAAAAAAAQAOABIAAAAAAAA
 tile_set = ExtResource("6_ol7p3")
 navigation_enabled = false
 
-[connection signal="body_entered" from="TrapTiles/Spike" to="TrapTiles/Spike" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@57743" to="TrapTiles/@Area2D@57743" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@57744" to="TrapTiles/@Area2D@57744" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@57745" to="TrapTiles/@Area2D@57745" method="_on_body_entered"]
 [connection signal="body_entered" from="CollectableTiles/Area2D" to="CollectableTiles/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="CollectableTiles/@Area2D@57753" to="CollectableTiles/@Area2D@57753" method="_on_body_entered"]
-[connection signal="body_entered" from="CollectableTiles/@Area2D@57754" to="CollectableTiles/@Area2D@57754" method="_on_body_entered"]
-[connection signal="body_entered" from="CollectableTiles/@Area2D@57755" to="CollectableTiles/@Area2D@57755" method="_on_body_entered"]
-[connection signal="body_entered" from="CollectableTiles/@Area2D@57756" to="CollectableTiles/@Area2D@57756" method="_on_body_entered"]
-[connection signal="body_entered" from="CollectableTiles/@Area2D@57757" to="CollectableTiles/@Area2D@57757" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@19323" to="CollectableTiles/@Area2D@19323" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@19324" to="CollectableTiles/@Area2D@19324" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@19325" to="CollectableTiles/@Area2D@19325" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@19326" to="CollectableTiles/@Area2D@19326" method="_on_body_entered"]
+[connection signal="body_entered" from="CollectableTiles/@Area2D@19327" to="CollectableTiles/@Area2D@19327" method="_on_body_entered"]
