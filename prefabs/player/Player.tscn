@@ -1,12 +1,141 @@
-[gd_scene format=3 uid="uid://517bp8gq433n"]
+[gd_scene format=3 uid="uid://cjjbmvmx1ilce"]
 
-[ext_resource type="Script" uid="uid://nu3ba402o05y" path="res://prefabs/player/player.gd" id="1_jfcio"]
-[ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_wuy1y"]
-[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_64pgi"]
-[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_0ep8a"]
-[ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="6_1nynx"]
-[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_70wo7"]
-[ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="10_634ti"]
+[ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_ivj8r"]
+[ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="3_6dlbe"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_00uvl"]
+[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_dcg2g"]
+[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_uiiwv"]
+[ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="7_w51pg"]
+
+[sub_resource type="GDScript" id="GDScript_q4fed"]
+script/source = "extends CharacterBody2D
+
+class_name Player
+
+@export var jump_strength :int = 1250
+@export var accelleration_per_second :int = 3000
+@export var max_speed :int = 450
+@export var jump_buffer_time :float = 0.1
+@export var wall_gravity_scale :float = 0.15
+
+@onready var collission_shape_2d :CollisionShape2D = %CollisionShape2D
+
+var double_jumped :bool = false
+var air_time :float = 0
+
+const INPUT_MAP :Dictionary[String, String] = { ## Skal ændres til globalt inputmap
+	\"move_left\" : \"move_left\",
+	\"move_right\" : \"move_right\",
+	\"jump_action\" : \"jump\"
+}
+
+signal state_changed(new_state: PlayerState)
+var state :PlayerState = PlayerState.IDLE:
+	set(value):
+		state = value
+		state_changed.emit(value)
+
+enum PlayerState {
+	IDLE,
+	RUNNING,
+	ON_WALL,
+	IN_AIR,
+	DEAD,
+}
+
+func _physics_process(delta: float) -> void:
+	if state == PlayerState.DEAD:
+		_handle_dead_player(delta)
+	else:
+		_handle_alive_player(delta)
+	move_and_slide()
+
+func _handle_dead_player(delta: float) -> void:
+	velocity.x = clamp(velocity.x, -max_speed * 4, max_speed * 4)
+	velocity += get_gravity() * delta * 0.65
+	collission_shape_2d.disabled = true
+	_reduce_horizontal_velocity(delta, accelleration_per_second / 20)
+
+func _handle_alive_player(delta: float) -> void:
+	var move_axis :float = Input.get_axis(INPUT_MAP[\"move_left\"], INPUT_MAP[\"move_right\"])
+	
+	velocity.x = clamp(velocity.x, -max_speed, max_speed)
+	velocity.x += move_axis * accelleration_per_second * delta
+	
+	print(state)
+	if move_axis == 0:
+		_reduce_horizontal_velocity(delta, accelleration_per_second)
+	
+	if is_on_floor():
+		if move_axis == 0:
+			state = PlayerState.IDLE
+		else:
+			state = PlayerState.RUNNING
+	
+	elif is_on_wall():
+		state = PlayerState.ON_WALL
+		
+	else:
+		state = PlayerState.IN_AIR
+	
+	if is_player_grounded():
+		double_jumped = false
+		air_time = 0
+	else:
+		air_time += delta
+
+	if Input.is_action_just_pressed(INPUT_MAP[\"jump_action\"]):
+		_handle_jump()
+	
+	if is_on_wall_only() && velocity.y > 0:
+		velocity += get_gravity() * delta * wall_gravity_scale
+	else:
+		velocity += get_gravity() * delta * 1
+
+func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void:
+	if velocity.x < -20:
+		velocity.x += amount_per_second * delta
+	elif velocity.x > 20:
+		velocity.x -= amount_per_second * delta
+	else:
+		velocity.x = 0
+
+func is_player_grounded() -> bool:
+	return state == PlayerState.ON_WALL or state == PlayerState.IDLE or state == PlayerState.RUNNING
+
+func hit(vec: Vector2) -> void:
+	velocity = vec * max_speed * 1.5
+	_die()
+	
+func _die() -> void: #TEMPOARY
+	print(\"player dying\")
+	state = PlayerState.DEAD
+	GameManager.player_died()
+
+func _handle_jump() -> void:
+	if state == PlayerState.ON_WALL:
+		velocity.y = -jump_strength * 0.85
+		if get_wall_normal().normalized().x > 0:
+			velocity.x = max_speed
+		else:
+			velocity.x = -max_speed
+		
+		air_time = jump_buffer_time
+		StatisticManager.add_value(\"wall_jump\", 1)
+		return
+	
+	if state == PlayerState.IDLE or state == PlayerState.RUNNING or air_time < jump_buffer_time:
+		air_time = jump_buffer_time
+		velocity.y = -jump_strength
+		StatisticManager.add_value(\"ground_jump\", 1)
+		return
+	
+	if !double_jumped:
+		double_jumped = true
+		velocity.y = -jump_strength * 0.85
+		StatisticManager.add_value(\"double_jump\", 1)
+	
+"
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
@@ -20,17 +149,16 @@ z_index = 9
 collision_layer = 15
 collision_mask = 15
 safe_margin = 2.5
-script = ExtResource("1_jfcio")
+script = SubResource("GDScript_q4fed")
 jump_buffer_time = 0.18
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("player")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151]
 visibility_layer = 7
-sprite_frames = ExtResource("2_wuy1y")
+sprite_frames = ExtResource("2_ivj8r")
 animation = &"Fall"
 autoplay = "Idle"
 flip_h = true
-script = ExtResource("10_634ti")
-player = NodePath("..")
+script = ExtResource("3_6dlbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]
 unique_name_in_owner = true
@@ -39,13 +167,13 @@ shape = SubResource("ConvexPolygonShape2D_1nynx")
 one_way_collision = true
 one_way_collision_margin = 30.0
 
-[node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_64pgi")]
+[node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_00uvl")]
 position = Vector2(-0.6666667, 14.333334)
 
-[node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_0ep8a")]
+[node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_dcg2g")]
 position = Vector2(-0.6666667, 14.333334)
 
-[node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_70wo7")]
+[node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_uiiwv")]
 position = Vector2(-0.33333334, 2.3333333)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=473809169]
@@ -59,7 +187,7 @@ collision_layer = 3
 collision_mask = 3
 monitorable = false
 priority = 30
-script = ExtResource("6_1nynx")
+script = ExtResource("7_w51pg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=350452057]
 position = Vector2(-4.787522e-08, 2.8212862)

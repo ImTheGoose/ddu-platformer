@@ -15,16 +15,18 @@
 [ext_resource type="PackedScene" uid="uid://c5lp5uujgx0yg" path="res://maps/map_parts/wilf_03_D_to_E.tscn" id="8_hri7i"]
 [ext_resource type="PackedScene" uid="uid://ck0t6e8l7ph1a" path="res://maps/transitions/trans_E_to_C.tscn" id="9_2gh4u"]
 [ext_resource type="PackedScene" uid="uid://dpxbnrxga5hx6" path="res://maps/map_parts/wilf_04_D_to_D.tscn" id="9_w3rk5"]
+[ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="10_0c1fb"]
 [ext_resource type="PackedScene" uid="uid://jtbhbtbjhb7e" path="res://maps/map_parts/wilf_05_D_to_C.tscn" id="10_5mvff"]
 [ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://maps/transitions/trans_C_to_A.tscn" id="10_devvj"]
 [ext_resource type="PackedScene" uid="uid://daixf013bdduf" path="res://maps/transitions/trans_C_to_B.tscn" id="11_3b0ty"]
+[ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="11_fw23c"]
 [ext_resource type="PackedScene" uid="uid://br7b3gvv1v1v1" path="res://maps/map_parts/willum_01_D_to_E.tscn" id="11_oye8v"]
-[ext_resource type="PackedScene" uid="uid://cjjbmvmx1ilce" path="res://prefabs/player/Player_old.tscn" id="11_x4tdt"]
+[ext_resource type="PackedScene" uid="uid://cjjbmvmx1ilce" path="res://prefabs/player/Player.tscn" id="11_x4tdt"]
 [ext_resource type="PackedScene" uid="uid://dykb0nm6ggl61" path="res://maps/map_parts/willum_02_E_to_C.tscn" id="12_40n85"]
+[ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="12_7867i"]
 [ext_resource type="PackedScene" uid="uid://by6dsb2rxmexr" path="res://maps/transitions/trans_C_to_D.tscn" id="12_bg4s2"]
 [ext_resource type="PackedScene" uid="uid://oewahg7jjfrl" path="res://maps/map_parts/willum_05_E_to_E.tscn" id="13_gb15f"]
 [ext_resource type="PackedScene" uid="uid://da8ypldv2i7b3" path="res://maps/transitions/trans_C_to_E.tscn" id="13_hhcpw"]
-[ext_resource type="PackedScene" uid="uid://517bp8gq433n" path="res://prefabs/player/Player.tscn" id="16_devvj"]
 [ext_resource type="PackedScene" uid="uid://dlwgaafj5t6g1" path="res://maps/map_parts/wilf_06_C_to_B.tscn" id="16_hri7i"]
 [ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://utility/playerspawn.gd" id="17_3b0ty"]
 [ext_resource type="PackedScene" uid="uid://wtjkb1srv4jy" path="res://maps/map_parts/willum_03_C_to_B.tscn" id="17_vi5kq"]
@@ -54,6 +56,157 @@
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="48_5tfui"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="49_38apo"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
+
+[sub_resource type="GDScript" id="GDScript_q4fed"]
+script/source = "extends CharacterBody2D
+
+class_name Player
+
+@export var jump_strength :int = 1250
+@export var accelleration_per_second :int = 3000
+@export var max_speed :int = 450
+@export var jump_buffer_time :float = 0.1
+@export var wall_gravity_scale :float = 0.15
+
+@onready var collission_shape_2d :CollisionShape2D = %CollisionShape2D
+
+var double_jumped :bool = false
+var air_time :float = 0
+
+const INPUT_MAP :Dictionary[String, String] = { ## Skal ændres til globalt inputmap
+	\"move_left\" : \"move_left\",
+	\"move_right\" : \"move_right\",
+	\"jump_action\" : \"jump\"
+}
+
+signal state_changed(new_state: PlayerState)
+var state :PlayerState = PlayerState.IDLE:
+	set(value):
+		state = value
+		state_changed.emit(value)
+
+enum PlayerState {
+	IDLE,
+	RUNNING,
+	ON_WALL,
+	IN_AIR,
+	DEAD,
+}
+
+func _physics_process(delta: float) -> void:
+	if state == PlayerState.DEAD:
+		_handle_dead_player(delta)
+	else:
+		_handle_alive_player(delta)
+	move_and_slide()
+
+func _handle_dead_player(delta: float) -> void:
+	velocity.x = clamp(velocity.x, -max_speed * 4, max_speed * 4)
+	velocity += get_gravity() * delta * 0.65
+	collission_shape_2d.disabled = true
+	_reduce_horizontal_velocity(delta, accelleration_per_second / 20)
+
+func _handle_alive_player(delta: float) -> void:
+	var move_axis :float = Input.get_axis(INPUT_MAP[\"move_left\"], INPUT_MAP[\"move_right\"])
+	
+	velocity.x = clamp(velocity.x, -max_speed, max_speed)
+	velocity.x += move_axis * accelleration_per_second * delta
+	
+	print(state)
+	if move_axis == 0:
+		_reduce_horizontal_velocity(delta, accelleration_per_second)
+	
+	if is_on_floor():
+		if move_axis == 0:
+			state = PlayerState.IDLE
+		else:
+			state = PlayerState.RUNNING
+	
+	elif is_on_wall():
+		state = PlayerState.ON_WALL
+		
+	else:
+		state = PlayerState.IN_AIR
+	
+	if is_player_grounded():
+		double_jumped = false
+		air_time = 0
+	else:
+		air_time += delta
+
+	if Input.is_action_just_pressed(INPUT_MAP[\"jump_action\"]):
+		_handle_jump()
+	
+	if is_on_wall_only() && velocity.y > 0:
+		velocity += get_gravity() * delta * wall_gravity_scale
+	else:
+		velocity += get_gravity() * delta * 1
+
+func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void:
+	if velocity.x < -20:
+		velocity.x += amount_per_second * delta
+	elif velocity.x > 20:
+		velocity.x -= amount_per_second * delta
+	else:
+		velocity.x = 0
+
+func is_player_grounded() -> bool:
+	return state == PlayerState.ON_WALL or state == PlayerState.IDLE or state == PlayerState.RUNNING
+
+func hit(vec: Vector2) -> void:
+	velocity = vec * max_speed * 1.5
+	_die()
+	
+func _die() -> void: #TEMPOARY
+	print(\"player dying\")
+	state = PlayerState.DEAD
+	GameManager.player_died()
+
+func _handle_jump() -> void:
+	if state == PlayerState.ON_WALL:
+		velocity.y = -jump_strength * 0.85
+		if get_wall_normal().normalized().x > 0:
+			velocity.x = max_speed
+		else:
+			velocity.x = -max_speed
+		
+		air_time = jump_buffer_time
+		StatisticManager.add_value(\"wall_jump\", 1)
+		return
+	
+	if state == PlayerState.IDLE or state == PlayerState.RUNNING or air_time < jump_buffer_time:
+		air_time = jump_buffer_time
+		velocity.y = -jump_strength
+		StatisticManager.add_value(\"ground_jump\", 1)
+		return
+	
+	if !double_jumped:
+		double_jumped = true
+		velocity.y = -jump_strength * 0.85
+		StatisticManager.add_value(\"double_jump\", 1)
+	
+"
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
+points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
+size = Vector2(17.670685, 6.0240984)
+
+[sub_resource type="PackedScene" id="PackedScene_7glbu"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("Player", "visibility_layer", "z_index", "collision_layer", "collision_mask", "safe_margin", "script", "jump_buffer_time", "Players", "CharacterBody2D", "AnimatedSprite2D", "sprite_frames", "animation", "autoplay", "flip_h", "player", "CollisionShape2D", "unique_name_in_owner", "position", "shape", "one_way_collision", "one_way_collision_margin", "dust_particles", "jump_particles", "die_particles", "AudioStreamPlayer", "volume_db", "bus", "Area2D", "scale", "monitorable", "priority", "debug_color"),
+"node_count": 9,
+"node_ids": PackedInt32Array(472125303, 1869280151, 786516878, 1559674720, 2087833924, 1269224737, 473809169, 541735558, 350452057),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 9, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 2, 5, 3, 6, 4, 7, 5, 1, 8, 0, 0, 10, 10, -1, 7, 1, 6, 11, 7, 12, 8, 13, 9, 14, 10, 6, 11, 1073741839, 12, 0, 0, 0, 16, 16, -1, 5, 17, 10, 18, 13, 19, 14, 20, 10, 21, 15, 0, 0, 0, 2147483647, 22, 16, 1, 18, 17, 0, 0, 0, 2147483647, 23, 18, 1, 18, 17, 0, 0, 0, 2147483647, 24, 19, 1, 18, 20, 0, 0, 0, 25, 25, -1, 2, 26, 21, 27, 22, 0, 0, 0, 28, 28, -1, 7, 18, 23, 29, 24, 3, 0, 4, 0, 30, 25, 31, 26, 6, 27, 0, 7, 0, 16, 16, -1, 3, 18, 28, 19, 29, 32, 30, 0),
+"variants": [3, 9, 15, 2.5, SubResource("GDScript_q4fed"), 0.18, 7, ExtResource("10_0c1fb"), &"Fall", "Idle", true, ExtResource("11_fw23c"), NodePath(".."), Vector2(0, 3.16666), SubResource("ConvexPolygonShape2D_1nynx"), 30.0, ExtResource("49_38apo"), Vector2(-0.6666667, 14.333334), ExtResource("50_khphd"), ExtResource("48_5tfui"), Vector2(-0.33333334, 2.3333333), -20.0, &"SFX", Vector2(0, 11.325), Vector2(0.83, 0.83), false, 30, ExtResource("12_7867i"), Vector2(-4.787522e-08, 2.8212862), SubResource("RectangleShape2D_1nynx"), Color(0.9907276, 0, 0.2804999, 0.41960785)],
+"version": 3
+}
 
 [sub_resource type="Resource" id="Resource_2gh4u"]
 script = ExtResource("4_wkp8b")
@@ -342,7 +495,7 @@ script = ExtResource("2_5mvff")
 position = Vector2(363, 300)
 script = ExtResource("17_3b0ty")
 parent = NodePath("../map_generator")
-prefab = ExtResource("16_devvj")
+prefab = SubResource("PackedScene_7glbu")
 old_prefab = ExtResource("11_x4tdt")
 
 [node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912]

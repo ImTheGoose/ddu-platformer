@@ -1,6 +1,5 @@
 extends AnimatedSprite2D
 
-@export var player :Player
 
 @onready var skin_sprites :Dictionary[String, SpriteFrames]= {
 	"Osvald": preload("uid://b4t3asxpw884d"),
@@ -12,33 +11,3 @@ extends AnimatedSprite2D
 func _ready() -> void:
 	var skin_name :String = DataManager.get_value("selected_skin")
 	sprite_frames = skin_sprites[skin_name]
-	if player:
-		player.state_changed.connect(_on_state_changed)
-
-func _on_state_changed(new_state: Player.PlayerState) -> void:
-	if new_state == Player.PlayerState.DEAD:
-		play("Die")
-
-func _process(delta: float) -> void:
-	if !player:
-		return
-	
-	if player.velocity.x > 0:
-		flip_h = false
-	elif player.velocity.x < 0:
-		flip_h = true
-	
-	if player.state == Player.PlayerState.IDLE:
-		play("Idle")
-	elif player.state == Player.PlayerState.RUNNING:
-		play("Run")
-	elif player.state == Player.PlayerState.ON_WALL:
-		play("Wall_Jump")
-	elif player.state == Player.PlayerState.IN_AIR:
-		if player.velocity.y > 0:
-			play("Fall")
-		elif player.double_jumped:
-			play("Double_Jump")
-		else:
-			play("Jump")
-		
