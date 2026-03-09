@@ -19,7 +19,11 @@ const INPUT_MAP :Dictionary[String, String] = { ## Skal ændres til globalt inpu
 	"jump_action" : "jump"
 }
 
-var state :PlayerState = PlayerState.IDLE
+signal state_changed(new_state: PlayerState)
+var state :PlayerState = PlayerState.IDLE:
+	set(value):
+		state = value
+		state_changed.emit(value)
 
 enum PlayerState {
 	IDLE,
@@ -35,7 +39,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		_handle_alive_player(delta)
 	move_and_slide()
-	print(state)
 
 func _handle_dead_player(delta: float) -> void:
 	velocity.x = clamp(velocity.x, -max_speed * 4, max_speed * 4)
@@ -49,7 +52,7 @@ func _handle_alive_player(delta: float) -> void:
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	velocity.x += move_axis * accelleration_per_second * delta
 	
-	
+	print(state)
 	if move_axis == 0:
 		_reduce_horizontal_velocity(delta, accelleration_per_second)
 	
@@ -74,7 +77,7 @@ func _handle_alive_player(delta: float) -> void:
 	if Input.is_action_just_pressed(INPUT_MAP["jump_action"]):
 		_handle_jump()
 	
-	if state == PlayerState.ON_WALL && velocity.y > 0:
+	if is_on_wall_only() && velocity.y > 0:
 		velocity += get_gravity() * delta * wall_gravity_scale
 	else:
 		velocity += get_gravity() * delta * 1
@@ -92,7 +95,12 @@ func is_player_grounded() -> bool:
 
 func hit(vec: Vector2) -> void:
 	velocity = vec * max_speed * 1.5
-	#_die()
+	_die()
+	
+func _die() -> void: #TEMPOARY
+	print("player dying")
+	state = PlayerState.DEAD
+	GameManager.player_died()
 
 func _handle_jump() -> void:
 	if state == PlayerState.ON_WALL:

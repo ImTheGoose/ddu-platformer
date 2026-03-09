@@ -2,6 +2,7 @@ extends Node2D
 
 @export var parent :Node2D
 @export var prefab :PackedScene
+@export var old_prefab :PackedScene
 
 var que_pla_spawn :bool = false
 
@@ -14,6 +15,14 @@ func _process(delta: float) -> void:
 		_spawn_player()
 
 func _spawn_player() -> void:
-	var p: CharacterBody2D = prefab.instantiate()
+	var ttt = randf()
+	var p = null
+	if ttt > 0.5:
+		p = prefab.instantiate()
+		print("new controller")
+	else:
+		p = old_prefab.instantiate()
+		print("old controller")
+	
 	parent.add_child(p)
 	p.global_position = global_position

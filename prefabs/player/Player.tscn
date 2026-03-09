@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://517bp8gq433n"]
 
-[ext_resource type="Script" uid="uid://nu3ba402o05y" path="res://prefabs/player/Player.gd" id="1_jfcio"]
+[ext_resource type="Script" uid="uid://nu3ba402o05y" path="res://prefabs/player/player.gd" id="1_jfcio"]
 [ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_wuy1y"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_64pgi"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_0ep8a"]

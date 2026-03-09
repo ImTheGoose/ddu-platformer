@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://maps/transitions/trans_C_to_A.tscn" id="10_devvj"]
 [ext_resource type="PackedScene" uid="uid://daixf013bdduf" path="res://maps/transitions/trans_C_to_B.tscn" id="11_3b0ty"]
 [ext_resource type="PackedScene" uid="uid://br7b3gvv1v1v1" path="res://maps/map_parts/willum_01_D_to_E.tscn" id="11_oye8v"]
+[ext_resource type="PackedScene" uid="uid://cjjbmvmx1ilce" path="res://prefabs/player/Player_old.tscn" id="11_x4tdt"]
 [ext_resource type="PackedScene" uid="uid://dykb0nm6ggl61" path="res://maps/map_parts/willum_02_E_to_C.tscn" id="12_40n85"]
 [ext_resource type="PackedScene" uid="uid://by6dsb2rxmexr" path="res://maps/transitions/trans_C_to_D.tscn" id="12_bg4s2"]
 [ext_resource type="PackedScene" uid="uid://oewahg7jjfrl" path="res://maps/map_parts/willum_05_E_to_E.tscn" id="13_gb15f"]
@@ -342,6 +343,7 @@ position = Vector2(363, 300)
 script = ExtResource("17_3b0ty")
 parent = NodePath("../map_generator")
 prefab = ExtResource("16_devvj")
+old_prefab = ExtResource("11_x4tdt")
 
 [node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912]
 script = ExtResource("3_cm0pq")

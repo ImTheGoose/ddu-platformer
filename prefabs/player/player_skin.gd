@@ -12,6 +12,12 @@ extends AnimatedSprite2D
 func _ready() -> void:
 	var skin_name :String = DataManager.get_value("selected_skin")
 	sprite_frames = skin_sprites[skin_name]
+	if player:
+		player.state_changed.connect(_on_state_changed)
+
+func _on_state_changed(new_state: Player.PlayerState) -> void:
+	if new_state == Player.PlayerState.DEAD:
+		play("Die")
 
 func _process(delta: float) -> void:
 	if !player:
