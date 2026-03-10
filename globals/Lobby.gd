@@ -69,9 +69,7 @@ func create_steam_lobby() -> void:
 	Steam.createLobby(Steam.LobbyType.LOBBY_TYPE_PUBLIC)
 
 func join_steam_lobby(lobby_id: int) -> void:
-	STEAM_PEER = SteamMultiplayerPeer.new()
-	STEAM_PEER.connect_lobby(lobby_id)
-	multiplayer.multiplayer_peer = STEAM_PEER
+	Steam.joinLobby(lobby_id)
 
 func _on_steam_lobby_created(result: int, id: int) -> void:
 	print(result, id)

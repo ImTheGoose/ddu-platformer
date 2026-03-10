@@ -25,7 +25,10 @@ func _on_join_button_pressed() -> void:
 	_initiate_lobby_join()
 
 func _initiate_lobby_join() -> void:
-	Lobby.join_lan_server(lobby_id_input.text)
+	if lobby_id_input.text.contains("."):
+		Lobby.join_lan_server(lobby_id_input.text)
+	else:
+		Lobby.join_steam_lobby(int(lobby_id_input.text))
 
 func _on_back_button_pressed() -> void:
 	MenuHandler.change_menu("multiplayer_select_menu")
