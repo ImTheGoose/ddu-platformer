@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dbsr1vrdfvlc4"]
+
+[ext_resource type="Script" uid="uid://dxniv0smwfli6" path="res://prefabs/menus/start_game_menu/select_play_menu.gd" id="1_cxadc"]
+
+[node name="SelectPlayMenu" type="VBoxContainer" unique_id=297666541 node_paths=PackedStringArray("initial_focus", "back_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cxadc")
+menu_name = "select_play_menu"
+initial_focus = NodePath("singleplayer")
+back_button = NodePath("back_button")
+
+[node name="Label" type="Label" parent="." unique_id=293640235]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Select Game"
+
+[node name="singleplayer" type="Button" parent="." unique_id=38332711]
+layout_mode = 2
+text = "Singleplayer"
+
+[node name="local_multiplayer" type="Button" parent="." unique_id=298402140]
+layout_mode = 2
+disabled = true
+text = "Local Multiplayer"
+
+[node name="online_multiplayer" type="Button" parent="." unique_id=1218321654]
+layout_mode = 2
+text = "Online Multiplayer"
+
+[node name="back_button" type="Button" parent="." unique_id=149193368]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="local_multiplayer" to="." method="_on_local_multiplayer_pressed"]
+[connection signal="pressed" from="online_multiplayer" to="." method="_on_online_multiplayer_pressed"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

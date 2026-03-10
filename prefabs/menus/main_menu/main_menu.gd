@@ -2,7 +2,7 @@ extends GameMenu
 
 
 func _on_start_game_pressed() -> void:
-	MenuHandler.change_menu("start_game_menu")
+	MenuHandler.change_menu("select_play_menu")
 	pass # Replace with function body.
 
 

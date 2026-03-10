@@ -30,7 +30,7 @@ func _on_start_game_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	MenuHandler.change_menu("main_menu")
+	MenuHandler.change_menu("select_play_menu")
 	pass # Replace with function body.
 
 

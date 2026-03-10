@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cmf3dmthewfn"]
+
+[ext_resource type="Script" uid="uid://cyqby47nqeuck" path="res://prefabs/menus/multiplayer_menus/player_lobby_card.gd" id="1_gc2p6"]
+[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="1_m8ntg"]
+
+[node name="player_lobby_card" type="HBoxContainer" unique_id=1625993656]
+custom_minimum_size = Vector2(0, 25)
+script = ExtResource("1_gc2p6")
+
+[node name="player_icon" type="TextureRect" parent="." unique_id=1316196612]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("1_m8ntg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=215357993]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -1
+
+[node name="name_label" type="Label" parent="VBoxContainer" unique_id=1720613919]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 16
+text = "Im_The_Goose"
+
+[node name="ping_label" type="Label" parent="VBoxContainer" unique_id=1333938313]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ping: 10ms"
+
+[node name="kick_button" type="Button" parent="." unique_id=804100480]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Kick"

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bychuhet3ynyy"]
+
+[ext_resource type="Script" uid="uid://rw5biaj28lsb" path="res://prefabs/menus/multiplayer_menus/multiplayer_host_type_menu.gd" id="1_1ogh0"]
+
+[node name="MultiplayerHostTypeMenu" type="VBoxContainer" unique_id=708408861 node_paths=PackedStringArray("initial_focus", "back_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ogh0")
+menu_name = "multiplayer_host_type_menu"
+initial_focus = NodePath("online_button")
+back_button = NodePath("back_button")
+
+[node name="Label" type="Label" parent="." unique_id=1454893288]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Select Type"
+
+[node name="local_lan_button" type="Button" parent="." unique_id=1458073278]
+layout_mode = 2
+text = "Local Lan"
+
+[node name="online_button" type="Button" parent="." unique_id=9559997]
+layout_mode = 2
+text = "Online"
+
+[node name="back_button" type="Button" parent="." unique_id=1255977890]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="local_lan_button" to="." method="_on_local_lan_button_pressed"]
+[connection signal="pressed" from="online_button" to="." method="_on_online_button_pressed"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

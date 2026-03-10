@@ -27,9 +27,14 @@
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="23_ggyxd"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="24_iix3i"]
 [ext_resource type="PackedScene" uid="uid://cejmty2271kf5" path="res://prefabs/menus/popups/steam_error_popup.tscn" id="24_o55x0"]
+[ext_resource type="PackedScene" uid="uid://sk35yfacs5bb" path="res://prefabs/menus/multiplayer_menus/multiplayer_join_menu.tscn" id="26_howv7"]
+[ext_resource type="PackedScene" uid="uid://bychuhet3ynyy" path="res://prefabs/menus/multiplayer_menus/multiplayer_host_type_menu.tscn" id="27_8h0xj"]
+[ext_resource type="PackedScene" uid="uid://dpjgsw4yi007c" path="res://prefabs/menus/multiplayer_menus/multiplayer_select_menu.tscn" id="28_8h0xj"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="28_mg1ud"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="29_anor8"]
+[ext_resource type="PackedScene" uid="uid://dbsr1vrdfvlc4" path="res://prefabs/menus/start_game_menu/select_play_menu.tscn" id="29_xxuaw"]
+[ext_resource type="PackedScene" uid="uid://1yqq0su5upk6" path="res://prefabs/menus/multiplayer_menus/multiplayer_lobby_menu.tscn" id="30_f6bkf"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
 shuffle = true
@@ -345,9 +350,40 @@ changed_list = Array[String](["Changed internal menu system", "Internal file res
 removed_list = Array[String](["Removed uneeded binaries"])
 
 [node name="steam_error_popup" parent="Control" unique_id=1151020849 instance=ExtResource("24_o55x0")]
+visible = false
 layout_mode = 1
 
 [node name="reset_game_popup" parent="Control" unique_id=337198406 instance=ExtResource("22_mcvie")]
+visible = false
+layout_mode = 1
+
+[node name="MultiplayerJoinMenu" parent="Control" unique_id=1617029824 instance=ExtResource("26_howv7")]
+layout_mode = 1
+offset_top = -52.5
+offset_bottom = 52.5
+
+[node name="MultiplayerTypeMenu" parent="Control" unique_id=708408861 instance=ExtResource("27_8h0xj")]
+layout_mode = 1
+offset_left = -108.5
+offset_top = -60.5
+offset_right = 108.5
+offset_bottom = 60.5
+
+[node name="MultiplayerSelectMenu" parent="Control" unique_id=846156382 instance=ExtResource("28_8h0xj")]
+layout_mode = 1
+offset_left = -103.5
+offset_top = -60.5
+offset_right = 103.5
+offset_bottom = 60.5
+
+[node name="SelectPlayMenu" parent="Control" unique_id=297666541 instance=ExtResource("29_xxuaw")]
+layout_mode = 1
+offset_left = -114.0
+offset_top = -72.0
+offset_right = 114.0
+offset_bottom = 72.0
+
+[node name="MultiplayerLobbyMenu" parent="Control" unique_id=2055560422 instance=ExtResource("30_f6bkf")]
 layout_mode = 1
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]

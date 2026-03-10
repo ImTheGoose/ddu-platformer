@@ -5,6 +5,10 @@ func _init() -> void:
 
 func _ready() -> void:
 	get_tree().root.ready.connect(_on_tree_ready)
+	Steam.initRelayNetworkAccess()
+
+func _process(delta: float) -> void:
+	Steam.run_callbacks()
 	
 func _on_tree_ready() -> void:
 	var init_response :Dictionary = Steam.get_steam_init_result() # Tjekker om der var fejl under steam hook.

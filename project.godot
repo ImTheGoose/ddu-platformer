@@ -38,6 +38,7 @@ MenuHandler="*uid://boqav6yfiyrq2"
 GlobalFocusManager="*uid://cej3huoix0m5b"
 Steamworks="*uid://bddun8wjf3s46"
 GlobalSignals="*uid://ckf3lulks2jy5"
+Lobby="*uid://coif17ch3knd1"
 
 [debug]
 
@@ -143,6 +144,8 @@ buffering/agile_event_flushing=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 
 [steam]
