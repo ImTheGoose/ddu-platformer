@@ -12,6 +12,8 @@ func _ready() -> void:
 	
 	if Lobby.is_lobby_lan():
 		name_label.text = "Player: %s" % [assigned_player_id]
+	else:
+		name_label.text = Steam.getFriendPersonaName(assigned_player_id)
 
 	if !multiplayer.is_server() or assigned_player_id == multiplayer.get_unique_id():
 		kick_button.visible = false
