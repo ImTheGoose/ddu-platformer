@@ -6,21 +6,27 @@ extends HBoxContainer
 @onready var kick_button :Button = %kick_button
 
 var assigned_player_id :int = -1
+var assigned_player_info :PlayerInfo
 
 func _ready() -> void:
 	kick_button.pressed.connect(_on_kick_pressed)
+	assigned_player_info.persona_name_changed.connect(_on_persona_name_changed)
+	assigned_player_info.avatar_image_changed.connect(_on_avatar_changed)
 	
-	if Lobby.is_lobby_lan():
-		name_label.text = "Player: %s" % [assigned_player_id]
-	else:
-		name_label.text = Steam.getFriendPersonaName(assigned_player_id)
+	name_label.text = assigned_player_info.DISPLAY_NAME
 
-	if !multiplayer.is_server() or assigned_player_id == multiplayer.get_unique_id():
+	if !multiplayer.is_server() or assigned_player_info.PEER_ID == multiplayer.get_unique_id():
 		kick_button.visible = false
 		kick_button.disabled = true
+
+func _on_avatar_changed() -> void:
+	player_icon.texture = assigned_player_info.get_avatar_texture(128)
+
+func _on_persona_name_changed(new_name: String) -> void:
+	name_label.text = new_name	
 
 func _on_kick_pressed() -> void:
 	if !multiplayer.is_server():
 		return
 	
-	multiplayer.multiplayer_peer.disconnect_peer(assigned_player_id)
+	Lobby.kick_peer(assigned_player_info.PEER_ID)

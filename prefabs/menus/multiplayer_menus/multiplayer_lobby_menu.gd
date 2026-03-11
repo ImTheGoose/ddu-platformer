@@ -21,8 +21,9 @@ func _on_lobby_created() -> void:
 	_update_ui_elements()
 
 func _on_steam_lobby_update(lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
-	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
-		_add_player_card(changed_id)
+	pass
+	#if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
+		#_add_player_card(Lobby.get_peer_id_from_steam_id(making_change_id))
 	
 
 func _get_local_ip() -> String:
@@ -40,12 +41,12 @@ func _clear_unused_in_playerlist() -> void:
 
 	var peers = multiplayer.get_peers()
 	for child in playerlist_container.get_children():
-		if !peers.has(child.assigned_player_id) and child.assigned_player_id != multiplayer.get_unique_id():
+		if !peers.has(child.assigned_player_info.PEER_ID) and child.assigned_player_info.PEER_ID != multiplayer.get_unique_id():
 			child.queue_free()
 
-func _add_player_card(id: int) -> void:
+func _add_player_card(peer_id: int) -> void:
 	var player_card :Node = player_card_prefab.instantiate()
-	player_card.assigned_player_id = id
+	player_card.assigned_player_info = Lobby.get_player_info(peer_id)
 	playerlist_container.add_child(player_card)
 
 func _on_peer_connected(id: int) -> void:
@@ -79,7 +80,6 @@ func _on_quit_lobby_pressed() -> void:
 	MenuHandler.change_menu("main_menu")
 	_clear_unused_in_playerlist()
 	pass # Replace with function body.
-
 
 func _on_copy_code_button_pressed() -> void:
 	if Lobby.is_lobby_lan():

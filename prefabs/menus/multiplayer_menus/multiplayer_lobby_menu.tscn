@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://1yqq0su5upk6"]
 
 [ext_resource type="Script" uid="uid://jkkasnmceuk4" path="res://prefabs/menus/multiplayer_menus/multiplayer_lobby_menu.gd" id="1_wdrp6"]
-[ext_resource type="PackedScene" uid="uid://cmf3dmthewfn" path="res://prefabs/menus/multiplayer_menus/player_lobby_card.tscn" id="2_w7p47"]
 
 [node name="MultiplayerLobbyMenu" type="VBoxContainer" unique_id=2055560422]
 anchors_preset = 8
@@ -35,9 +34,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="player_lobby_card" parent="PanelContainer/VBoxContainer/playerlist" unique_id=1625993656 instance=ExtResource("2_w7p47")]
-layout_mode = 2
 
 [node name="start_game_button" type="Button" parent="." unique_id=1649323693]
 unique_name_in_owner = true
