@@ -5,11 +5,13 @@ extends HBoxContainer
 @onready var ping_label :Label = %ping_label
 @onready var kick_button :Button = %kick_button
 
-var assigned_player_id :int = -1
+var assigned_peer_id :int = -1
 var assigned_player_info :PlayerInfo
 
 func _ready() -> void:
 	kick_button.pressed.connect(_on_kick_pressed)
+	assigned_player_info = Lobby.get_player_info(assigned_peer_id)
+	
 	assigned_player_info.persona_name_changed.connect(_on_persona_name_changed)
 	assigned_player_info.avatar_image_changed.connect(_on_avatar_changed)
 	

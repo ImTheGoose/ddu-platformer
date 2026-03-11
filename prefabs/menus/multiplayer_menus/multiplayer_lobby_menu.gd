@@ -40,23 +40,23 @@ func _clear_unused_in_playerlist() -> void:
 		return
 
 	var peers = multiplayer.get_peers()
+	print(peers)
 	for child in playerlist_container.get_children():
-		if !peers.has(child.assigned_player_info.PEER_ID) and child.assigned_player_info.PEER_ID != multiplayer.get_unique_id():
+		if !peers.has(child.assigned_peer_id) and child.assigned_peer_id != multiplayer.get_unique_id():
 			child.queue_free()
 
 func _add_player_card(peer_id: int) -> void:
 	var player_card :Node = player_card_prefab.instantiate()
-	player_card.assigned_player_info = Lobby.get_player_info(peer_id)
+	player_card.assigned_peer_id = peer_id
 	playerlist_container.add_child(player_card)
 
-func _on_peer_connected(id: int) -> void:
-	_add_player_card(id)
+func _on_peer_connected(peer_id: int) -> void:
+	print("peer connected")
+	_add_player_card(peer_id)
 	_update_ui_elements()
-	print("Peer connected with id: ", id)
 
 func _on_peer_disconnected(id: int) -> void:
 	_update_ui_elements()
-	print("Peer disconnected with id: ", id)
 
 func _update_ui_elements() -> void:
 	_clear_unused_in_playerlist()
