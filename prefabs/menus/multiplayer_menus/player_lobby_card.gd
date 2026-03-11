@@ -16,6 +16,8 @@ func _ready() -> void:
 	assigned_player_info.avatar_image_changed.connect(_on_avatar_changed)
 	
 	name_label.text = assigned_player_info.DISPLAY_NAME
+	if assigned_player_info.AVATAR_IMAGE:
+		_on_avatar_changed()
 
 	if !multiplayer.is_server() or assigned_player_info.PEER_ID == multiplayer.get_unique_id():
 		kick_button.visible = false

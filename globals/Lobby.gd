@@ -7,6 +7,7 @@ var DEFAULT_LAN_PORT : int = 8069
 var created_player_infos :Dictionary[int, PlayerInfo] = {}
 
 signal lobby_ready()
+signal connection_error(error_reason: String)
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -20,9 +21,10 @@ func _ready() -> void:
 	Steam.lobby_created.connect(_on_steam_lobby_created)
 	Steam.lobby_joined.connect(_on_steam_lobby_joined)
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
+	close_connection()
 
 func _on_server_disconnected() -> void:
-	print("Server host left")
+	Alerts.push_error("Disconnected", "The lobby host has left.")
 	close_connection()
 	MenuHandler.change_menu("main_menu")
 
@@ -31,13 +33,14 @@ func _on_join_requested(lobby_id: int, steam_id: int) -> void:
 
 func _on_steam_lobby_joined(lobby: int, permission: int, locked: bool, response: int) -> void:
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
-		if multiplayer.is_server():
+		if multiplayer.multiplayer_peer && multiplayer.is_server():
 			return
 		STEAM_LOBBY_ID = lobby
 		STEAM_PEER = SteamMultiplayerPeer.new()
 		STEAM_PEER.server_relay = true
 		STEAM_PEER.create_client(Steam.getLobbyOwner(lobby))
 		multiplayer.multiplayer_peer = STEAM_PEER
+		add_player_info(multiplayer.multiplayer_peer.get_unique_id())
 		_on_connected_to_server()
 	else:
 		_on_connection_failed()
@@ -67,11 +70,10 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 		print("%s did... something." % changer_name)
 
 func _on_connected_to_server() -> void:
-	print("Successfully connected to server")
 	MenuHandler.change_menu("multiplayer_lobby_menu")
 
 func _on_connection_failed() -> void:
-	print("Failed to establish connection to server")
+	Lobby.connection_error.emit("Failed to establish connection to server")
 
 func create_lan_server(port: int = DEFAULT_LAN_PORT) -> void:
 	var peer := ENetMultiplayerPeer.new()
@@ -84,6 +86,7 @@ func create_lan_server(port: int = DEFAULT_LAN_PORT) -> void:
 		add_player_info(multiplayer.multiplayer_peer.get_unique_id())
 		lobby_ready.emit()
 		MenuHandler.change_menu("multiplayer_lobby_menu")
+		Alerts.push_success("Lobby Created", "Lobby was successfully created.")
 
 func join_lan_server(ip: String, port: int = DEFAULT_LAN_PORT) -> void:
 	var peer := ENetMultiplayerPeer.new()
@@ -102,9 +105,11 @@ func is_lobby_lan() -> bool:
 		return true
 
 func create_steam_lobby() -> void:
+	MenuHandler.change_menu("multiplayer_status_menu")
 	Steam.createLobby(Steam.LobbyType.LOBBY_TYPE_PUBLIC, 4)
 
 func join_steam_lobby(lobby_id: int) -> void:
+	MenuHandler.change_menu("multiplayer_status_menu")
 	Steam.joinLobby(lobby_id)
 
 func kick_peer(peer_id: int) -> void:
@@ -114,7 +119,6 @@ func _on_peer_connected(peer_id: int) -> void:
 	add_player_info(peer_id)
 
 func _on_steam_lobby_created(result: int, id: int) -> void:
-	print(result, id)
 	if result == Steam.Result.RESULT_OK:
 		STEAM_LOBBY_ID = id
 		
@@ -126,6 +130,7 @@ func _on_steam_lobby_created(result: int, id: int) -> void:
 
 		lobby_ready.emit()
 		MenuHandler.change_menu("multiplayer_lobby_menu")
+		Alerts.push_success("Lobby Created", "Lobby was successfully created.")
 
 func get_peer_id_from_steam_id(steam_id: int) -> int:
 	if multiplayer.multiplayer_peer is SteamMultiplayerPeer:

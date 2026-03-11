@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="10_25ya2"]
 [ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="11_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="12_25ya2"]
+[ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="12_yxbh2"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="13_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="14_25ya2"]
 [ext_resource type="PackedScene" uid="uid://xvfmjoenq114" path="res://prefabs/menus/shop_menus/shop_skin_menu.tscn" id="15_25ya2"]
@@ -35,6 +36,7 @@
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="29_anor8"]
 [ext_resource type="PackedScene" uid="uid://dbsr1vrdfvlc4" path="res://prefabs/menus/start_game_menu/select_play_menu.tscn" id="29_xxuaw"]
 [ext_resource type="PackedScene" uid="uid://1yqq0su5upk6" path="res://prefabs/menus/multiplayer_menus/multiplayer_lobby_menu.tscn" id="30_f6bkf"]
+[ext_resource type="PackedScene" uid="uid://c2fthjbl5jn4r" path="res://prefabs/menus/multiplayer_menus/multiplayer_status_menu.tscn" id="31_wns3v"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
 shuffle = true
@@ -277,6 +279,16 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 11
 text = "Legacy-1"
 
+[node name="Control" type="Control" parent="UI" unique_id=1649518603]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("12_yxbh2")
+
 [node name="Control" type="Control" parent="." unique_id=884807155]
 z_index = 1
 layout_mode = 3
@@ -385,6 +397,13 @@ offset_bottom = 72.0
 
 [node name="MultiplayerLobbyMenu" parent="Control" unique_id=2055560422 instance=ExtResource("30_f6bkf")]
 layout_mode = 1
+
+[node name="MultiplayerStatusMenu" parent="Control" unique_id=840786237 instance=ExtResource("31_wns3v")]
+layout_mode = 1
+offset_left = -116.5
+offset_top = -37.5
+offset_right = 116.5
+offset_bottom = 37.5
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 0

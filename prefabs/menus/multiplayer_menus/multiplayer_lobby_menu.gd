@@ -40,7 +40,6 @@ func _clear_unused_in_playerlist() -> void:
 		return
 
 	var peers = multiplayer.get_peers()
-	print(peers)
 	for child in playerlist_container.get_children():
 		if !peers.has(child.assigned_peer_id) and child.assigned_peer_id != multiplayer.get_unique_id():
 			child.queue_free()
@@ -51,11 +50,12 @@ func _add_player_card(peer_id: int) -> void:
 	playerlist_container.add_child(player_card)
 
 func _on_peer_connected(peer_id: int) -> void:
-	print("peer connected")
+	Alerts.push_default("Player Joined", "A player has joined the lobby.")
 	_add_player_card(peer_id)
 	_update_ui_elements()
 
 func _on_peer_disconnected(id: int) -> void:
+	Alerts.push_default("Player Left", "A player has left the lobby.")
 	_update_ui_elements()
 
 func _update_ui_elements() -> void:
@@ -69,6 +69,7 @@ func _update_ui_elements() -> void:
 		lobby_id_label.text = "Local IP: %s" % _get_local_ip()
 	else:
 		lobby_id_label.text = "Lobby ID: %s" % Lobby.STEAM_LOBBY_ID
+
 
 func _on_connected_to_server() -> void:
 	_add_player_card(multiplayer.get_unique_id())

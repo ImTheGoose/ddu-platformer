@@ -12,7 +12,7 @@ class_name PlayerInfo
 @export var DISPLAY_NAME: String = "lan_placeholder":
 	set(value):
 		DISPLAY_NAME = value
-		persona_name_changed.emit()
+		persona_name_changed.emit(value)
 
 signal persona_name_changed(new_name: String)
 signal avatar_image_changed()
@@ -22,14 +22,13 @@ func _init(assigned_peer_id: int) -> void:
 	
 	if Lobby.is_lobby_lan():
 		return
-
-	STEAM_ID = Lobby.get_steam_id_from_peer_id(PEER_ID)
-	Steam.getPlayerAvatar(2, STEAM_ID)
-	if STEAM_ID == Steam.getSteamID():
-		DISPLAY_NAME = Steam.getPersonaName()
-	
+		
 	Steam.persona_state_change.connect(_on_persona_state_change)
 	Steam.avatar_loaded.connect(_on_avatar_loaded)
+	
+	STEAM_ID = Lobby.get_steam_id_from_peer_id(PEER_ID)
+	Steam.getPlayerAvatar(2, STEAM_ID)
+	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
 
 func _on_persona_state_change(steam_id: int, flags: int) -> void:
 	if steam_id != STEAM_ID:

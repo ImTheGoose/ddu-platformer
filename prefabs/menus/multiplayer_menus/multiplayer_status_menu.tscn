@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://c2fthjbl5jn4r"]
+
+[ext_resource type="Script" uid="uid://ddmpwdys2gw52" path="res://prefabs/menus/multiplayer_menus/multiplayer_status_menu.gd" id="1_mlk4r"]
+
+[node name="MultiplayerStatusMenu" type="VBoxContainer" unique_id=840786237]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mlk4r")
+menu_name = "multiplayer_status_menu"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=441317920]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="titel" type="Label" parent="VBoxContainer" unique_id=1378034994]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Connecting..."
+
+[node name="description" type="Label" parent="VBoxContainer" unique_id=127931409]
+unique_name_in_owner = true
+layout_mode = 2
+text = "An Error occurec"
+horizontal_alignment = 1
+
+[node name="cancel_button" type="Button" parent="." unique_id=1791541569]
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="pressed" from="cancel_button" to="." method="_on_cancel_button_pressed"]
