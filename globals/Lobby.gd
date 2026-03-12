@@ -37,11 +37,12 @@ func _on_connection_failed() -> void:
 	Lobby.connection_error.emit("Failed to establish connection to server")
 
 func create_lan_server(port: int = DEFAULT_LAN_PORT) -> void:
+	MenuHandler.change_menu("multiplayer_status_menu")
 	var peer := ENetMultiplayerPeer.new()
-	var err := peer.create_server(port, 4)
+	var err := peer.create_server(port, 3)
 	multiplayer.multiplayer_peer = peer
 	if err != OK:
-		print("Error occured while creating lan lobby")
+		connection_error.emit("Error occured while creating lan lobby")
 		close_connection()
 	else:
 		add_player_info(multiplayer.multiplayer_peer.get_unique_id())
@@ -50,12 +51,13 @@ func create_lan_server(port: int = DEFAULT_LAN_PORT) -> void:
 		Alerts.push_success("Lobby Created", "Lobby was successfully created.")
 
 func join_lan_server(ip: String, port: int = DEFAULT_LAN_PORT) -> void:
+	MenuHandler.change_menu("multiplayer_status_menu")
 	var peer := ENetMultiplayerPeer.new()
 	var err := peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = peer
 	add_player_info(multiplayer.multiplayer_peer.get_unique_id())
 	if err != OK:
-		print("Error occured while joining lan server")
+		connection_error.emit("Failed to connect to lan server.")
 		close_connection()
 		return
 
@@ -110,6 +112,8 @@ func _on_steam_lobby_created(result: int, id: int) -> void:
 		lobby_ready.emit()
 		MenuHandler.change_menu("multiplayer_lobby_menu")
 		Alerts.push_success("Lobby Created", "Lobby was successfully created.")
+	else:
+		Lobby.connection_error.emit("Failed to create online lobby. Please try again.")
 
 func join_steam_lobby(lobby_id: int) -> void:
 	MenuHandler.change_menu("multiplayer_status_menu")

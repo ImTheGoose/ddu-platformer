@@ -3,6 +3,7 @@ extends GameMenu
 @onready var lobby_id_label :Label = %lobby_id_label
 @onready var playerlist_container :VBoxContainer = %playerlist
 @onready var start_game_button:Button = %start_game_button
+@onready var player_amount_label :Label = %player_amount_label
 @export var player_card_prefab :PackedScene = preload("uid://cmf3dmthewfn")
 
 func _ready() -> void:
@@ -60,6 +61,8 @@ func _on_peer_disconnected(id: int) -> void:
 
 func _update_ui_elements() -> void:
 	_clear_unused_in_playerlist()
+	player_amount_label.text = "Players: %s of 4" % (multiplayer.get_peers().size() + 1)
+	
 	if multiplayer.is_server():
 		start_game_button.visible = true
 		start_game_button.disabled = multiplayer.get_peers().size() < 1
