@@ -30,6 +30,7 @@ disabled = true
 text = "Local Multiplayer"
 
 [node name="online_multiplayer" type="Button" parent="." unique_id=1218321654]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Online Multiplayer"
 
