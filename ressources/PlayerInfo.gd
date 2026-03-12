@@ -20,13 +20,22 @@ signal avatar_image_changed()
 func _init(assigned_peer_id: int) -> void:
 	PEER_ID = assigned_peer_id
 	
-	if Lobby.is_lobby_lan():
-		return
-		
 	Steam.persona_state_change.connect(_on_persona_state_change)
 	Steam.avatar_loaded.connect(_on_avatar_loaded)
+	Lobby.peer_linked_to_steam.connect(_on_peer_linked_to_steam)
+	
+	if Lobby.is_lobby_lan():
+		return
 	
 	STEAM_ID = Lobby.get_steam_id_from_peer_id(PEER_ID)
+	Steam.getPlayerAvatar(2, STEAM_ID)
+	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
+
+func _on_peer_linked_to_steam(peer_id: int, steam_id: int) -> void:
+	if peer_id != PEER_ID or steam_id < 1:
+		return
+	
+	STEAM_ID = steam_id
 	Steam.getPlayerAvatar(2, STEAM_ID)
 	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
 

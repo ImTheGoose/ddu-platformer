@@ -8,6 +8,7 @@ var created_player_infos :Dictionary[int, PlayerInfo] = {}
 
 signal lobby_ready()
 signal connection_error(error_reason: String)
+signal peer_linked_to_steam(peer_id: int, steam_id: int)
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -22,6 +23,33 @@ func _ready() -> void:
 	Steam.lobby_joined.connect(_on_steam_lobby_joined)
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	close_connection()
+
+#region Lobby RPC commands
+
+@rpc("any_peer","call_local","reliable")
+func link_steamid_to_peerid(peer_id: int, steam_id: int) -> void:
+	if created_player_infos.has(peer_id):
+		peer_linked_to_steam.emit(peer_id, steam_id)
+	else:
+		print("Retrived steam id from a peer, that doesnt have a linked info. Peer is: ", peer_id)
+
+
+@rpc("any_peer","call_local","reliable")
+func transmit_steamid_to_sender() -> void:
+	var sender_peer_id :int = multiplayer.get_remote_sender_id()
+	var peer_id :int = multiplayer.get_unique_id()
+	var steam_id :int = Steam.getSteamID()
+	var err = rpc_id(sender_peer_id, "link_steamid_to_peerid", peer_id, steam_id)
+	if err != OK:
+		print("Error occured while transmitting steam id to peer %s. Error code: %s" % [sender_peer_id, err])
+
+
+func request_steamid_from_peer(peer_id: int) -> void:
+	var err = rpc_id(peer_id, "transmit_steamid_to_sender")
+	if err != OK:
+		print("Error occured while requesting steamid from peer %s. Error code: %s" % [peer_id, err])
+
+#endregion
 
 #region Lan Lobby Hadling
 
@@ -44,22 +72,25 @@ func create_lan_server(port: int = DEFAULT_LAN_PORT) -> void:
 	if err != OK:
 		connection_error.emit("Error occured while creating lan lobby")
 		close_connection()
-	else:
-		add_player_info(multiplayer.multiplayer_peer.get_unique_id())
-		lobby_ready.emit()
-		MenuHandler.change_menu("multiplayer_lobby_menu")
-		Alerts.push_success("Lobby Created", "Lobby was successfully created.")
+		return
+
+	add_player_info(multiplayer.multiplayer_peer.get_unique_id())
+	lobby_ready.emit()
+	MenuHandler.change_menu("multiplayer_lobby_menu")
+	Alerts.push_success("Lobby Created", "Lobby was successfully created.")
 
 func join_lan_server(ip: String, port: int = DEFAULT_LAN_PORT) -> void:
 	MenuHandler.change_menu("multiplayer_status_menu")
 	var peer := ENetMultiplayerPeer.new()
 	var err := peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = peer
-	add_player_info(multiplayer.multiplayer_peer.get_unique_id())
 	if err != OK:
 		connection_error.emit("Failed to connect to lan server.")
 		close_connection()
 		return
+	
+	
+	add_player_info(multiplayer.get_unique_id())
 
 #endregion
 
@@ -164,6 +195,11 @@ func get_steam_id_from_peer_id(peer_id: int) -> int:
 
 func add_player_info(peer_id: int) -> void:
 	created_player_infos.set(peer_id, PlayerInfo.new(peer_id))
+	
+	if peer_id == multiplayer.get_unique_id():
+		link_steamid_to_peerid(peer_id, Steam.getSteamID())
+	else:
+		request_steamid_from_peer(peer_id)
 
 func get_player_info(peer_id: int) -> PlayerInfo:
 	return created_player_infos[peer_id]
