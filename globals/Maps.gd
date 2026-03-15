@@ -9,6 +9,7 @@ var loaded_map_files :Array[MapFile] = []
 
 var current_map_pool :Array[MapFile] = []:
 	set(value):
+		print("set map pool")
 		if value.is_empty():
 			current_map_pool = get_valid_regular_maps()
 			current_map_pool.shuffle()
@@ -18,10 +19,13 @@ var current_map_pool :Array[MapFile] = []:
 var current_transition_pool :Array[MapFile] = []
 var current_start_pool :Array[MapFile] = []:
 	set(value):
+		print("set start pool")
 		if value.is_empty():
 			current_start_pool = get_valid_start_maps()
+			current_start_pool.shuffle()
 		else:
 			current_start_pool = value
+			current_start_pool.shuffle()
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -86,10 +90,21 @@ func refresh_map_pools() -> void:
 	current_transition_pool = get_valid_transitions()
 	current_start_pool = get_valid_start_maps()
 
+func get_start_map() -> MapFile:
+	if current_start_pool.is_empty():
+		current_start_pool = get_valid_start_maps()
+		current_start_pool.shuffle()
+	return current_start_pool.pop_back()
+
 # Gets the next map, with nescessary transitions earlier in the array.
 func get_next_map_section(current_connection: MapFile.ConnectionType) -> Array[MapFile]:
 	var section :Array[MapFile] = []
-	var next_map :MapFile = current_map_pool.pop_front()
+
+	if current_map_pool.is_empty():
+		current_map_pool = get_valid_regular_maps()
+		current_map_pool.shuffle()
+
+	var next_map :MapFile = current_map_pool.pop_back()
 	if next_map.bottom_connection_type == current_connection:
 		return [next_map]
 	
