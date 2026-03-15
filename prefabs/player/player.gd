@@ -26,6 +26,7 @@ var air_time :float = 0
 
 func _enter_tree() -> void:
 	if multiplayer.has_multiplayer_peer():
+		position = Vector2(350.0, 300.0)
 		set_multiplayer_authority(int(name))
 
 func _physics_process(delta: float) -> void:

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://butcxn82sp4xf"]
+
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_cc85k"]
+[ext_resource type="PackedScene" uid="uid://br7b3gvv1v1v1" path="res://maps/map_parts/willum_01_D_to_E.tscn" id="1_odia0"]
+
+[resource]
+script = ExtResource("1_cc85k")
+map_id = "willum_map_01"
+prefab = ExtResource("1_odia0")
+bottom_connection_type = 3
+top_connection_type = 4
+related_collections = Array[int]([0])
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
