@@ -14,6 +14,8 @@ class_name MapFile
 # The upper connection type, which is used to find the next map parts
 @export var top_connection_type: ConnectionType
 
+@export var type :MapType = MapType.REGULAR_MAP
+
 # Collections that the maps is a part of.
 @export var related_collections :Array[CollectionType] = []
 
@@ -28,6 +30,7 @@ enum CollectionType {
 enum MapType {
 	REGULAR_MAP,
 	TRANSITION_MAP,
+	START_MAP,
 }
 
 enum ConnectionType {
