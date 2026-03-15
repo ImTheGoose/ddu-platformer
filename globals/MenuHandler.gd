@@ -39,6 +39,7 @@ func _on_game_visible_changed(isVisible: bool) -> void:
 func is_menu_visible(menu_name : String) -> bool:
 	return visible_menu_names.has(menu_name)
 
+@rpc("authority","call_local","reliable")
 func hide_all_menus() -> void:
 	for menu_name in registered_menu_names:
 		hide_menu(menu_name)
@@ -54,15 +55,19 @@ func show_menu(menu_name : String) -> void:
 	visible_menu_names.append(menu_name)
 	changed_menu_visibillity.emit(menu_name, true)
 
+@rpc("authority","call_local","reliable")
 func hide_game() -> void:
 	changed_game_visibillity.emit(false)
 
+@rpc("authority","call_local","reliable")
 func show_game() -> void:
 	changed_game_visibillity.emit(true)
-
+	
+@rpc("authority","call_local","reliable")
 func show_blackout() -> void:
 	changed_blackout_visibillity.emit(true)
 
+@rpc("authority","call_local","reliable")
 func hide_blackout() -> void:
 	changed_blackout_visibillity.emit(false)
 

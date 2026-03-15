@@ -14,9 +14,34 @@ points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7,
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(17.670685, 6.0240984)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jfcio"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("AnimatedSprite2D:flip_h")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("dust_particles:emitting")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath("jump_particles:emitting")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("die_particles:emitting")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath("AudioStreamPlayer:playing")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+
 [node name="Player" type="CharacterBody2D" unique_id=472125303 groups=["Players"]]
 visibility_layer = 3
-z_index = 9
 collision_layer = 15
 collision_mask = 15
 safe_margin = 2.5
@@ -64,3 +89,6 @@ script = ExtResource("7_w51pg")
 position = Vector2(-4.787522e-08, 2.8212862)
 shape = SubResource("RectangleShape2D_1nynx")
 debug_color = Color(0.9907276, 0, 0.2804999, 0.41960785)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2064356115]
+replication_config = SubResource("SceneReplicationConfig_jfcio")

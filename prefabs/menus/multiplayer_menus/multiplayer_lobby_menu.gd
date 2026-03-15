@@ -90,3 +90,12 @@ func _on_copy_code_button_pressed() -> void:
 		DisplayServer.clipboard_set(str(_get_local_ip()))
 	else:
 		DisplayServer.clipboard_set(str(Lobby.STEAM_LOBBY_ID))
+
+
+func _on_start_game_button_pressed() -> void:
+	if !multiplayer.is_server():
+		return
+	
+	GameManager.set_state(GameManager.STATE.AWAITING_RESTART)
+	MenuHandler.show_blackout()
+	pass # Replace with function body.

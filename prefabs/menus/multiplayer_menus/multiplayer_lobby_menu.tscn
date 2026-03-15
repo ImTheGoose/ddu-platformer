@@ -67,5 +67,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 6
 text = "Copy"
 
+[connection signal="pressed" from="start_game_button" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="quit_lobby" to="." method="_on_quit_lobby_pressed"]
 [connection signal="pressed" from="HBoxContainer/copy_code_button" to="." method="_on_copy_code_button_pressed"]

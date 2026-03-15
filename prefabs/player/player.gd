@@ -18,13 +18,20 @@ extends CharacterBody2D
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
 
 var dead :bool = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
 
+func _enter_tree() -> void:
+	if multiplayer.has_multiplayer_peer():
+		set_multiplayer_authority(int(name))
 
 func _physics_process(delta: float) -> void:
+	if multiplayer.has_multiplayer_peer() && !is_multiplayer_authority():
+		return
+	
 	if dead:
 		var col :CollisionShape2D = $CollisionShape2D
 		col.disabled = true
