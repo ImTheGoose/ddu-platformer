@@ -29,7 +29,7 @@ func spawn_map_section(map_section: Array[MapFile]) -> void:
 func spawn_map_file(map_file: MapFile) -> void:
 	current_connection_type = map_file.top_connection_type
 	var map_node :Node2D = map_file.prefab.instantiate()
-	add_child(map_node)
+	add_child(map_node, true)
 	
 	var terrain_node :TileMapLayer = map_node.get_node("TerrainTiles")
 	var terrain_rect :Rect2i = terrain_node.get_used_rect()

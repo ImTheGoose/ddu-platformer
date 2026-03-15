@@ -7,25 +7,9 @@ const MAP_FOLDER_PATHS :Dictionary[String, String] = {
 # A directory of every map that is loaded into memory. Not intended to be manipulated.
 var loaded_map_files :Array[MapFile] = []
 
-var current_map_pool :Array[MapFile] = []:
-	set(value):
-		print("set map pool")
-		if value.is_empty():
-			current_map_pool = get_valid_regular_maps()
-			current_map_pool.shuffle()
-		else:
-			current_map_pool = value
-			current_map_pool.shuffle()
+var current_map_pool :Array[MapFile] = []
 var current_transition_pool :Array[MapFile] = []
-var current_start_pool :Array[MapFile] = []:
-	set(value):
-		print("set start pool")
-		if value.is_empty():
-			current_start_pool = get_valid_start_maps()
-			current_start_pool.shuffle()
-		else:
-			current_start_pool = value
-			current_start_pool.shuffle()
+var current_start_pool :Array[MapFile] = []
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
