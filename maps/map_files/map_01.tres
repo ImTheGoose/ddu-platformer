@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://co8b0v26ap3ym"]
+
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_ncned"]
+
+[resource]
+script = ExtResource("1_ncned")
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
