@@ -25,7 +25,9 @@ func _on_join_button_pressed() -> void:
 	_initiate_lobby_join()
 
 func _initiate_lobby_join() -> void:
-	if lobby_id_input.text.contains("."):
+	if lobby_id_input.text == "":
+		Lobby.join_lan_server("127.0.0.1")
+	elif lobby_id_input.text.contains("."):
 		Lobby.join_lan_server(lobby_id_input.text)
 	else:
 		Lobby.join_steam_lobby(int(lobby_id_input.text))

@@ -16,7 +16,7 @@ size = Vector2(17.670685, 6.0240984)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jfcio"]
 properties/0/path = NodePath(".:position")
-properties/0/spawn = true
+properties/0/spawn = false
 properties/0/replication_mode = 1
 properties/1/path = NodePath("AnimatedSprite2D:animation")
 properties/1/spawn = true
