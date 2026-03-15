@@ -138,6 +138,7 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		quit_game()
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		return
 		if get_state() == STATE.PREGAME or get_state() == STATE.PLAYING:
 			pause_game(true)
 			MenuHandler.change_menu("pause_menu")

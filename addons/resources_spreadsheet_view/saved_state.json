@@ -2,13 +2,13 @@
   "column_properties": {
     "res://maps/map_files/": {
       "metadata/_custom_type_script": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
       }
     }
   },
@@ -17,7 +17,7 @@
   ],
   "table_functions": {
     "filter": [
-      "\nreturn true"
+      "return true"
     ],
     "process": [
       "return value"

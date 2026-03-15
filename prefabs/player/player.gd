@@ -19,6 +19,7 @@ extends CharacterBody2D
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
+@export var sync_position: Vector2
 
 var dead :bool = false #TEMPOARY
 var double_jumped :bool = false
@@ -31,7 +32,10 @@ func _enter_tree() -> void:
 
 func _physics_process(delta: float) -> void:
 	if multiplayer.has_multiplayer_peer() && !is_multiplayer_authority():
+		global_position = global_position.lerp(sync_position, delta * 15.0)
 		return
+	else:
+		sync_position = global_position
 	
 	if dead:
 		var col :CollisionShape2D = $CollisionShape2D
