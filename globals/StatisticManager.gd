@@ -28,7 +28,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	GameManager.on_player_death.connect(_save_recording)
-	GameManager.reset_game.connect(_clear_recording)
+	GameManager.client_reset.connect(_clear_recording)
 
 func _save_recording() -> void:
 	var glo_stats :Dictionary = DataManager.get_value("statistics")

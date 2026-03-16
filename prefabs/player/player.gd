@@ -142,7 +142,7 @@ func reset_player(gpos:Vector2) -> void:
 func _die() -> void: #TEMPOARY
 	print("player dying")
 	dead = true
-	GameManager.player_died()
+	GameManager.rpc("player_died")
 	death_particles.restart()
 	anim.play("Die")
 	audio_stream.stream = audio_files["die"]
@@ -151,8 +151,9 @@ func _die() -> void: #TEMPOARY
 	audio_stream.play()
 
 func hit(vec: Vector2) -> void:
-	velocity = vec * max_speed * 1.5
-	_die()
+	if is_multiplayer_authority():
+		velocity = vec * max_speed * 1.5
+		_die()
 
 func _update_anim(move_axis: float) -> void:
 	if dead:
