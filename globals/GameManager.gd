@@ -4,7 +4,7 @@ signal on_start_game
 signal reset_game
 signal spawn_level
 signal on_player_death
-signal spawn_player
+signal spawn_player(global_position: Vector2, peer_id: int)
 var game_paused :bool = false
 var game_difficulty :difficulty = difficulty.NORMAL
 
@@ -109,7 +109,6 @@ func force_reset_game() -> void:
 
 func spawn_game() -> void:
 	spawn_level.emit()
-	spawn_player.emit()
 	set_state(STATE.PREGAME)
 	players_dead = 0
 

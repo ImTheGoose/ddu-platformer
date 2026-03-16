@@ -19,16 +19,11 @@ extends CharacterBody2D
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
-@export var sync_position: Vector2
+@export var sync_position: Vector2 = Vector2.ZERO
 
 var dead :bool = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
-
-func _enter_tree() -> void:
-	if multiplayer.has_multiplayer_peer():
-		position = Vector2(350.0, 300.0)
-		set_multiplayer_authority(int(name))
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
@@ -146,6 +141,11 @@ func _die() -> void: #TEMPOARY
 func hit(vec: Vector2) -> void:
 	velocity = vec * max_speed * 1.5
 	_die()
+
+func safe_queue_free() -> void:
+	multi_sync.set_process(false)
+	multi_sync.set_process_internal(false)
+	queue_free()
 
 func _update_anim(move_axis: float) -> void:
 	if dead:

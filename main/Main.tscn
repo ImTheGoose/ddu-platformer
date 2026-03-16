@@ -5,8 +5,7 @@
 [ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://main/map_generator.gd" id="3_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="6_38apo"]
 [ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="7_khphd"]
-[ext_resource type="PackedScene" uid="uid://cjjbmvmx1ilce" path="res://prefabs/player/Player.tscn" id="11_x4tdt"]
-[ext_resource type="Script" uid="uid://c34ss7wg87b4o" path="res://utility/playerspawn.gd" id="17_3b0ty"]
+[ext_resource type="Script" uid="uid://bs1phqh1dv12v" path="res://main/player_spawner.gd" id="10_m4geg"]
 [ext_resource type="PackedScene" uid="uid://dxyonb6hgvrx" path="res://main/Camera.tscn" id="24_hhcpw"]
 [ext_resource type="Script" uid="uid://2wk5j2o4ng1c" path="res://main/particle_pre_renderer.gd" id="47_rchyr"]
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="48_5tfui"]
@@ -27,18 +26,18 @@ particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38
 scale = Vector2(3, 3)
 script = ExtResource("2_5mvff")
 
-[node name="Playerspawn" type="Node2D" parent="game_container" unique_id=1262602405 node_paths=PackedStringArray("parent")]
-position = Vector2(363, 300)
-script = ExtResource("17_3b0ty")
-parent = NodePath("../map_generator")
-prefab = ExtResource("11_x4tdt")
-
-[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner")]
+[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner", "player_container")]
 script = ExtResource("3_cm0pq")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
+player_container = NodePath("../player_container")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=987899368]
-_spawnable_scenes = PackedStringArray("uid://cjjbmvmx1ilce")
 spawn_path = NodePath("../map_generator")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=408371865]
+spawn_path = NodePath("../player_container")
+script = ExtResource("10_m4geg")
+
+[node name="player_container" type="Node2D" parent="game_container" unique_id=418401319]
 
 [node name="Camera2D" parent="." unique_id=1311093804 instance=ExtResource("24_hhcpw")]

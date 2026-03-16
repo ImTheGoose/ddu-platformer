@@ -109,7 +109,6 @@ func save_game_data() -> void:
 		print(PREFIX, "Failed to open file access for saves. Error code: " ,FileAccess.get_open_error())
 		
 	var json_string :String = JSON.stringify(game_data)
-	print(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME)
 	save_file.store_line(json_string)
 	save_game_completed.emit()
 

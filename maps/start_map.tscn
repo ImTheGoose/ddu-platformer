@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_rod0e"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="4_tw5qb"]
 [ext_resource type="Script" uid="uid://k4wwyi70oref" path="res://maps/game_start_area.gd" id="6_dfobg"]
+[ext_resource type="Script" uid="uid://h4x8nun4f5ff" path="res://maps/spawnpoint.gd" id="7_n1nbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tji8"]
 size = Vector2(117, 31)
@@ -41,5 +42,23 @@ script = ExtResource("6_dfobg")
 position = Vector2(136, 165)
 shape = SubResource("RectangleShape2D_6tji8")
 
-[connection signal="body_entered" from="TrapTiles/@Area2D@72315" to="TrapTiles/@Area2D@72315" method="_on_body_entered"]
+[node name="spawnpoint" type="Node2D" parent="." unique_id=890183501]
+position = Vector2(320, 288)
+script = ExtResource("7_n1nbg")
+
+[node name="spawnpoint2" type="Node2D" parent="." unique_id=2127278485]
+position = Vector2(352, 288)
+script = ExtResource("7_n1nbg")
+spawn_idx = 2
+
+[node name="spawnpoint3" type="Node2D" parent="." unique_id=122264027]
+position = Vector2(384, 288)
+script = ExtResource("7_n1nbg")
+spawn_idx = 3
+
+[node name="spawnpoint4" type="Node2D" parent="." unique_id=2110501125]
+position = Vector2(416, 288)
+script = ExtResource("7_n1nbg")
+spawn_idx = 4
+
 [connection signal="body_entered" from="game_start_area" to="game_start_area" method="_on_body_entered"]
