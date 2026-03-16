@@ -157,7 +157,7 @@ func join_steam_lobby(lobby_id: int) -> void:
 
 func _on_steam_lobby_joined(lobby: int, permission: int, locked: bool, response: int) -> void:
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
-		if multiplayer.multiplayer_peer && multiplayer.is_server():
+		if multiplayer.is_server() && multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
 			return
 		STEAM_LOBBY_ID = lobby
 		STEAM_PEER = SteamMultiplayerPeer.new()
@@ -225,7 +225,6 @@ func unlock_lobby() -> void:
 			Steam.setLobbyJoinable(STEAM_LOBBY_ID, true)
 
 func close_connection() -> void:
-	print("closing connection")
 	created_player_infos.clear()
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
