@@ -30,13 +30,8 @@ func spawn_map_section(map_section: Array[MapFile]) -> void:
 
 func spawn_map_file(map_file: MapFile) -> void:
 	current_connection_type = map_file.top_connection_type
-	var map_node :Node2D = null
-	if multiplayer.has_multiplayer_peer():
-		map_node = multiplayer_spawner.spawn([map_file.prefab.resource_path, get_map_global_position()])
-	else:
-		map_node = spawn_map_prefab([map_file.prefab.resource_path, get_map_global_position()])
-		add_child(map_node)
-	
+	var map_node :Node2D = multiplayer_spawner.spawn([map_file.prefab.resource_path, get_map_global_position()])
+
 	height -= get_height_from_map_instance(map_node)
 
 func next_map_section() -> void:

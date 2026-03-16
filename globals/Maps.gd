@@ -31,9 +31,9 @@ func get_maps_from_folder(path: String) -> Array[MapFile]:
 	
 	for file_name in DirAccess.get_files_at(path):
 		if file_name.get_extension() == "import": # On export files are moved, and need to be checked for file extensions.
-			file_name.replace(".import", "")
-		elif file_name.get_extension() == ".remap":
-			file_name.replace(".remap", "")
+			file_name = file_name.replace(".import", "")
+		if file_name.get_extension() == "remap":
+			file_name = file_name.replace(".remap", "")
 		
 		var loaded_file :Resource = load(path + file_name)
 		if loaded_file is MapFile:

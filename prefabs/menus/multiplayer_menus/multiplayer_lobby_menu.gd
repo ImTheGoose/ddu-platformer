@@ -35,11 +35,6 @@ func _get_local_ip() -> String:
 	return local_adresses[0]
 
 func _clear_unused_in_playerlist() -> void:
-	if !multiplayer.has_multiplayer_peer():
-		for child in playerlist_container.get_children():
-			child.queue_free()
-		return
-
 	var peers = multiplayer.get_peers()
 	for child in playerlist_container.get_children():
 		if !peers.has(child.assigned_peer_id) and child.assigned_peer_id != multiplayer.get_unique_id():

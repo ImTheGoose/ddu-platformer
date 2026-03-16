@@ -215,7 +215,8 @@ func close_connection() -> void:
 	created_player_infos.clear()
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
-	multiplayer.multiplayer_peer = null
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	add_player_info(multiplayer.get_unique_id())
 	if STEAM_LOBBY_ID > 0:
 		Steam.leaveLobby(STEAM_LOBBY_ID)
 		STEAM_LOBBY_ID = 0

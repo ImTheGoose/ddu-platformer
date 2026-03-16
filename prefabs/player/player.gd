@@ -31,7 +31,7 @@ func _enter_tree() -> void:
 		set_multiplayer_authority(int(name))
 
 func _physics_process(delta: float) -> void:
-	if multiplayer.has_multiplayer_peer() && !is_multiplayer_authority():
+	if !is_multiplayer_authority():
 		global_position = global_position.lerp(sync_position, delta * 15.0)
 		return
 	else:

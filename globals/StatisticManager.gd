@@ -85,7 +85,7 @@ func get_value(key:String) -> Variant:
 	return stat_recording[key]
 
 func _process(delta: float) -> void:
-	if GameManager.is_game_running():
+	if GameManager.is_game_running() && !GameManager.is_game_paused():
 		stat_recording["time_alive"] += delta
 
 func _clear_recording() -> void:

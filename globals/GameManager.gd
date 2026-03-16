@@ -58,14 +58,10 @@ func _on_game_covered() -> void:
 	if state == STATE.AWAITING_RESTART:
 		force_reset_game()
 		spawn_game()
-		if multiplayer.has_multiplayer_peer() && multiplayer.is_server():
+		if multiplayer.is_server():
 			MenuHandler.rpc("hide_blackout")
 			MenuHandler.rpc("hide_all_menus")
 			MenuHandler.rpc("show_game")
-		else:
-			MenuHandler.hide_blackout()
-			MenuHandler.hide_all_menus()
-			MenuHandler.show_game()
 		if is_game_paused():
 			pause_game(false)
 	elif state == STATE.AWAITING_QUIT_TO_MAIN:

@@ -11,10 +11,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if que_pla_spawn:
 		que_pla_spawn = false
-		if multiplayer.has_multiplayer_peer():
-			spawn_peers()
-		else:
-			_spawn_player()
+		spawn_peers()
 
 func spawn_peers() -> void:
 	_spawn_player()

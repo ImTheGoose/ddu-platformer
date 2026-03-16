@@ -21,7 +21,7 @@ func _reset_position() -> void:
 
 func _process(delta: float) -> void:
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
-	if players.size() > 0 && nudge_camera && !multiplayer.has_multiplayer_peer():
+	if players.size() > 0 && nudge_camera:
 		for p in players:
 			if !p or p is not CharacterBody2D:
 				continue
