@@ -56,7 +56,7 @@ func _ready() -> void:
 
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_RESTART:
-		force_reset_game()
+		rpc("force_reset_game")
 		spawn_game()
 		if multiplayer.is_server():
 			MenuHandler.rpc("hide_blackout")
@@ -104,6 +104,7 @@ func restart_game() -> void:
 	set_state(STATE.AWAITING_RESTART)
 	MenuHandler.show_blackout()
 
+@rpc("authority","call_local","reliable")
 func force_reset_game() -> void:
 	reset_game.emit()
 

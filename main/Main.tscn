@@ -26,10 +26,9 @@ particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38
 scale = Vector2(3, 3)
 script = ExtResource("2_5mvff")
 
-[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner", "player_container")]
+[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner")]
 script = ExtResource("3_cm0pq")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
-player_container = NodePath("../player_container")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=987899368]
 spawn_path = NodePath("../map_generator")

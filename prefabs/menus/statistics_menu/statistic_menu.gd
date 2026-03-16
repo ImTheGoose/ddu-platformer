@@ -145,7 +145,7 @@ func _on_show() -> void:
 
 func _refresh_stat_list() -> void:
 	_clear_children()
-	for entry in statistics_entries:
+	for entry: Dictionary in statistics_entries:
 		_instantiate_entry(entry)
 
 func _clear_children() -> void:
@@ -187,7 +187,7 @@ func _get_entry_string_value(entry: Dictionary) -> String:
 	var value_dict :Dictionary = value
 	var combined_value :float = 0.0
 	
-	for key in value_dict.keys():
+	for key: Variant in value_dict.keys():
 		combined_value += value_dict[key]
 	
 	return str(int(combined_value))

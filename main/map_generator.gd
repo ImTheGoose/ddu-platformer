@@ -5,14 +5,11 @@ extends Node2D
 @export var initial_height :int = 360
 @export var multiplayer_spawner :MultiplayerSpawner
 
-@export var player_container :Node2D
-
 var px_per_tile :int = 16
 var height :float = 0
 var current_connection_type :MapFile.ConnectionType
 
 func _ready() -> void: 
-	GameManager.reset_game.connect(clear_map)
 	GameManager.spawn_level.connect(_on_spawn_level)
 	multiplayer_spawner.spawn_function = spawn_map_prefab
 
@@ -21,13 +18,12 @@ func clear_map() -> void:
 	for child: Node in get_children():
 		child.queue_free()
 	
-	for p:Node in player_container.get_children():
-		p.safe_queue_free()
-	
 	height = initial_height
 	current_connection_type = MapFile.ConnectionType.TYPE_A
 
 func _on_spawn_level() -> void:
+	clear_map()
+	
 	height = initial_height
 	spawn_map_file(Maps.get_start_map())
 

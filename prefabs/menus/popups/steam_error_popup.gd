@@ -14,7 +14,7 @@ func _on_show() -> void:
 	_refresh_description()
 
 func _refresh_description() -> void:
-	var reason = Steam.get_steam_init_result()
+	var reason :Dictionary = Steam.get_steam_init_result()
 	error_label.text = ERROR_TEXT + ERROR_STRING_CODES[reason.status]
 	
 

@@ -13,16 +13,16 @@ func _on_new_alert(alert : Alert) -> void:
 	_add_alert_card(alert)
 	_tween_offset_position()
 
-func _on_child_entered_tree(node: Node):
+func _on_child_entered_tree(node: Node) -> void:
 	_tween_offset_position()
 
 func _add_alert_card(alert : Alert) -> void:
-	var card = ALERT_CARD.instantiate()
+	var card :Node = ALERT_CARD.instantiate()
 	card.alert = alert
 	add_child(card)
 
 func _tween_offset_position() -> void:
-	var tween = get_tree().create_tween().bind_node(self).set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var tween :Tween = get_tree().create_tween().bind_node(self).set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	for child : Control in get_children():
 		if child.size.x > custom_minimum_size.x: 
 			custom_minimum_size.x = child.size.x
@@ -30,7 +30,7 @@ func _tween_offset_position() -> void:
 		if child.get_index() == get_child_count():
 			return
 		
-		var negative_index = get_child_count() - child.get_index() - 1
+		var negative_index :int = get_child_count() - child.get_index() - 1
 		
 		tween.tween_property(child, "position:y", (child.size.y + padding) * negative_index, reorder_animation_seconds)
 		if negative_index >= max_active_alerts:

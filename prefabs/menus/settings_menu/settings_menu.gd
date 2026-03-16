@@ -85,7 +85,7 @@ func _on_fps_limit_value_changed(value: float) -> void:
 	if value >= max_fps_slider.max_value:
 		Engine.max_fps = 0
 	else:
-		Engine.max_fps = value
+		Engine.max_fps = int(value)
 
 func _on_fps_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("show_fps", toggled_on)

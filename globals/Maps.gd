@@ -20,7 +20,7 @@ func _init() -> void:
 #region Map File Loading
 # Every path in folder paths gets loaded.
 func _load_all_maps_on_initialise() -> void:
-	for path in MAP_FOLDER_PATHS.values():
+	for path: String in MAP_FOLDER_PATHS.values():
 		load_maps_from_folder(path)
 
 func load_maps_from_folder(path: String) -> void:
@@ -104,7 +104,7 @@ func get_transition_section(from: MapFile.ConnectionType, to: MapFile.Connection
 		return [first_transition]
 	
 	first_transition = get_transition(from, MapFile.ConnectionType.TYPE_C)
-	var second_transition = get_transition(MapFile.ConnectionType.TYPE_C, to)
+	var second_transition :MapFile = get_transition(MapFile.ConnectionType.TYPE_C, to)
 	
 	return [first_transition, second_transition]
 

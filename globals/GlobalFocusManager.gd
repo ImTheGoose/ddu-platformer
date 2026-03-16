@@ -12,11 +12,11 @@ func _init() -> void:
 
 func _process(delta: float) -> void:
 	# 1. Get stick strength
-	var move_vec = Vector2(
+	var move_vec :Vector2 = Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down"),
 	)
-	var strength = move_vec.length()
+	var strength :float = move_vec.length()
 
 	# 2. Check if stick is being pushed
 	if strength > deadzone:

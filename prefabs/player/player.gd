@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player 
+
 @export var jump_strength :int = 1250
 @export var speed_per_second :int = 3000
 @export var max_speed :int = 450
@@ -36,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		var col :CollisionShape2D = $CollisionShape2D
 		col.disabled = true
 		_limit_horizontal_velocity(max_speed * 4)
-		_reduce_horizontal_velocity(delta, speed_per_second / 20)
+		_reduce_horizontal_velocity(delta, speed_per_second / 20.0)
 		_apply_gravity(delta, 0.65)
 		move_and_slide()
 		return
@@ -126,6 +128,16 @@ func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void
 	else:
 		velocity.x = 0
 
+@rpc("any_peer", "call_local","reliable")
+func reset_player(gpos:Vector2) -> void:
+	dead = false
+	anim.play("Idle")
+	death_particles.emitting = false
+	var col :CollisionShape2D = $CollisionShape2D
+	col.disabled = false
+	rotation = 0
+	velocity = Vector2.ZERO
+	global_position = gpos
 
 func _die() -> void: #TEMPOARY
 	print("player dying")
@@ -141,11 +153,6 @@ func _die() -> void: #TEMPOARY
 func hit(vec: Vector2) -> void:
 	velocity = vec * max_speed * 1.5
 	_die()
-
-func safe_queue_free() -> void:
-	multi_sync.set_process(false)
-	multi_sync.set_process_internal(false)
-	queue_free()
 
 func _update_anim(move_axis: float) -> void:
 	if dead:

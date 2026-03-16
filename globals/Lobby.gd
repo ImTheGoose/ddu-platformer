@@ -39,13 +39,13 @@ func transmit_steamid_to_sender() -> void:
 	var sender_peer_id :int = multiplayer.get_remote_sender_id()
 	var peer_id :int = multiplayer.get_unique_id()
 	var steam_id :int = Steam.getSteamID()
-	var err = rpc_id(sender_peer_id, "link_steamid_to_peerid", peer_id, steam_id)
+	var err := rpc_id(sender_peer_id, "link_steamid_to_peerid", peer_id, steam_id)
 	if err != OK:
 		print("Error occured while transmitting steam id to peer %s. Error code: %s" % [sender_peer_id, err])
 
 
 func request_steamid_from_peer(peer_id: int) -> void:
-	var err = rpc_id(peer_id, "transmit_steamid_to_sender")
+	var err := rpc_id(peer_id, "transmit_steamid_to_sender")
 	if err != OK:
 		print("Error occured while requesting steamid from peer %s. Error code: %s" % [peer_id, err])
 

@@ -23,8 +23,8 @@ func _on_connection_error(error_reason: String) -> void:
 	titel_label.text = "Connection Failed"
 	description_label.text = error_reason
 
-func _on_lobby_created(connect: int, lobby_id: int) -> void:
-	if connect == 1:
+func _on_lobby_created(connected: int, lobby_id: int) -> void:
+	if connected == 1:
 		return
 	titel_label.text = "Connection Failed"
 	description_label.text = "An error ooccured while creating a lobby."
