@@ -81,6 +81,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel") && event.is_pressed():
 		request_back_from_menu.emit()
 
+@rpc("authority","call_local","reliable")
 func change_menu(menu_name : String) -> void:
 	if visible_menu_names.size() > 0:
 		previous_menu = visible_menu_names[0]

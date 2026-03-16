@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func _on_show() -> void:
 	_clear_unused_in_playerlist()
+	Lobby.unlock_lobby()
 
 func _on_lobby_created() -> void:
 	_add_player_card(multiplayer.get_unique_id())
@@ -36,8 +37,12 @@ func _get_local_ip() -> String:
 
 func _clear_unused_in_playerlist() -> void:
 	var peers :PackedInt32Array = multiplayer.get_peers()
+	peers.append(multiplayer.get_unique_id())
 	for child in playerlist_container.get_children():
-		if !peers.has(child.assigned_peer_id) and child.assigned_peer_id != multiplayer.get_unique_id():
+		if peers.has(child.assigned_peer_id):
+			peers.erase(child.assigned_peer_id)
+			continue
+		else:
 			child.queue_free()
 
 func _add_player_card(peer_id: int) -> void:
@@ -92,5 +97,6 @@ func _on_start_game_button_pressed() -> void:
 		return
 	
 	GameManager.set_state(GameManager.STATE.AWAITING_RESTART)
-	MenuHandler.show_blackout()
+	MenuHandler.rpc("show_blackout")
+	Lobby.lock_lobby()
 	pass # Replace with function body.

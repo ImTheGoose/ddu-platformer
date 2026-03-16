@@ -63,6 +63,7 @@ enum STATE {
 	INITIAL,
 	AWAITING_RESTART,
 	AWAITING_QUIT_TO_MAIN,
+	AWATING_RETURN_TO_LOBBY,
 	PREGAME,
 	PLAYING,
 	DEAD,
@@ -90,19 +91,28 @@ func _on_game_covered() -> void:
 		MenuHandler.change_menu("main_menu")
 		MenuHandler.hide_game()
 		MenuHandler.hide_blackout()
-	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
+	elif state == STATE.AWATING_RETURN_TO_LOBBY && multiplayer.is_server():
 		rpc("reset_client")
 		spawn_game()
-		if multiplayer.is_server():
-			MenuHandler.rpc("hide_blackout")
-			MenuHandler.rpc("hide_all_menus")
-			MenuHandler.rpc("show_game")
+		MenuHandler.rpc("hide_blackout")
+		MenuHandler.rpc("hide_game")
+		MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
+		
+	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
+		rpc("set_seed", int(Time.get_unix_time_from_system()))
+		rpc("reset_client")
+		spawn_game()
+		MenuHandler.rpc("hide_blackout")
+		MenuHandler.rpc("hide_all_menus")
+		MenuHandler.rpc("show_game")
 		if is_game_paused():
 			pause_game(false)
 
 
-
 func pause_game(isPaused: bool) -> void:
+	if multiplayer.get_peers().size() > 0:
+		return
+	
 	get_tree().paused = isPaused
 	game_paused = isPaused
 
@@ -114,12 +124,19 @@ func is_game_running() -> bool:
 
 func restart_game() -> void:
 	set_state(STATE.AWAITING_RESTART)
-	MenuHandler.show_blackout()
+	MenuHandler.rpc("show_blackout")
 
 func spawn_game() -> void:
 	spawn_level.emit()
 	set_state(STATE.PREGAME)
 
+
+func return_to_lobby() -> void:
+	if !multiplayer.is_server():
+		return
+	
+	set_state(STATE.AWATING_RETURN_TO_LOBBY)
+	MenuHandler.rpc("show_blackout")
 
 
 func start_game() -> void:
@@ -128,7 +145,11 @@ func start_game() -> void:
 	
 	rpc("start_client")
 	server_start.emit()
-	
+
+@rpc("authority","call_local","reliable")
+func set_seed(new_seed:int) -> void:
+	seed(new_seed)
+
 @rpc("authority","call_local","reliable")
 func start_client() -> void:
 	client_start.emit()
@@ -149,7 +170,7 @@ func player_died() -> void:
 	if players_dead < multiplayer.get_peers().size() + 1:
 		return
 	
-	MenuHandler.show_menu("death_menu")
+	MenuHandler.rpc("change_menu", "death_menu")
 	on_player_death.emit()
 	rpc("set_state", STATE.DEAD)
 

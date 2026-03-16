@@ -9,10 +9,34 @@ var new_highscore_sound :AudioStreamMP3 = preload("uid://dp8k0xj5ljst1")
 @export var time_highscore_particles :Array[GPUParticles2D] = []
 @export var apple_highscore_particles :Array[GPUParticles2D] = []
 
+@onready var play_again_button :Button = %play_again_button
+@onready var main_menu_button :Button = %back_button
+@onready var back_to_lobby :Button = %back_to_lobby
+
 
 func _on_show() -> void:
 	_refresh_stat_text()
-
+	if !multiplayer.is_server():
+		play_again_button.visible = false
+		play_again_button.disabled = true
+		main_menu_button.visible = true
+		main_menu_button.disabled = false
+		back_to_lobby.disabled = true
+		back_to_lobby.visible = false
+	else:
+		if multiplayer.get_peers().size() < 1:
+			main_menu_button.visible = true
+			main_menu_button.disabled = false
+			back_to_lobby.disabled = true
+			back_to_lobby.visible = false
+		else:
+			main_menu_button.visible = false
+			main_menu_button.disabled = true
+			back_to_lobby.disabled = false
+			back_to_lobby.visible = true
+	
+		play_again_button.visible = true
+		play_again_button.disabled = false
 
 func _refresh_stat_text() -> void:
 	var text :String = ""
@@ -48,9 +72,11 @@ func _refresh_stat_text() -> void:
 
 func _on_play_again_pressed() -> void:
 	GameManager.restart_game()
-	pass # Replace with function body.
 
 
 func _on_back_to_menu_pressed() -> void:
 	GameManager.quit_to_main()
-	pass # Replace with function body.
+
+
+func _on_back_to_lobby_pressed() -> void:
+	GameManager.return_to_lobby()

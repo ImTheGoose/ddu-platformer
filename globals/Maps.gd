@@ -13,7 +13,6 @@ var current_start_pool :Array[MapFile] = []
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	seed(int(Time.get_unix_time_from_system()))
 	_load_all_maps_on_initialise()
 	refresh_map_pools()
 

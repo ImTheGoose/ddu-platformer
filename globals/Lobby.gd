@@ -57,6 +57,8 @@ func _on_server_disconnected() -> void:
 	Alerts.push_error("Disconnected", "The lobby host has left.")
 	close_connection()
 	MenuHandler.change_menu("main_menu")
+	GameManager.reset_client()
+	MenuHandler.hide_game()
 
 func _on_connected_to_server() -> void:
 	MenuHandler.change_menu("multiplayer_lobby_menu")
@@ -209,6 +211,18 @@ func clear_unused_player_info() -> void:
 	for key in created_player_infos:
 		if !peers.has(key):
 			created_player_infos.erase(key)
+
+func lock_lobby() -> void:
+	if multiplayer.is_server():
+		multiplayer.multiplayer_peer.refuse_new_connections = true
+		if STEAM_LOBBY_ID > 0:
+			Steam.setLobbyJoinable(STEAM_LOBBY_ID, false)
+
+func unlock_lobby() -> void:
+	if multiplayer.is_server():
+		multiplayer.multiplayer_peer.refuse_new_connections = false
+		if STEAM_LOBBY_ID > 0:
+			Steam.setLobbyJoinable(STEAM_LOBBY_ID, true)
 
 func close_connection() -> void:
 	print("closing connection")

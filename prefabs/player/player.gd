@@ -29,7 +29,7 @@ var air_time :float = 0
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
-		global_position = global_position.lerp(sync_position, delta * 15.0)
+		global_position = global_position.lerp(sync_position, delta * 30.0)
 		return
 	else:
 		sync_position = global_position

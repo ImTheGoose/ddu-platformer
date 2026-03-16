@@ -1,5 +1,15 @@
 extends GameMenu
 
+@onready var restart_button :Button = %restart_game
+
+func _on_show() -> void:
+	if !multiplayer.is_server():
+		restart_button.disabled = true
+		restart_button.visible = false
+	else:
+		restart_button.disabled = false
+		restart_button.visible = true
+
 func _input(event: InputEvent) -> void:
 	if event.is_action("escape") && event.is_pressed():
 		if !MenuHandler.is_game_visible():
