@@ -17,17 +17,12 @@ var target_point :PathfindingPoint
 var valid_path_direction :Vector2
 var dead :bool = false
 
+var random_floats :Array[float] = []
+
 enum axis {
 	vertical,
 	horizontal
-}
-
-func _init() -> void:
-	var spawn_rate :float = min(GameManager.get_difficulty_value("enemy_spawn_rate"), 1.0)
-	var rand_float :float = randf()
-	if rand_float > spawn_rate:
-		queue_free()
-	
+}	
 
 func _process(delta: float) -> void:
 	if dead:
@@ -103,18 +98,12 @@ func _search_for_points(vec: Vector2) -> void:
 		return
 	
 	point_positive = c
-	if randf() < 0.5:
+	if random_floats[0] < 0.5:
 		target_point = point_positive
 	else:
 		target_point = point_negative
 	
-
-	if point_negative.global_position.y == point_positive.global_position.y:
-		var ran_gpos :float = randf_range(point_negative.global_position.x, point_positive.global_position.x)
-		global_position.x = ran_gpos
-	else: 
-		var ran_gpos :float = randf_range(point_negative.global_position.y, point_positive.global_position.y)
-		global_position.y = ran_gpos
+	global_position = lerp(point_negative.global_position, point_positive.global_position, random_floats[1])
 
 	valid_path_direction = global_position.direction_to(target_point.global_position)
 
@@ -128,6 +117,7 @@ func _get_direction() -> Vector2:
 	else:
 		return Vector2(1, 0)
 
+@rpc("any_peer","call_local","reliable")
 func die() -> void:
 	anim.play("Hit")
 	anim.death()

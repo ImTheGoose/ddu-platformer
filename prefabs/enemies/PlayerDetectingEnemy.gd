@@ -20,17 +20,21 @@ func _process(delta: float) -> void:
 	playerRay.target_position = dir * 1000
 	
 	var c :Object = playerRay.get_collider()
-	if c is CharacterBody2D:
-		_attempt_attack()
-		detected_player = true
-		return
+	if c is Player:
+		if c.is_multiplayer_authority():
+			_attempt_attack()
+			detected_player = true
+			return
 	
 	detected_player = false
 
 func _attempt_attack() -> void:
 	if seconds_since_attack < seconds_between_attacks:
 		return
-	
+	rpc("show_attacking")
+
+@rpc("any_peer","call_local","reliable")
+func show_attacking() -> void:
 	attacking = true
 	anim.play("Attack")
 

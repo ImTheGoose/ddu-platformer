@@ -6,6 +6,7 @@ signal server_reset
 signal server_start
 signal spawn_level
 signal on_player_death
+signal spawn_entity(global_position: Vector2, spawn_type: int)
 signal spawn_player(global_position: Vector2, peer_id: int)
 var game_paused :bool = false
 
@@ -93,6 +94,7 @@ func _on_game_covered() -> void:
 		MenuHandler.hide_blackout()
 	elif state == STATE.AWATING_RETURN_TO_LOBBY && multiplayer.is_server():
 		rpc("reset_client")
+		server_reset.emit()
 		spawn_game()
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_game")
@@ -101,6 +103,7 @@ func _on_game_covered() -> void:
 	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
 		rpc("set_seed", int(Time.get_unix_time_from_system()))
 		rpc("reset_client")
+		server_reset.emit()
 		spawn_game()
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_all_menus")
@@ -111,6 +114,8 @@ func _on_game_covered() -> void:
 
 func pause_game(isPaused: bool) -> void:
 	if multiplayer.get_peers().size() > 0:
+		get_tree().paused = false
+		game_paused = false
 		return
 	
 	get_tree().paused = isPaused

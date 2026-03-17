@@ -20,6 +20,9 @@ func _reset_position() -> void:
 	position = origin_position
 
 func _process(delta: float) -> void:
+	if !GameManager.is_game_running():
+		return
+	
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
 	if players.size() > 0 && nudge_camera:
 		for p in players:
@@ -35,6 +38,6 @@ func _process(delta: float) -> void:
 
 	
 	
-	if GameManager.is_game_running() && !GameManager.is_game_paused():
+	if !GameManager.is_game_paused():
 		var speed_scale :Variant = GameManager.get_difficulty_value("camera_speed")
 		position.y -= speed_scale * speed * delta

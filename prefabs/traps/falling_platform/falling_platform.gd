@@ -34,7 +34,12 @@ func _initiate_platform_fall() -> void:
 	col.disabled = true
 	gravity_scale = 1
 
+@rpc("any_peer","call_local","reliable")
+func show_touched() -> void:
+	touched = true
+
 func _on_player_detection_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is Player:
 		if body.is_on_floor():
-			touched = true
+			if body.is_multiplayer_authority():
+				rpc("show_touched")

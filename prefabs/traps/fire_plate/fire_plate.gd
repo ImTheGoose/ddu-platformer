@@ -35,11 +35,13 @@ func _start_burning() -> void:
 	hit_area.monitoring = true
 	AudioManager.play_global_sound(audio_burning, -10)
 
-func _hit_plate() -> void:
+@rpc("any_peer","call_local","reliable")
+func show_hit() -> void:
 	hit = true
 	anim.play("Hit")
 	AudioManager.play_global_sound(audio_clicked, -4)
 
 func _on_player_detection_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		_hit_plate()
+	if body is Player:
+		if body.is_multiplayer_authority():
+			rpc("show_hit")
