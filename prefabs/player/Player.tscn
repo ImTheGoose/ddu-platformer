@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://cjjbmvmx1ilce"]
 
 [ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player/player.gd" id="1_jfcio"]
+[ext_resource type="Shader" uid="uid://4e5mx13fnoig" path="res://prefabs/player/Player.gdshader" id="2_ctndf"]
 [ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_ivj8r"]
 [ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="3_6dlbe"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_00uvl"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_dcg2g"]
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_uiiwv"]
 [ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="7_w51pg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hr8rp"]
+shader = ExtResource("2_ctndf")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0000000475
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = false
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
@@ -27,6 +36,9 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath(".:double_jumped")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("AnimatedSprite2D:chosen_outline_color")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [node name="Player" type="CharacterBody2D" unique_id=472125303 groups=["Players"]]
 visibility_layer = 3
@@ -38,8 +50,9 @@ peer_lerp_speed = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("player_controller")]
 visibility_layer = 7
+material = SubResource("ShaderMaterial_hr8rp")
 sprite_frames = ExtResource("2_ivj8r")
-animation = &"Die"
+animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
 script = ExtResource("3_6dlbe")
