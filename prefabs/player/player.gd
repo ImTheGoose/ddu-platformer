@@ -153,8 +153,6 @@ func _die() -> void: #TEMPOARY
 	GameManager.rpc("player_died")
 	rpc("show_death")
 
-
-
 @rpc("authority","call_local","reliable")
 func show_death() -> void:
 	dead = true
@@ -193,10 +191,12 @@ func _update_anim(move_axis: float) -> void:
 		if velocity.y < 0 && !double_jumped:
 			dust_particles.emitting = false
 			anim.play("Jump")
-		elif anim.animation != "Double_Jump":
+		elif anim.animation != "Double_Jump" && velocity.y < 0 && double_jumped:
 			anim.play("Double_Jump")
 
 		if velocity.y > 0:
+			if anim.is_playing() && anim.animation == "Double_Jump":
+				return
 			anim.play("Fall")
 			dust_particles.emitting = false
 	elif is_on_wall_only() && velocity.y > 0:
