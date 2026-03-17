@@ -6,6 +6,7 @@ func _init() -> void:
 func _ready() -> void:
 	get_tree().root.ready.connect(_on_tree_ready)
 	Steam.initRelayNetworkAccess()
+	set_rich_presense("#InMenu")
 
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
@@ -21,6 +22,18 @@ func _on_tree_ready() -> void:
 		MenuHandler.change_menu("steam_error_popup")
 	
 	check_command_line()
+
+func set_rich_presense(token:String, value: String = "") -> void:
+	var setting_presence: bool = false
+	if value == "":
+		setting_presence = Steam.setRichPresence("steam_display", token)
+	else:
+		setting_presence= Steam.setRichPresence(token, value)
+
+	# Debug it
+	print("Setting rich presence to %s: %s" % [token, setting_presence])
+	
+	pass
 
 func check_command_line() -> void:
 	var these_arguments: Array = OS.get_cmdline_args()

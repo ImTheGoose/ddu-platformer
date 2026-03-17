@@ -16,6 +16,12 @@ func _ready() -> void:
 
 func _on_show() -> void:
 	_clear_unused_in_playerlist()
+	if multiplayer.multiplayer_peer is ENetMultiplayerPeer:
+		Steamworks.set_rich_presense("#InLanLobby")
+	elif multiplayer.multiplayer_peer is SteamMultiplayerPeer:
+		Steamworks.set_rich_presense("#InLobby")
+	Steamworks.set_rich_presense("lobby_count", str(multiplayer.get_peers().size()+1))
+	
 	Lobby.unlock_lobby()
 
 func _on_lobby_created() -> void:

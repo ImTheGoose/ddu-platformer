@@ -40,6 +40,7 @@ spawn_path = NodePath("../player_container")
 script = ExtResource("10_m4geg")
 
 [node name="player_container" type="Node2D" parent="game_container" unique_id=418401319]
+position = Vector2(-600, 600)
 
 [node name="entity_container" type="Node2D" parent="game_container" unique_id=1006682291]
 

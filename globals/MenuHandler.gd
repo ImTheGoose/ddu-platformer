@@ -62,6 +62,10 @@ func hide_game() -> void:
 @rpc("authority","call_local","reliable")
 func show_game() -> void:
 	changed_game_visibillity.emit(true)
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		Steamworks.set_rich_presense("#PlayingSingleplayer")
+	else:
+		Steamworks.set_rich_presense("#InMatch")
 	
 @rpc("authority","call_local","reliable")
 func show_blackout() -> void:

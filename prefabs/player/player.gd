@@ -26,12 +26,19 @@ class_name Player
 @export var sync_velocity: Vector2 = Vector2.ZERO
 
 var dead :bool = false #TEMPOARY
-var double_jumped :bool = false
+@export var double_jumped :bool = false
 var air_time :float = 0
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
+		velocity = sync_velocity
 		global_position = global_position.lerp(sync_position, delta * peer_lerp_speed)
+		
+		if dead:
+			return
+		
+		move_and_slide()
+		_update_anim(velocity.x)
 		return
 	else:
 		sync_velocity = velocity
@@ -64,7 +71,6 @@ func _physics_process(delta: float) -> void:
 	velocity.x += move_axis * speed_per_second * delta
 
 	if is_on_wall_only() && velocity.y > 0:
-		anim.play("Wall_Jump")
 		_apply_gravity(delta, wall_gravity_scale)
 	else:
 		_apply_gravity(delta)
@@ -82,33 +88,34 @@ func _attempt_jump() -> void:
 			velocity.x = -max_speed
 		air_time = jump_buffer_time
 		anim.flip_h = !anim.flip_h
-		jump_particles.restart(false)
-		audio_stream.stream = audio_files["jump"]
-		audio_stream.volume_db = -20
-		audio_stream.pitch_scale = randf_range(0.8, 1.1)
-		audio_stream.play()
 		StatisticManager.add_value("wall_jump", 1)
+		rpc("show_jump")
 	
 	elif is_on_floor() or air_time < jump_buffer_time:
-		jump_particles.restart(false)
 		air_time = jump_buffer_time
 		velocity.y = -jump_strength
-		audio_stream.stream = audio_files["jump"]
-		audio_stream.volume_db = -20
-		audio_stream.pitch_scale = randf_range(0.8, 1.1)
-		audio_stream.play()
 		StatisticManager.add_value("ground_jump", 1)
+		rpc("show_jump")
 
 	elif !double_jumped:
 		double_jumped = true
 		velocity.y = -jump_strength * 0.85
-		anim.play("Double_Jump")
-		jump_particles.restart(false)
-		audio_stream.stream = audio_files["jump"]
-		audio_stream.volume_db = -20
-		audio_stream.pitch_scale = randf_range(0.8, 1.1)
-		audio_stream.play()
 		StatisticManager.add_value("double_jump", 1)
+		rpc("show_jump", true)
+
+@rpc("authority","call_local","reliable")
+func show_jump(isDoubleJump: bool = false) -> void:
+	if isDoubleJump:
+		anim.play("Double_Jump")
+	else:
+		anim.play("Jump")
+		
+	jump_particles.restart(false)
+	audio_stream.stream = audio_files["jump"]
+	audio_stream.volume_db = -20
+	audio_stream.pitch_scale = randf_range(0.8, 1.1)
+	audio_stream.play()
+	return
 
 func _apply_gravity(delta: float, gravity_scale: float = 1) -> void:
 	velocity += get_gravity() * delta * gravity_scale
@@ -143,9 +150,14 @@ func reset_player(gpos:Vector2) -> void:
 	global_position = gpos
 
 func _die() -> void: #TEMPOARY
-	print("player dying")
-	dead = true
 	GameManager.rpc("player_died")
+	rpc("show_death")
+
+
+
+@rpc("authority","call_local","reliable")
+func show_death() -> void:
+	dead = true
 	death_particles.restart()
 	anim.play("Die")
 	audio_stream.stream = audio_files["die"]
@@ -161,17 +173,14 @@ func hit(vec: Vector2) -> void:
 func _update_anim(move_axis: float) -> void:
 	if dead:
 		return
-		
-	if move_axis > 0:
-		anim.flip_h = false
-	if move_axis < 0:
-		anim.flip_h = true
 
 	if is_on_floor():
 		if move_axis == 0:
 			anim.play("Idle")
 			dust_particles.emitting = false
-			audio_stream.stop()
+			if audio_stream.playing:
+				if audio_stream.stream == audio_files["running"]:
+					audio_stream.stop()
 		else:
 			anim.play("Run")
 			dust_particles.emitting = true
@@ -184,7 +193,11 @@ func _update_anim(move_axis: float) -> void:
 		if velocity.y < 0 && !double_jumped:
 			dust_particles.emitting = false
 			anim.play("Jump")
+		elif anim.animation != "Double_Jump":
+			anim.play("Double_Jump")
 
 		if velocity.y > 0:
 			anim.play("Fall")
 			dust_particles.emitting = false
+	elif is_on_wall_only() && velocity.y > 0:
+		anim.play("Wall_Jump")

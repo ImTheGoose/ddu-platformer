@@ -89,6 +89,7 @@ func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
 		Lobby.close_connection()
 		rpc("reset_client")
+		Steamworks.set_rich_presense("#InMenu")
 		MenuHandler.change_menu("main_menu")
 		MenuHandler.hide_game()
 		MenuHandler.hide_blackout()

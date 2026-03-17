@@ -18,6 +18,7 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	Steam.join_requested.connect(_on_steam_join_requested)
 	Steam.lobby_created.connect(_on_steam_lobby_created)
 	Steam.lobby_joined.connect(_on_steam_lobby_joined)
@@ -182,7 +183,11 @@ func is_lobby_lan() -> bool:
 func kick_peer(peer_id: int) -> void:
 	multiplayer.multiplayer_peer.disconnect_peer(peer_id)
 
+func _on_peer_disconnected(peer_id: int) -> void:
+	Steamworks.set_rich_presense("lobby_count", str(multiplayer.get_peers().size()+1))
+
 func _on_peer_connected(peer_id: int) -> void:
+	Steamworks.set_rich_presense("lobby_count", str(multiplayer.get_peers().size()+1))
 	add_player_info(peer_id)
 
 func get_peer_id_from_steam_id(steam_id: int) -> int:
@@ -225,6 +230,7 @@ func unlock_lobby() -> void:
 			Steam.setLobbyJoinable(STEAM_LOBBY_ID, true)
 
 func close_connection() -> void:
+	Steamworks.set_rich_presense("#InMenu")
 	created_player_infos.clear()
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
