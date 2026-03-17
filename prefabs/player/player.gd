@@ -7,6 +7,7 @@ class_name Player
 @export var max_speed :int = 450
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
+@export_range(0,100,1.0) var peer_lerp_speed :float = 30
 
 @onready var audio_files :Dictionary[String, AudioStreamMP3]= {
 	"running" : preload("uid://cap73awyf8ake"),
@@ -22,6 +23,7 @@ class_name Player
 
 @onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
 @export var sync_position: Vector2 = Vector2.ZERO
+@export var sync_velocity: Vector2 = Vector2.ZERO
 
 var dead :bool = false #TEMPOARY
 var double_jumped :bool = false
@@ -29,9 +31,10 @@ var air_time :float = 0
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
-		global_position = global_position.lerp(sync_position, delta * 30.0)
+		global_position = global_position.lerp(sync_position, delta * peer_lerp_speed)
 		return
 	else:
+		sync_velocity = velocity
 		sync_position = global_position
 	
 	if dead:
