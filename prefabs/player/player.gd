@@ -140,14 +140,18 @@ func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void
 
 @rpc("any_peer", "call_local","reliable")
 func reset_player(gpos:Vector2) -> void:
+	var col :CollisionShape2D = $CollisionShape2D
+	col.disabled = false
+	velocity = Vector2.ZERO
+	global_position = gpos
+	rpc("show_reset")
+
+@rpc("authority","call_local","reliable")
+func show_reset() -> void:
 	dead = false
 	anim.play("Idle")
 	death_particles.emitting = false
-	var col :CollisionShape2D = $CollisionShape2D
-	col.disabled = false
 	rotation = 0
-	velocity = Vector2.ZERO
-	global_position = gpos
 
 func _die() -> void: #TEMPOARY
 	GameManager.rpc("player_died")

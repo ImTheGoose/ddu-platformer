@@ -11,10 +11,11 @@ signal save_game_completed
 var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
-	"save_version" : 0.1,
-	"money" : 0,
+	"save_version" : 0.2,
+	"money" : 69420,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
+	"selected_outline_hex" : "#ffffff",
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
@@ -90,8 +91,8 @@ func update_game_data() -> void:
 	print(PREFIX, "Updating save data, from: ", v, " to: ", default_game_data["save_version"])
 	game_data["changelog_seen"] = false
 	
-	#if v < 0.2:
-	# game_data["new_key"] = default_game_data["new_key"]
+	if v < 0.2:
+		game_data["selected_outline_hex"] = default_game_data["selected_outline_hex"]
 	
 	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()

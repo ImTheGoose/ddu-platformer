@@ -9,6 +9,7 @@ var created_player_infos :Dictionary[int, PlayerInfo] = {}
 signal lobby_ready()
 signal connection_error(error_reason: String)
 signal peer_linked_to_steam(peer_id: int, steam_id: int)
+signal peer_cosmetic_updated(peer_id: int, data_type:DataRequestType, cosmetic_data: Array[Variant])
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -28,27 +29,56 @@ func _ready() -> void:
 #region Lobby RPC commands
 
 @rpc("any_peer","call_local","reliable")
-func link_steamid_to_peerid(peer_id: int, steam_id: int) -> void:
-	if created_player_infos.has(peer_id):
-		peer_linked_to_steam.emit(peer_id, steam_id)
-	else:
-		print("Retrived steam id from a peer, that doesnt have a linked info. Peer is: ", peer_id)
+func handle_data_from_peer(data_type: DataRequestType, data: Array[Variant]) -> void:
+	var peer_id :int = multiplayer.get_remote_sender_id()
+	if peer_id == 0:
+		peer_id = multiplayer.get_unique_id()
+	match data_type:
+		DataRequestType.STEAM_ID:
+			if created_player_infos.has(peer_id):
+				peer_linked_to_steam.emit(peer_id, data[0])
+			else:
+				print("Retrived steam id from a peer, that doesnt have a linked info. Peer is: ", peer_id)
+		
+		DataRequestType.COSMETIC_SKIN, DataRequestType.COSMETIC_OUTLINE:
+			peer_cosmetic_updated.emit(peer_id, data_type, data)
 
 
 @rpc("any_peer","call_local","reliable")
-func transmit_steamid_to_sender() -> void:
+func transmit_data_to_sender(data_type: DataRequestType) -> void:
 	var sender_peer_id :int = multiplayer.get_remote_sender_id()
+	var data :Array[Variant] = []
 	var peer_id :int = multiplayer.get_unique_id()
-	var steam_id :int = Steam.getSteamID()
-	var err := rpc_id(sender_peer_id, "link_steamid_to_peerid", peer_id, steam_id)
-	if err != OK:
-		print("Error occured while transmitting steam id to peer %s. Error code: %s" % [sender_peer_id, err])
+	match data_type:
+		DataRequestType.STEAM_ID:
+			var steam_id :int = Steam.getSteamID()
+			data = [steam_id]
+		
+		DataRequestType.COSMETIC_OUTLINE:
+			var outline_hex :String = DataManager.get_value("selected_outline_hex")
+			data = [outline_hex]
+			
+		DataRequestType.COSMETIC_SKIN:
+			var skin_name :String = DataManager.get_value("selected_skin")
+			data = [skin_name]
+	
+	if sender_peer_id == 0:
+		rpc("handle_data_from_peer", data_type, data)
+	else:
+		rpc_id(sender_peer_id, "handle_data_from_peer", data_type, data)
 
+func transmit_data_to_lobby(data_type: DataRequestType) -> void:
+	transmit_data_to_sender(data_type)
+	
 
-func request_steamid_from_peer(peer_id: int) -> void:
-	var err := rpc_id(peer_id, "transmit_steamid_to_sender")
-	if err != OK:
-		print("Error occured while requesting steamid from peer %s. Error code: %s" % [peer_id, err])
+func request_data_from_peer(peer_id: int, data_type: DataRequestType) -> void:
+	rpc_id(peer_id, "transmit_data_to_sender", data_type)
+
+enum DataRequestType {
+	COSMETIC_OUTLINE,
+	COSMETIC_SKIN,
+	STEAM_ID,
+}
 
 #endregion
 
@@ -63,6 +93,7 @@ func _on_server_disconnected() -> void:
 
 func _on_connected_to_server() -> void:
 	MenuHandler.change_menu("multiplayer_lobby_menu")
+	add_player_info(multiplayer.get_unique_id())
 
 func _on_connection_failed() -> void:
 	Lobby.connection_error.emit("Failed to establish connection to server")
@@ -91,9 +122,6 @@ func join_lan_server(ip: String, port: int = DEFAULT_LAN_PORT) -> void:
 		connection_error.emit("Failed to connect to lan server.")
 		close_connection()
 		return
-	
-	
-	add_player_info(multiplayer.get_unique_id())
 
 #endregion
 
@@ -165,8 +193,6 @@ func _on_steam_lobby_joined(lobby: int, permission: int, locked: bool, response:
 		STEAM_PEER.server_relay = true
 		STEAM_PEER.create_client(Steam.getLobbyOwner(lobby))
 		multiplayer.multiplayer_peer = STEAM_PEER
-		add_player_info(multiplayer.multiplayer_peer.get_unique_id())
-		_on_connected_to_server()
 	else:
 		_on_connection_failed()
 
@@ -206,10 +232,7 @@ func get_steam_id_from_peer_id(peer_id: int) -> int:
 func add_player_info(peer_id: int) -> void:
 	created_player_infos.set(peer_id, PlayerInfo.new(peer_id))
 	
-	if peer_id == multiplayer.get_unique_id():
-		link_steamid_to_peerid(peer_id, Steam.getSteamID())
-	else:
-		request_steamid_from_peer(peer_id)
+	request_data_from_peer(peer_id, DataRequestType.STEAM_ID)
 
 func get_player_info(peer_id: int) -> PlayerInfo:
 	return created_player_infos[peer_id]
@@ -242,5 +265,6 @@ func close_connection() -> void:
 	if STEAM_LOBBY_ID > 0:
 		Steam.leaveLobby(STEAM_LOBBY_ID)
 		STEAM_LOBBY_ID = 0
+	GameManager.clear_players.emit()
 
 #endregion

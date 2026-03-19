@@ -8,6 +8,7 @@ signal spawn_level
 signal on_player_death
 signal spawn_entity(global_position: Vector2, spawn_type: int)
 signal spawn_player(global_position: Vector2, peer_id: int)
+signal clear_players()
 var game_paused :bool = false
 
 
@@ -89,6 +90,7 @@ func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
 		Lobby.close_connection()
 		rpc("reset_client")
+		server_reset.emit()
 		Steamworks.set_rich_presense("#InMenu")
 		MenuHandler.change_menu("main_menu")
 		MenuHandler.hide_game()

@@ -14,6 +14,10 @@ class_name PlayerInfo
 		DISPLAY_NAME = value
 		persona_name_changed.emit(value)
 
+@export var SELECTED_SKIN_NAME: String = "Osvald"
+@export var SELECTED_OUTLINE_HEX: String = "#ffffff"
+
+signal cosmetics_changed()
 signal persona_name_changed(new_name: String)
 signal avatar_image_changed()
 
@@ -23,6 +27,7 @@ func _init(assigned_peer_id: int) -> void:
 	Steam.persona_state_change.connect(_on_persona_state_change)
 	Steam.avatar_loaded.connect(_on_avatar_loaded)
 	Lobby.peer_linked_to_steam.connect(_on_peer_linked_to_steam)
+	Lobby.peer_cosmetic_updated.connect(_on_peer_cosmetic_updated)
 	
 	if Lobby.is_lobby_lan():
 		return
@@ -38,6 +43,8 @@ func _on_peer_linked_to_steam(peer_id: int, steam_id: int) -> void:
 	STEAM_ID = steam_id
 	Steam.getPlayerAvatar(2, STEAM_ID)
 	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
+	Lobby.request_data_from_peer(PEER_ID, Lobby.DataRequestType.COSMETIC_SKIN)
+	Lobby.request_data_from_peer(PEER_ID, Lobby.DataRequestType.COSMETIC_OUTLINE)
 
 func _on_persona_state_change(steam_id: int, flags: int) -> void:
 	if steam_id != STEAM_ID:
@@ -50,6 +57,16 @@ func _on_avatar_loaded(avatar_id: int, avatar_size: int, avatar_buffer: Array) -
 		return
 
 	AVATAR_IMAGE = Image.create_from_data(avatar_size, avatar_size, false, Image.FORMAT_RGBA8, avatar_buffer)
+
+func _on_peer_cosmetic_updated(peer_id: int, data_type: int, data: Array[Variant]) -> void:
+	if peer_id != PEER_ID:
+		return
+	
+	match data_type:
+		Lobby.DataRequestType.COSMETIC_SKIN:
+			SELECTED_SKIN_NAME = data[0]
+		Lobby.DataRequestType.COSMETIC_OUTLINE:
+			SELECTED_OUTLINE_HEX = data[0]
 
 func get_avatar_texture(texture_size: int) -> ImageTexture:
 	var img :Image = AVATAR_IMAGE.duplicate()

@@ -5,6 +5,7 @@ extends MultiplayerSpawner
 func _ready() -> void:
 	spawn_function = _spawn_player
 	GameManager.spawn_player.connect(_on_spawn_player)
+	GameManager.clear_players.connect(_on_clear_players)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
 func _on_spawn_player(gpos: Vector2, peer_id: int) -> void:
@@ -18,6 +19,11 @@ func _on_spawn_player(gpos: Vector2, peer_id: int) -> void:
 	else:
 		spawn([gpos, peer_id])
 
+func _on_clear_players() -> void:
+	var spawn_node :Node2D = get_node(spawn_path)
+	for child in spawn_node.get_children():
+		if child is Player:
+			child.queue_free()
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	if !multiplayer.is_server():

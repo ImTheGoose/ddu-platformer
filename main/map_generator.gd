@@ -15,22 +15,25 @@ var current_connection_type :MapFile.ConnectionType
 
 func _ready() -> void: 
 	GameManager.spawn_level.connect(_on_spawn_level)
+	GameManager.server_reset.connect(clear_map)
 	multiplayer_spawner.spawn_function = spawn_map_prefab
 
 func clear_map() -> void:
-	print("clearing map")
-	for child: Node in get_children():
-		child.queue_free()
-	
-	height = initial_height
-	current_connection_type = MapFile.ConnectionType.TYPE_A
-	seconds_since_clear = 0
+	if multiplayer.is_server():
+		print("clearing map")
+		for child: Node in get_children():
+			child.queue_free()
+		
+		height = initial_height
+		current_connection_type = MapFile.ConnectionType.TYPE_A
+		seconds_since_clear = 0
 
 func _on_spawn_level() -> void:
-	clear_map()
-	
-	height = initial_height
-	spawn_map_file(Maps.get_start_map())
+	if multiplayer.is_server():
+		clear_map()
+		
+		height = initial_height
+		spawn_map_file(Maps.get_start_map())
 
 func spawn_map_section(map_section: Array[MapFile]) -> void:
 	for map_file in map_section:
