@@ -67,6 +67,8 @@ func _on_peer_cosmetic_updated(peer_id: int, data_type: int, data: Array[Variant
 			SELECTED_SKIN_NAME = data[0]
 		Lobby.DataRequestType.COSMETIC_OUTLINE:
 			SELECTED_OUTLINE_HEX = data[0]
+	
+	cosmetics_changed.emit()
 
 func get_avatar_texture(texture_size: int) -> ImageTexture:
 	var img :Image = AVATAR_IMAGE.duplicate()

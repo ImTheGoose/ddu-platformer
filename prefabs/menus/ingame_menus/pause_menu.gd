@@ -57,7 +57,13 @@ func _on_back_to_menu_pressed() -> void:
 	GameManager.quit_to_main()
 	
 
-
 func _on_back_to_lobby_pressed() -> void:
 	GameManager.return_to_lobby()
-	pass # Replace with function body.
+
+
+func _on_settings_button_pressed() -> void:
+	MenuHandler.change_menu("settings_menu", true)
+
+
+func _on_customize_button_pressed() -> void:
+	MenuHandler.change_menu("shop_selection_menu", true)

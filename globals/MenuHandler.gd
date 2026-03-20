@@ -86,8 +86,8 @@ func _input(event: InputEvent) -> void:
 		request_back_from_menu.emit()
 
 @rpc("authority","call_local","reliable")
-func change_menu(menu_name : String) -> void:
-	if visible_menu_names.size() > 0:
+func change_menu(menu_name : String, log_as_previous: bool = false) -> void:
+	if visible_menu_names.size() > 0 && log_as_previous:
 		previous_menu = visible_menu_names[0]
 
 	hide_all_menus()

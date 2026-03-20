@@ -180,6 +180,19 @@ layout_mode = 2
 disabled = true
 text = "Start Game"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1001106178]
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=2071466162]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="customize_button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1576135162]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Customize"
+
 [node name="quit_lobby" type="Button" parent="VBoxContainer" unique_id=1172475521]
 layout_mode = 2
 text = "Quit Lobby"
@@ -199,5 +212,7 @@ theme_override_font_sizes/font_size = 6
 text = "Copy"
 
 [connection signal="pressed" from="VBoxContainer/start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/customize_button" to="." method="_on_customize_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/quit_lobby" to="." method="_on_quit_lobby_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/copy_code_button" to="." method="_on_copy_code_button_pressed"]

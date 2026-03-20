@@ -36,7 +36,11 @@ func _refresh_shop_contents() -> void:
 
 func _buy(item: Dictionary) -> void:
 	super(item)
+
+func _select_item(item_name: String) -> void:
+	super(item_name)
 	Lobby.transmit_data_to_lobby(Lobby.DataRequestType.COSMETIC_SKIN)
+	_refresh_shop_contents()
 
 func _on_outline_pressed() -> void:
 	var random_color: Color = Color(randf(),randf(),randf())

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bh0jgwssyi2a1"]
+
+[ext_resource type="Script" uid="uid://g3vlgv4cqfpo" path="res://prefabs/menus/multiplayer_menus/multiplayer_round_win_menu.gd" id="1_6bnso"]
+
+[node name="MultiplayerRoundWinMenu" type="VBoxContainer" unique_id=107251656]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -9.5
+offset_right = 49.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6bnso")
+menu_name = "multiplayer_round_win_menu"
+require_seperator = true
+
+[node name="Label" type="Label" parent="." unique_id=1458409405]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Round Won"
+
+[node name="next_round_-button" type="Button" parent="." unique_id=1245133292]
+layout_mode = 2
+text = "Next Round"

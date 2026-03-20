@@ -104,4 +104,12 @@ func _on_start_game_button_pressed() -> void:
 	
 	GameManager.prepare_game()
 	Lobby.lock_lobby()
-	pass # Replace with function body.
+
+
+func _on_customize_button_pressed() -> void:
+	MenuHandler.change_menu("shop_selection_menu", true)
+
+
+func _on_settings_button_pressed() -> void:
+	MenuHandler.change_menu("settings_menu", true)
+	

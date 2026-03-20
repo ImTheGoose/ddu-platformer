@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://mwa71iau7eyn"]
+
+[ext_resource type="Script" uid="uid://cho3y1jg73dfw" path="res://prefabs/menus/multiplayer_menus/multiplayer_win_menu.gd" id="1_ca3nu"]
+
+[node name="MultiplayerWinMenu" type="VBoxContainer" unique_id=302228853]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ca3nu")
+menu_name = "multiplayer_win_menu"
+require_seperator = true
+
+[node name="Label" type="Label" parent="." unique_id=709359738]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Winner"
+
+[node name="play_again_button" type="Button" parent="." unique_id=740777544]
+layout_mode = 2
+text = "Play Again"
+
+[node name="back_button" type="Button" parent="." unique_id=1870285828]
+layout_mode = 2
+text = "Return To Lobby"

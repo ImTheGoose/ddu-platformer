@@ -92,7 +92,7 @@ func _on_fps_toggle_toggled(toggled_on: bool) -> void:
 
 
 func _on_back_pressed() -> void:
-	MenuHandler.change_menu("main_menu")
+	MenuHandler.change_menu(MenuHandler.get_previous_menu())
 	pass # Replace with function body.
 
 

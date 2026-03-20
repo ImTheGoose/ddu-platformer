@@ -36,6 +36,19 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1782002489]
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="HBoxContainer2" unique_id=396095493]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="customize_button" type="Button" parent="HBoxContainer2" unique_id=1778460175]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Customize"
+
 [node name="back_to_lobby" type="Button" parent="." unique_id=411306560]
 unique_name_in_owner = true
 layout_mode = 2
@@ -48,5 +61,7 @@ text = "Main Menu"
 
 [connection signal="pressed" from="continue_game" to="." method="_on_continue_game_pressed"]
 [connection signal="pressed" from="restart_game" to="." method="_on_restart_game_pressed"]
+[connection signal="pressed" from="HBoxContainer2/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/customize_button" to="." method="_on_customize_button_pressed"]
 [connection signal="pressed" from="back_to_lobby" to="." method="_on_back_to_lobby_pressed"]
 [connection signal="pressed" from="back_to_menu" to="." method="_on_back_to_menu_pressed"]
