@@ -280,6 +280,7 @@ script = ExtResource("1_rn6i1")
 death_sound = ExtResource("2_apt1k")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1714039566]
+collision_mask = 9
 collide_with_areas = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=537677901]
@@ -291,7 +292,7 @@ script = ExtResource("5_uuv8h")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=1635299632]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("6_rn6i1")
 kill_type = 0
 metadata/_custom_type_script = "uid://csjcberb4rmwa"

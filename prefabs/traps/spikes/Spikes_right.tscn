@@ -9,6 +9,7 @@ size = Vector2(11, 5)
 [node name="Spike" type="Area2D" unique_id=11167043]
 texture_filter = 1
 rotation = -1.5707964
+collision_mask = 9
 monitorable = false
 script = ExtResource("1_4ld5s")
 

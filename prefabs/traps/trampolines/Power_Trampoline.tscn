@@ -81,6 +81,7 @@ animations = [{
 size = Vector2(23, 10)
 
 [node name="Trampoline" type="Area2D" unique_id=634334736]
+collision_mask = 9
 script = ExtResource("1_7fog4")
 jump_force = 3200
 

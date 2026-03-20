@@ -36,10 +36,17 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"
 
+[node name="back_to_lobby" type="Button" parent="." unique_id=411306560]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return To Lobby"
+
 [node name="back_to_menu" type="Button" parent="." unique_id=1361391487]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
 
 [connection signal="pressed" from="continue_game" to="." method="_on_continue_game_pressed"]
 [connection signal="pressed" from="restart_game" to="." method="_on_restart_game_pressed"]
+[connection signal="pressed" from="back_to_lobby" to="." method="_on_back_to_lobby_pressed"]
 [connection signal="pressed" from="back_to_menu" to="." method="_on_back_to_menu_pressed"]

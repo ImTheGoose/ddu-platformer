@@ -30,7 +30,9 @@ var dead :bool = false #TEMPOARY
 var air_time :float = 0
 
 func _physics_process(delta: float) -> void:
+	set_collision_mask_value(4, GameManager.is_collissions_enabled())
 	if !is_multiplayer_authority():
+		z_index = 0
 		velocity = sync_velocity
 		global_position = global_position.lerp(sync_position, delta * peer_lerp_speed)
 		
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		_update_anim(velocity.x)
 		return
 	else:
+		z_index = 1
 		sync_velocity = velocity
 		sync_position = global_position
 	
@@ -148,6 +151,7 @@ func reset_player(gpos:Vector2) -> void:
 
 @rpc("authority","call_local","reliable")
 func show_reset() -> void:
+	set_collision_mask_value(5, GameManager.is_collissions_enabled())
 	dead = false
 	anim.play("Idle")
 	death_particles.emitting = false

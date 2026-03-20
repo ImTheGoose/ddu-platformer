@@ -265,6 +265,9 @@ func close_connection() -> void:
 	if STEAM_LOBBY_ID > 0:
 		Steam.leaveLobby(STEAM_LOBBY_ID)
 		STEAM_LOBBY_ID = 0
+	GameManager.set_state(GameManager.STATE.INITIAL)
 	GameManager.clear_players.emit()
+	GameManager.server_reset.emit()
+	GameManager.reset_settings_to_default()
 
 #endregion

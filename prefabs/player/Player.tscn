@@ -17,6 +17,7 @@ shader_parameter/width = 1.0000000475
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = false
+shader_parameter/opacity = 1.0
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
@@ -37,13 +38,14 @@ properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" unique_id=472125303 groups=["Players"]]
 visibility_layer = 3
-collision_layer = 15
+collision_layer = 8
 collision_mask = 15
 safe_margin = 2.5
 script = ExtResource("1_jfcio")
 peer_lerp_speed = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("player_controller")]
+modulate = Color(0.33518517, 0.59265137, 0.8908548, 1)
 visibility_layer = 7
 material = SubResource("ShaderMaterial_hr8rp")
 sprite_frames = ExtResource("2_ivj8r")

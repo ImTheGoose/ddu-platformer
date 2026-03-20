@@ -1,14 +1,32 @@
 extends GameMenu
 
 @onready var restart_button :Button = %restart_game
+@onready var back_to_main :Button = %back_to_menu
+@onready var back_to_lobby :Button = %back_to_lobby
 
 func _on_show() -> void:
 	if !multiplayer.is_server():
 		restart_button.disabled = true
 		restart_button.visible = false
+		back_to_lobby.visible = false
+		back_to_lobby.disabled = true
+		back_to_main.visible = true
+		back_to_main.disabled = false
+		return
+	
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		back_to_lobby.visible = false
+		back_to_lobby.disabled = true
+		back_to_main.visible = true
+		back_to_main.disabled = false
 	else:
-		restart_button.disabled = false
-		restart_button.visible = true
+		back_to_lobby.visible = true
+		back_to_lobby.disabled = false
+		back_to_main.visible = false
+		back_to_main.disabled = true
+		
+	restart_button.disabled = false
+	restart_button.visible = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("escape") && event.is_pressed():
@@ -38,3 +56,8 @@ func _on_restart_game_pressed() -> void:
 func _on_back_to_menu_pressed() -> void:
 	GameManager.quit_to_main()
 	
+
+
+func _on_back_to_lobby_pressed() -> void:
+	GameManager.return_to_lobby()
+	pass # Replace with function body.

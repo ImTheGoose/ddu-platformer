@@ -158,6 +158,13 @@ escape={
 
 buffering/agile_event_flushing=true
 
+[layer_names]
+
+2d_physics/layer_1="Default"
+2d_physics/layer_2="Traps"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Players"
+
 [physics]
 
 2d/default_gravity_vector=Vector2(0, 4.5)

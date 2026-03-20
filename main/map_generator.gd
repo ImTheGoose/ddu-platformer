@@ -60,7 +60,10 @@ func get_map_global_position() -> Vector2:
 	return position + Vector2(0, height)
 
 func _process(delta: float) -> void:
-	if multiplayer.has_multiplayer_peer() && multiplayer.is_server() != true:
+	if !multiplayer.is_server():
+		return
+	
+	if !MenuHandler.is_game_visible():
 		return
 
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")

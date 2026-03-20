@@ -14,6 +14,7 @@ var player_info :PlayerInfo
 
 func _ready() -> void:
 	GameManager.spawn_player.connect(_on_spawn_player)
+	GameManager.game_settings_changed.connect(refresh_cosmetics)
 	player_info = Lobby.get_player_info(get_multiplayer_authority())
 	player_info.cosmetics_changed.connect(_on_cosmetics_changed)
 	refresh_cosmetics()
@@ -36,6 +37,12 @@ func _process(delta: float) -> void:
 func refresh_cosmetics() -> void:
 	sprite_frames = skin_sprites[player_info.SELECTED_SKIN_NAME]
 	get_material().set_shader_parameter("color", Color(player_info.SELECTED_OUTLINE_HEX))
+	if GameManager.is_collissions_enabled() or is_multiplayer_authority():
+		get_material().set_shader_parameter("opacity", 1.0)
+	else:
+		get_material().set_shader_parameter("opacity", .6)
+		
+	
 
 func _on_cosmetics_changed() -> void:
 	refresh_cosmetics()

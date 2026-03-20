@@ -381,10 +381,12 @@ enemy_name = "trunk"
 death_sound = ExtResource("3_o7ajs")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1100985406]
+collision_mask = 9
 collide_with_areas = true
 
 [node name="PlayerRay" type="RayCast2D" parent="." unique_id=697095699]
 position = Vector2(0, -4.565)
+collision_mask = 9
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=47335679]
 position = Vector2(0, -8)
@@ -396,7 +398,7 @@ script = ExtResource("6_yuq46")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=2038112279]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("8_xmyx0")
 kill_type = 1
 metadata/_custom_type_script = "uid://csjcberb4rmwa"

@@ -38,10 +38,12 @@ func _get_spawnrate(spawn_type: int) -> float:
 
 
 func _on_server_reset() -> void:
-	if multiplayer.is_server():
-		var entity_container :Node2D = get_node(spawn_path)
-		for child in entity_container.get_children():
-			child.queue_free()
+	if !multiplayer.is_server() && multiplayer.get_peers().size() != 0:
+		return
+		
+	var entity_container :Node2D = get_node(spawn_path)
+	for child in entity_container.get_children():
+		child.queue_free()
 	
 
 func _spawn_entity(data: Array) -> Node:

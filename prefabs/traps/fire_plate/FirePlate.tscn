@@ -100,6 +100,7 @@ animation = &"On"
 autoplay = "Off"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1565565911]
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=1877283129]
 position = Vector2(0, -8.5)
@@ -107,6 +108,7 @@ shape = SubResource("RectangleShape2D_hsvo0")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=263688076]
 position = Vector2(0, -16.465)
+collision_mask = 9
 monitoring = false
 monitorable = false
 script = ExtResource("5_s08ra")
