@@ -6,6 +6,7 @@ signal server_reset
 signal server_start
 signal spawn_level
 signal on_player_death
+signal game_settings_changed()
 signal spawn_entity(global_position: Vector2, spawn_type: int)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
@@ -55,8 +56,14 @@ func get_difficulty_value(key: String) -> Variant:
 func get_difficulty() -> difficulty:
 	return game_difficulty
 
+@rpc("authority","call_local","reliable")
 func set_difficulty(dif: difficulty) -> void:
 	game_difficulty = dif
+	game_settings_changed.emit()
+
+func sync_settings_to_peers() -> void:
+	if multiplayer.is_server():
+		rpc("set_difficulty", get_difficulty())
 
 #endregion
 
@@ -69,6 +76,12 @@ enum STATE {
 	PREGAME,
 	PLAYING,
 	DEAD,
+}
+
+enum ClientState {
+	PREGAME,
+	CLIENT_ALIVE,
+	CLIENT_DEAD,
 }
 
 var state :STATE = STATE.INITIAL:
@@ -104,7 +117,7 @@ func _on_game_covered() -> void:
 		MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
 		
 	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
-		rpc("set_seed", int(Time.get_unix_time_from_system()))
+		rpc("set_difficulty", get_difficulty())
 		rpc("reset_client")
 		server_reset.emit()
 		spawn_game()
@@ -153,10 +166,6 @@ func start_game() -> void:
 	
 	rpc("start_client")
 	server_start.emit()
-
-@rpc("authority","call_local","reliable")
-func set_seed(new_seed:int) -> void:
-	seed(new_seed)
 
 @rpc("authority","call_local","reliable")
 func start_client() -> void:
