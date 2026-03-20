@@ -172,7 +172,7 @@ func show_death() -> void:
 	audio_stream.play()
 
 func hit(vec: Vector2) -> void:
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() && !dead:
 		velocity = vec * max_speed * 1.5
 		_die()
 

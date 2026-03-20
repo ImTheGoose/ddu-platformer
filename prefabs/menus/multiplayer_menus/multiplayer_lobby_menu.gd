@@ -102,7 +102,6 @@ func _on_start_game_button_pressed() -> void:
 	if !multiplayer.is_server():
 		return
 	
-	GameManager.set_state(GameManager.STATE.AWAITING_RESTART)
-	MenuHandler.rpc("show_blackout")
+	GameManager.prepare_game()
 	Lobby.lock_lobby()
 	pass # Replace with function body.

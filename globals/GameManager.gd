@@ -12,7 +12,7 @@ signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
 var game_paused :bool = false
 
-
+var played_rounds :int = 0
 var players_dead :int = 0
 
 #region Difficulty Handling
@@ -77,7 +77,7 @@ func is_collissions_enabled() -> bool:
 func get_gamemode() -> Gamemode:
 	return game_gamemode
 
-func get_playing_rounds() -> int:
+func get_total_rounds() -> int:
 	return game_total_rounds
 
 @rpc("authority","call_local","reliable")
@@ -98,21 +98,39 @@ func set_collisions_enabled(is_enabled: bool) -> void:
 	return
 
 @rpc("authority","call_local","reliable")
-func set_playing_rounds(amount: int) -> void:
+func set_total_rounds(amount: int) -> void:
 	game_total_rounds = amount
 	game_settings_changed.emit()
 	return
+	
+@rpc("authority","call_local","reliable")
+func set_rounds_played(amount_played: int, show_alert: bool = false) -> void:
+	played_rounds = amount_played
+	if show_alert && multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
+		Alerts.push_default("Next Round", "Round %s out of %s" % [played_rounds, game_total_rounds])
+
+func next_round() -> void:
+	if game_total_rounds > played_rounds:
+		rpc("set_rounds_played", played_rounds + 1, true)
+		restart_game()
+	elif multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		MenuHandler.rpc("change_menu", "death_menu")
+		on_player_death.emit()
+		rpc("set_state", STATE.DEAD)
+	else:
+		return_to_lobby()
+
 
 func sync_settings_to_peers() -> void:
 	if multiplayer.is_server():
 		rpc("set_difficulty", get_difficulty())
-		rpc("set_playing_rounds", get_playing_rounds())
+		rpc("set_total_rounds", get_total_rounds())
 		rpc("set_collisions_enabled", is_collissions_enabled())
 		rpc("set_gamemode", get_gamemode())
 
 func reset_settings_to_default() -> void:
 	set_difficulty(default_game_settings["difficulty"])
-	set_playing_rounds(default_game_settings["total_rounds"])
+	set_total_rounds(default_game_settings["total_rounds"])
 	set_collisions_enabled(default_game_settings["collissions_enabled"])
 	set_gamemode(default_game_settings["gamemode"])
 
@@ -127,12 +145,6 @@ enum STATE {
 	PREGAME,
 	PLAYING,
 	DEAD,
-}
-
-enum ClientState {
-	PREGAME,
-	CLIENT_ALIVE,
-	CLIENT_DEAD,
 }
 
 var state :STATE = STATE.INITIAL:
@@ -158,14 +170,17 @@ func _on_peer_connected(peer_id: int) -> void:
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
 		Lobby.close_connection()
+		rpc("set_rounds_played", 0)
 		rpc("reset_client")
 		server_reset.emit()
 		Steamworks.set_rich_presense("#InMenu")
 		MenuHandler.change_menu("main_menu")
 		MenuHandler.hide_game()
 		MenuHandler.hide_blackout()
+
 	elif state == STATE.AWATING_RETURN_TO_LOBBY && multiplayer.is_server():
 		rpc("reset_client")
+		rpc("set_rounds_played", 0)
 		server_reset.emit()
 		spawn_game()
 		MenuHandler.rpc("hide_blackout")
@@ -182,7 +197,6 @@ func _on_game_covered() -> void:
 		MenuHandler.rpc("show_game")
 		if is_game_paused():
 			pause_game(false)
-
 
 func pause_game(isPaused: bool) -> void:
 	if multiplayer.get_peers().size() > 0:
@@ -215,6 +229,10 @@ func return_to_lobby() -> void:
 	set_state(STATE.AWATING_RETURN_TO_LOBBY)
 	MenuHandler.rpc("show_blackout")
 
+func prepare_game() -> void:
+	MenuHandler.rpc("show_blackout")
+	rpc("set_rounds_played", 0)
+	next_round()
 
 func start_game() -> void:
 	if !multiplayer.is_server():
@@ -243,9 +261,8 @@ func player_died() -> void:
 	if players_dead < multiplayer.get_peers().size() + 1:
 		return
 	
-	MenuHandler.rpc("change_menu", "death_menu")
-	on_player_death.emit()
-	rpc("set_state", STATE.DEAD)
+	next_round()
+
 
 #region QUIT Handling
 func _notification(what: int) -> void:
