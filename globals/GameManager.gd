@@ -267,7 +267,7 @@ func _on_game_covered() -> void:
 			pause_game(false)
 
 func pause_game(isPaused: bool) -> void:
-	if multiplayer.get_peers().size() > 0:
+	if multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
 		get_tree().paused = false
 		game_paused = false
 		return
@@ -328,6 +328,7 @@ func reset_client() -> void:
 	set_state(STATE.PREGAME)
 	players_dead = 0
 	round_scores.clear()
+	pause_game(false)
 
 
 
@@ -366,10 +367,10 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		quit_game()
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
-		return
 		if get_state() == STATE.PREGAME or get_state() == STATE.PLAYING:
-			pause_game(true)
-			MenuHandler.change_menu("pause_menu")
+			if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && !is_game_paused():
+				pause_game(true)
+				MenuHandler.change_menu("pause_menu")
 
 func quit_game() -> void:
 	DataManager.save_game_data()

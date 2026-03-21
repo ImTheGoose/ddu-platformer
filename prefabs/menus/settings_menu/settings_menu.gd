@@ -9,6 +9,7 @@ extends GameMenu
 @onready var particle_toggle :CheckBox = %particles_toggle
 @onready var vsync_toggle :CheckBox = %vsync_toggle
 @onready var skip_transitions_toggle :CheckBox = %skip_transitions_toggle
+@onready var clear_game_data: Button = %clear_game_data
 
 
 
@@ -27,6 +28,13 @@ func _ready() -> void:
 
 func _on_show() -> void:
 	_load_config_variables()
+	
+	if MenuHandler.is_game_visible() or multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
+		clear_game_data.visible = false
+		clear_game_data.disabled = true
+	else:
+		clear_game_data.visible = true
+		clear_game_data.disabled = false
 
 func _load_config_variables() -> void:
 	var video_settings :Dictionary = DataManager.get_video_settings()

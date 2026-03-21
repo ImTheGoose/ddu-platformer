@@ -147,6 +147,7 @@ layout_mode = 2
 text = "Keybindings"
 
 [node name="clear_game_data" type="Button" parent="." unique_id=1315414766]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Clear Game Data"
 

@@ -8,6 +8,7 @@ class_name Player
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
 @export_range(0,100,1.0) var peer_lerp_speed :float = 30
+@export_range(0,200, 5) var snap_distance :float = 100
 
 @onready var audio_files :Dictionary[String, AudioStreamMP3]= {
 	"running" : preload("uid://cap73awyf8ake"),
@@ -38,8 +39,12 @@ func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
 		z_index = 0
 		velocity = sync_velocity
-		var weight = 1 - exp(-peer_lerp_speed * delta)
-		global_position = global_position.lerp(sync_position, weight)
+		var distance :float = global_position.distance_to(sync_position)
+		if distance > snap_distance:
+			global_position = sync_position
+		else:
+			var weight :float = 1 - exp(-peer_lerp_speed * delta)
+			global_position = global_position.lerp(sync_position, weight)
 		
 		if dead:
 			return
