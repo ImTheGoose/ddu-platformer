@@ -178,7 +178,7 @@ func _get_entry_string_value(entry: Dictionary) -> String:
 		value = stats[stat_id]
 		
 	if stat_type == STAT_TYPE.TYPE_FORMATTED_TIME:
-		return TimeFormat.get_time_string(value)
+		return TimeFormat.get_time_string(value, 1.0)
 	if stat_type == STAT_TYPE.TYPE_INT:
 		return str(int(value))
 	if value is not Dictionary:

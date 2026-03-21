@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bh0jgwssyi2a1"]
 
 [ext_resource type="Script" uid="uid://g3vlgv4cqfpo" path="res://prefabs/menus/multiplayer_menus/multiplayer_round_win_menu.gd" id="1_6bnso"]
+[ext_resource type="PackedScene" uid="uid://c2sykb4hpg0u7" path="res://prefabs/menus/multiplayer_menus/player_leaderboard_card.tscn" id="2_v8n0v"]
 
 [node name="MultiplayerRoundWinMenu" type="VBoxContainer" unique_id=107251656]
 anchors_preset = 8
@@ -18,11 +19,53 @@ script = ExtResource("1_6bnso")
 menu_name = "multiplayer_round_win_menu"
 require_seperator = true
 
-[node name="Label" type="Label" parent="." unique_id=1458409405]
+[node name="round_label" type="Label" parent="." unique_id=1458409405]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Round Won"
+horizontal_alignment = 1
 
-[node name="next_round_-button" type="Button" parent="." unique_id=1245133292]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=176309256]
+layout_mode = 2
+
+[node name="player_leaderboard" type="VBoxContainer" parent="PanelContainer" unique_id=38356560]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="sample_player_card" parent="PanelContainer/player_leaderboard" unique_id=1052477706 instance=ExtResource("2_v8n0v")]
+layout_mode = 2
+
+[node name="next_round_button" type="Button" parent="." unique_id=1245133292]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Next Round"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=860590795]
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="HBoxContainer2" unique_id=476795898]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="customize_button" type="Button" parent="HBoxContainer2" unique_id=605469296]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Customize"
+
+[node name="return_to_lobby" type="Button" parent="." unique_id=1566559820]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return To Lobby"
+
+[node name="quit_to_main" type="Button" parent="." unique_id=2007800589]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Leave Game"
+
+[connection signal="pressed" from="next_round_button" to="." method="_on_next_round_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/customize_button" to="." method="_on_customize_button_pressed"]
+[connection signal="pressed" from="return_to_lobby" to="." method="_on_return_to_lobby_pressed"]
+[connection signal="pressed" from="quit_to_main" to="." method="_on_quit_to_main_pressed"]

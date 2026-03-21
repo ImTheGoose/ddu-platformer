@@ -161,7 +161,7 @@ func show_reset() -> void:
 	rotation = 0
 
 func _die() -> void: #TEMPOARY
-	GameManager.rpc("player_died")
+	GameManager.rpc("player_died", get_multiplayer_authority())
 	rpc("show_death")
 
 @rpc("authority","call_local","reliable")

@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		if !MenuHandler.is_game_visible():
 			return
 		
-		if GameManager.get_state() == GameManager.STATE.DEAD:
+		if GameManager.get_state() == GameManager.STATE.POST_GAME:
 			return
 		
 		if GameManager.is_game_paused():

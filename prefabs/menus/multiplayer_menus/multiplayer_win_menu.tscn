@@ -17,12 +17,38 @@ require_seperator = true
 [node name="Label" type="Label" parent="." unique_id=709359738]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "Winner"
+text = "Game Over"
 
 [node name="play_again_button" type="Button" parent="." unique_id=740777544]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Play Again"
 
-[node name="back_button" type="Button" parent="." unique_id=1870285828]
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1484253742]
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="HBoxContainer2" unique_id=125141881]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="customize_button" type="Button" parent="HBoxContainer2" unique_id=1334913116]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Customize"
+
+[node name="return_to_lobby" type="Button" parent="." unique_id=1870285828]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Return To Lobby"
+
+[node name="quit_to_main" type="Button" parent="." unique_id=1857301556]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Leave Game"
+
+[connection signal="pressed" from="play_again_button" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/customize_button" to="." method="_on_customize_button_pressed"]
+[connection signal="pressed" from="return_to_lobby" to="." method="_on_return_to_lobby_pressed"]
+[connection signal="pressed" from="quit_to_main" to="." method="_on_quit_to_main_pressed"]

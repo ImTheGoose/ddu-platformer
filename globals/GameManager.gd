@@ -5,13 +5,15 @@ signal client_reset
 signal server_reset
 signal server_start
 signal spawn_level
-signal on_player_death
+signal player_death(peer_id: int)
 signal game_settings_changed()
 signal spawn_entity(global_position: Vector2, spawn_type: int)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
 var game_paused :bool = false
 
+signal game_scores_changed()
+var round_scores :Dictionary[int, float] = {}
 var played_rounds :int = 0
 var players_dead :int = 0
 
@@ -63,6 +65,30 @@ enum Gamemode {
 	GAMEMODE_STANDARD,
 	GAMEMODE_CONSTANT,
 }
+
+func get_match_scores() -> Dictionary[int, Variant]:
+	return {}
+
+func get_round_scores() -> Dictionary[int, Variant]:
+	return {}
+
+func get_score(peer_id: int) -> float:
+	return round_scores.get(peer_id, 0.0)
+
+func get_placement(peer_id: int) -> float:
+	var peer_score: float = get_score(peer_id)
+	var placement: int = 1
+	for peer in round_scores.keys():
+		if peer == peer_id:
+			continue
+		if round_scores[peer] > peer_score:
+			placement += 1
+	return placement
+
+@rpc("any_peer","call_local","reliable")
+func set_round_score(peer_id: int, score: Variant) -> void:
+	round_scores.set(peer_id, score)
+	game_scores_changed.emit()
 
 func get_difficulty_value(key: String) -> Variant:
 	var dif_settings :Dictionary = difficulty_settings[game_difficulty]
@@ -144,6 +170,7 @@ enum STATE {
 	PREGAME,
 	PLAYING,
 	DEAD,
+	POST_GAME,
 }
 
 var state :STATE = STATE.INITIAL:
@@ -209,7 +236,13 @@ func is_game_paused() -> bool:
 	return game_paused
 
 func is_game_running() -> bool:
-	return state == STATE.PLAYING
+	if state == STATE.PLAYING or state == STATE.DEAD:
+		return true
+	else:
+		return false
+
+func is_alive() -> bool:
+	return state != STATE.DEAD
 
 func restart_game() -> void:
 	set_state(STATE.AWAITING_RESTART)
@@ -249,9 +282,18 @@ func reset_client() -> void:
 	client_reset.emit()
 	set_state(STATE.PREGAME)
 	players_dead = 0
+	round_scores.clear()
+
+
 
 @rpc("any_peer","call_local","reliable")
-func player_died() -> void:
+func player_died(peer_id: int) -> void:
+	player_death.emit(peer_id)
+	
+	if peer_id == multiplayer.get_unique_id():
+		set_state(STATE.DEAD)
+		rpc("set_round_score", multiplayer.get_unique_id(), StatisticManager.get_value("time_alive"))
+	
 	if !multiplayer.is_server():
 		return
 	
@@ -261,12 +303,13 @@ func player_died() -> void:
 	
 	
 	if multiplayer.is_server():
+		rpc("set_state", STATE.POST_GAME)
 		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
 			MenuHandler.rpc("change_menu", "death_menu")
-			on_player_death.emit()
-			rpc("set_state", STATE.DEAD)
+		elif get_total_rounds() > played_rounds:
+			MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
 		else:
-			next_round()
+			MenuHandler.rpc("change_menu", "multiplayer_win_menu")
 
 
 

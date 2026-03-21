@@ -27,8 +27,12 @@ func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _ready() -> void:
-	GameManager.on_player_death.connect(_save_recording)
+	GameManager.player_death.connect(_on_player_death)
 	GameManager.client_reset.connect(_clear_recording)
+
+func _on_player_death(peer_id: int) -> void:
+	if peer_id == multiplayer.get_unique_id():
+		_save_recording()
 
 func _save_recording() -> void:
 	var glo_stats :Dictionary = DataManager.get_value("statistics")
@@ -85,7 +89,7 @@ func get_value(key:String) -> Variant:
 	return stat_recording[key]
 
 func _process(delta: float) -> void:
-	if GameManager.is_game_running() && !GameManager.is_game_paused():
+	if GameManager.is_game_running() && !GameManager.is_game_paused() && GameManager.is_alive():
 		stat_recording["time_alive"] += delta
 
 func _clear_recording() -> void:
