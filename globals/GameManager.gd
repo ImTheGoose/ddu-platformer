@@ -114,9 +114,8 @@ func next_round() -> void:
 		rpc("set_rounds_played", played_rounds + 1, true)
 		restart_game()
 	elif multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		MenuHandler.rpc("change_menu", "death_menu")
-		on_player_death.emit()
-		rpc("set_state", STATE.DEAD)
+		rpc("set_rounds_played", 0)
+		restart_game()
 	else:
 		return_to_lobby()
 
@@ -182,7 +181,6 @@ func _on_game_covered() -> void:
 		rpc("reset_client")
 		rpc("set_rounds_played", 0)
 		server_reset.emit()
-		spawn_game()
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_game")
 		MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
@@ -261,7 +259,15 @@ func player_died() -> void:
 	if players_dead < multiplayer.get_peers().size() + 1:
 		return
 	
-	next_round()
+	
+	if multiplayer.is_server():
+		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+			MenuHandler.rpc("change_menu", "death_menu")
+			on_player_death.emit()
+			rpc("set_state", STATE.DEAD)
+		else:
+			next_round()
+
 
 
 #region QUIT Handling

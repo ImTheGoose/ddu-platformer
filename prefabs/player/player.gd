@@ -30,6 +30,9 @@ var dead :bool = false #TEMPOARY
 var air_time :float = 0
 
 func _physics_process(delta: float) -> void:
+	if !MenuHandler.is_game_visible():
+		return
+	
 	set_collision_mask_value(4, GameManager.is_collissions_enabled())
 	if !is_multiplayer_authority():
 		z_index = 0

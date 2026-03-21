@@ -71,7 +71,7 @@ func _refresh_stat_text() -> void:
 	stat_text_node.text = text
 
 func _on_play_again_pressed() -> void:
-	GameManager.restart_game()
+	GameManager.next_round()
 
 
 func _on_back_to_menu_pressed() -> void:
