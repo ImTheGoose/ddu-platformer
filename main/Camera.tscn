@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="10_25ya2"]
 [ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="11_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="12_25ya2"]
+[ext_resource type="Script" uid="uid://c8ed372wclpdl" path="res://main/state_label.gd" id="12_28bm7"]
 [ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="12_yxbh2"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="13_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="14_25ya2"]
@@ -268,6 +269,18 @@ text = "FPS: 1000"
 fit_content = true
 script = ExtResource("8_psn7d")
 
+[node name="state_label" type="RichTextLabel" parent="UI" unique_id=599648194]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = 2.0
+offset_top = 20.45
+offset_right = 473.61
+offset_bottom = 32.450005
+text = "FPS: 1000"
+fit_content = true
+script = ExtResource("12_28bm7")
+
 [node name="version_label" type="Label" parent="UI" unique_id=905158422]
 layout_mode = 1
 anchors_preset = -1
@@ -280,7 +293,7 @@ offset_right = 26.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 11
-text = "mutliplayer-4"
+text = "mutliplayer-5"
 
 [node name="Control" type="Control" parent="UI" unique_id=1649518603]
 layout_mode = 1

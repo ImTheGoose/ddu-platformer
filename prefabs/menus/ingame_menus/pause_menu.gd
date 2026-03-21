@@ -3,6 +3,7 @@ extends GameMenu
 @onready var restart_button :Button = %restart_game
 @onready var back_to_main :Button = %back_to_menu
 @onready var back_to_lobby :Button = %back_to_lobby
+@onready var leave_game_button: Button = %leave_game_button
 
 func _on_show() -> void:
 	if !multiplayer.is_server():
@@ -10,8 +11,10 @@ func _on_show() -> void:
 		restart_button.visible = false
 		back_to_lobby.visible = false
 		back_to_lobby.disabled = true
-		back_to_main.visible = true
-		back_to_main.disabled = false
+		back_to_main.visible = false
+		back_to_main.disabled = true
+		leave_game_button.visible = true
+		leave_game_button.disabled = false
 		return
 	
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
@@ -19,12 +22,15 @@ func _on_show() -> void:
 		back_to_lobby.disabled = true
 		back_to_main.visible = true
 		back_to_main.disabled = false
+
 	else:
 		back_to_lobby.visible = true
 		back_to_lobby.disabled = false
 		back_to_main.visible = false
 		back_to_main.disabled = true
-		
+
+	leave_game_button.visible = false
+	leave_game_button.disabled = true
 	restart_button.disabled = false
 	restart_button.visible = true
 
@@ -67,3 +73,7 @@ func _on_settings_button_pressed() -> void:
 
 func _on_customize_button_pressed() -> void:
 	MenuHandler.change_menu("shop_selection_menu", true)
+
+
+func _on_leave_game_button_pressed() -> void:
+	GameManager.quit_to_main()

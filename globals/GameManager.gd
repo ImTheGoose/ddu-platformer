@@ -309,6 +309,7 @@ func prepare_game() -> void:
 	match_scores.clear()
 	next_round()
 
+@rpc("any_peer","call_local","reliable")
 func start_game() -> void:
 	if !multiplayer.is_server():
 		return

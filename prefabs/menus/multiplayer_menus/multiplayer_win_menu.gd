@@ -14,7 +14,7 @@ func _ready() -> void:
 	clear_leaderboard()
 
 func _on_scores_changed() -> void:
-	call_deferred("update_board")
+	update_board()
 
 func _on_show() -> void:
 	clear_leaderboard()
@@ -39,7 +39,7 @@ func _on_show() -> void:
 
 func update_board() -> void:
 	sort_leaderboard()
-	if GameManager.get_placement(multiplayer.get_unique_id()) == 1:
+	if GameManager.get_match_placement(multiplayer.get_unique_id()) == 1:
 		conclusion_label.text = "Game Winner"
 	else:
 		conclusion_label.text = "Loser"
@@ -53,20 +53,22 @@ func build_leaderboard() -> void:
 		var card :Control = leaderboard_card.instantiate()
 		card.assigned_peer_id = peer
 		player_leaderboard.add_child(card)
+		card.labels_changed.connect(update_board)
 
 func sort_leaderboard() -> void:
-	var sorted_cards :Dictionary[int, Node] = {}
-	for card in player_leaderboard.get_children():
-		var peer :int = card.assigned_peer_id
-		var placement :int = GameManager.get_match_placement(peer) - 1
-		if placement > player_leaderboard.get_child_count():
-			continue
-		else:
-			sorted_cards.set(placement, card)
+	var children :Array[Node]= player_leaderboard.get_children()
 	
-	for index: int in sorted_cards.keys():
-		player_leaderboard.move_child(sorted_cards[index], index)
-	return
+	children.sort_custom(func (a, b):
+		var pl_a :int = GameManager.get_match_placement(a.assigned_peer_id)
+		var pl_b :int = GameManager.get_match_placement(b.assigned_peer_id)
+		if pl_a != pl_b:
+			return pl_a < pl_b
+		
+		return a.assigned_peer_id < b.assigned_peer_id
+		)
+	
+	for i in range(children.size()):
+		player_leaderboard.move_child(children[i], i)
 
 func clear_leaderboard() -> void:
 	for child in player_leaderboard.get_children():

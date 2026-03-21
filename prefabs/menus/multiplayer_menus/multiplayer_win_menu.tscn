@@ -39,7 +39,7 @@ size_flags_horizontal = 4
 [node name="play_again_button" type="Button" parent="VBoxContainer" unique_id=740777544]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play Again"
+text = "Play Another Game"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1484253742]
 layout_mode = 2

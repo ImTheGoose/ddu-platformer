@@ -25,6 +25,7 @@ class_name Player
 @export var sync_position: Vector2 = Vector2.ZERO
 @export var sync_velocity: Vector2 = Vector2.ZERO
 
+var reset_ready :bool = true
 var dead :bool = false #TEMPOARY
 @export var double_jumped :bool = false
 var air_time :float = 0
@@ -37,7 +38,8 @@ func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
 		z_index = 0
 		velocity = sync_velocity
-		global_position = global_position.lerp(sync_position, delta * peer_lerp_speed)
+		var weight = 1 - exp(-peer_lerp_speed * delta)
+		global_position = global_position.lerp(sync_position, weight)
 		
 		if dead:
 			return
@@ -151,6 +153,7 @@ func reset_player(gpos:Vector2) -> void:
 	velocity = Vector2.ZERO
 	global_position = gpos
 	rpc("show_reset")
+	reset_ready = true
 
 @rpc("authority","call_local","reliable")
 func show_reset() -> void:
@@ -161,6 +164,7 @@ func show_reset() -> void:
 	rotation = 0
 
 func _die() -> void: #TEMPOARY
+	reset_ready = false
 	GameManager.rpc("player_died", get_multiplayer_authority())
 	rpc("show_death")
 
@@ -175,7 +179,7 @@ func show_death() -> void:
 	audio_stream.play()
 
 func hit(vec: Vector2) -> void:
-	if is_multiplayer_authority() && !dead:
+	if is_multiplayer_authority() && !dead && GameManager.is_game_running():
 		velocity = vec * max_speed * 1.5
 		_die()
 

@@ -5,6 +5,7 @@ extends HBoxContainer
 @onready var player_name_label: Label = %player_name_label
 @onready var player_score_label: Label = %player_score_label
 
+signal labels_changed()
 var assigned_peer_id :int = -1
 var assigned_player_info :PlayerInfo
 
@@ -38,6 +39,7 @@ func refresh_labels() -> void:
 		_:
 			placement_label.text = "%sth" % placement
 			set_label_colors(Color(0.25, 0.25, 0.25, 1.0))
+	labels_changed.emit()
 
 func set_label_colors(color: Color) -> void:
 	placement_label.add_theme_color_override("font_color", color)
