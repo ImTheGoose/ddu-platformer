@@ -16,7 +16,7 @@ func _ready() -> void:
 	clear_leaderboard()
 
 func _on_scores_changed() -> void:
-	update_board()
+	call_deferred("update_board")
 
 func _on_show() -> void:
 	clear_leaderboard()
@@ -56,12 +56,17 @@ func build_leaderboard() -> void:
 		player_leaderboard.add_child(card)
 
 func sort_leaderboard() -> void:
+	var sorted_cards :Dictionary[int, Node] = {}
 	for card in player_leaderboard.get_children():
 		var peer :int = card.assigned_peer_id
 		var placement :int = GameManager.get_placement(peer) - 1
 		if placement > player_leaderboard.get_child_count():
-			return
-		player_leaderboard.move_child(card, placement)
+			continue
+		else:
+			sorted_cards.set(placement, card)
+	
+	for index: int in sorted_cards.keys():
+		player_leaderboard.move_child(sorted_cards[index], index)
 	return
 
 func clear_leaderboard() -> void:

@@ -13,6 +13,7 @@ signal clear_players()
 var game_paused :bool = false
 
 signal game_scores_changed()
+var match_scores :Dictionary[int, int] = {}
 var round_scores :Dictionary[int, float] = {}
 var played_rounds :int = 0
 var players_dead :int = 0
@@ -66,14 +67,23 @@ enum Gamemode {
 	GAMEMODE_CONSTANT,
 }
 
-func get_match_scores() -> Dictionary[int, Variant]:
-	return {}
-
-func get_round_scores() -> Dictionary[int, Variant]:
-	return {}
 
 func get_score(peer_id: int) -> float:
 	return round_scores.get(peer_id, 0.0)
+
+func get_match_score(peer_id: int) -> int:
+	return match_scores.get(peer_id, 0)
+
+func get_match_placement(peer_id: int) -> float:
+	var peer_score: float = get_match_score(peer_id)
+	var placement: int = 1
+	for peer in match_scores.keys():
+		if peer == peer_id:
+			continue
+		
+		if match_scores[peer] > peer_score:
+			placement += 1
+	return placement
 
 func get_placement(peer_id: int) -> float:
 	var peer_score: float = get_score(peer_id)
@@ -85,8 +95,31 @@ func get_placement(peer_id: int) -> float:
 			placement += 1
 	return placement
 
+@rpc("authority", "call_local", "reliable")
+func set_match_score(peer_id: int, score: int) -> void:
+	match_scores.set(peer_id, score)
+	game_scores_changed.emit()
+
+func sync_match_scores() -> void:
+	if !multiplayer.is_server():
+		return
+	
+	var peer_list :PackedInt32Array = multiplayer.get_peers()
+	peer_list.append(multiplayer.get_unique_id())
+	for peer_id: int in peer_list:
+		rpc("set_match_score", peer_id, get_match_score(peer_id))
+
+func add_winner_to_match_scores() -> void:
+	if !multiplayer.is_server():
+		return
+	
+	for peer_id: int in round_scores.keys():
+		if get_placement(peer_id) == 1 && round_scores.get(peer_id) != 0:
+			rpc("set_match_score", peer_id, get_match_score(peer_id) + 1)
+	round_scores.clear()
+
 @rpc("any_peer","call_local","reliable")
-func set_round_score(peer_id: int, score: Variant) -> void:
+func set_round_score(peer_id: int, score: float) -> void:
 	round_scores.set(peer_id, score)
 	game_scores_changed.emit()
 
@@ -138,6 +171,8 @@ func set_rounds_played(amount_played: int, show_alert: bool = false) -> void:
 func next_round() -> void:
 	if game_total_rounds > played_rounds:
 		rpc("set_rounds_played", played_rounds + 1, true)
+		add_winner_to_match_scores()
+		
 		restart_game()
 	elif multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
 		rpc("set_rounds_played", 0)
@@ -167,6 +202,7 @@ enum STATE {
 	AWAITING_RESTART,
 	AWAITING_QUIT_TO_MAIN,
 	AWATING_RETURN_TO_LOBBY,
+	AWAITING_GAME_CONCLUSION,
 	PREGAME,
 	PLAYING,
 	DEAD,
@@ -203,6 +239,13 @@ func _on_game_covered() -> void:
 		MenuHandler.change_menu("main_menu")
 		MenuHandler.hide_game()
 		MenuHandler.hide_blackout()
+	
+	elif state == STATE.AWAITING_GAME_CONCLUSION && multiplayer.is_server():
+		add_winner_to_match_scores()
+		sync_match_scores()
+		MenuHandler.rpc("hide_blackout")
+		MenuHandler.rpc("hide_game")
+		MenuHandler.rpc("change_menu", "multiplayer_win_menu")
 
 	elif state == STATE.AWATING_RETURN_TO_LOBBY && multiplayer.is_server():
 		rpc("reset_client")
@@ -263,6 +306,7 @@ func return_to_lobby() -> void:
 func prepare_game() -> void:
 	MenuHandler.rpc("show_blackout")
 	rpc("set_rounds_played", 0)
+	match_scores.clear()
 	next_round()
 
 func start_game() -> void:
@@ -291,8 +335,10 @@ func player_died(peer_id: int) -> void:
 	player_death.emit(peer_id)
 	
 	if peer_id == multiplayer.get_unique_id():
-		set_state(STATE.DEAD)
 		rpc("set_round_score", multiplayer.get_unique_id(), StatisticManager.get_value("time_alive"))
+		if get_state() != STATE.POST_GAME:
+			set_state(STATE.DEAD)
+		
 	
 	if !multiplayer.is_server():
 		return
@@ -309,7 +355,8 @@ func player_died(peer_id: int) -> void:
 		elif get_total_rounds() > played_rounds:
 			MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
 		else:
-			MenuHandler.rpc("change_menu", "multiplayer_win_menu")
+			MenuHandler.rpc("show_blackout")
+			set_state(STATE.AWAITING_GAME_CONCLUSION)
 
 
 
