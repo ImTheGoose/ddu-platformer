@@ -306,7 +306,7 @@ grow_horizontal = 0
 script = ExtResource("12_yxbh2")
 
 [node name="Control" type="Control" parent="." unique_id=884807155]
-z_index = 1
+z_index = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
@@ -319,7 +319,6 @@ layout_mode = 1
 
 [node name="settings_menu" parent="Control" unique_id=463999452 instance=ExtResource("11_25ya2")]
 visible = false
-z_index = 2
 layout_mode = 1
 offset_left = -79.5
 offset_right = 79.5
@@ -342,36 +341,30 @@ offset_right = 54.5
 
 [node name="shop_skin_menu" parent="Control" unique_id=1491830652 instance=ExtResource("15_25ya2")]
 visible = false
-z_index = 2
 layout_mode = 1
 offset_left = -100.0
 offset_right = 100.0
 
 [node name="shop_accent_menu" parent="Control" unique_id=411804758 instance=ExtResource("16_25ya2")]
 visible = false
-z_index = 2
 layout_mode = 1
 
 [node name="shop_theme_menu" parent="Control" unique_id=1320604940 instance=ExtResource("17_lviju")]
 visible = false
-z_index = 2
 layout_mode = 1
 
 [node name="shop_selection_menu" parent="Control" unique_id=2104256746 instance=ExtResource("18_anor8")]
 visible = false
-z_index = 2
 layout_mode = 1
 
 [node name="pause_menu" parent="Control" unique_id=710775371 instance=ExtResource("22_anor8")]
 visible = false
-z_index = 2
 layout_mode = 1
 offset_left = -100.0
 offset_right = 100.0
 
 [node name="death_menu" parent="Control" unique_id=1525325848 instance=ExtResource("21_hx0qg")]
 visible = false
-z_index = 2
 layout_mode = 1
 
 [node name="changelog_popup" parent="Control" unique_id=272473621 instance=ExtResource("21_l4l7y")]
@@ -433,7 +426,6 @@ offset_bottom = 37.5
 
 [node name="MultiplayerWinMenu" parent="Control" unique_id=302228853 instance=ExtResource("33_by3hl")]
 visible = false
-z_index = 2
 layout_mode = 1
 offset_left = -65.0
 offset_top = -49.0
@@ -442,7 +434,6 @@ offset_bottom = 49.0
 
 [node name="MultiplayerRoundWinMenu" parent="Control" unique_id=107251656 instance=ExtResource("34_28bm7")]
 visible = false
-z_index = 2
 layout_mode = 1
 offset_left = -99.0
 offset_top = -37.5

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://g3vlgv4cqfpo" path="res://prefabs/menus/multiplayer_menus/multiplayer_round_win_menu.gd" id="1_6bnso"]
 [ext_resource type="PackedScene" uid="uid://c2sykb4hpg0u7" path="res://prefabs/menus/multiplayer_menus/player_leaderboard_card.tscn" id="2_v8n0v"]
 
-[node name="MultiplayerRoundWinMenu" type="VBoxContainer" unique_id=107251656]
+[node name="MultiplayerRoundWinMenu" type="VBoxContainer" unique_id=107251656 node_paths=PackedStringArray("initial_focus", "server_initial_focus")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -17,7 +17,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6bnso")
 menu_name = "multiplayer_round_win_menu"
-require_seperator = true
+seperate_from_game = true
+initial_focus = NodePath("HBoxContainer2/customize_button")
+server_initial_focus = NodePath("next_round_button")
 
 [node name="round_label" type="Label" parent="." unique_id=1458409405]
 unique_name_in_owner = true
@@ -38,7 +40,6 @@ layout_mode = 2
 
 [node name="next_round_button" type="Button" parent="." unique_id=1245133292]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 text = "Next Round"
 

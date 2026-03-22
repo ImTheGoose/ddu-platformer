@@ -35,14 +35,14 @@ func _on_show() -> void:
 	restart_button.visible = true
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("escape") && event.is_pressed():
+	if event.is_action("pause_game") && event.is_pressed():
 		if !MenuHandler.is_game_visible():
 			return
 		
 		if GameManager.get_state() == GameManager.STATE.POST_GAME:
 			return
 		
-		if GameManager.is_game_paused():
+		if GameManager.is_game_paused() or MenuHandler.is_menu_visible("pause_menu"):
 			GameManager.pause_game(false)
 			MenuHandler.hide_all_menus()
 		else:

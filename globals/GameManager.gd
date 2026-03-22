@@ -368,7 +368,7 @@ func _notification(what: int) -> void:
 		quit_game()
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		if get_state() == STATE.PREGAME or get_state() == STATE.PLAYING:
-			if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && !is_game_paused():
+			if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && !is_game_paused() && MenuHandler.is_game_visible():
 				pause_game(true)
 				MenuHandler.change_menu("pause_menu")
 

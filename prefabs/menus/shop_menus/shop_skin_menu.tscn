@@ -11,6 +11,7 @@ shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
+shader_parameter/opacity = 1.0
 
 [node name="shop_skin_menu" type="MarginContainer" unique_id=1491830652 node_paths=PackedStringArray("display_rect", "price_tag", "buy_button", "name_tag", "initial_focus", "back_button")]
 custom_minimum_size = Vector2(200, 0)
@@ -32,6 +33,7 @@ price_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer
 buy_button = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button")
 name_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/skin_name_tag")
 menu_name = "shop_skin_menu"
+seperate_from_game = true
 initial_focus = NodePath("VBoxContainer/back")
 back_button = NodePath("VBoxContainer/back")
 

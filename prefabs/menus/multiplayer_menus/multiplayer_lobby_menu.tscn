@@ -14,7 +14,7 @@ grow_end = 2.0
 thickness = 3
 vertical = true
 
-[node name="MultiplayerLobbyMenu" type="VBoxContainer" unique_id=2055560422]
+[node name="MultiplayerLobbyMenu" type="VBoxContainer" unique_id=2055560422 node_paths=PackedStringArray("initial_focus")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wdrp6")
 menu_name = "multiplayer_lobby_menu"
+initial_focus = NodePath("VBoxContainer/quit_lobby")
 
 [node name="Label" type="Label" parent="." unique_id=1013216083]
 layout_mode = 2

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cho3y1jg73dfw" path="res://prefabs/menus/multiplayer_menus/multiplayer_win_menu.gd" id="1_ca3nu"]
 [ext_resource type="PackedScene" uid="uid://c2sykb4hpg0u7" path="res://prefabs/menus/multiplayer_menus/player_leaderboard_card.tscn" id="2_ttmmp"]
 
-[node name="MultiplayerWinMenu" type="VBoxContainer" unique_id=302228853]
+[node name="MultiplayerWinMenu" type="VBoxContainer" unique_id=302228853 node_paths=PackedStringArray("initial_focus", "server_initial_focus")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -13,7 +13,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ca3nu")
 menu_name = "multiplayer_win_menu"
-require_seperator = true
+initial_focus = NodePath("VBoxContainer/HBoxContainer2/customize_button")
+server_initial_focus = NodePath("VBoxContainer/play_again_button")
 
 [node name="conclusion_label" type="Label" parent="." unique_id=709359738]
 layout_mode = 2
