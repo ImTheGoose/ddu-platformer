@@ -307,6 +307,7 @@ func prepare_game() -> void:
 	MenuHandler.rpc("show_blackout")
 	rpc("set_rounds_played", 0)
 	match_scores.clear()
+	sync_match_scores()
 	next_round()
 
 @rpc("any_peer","call_local","reliable")
