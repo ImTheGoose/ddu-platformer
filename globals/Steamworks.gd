@@ -1,6 +1,6 @@
 extends Node
 
-const STEAM_DATA_COOLDOWN :float = 60.0
+const STEAM_DATA_COOLDOWN :float = 15.0
 var steam_data_cooldown_progress :float = 0.0
 
 func _init() -> void:
@@ -48,6 +48,8 @@ func store_steam_data(forced:bool = false, attempt: int = 0) -> void:
 	if !forced:
 		if steam_data_cooldown_progress < STEAM_DATA_COOLDOWN:
 			return
+	
+	Stats.sync_group_totals()
 	
 	if not Steam.storeStats():
 		print("Failed to store data on Steam, trying again.")
