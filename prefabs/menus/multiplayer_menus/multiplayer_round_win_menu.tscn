@@ -41,6 +41,7 @@ layout_mode = 2
 [node name="next_round_button" type="Button" parent="." unique_id=1245133292]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../HBoxContainer2/customize_button")
 text = "Next Round"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=860590795]
@@ -59,11 +60,13 @@ text = "Customize"
 [node name="return_to_lobby" type="Button" parent="." unique_id=1566559820]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Return To Lobby"
 
 [node name="quit_to_main" type="Button" parent="." unique_id=2007800589]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Leave Game"
 
 [connection signal="pressed" from="next_round_button" to="." method="_on_next_round_button_pressed"]

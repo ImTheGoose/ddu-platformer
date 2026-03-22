@@ -40,6 +40,7 @@ size_flags_horizontal = 4
 [node name="play_again_button" type="Button" parent="VBoxContainer" unique_id=740777544]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../HBoxContainer2/customize_button")
 text = "Play Another Game"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1484253742]
@@ -58,11 +59,13 @@ text = "Customize"
 [node name="return_to_lobby" type="Button" parent="VBoxContainer" unique_id=1870285828]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Return To Lobby"
 
 [node name="quit_to_main" type="Button" parent="VBoxContainer" unique_id=1857301556]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Leave Game"
 
 [connection signal="pressed" from="VBoxContainer/play_again_button" to="." method="_on_play_again_button_pressed"]

@@ -178,6 +178,7 @@ size_flags_horizontal = 4
 [node name="start_game_button" type="Button" parent="VBoxContainer" unique_id=1649323693]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../HBoxContainer2/customize_button")
 disabled = true
 text = "Start Game"
 
@@ -196,6 +197,7 @@ text = "Customize"
 
 [node name="quit_lobby" type="Button" parent="VBoxContainer" unique_id=1172475521]
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Quit Lobby"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=440277464]

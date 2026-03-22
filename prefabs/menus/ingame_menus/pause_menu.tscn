@@ -9,10 +9,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -60.5
-offset_right = 58.0
-offset_bottom = 60.5
+offset_left = -100.0
+offset_top = -95.0
+offset_right = 100.0
+offset_bottom = 95.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -34,6 +34,7 @@ text = "Continue"
 [node name="restart_game" type="Button" parent="." unique_id=1837526330]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../HBoxContainer2/customize_button")
 text = "Restart"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1782002489]
@@ -52,16 +53,19 @@ text = "Customize"
 [node name="back_to_lobby" type="Button" parent="." unique_id=411306560]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Return To Lobby"
 
 [node name="back_to_menu" type="Button" parent="." unique_id=1361391487]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Main Menu"
 
 [node name="leave_game_button" type="Button" parent="." unique_id=1862743837]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
 text = "Leave Game"
 
 [connection signal="pressed" from="continue_game" to="." method="_on_continue_game_pressed"]
