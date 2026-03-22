@@ -45,15 +45,14 @@ buses/default_bus_layout="res://main/default_bus_layout.tres"
 GameManager="*res://globals/GameManager.gd"
 DataManager="*res://globals/DataManager.gd"
 AudioManager="*res://globals/AudioManager.gd"
-StatisticManager="*res://globals/StatisticManager.gd"
 GameHandler="*uid://dapkibmitjx82"
 MenuHandler="*uid://boqav6yfiyrq2"
 GlobalFocusManager="*uid://cej3huoix0m5b"
 Steamworks="*uid://bddun8wjf3s46"
-GlobalSignals="*uid://ckf3lulks2jy5"
 Lobby="*uid://coif17ch3knd1"
 Alerts="*uid://5k1jf2wcmw7"
 Maps="*uid://bi6ay7ka3lyrd"
+Stats="*uid://c56ybmb52mjm8"
 
 [debug]
 

@@ -1,5 +1,8 @@
 extends Node
 
+const STEAM_DATA_COOLDOWN :float = 60.0
+var steam_data_cooldown_progress :float = 0.0
+
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -10,6 +13,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
+	steam_data_cooldown_progress += delta
 	
 func _on_tree_ready() -> void:
 	var init_response :Dictionary = Steam.get_steam_init_result() # Tjekker om der var fejl under steam hook.
@@ -34,6 +38,35 @@ func set_rich_presense(token:String, value: String = "") -> void:
 	print("Setting rich presence to %s: %s" % [token, setting_presence])
 	
 	pass
+
+
+func store_steam_data(forced:bool = false, attempt: int = 0) -> void:
+	if attempt > 3:
+		print("Failed to store data on Steam. Too many attempts.")
+		return
+	
+	if !forced:
+		if steam_data_cooldown_progress < STEAM_DATA_COOLDOWN:
+			return
+	
+	if not Steam.storeStats():
+		print("Failed to store data on Steam, trying again.")
+		store_steam_data(true, attempt + 1)
+		return
+
+	steam_data_cooldown_progress = 0.0
+	print("Data successfully sent to Steam")
+
+func reset_steam_stats(attempt: int = 0) -> void:
+	if attempt > 3:
+		print("Failed to reset data on Steam. Too many attempts.")
+		return
+	
+	if not Steam.resetAllStats(true):
+		print("Failed to reset data on Steam, trying again.")
+		reset_steam_stats(attempt + 1)
+		return
+	print("Data successfully reset on steam.")
 
 func check_command_line() -> void:
 	var these_arguments: Array = OS.get_cmdline_args()

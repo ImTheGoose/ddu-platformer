@@ -338,7 +338,7 @@ func player_died(peer_id: int) -> void:
 	player_death.emit(peer_id)
 	
 	if peer_id == multiplayer.get_unique_id():
-		rpc("set_round_score", multiplayer.get_unique_id(), StatisticManager.get_value("time_alive"))
+		rpc("set_round_score", multiplayer.get_unique_id(), Stats.get_recording_value(Stats.StatType.TIME_ALIVE))
 		if get_state() != STATE.POST_GAME:
 			set_state(STATE.DEAD)
 		
@@ -374,6 +374,7 @@ func _notification(what: int) -> void:
 				MenuHandler.change_menu("pause_menu")
 
 func quit_game() -> void:
+	Steamworks.store_steam_data(true)
 	DataManager.save_game_data()
 	get_tree().quit()
 

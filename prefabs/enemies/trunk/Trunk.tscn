@@ -377,7 +377,7 @@ z_index = 10
 script = ExtResource("1_nud6c")
 projectile = ExtResource("2_kyy33")
 seconds_between_attacks = 1.2
-enemy_name = "trunk"
+enemy_type = 1
 death_sound = ExtResource("3_o7ajs")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1100985406]

@@ -101,19 +101,19 @@ func _attempt_jump() -> void:
 			velocity.x = -max_speed
 		air_time = jump_buffer_time
 		anim.flip_h = !anim.flip_h
-		StatisticManager.add_value("wall_jump", 1)
+		Stats.add_recording_value(Stats.StatType.JUMPS_WALL, 1)
 		rpc("show_jump")
 	
 	elif is_on_floor() or air_time < jump_buffer_time:
 		air_time = jump_buffer_time
 		velocity.y = -jump_strength
-		StatisticManager.add_value("ground_jump", 1)
+		Stats.add_recording_value(Stats.StatType.JUMPS_GROUND, 1)
 		rpc("show_jump")
 
 	elif !double_jumped:
 		double_jumped = true
 		velocity.y = -jump_strength * 0.85
-		StatisticManager.add_value("double_jump", 1)
+		Stats.add_recording_value(Stats.StatType.JUMPS_DOUBLE, 1)
 		rpc("show_jump", true)
 
 @rpc("authority","call_local","reliable")

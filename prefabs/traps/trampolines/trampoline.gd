@@ -13,7 +13,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if body.is_multiplayer_authority():
 			body.velocity.y = -jump_force
-			StatisticManager.add_value("trampoline_jump", 1)
+			Stats.add_recording_value(Stats.StatType.JUMPS_TRAMPOLINE, 1)
 			rpc("show_hit")
 
 @rpc("any_peer","call_local","reliable")

@@ -11,7 +11,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.is_multiplayer_authority():
 			var money :Variant = DataManager.get_value("money")
 			DataManager.set_value("money", money + 1) 
-			StatisticManager.add_value("apples_collected", 1)
+			Stats.add_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED, 1)
 			rpc("show_collect")
 			
 @rpc("any_peer","call_local","reliable")
@@ -23,4 +23,3 @@ func show_collect() -> void:
 func _on_anim_finished() -> void:
 	if multiplayer.is_server():
 		queue_free()
-	

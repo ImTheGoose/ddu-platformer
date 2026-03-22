@@ -41,31 +41,6 @@ var default_game_data: Dictionary = {
 		"Castle" : false,
 		"Icey" : false, 
 	},
-	"statistics" : {
-		"time_played" : 0,
-		"time_alive" : 0,
-		"total_apples_collected" : 0,
-		"time_highscore" : 0,
-		"apple_highscore" : 0,
-		"deaths" : {
-			"mushroom" : 0,
-			"trunk" : 0,
-			"spike" : 0,
-			"fire" : 0,
-			"cloud" : 0,
-		},
-		"kills" : {
-			"mushroom" : 0,
-			"trunk" : 0,
-		},
-		"jumps" : {
-			"ground" : 0,
-			"wall" : 0,
-			"double" : 0,
-			"trampoline" : 0,
-			"kill" : 0,
-		}
-	}
 }
 
 func _init() -> void:
@@ -84,7 +59,7 @@ func _init() -> void:
 	load_config()
 
 func _process(delta: float) -> void:
-	game_data["statistics"]["time_played"] += delta
+	Stats.add_float_stat(Stats.StatType.TIME_PlAYED, delta, false)
 
 func update_game_data() -> void:
 	var v: float = float(game_data["save_version"])

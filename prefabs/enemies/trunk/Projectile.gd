@@ -17,9 +17,11 @@ func _process(delta: float) -> void:
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		StatisticManager.set_value("death_type", StatisticManager.death_type.trunk)
-		body.hit(col.global_position.direction_to(body.global_position))
-		pass
+		if body.is_multiplayer_authority():
+			Stats.set_recording_value(Stats.StatType.RECORDING_DEATH_TYPE, Stats.StatType.DEATH_TRUNK)
+			body.hit(col.global_position.direction_to(body.global_position))
+		else:
+			queue_free()
 	if body is TileMapLayer:
 		queue_free()	
 	

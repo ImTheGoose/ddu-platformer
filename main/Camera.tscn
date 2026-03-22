@@ -360,8 +360,6 @@ layout_mode = 1
 [node name="pause_menu" parent="Control" unique_id=710775371 instance=ExtResource("22_anor8")]
 visible = false
 layout_mode = 1
-offset_left = -100.0
-offset_right = 100.0
 
 [node name="death_menu" parent="Control" unique_id=1525325848 instance=ExtResource("21_hx0qg")]
 visible = false

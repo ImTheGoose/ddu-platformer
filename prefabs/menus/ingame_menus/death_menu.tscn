@@ -22,7 +22,7 @@ script = ExtResource("1_aavvi")
 time_highscore_particles = [NodePath("time_highscore_particles"), NodePath("time_highscore_particles2")]
 apple_highscore_particles = [NodePath("apple_highscore_particles"), NodePath("apple_highscore_particles2")]
 menu_name = "death_menu"
-require_seperator = true
+seperate_from_game = true
 initial_focus = NodePath("play_again_button")
 back_button = NodePath("back_button")
 
