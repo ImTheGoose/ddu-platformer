@@ -4,10 +4,10 @@ extends Camera2D
 @export var safe_distance :int = 400
 @onready var origin_position :Vector2 = position
 
-const nudge_camera :bool = true
+var nudge_camera :bool = true
 
 func _ready() -> void:
-	GameManager.reset_game.connect(_reset_position)
+	GameManager.client_reset.connect(_reset_position)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 func _on_viewport_size_changed() -> void:
@@ -20,6 +20,11 @@ func _reset_position() -> void:
 	position = origin_position
 
 func _process(delta: float) -> void:
+	if !GameManager.is_game_running():
+		return
+	
+	nudge_camera = GameManager.get_gamemode() == GameManager.Gamemode.GAMEMODE_STANDARD
+	
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
 	if players.size() > 0 && nudge_camera:
 		for p in players:
@@ -35,6 +40,6 @@ func _process(delta: float) -> void:
 
 	
 	
-	if GameManager.is_game_running() && !GameManager.is_game_paused():
+	if !GameManager.is_game_paused():
 		var speed_scale :Variant = GameManager.get_difficulty_value("camera_speed")
 		position.y -= speed_scale * speed * delta

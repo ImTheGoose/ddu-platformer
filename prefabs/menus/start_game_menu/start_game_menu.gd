@@ -24,17 +24,13 @@ func _refresh_stats() -> void:
 	diffculty_stat_label.text = tex
 
 func _on_start_game_pressed() -> void:
-	GameManager.set_state(GameManager.STATE.AWAITING_RESTART)
-	MenuHandler.show_blackout()
-	pass # Replace with function body.
+	GameManager.prepare_game()
 
 
 func _on_back_pressed() -> void:
-	MenuHandler.change_menu("main_menu")
-	pass # Replace with function body.
+	MenuHandler.change_menu("select_play_menu")
 
 
 func _on_difficulty_dropdown_item_selected(index: int) -> void:
 	GameManager.set_difficulty(difficulty_dropdown.get_item_id(index))
 	_refresh_stats()
-	pass # Replace with function body.

@@ -2,7 +2,7 @@ extends Node
 
 class_name TimeFormat
 
-static func get_time_string(t: float) -> String:
+static func get_time_string(t: float, second_precision: float = 0.1) -> String:	
 	var seconds :float = get_seconds(t)
 	var minutes :float = get_minutes(t)
 	var hours :float = get_hours(t)
@@ -15,12 +15,14 @@ static func get_time_string(t: float) -> String:
 		time_string += str( int(hours)) + "h "
 	if minutes >= 1:
 		time_string += str( int(minutes)) + "m "
-	time_string += str( int(seconds)) + "s "
-	
+	if second_precision == 1.0:
+		time_string += str( int(seconds)) + "s "
+	else:
+		time_string += str( snappedf(seconds, second_precision)) + "s "
 	return time_string
 
+
 static func get_seconds(t: float) -> float:
-	t = floor(t)
 	var mnts :float = floor(t/60)
 	return t - (mnts * 60)
 

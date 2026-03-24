@@ -3,8 +3,9 @@ extends Control
 class_name GameMenu 
 
 @export var menu_name :String
-@export var require_seperator :bool = false
+@export var seperate_from_game :bool = false
 @export var initial_focus :Control
+@export var server_initial_focus :Control
 @export var back_button :Button
 
 func _ready() -> void:
@@ -29,13 +30,16 @@ func _on_visibillity_changed(target : String, isVisible : bool) -> void:
 		if isVisible:
 			_on_show()
 			if initial_focus:
-				initial_focus.grab_focus()
+				if server_initial_focus && multiplayer.is_server():
+					server_initial_focus.grab_focus()
+				else:
+					initial_focus.grab_focus()
 			
-			if require_seperator:
+			if seperate_from_game && MenuHandler.is_game_visible():
 				MenuHandler.show_background_seperator()
 		else:
 			_on_hide()
-			if require_seperator:
+			if seperate_from_game:
 					MenuHandler.hide_background_seperator()
 		
 

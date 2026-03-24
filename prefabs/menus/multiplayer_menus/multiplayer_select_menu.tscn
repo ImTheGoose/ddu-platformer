@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dpjgsw4yi007c"]
+
+[ext_resource type="Script" uid="uid://brjrpd5u8uryd" path="res://prefabs/menus/multiplayer_menus/multiplayer_select_menu.gd" id="1_ofm5n"]
+
+[node name="MultiplayerSelectMenu" type="VBoxContainer" unique_id=846156382 node_paths=PackedStringArray("initial_focus", "back_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ofm5n")
+menu_name = "multiplayer_select_menu"
+initial_focus = NodePath("join_button")
+back_button = NodePath("back_button")
+
+[node name="Label" type="Label" parent="." unique_id=486856905]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Multiplayer"
+
+[node name="join_button" type="Button" parent="." unique_id=1495147]
+layout_mode = 2
+text = "Join Game"
+
+[node name="host_button" type="Button" parent="." unique_id=837124655]
+layout_mode = 2
+text = "Host Game"
+
+[node name="back_button" type="Button" parent="." unique_id=2130464829]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

@@ -12,11 +12,11 @@ func _init() -> void:
 
 func _process(delta: float) -> void:
 	# 1. Get stick strength
-	var move_vec = Vector2(
+	var move_vec :Vector2 = Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down"),
 	)
-	var strength = move_vec.length()
+	var strength :float = move_vec.length()
 
 	# 2. Check if stick is being pushed
 	if strength > deadzone:
@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		move_timer = 0.0
 
 func move_focus(dir: Vector2) -> void:
-	var current_focus = get_viewport().gui_get_focus_owner()
+	var current_focus :Control = get_viewport().gui_get_focus_owner()
 	if not current_focus: return
 
 	# Determine direction
@@ -46,6 +46,6 @@ func move_focus(dir: Vector2) -> void:
 	else:
 		side = SIDE_TOP if dir.y < 0 else SIDE_BOTTOM
 	
-	var next_node = current_focus.find_valid_focus_neighbor(side)
+	var next_node :Control = current_focus.find_valid_focus_neighbor(side)
 	if next_node:
 		next_node.grab_focus()

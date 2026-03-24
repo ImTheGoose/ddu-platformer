@@ -9,6 +9,7 @@ extends GameMenu
 @onready var particle_toggle :CheckBox = %particles_toggle
 @onready var vsync_toggle :CheckBox = %vsync_toggle
 @onready var skip_transitions_toggle :CheckBox = %skip_transitions_toggle
+@onready var clear_game_data: Button = %clear_game_data
 
 
 
@@ -27,6 +28,13 @@ func _ready() -> void:
 
 func _on_show() -> void:
 	_load_config_variables()
+	
+	if MenuHandler.is_game_visible() or multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
+		clear_game_data.visible = false
+		clear_game_data.disabled = true
+	else:
+		clear_game_data.visible = true
+		clear_game_data.disabled = false
 
 func _load_config_variables() -> void:
 	var video_settings :Dictionary = DataManager.get_video_settings()
@@ -85,14 +93,14 @@ func _on_fps_limit_value_changed(value: float) -> void:
 	if value >= max_fps_slider.max_value:
 		Engine.max_fps = 0
 	else:
-		Engine.max_fps = value
+		Engine.max_fps = int(value)
 
 func _on_fps_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("show_fps", toggled_on)
 
 
 func _on_back_pressed() -> void:
-	MenuHandler.change_menu("main_menu")
+	MenuHandler.change_menu(MenuHandler.get_previous_menu())
 	pass # Replace with function body.
 
 

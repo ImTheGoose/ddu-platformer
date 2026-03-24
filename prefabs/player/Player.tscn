@@ -1,12 +1,23 @@
-[gd_scene format=3 uid="uid://517bp8gq433n"]
+[gd_scene format=3 uid="uid://cjjbmvmx1ilce"]
 
-[ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player/player.gd" id="1_0ep8a"]
-[ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_wuy1y"]
-[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_64pgi"]
-[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_0ep8a"]
-[ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="6_1nynx"]
-[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_70wo7"]
-[ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="10_634ti"]
+[ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player/player.gd" id="1_jfcio"]
+[ext_resource type="Shader" uid="uid://4e5mx13fnoig" path="res://prefabs/player/Player.gdshader" id="2_ctndf"]
+[ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_ivj8r"]
+[ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="3_6dlbe"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_00uvl"]
+[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_dcg2g"]
+[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_uiiwv"]
+[ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="7_w51pg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hr8rp"]
+resource_local_to_scene = true
+shader = ExtResource("2_ctndf")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0000000475
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = false
+shader_parameter/opacity = 1.0
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
@@ -14,36 +25,51 @@ points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7,
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(17.670685, 6.0240984)
 
-[node name="Player" type="CharacterBody2D" unique_id=2067965372 groups=["Players"]]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jfcio"]
+properties/0/path = NodePath(".:sync_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:sync_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:double_jumped")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="Player" type="CharacterBody2D" unique_id=472125303 groups=["Players"]]
 visibility_layer = 3
-z_index = 9
-collision_layer = 15
+collision_layer = 8
 collision_mask = 15
 safe_margin = 2.5
-script = ExtResource("1_0ep8a")
-jump_buffer_time = 0.18
+script = ExtResource("1_jfcio")
+peer_lerp_speed = 20.0
+snap_distance = 90.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("player_controller")]
+modulate = Color(0.33518517, 0.59265137, 0.8908548, 1)
 visibility_layer = 7
-sprite_frames = ExtResource("2_wuy1y")
-animation = &"Fall"
+material = SubResource("ShaderMaterial_hr8rp")
+sprite_frames = ExtResource("2_ivj8r")
+animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
-script = ExtResource("10_634ti")
+script = ExtResource("3_6dlbe")
+player_controller = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]
+unique_name_in_owner = true
 position = Vector2(0, 3.16666)
 shape = SubResource("ConvexPolygonShape2D_1nynx")
 one_way_collision = true
 one_way_collision_margin = 30.0
 
-[node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_64pgi")]
+[node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_00uvl")]
 position = Vector2(-0.6666667, 14.333334)
 
-[node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_0ep8a")]
+[node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_dcg2g")]
 position = Vector2(-0.6666667, 14.333334)
 
-[node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_70wo7")]
+[node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_uiiwv")]
 position = Vector2(-0.33333334, 2.3333333)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=473809169]
@@ -57,9 +83,12 @@ collision_layer = 3
 collision_mask = 3
 monitorable = false
 priority = 30
-script = ExtResource("6_1nynx")
+script = ExtResource("7_w51pg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=350452057]
 position = Vector2(-4.787522e-08, 2.8212862)
 shape = SubResource("RectangleShape2D_1nynx")
 debug_color = Color(0.9907276, 0, 0.2804999, 0.41960785)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2064356115]
+replication_config = SubResource("SceneReplicationConfig_jfcio")

@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="10_25ya2"]
 [ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="11_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="12_25ya2"]
+[ext_resource type="Script" uid="uid://c8ed372wclpdl" path="res://main/state_label.gd" id="12_28bm7"]
+[ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="12_yxbh2"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="13_25ya2"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="14_25ya2"]
 [ext_resource type="PackedScene" uid="uid://xvfmjoenq114" path="res://prefabs/menus/shop_menus/shop_skin_menu.tscn" id="15_25ya2"]
@@ -27,9 +29,17 @@
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="23_ggyxd"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="24_iix3i"]
 [ext_resource type="PackedScene" uid="uid://cejmty2271kf5" path="res://prefabs/menus/popups/steam_error_popup.tscn" id="24_o55x0"]
+[ext_resource type="PackedScene" uid="uid://sk35yfacs5bb" path="res://prefabs/menus/multiplayer_menus/multiplayer_join_menu.tscn" id="26_howv7"]
+[ext_resource type="PackedScene" uid="uid://bychuhet3ynyy" path="res://prefabs/menus/multiplayer_menus/multiplayer_host_type_menu.tscn" id="27_8h0xj"]
+[ext_resource type="PackedScene" uid="uid://dpjgsw4yi007c" path="res://prefabs/menus/multiplayer_menus/multiplayer_select_menu.tscn" id="28_8h0xj"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="28_mg1ud"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="29_anor8"]
+[ext_resource type="PackedScene" uid="uid://dbsr1vrdfvlc4" path="res://prefabs/menus/start_game_menu/select_play_menu.tscn" id="29_xxuaw"]
+[ext_resource type="PackedScene" uid="uid://1yqq0su5upk6" path="res://prefabs/menus/multiplayer_menus/multiplayer_lobby_menu.tscn" id="30_f6bkf"]
+[ext_resource type="PackedScene" uid="uid://c2fthjbl5jn4r" path="res://prefabs/menus/multiplayer_menus/multiplayer_status_menu.tscn" id="31_wns3v"]
+[ext_resource type="PackedScene" uid="uid://mwa71iau7eyn" path="res://prefabs/menus/multiplayer_menus/multiplayer_win_menu.tscn" id="33_by3hl"]
+[ext_resource type="PackedScene" uid="uid://bh0jgwssyi2a1" path="res://prefabs/menus/multiplayer_menus/multiplayer_round_win_menu.tscn" id="34_28bm7"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
 shuffle = true
@@ -185,6 +195,7 @@ script = ExtResource("4_vjk6h")
 metadata/_edit_use_anchors_ = true
 
 [node name="background_seperator" type="ColorRect" parent="." unique_id=31424905]
+visible = false
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -258,6 +269,18 @@ text = "FPS: 1000"
 fit_content = true
 script = ExtResource("8_psn7d")
 
+[node name="state_label" type="RichTextLabel" parent="UI" unique_id=599648194]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = 2.0
+offset_top = 20.45
+offset_right = 473.61
+offset_bottom = 32.450005
+text = "FPS: 1000"
+fit_content = true
+script = ExtResource("12_28bm7")
+
 [node name="version_label" type="Label" parent="UI" unique_id=905158422]
 layout_mode = 1
 anchors_preset = -1
@@ -270,10 +293,20 @@ offset_right = 26.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 11
-text = "Legacy-1"
+text = "mutliplayer-6"
+
+[node name="Control" type="Control" parent="UI" unique_id=1649518603]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("12_yxbh2")
 
 [node name="Control" type="Control" parent="." unique_id=884807155]
-z_index = 1
+z_index = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
@@ -326,14 +359,10 @@ layout_mode = 1
 
 [node name="pause_menu" parent="Control" unique_id=710775371 instance=ExtResource("22_anor8")]
 visible = false
-z_index = 2
 layout_mode = 1
-offset_left = -100.0
-offset_right = 100.0
 
 [node name="death_menu" parent="Control" unique_id=1525325848 instance=ExtResource("21_hx0qg")]
 visible = false
-z_index = 2
 layout_mode = 1
 
 [node name="changelog_popup" parent="Control" unique_id=272473621 instance=ExtResource("21_l4l7y")]
@@ -345,10 +374,69 @@ changed_list = Array[String](["Changed internal menu system", "Internal file res
 removed_list = Array[String](["Removed uneeded binaries"])
 
 [node name="steam_error_popup" parent="Control" unique_id=1151020849 instance=ExtResource("24_o55x0")]
+visible = false
 layout_mode = 1
 
 [node name="reset_game_popup" parent="Control" unique_id=337198406 instance=ExtResource("22_mcvie")]
+visible = false
 layout_mode = 1
+
+[node name="MultiplayerJoinMenu" parent="Control" unique_id=1617029824 instance=ExtResource("26_howv7")]
+visible = false
+layout_mode = 1
+offset_top = -52.5
+offset_bottom = 52.5
+
+[node name="MultiplayerTypeMenu" parent="Control" unique_id=708408861 instance=ExtResource("27_8h0xj")]
+visible = false
+layout_mode = 1
+offset_left = -108.5
+offset_top = -60.5
+offset_right = 108.5
+offset_bottom = 60.5
+
+[node name="MultiplayerSelectMenu" parent="Control" unique_id=846156382 instance=ExtResource("28_8h0xj")]
+visible = false
+layout_mode = 1
+offset_left = -103.5
+offset_top = -60.5
+offset_right = 103.5
+offset_bottom = 60.5
+
+[node name="SelectPlayMenu" parent="Control" unique_id=297666541 instance=ExtResource("29_xxuaw")]
+visible = false
+layout_mode = 1
+offset_left = -114.0
+offset_top = -72.0
+offset_right = 114.0
+offset_bottom = 72.0
+
+[node name="MultiplayerLobbyMenu" parent="Control" unique_id=2055560422 instance=ExtResource("30_f6bkf")]
+visible = false
+layout_mode = 1
+
+[node name="MultiplayerStatusMenu" parent="Control" unique_id=840786237 instance=ExtResource("31_wns3v")]
+layout_mode = 1
+offset_left = -116.5
+offset_top = -37.5
+offset_right = 116.5
+offset_bottom = 37.5
+
+[node name="MultiplayerWinMenu" parent="Control" unique_id=302228853 instance=ExtResource("33_by3hl")]
+visible = false
+layout_mode = 1
+offset_left = -65.0
+offset_top = -49.0
+offset_right = 65.0
+offset_bottom = 49.0
+
+[node name="MultiplayerRoundWinMenu" parent="Control" unique_id=107251656 instance=ExtResource("34_28bm7")]
+visible = false
+layout_mode = 1
+offset_left = -99.0
+offset_top = -37.5
+offset_right = 99.0
+offset_bottom = 37.5
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 0
@@ -357,6 +445,7 @@ emitting = false
 script = ExtResource("17_8t6hx")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=913652253]
+collision_mask = 9
 script = ExtResource("7_tim8x")
 kill_type = 4
 metadata/_custom_type_script = "uid://csjcberb4rmwa"

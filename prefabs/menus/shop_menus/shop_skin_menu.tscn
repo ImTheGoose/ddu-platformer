@@ -1,7 +1,17 @@
 [gd_scene format=3 uid="uid://xvfmjoenq114"]
 
 [ext_resource type="Script" uid="uid://ckcre2d4frq2h" path="res://prefabs/menus/shop_menus/shop_skin_menu.gd" id="1_tvv5t"]
+[ext_resource type="Shader" uid="uid://4e5mx13fnoig" path="res://prefabs/player/Player.gdshader" id="2_tvv5t"]
 [ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="3_x55cg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0l6h4"]
+shader = ExtResource("2_tvv5t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/opacity = 1.0
 
 [node name="shop_skin_menu" type="MarginContainer" unique_id=1491830652 node_paths=PackedStringArray("display_rect", "price_tag", "buy_button", "name_tag", "initial_focus", "back_button")]
 custom_minimum_size = Vector2(200, 0)
@@ -23,6 +33,7 @@ price_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer
 buy_button = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button")
 name_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/skin_name_tag")
 menu_name = "shop_skin_menu"
+seperate_from_game = true
 initial_focus = NodePath("VBoxContainer/back")
 back_button = NodePath("VBoxContainer/back")
 
@@ -82,7 +93,8 @@ vertical_alignment = 1
 
 [node name="display_rect" type="TextureRect" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1129474809]
 texture_filter = 1
-custom_minimum_size = Vector2(0, 50)
+material = SubResource("ShaderMaterial_0l6h4")
+custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 texture = ExtResource("3_x55cg")
 expand_mode = 2
@@ -112,6 +124,11 @@ focus_neighbor_left = NodePath("../previous")
 focus_neighbor_top = NodePath("../../../../back")
 focus_neighbor_right = NodePath("../previous")
 text = ">"
+
+[node name="outline_button" type="Button" parent="VBoxContainer" unique_id=1233984865]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Color?"
 
 [node name="back" type="Button" parent="VBoxContainer" unique_id=498519230]
 layout_mode = 2

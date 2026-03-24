@@ -11,10 +11,11 @@ signal save_game_completed
 var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
-	"save_version" : 0.1,
-	"money" : 0,
+	"save_version" : 0.2,
+	"money" : 69420,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
+	"selected_outline_hex" : "#ffffff",
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
@@ -40,31 +41,6 @@ var default_game_data: Dictionary = {
 		"Castle" : false,
 		"Icey" : false, 
 	},
-	"statistics" : {
-		"time_played" : 0,
-		"time_alive" : 0,
-		"total_apples_collected" : 0,
-		"time_highscore" : 0,
-		"apple_highscore" : 0,
-		"deaths" : {
-			"mushroom" : 0,
-			"trunk" : 0,
-			"spike" : 0,
-			"fire" : 0,
-			"cloud" : 0,
-		},
-		"kills" : {
-			"mushroom" : 0,
-			"trunk" : 0,
-		},
-		"jumps" : {
-			"ground" : 0,
-			"wall" : 0,
-			"double" : 0,
-			"trampoline" : 0,
-			"kill" : 0,
-		}
-	}
 }
 
 func _init() -> void:
@@ -83,15 +59,15 @@ func _init() -> void:
 	load_config()
 
 func _process(delta: float) -> void:
-	game_data["statistics"]["time_played"] += delta
+	Stats.add_float_stat(Stats.StatType.TIME_PlAYED, delta, false)
 
 func update_game_data() -> void:
 	var v: float = float(game_data["save_version"])
 	print(PREFIX, "Updating save data, from: ", v, " to: ", default_game_data["save_version"])
 	game_data["changelog_seen"] = false
 	
-	#if v < 0.2:
-	# game_data["new_key"] = default_game_data["new_key"]
+	if v < 0.2:
+		game_data["selected_outline_hex"] = default_game_data["selected_outline_hex"]
 	
 	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
@@ -109,7 +85,6 @@ func save_game_data() -> void:
 		print(PREFIX, "Failed to open file access for saves. Error code: " ,FileAccess.get_open_error())
 		
 	var json_string :String = JSON.stringify(game_data)
-	print(GAME_FILE_DIRECTORY_PATH + SAVE_FILE_NAME)
 	save_file.store_line(json_string)
 	save_game_completed.emit()
 

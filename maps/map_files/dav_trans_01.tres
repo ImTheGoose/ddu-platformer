@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://ceg6rukg1x86v"]
+
+[ext_resource type="PackedScene" uid="uid://drvdk8pie4roy" path="res://maps/transitions/dav_01_E_to_A.tscn" id="1_rbeav"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="2_w0llt"]
+
+[resource]
+script = ExtResource("2_w0llt")
+map_id = "dav_trans_01"
+prefab = ExtResource("1_rbeav")
+bottom_connection_type = 4
+type = 1
+related_collections = Array[int]([0])
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

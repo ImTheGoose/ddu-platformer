@@ -9,15 +9,39 @@ var new_highscore_sound :AudioStreamMP3 = preload("uid://dp8k0xj5ljst1")
 @export var time_highscore_particles :Array[GPUParticles2D] = []
 @export var apple_highscore_particles :Array[GPUParticles2D] = []
 
+@onready var play_again_button :Button = %play_again_button
+@onready var main_menu_button :Button = %back_button
+@onready var back_to_lobby :Button = %back_to_lobby
+
 
 func _on_show() -> void:
 	_refresh_stat_text()
-
+	if !multiplayer.is_server():
+		play_again_button.visible = false
+		play_again_button.disabled = true
+		main_menu_button.visible = true
+		main_menu_button.disabled = false
+		back_to_lobby.disabled = true
+		back_to_lobby.visible = false
+	else:
+		if multiplayer.get_peers().size() < 1:
+			main_menu_button.visible = true
+			main_menu_button.disabled = false
+			back_to_lobby.disabled = true
+			back_to_lobby.visible = false
+		else:
+			main_menu_button.visible = false
+			main_menu_button.disabled = true
+			back_to_lobby.disabled = false
+			back_to_lobby.visible = true
+	
+		play_again_button.visible = true
+		play_again_button.disabled = false
 
 func _refresh_stat_text() -> void:
 	var text :String = ""
-	var time_alive :Variant = StatisticManager.get_value("time_alive")
-	if time_alive >= DataManager.get_value("statistics")["time_highscore"]:
+	var time_alive :Variant = Stats.get_recording_value(Stats.StatType.TIME_ALIVE)
+	if time_alive >= Stats.get_float_stat(Stats.StatType.HIGHSCORE_TIME):
 		text += time_bbcode + TimeFormat.get_time_string(time_alive) + highscore_suffix + "[br]"
 		for p in time_highscore_particles:
 			p.visible = true
@@ -28,9 +52,9 @@ func _refresh_stat_text() -> void:
 		for p in time_highscore_particles:
 			p.visible = false
 	
-	var apples_collected :int = StatisticManager.get_value("apples_collected")
+	var apples_collected :int = Stats.get_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED)
 	
-	if apples_collected >= DataManager.get_value("statistics")["apple_highscore"]:
+	if apples_collected >= Stats.get_int_stat(Stats.StatType.HIGHSCORE_APPLE):
 		text += apple_bbcode + str( int(apples_collected)) + highscore_suffix
 		for p in apple_highscore_particles:
 			p.visible = true
@@ -47,10 +71,12 @@ func _refresh_stat_text() -> void:
 	stat_text_node.text = text
 
 func _on_play_again_pressed() -> void:
-	GameManager.restart_game()
-	pass # Replace with function body.
+	GameManager.next_round()
 
 
 func _on_back_to_menu_pressed() -> void:
 	GameManager.quit_to_main()
-	pass # Replace with function body.
+
+
+func _on_back_to_lobby_pressed() -> void:
+	GameManager.return_to_lobby()

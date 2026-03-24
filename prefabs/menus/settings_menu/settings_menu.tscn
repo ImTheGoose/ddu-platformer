@@ -19,6 +19,7 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_j2ip3")
 menu_name = "settings_menu"
+seperate_from_game = true
 initial_focus = NodePath("back")
 back_button = NodePath("back")
 
@@ -147,6 +148,7 @@ layout_mode = 2
 text = "Keybindings"
 
 [node name="clear_game_data" type="Button" parent="." unique_id=1315414766]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Clear Game Data"
 

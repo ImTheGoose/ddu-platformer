@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b21toqgef4rn1"]
+
+[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="1_v1uop"]
+[ext_resource type="Texture2D" uid="uid://cd23tadwq2v3c" path="res://assets/pixel_adventure_assets/Traps/Spikes/Idle.png" id="2_yjxws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fysbu"]
+size = Vector2(11, 5)
+
+[node name="Spike" type="Area2D" unique_id=1250611505]
+texture_filter = 1
+rotation = 1.5707964
+collision_mask = 9
+monitorable = false
+script = ExtResource("1_v1uop")
+
+[node name="Idle" type="Sprite2D" parent="." unique_id=35105274]
+texture = ExtResource("2_yjxws")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=86006379]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_fysbu")

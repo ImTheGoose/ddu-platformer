@@ -39,6 +39,7 @@ func _on_game_visible_changed(isVisible: bool) -> void:
 func is_menu_visible(menu_name : String) -> bool:
 	return visible_menu_names.has(menu_name)
 
+@rpc("authority","call_local","reliable")
 func hide_all_menus() -> void:
 	for menu_name in registered_menu_names:
 		hide_menu(menu_name)
@@ -54,15 +55,23 @@ func show_menu(menu_name : String) -> void:
 	visible_menu_names.append(menu_name)
 	changed_menu_visibillity.emit(menu_name, true)
 
+@rpc("authority","call_local","reliable")
 func hide_game() -> void:
 	changed_game_visibillity.emit(false)
 
+@rpc("authority","call_local","reliable")
 func show_game() -> void:
 	changed_game_visibillity.emit(true)
-
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		Steamworks.set_rich_presense("#PlayingSingleplayer")
+	else:
+		Steamworks.set_rich_presense("#InMatch")
+	
+@rpc("authority","call_local","reliable")
 func show_blackout() -> void:
 	changed_blackout_visibillity.emit(true)
 
+@rpc("authority","call_local","reliable")
 func hide_blackout() -> void:
 	changed_blackout_visibillity.emit(false)
 
@@ -76,8 +85,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel") && event.is_pressed():
 		request_back_from_menu.emit()
 
-func change_menu(menu_name : String) -> void:
-	if visible_menu_names.size() > 0:
+@rpc("authority","call_local","reliable")
+func change_menu(menu_name : String, log_as_previous: bool = false) -> void:
+	if visible_menu_names.size() > 0 && log_as_previous:
 		previous_menu = visible_menu_names[0]
 
 	hide_all_menus()

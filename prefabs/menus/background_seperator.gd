@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func _on_viewport_size_changed() -> void:
 	var rect :Rect2 = get_viewport_rect()
-	size = rect.size
+	set_deferred("size", rect.size)
 	var boundary_size :Vector2 = rect.size - Vector2(1920, 1080)
 	var pos_offset :Vector2 = boundary_size / 2
 	position.x = -pos_offset.x

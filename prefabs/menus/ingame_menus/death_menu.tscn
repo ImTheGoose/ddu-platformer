@@ -22,7 +22,7 @@ script = ExtResource("1_aavvi")
 time_highscore_particles = [NodePath("time_highscore_particles"), NodePath("time_highscore_particles2")]
 apple_highscore_particles = [NodePath("apple_highscore_particles"), NodePath("apple_highscore_particles2")]
 menu_name = "death_menu"
-require_seperator = true
+seperate_from_game = true
 initial_focus = NodePath("play_again_button")
 back_button = NodePath("back_button")
 
@@ -41,12 +41,19 @@ autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="play_again_button" type="Button" parent="." unique_id=489721930]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Play again"
 
 [node name="back_button" type="Button" parent="." unique_id=1744017188]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
+
+[node name="back_to_lobby" type="Button" parent="." unique_id=692819513]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back to Lobby"
 
 [node name="apple_highscore_particles" parent="." unique_id=1440854082 instance=ExtResource("3_d258s")]
 position = Vector2(-130.25, 221.99998)
@@ -68,3 +75,4 @@ rotation = -0.36651915
 
 [connection signal="pressed" from="play_again_button" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="back_button" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="back_to_lobby" to="." method="_on_back_to_lobby_pressed"]

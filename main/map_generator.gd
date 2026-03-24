@@ -1,116 +1,104 @@
 extends Node2D
 
-@export var start_map :MapInfo
-@export var map_arr :Array[MapInfo]
-@onready var map_arr_full :Array[MapInfo] = map_arr.duplicate()
-@export var transition_arr :Array[MapInfo]
-@export var safe_zone :int = 0
+@export var top_safe_distance :int = 900
+@export var bottom_safe_distance :int = 1200
+@export var initial_height :int = 360
+@export var multiplayer_spawner :MultiplayerSpawner
+
+@export var entity_container :Node2D
+@export var seconds_between_clear :int = 5
+var seconds_since_clear :float = 0
 
 var px_per_tile :int = 16
 var height :float = 0
-var current_connection_type :MapInfo.connection_type
+var current_connection_type :MapFile.ConnectionType
 
 func _ready() -> void: 
-	seed(int(Time.get_unix_time_from_system())) # Sikrer at alle map spawns er forskellige.
-	
-	if map_arr.is_empty():
-		map_arr = transition_arr.duplicate()
-		map_arr_full = map_arr.duplicate()
-	
-	GameManager.reset_game.connect(_clear_map)
 	GameManager.spawn_level.connect(_on_spawn_level)
-	_insert_map(start_map, _get_map_global_position())
-	return
+	GameManager.server_reset.connect(clear_map)
+	multiplayer_spawner.spawn_function = spawn_map_prefab
 
-func _process(delta: float) -> void:
-	_update_view_zone()
-
-func _clear_map() -> void:
-	for child: Node in get_children():
-		child.queue_free()
-	height = 360
-	current_connection_type = MapInfo.connection_type.typeA
+func clear_map() -> void:
+	if multiplayer.is_server():
+		print("clearing map")
+		for child: Node in get_children():
+			child.queue_free()
+		
+		height = initial_height
+		current_connection_type = MapFile.ConnectionType.TYPE_A
+		seconds_since_clear = 0
 
 func _on_spawn_level() -> void:
-	height = 360
-	current_connection_type = MapInfo.connection_type.typeA
-	_insert_map(start_map, _get_map_global_position())
-	
+	if multiplayer.is_server():
+		clear_map()
+		
+		height = initial_height
+		spawn_map_file(Maps.get_start_map())
 
-func _get_part() -> MapInfo:
-	if map_arr.is_empty():
-		map_arr = map_arr_full.duplicate()
-	
-	map_arr.shuffle()
-	var part :MapInfo = map_arr.pop_front()
-	
-	return part
+func spawn_map_section(map_section: Array[MapFile]) -> void:
+	for map_file in map_section:
+		spawn_map_file(map_file)
 
-func _get_transition_part(from: MapInfo.connection_type, to: MapInfo.connection_type) -> MapInfo:
-	var parts :Array[MapInfo] = _get_matching_transition_parts(from, to)
-	if parts.is_empty(): ##If no transitions exist. Transition to a type that has a transition for all. (TypeC)
-		_insert_transition(from, MapInfo.connection_type.typeC)
-		return _get_matching_transition_parts(MapInfo.connection_type.typeC, to)[0]
-	
-	var part :MapInfo = parts.pick_random()
-	
-	return part
+func spawn_map_file(map_file: MapFile) -> void:
+	current_connection_type = map_file.top_connection_type
+	var map_node :Node2D = multiplayer_spawner.spawn([map_file.prefab.resource_path, get_map_global_position()])
 
-func _get_matching_transition_parts(from: MapInfo.connection_type, to: MapInfo.connection_type) -> Array[MapInfo]:
-	var arr :Array[MapInfo] = []
-	for t in transition_arr:
-		if t.start_connection == from && t.end_connection == to:
-			arr.append(t)
 	
-	return arr
+	height -= get_height_from_map_instance(map_node)
 
-func _insert_transition(from: MapInfo.connection_type, to: MapInfo.connection_type) -> void:
-	var trans_part :MapInfo = _get_transition_part(from, to)
-	_insert_map(trans_part, _get_map_global_position())
-	
-func _next_map() -> void:
-	var map_part :MapInfo = _get_part()
-	
-	if map_part.start_connection != current_connection_type:
-		_insert_transition(current_connection_type, map_part.start_connection)
-	
-	_insert_map(map_part, _get_map_global_position())
+func next_map_section() -> void:
+	var section :Array[MapFile] = Maps.get_next_map_section(current_connection_type)
+	spawn_map_section(section)
 
+func get_height_from_map_instance(node: Node2D) -> float:
+	var terrain_node :TileMapLayer = node.get_node("TerrainTiles")
+	var height_in_tiles :float = terrain_node.get_used_rect().size.y
+	var height_in_pixels :float = height_in_tiles * px_per_tile
+	return height_in_pixels
 
-func _get_map_global_position() -> Vector2:
+func get_map_global_position() -> Vector2:
 	return position + Vector2(0, height)
 
-func _insert_map(mapInfo: MapInfo, gpos: Vector2) -> void:
-	current_connection_type = mapInfo.end_connection
-	var m :Node2D = mapInfo.prefab.instantiate()
-	add_child(m)
+func _process(delta: float) -> void:
+	if !multiplayer.is_server():
+		return
 	
-	var terrain_node :TileMapLayer = m.get_node("TerrainTiles")
-	var rect :Rect2i = terrain_node.get_used_rect()
-	var neg_height_vector :Vector2 = Vector2(rect.position.x, rect.end.y) * px_per_tile
-	neg_height_vector += Vector2(terrain_node.position.x, terrain_node.position.y)
-	m.position = gpos - neg_height_vector
-	height -= _get_height_from_instance(m)
+	if !MenuHandler.is_game_visible():
+		return
 
-func _update_view_zone() -> void:
-	var cam_gpos :Vector2 = get_viewport().get_camera_2d().global_position
-	var global_height :float = height * global_scale.y
-	if global_height > cam_gpos.y - safe_zone:
-		_next_map()
+	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
+	if players.is_empty():
+		return
 	
-		# Only checks children for clearance, when a new part can be added, to avoid looping every frame.
-		var cam_rect :Rect2 = get_viewport_rect()
-		var cam_rect_global_end :Vector2 = cam_gpos + cam_rect.size
-		for child: Node2D in get_children():
-			if child.global_position.y > cam_rect_global_end.y + safe_zone:
-				if child is CharacterBody2D:
+	var global_height :float = height * global_scale.y
+	for p:Node2D in players:
+		if p.global_position.y < global_height + top_safe_distance:
+			next_map_section()
+	
+		if seconds_since_clear < seconds_between_clear:
+			seconds_since_clear += delta
+		else:
+			seconds_since_clear = 0
+			print("clearing objects")
+			var cleared :int = 0
+			var children :Array[Node] = get_children()
+			children.append_array(entity_container.get_children())
+			
+			for child: Node in children:
+				if child is not Node2D or players.has(child):
 					return
 				
-				child.queue_free()
+				if child.global_position.y > p.global_position.y + bottom_safe_distance:
+					cleared += 1
+					child.queue_free()
+			print("Cleared a total of %s objects" % cleared)
 
-
-func _get_height_from_instance(inst: Node2D) -> float:
-	var terrain_node :TileMapLayer = inst.get_node("TerrainTiles")
-	var size_in_tiles :float = terrain_node.get_used_rect().size.y
-	var size :float = size_in_tiles * px_per_tile
-	return size
+func spawn_map_prefab(data: Array) -> Node: # Array[ressource_path, gpos, ]
+	var map_node :Node2D = load(data[0]).instantiate()
+	
+	var terrain_node :TileMapLayer = map_node.get_node("TerrainTiles")
+	var terrain_rect :Rect2i = terrain_node.get_used_rect()
+	var neg_height_vector :Vector2 = Vector2(terrain_rect.position.x, terrain_rect.end.y) * px_per_tile
+	neg_height_vector += terrain_node.position
+	map_node.position = data[1] - neg_height_vector
+	return map_node
