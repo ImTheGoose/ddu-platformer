@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var top_safe_distance :int = 900
-@export var bottom_safe_distance :int = 1200
+@export var bottom_safe_distance :int = 1600
 @export var initial_height :int = 360
 @export var multiplayer_spawner :MultiplayerSpawner
 
@@ -71,27 +71,38 @@ func _process(delta: float) -> void:
 		return
 	
 	var global_height :float = height * global_scale.y
-	for p:Node2D in players:
-		if p.global_position.y < global_height + top_safe_distance:
-			next_map_section()
+	var highest_player :Player = players[0]
+	var lowest_player :Player = players[0]
+	for p:Player in players:
+		if p.dead:
+			continue
+		
+		if p.global_position.y < highest_player.global_position.y:
+			highest_player = p
+		
+		if p.global_position.y > lowest_player.global_position.y:
+			lowest_player = p
 	
-		if seconds_since_clear < seconds_between_clear:
-			seconds_since_clear += delta
-		else:
-			seconds_since_clear = 0
-			print("clearing objects")
-			var cleared :int = 0
-			var children :Array[Node] = get_children()
-			children.append_array(entity_container.get_children())
+	if highest_player.global_position.y < global_height + top_safe_distance:
+		next_map_section()
+
+	if seconds_since_clear < seconds_between_clear:
+		seconds_since_clear += delta
+	else:
+		seconds_since_clear = 0
+		print("clearing objects")
+		var cleared :int = 0
+		var children :Array[Node] = get_children()
+		children.append_array(entity_container.get_children())
+		
+		for child: Node in children:
+			if child is not Node2D or players.has(child):
+				return
 			
-			for child: Node in children:
-				if child is not Node2D or players.has(child):
-					return
-				
-				if child.global_position.y > p.global_position.y + bottom_safe_distance:
-					cleared += 1
-					child.queue_free()
-			print("Cleared a total of %s objects" % cleared)
+			if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance:
+				cleared += 1
+				child.queue_free()
+		print("Cleared a total of %s objects" % cleared)
 
 func spawn_map_prefab(data: Array) -> Node: # Array[ressource_path, gpos, ]
 	var map_node :Node2D = load(data[0]).instantiate()
