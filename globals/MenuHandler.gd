@@ -1,7 +1,5 @@
 extends Node
 
-signal request_back_from_menu()
-signal changed_menu_visibillity(target: String, isVisible: bool)
 signal changed_seperator_visibillity(isVisible: bool)
 signal changed_blackout_visibillity(isVisible: bool)
 signal changed_game_visibillity(isVisible: bool)
@@ -10,8 +8,8 @@ signal game_is_covered()
 var background_is_visible :bool = false
 var game_is_visible :bool = false
 
-var registered_menu_names :Array[String]
-var visible_menu_names :Array[String] = []
+var registered_menus :Dictionary[String, GameMenu] = {}
+var visible_menus :Dictionary[String, GameMenu] = {}
 
 var previous_menu :String
 
@@ -20,9 +18,9 @@ func _init() -> void:
 	changed_seperator_visibillity.connect(_background_visible_changed)
 	changed_game_visibillity.connect(_on_game_visible_changed)
 
-func register_menu_name(menu_name : String) -> void:
-	registered_menu_names.append(menu_name)
-	visible_menu_names.append(menu_name)
+func register_menu(menu_name : String, root_node : Control) -> void:
+	registered_menus.set(menu_name, root_node)
+	visible_menus.set(menu_name, root_node)
 
 func show_background_seperator() -> void:
 	changed_seperator_visibillity.emit(true)
@@ -37,23 +35,30 @@ func _on_game_visible_changed(isVisible: bool) -> void:
 	game_is_visible = isVisible
 
 func is_menu_visible(menu_name : String) -> bool:
-	return visible_menu_names.has(menu_name)
+	return visible_menus.has(menu_name)
 
 @rpc("authority","call_local","reliable")
 func hide_all_menus() -> void:
-	for menu_name in registered_menu_names:
+	for menu_name in visible_menus.keys():
 		hide_menu(menu_name)
 
 func hide_menu(menu_name : String) -> void:
-	while visible_menu_names.has(menu_name):
-		visible_menu_names.erase(menu_name)
-	changed_menu_visibillity.emit(menu_name, false)
+	if visible_menus.has(menu_name):
+		var root_node :GameMenu = visible_menus.get(menu_name)
+		root_node.hide_menu()
+		visible_menus.erase(menu_name)
 
 func show_menu(menu_name : String) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	visible_menu_names.append(menu_name)
-	changed_menu_visibillity.emit(menu_name, true)
+	
+	if registered_menus.has(menu_name):
+		var root_node :GameMenu = registered_menus.get(menu_name)
+		root_node.show_menu()
+		visible_menus.set(menu_name, root_node)
+	else:
+		print("menu: %s doesnt exist in regestry" % menu_name)
+
 
 @rpc("authority","call_local","reliable")
 func hide_game() -> void:
@@ -83,12 +88,14 @@ func is_game_visible() -> bool:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel") && event.is_pressed():
-		request_back_from_menu.emit()
+		if visible_menus.size() > 0:
+			var root_node :GameMenu = visible_menus.values()[0]
+			root_node.go_back()
 
 @rpc("authority","call_local","reliable")
 func change_menu(menu_name : String, log_as_previous: bool = false) -> void:
-	if visible_menu_names.size() > 0 && log_as_previous:
-		previous_menu = visible_menu_names[0]
-
+	if visible_menus.size() > 0 && log_as_previous:
+		previous_menu = visible_menus.keys()[0]
+	
 	hide_all_menus()
 	show_menu(menu_name)
