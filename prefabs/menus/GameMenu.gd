@@ -7,15 +7,18 @@ class_name GameMenu
 @export var initial_focus :Control
 @export var server_initial_focus :Control
 @export var back_button :Button
+var initial_process :ProcessMode
 
 func _ready() -> void:
 	MenuHandler.register_menu(menu_name, self)
+	initial_process = process_mode
 	
 	if !initial_focus:
 		print("Missing initial focus on " + menu_name)
 
 
 func show_menu() -> void:
+	process_mode = initial_process
 	visible = true
 	_on_show()
 	if initial_focus:
@@ -29,6 +32,7 @@ func show_menu() -> void:
 	pass
 
 func hide_menu() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
 	visible = false
 	_on_hide()
 	if seperate_from_game:

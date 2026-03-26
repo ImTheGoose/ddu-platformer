@@ -382,4 +382,27 @@ func quit_to_main() -> void:
 	set_state(STATE.AWAITING_QUIT_TO_MAIN)
 	MenuHandler.show_blackout()
 
+func _input(event: InputEvent) -> void:
+	if !event.is_pressed():
+		return
+	
+	if event.is_action("pause_game"):
+		if !MenuHandler.is_game_visible():
+			return
+		
+		if GameManager.get_state() == GameManager.STATE.POST_GAME:
+			return
+		
+		if GameManager.is_game_paused() or MenuHandler.is_menu_visible("pause_menu"):
+			GameManager.pause_game(false)
+			MenuHandler.hide_all_menus()
+		else:
+			GameManager.pause_game(true)
+			MenuHandler.change_menu("pause_menu")
+
+	if event.is_action("fullscreen_toggle"):
+		var mode := DisplayServer.window_get_mode()
+		var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
+		DataManager.save_video_setting("fullscreen", is_window)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
 #endregion

@@ -110,13 +110,3 @@ func _on_keybinds_pressed() -> void:
 
 func _on_clear_game_data_pressed() -> void:
 	MenuHandler.change_menu("reset_game_menu")
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey && event.pressed:
-		if event.is_action("fullscreen_toggle"):
-			var mode := DisplayServer.window_get_mode()
-			var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
-			fullscreen_toggle.button_pressed = is_window
-			DataManager.save_video_setting("fullscreen", is_window)
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
