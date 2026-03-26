@@ -83,6 +83,7 @@ size = Vector2(23, 10)
 [node name="Trampoline" type="Area2D" unique_id=1944955003]
 collision_mask = 9
 script = ExtResource("1_e7khr")
+entity_type = 9
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2076110011]
 position = Vector2(0, -6)
@@ -100,4 +101,5 @@ shape = SubResource("RectangleShape2D_6n1a3")
 stream = ExtResource("4_6n1a3")
 volume_db = 1.5
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animatable_body_2d_animation_finished"]

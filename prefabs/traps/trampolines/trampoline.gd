@@ -1,13 +1,9 @@
-extends Area2D
+extends Entity
 
 @export var jump_force :int = 1600
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 @onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")
-
-
-func _init() -> void:
-	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -29,4 +25,6 @@ func show_hit() -> void:
 
 func _on_animatable_body_2d_animation_finished() -> void:
 	anim.play("Idle")
-	pass # Replace with function body.
+
+func _on_reset() -> void:
+	anim.play("Idle")

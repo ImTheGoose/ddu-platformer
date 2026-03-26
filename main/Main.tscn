@@ -27,10 +27,9 @@ particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38
 scale = Vector2(3, 3)
 script = ExtResource("2_5mvff")
 
-[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner", "entity_container")]
+[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner")]
 script = ExtResource("3_cm0pq")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
-entity_container = NodePath("../entity_container")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=987899368]
 spawn_path = NodePath("../map_generator")
@@ -46,9 +45,10 @@ position = Vector2(-600, 600)
 
 [node name="local_entity_container" type="Node2D" parent="game_container" unique_id=878193123]
 
-[node name="EntitySpawner" type="MultiplayerSpawner" parent="game_container" unique_id=129003603 node_paths=PackedStringArray("local_spawn_node", "spawn_node")]
+[node name="EntitySpawner" type="MultiplayerSpawner" parent="game_container" unique_id=129003603 node_paths=PackedStringArray("map_gen_node", "local_spawn_node", "spawn_node")]
 spawn_path = NodePath("../entity_container")
 script = ExtResource("11_8bq6g")
+map_gen_node = NodePath("../map_generator")
 local_spawn_node = NodePath("../local_entity_container")
 spawn_node = NodePath("../entity_container")
 

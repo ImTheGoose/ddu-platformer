@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Entity 
 
 @onready var audio_burning :AudioStreamMP3 = preload("uid://dfk3ua7m2563v")
 @onready var audio_clicked :AudioStreamMP3 = preload("uid://m6484ap3pala")
@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func _reset_plate() -> void:
 	_stop_burning()
 	hit = false
-	time_since_hit = 0
+	time_since_hit = 0.0
 
 func _stop_burning() -> void:
 	anim.play("Off")
@@ -45,3 +45,6 @@ func _on_player_detection_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if body.is_multiplayer_authority():
 			rpc("show_hit")
+
+func _on_reset() -> void:
+	_reset_plate()

@@ -1,20 +1,26 @@
 [gd_scene format=3 uid="uid://dwyc1xb3bavyv"]
 
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="1_fysbu"]
+[ext_resource type="Script" uid="uid://brmbno0bah8v4" path="res://prefabs/Entity.gd" id="1_xbr47"]
 [ext_resource type="Texture2D" uid="uid://cd23tadwq2v3c" path="res://assets/pixel_adventure_assets/Traps/Spikes/Idle.png" id="1_xh5ig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fysbu"]
 size = Vector2(11, 5)
 
-[node name="Spike" type="Area2D" unique_id=184768431]
+[node name="SpikeEntity" type="Node2D" unique_id=1931637813]
+script = ExtResource("1_xbr47")
+entity_type = 3
+metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="Spike" type="Area2D" parent="." unique_id=184768431]
 texture_filter = 1
 collision_mask = 9
 monitorable = false
 script = ExtResource("1_fysbu")
 
-[node name="Idle" type="Sprite2D" parent="." unique_id=371863716]
+[node name="Idle" type="Sprite2D" parent="Spike" unique_id=371863716]
 texture = ExtResource("1_xh5ig")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1252797556]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike" unique_id=1252797556]
 position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_fysbu")

@@ -1,4 +1,4 @@
-extends Node2D
+extends Entity
 
 class_name PathfindingEnemy
 
@@ -128,3 +128,12 @@ func die() -> void:
 
 func _is_valid_pathfinding() -> bool:
 	return point_negative != null && point_positive != null
+
+func _on_reset() -> void:
+	anim.play("Idle")
+	$HitArea.set_deferred("monitoring", true)
+	$HitArea.set_deferred("monitorable", true)
+	dead = false
+	point_positive = null
+	point_negative = null
+	checked_points = false

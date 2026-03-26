@@ -379,6 +379,7 @@ projectile = ExtResource("2_kyy33")
 seconds_between_attacks = 1.2
 enemy_type = 1
 death_sound = ExtResource("3_o7ajs")
+entity_type = 2
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1100985406]
 collision_mask = 9

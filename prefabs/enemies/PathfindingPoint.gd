@@ -1,3 +1,3 @@
-extends Area2D
+extends Entity 
 
 class_name PathfindingPoint

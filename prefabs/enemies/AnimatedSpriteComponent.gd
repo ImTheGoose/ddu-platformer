@@ -2,11 +2,20 @@ extends AnimatedSprite2D
 
 class_name AnimatedSpriteComponent
 
+@export var entity_node :Entity
 var target_rot :float = 0.0
 var start_vel :Vector2 = Vector2.ZERO
 
 func _init() -> void:
 	animation_looped.connect(_on_animation_looped)
+
+func _ready() -> void:
+	if entity_node:
+		entity_node.entity_reset.connect(_on_entity_reset)
+
+func _on_entity_reset() -> void:
+	target_rot = 0.0
+	start_vel = Vector2.ZERO
 
 func _process(delta: float) -> void:	
 	if target_rot == 0:

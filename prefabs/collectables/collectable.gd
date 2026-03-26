@@ -1,4 +1,4 @@
-extends Area2D
+extends Entity
 
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_collect :AudioStreamMP3 = preload("uid://cyi6b5lna87oj")
@@ -22,4 +22,7 @@ func show_collect() -> void:
 
 func _on_anim_finished() -> void:
 	if multiplayer.is_server():
-		queue_free()
+		rpc("disable")
+
+func _on_reset() -> void:
+	anim.play("Idle")

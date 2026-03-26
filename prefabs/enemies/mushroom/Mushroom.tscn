@@ -278,17 +278,19 @@ size = Vector2(18, 15)
 z_index = 10
 script = ExtResource("1_rn6i1")
 death_sound = ExtResource("2_apt1k")
+entity_type = 1
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1714039566]
 collision_mask = 9
 collide_with_areas = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=537677901]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=537677901 node_paths=PackedStringArray("entity_node")]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_e5cyv")
 animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("5_uuv8h")
+entity_node = NodePath("..")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=1635299632]
 collision_layer = 2

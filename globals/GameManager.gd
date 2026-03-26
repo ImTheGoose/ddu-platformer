@@ -259,7 +259,7 @@ func _on_game_covered() -> void:
 		rpc("set_difficulty", get_difficulty())
 		rpc("reset_client")
 		server_reset.emit()
-		spawn_game()
+		rpc("spawn_game")
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_all_menus")
 		MenuHandler.rpc("show_game")
@@ -291,6 +291,7 @@ func restart_game() -> void:
 	set_state(STATE.AWAITING_RESTART)
 	MenuHandler.rpc("show_blackout")
 
+@rpc("authority","call_local","reliable")
 func spawn_game() -> void:
 	spawn_level.emit()
 	set_state(STATE.PREGAME)
