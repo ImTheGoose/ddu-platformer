@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://de7p8kn4l6uuu"]
 
 [ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_4co5t"]
-[ext_resource type="PackedScene" uid="uid://j4m222lms2of" path="res://maps/transitions/wilf_transition_04_B__to_E.tscn" id="1_8n05x"]
+[ext_resource type="PackedScene" uid="uid://j4m222lms2of" path="res://maps/transitions/wilf_transition_04_B_to_E.tscn" id="1_8n05x"]
 
 [resource]
 script = ExtResource("1_4co5t")

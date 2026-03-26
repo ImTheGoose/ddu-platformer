@@ -3,12 +3,11 @@
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_0812h"]
 [ext_resource type="Script" uid="uid://cuqgqv7w3oopv" path="res://maps/MapRoot.gd" id="1_pxst5"]
 [ext_resource type="TileSet" uid="uid://bkj06jyku7bya" path="res://ressources/tilesets/map_guides.tres" id="2_pxst5"]
-[ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="3_foe33"]
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="4_u33v2"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="5_jg0xg"]
 [ext_resource type="TileSet" uid="uid://dm0uv7n0xo0sl" path="res://ressources/tilesets/collectables_tileset.tres" id="6_ylqbj"]
 
-[node name="Map" type="Node2D" unique_id=378984217 node_paths=PackedStringArray("terrain_tiles", "trap_tiles", "enemy_tiles", "collectable_tiles", "guide_tiles")]
+[node name="Map" type="Node2D" unique_id=659559353 node_paths=PackedStringArray("terrain_tiles", "trap_tiles", "enemy_tiles", "collectable_tiles", "guide_tiles")]
 texture_filter = 1
 script = ExtResource("1_pxst5")
 terrain_tiles = NodePath("TerrainTiles")
@@ -16,6 +15,7 @@ trap_tiles = NodePath("TrapTiles")
 enemy_tiles = NodePath("EnemyTiles")
 collectable_tiles = NodePath("CollectableTiles")
 guide_tiles = NodePath("GUIDE_TILE")
+metadata/_custom_type_script = "uid://cuqgqv7w3oopv"
 
 [node name="TerrainTiles" type="TileMapLayer" parent="." unique_id=2068634546]
 position = Vector2(0, -16)
@@ -29,7 +29,6 @@ position = Vector2(0, -16)
 tile_map_data = PackedByteArray("AAAAABYAAAARAAgAAAABABYAAAASAAgAAAACABYAAAASAAgAAAADABYAAAASAAgAAAAEABYAAAATAAgAAAAMABYAAAARAAgAAAANABYAAAASAAgAAAAOABYAAAASAAgAAAAPABYAAAASAAgAAAAQABYAAAASAAgAAAARABYAAAASAAgAAAASABYAAAASAAgAAAATABYAAAASAAgAAAAUABYAAAASAAgAAAAVABYAAAASAAgAAAAWABYAAAASAAgAAAAXABYAAAASAAgAAAAYABYAAAASAAgAAAAZABYAAAASAAgAAAAaABYAAAASAAgAAAAbABYAAAASAAgAAAAcABYAAAASAAgAAAAdABYAAAASAAgAAAAeABYAAAASAAgAAAAfABYAAAASAAgAAAAgABYAAAASAAgAAAAhABYAAAASAAgAAAAiABYAAAASAAgAAAAjABYAAAASAAgAAAAkABYAAAASAAgAAAAlABYAAAASAAgAAAAmABYAAAASAAgAAAAnABYAAAATAAgAAAAAAPX/AAAMAAgAAAABAPX/AAAOAAgAAAACAPX/AAABAAUAAAADAPX/AAABAAUAAAAEAPX/AAABAAUAAAAFAPX/AAABAAUAAAAGAPX/AAABAAUAAAAHAPX/AAABAAUAAAAIAPX/AAABAAUAAAAJAPX/AAABAAUAAAAKAPX/AAABAAUAAAALAPX/AAABAAUAAAAMAPX/AAABAAUAAAANAPX/AAABAAUAAAAOAPX/AAABAAUAAAAPAPX/AAABAAUAAAAQAPX/AAABAAUAAAARAPX/AAABAAUAAAASAPX/AAABAAUAAAATAPX/AAABAAUAAAAUAPX/AAABAAUAAAAVAPX/AAABAAUAAAAWAPX/AAABAAUAAAAXAPX/AAABAAUAAAAYAPX/AAABAAUAAAAZAPX/AAABAAUAAAAaAPX/AAABAAUAAAAbAPX/AAACAAUAAAAcAPX/AAARAAgAAAAdAPX/AAASAAgAAAAeAPX/AAASAAgAAAAfAPX/AAASAAgAAAAgAPX/AAASAAgAAAAhAPX/AAASAAgAAAAiAPX/AAATAAgAAAAjAPX/AAAAAAUAAAAkAPX/AAABAAUAAAAlAPX/AAABAAUAAAAmAPX/AAAMAAgAAAAnAPX/AAAOAAgAAAA=")
 tile_set = ExtResource("2_pxst5")
 navigation_enabled = false
-script = ExtResource("3_foe33")
 
 [node name="TrapTiles" type="TileMapLayer" parent="." unique_id=1421633261]
 position = Vector2(0, -16)

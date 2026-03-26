@@ -49,6 +49,7 @@ func _ready() -> void:
 	spawn_function = _spawn_entity
 	GameManager.spawn_entity.connect(_on_spawn_entity)
 	GameManager.server_reset.connect(_on_server_reset)
+	GameManager.client_reset.connect(_on_client_reset)
 
 func _on_spawn_entity(gpos: Vector2, spawn_type: int) -> void:
 	if is_local(spawn_type):
@@ -76,10 +77,11 @@ func _get_spawnrate(spawn_type: int) -> float:
 	return 1.0
 
 
-func _on_server_reset() -> void:
+func _on_client_reset() -> void:
 	for local_child in local_spawn_node.get_children():
 		local_child.queue_free()
-	
+
+func _on_server_reset() -> void:
 	if !multiplayer.is_server() && multiplayer.get_peers().size() != 0:
 		return
 		
