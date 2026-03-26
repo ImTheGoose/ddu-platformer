@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://nf08485g42p5"]
 
-[ext_resource type="Script" uid="uid://dnmu11jypntuq" path="res://EntitySpawn.gd" id="1_5k8hh"]
 [ext_resource type="Texture2D" uid="uid://bdlpe3shus1y6" path="res://assets/pixel_adventure_assets/Traps/Blue Trampoline/Idle.png" id="2_c1xpp"]
 [ext_resource type="Texture2D" uid="uid://cha2e4akx0wk6" path="res://assets/pixel_adventure_assets/Traps/Blue Trampoline/Jump (28x28).png" id="3_s8job"]
 
@@ -76,10 +75,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="PowerTrampolineSpawnPlaceholder" type="Node2D" unique_id=895866008]
-script = ExtResource("1_5k8hh")
-type = 5
-metadata/_custom_type_script = "uid://dnmu11jypntuq"
+[node name="PowerTrampolineSpawnPlaceholder" type="Node2D" unique_id=668180414]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1929878165]
 position = Vector2(0, -6)

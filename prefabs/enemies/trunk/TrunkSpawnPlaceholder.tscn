@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://5ocddr3le6j7"]
 
-[ext_resource type="Script" uid="uid://dnmu11jypntuq" path="res://EntitySpawn.gd" id="1_8766d"]
 [ext_resource type="Texture2D" uid="uid://0iatuva5p6ag" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Attack (64x32).png" id="2_pwliw"]
 [ext_resource type="Texture2D" uid="uid://dyxua7nfc66ad" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Hit (64x32).png" id="3_dcv21"]
 [ext_resource type="Texture2D" uid="uid://veyhh7ovq274" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Idle (64x32).png" id="4_2doto"]
@@ -365,10 +364,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="TrunkSpawnPlaceholder" type="Node2D" unique_id=331536752]
-script = ExtResource("1_8766d")
-type = 1
-metadata/_custom_type_script = "uid://dnmu11jypntuq"
+[node name="TrunkSpawnPlaceholder" type="Node2D" unique_id=2073620266]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=379735526]
 position = Vector2(0, -8)

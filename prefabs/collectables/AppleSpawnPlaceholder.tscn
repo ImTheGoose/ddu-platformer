@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://duniltty51tr1"]
 
-[ext_resource type="Script" uid="uid://dnmu11jypntuq" path="res://EntitySpawn.gd" id="1_s3nwy"]
 [ext_resource type="Texture2D" uid="uid://ccmn1mxq1jsip" path="res://assets/pixel_adventure_assets/Items/Fruits/Collected.png" id="2_dp4m6"]
 [ext_resource type="Texture2D" uid="uid://rguh3d36k7fr" path="res://assets/pixel_adventure_assets/Items/Fruits/Apple.png" id="3_xkkw2"]
 
@@ -178,10 +177,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="AppleSpawnPlaceholder" type="Node2D" unique_id=573887390]
-script = ExtResource("1_s3nwy")
-type = 6
-metadata/_custom_type_script = "uid://dnmu11jypntuq"
+[node name="AppleSpawnPlaceholder" type="Node2D" unique_id=24080320]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2096131986]
 sprite_frames = SubResource("SpriteFrames_cjytm")
