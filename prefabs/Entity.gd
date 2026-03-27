@@ -4,6 +4,7 @@ class_name Entity
 
 @export var entity_type :EntitySpawner.SpawnType
 @onready var initial_process_mode :ProcessMode = process_mode
+var is_disabled :bool = false
 signal enabled
 signal disabled
 signal entity_reset
@@ -11,6 +12,7 @@ signal entity_reset
 
 @rpc("authority","call_local","reliable")
 func disable() -> void:
+	is_disabled = true
 	global_position.x += 2000
 	process_mode = Node.PROCESS_MODE_DISABLED
 	visible = false
@@ -21,12 +23,15 @@ func _on_disable() -> void:
 	return
 
 @rpc("authority","call_local","reliable")
-func enable(new_gpos: Vector2 = Vector2.ZERO) -> void:
+func enable(new_gpos: Vector2 = Vector2.ZERO, new_rot: float = 0.0) -> void:
+	is_disabled = false
 	reset()
 	visible = true
 	process_mode = initial_process_mode
 	if new_gpos != Vector2.ZERO:
 		global_position = new_gpos
+	
+	rotation_degrees = new_rot
 	
 	_on_enable()
 	return

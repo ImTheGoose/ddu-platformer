@@ -12,18 +12,12 @@ var seconds_since_clear :float = 0
 @export var local_types :Array[SpawnType] = [
 	SpawnType.ENEMY_PATHFINDING_POINT,
 	SpawnType.TRAP_SPIKE,
-	SpawnType.TRAP_SPIKE_LEFT,
-	SpawnType.TRAP_SPIKE_RIGHT,
-	SpawnType.TRAP_SPIKE_DOWN,
 ]
 @export var entity_prefabs :Dictionary[SpawnType, PackedScene] = {
 	SpawnType.ENEMY_PATHFINDING_POINT : preload("uid://dvuu00ynhqps7"),
 	SpawnType.ENEMY_MUSHROOM: preload("uid://bm73fykqwqf6j"),
 	SpawnType.ENEMY_TRUNK: preload("uid://cl3ty1bxj7fwe"),
 	SpawnType.TRAP_SPIKE : preload("uid://dwyc1xb3bavyv"),
-	SpawnType.TRAP_SPIKE_DOWN : preload("uid://cnh6641embbwk"),
-	SpawnType.TRAP_SPIKE_LEFT : preload("uid://b21toqgef4rn1"),
-	SpawnType.TRAP_SPIKE_RIGHT : preload("uid://bnicsngp8cud0"),
 	SpawnType.TRAP_FIRE_PLATE: preload("uid://cocuafbfox40i"),
 	SpawnType.TRAP_FALLING_PLATFORM: preload("uid://cc8s1kq0yww6p"),
 	SpawnType.TRAP_TRAMPOLINE: preload("uid://cq0dyrn14nfnf"),
@@ -36,9 +30,6 @@ enum SpawnType {
 	ENEMY_MUSHROOM,
 	ENEMY_TRUNK,
 	TRAP_SPIKE,
-	TRAP_SPIKE_LEFT,
-	TRAP_SPIKE_RIGHT,
-	TRAP_SPIKE_DOWN,
 	TRAP_FIRE_PLATE,
 	TRAP_FALLING_PLATFORM,
 	TRAP_TRAMPOLINE,
@@ -59,20 +50,26 @@ func _on_client_reset() -> void:
 	for local_child in local_spawn_node.get_children():
 		local_child.queue_free()
 
-func _spawn_local_entity(gpos: Vector2, spawn_type: int) -> void:
+func _spawn_local_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
 	if !entity_prefabs.has(spawn_type):
 		printerr("No entity prefab for entity with type : %s" % spawn_type)
 	
-	if unused_entities.has(spawn_type):
+	if unused_entities.has(spawn_type) && gpos != Vector2(-1, -1):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.enable(gpos)
+			node.enable(gpos, rotation)
 			print("Reusing an existing local asset")
 			return
 	
 	var e :Node2D = entity_prefabs[spawn_type].instantiate()
 	local_spawn_node.add_child(e)
 	e.global_position = gpos
+	e.rotation_degrees = rotation
+	
+	if gpos == Vector2(-1, -1):
+		if e is Entity:
+			e.disable()
+			add_node_to_unused(e)
 	
 	add_node_to_spawned(e)
 
@@ -90,28 +87,33 @@ func _on_server_reset() -> void:
 	for child in map_gen_node.get_children():
 		child.queue_free()
 
-func _on_spawn_entity(gpos: Vector2, spawn_type: int) -> void:
+func _on_spawn_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
 	if is_local(spawn_type):
-		_spawn_local_entity(gpos, spawn_type)
+		_spawn_local_entity(gpos, spawn_type, rotation)
 		return
 	
 	if multiplayer.is_server():
-		_spawn_online_entity(gpos, spawn_type)
+		_spawn_online_entity(gpos, spawn_type, rotation)
 
-func _spawn_online_entity(gpos: Vector2, spawn_type: int) -> void:
+func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
 	var spawn_rate :float = get_spawnrate(spawn_type)
 	var rand_float :float = randf()
 	if rand_float > spawn_rate:
 		return
 	
-	if unused_entities.has(spawn_type):
+	if unused_entities.has(spawn_type) && gpos != Vector2(-1, -1):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.rpc("enable", gpos)
+			node.rpc("enable", gpos, rotation)
 			print("Reusing an existing node")
 			return
 	
-	var node :Node = spawn([gpos, spawn_type, randf(), randf()])
+	var node :Node = spawn([gpos, spawn_type, rotation, randf(), randf()])
+	
+	if gpos == Vector2(-1, -1):
+		if node is Entity:
+			node.disable()
+			add_node_to_unused(node)
 	
 	if !spawned_entities.has(spawn_type):
 		spawned_entities.set(spawn_type, [])
@@ -128,9 +130,10 @@ func _online_spawner_function(data: Array) -> Node:
 	e.tree_entered.connect(
 		func() -> void:
 			e.global_position = data[0]
+			e.rotation_degrees = data[2]
 			
 			if e is PathfindingEnemy:
-				e.random_floats.append_array([data[2], data[3]])
+				e.random_floats.append_array([data[3], data[4]])
 			)
 	
 	return e
@@ -143,9 +146,11 @@ func get_spawn_amount(type: SpawnType) -> int:
 		SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK:
 			return 15
 		SpawnType.COLLECTABLE_APPLE:
-			return 100
+			return 50
+		SpawnType.TRAP_SPIKE:
+			return 40
 		_:
-			return 30
+			return 20
 
 func _on_spawn_level() -> void:
 	for type in entity_prefabs.keys():
@@ -154,9 +159,6 @@ func _on_spawn_level() -> void:
 		for i:int in range(get_spawn_amount(type)):
 			_on_spawn_entity(Vector2(-1, -1), type)
 	
-	seconds_since_clear = seconds_between_clear - 0.05
-	
-	return
 
 #region Entity & Map Pruning
 func clear_unused_children() -> void:
@@ -182,8 +184,13 @@ func _clear_unused_multiplayer_children() -> void:
 		if child is not Node2D or child is Player:
 			continue
 		
-		if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance or child.global_position == Vector2(-1, -1):
+		
+		
+		if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance:
 			if child is Entity:
+				if child.is_disabled:
+					continue
+				
 				disabled += 1
 				child.rpc("disable")
 				add_node_to_unused(child)
@@ -203,7 +210,10 @@ func _clear_unused_local_children() -> void:
 	var local_children :Array[Node] = local_spawn_node.get_children()
 	for child: Node in local_children:
 		if child is Entity:
-			if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance or child.global_position == Vector2(-1, -1):
+			if child.is_disabled:
+				continue
+			
+			if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance:
 				disabled += 1
 				child.disable()
 				add_node_to_unused(child)

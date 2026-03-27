@@ -9,7 +9,7 @@ size = Vector2(11, 5)
 
 [node name="SpikeEntityDown" type="Node2D" unique_id=190749638]
 script = ExtResource("1_o0niv")
-entity_type = 6
+entity_type = 3
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="Spike" type="Area2D" parent="." unique_id=465739661]

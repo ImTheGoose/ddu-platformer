@@ -24,6 +24,7 @@ func _initiate_platform_reappear() -> void:
 	anim.frame = 0
 	gravity_scale = 0
 	position = origin_pos
+	rotation_degrees = 0
 	col.disabled = false
 	fall_time = 0
 	touched = false

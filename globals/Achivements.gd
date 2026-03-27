@@ -51,6 +51,7 @@ func set_achievement(achivement_type: Type) -> void:
 		return
 
 	print("Set acheivement: %s" % achivement_type)
+	ACHIVEMENT_STATES.set(achivement_type, true)
 	data_upload_queued = true
 
 func _init() -> void:
