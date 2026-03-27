@@ -315,6 +315,7 @@ func clear_game() -> void:
 
 @rpc("authority","call_local","reliable")
 func prepare_game() -> void:
+	clear_game()
 	prespawn_entities.emit()
 	
 	if multiplayer.is_server():

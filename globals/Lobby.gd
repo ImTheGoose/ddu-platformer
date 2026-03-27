@@ -268,6 +268,7 @@ func close_connection() -> void:
 	GameManager.set_state(GameManager.STATE.INITIAL)
 	GameManager.clear_players.emit()
 	GameManager.server_reset.emit()
+	GameManager.client_reset.emit()
 	GameManager.reset_settings_to_default()
 
 #endregion
