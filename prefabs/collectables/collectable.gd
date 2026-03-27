@@ -26,3 +26,4 @@ func _on_anim_finished() -> void:
 
 func _on_reset() -> void:
 	anim.play("Idle")
+	anim.frame = 0
