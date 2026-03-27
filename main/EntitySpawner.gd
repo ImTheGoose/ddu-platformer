@@ -45,7 +45,7 @@ enum SpawnType {
 	TRAP_POWER_TRAMPOLINE,
 	COLLECTABLE_APPLE,
 }
-var spawned_entities :Dictionary[SpawnType, Array]
+var spawned_entities :Dictionary[SpawnType, Array] = {}
 var unused_entities :Dictionary[SpawnType, Array] = {}
 
 
@@ -66,54 +66,17 @@ func _spawn_local_entity(gpos: Vector2, spawn_type: int) -> void:
 	if unused_entities.has(spawn_type):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.rpc("enable", gpos)
+			node.enable(gpos)
 			print("Reusing an existing local asset")
 			return
 	
 	var e :Node2D = entity_prefabs[spawn_type].instantiate()
-	
 	local_spawn_node.add_child(e)
 	e.global_position = gpos
 	
-	if !spawned_entities.has(spawn_type):
-		spawned_entities.set(spawn_type, [])
-
-	spawned_entities[spawn_type].append(e)
-	
-	return
+	add_node_to_spawned(e)
 
 #endregion
-
-func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
-	spawn_function = _spawn_entity
-	GameManager.spawn_entity.connect(_on_spawn_entity)
-	GameManager.server_reset.connect(_on_server_reset)
-	GameManager.client_reset.connect(_on_client_reset)
-	GameManager.spawn_level.connect(_on_spawn_level)
-	Performance.add_custom_monitor("game/enemies", get_entity_count)
-
-func get_entity_count() -> int:
-	var total_entites :int = 0
-	for arr:Array in spawned_entities.values():
-		total_entites += arr.size()
-	return total_entites
-
-func _process(delta: float) -> void:
-	if seconds_since_clear < seconds_between_clear:
-		seconds_since_clear += delta
-	else:
-		seconds_since_clear = 0.0
-		clear_unused_children()
-
-func _get_spawnrate(spawn_type: int) -> float:
-	match spawn_type:
-		SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK:
-			return min(GameManager.get_difficulty_value("enemy_spawn_rate"), 1.0)
-		SpawnType.COLLECTABLE_APPLE:
-			return min(GameManager.get_difficulty_value("collectable_spawn_rate"), 1.0)
-	
-	return 1.0
 
 
 #region Server Spawning
@@ -132,10 +95,11 @@ func _on_spawn_entity(gpos: Vector2, spawn_type: int) -> void:
 		_spawn_local_entity(gpos, spawn_type)
 		return
 	
-	if !multiplayer.is_server():
-		return
+	if multiplayer.is_server():
+		_spawn_online_entity(gpos, spawn_type)
 
-	var spawn_rate :float = _get_spawnrate(spawn_type)
+func _spawn_online_entity(gpos: Vector2, spawn_type: int) -> void:
+	var spawn_rate :float = get_spawnrate(spawn_type)
 	var rand_float :float = randf()
 	if rand_float > spawn_rate:
 		return
@@ -154,7 +118,7 @@ func _on_spawn_entity(gpos: Vector2, spawn_type: int) -> void:
 
 	spawned_entities[spawn_type].append(node)
 
-func _spawn_entity(data: Array) -> Node:
+func _online_spawner_function(data: Array) -> Node:
 	if !entity_prefabs.has(data[1]):
 		printerr("No entity prefab for entity with type : %s" % data[1])
 		return entity_prefabs[0].instantiate()
@@ -198,44 +162,25 @@ func _on_spawn_level() -> void:
 func clear_unused_children() -> void:
 	if !MenuHandler.is_game_visible():
 		return
+	_clear_unused_local_children()
 	
-	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
-	if players.is_empty():
+	if multiplayer.is_server():
+		_clear_unused_multiplayer_children()
+	
+func _clear_unused_multiplayer_children() -> void:
+	var lowest_player :Player = get_lowest_player()
+	if not lowest_player:
 		return
-	
-	var highest_player :Player = players[0]
-	var lowest_player :Player = players[0]
-	for p:Player in players:
-		if p.dead:
-			continue
 		
-		if p.global_position.y < highest_player.global_position.y:
-			highest_player = p
-		
-		if p.global_position.y > lowest_player.global_position.y:
-			lowest_player = p
-	
-	print("clearing objects")
 	var cleared :int = 0
-	var disabled :int = 0
-	
-	var local_children :Array[Node] = local_spawn_node.get_children()
-	for child: Node in local_children:
-		if child is Entity:
-			if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance or child.global_position == Vector2(-1, -1):
-				disabled += 1
-				child.disable()
-				add_node_to_unused(child)
-	
-	if !multiplayer.is_server():
-		return
+	var disabled = 0
 	
 	var children :Array[Node] = spawn_node.get_children()
 	children.append_array(map_gen_node.get_children())
 	
 	for child: Node in children:
-		if child is not Node2D or players.has(child):
-			return
+		if child is not Node2D or child is Player:
+			continue
 		
 		if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance or child.global_position == Vector2(-1, -1):
 			if child is Entity:
@@ -246,7 +191,86 @@ func clear_unused_children() -> void:
 				cleared += 1
 				child.queue_free()
 	print("Cleared a total of %s objects" % cleared)
-	print("Disabled a total of %s objects" % disabled)
+	print("Disabled %s networked objects" % disabled)
+
+func _clear_unused_local_children() -> void:
+	var lowest_player :Player = get_lowest_player()
+	if not lowest_player:
+		return
+	
+	var disabled :int = 0
+	
+	var local_children :Array[Node] = local_spawn_node.get_children()
+	for child: Node in local_children:
+		if child is Entity:
+			if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance or child.global_position == Vector2(-1, -1):
+				disabled += 1
+				child.disable()
+				add_node_to_unused(child)
+	
+	print("Disabled %s local objects" % disabled)
+
+func get_lowest_player() -> Player:
+	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
+	if players.is_empty():
+		return null
+	
+	var lowest_player :Player = players[0]
+	for p:Player in players:
+		if p.dead:
+			continue
+
+		if p.global_position.y > lowest_player.global_position.y:
+			lowest_player = p
+	
+	return lowest_player
+
+#endregion
+
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	spawn_function = _online_spawner_function
+	GameManager.spawn_entity.connect(_on_spawn_entity)
+	GameManager.server_reset.connect(_on_server_reset)
+	GameManager.client_reset.connect(_on_client_reset)
+	GameManager.spawn_level.connect(_on_spawn_level)
+	Performance.add_custom_monitor("game/Total_Entities", get_entity_count, [[]])
+	Performance.add_custom_monitor("game/enemies", get_entity_count, [[SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK]])
+	Performance.add_custom_monitor("game/Traps", get_entity_count, [range(SpawnType.TRAP_SPIKE, SpawnType.TRAP_POWER_TRAMPOLINE)])
+	Performance.add_custom_monitor("game/Collectables", get_entity_count, [[SpawnType.COLLECTABLE_APPLE]])
+
+func _process(delta: float) -> void:
+	if seconds_since_clear < seconds_between_clear:
+		seconds_since_clear += delta
+	else:
+		seconds_since_clear = 0.0
+		clear_unused_children()
+
+#region Helper Functions
+
+func get_entity_count(included_types: Array) -> int:
+	var total_entites :int = 0
+	for type:int in spawned_entities.keys():
+		if included_types.has(type) or included_types.is_empty():
+			total_entites += spawned_entities[type].size()
+	return total_entites
+
+func get_spawnrate(spawn_type: int) -> float:
+	match spawn_type:
+		SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK:
+			return min(GameManager.get_difficulty_value("enemy_spawn_rate"), 1.0)
+		SpawnType.COLLECTABLE_APPLE:
+			return min(GameManager.get_difficulty_value("collectable_spawn_rate"), 1.0)
+	
+	return 1.0
+
+func add_node_to_spawned(node: Entity) -> void:
+	var type :SpawnType = node.entity_type
+	if !spawned_entities.has(type):
+		spawned_entities.set(type, [])
+	
+	spawned_entities[type].append(node)
 
 func add_node_to_unused(node: Entity) -> void:
 	var type :SpawnType = node.entity_type
