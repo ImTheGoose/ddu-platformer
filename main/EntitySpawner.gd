@@ -44,11 +44,15 @@ var unused_entities :Dictionary[SpawnType, Array] = {}
 func is_local(type: SpawnType) -> bool:
 	return local_types.has(type)
 
-func _on_client_reset() -> void:
-	unused_entities.clear()
-	spawned_entities.clear()
-	for local_child in local_spawn_node.get_children():
-		local_child.queue_free()
+func _on_client_reset() -> void:	
+	for key in unused_entities.keys():
+		if is_local(key):
+			unused_entities.set(key, [])
+	
+	for child in local_spawn_node.get_children():
+		if child is Entity:
+			child.disable()
+			add_node_to_unused(child)
 
 func _spawn_local_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
 	if !entity_prefabs.has(spawn_type):
@@ -80,10 +84,16 @@ func _spawn_local_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) 
 func _on_server_reset() -> void:
 	if !multiplayer.is_server():
 		return
-		
+	
+	for key in unused_entities.keys():
+		if !is_local(key):
+			unused_entities.set(key, [])
+	
 	for child in spawn_node.get_children():
-		child.queue_free()
-
+		if child is Entity:
+			child.rpc("disable")
+			add_node_to_unused(child)
+			
 	for child in map_gen_node.get_children():
 		child.queue_free()
 
@@ -115,10 +125,7 @@ func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0)
 			node.disable()
 			add_node_to_unused(node)
 	
-	if !spawned_entities.has(spawn_type):
-		spawned_entities.set(spawn_type, [])
-
-	spawned_entities[spawn_type].append(node)
+	add_node_to_spawned(node)
 
 func _online_spawner_function(data: Array) -> Node:
 	if !entity_prefabs.has(data[1]):
@@ -151,14 +158,6 @@ func get_spawn_amount(type: SpawnType) -> int:
 			return 40
 		_:
 			return 20
-
-func _on_spawn_level() -> void:
-	for type in entity_prefabs.keys():
-		if !is_local(type) && !multiplayer.is_server():
-			continue
-		for i:int in range(get_spawn_amount(type)):
-			_on_spawn_entity(Vector2(-1, -1), type)
-	
 
 #region Entity & Map Pruning
 func clear_unused_children() -> void:
@@ -235,6 +234,24 @@ func get_lowest_player() -> Player:
 	
 	return lowest_player
 
+func _on_prespawn_entities() -> void:
+	for type in entity_prefabs.keys():
+		if !is_local(type) && !multiplayer.is_server():
+			continue
+		for i:int in range(get_spawn_amount(type)):
+			_on_spawn_entity(Vector2(-1, -1), type)
+
+func _on_clear_entities() -> void:
+	spawned_entities.clear()
+	unused_entities.clear()
+	
+	for child in local_spawn_node.get_children():
+		child.queue_free()
+	
+	if multiplayer.is_server():
+		for child in spawn_node.get_children():
+			child.queue_free()
+
 #endregion
 
 
@@ -242,13 +259,17 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	spawn_function = _online_spawner_function
 	GameManager.spawn_entity.connect(_on_spawn_entity)
+	GameManager.prespawn_entities.connect(_on_prespawn_entities)
+	GameManager.clear_entities.connect(_on_clear_entities)
 	GameManager.server_reset.connect(_on_server_reset)
 	GameManager.client_reset.connect(_on_client_reset)
-	GameManager.spawn_level.connect(_on_spawn_level)
 	Performance.add_custom_monitor("game/Total_Entities", get_entity_count, [[]])
 	Performance.add_custom_monitor("game/enemies", get_entity_count, [[SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK]])
 	Performance.add_custom_monitor("game/Traps", get_entity_count, [range(SpawnType.TRAP_SPIKE, SpawnType.TRAP_POWER_TRAMPOLINE)])
 	Performance.add_custom_monitor("game/Collectables", get_entity_count, [[SpawnType.COLLECTABLE_APPLE]])
+
+
+
 
 func _process(delta: float) -> void:
 	if seconds_since_clear < seconds_between_clear:

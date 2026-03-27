@@ -24,8 +24,6 @@ func clear_map() -> void:
 		current_connection_type = MapFile.ConnectionType.TYPE_A
 
 func _on_spawn_level() -> void:
-	await get_tree().physics_frame
-	
 	if multiplayer.is_server():
 		clear_map()
 		

@@ -4,6 +4,8 @@ signal client_start
 signal client_reset
 signal server_reset
 signal server_start
+signal clear_entities
+signal prespawn_entities
 signal spawn_level
 signal player_death(peer_id: int)
 signal game_settings_changed()
@@ -232,6 +234,7 @@ func _on_peer_connected(peer_id: int) -> void:
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
 		Lobby.close_connection()
+		rpc("clear_game")
 		rpc("set_rounds_played", 0)
 		rpc("reset_client")
 		server_reset.emit()
@@ -248,6 +251,7 @@ func _on_game_covered() -> void:
 		MenuHandler.rpc("change_menu", "multiplayer_win_menu")
 
 	elif state == STATE.AWATING_RETURN_TO_LOBBY && multiplayer.is_server():
+		rpc("clear_game")
 		rpc("reset_client")
 		rpc("set_rounds_played", 0)
 		server_reset.emit()
@@ -304,12 +308,20 @@ func return_to_lobby() -> void:
 	set_state(STATE.AWATING_RETURN_TO_LOBBY)
 	MenuHandler.rpc("show_blackout")
 
+@rpc("authority","call_local","reliable")
+func clear_game() -> void:
+	clear_entities.emit()
+
+@rpc("authority","call_local","reliable")
 func prepare_game() -> void:
-	MenuHandler.rpc("show_blackout")
-	rpc("set_rounds_played", 0)
-	match_scores.clear()
-	sync_match_scores()
-	next_round()
+	prespawn_entities.emit()
+	
+	if multiplayer.is_server():
+		MenuHandler.rpc("show_blackout")
+		rpc("set_rounds_played", 0)
+		match_scores.clear()
+		sync_match_scores()
+		next_round()
 
 @rpc("any_peer","call_local","reliable")
 func start_game() -> void:
