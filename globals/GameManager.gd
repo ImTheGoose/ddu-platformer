@@ -224,6 +224,7 @@ func get_state() -> STATE:
 #endregion
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	MenuHandler.game_is_covered.connect(_on_game_covered)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	reset_settings_to_default()
