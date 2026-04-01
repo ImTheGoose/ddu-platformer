@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dvuu00ynhqps7"]
 
-[ext_resource type="Script" uid="uid://c4w1smgmv08vw" path="res://prefabs/enemies/PathfindingPoint.gd" id="1_1ifti"]
+[ext_resource type="Script" uid="uid://c4w1smgmv08vw" path="res://prefabs/old_enemies/PathfindingPoint.gd" id="1_1ifti"]
 [ext_resource type="Script" uid="uid://b8drxfgp0ol5s" path="res://utility/EditorVisual.gd" id="2_aqdrw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ifti"]
