@@ -18,9 +18,9 @@ alignment = 1
 script = ExtResource("1_vgh5j")
 title = "Multiplayer Update"
 added_bbcode = "[color=green]+ "
-added_list = Array[String](["Added Steam Overlay", "Added Local Lan Multiplayer", "Added Online Multiplayer via steam", "Added Steam Cloud Saving", "Added Outlines to Characters", "Added Settings to pause menu", "Added Cosmetics to pause meuu", "Added Controller Support", "Added Temporay Steam Achivements", "Added support for Steam Join & Invite", "Added Multiplayer Lobby and Settings", "Added Steam Avatars and Names", "Added controller/keyboard support in statistics menu"])
+added_list = Array[String](["Added Steam Overlay", "Added Local Lan Multiplayer", "Added Online Multiplayer via steam", "Added Steam Cloud Saving", "Added Outlines to Characters", "Added Settings to pause menu", "Added Cosmetics to pause meuu", "Added Controller Support", "Added Temporay Steam Achivements", "Added support for Steam Join & Invite", "Added Multiplayer Lobby and Settings", "Added Steam Avatars and Names", "Added controller/keyboard support in statistics menu", "Added Entity Pooling for big performance Boost"])
 changed_bbcode = "[color=orange]~ "
-changed_list = Array[String](["Reworked Statistics Menu", "Changed stats to use Steam Stats", "Reworked how maps are saved and loaded", "Fixed various movement bugs", "Reworked maps to support different spawn maps.", "Reworked GameManager to support several players"])
+changed_list = Array[String](["Reworked Statistics Menu", "Changed stats to use Steam Stats", "Reworked how maps are saved and loaded", "Fixed various movement bugs", "Reworked maps to support different spawn maps.", "Reworked GameManager to support several players", "Disabled all inactive tilemaps", "Spawn from tilemap id, instead of as prefab"])
 removed_bbcode = "[color=red]- "
 removed_list = Array[String](["Removed stats from save files", "Removed support for Non Steam Clients"])
 menu_name = "changelog"
