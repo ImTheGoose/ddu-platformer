@@ -12,7 +12,7 @@ var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"save_version" : 0.3,
-	"money" : 69420,
+	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
 	"selected_outline_hex" : "#ffffff",
@@ -55,11 +55,19 @@ func _init() -> void:
 			print(PREFIX, "Failed to create directory at: \"", GAME_FILE_DIRECTORY_PATH, "\" With error code: \"", err, "\"")
 	
 	game_data = default_game_data.duplicate()
+	if OS.is_debug_build():
+		debug_data()
 	load_save_data()
 	load_config()
 
 func _process(delta: float) -> void:
 	Stats.add_float_stat(Stats.StatType.TIME_PlAYED, delta, false)
+
+func debug_data() -> void:
+	_create_new_save_data()
+	set_value("money", 12456124)
+	save_game_data()
+	return
 
 func update_game_data() -> void:
 	var v: float = float(game_data["save_version"])
@@ -69,7 +77,7 @@ func update_game_data() -> void:
 	if v < 0.2:
 		game_data["selected_outline_hex"] = default_game_data["selected_outline_hex"]
 	
-	#game_data["save_version"] = default_game_data["save_version"]
+	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
 	
 func clear_game_data() -> void:
