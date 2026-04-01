@@ -1,283 +1,19 @@
 [gd_scene format=3 uid="uid://bm73fykqwqf6j"]
 
-[ext_resource type="Script" uid="uid://bmk40585djfsk" path="res://prefabs/old_enemies/PathfindingEnemy.gd" id="1_rn6i1"]
-[ext_resource type="AudioStream" uid="uid://yv1k7suwtmf1" path="res://assets/audio/sfx/mushroom_death.mp3" id="2_apt1k"]
-[ext_resource type="Texture2D" uid="uid://dfq04fji2abk4" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Hit.png" id="2_x722j"]
-[ext_resource type="Texture2D" uid="uid://6buevbuadrfb" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Idle (32x32).png" id="3_apt1k"]
-[ext_resource type="Texture2D" uid="uid://08qr8fcio77j" path="res://assets/pixel_adventure_assets/Enemies/Mushroom/Run (32x32).png" id="4_55w7g"]
-[ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/old_enemies/AnimatedSpriteComponent.gd" id="5_uuv8h"]
-[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_rn6i1"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lksun"]
-atlas = ExtResource("2_x722j")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nph53"]
-atlas = ExtResource("2_x722j")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tj8ie"]
-atlas = ExtResource("2_x722j")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qo5ll"]
-atlas = ExtResource("2_x722j")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hnnwq"]
-atlas = ExtResource("2_x722j")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jqj6"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k4m0y"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5rubf"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3vsw"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1pgne"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ujmmm"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdnx8"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrwep"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_at6kf"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dh57m"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(288, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ea4ed"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(320, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3agb"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(352, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0v1eg"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(384, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_74fii"]
-atlas = ExtResource("3_apt1k")
-region = Rect2(416, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q2wqq"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i0de7"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wvuyf"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yo1qp"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ney2y"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wqq0y"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5h32d"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u0rvn"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ldtkc"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7yirv"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(288, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5yj8"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(320, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e84hv"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(352, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vshxf"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(384, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3u652"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(416, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_86ife"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(448, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yn7v4"]
-atlas = ExtResource("4_55w7g")
-region = Rect2(480, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_e5cyv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lksun")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nph53")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tj8ie")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qo5ll")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hnnwq")
-}],
-"loop": false,
-"name": &"Hit",
-"speed": 20.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1jqj6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k4m0y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5rubf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b3vsw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1pgne")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujmmm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cdnx8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qrwep")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_at6kf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dh57m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ea4ed")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i3agb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0v1eg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74fii")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 20.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q2wqq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i0de7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wvuyf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yo1qp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ney2y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wqq0y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5h32d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u0rvn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ldtkc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7yirv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a5yj8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e84hv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vshxf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3u652")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_86ife")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yn7v4")
-}],
-"loop": true,
-"name": &"Moving",
-"speed": 20.0
-}]
+[ext_resource type="Script" uid="uid://bmk40585djfsk" path="res://prefabs/old_enemies/PathfindingEnemy.gd" id="1_rtuw6"]
+[ext_resource type="AudioStream" uid="uid://yv1k7suwtmf1" path="res://assets/audio/sfx/mushroom_death.mp3" id="2_oh4xa"]
+[ext_resource type="SpriteFrames" uid="uid://f1m6kqgyba88" path="res://prefabs/enemies/mushroom/mushroom_frames.tres" id="3_xk0ge"]
+[ext_resource type="Script" uid="uid://7qvi47w1cpbi" path="res://prefabs/old_enemies/AnimatedSpriteComponent.gd" id="6_krppi"]
+[ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_l26su"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3vsw"]
 size = Vector2(18, 15)
 
 [node name="Mushroom" type="Node2D" unique_id=1008598162]
+modulate = Color(0.03529412, 1, 1, 1)
 z_index = 10
-script = ExtResource("1_rn6i1")
-death_sound = ExtResource("2_apt1k")
+script = ExtResource("1_rtuw6")
+death_sound = ExtResource("2_oh4xa")
 entity_type = 1
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1714039566]
@@ -286,16 +22,16 @@ collide_with_areas = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=537677901 node_paths=PackedStringArray("entity_node")]
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_e5cyv")
+sprite_frames = ExtResource("3_xk0ge")
 animation = &"Idle"
 autoplay = "Idle"
-script = ExtResource("5_uuv8h")
+script = ExtResource("6_krppi")
 entity_node = NodePath("..")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=1635299632]
 collision_layer = 2
 collision_mask = 10
-script = ExtResource("6_rn6i1")
+script = ExtResource("7_l26su")
 kill_type = 0
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 

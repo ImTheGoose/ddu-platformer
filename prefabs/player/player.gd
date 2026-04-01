@@ -21,6 +21,7 @@ class_name Player
 @onready var death_particles :GPUParticles2D = $die_particles
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
+@onready var feet_position: Node2D = %feet_position
 
 @onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
 @export var sync_position: Vector2 = Vector2.ZERO
@@ -185,8 +186,18 @@ func show_death() -> void:
 
 func hit(vec: Vector2) -> void:
 	if is_multiplayer_authority() && !dead && GameManager.is_game_running():
-		velocity = vec * max_speed * 1.5
+		knockback(vec, max_speed * 1.5)
 		_die()
+
+func knockback(dir: Vector2, power: float, reset_jump: bool = false) -> void:
+	if reset_jump:
+		double_jumped = false
+	
+	velocity = dir * power
+	return
+
+func get_feet_node() -> Node2D:
+	return feet_position
 
 func _update_anim(move_axis: float) -> void:
 	if dead:

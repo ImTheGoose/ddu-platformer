@@ -15,7 +15,7 @@ var seconds_since_clear :float = 0
 ]
 @export var entity_prefabs :Dictionary[SpawnType, PackedScene] = {
 	SpawnType.ENEMY_PATHFINDING_POINT : preload("uid://dvuu00ynhqps7"),
-	SpawnType.ENEMY_MUSHROOM: preload("uid://bm73fykqwqf6j"),
+	SpawnType.ENEMY_MUSHROOM: preload("uid://cotlp2mae8vp7"),
 	SpawnType.ENEMY_TRUNK: preload("uid://cl3ty1bxj7fwe"),
 	SpawnType.TRAP_SPIKE : preload("uid://dwyc1xb3bavyv"),
 	SpawnType.TRAP_FIRE_PLATE: preload("uid://cocuafbfox40i"),

@@ -92,3 +92,7 @@ debug_color = Color(0.9907276, 0, 0.2804999, 0.41960785)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2064356115]
 replication_config = SubResource("SceneReplicationConfig_jfcio")
+
+[node name="feet_position" type="Node2D" parent="." unique_id=1082781265]
+unique_name_in_owner = true
+position = Vector2(0, 14)
