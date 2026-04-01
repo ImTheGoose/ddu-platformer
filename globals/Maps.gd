@@ -70,6 +70,8 @@ func refresh_map_pools() -> void:
 	current_map_pool = get_valid_maps(MapFile.MapType.REGULAR_MAP)
 	current_transition_pool = get_valid_maps(MapFile.MapType.TRANSITION_MAP)
 	current_start_pool = get_valid_maps(MapFile.MapType.START_MAP)
+	current_map_pool.shuffle()
+	current_start_pool.shuffle()
 
 func get_start_map() -> MapFile:
 	if current_start_pool.is_empty():
