@@ -6,8 +6,8 @@ class_name EnemySpriteComponent
 @export var health_component :HealthComponent
 @export var path_detection_component :PathDetectionComponent
 @export var movement_component :MovementComponent
-var target_rot :float = 0.0
-var start_vel :Vector2 = Vector2.ZERO
+var target_rotation :float = 0.0
+var velocity :Vector2 = Vector2.ZERO
 var origin_pos :Vector2 = position
 
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 		path_detection_component.direction_changed.connect(_on_direction_changed)
 	
 	if movement_component:
-		movement_component.movement_changed.connect(_on_movement_changed)
+		movement_component.movement_state_changed.connect(_on_movement_changed)
 		pass
 	
 	origin_pos = position
@@ -43,20 +43,20 @@ func _on_direction_changed(new_dir: Vector2) -> void:
 
 func _on_death() -> void:
 	play("Hit")
-	target_rot = randf_range(-35, 35)
-	start_vel = Vector2(randf_range(-150, 150), randf_range(-100, -600))
+	target_rotation = randf_range(-35, 35)
+	velocity = Vector2(randf_range(-150, 150), randf_range(-100, -600))
 
 func _on_entity_reset() -> void:
 	play("Idle")
-	target_rot = 0.0
-	start_vel = Vector2.ZERO
+	target_rotation = 0.0
+	velocity = Vector2.ZERO
 	position = origin_pos
 	rotation_degrees = 0
 
 func _process(delta: float) -> void:	
-	if target_rot == 0:
+	if target_rotation == 0:
 		return
 
-	start_vel.y += 1100 * delta
-	global_position += start_vel * delta
-	rotation = lerp_angle(rotation, target_rot, delta)
+	velocity.y += 1100 * delta
+	global_position += velocity * delta
+	rotation = lerp_angle(rotation, target_rotation, delta)

@@ -12,7 +12,17 @@ class_name MovementComponent
 @export_range(0,5, 0.1) var seconds_waiting_at_target :float = 2.0
 var seconds_waited :float = 0.0
 
-signal movement_changed
+signal movement_state_changed
+var state :MovementState = MovementState.WAITING:
+	set(value):
+		if state != value:
+			state = value
+			movement_state_changed.emit()
+
+enum MovementState {
+	WAITING,
+	MOVING,
+}
 
 func _ready() -> void:
 	if not path_detection_component:
@@ -39,15 +49,14 @@ func _process(delta: float) -> void:
 	
 	if distance < 1:
 		if seconds_waited < seconds_waiting_at_target:
-			if seconds_waited == 0.0:
-				movement_changed.emit()
-			
+			state = MovementState.WAITING
 			seconds_waited += delta
 			return
 		else:
 			seconds_waited = 0.0
 			path_detection_component.swap_target()
-			movement_changed.emit()
+
+	state = MovementState.MOVING
 	
 	_move_towards_position(delta, gpos)
 	
@@ -66,12 +75,4 @@ func start_moving() -> void:
 	return
 
 func is_waiting() -> bool:
-	var target :Node2D = path_detection_component.get_target()
-	var gpos :Vector2 = target.global_position
-	var distance :float = entity_root.global_position.distance_to(gpos)
-	
-	if distance < 1:
-		if seconds_waited < seconds_waiting_at_target:
-			return true
-	
-	return false
+	return state == MovementState.WAITING
