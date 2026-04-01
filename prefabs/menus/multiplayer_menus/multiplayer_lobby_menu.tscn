@@ -170,6 +170,27 @@ popup/item_0/id = 0
 popup/item_1/text = "Constant"
 popup/item_1/id = 1
 
+[node name="map_collection_setting" type="HBoxContainer" parent="PanelContainer/HBoxContainer2/settings_parts" unique_id=68486791]
+layout_mode = 2
+
+[node name="map_collection_label" type="Label" parent="PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=117222289]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Collection: "
+vertical_alignment = 1
+
+[node name="map_collection_option" type="OptionButton" parent="PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=1183251566]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "Standard"
+popup/item_0/id = 0
+popup/item_1/text = "Constant"
+popup/item_1/id = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1200886208]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2

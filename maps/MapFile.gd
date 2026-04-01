@@ -24,6 +24,7 @@ class_name MapFile
 
 enum CollectionType {
 	LEGACY,
+	TESTING,
 }
 
 # Transition maps arent a part of the map pool, and can therefore be shown multiple times per map clean.

@@ -62,7 +62,6 @@ func _spawn_local_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) 
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
 			node.enable(gpos, rotation)
-			print("Reusing an existing local asset")
 			return
 	
 	var e :Node2D = entity_prefabs[spawn_type].instantiate()
@@ -115,7 +114,6 @@ func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0)
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
 			node.rpc("enable", gpos, rotation)
-			print("Reusing an existing node")
 			return
 	
 	var node :Node = spawn([gpos, spawn_type, rotation, randf(), randf()])

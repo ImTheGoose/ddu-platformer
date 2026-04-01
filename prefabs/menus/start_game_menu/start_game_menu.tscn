@@ -56,6 +56,11 @@ popup/item_3/id = 3
 popup/item_4/text = "Impossible"
 popup/item_4/id = 4
 
+[node name="map_collection_dropdown" type="OptionButton" parent="." unique_id=2134683208]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
 [node name="start_game" type="Button" parent="." unique_id=671084686]
 layout_mode = 2
 text = "Start Game
@@ -66,5 +71,6 @@ layout_mode = 2
 text = "Back"
 
 [connection signal="item_selected" from="difficulty_dropdown" to="." method="_on_difficulty_dropdown_item_selected"]
+[connection signal="item_selected" from="map_collection_dropdown" to="." method="_on_map_collection_dropdown_item_selected"]
 [connection signal="pressed" from="start_game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

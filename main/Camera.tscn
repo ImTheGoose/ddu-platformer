@@ -293,7 +293,7 @@ offset_right = 26.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 11
-text = "mutliplayer-7"
+text = "Content-1"
 
 [node name="Control" type="Control" parent="UI" unique_id=1649518603]
 layout_mode = 1

@@ -14,6 +14,8 @@ var current_start_pool :Array[MapFile] = []
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_load_all_maps_on_initialise()
+
+func _ready() -> void:
 	refresh_map_pools()
 
 #region Map File Loading
@@ -44,20 +46,16 @@ func get_maps_from_folder(path: String) -> Array[MapFile]:
 #endregion
 
 #region Map Getting
-func get_loaded_transitions() -> Array[MapFile]:
-	return get_maps_matching_type(MapFile.MapType.TRANSITION_MAP)
+func get_loaded_maps(map_type: MapFile.MapType) -> Array[MapFile]:
+	return get_maps_matching_type(map_type)
 
-func get_loaded_regular_maps() -> Array[MapFile]:
-	return get_maps_matching_type(MapFile.MapType.REGULAR_MAP)
-
-func get_valid_transitions() -> Array[MapFile]:
-	return get_maps_matching_type(MapFile.MapType.TRANSITION_MAP, true)
-
-func get_valid_regular_maps() -> Array[MapFile]:
-	return get_maps_matching_type(MapFile.MapType.REGULAR_MAP, true)
-
-func get_valid_start_maps() -> Array[MapFile]:
-	return get_maps_matching_type(MapFile.MapType.START_MAP, true)
+func get_valid_maps(map_type: MapFile.MapType) -> Array[MapFile]:
+	var maps :Array[MapFile] = get_maps_matching_type(map_type, true)
+	if maps.is_empty():
+		printerr("No matching maps of type %s for current conditions. Using defaults" % MapFile.MapType.keys()[map_type])
+		return get_loaded_maps(map_type)
+	return maps
+	
 
 func get_maps_matching_type(type: MapFile.MapType, check_valid: bool = false) -> Array[MapFile]:
 	var matching_map_files :Array[MapFile]
@@ -69,13 +67,13 @@ func get_maps_matching_type(type: MapFile.MapType, check_valid: bool = false) ->
 #endregion
 
 func refresh_map_pools() -> void:
-	current_map_pool = get_valid_regular_maps()
-	current_transition_pool = get_valid_transitions()
-	current_start_pool = get_valid_start_maps()
+	current_map_pool = get_valid_maps(MapFile.MapType.REGULAR_MAP)
+	current_transition_pool = get_valid_maps(MapFile.MapType.TRANSITION_MAP)
+	current_start_pool = get_valid_maps(MapFile.MapType.START_MAP)
 
 func get_start_map() -> MapFile:
 	if current_start_pool.is_empty():
-		current_start_pool = get_valid_start_maps()
+		current_start_pool = get_valid_maps(MapFile.MapType.START_MAP)
 		current_start_pool.shuffle()
 	return current_start_pool.pop_back()
 
@@ -84,7 +82,7 @@ func get_next_map_section(current_connection: MapFile.ConnectionType) -> Array[M
 	var section :Array[MapFile] = []
 
 	if current_map_pool.is_empty():
-		current_map_pool = get_valid_regular_maps()
+		current_map_pool = get_valid_maps(MapFile.MapType.REGULAR_MAP)
 		current_map_pool.shuffle()
 
 	var next_map :MapFile = current_map_pool.pop_back()
@@ -129,4 +127,12 @@ func is_map_valid(map_file: MapFile) -> bool:
 	if !map_file.prefab:
 		printerr("Map with id '%s' is missing prefab" % map_file.map_id)
 		return false
+	
+	if multiplayer.has_multiplayer_peer() && multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
+		if not map_file.is_multiplayer_compatible:
+			return false
+	
+	if not map_file.related_collections.has(GameManager.get_map_collection()):
+		return false
+	
 	return true

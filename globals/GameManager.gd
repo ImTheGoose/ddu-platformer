@@ -22,6 +22,7 @@ var players_dead :int = 0
 
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
+	"map_collection" : MapFile.CollectionType.LEGACY,
 	"difficulty" : difficulty.NORMAL,
 	"gamemode" : Gamemode.GAMEMODE_STANDARD,
 	"total_rounds" : 1,
@@ -31,6 +32,7 @@ var default_game_settings :Dictionary = {
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
+var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.LEGACY
 var game_difficulty :difficulty = difficulty.NORMAL
 var difficulty_settings :Dictionary = {
 	difficulty.VERY_EASY : {
@@ -129,6 +131,9 @@ func get_difficulty_value(key: String) -> Variant:
 	var dif_settings :Dictionary = difficulty_settings[game_difficulty]
 	return dif_settings[key]
 
+func get_map_collection() -> MapFile.CollectionType:
+	return game_map_collection
+
 func get_difficulty() -> difficulty:
 	return game_difficulty
 
@@ -140,6 +145,11 @@ func get_gamemode() -> Gamemode:
 
 func get_total_rounds() -> int:
 	return game_total_rounds
+
+@rpc("authority","call_local","reliable")
+func set_map_collection(collection: MapFile.CollectionType) -> void:
+	game_map_collection = collection
+	game_settings_changed.emit()
 
 @rpc("authority","call_local","reliable")
 func set_difficulty(dif: difficulty) -> void:
@@ -185,12 +195,14 @@ func next_round() -> void:
 
 func sync_settings_to_peers() -> void:
 	if multiplayer.is_server():
+		rpc("set_map_collection", get_map_collection())
 		rpc("set_difficulty", get_difficulty())
 		rpc("set_total_rounds", get_total_rounds())
 		rpc("set_collisions_enabled", is_collissions_enabled())
 		rpc("set_gamemode", get_gamemode())
 
 func reset_settings_to_default() -> void:
+	set_map_collection(default_game_settings["map_collection"])
 	set_difficulty(default_game_settings["difficulty"])
 	set_total_rounds(default_game_settings["total_rounds"])
 	set_collisions_enabled(default_game_settings["collissions_enabled"])
@@ -319,6 +331,7 @@ func prepare_game() -> void:
 	prespawn_entities.emit()
 	
 	if multiplayer.is_server():
+		Maps.refresh_map_pools()
 		MenuHandler.rpc("show_blackout")
 		rpc("set_rounds_played", 0)
 		match_scores.clear()
