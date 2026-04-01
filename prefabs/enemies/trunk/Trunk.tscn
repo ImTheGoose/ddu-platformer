@@ -379,6 +379,7 @@ projectile = ExtResource("2_kyy33")
 seconds_between_attacks = 1.2
 enemy_type = 1
 death_sound = ExtResource("3_o7ajs")
+entity_type = 2
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1100985406]
 collision_mask = 9
@@ -388,13 +389,14 @@ collide_with_areas = true
 position = Vector2(0, -4.565)
 collision_mask = 9
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=47335679]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=47335679 node_paths=PackedStringArray("entity_node")]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_tw06p")
 animation = &"Attack"
 autoplay = "Idle"
 frame = 10
 script = ExtResource("6_yuq46")
+entity_node = NodePath("..")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=2038112279]
 collision_layer = 2

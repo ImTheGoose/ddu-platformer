@@ -2,6 +2,7 @@ extends Node
 
 var data_upload_queued :bool = false
 
+var ACHIVEMENT_STATES :Dictionary[Type, bool] = {}
 const ACHIVEMENT_IDS :Dictionary[Type, String] = {
 	Type.DEATHS_50 : "DEATHS_1", #AUTO
 	Type.DEATHS_150 : "DEATHS_2", #AUTO
@@ -22,12 +23,23 @@ enum Type {
 	APPLE_TOTAL_5k,
 }
 
-func is_achived(type: Type) -> bool:
+func load_achivement(type: Type) -> void:
 	var ach = Steam.getAchievement(ACHIVEMENT_IDS[type])
-	if not ach["ret"]:
-		return false
+	if not ach:
+		return
 	
-	return ach["achieved"]
+	if not ach["ret"]:
+		print("Achivement doesnt exist in steamworks dashboard: %s" % Type.keys()[type])
+		return
+	
+	ACHIVEMENT_STATES.set(type, ach["achieved"])
+	
+func is_achived(type: Type) -> bool:
+	if !ACHIVEMENT_STATES.has(type):
+		load_achivement(type)
+		return false
+		
+	return ACHIVEMENT_STATES.get(type)
 
 func set_achievement(achivement_type: Type) -> void:
 	if not ACHIVEMENT_IDS.has(achivement_type):
@@ -39,6 +51,7 @@ func set_achievement(achivement_type: Type) -> void:
 		return
 
 	print("Set acheivement: %s" % achivement_type)
+	ACHIVEMENT_STATES.set(achivement_type, true)
 	data_upload_queued = true
 
 func _init() -> void:

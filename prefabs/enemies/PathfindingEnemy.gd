@@ -1,4 +1,4 @@
-extends Node2D
+extends Entity
 
 class_name PathfindingEnemy
 
@@ -12,10 +12,12 @@ var seconds_waited :float = 0
 @onready var anim :AnimatedSpriteComponent = $AnimatedSprite2D
 var point_positive :PathfindingPoint
 var point_negative :PathfindingPoint
-var checked_points :bool = false
 var target_point :PathfindingPoint
 var valid_path_direction :Vector2
 var dead :bool = false
+
+var seconds_between_point_retry :float = 0.1
+var seconds_since_points_check :float = 0.0
 
 var random_floats :Array[float] = []
 
@@ -28,12 +30,16 @@ func _process(delta: float) -> void:
 	if dead:
 		return
 		
-	if !checked_points:
-		if path_axis == axis.vertical:
-			_search_for_points(Vector2(0, 1))
+	if not point_positive or not point_negative:
+		if seconds_since_points_check < seconds_between_point_retry:
+			seconds_since_points_check += delta
 		else:
-			_search_for_points(Vector2(1, 0))
-	
+			seconds_since_points_check = 0.0
+			if path_axis == axis.vertical:
+				_search_for_points(Vector2(0, 1))
+			else:
+				_search_for_points(Vector2(1, 0))
+
 	if _get_direction().x > 0:
 		anim.flip_h = true
 	else:
@@ -82,7 +88,6 @@ func _move_towards_position(delta: float, gpos: Vector2) -> void:
 	global_position += dir * speed * delta
 
 func _search_for_points(vec: Vector2) -> void:
-	checked_points = true
 	ray.target_position = -vec * 1000
 	ray.force_raycast_update()
 	var c :Object = ray.get_collider()
@@ -128,3 +133,12 @@ func die() -> void:
 
 func _is_valid_pathfinding() -> bool:
 	return point_negative != null && point_positive != null
+
+func _on_reset() -> void:
+	anim.play("Idle")
+	$HitArea.set_deferred("monitoring", true)
+	$HitArea.set_deferred("monitorable", true)
+	dead = false
+	point_positive = null
+	point_negative = null
+	seconds_since_points_check = 0.0

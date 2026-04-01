@@ -55,5 +55,8 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	
 	if attacking:
 		_attack()
-	
-	pass # Replace with function body.
+
+func _on_reset() -> void:
+	super()
+	seconds_since_attack = 0
+	attacking = false

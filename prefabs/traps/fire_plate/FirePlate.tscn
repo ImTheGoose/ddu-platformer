@@ -87,6 +87,7 @@ size = Vector2(10, 14.965)
 
 [node name="FallingPlatform" type="StaticBody2D" unique_id=379550939]
 script = ExtResource("1_vhx8u")
+entity_type = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1136785909]
 position = Vector2(-2.3841858e-07, 0.5)

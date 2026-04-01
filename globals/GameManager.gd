@@ -4,10 +4,12 @@ signal client_start
 signal client_reset
 signal server_reset
 signal server_start
+signal clear_entities
+signal prespawn_entities
 signal spawn_level
 signal player_death(peer_id: int)
 signal game_settings_changed()
-signal spawn_entity(global_position: Vector2, spawn_type: int)
+signal spawn_entity(global_position: Vector2, spawn_type: int, rotation: float)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
 var game_paused :bool = false
@@ -222,6 +224,7 @@ func get_state() -> STATE:
 #endregion
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	MenuHandler.game_is_covered.connect(_on_game_covered)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	reset_settings_to_default()
@@ -232,6 +235,7 @@ func _on_peer_connected(peer_id: int) -> void:
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
 		Lobby.close_connection()
+		rpc("clear_game")
 		rpc("set_rounds_played", 0)
 		rpc("reset_client")
 		server_reset.emit()
@@ -248,6 +252,7 @@ func _on_game_covered() -> void:
 		MenuHandler.rpc("change_menu", "multiplayer_win_menu")
 
 	elif state == STATE.AWATING_RETURN_TO_LOBBY && multiplayer.is_server():
+		rpc("clear_game")
 		rpc("reset_client")
 		rpc("set_rounds_played", 0)
 		server_reset.emit()
@@ -259,7 +264,7 @@ func _on_game_covered() -> void:
 		rpc("set_difficulty", get_difficulty())
 		rpc("reset_client")
 		server_reset.emit()
-		spawn_game()
+		rpc("spawn_game")
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_all_menus")
 		MenuHandler.rpc("show_game")
@@ -291,6 +296,7 @@ func restart_game() -> void:
 	set_state(STATE.AWAITING_RESTART)
 	MenuHandler.rpc("show_blackout")
 
+@rpc("authority","call_local","reliable")
 func spawn_game() -> void:
 	spawn_level.emit()
 	set_state(STATE.PREGAME)
@@ -303,12 +309,21 @@ func return_to_lobby() -> void:
 	set_state(STATE.AWATING_RETURN_TO_LOBBY)
 	MenuHandler.rpc("show_blackout")
 
+@rpc("authority","call_local","reliable")
+func clear_game() -> void:
+	clear_entities.emit()
+
+@rpc("authority","call_local","reliable")
 func prepare_game() -> void:
-	MenuHandler.rpc("show_blackout")
-	rpc("set_rounds_played", 0)
-	match_scores.clear()
-	sync_match_scores()
-	next_round()
+	clear_game()
+	prespawn_entities.emit()
+	
+	if multiplayer.is_server():
+		MenuHandler.rpc("show_blackout")
+		rpc("set_rounds_played", 0)
+		match_scores.clear()
+		sync_match_scores()
+		next_round()
 
 @rpc("any_peer","call_local","reliable")
 func start_game() -> void:
@@ -382,4 +397,27 @@ func quit_to_main() -> void:
 	set_state(STATE.AWAITING_QUIT_TO_MAIN)
 	MenuHandler.show_blackout()
 
+func _input(event: InputEvent) -> void:
+	if !event.is_pressed():
+		return
+	
+	if event.is_action("pause_game"):
+		if !MenuHandler.is_game_visible():
+			return
+		
+		if GameManager.get_state() == GameManager.STATE.POST_GAME:
+			return
+		
+		if GameManager.is_game_paused() or MenuHandler.is_menu_visible("pause_menu"):
+			GameManager.pause_game(false)
+			MenuHandler.hide_all_menus()
+		else:
+			GameManager.pause_game(true)
+			MenuHandler.change_menu("pause_menu")
+
+	if event.is_action("fullscreen_toggle"):
+		var mode := DisplayServer.window_get_mode()
+		var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
+		DataManager.save_video_setting("fullscreen", is_window)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
 #endregion
