@@ -44,9 +44,9 @@ var difficulty_settings :Dictionary = {
 		"enemy_spawn_rate": 0.70,
 		"collectable_spawn_rate": 0.7,
 	},difficulty.NORMAL : {
-		"camera_speed" : 1,
-		"enemy_spawn_rate": 0.85,
-		"collectable_spawn_rate": 1.0,
+		"camera_speed" : 0.1, #default 1
+		"enemy_spawn_rate": 1, #default 0.85
+		"collectable_spawn_rate": 0, #default 1.0
 	},difficulty.HARD : {
 		"camera_speed" : 1.1,
 		"enemy_spawn_rate": 1.0,

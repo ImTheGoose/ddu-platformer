@@ -62,7 +62,7 @@ height = 28.0
 
 [node name="FallingPlatformEntity" type="Node2D" unique_id=22592096]
 script = ExtResource("1_j7ywd")
-entity_type = 5
+entity_type = 12
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="FallingPlatform" type="RigidBody2D" parent="." unique_id=2143142840]

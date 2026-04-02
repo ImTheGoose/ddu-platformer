@@ -9,20 +9,14 @@ class_name MovementComponent
 
 @export_category("Movement Config")
 @export var speed :int = 100
+@export_range(-8,8,1.0) var edge_offset = 0.0
 @export_range(0,5, 0.1) var seconds_waiting_at_target :float = 2.0
 var seconds_waited :float = 0.0
 
-signal movement_state_changed
-var state :MovementState = MovementState.WAITING:
-	set(value):
-		if state != value:
-			state = value
-			movement_state_changed.emit()
 
-enum MovementState {
-	WAITING,
-	MOVING,
-}
+signal target_reached
+
+var movement_blocked :bool = false
 
 func _ready() -> void:
 	if not path_detection_component:
@@ -32,47 +26,66 @@ func _ready() -> void:
 	if not entity_root:
 		process_mode = Node.PROCESS_MODE_DISABLED
 		return
-	
-	entity_root.entity_reset.connect(_on_entity_reset)
 
 func _process(delta: float) -> void:
-	if health_component:
-		if health_component.is_dead():
-			return
-	
-	if not path_detection_component.is_valid_path():
+	if not is_able_to_move():
 		return
 	
-	var target :Node2D = path_detection_component.get_target()
-	var gpos :Vector2 = target.global_position
-	var distance :float = entity_root.global_position.distance_to(gpos)
-	
-	if distance < 1:
-		if seconds_waited < seconds_waiting_at_target:
-			state = MovementState.WAITING
-			seconds_waited += delta
-			return
-		else:
+	if is_at_target():
+		if seconds_waited == 0.0:
+			target_reached.emit()
+		seconds_waited += delta
+		if seconds_waited > seconds_waiting_at_target:
 			seconds_waited = 0.0
 			path_detection_component.swap_target()
-
-	state = MovementState.MOVING
 	
+	var target :Node2D = path_detection_component.get_target()
+	var offset :Vector2 = entity_root.global_scale * path_detection_component.get_direction() * edge_offset
+	var gpos :Vector2 = target.global_position + offset
+
 	_move_towards_position(delta, gpos)
 	
 func _move_towards_position(delta: float, gpos: Vector2) -> void:
 	var dir :Vector2 = entity_root.global_position.direction_to(gpos)
 	entity_root.global_position += dir * speed * delta
 
-func _on_entity_reset() -> void:
-	seconds_waited = 0
-	return
+func is_at_target() -> bool:
+	var target :Node2D = path_detection_component.get_target()
+	if not target:
+		return false
+	
+	var offset :Vector2 = entity_root.global_scale * path_detection_component.get_direction() * edge_offset
+	var gpos :Vector2 = target.global_position + offset
+	var distance :float = entity_root.global_position.distance_to(gpos)
+	
+	if distance < 1:
+		return true
+		
+	return false
 
-func stop_moving() -> void:
-	return
+func is_able_to_move() -> bool:
+	if health_component.is_dead():
+		return false
+	
+	if not path_detection_component.is_valid_path():
+		return false
+	
+	if movement_blocked:
+		return false
+	
+	return true
 
-func start_moving() -> void:
-	return
+func is_moving() -> bool:
+	if not is_able_to_move():
+		return false
+	
+	if is_at_target():
+		return false
+	
+	return true
 
-func is_waiting() -> bool:
-	return state == MovementState.WAITING
+func block_movement() -> void:
+	movement_blocked = true
+
+func resume_movement() -> void:
+	movement_blocked = false

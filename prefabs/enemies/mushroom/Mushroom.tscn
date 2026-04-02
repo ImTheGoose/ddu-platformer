@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cotlp2mae8vp7"]
 
-[ext_resource type="Script" uid="uid://brmbno0bah8v4" path="res://prefabs/Entity.gd" id="1_rft3r"]
+[ext_resource type="Script" uid="uid://bhxdi46is6o2x" path="res://prefabs/enemies/mushroom/mushroom.gd" id="1_fiqdt"]
 [ext_resource type="SpriteFrames" uid="uid://f1m6kqgyba88" path="res://prefabs/enemies/mushroom/mushroom_frames.tres" id="2_4l0vp"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_1rpio"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="4_f8aov"]
@@ -12,13 +12,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8aov"]
 size = Vector2(18, 18)
 
-[node name="Mushroom" type="Node2D" unique_id=920916629]
+[node name="Mushroom" type="Node2D" unique_id=920916629 node_paths=PackedStringArray("health_component", "movement_component", "path_detection_component", "sprite_component")]
 z_index = 10
-script = ExtResource("1_rft3r")
+script = ExtResource("1_fiqdt")
+health_component = NodePath("HealthComponent")
+movement_component = NodePath("MovementComponent")
+path_detection_component = NodePath("PathDetectionComponent")
+sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 1
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
-[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=668066771 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component", "movement_component")]
+[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=668066771 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_4l0vp")
 animation = &"Idle"
@@ -26,7 +30,6 @@ script = ExtResource("3_1rpio")
 entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 path_detection_component = NodePath("../PathDetectionComponent")
-movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1978801922 node_paths=PackedStringArray("entity_node")]

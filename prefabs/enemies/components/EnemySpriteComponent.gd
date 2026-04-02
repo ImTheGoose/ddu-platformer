@@ -5,7 +5,8 @@ class_name EnemySpriteComponent
 @export var entity_node :Entity
 @export var health_component :HealthComponent
 @export var path_detection_component :PathDetectionComponent
-@export var movement_component :MovementComponent
+@export var flip_x_offset :bool = false
+var unflipped_x_offset :float = position.x
 var target_rotation :float = 0.0
 var velocity :Vector2 = Vector2.ZERO
 var origin_pos :Vector2 = position
@@ -17,28 +18,19 @@ func _ready() -> void:
 	if path_detection_component:
 		path_detection_component.direction_changed.connect(_on_direction_changed)
 	
-	if movement_component:
-		movement_component.movement_state_changed.connect(_on_movement_changed)
-		pass
-	
+	unflipped_x_offset = offset.x
 	origin_pos = position
 	if entity_node:
 		entity_node.entity_reset.connect(_on_entity_reset)
 
-func _on_movement_changed() -> void:
-	if health_component:
-		if health_component.is_dead():
-			return
-
-	if movement_component.is_waiting():
-		play("Idle")
-	else:
-		play("Moving")
-
 func _on_direction_changed(new_dir: Vector2) -> void:
 	if new_dir.x > 0:
+		if flip_x_offset:
+			offset.x = -unflipped_x_offset
 		flip_h = true
 	else:
+		if flip_x_offset:
+			offset.x = unflipped_x_offset
 		flip_h = false
 
 func _on_death() -> void:
@@ -47,7 +39,6 @@ func _on_death() -> void:
 	velocity = Vector2(randf_range(-150, 150), randf_range(-100, -600))
 
 func _on_entity_reset() -> void:
-	play("Idle")
 	target_rotation = 0.0
 	velocity = Vector2.ZERO
 	position = origin_pos

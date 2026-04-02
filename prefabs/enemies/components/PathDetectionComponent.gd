@@ -91,9 +91,12 @@ func swap_target() -> void:
 
 func get_direction() -> Vector2:
 	if is_valid_path():
-		return global_position.direction_to(taget_point.global_position)
+		if taget_point == point_positive:
+			return _get_axis_direction()
+		else:
+			return Vector2(-1, -1) * _get_axis_direction()
 	elif point_negative != null:
-		return global_position.direction_to(point_negative.global_position)
+		return Vector2(-1, -1) * _get_axis_direction()
 	else:
 		return _get_axis_direction()
 

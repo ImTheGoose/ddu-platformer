@@ -18,6 +18,14 @@ func _ready() -> void:
 	
 	body_entered.connect(_on_body_entered)
 
+func disable_hitbox() -> void:
+	monitorable = false
+	monitoring = false
+
+func enable_hitbox() -> void:
+	monitorable = true
+	monitoring = true
+
 func _on_entity_reset() -> void:
 	killed_peer_id = -1
 

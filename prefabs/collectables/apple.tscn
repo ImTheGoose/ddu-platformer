@@ -186,7 +186,7 @@ texture_filter = 1
 collision_layer = 2
 collision_mask = 10
 script = ExtResource("1_t0ghb")
-entity_type = 8
+entity_type = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=148195076]
 shape = SubResource("CircleShape2D_fbuy2")
