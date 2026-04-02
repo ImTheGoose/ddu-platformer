@@ -53,27 +53,57 @@ func _get_axis_direction() -> Vector2:
 	return Vector2.ZERO
 
 func _search_for_points() -> void:
+	
 	var positive_dir :Vector2 = _get_axis_direction()
-	var positive_collider :Object = _get_ray_collission(positive_dir)
-	if positive_collider is PathfindingPoint:
+	var positive_collider :PathfindingPoint = _get_ray_collission(positive_dir)
+	if positive_collider:
 		point_positive = positive_collider
 	
-	var negative_collider :Object = _get_ray_collission(-positive_dir)
-	if negative_collider is PathfindingPoint:
+	var cached_point :PathfindingPoint = null
+	
+	if _is_collission_inside():
+		cached_point = _get_ray_collission(positive_dir, false)
+	
+	var negative_collider :PathfindingPoint = _get_ray_collission(-positive_dir)
+	if negative_collider:
 		point_negative = negative_collider
 	
+	if _is_collission_inside():
+		var cached_neg_point :PathfindingPoint = _get_ray_collission(-positive_dir, false)
+		var gpos :Vector2 = entity_node.global_position
+		if cached_point && cached_neg_point:
+			if gpos.distance_to(cached_point.global_position) < gpos.distance_to(cached_neg_point.global_position):
+				point_positive = cached_point
+			else:
+				point_negative = cached_neg_point
+		elif cached_point:
+			point_positive = cached_point
+		elif cached_neg_point:
+			point_negative = cached_neg_point
+	
 	if is_valid_path():
-		taget_point = point_positive
 		valid_path_detected.emit()
+		
+		if entity_node.enabled_modifiers.has(Entity.EntityModifiers.INITIAL_DIRECTION_NEGATIVE):
+			taget_point = point_negative
+		else:
+			taget_point = point_positive
 	
 	direction_changed.emit(get_direction())
 	
 	return
 
-func _get_ray_collission(dir: Vector2) -> Object:
+func _is_collission_inside() -> bool:
+	return get_collision_point() == global_position
+
+func _get_ray_collission(dir: Vector2, inside_hit: bool = true) -> PathfindingPoint:
+	hit_from_inside = inside_hit
 	target_position = dir * 1000
 	force_raycast_update()
-	return get_collider()
+	
+	if get_collider() is PathfindingPoint:
+		return get_collider()
+	return null
 
 #region Helper Functions
 

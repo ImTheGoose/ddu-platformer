@@ -21,6 +21,9 @@ var seconds_since_clear :float = 0
 	SpawnType.ENEMY_BIRD : preload("uid://c011nvwhwv1ii"),
 	SpawnType.ENEMY_GHOST : preload("uid://bihwcphf4kctd"),
 	SpawnType.ENEMY_ROCKS_BIG : preload("uid://do5gbabi2agsb"),
+	SpawnType.ENEMY_ROCKS_MEDIUM : preload("uid://72kyayuiloib"),
+	SpawnType.ENEMY_ROCKS_SMALL : preload("uid://b14td6vruqott"),
+	SpawnType.ENEMY_FAT_BIRD : preload("uid://bbtr8h0akbyoy"),
 	SpawnType.TRAP_SPIKE : preload("uid://dwyc1xb3bavyv"),
 	SpawnType.TRAP_FIRE_PLATE: preload("uid://cocuafbfox40i"),
 	SpawnType.TRAP_FALLING_PLATFORM: preload("uid://cc8s1kq0yww6p"),
@@ -65,25 +68,25 @@ func _on_client_reset() -> void:
 			child.disable()
 			add_node_to_unused(child)
 
-func _spawn_local_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
+func _spawn_local_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int]) -> void:
 	if !entity_prefabs.has(spawn_type):
 		printerr("No entity prefab for entity with type : %s" % spawn_type)
 	
 	if unused_entities.has(spawn_type) && gpos != Vector2(-1, -1):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.enable(gpos, rotation)
+			node.enable(gpos, modifiers)
 			return
 	
-	var e :Node2D = entity_prefabs[spawn_type].instantiate()
+	var e :Entity = entity_prefabs[spawn_type].instantiate()
 	local_spawn_node.add_child(e)
-	e.global_position = gpos
-	e.rotation_degrees = rotation
 	
 	if gpos == Vector2(-1, -1):
 		if e is Entity:
 			e.disable()
 			add_node_to_unused(e)
+	else:
+		e.enable(gpos, modifiers)
 	
 	add_node_to_spawned(e)
 
@@ -107,15 +110,15 @@ func _on_server_reset() -> void:
 	for child in map_gen_node.get_children():
 		child.queue_free()
 
-func _on_spawn_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
+func _on_spawn_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int] = []) -> void:
 	if is_local(spawn_type):
-		_spawn_local_entity(gpos, spawn_type, rotation)
+		_spawn_local_entity(gpos, spawn_type, modifiers)
 		return
 	
 	if multiplayer.is_server():
-		_spawn_online_entity(gpos, spawn_type, rotation)
+		_spawn_online_entity(gpos, spawn_type, modifiers)
 
-func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
+func _spawn_online_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int]) -> void:
 	var spawn_rate :float = get_spawnrate(spawn_type)
 	var rand_float :float = randf()
 	if rand_float > spawn_rate:
@@ -124,16 +127,17 @@ func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0)
 	if unused_entities.has(spawn_type) && gpos != Vector2(-1, -1):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.rpc("enable", gpos, rotation)
+			node.rpc("enable", gpos, modifiers)
 			return
 	
-	var node :Node = spawn([gpos, spawn_type, rotation, randf(), randf()])
+	var node :Node = spawn([gpos, spawn_type])
 	
-	if gpos == Vector2(-1, -1):
-		if node is Entity:
-			node.disable()
+	if node is Entity:
+		if gpos == Vector2(-1, -1):
+			node.rpc("disable")
 			add_node_to_unused(node)
-	
+		else:
+			node.rpc("enable", gpos, modifiers)
 	add_node_to_spawned(node)
 
 func _online_spawner_function(data: Array) -> Node:
@@ -141,16 +145,7 @@ func _online_spawner_function(data: Array) -> Node:
 		printerr("No entity prefab for entity with type : %s" % data[1])
 		return entity_prefabs[0].instantiate()
 	
-	var e :Node2D = entity_prefabs[data[1]].instantiate()
-	
-	e.tree_entered.connect(
-		func() -> void:
-			e.global_position = data[0]
-			e.rotation_degrees = data[2]
-			
-			if e is PathfindingEnemy:
-				e.random_floats.append_array([data[3], data[4]])
-			)
+	var e :Entity = entity_prefabs[data[1]].instantiate()
 	
 	return e
 

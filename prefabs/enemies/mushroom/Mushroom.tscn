@@ -22,21 +22,6 @@ sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 1
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
-[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=668066771 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
-position = Vector2(0, -8)
-sprite_frames = ExtResource("2_4l0vp")
-animation = &"Idle"
-script = ExtResource("3_1rpio")
-entity_node = NodePath("..")
-health_component = NodePath("../HealthComponent")
-path_detection_component = NodePath("../PathDetectionComponent")
-metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
-
-[node name="HealthComponent" type="Node" parent="." unique_id=1978801922 node_paths=PackedStringArray("entity_node")]
-script = ExtResource("4_f8aov")
-entity_node = NodePath("..")
-metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
-
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
 collision_layer = 2
 collision_mask = 10
@@ -52,6 +37,21 @@ metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_f8aov")
 debug_color = Color(0.9098039, 0.29803923, 0.06666667, 0.41960785)
+
+[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=668066771 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("2_4l0vp")
+animation = &"Idle"
+script = ExtResource("3_1rpio")
+entity_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+path_detection_component = NodePath("../PathDetectionComponent")
+metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1978801922 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("4_f8aov")
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 
 [node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=907221168 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("7_f8aov")

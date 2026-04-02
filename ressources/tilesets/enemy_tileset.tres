@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c011nvwhwv1ii" path="res://prefabs/enemies/bird/Bird.tscn" id="5_55lxm"]
 [ext_resource type="PackedScene" uid="uid://bihwcphf4kctd" path="res://prefabs/enemies/ghost/Ghost.tscn" id="6_rg5j0"]
 [ext_resource type="PackedScene" uid="uid://do5gbabi2agsb" path="res://prefabs/enemies/rock_big/Rock_Big.tscn" id="7_p1tn0"]
+[ext_resource type="PackedScene" uid="uid://bbtr8h0akbyoy" path="res://prefabs/enemies/fat_bird/Fat_Bird.tscn" id="8_f278o"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wrtas"]
 resource_name = "Enemies"
@@ -17,6 +18,7 @@ scenes/5/scene = ExtResource("4_g4pij")
 scenes/6/scene = ExtResource("5_55lxm")
 scenes/7/scene = ExtResource("6_rg5j0")
 scenes/8/scene = ExtResource("7_p1tn0")
+scenes/9/scene = ExtResource("8_f278o")
 
 [resource]
 sources/0 = SubResource("TileSetScenesCollectionSource_wrtas")

@@ -42,7 +42,7 @@ func _on_body_entered(body: Node2D) -> void:
 		var feet_gpos :Vector2 = body.get_feet_node().global_position
 		var dir :Vector2 = gpos.direction_to(feet_gpos)
 		print("Dir: %s" % dir)
-		if dir.y < 0 or body.velocity.y > kill_veloctiy_treshold:
+		if dir.y < 0 or body.velocity.y > kill_veloctiy_treshold or health_component.is_immune():
 			health_component.rpc("die")
 			body.knockback(Vector2(0, -1), 1000, true)
 		else:

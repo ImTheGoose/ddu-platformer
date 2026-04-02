@@ -30,16 +30,6 @@ edge_offset = -3.0
 seconds_waiting_at_target = 0.2
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
-[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1093400066 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
-position = Vector2(0, -6)
-sprite_frames = ExtResource("4_iicmi")
-animation = &"Moving"
-script = ExtResource("5_pptc2")
-entity_node = NodePath("..")
-health_component = NodePath("../HealthComponent")
-path_detection_component = NodePath("../PathDetectionComponent")
-metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
-
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=393339940 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
 collision_layer = 4
 collision_mask = 12
@@ -51,9 +41,19 @@ entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1105444755]
-position = Vector2(-0.5, -4.5)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_4nn18")
 debug_color = Color(0.82193947, 0.40174487, 7.70092e-07, 0.41960785)
+
+[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1093400066 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("4_iicmi")
+animation = &"Moving"
+script = ExtResource("5_pptc2")
+entity_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+path_detection_component = NodePath("../PathDetectionComponent")
+metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=893078161 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("6_hnhmm")

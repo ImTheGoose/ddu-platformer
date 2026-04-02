@@ -10,10 +10,10 @@ const PREFIX :String = "[MapRoot] "
 @export var collectable_tiles :TileMapLayer
 @export var guide_tiles :TileMapLayer
 
-const trap_tile_id_rotations :Dictionary[int, float] = {
-	2 : 180.0,
-	3 : 90.0,
-	4 : -90.0,
+const trap_tile_id_modifiers :Dictionary[int, Array] = {
+	2 : [Entity.EntityModifiers.ROTATE_180],
+	3 : [Entity.EntityModifiers.ROTATE_90],
+	4 : [Entity.EntityModifiers.ROTATE_270],
 }
 
 const trap_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
@@ -35,6 +35,7 @@ const enemy_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
 	6 : EntitySpawner.SpawnType.ENEMY_BIRD,
 	7 : EntitySpawner.SpawnType.ENEMY_GHOST,
 	8 : EntitySpawner.SpawnType.ENEMY_ROCKS_BIG,
+	9 : EntitySpawner.SpawnType.ENEMY_FAT_BIRD,
 }
 
 const collectable_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
@@ -67,7 +68,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	if trap_tiles:
-		_spawn_tiles_from_types(trap_tiles, trap_tile_id_types, trap_tile_id_rotations)
+		_spawn_tiles_from_types(trap_tiles, trap_tile_id_types, trap_tile_id_modifiers)
 	
 	if enemy_tiles:
 		_spawn_tiles_from_types(enemy_tiles, enemy_tile_id_types)
@@ -76,12 +77,13 @@ func _ready() -> void:
 		_spawn_tiles_from_types(collectable_tiles, collectable_tile_id_types)
 
 
-func _spawn_tiles_from_types(tilemap: TileMapLayer, tile_id_collection: Dictionary[int, EntitySpawner.SpawnType], tile_rotation_collection :Dictionary[int, float] = {}) -> void:
+func _spawn_tiles_from_types(tilemap: TileMapLayer, tile_id_collection: Dictionary[int, EntitySpawner.SpawnType], tile_modifier_collection :Dictionary[int, Array] = {}) -> void:
 	for id: int in tile_id_collection.keys():
 		var tiles :Array[Vector2i] = tilemap.get_used_cells_by_id(-1, Vector2i(-1,-1), id)
 		for tile:Vector2i in tiles:
 			var pos :Vector2 = tilemap.map_to_local(tile)
 			var gpos :Vector2 = tilemap.to_global(pos)
-			var rot :float = tile_rotation_collection.get(id, 0.0)
-			GameManager.spawn_entity.emit(gpos, tile_id_collection[id], rot)
+			var arr :Array[int] = []
+			arr.assign(tile_modifier_collection.get(id, []))
+			GameManager.spawn_entity.emit(gpos, tile_id_collection[id], arr)
 	return

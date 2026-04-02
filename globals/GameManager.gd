@@ -9,7 +9,7 @@ signal prespawn_entities
 signal spawn_level
 signal player_death(peer_id: int)
 signal game_settings_changed()
-signal spawn_entity(global_position: Vector2, spawn_type: int, rotation: float)
+signal spawn_entity(global_position: Vector2, spawn_type: int, modifiers: Entity.EntityModifiers)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
 var game_paused :bool = false

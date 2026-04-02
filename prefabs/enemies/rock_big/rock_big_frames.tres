@@ -125,6 +125,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wb71p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb71p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb71p")
 }],
 "loop": false,
 "name": &"Hit",

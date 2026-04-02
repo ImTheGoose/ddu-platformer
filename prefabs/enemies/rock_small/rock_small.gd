@@ -6,13 +6,6 @@ extends Entity
 @export var path_detection_component :PathDetectionComponent
 @export var sprite_component :EnemySpriteComponent
 
-func _ready() -> void:
-	sprite_component.animation_finished.connect(_on_animation_finished)
-
-func _on_animation_finished() -> void:
-	if sprite_component.animation == "Hit":
-		visible = false
-
 func _process(delta: float) -> void:
 	if health_component:
 		if health_component.is_dead():

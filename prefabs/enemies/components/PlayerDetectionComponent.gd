@@ -9,12 +9,10 @@ signal player_detected
 @export var detection_range :int = 1000
 
 func _ready() -> void:
-	if not path_detection_component:
-		process_mode = Node.PROCESS_MODE_DISABLED
-		return
-		
-	path_detection_component.direction_changed.connect(_on_direction_changed)
-	_on_direction_changed(path_detection_component.get_direction())
+	if path_detection_component:
+		path_detection_component.direction_changed.connect(_on_direction_changed)
+		_on_direction_changed(path_detection_component.get_direction())
+	_on_direction_changed(target_position.normalized())
 
 func _process(delta: float) -> void:
 	if is_detecting_player():
