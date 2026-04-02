@@ -20,6 +20,7 @@ var seconds_since_clear :float = 0
 	SpawnType.ENEMY_PLANT: preload("uid://c1mt2bnj7pmli"),
 	SpawnType.ENEMY_BIRD : preload("uid://c011nvwhwv1ii"),
 	SpawnType.ENEMY_GHOST : preload("uid://bihwcphf4kctd"),
+	SpawnType.ENEMY_ROCKS_BIG : preload("uid://do5gbabi2agsb"),
 	SpawnType.TRAP_SPIKE : preload("uid://dwyc1xb3bavyv"),
 	SpawnType.TRAP_FIRE_PLATE: preload("uid://cocuafbfox40i"),
 	SpawnType.TRAP_FALLING_PLATFORM: preload("uid://cc8s1kq0yww6p"),

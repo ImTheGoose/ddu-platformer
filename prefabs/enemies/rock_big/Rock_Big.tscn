@@ -1,7 +1,84 @@
 [gd_scene format=3 uid="uid://do5gbabi2agsb"]
 
-[ext_resource type="Script" uid="uid://brmbno0bah8v4" path="res://prefabs/Entity.gd" id="1_12kbg"]
+[ext_resource type="Script" uid="uid://c6tnyu176t8sk" path="res://prefabs/enemies/rock_big/rock_big.gd" id="1_fim2q"]
+[ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="2_54pcy"]
+[ext_resource type="SpriteFrames" uid="uid://hwllhcfkyyj7" path="res://prefabs/enemies/rock_big/rock_big_frames.tres" id="3_fim2q"]
+[ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="4_ei2c2"]
+[ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="5_yhhnt"]
+[ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="6_dx1i4"]
+[ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="7_5m813"]
+[ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_4rm02"]
+[ext_resource type="Script" uid="uid://ck12efevamnkb" path="res://prefabs/enemies/components/EntitySpawnerComponent.gd" id="9_fim2q"]
 
-[node name="RockBig" type="Node2D" unique_id=379329347]
-script = ExtResource("1_12kbg")
+[sub_resource type="CircleShape2D" id="CircleShape2D_54pcy"]
+radius = 16.0
+
+[node name="RockBig" type="Node2D" unique_id=379329347 node_paths=PackedStringArray("health_component", "movement_component", "path_detection_component", "sprite_component")]
+script = ExtResource("1_fim2q")
+health_component = NodePath("HealthComponent")
+movement_component = NodePath("MovementComponent")
+path_detection_component = NodePath("PathDetectionComponent")
+sprite_component = NodePath("EnemySpriteComponent")
+entity_type = 7
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=386238058 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("2_54pcy")
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
+
+[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1333216415 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("3_fim2q")
+animation = &"Idle"
+frame = 5
+frame_progress = 0.67328525
+script = ExtResource("4_ei2c2")
+entity_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+path_detection_component = NodePath("../PathDetectionComponent")
+metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="HitBoxComponent" type="Area2D" parent="." unique_id=654769224 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
+collision_layer = 4
+collision_mask = 12
+script = ExtResource("5_yhhnt")
+knockback_origin_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+kill_height_node = NodePath("../HeadPosition")
+kill_veloctiy_treshold = 100.0
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1756160775]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_54pcy")
+
+[node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=941408710 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("6_dx1i4")
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://ddrne3nd443y"
+
+[node name="MovementComponent" type="Node" parent="." unique_id=923064961 node_paths=PackedStringArray("entity_root", "path_detection_component", "health_component")]
+script = ExtResource("7_5m813")
+entity_root = NodePath("..")
+path_detection_component = NodePath("../PathDetectionComponent")
+health_component = NodePath("../HealthComponent")
+edge_offset = -4.0
+metadata/_custom_type_script = "uid://bu6nkb8bdte24"
+
+[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]
+script = ExtResource("8_4rm02")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
+
+[node name="HeadPosition" type="Node2D" parent="." unique_id=910548544]
+position = Vector2(0, -19)
+
+[node name="EntitySpawnerComponent" type="Node2D" parent="." unique_id=544914628 node_paths=PackedStringArray("path_detection_component", "movement_component", "health_component")]
+script = ExtResource("9_fim2q")
+path_detection_component = NodePath("../PathDetectionComponent")
+movement_component = NodePath("../MovementComponent")
+health_component = NodePath("../HealthComponent")
+entity_type = 1
+metadata/_custom_type_script = "uid://ck12efevamnkb"
