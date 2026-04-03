@@ -29,7 +29,7 @@ tile_set = ExtResource("2_oirlt")
 navigation_enabled = false
 
 [node name="TrapTiles" type="TileMapLayer" parent="." unique_id=678907754]
-tile_map_data = PackedByteArray("AAABABIAAAAAAAAAAwABABMAAAAAAAAAAwARABMAAAAAAAAAAwAXABMAAAAAAAAAAQAYABMAAAAAAAAAAQAfABIAAAAAAAAABAAfABMAAAAAAAAABAA=")
+tile_map_data = PackedByteArray("AAABABMAAAAAAAAAAVARABMAAAAAAAAAAVAXABMAAAAAAAAAAQAYABMAAAAAAAAAAQAfABIAAAAAAAAAAWAfABMAAAAAAAAAAWABABIAAAAAAAAAAVA=")
 tile_set = ExtResource("4_f2hcb")
 navigation_enabled = false
 
