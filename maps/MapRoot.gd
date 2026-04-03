@@ -82,7 +82,7 @@ func _spawn_tiles_from_types(tilemap: TileMapLayer, tile_id_collection: Dictiona
 					col_name = "Traps"
 				enemy_tile_id_types:
 					col_name = "Enemies"
-				collectable_tiles:
+				collectable_tile_id_types:
 					col_name = "Collectables"
 			
 			printerr("Tile missing for Id: %s with raw_id: %s for tilemap: %s in map: %s" % [id, raw_id, col_name, scene_file_path.get_file()])

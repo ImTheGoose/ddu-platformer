@@ -3,6 +3,7 @@ extends Node2D
 class_name Entity 
 
 @export var entity_type :EntitySpawner.SpawnType
+@export var block_rotation :bool = false
 @onready var initial_process_mode :ProcessMode = process_mode
 var is_disabled :bool = false
 signal enabled
@@ -40,15 +41,16 @@ func enable(new_gpos: Vector2 = Vector2.ZERO, modifiers: Array[int] = []) -> voi
 	process_mode = initial_process_mode
 	if new_gpos != Vector2.ZERO:
 		global_position = new_gpos
+		
+	global_rotation_degrees = 0
+	if not block_rotation:
+		if modifiers.has(EntityModifiers.ROTATE_90):
+			global_rotation_degrees = 90
+		elif modifiers.has(EntityModifiers.ROTATE_180):
+			global_rotation_degrees = 180
+		elif modifiers.has(EntityModifiers.ROTATE_270):
+			global_rotation_degrees = 270
 	
-	for mod in modifiers:
-		match mod:
-			EntityModifiers.ROTATE_90:
-				rotation_degrees = 90
-			EntityModifiers.ROTATE_180:
-				rotation_degrees = 180
-			EntityModifiers.ROTATE_270:
-				rotation_degrees = 270
 	reset()
 	enabled.emit()
 	_on_enable()

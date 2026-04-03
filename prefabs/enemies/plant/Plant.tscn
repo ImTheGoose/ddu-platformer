@@ -67,7 +67,7 @@ seconds_between_attacks = 1.4
 metadata/_custom_type_script = "uid://xj5blqpn2j3h"
 
 [node name="PlayerDetectionComponent" type="RayCast2D" parent="." unique_id=457834454 node_paths=PackedStringArray("health_component", "path_detection_component")]
-position = Vector2(0, -12)
+position = Vector2(0, -15)
 collision_mask = 9
 script = ExtResource("7_op3u3")
 health_component = NodePath("../HealthComponent")
