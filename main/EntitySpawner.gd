@@ -15,6 +15,7 @@ var seconds_since_clear :float = 0
 ]
 @export var entity_prefabs :Dictionary[SpawnType, PackedScene] = {
 	SpawnType.ENEMY_PATHFINDING_POINT : preload("uid://dvuu00ynhqps7"),
+	SpawnType.TRAP_PATHFINDING_POINT : preload("uid://b5jetmt6yygr8"),
 	SpawnType.ENEMY_MUSHROOM: preload("uid://cotlp2mae8vp7"),
 	SpawnType.ENEMY_TRUNK: preload("uid://daa708mlqvqkn"),
 	SpawnType.ENEMY_PLANT: preload("uid://c1mt2bnj7pmli"),
@@ -29,6 +30,7 @@ var seconds_since_clear :float = 0
 	SpawnType.TRAP_FALLING_PLATFORM: preload("uid://cc8s1kq0yww6p"),
 	SpawnType.TRAP_TRAMPOLINE: preload("uid://cq0dyrn14nfnf"),
 	SpawnType.TRAP_POWER_TRAMPOLINE: preload("uid://bh3pdvlpgdufq"),
+	SpawnType.TRAP_FANS: preload("uid://clkaqpool53jm"),
 	SpawnType.COLLECTABLE_APPLE: preload("uid://btu7xbmgfkame"),
 }
 
@@ -48,6 +50,10 @@ enum SpawnType {
 	TRAP_FALLING_PLATFORM,
 	TRAP_TRAMPOLINE,
 	TRAP_POWER_TRAMPOLINE,
+	TRAP_FANS,
+	TRAP_MOVING_BOX,
+	TRAP_SPIKED_MOVING_BOX,
+	TRAP_PATHFINDING_POINT,
 	COLLECTABLE_APPLE,
 }
 var spawned_entities :Dictionary[SpawnType, Array] = {}

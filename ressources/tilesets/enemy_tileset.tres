@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://2v32sa53s5e0"]
 
-[ext_resource type="PackedScene" uid="uid://dvuu00ynhqps7" path="res://prefabs/enemies/PathfindingPoint.tscn" id="1_gac34"]
+[ext_resource type="PackedScene" uid="uid://dvuu00ynhqps7" path="res://prefabs/enemies/EnemyPathfindingPoint.tscn" id="1_gac34"]
 [ext_resource type="PackedScene" uid="uid://cotlp2mae8vp7" path="res://prefabs/enemies/mushroom/Mushroom.tscn" id="2_f278o"]
 [ext_resource type="PackedScene" uid="uid://daa708mlqvqkn" path="res://prefabs/enemies/trunk/Trunk.tscn" id="3_f278o"]
 [ext_resource type="PackedScene" uid="uid://c1mt2bnj7pmli" path="res://prefabs/enemies/plant/Plant.tscn" id="4_g4pij"]

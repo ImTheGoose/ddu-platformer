@@ -78,7 +78,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6n1a3"]
-size = Vector2(22, 10)
+size = Vector2(21, 12)
 
 [node name="Trampoline" type="Area2D" unique_id=634334736]
 collision_mask = 9
@@ -89,12 +89,11 @@ entity_type = 14
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=805781376]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_7fog4")
-animation = &"Jump"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342050869]
-visible = false
-position = Vector2(-0.5, 3)
+position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_6n1a3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=878024416]

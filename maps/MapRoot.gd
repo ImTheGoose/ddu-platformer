@@ -16,6 +16,8 @@ const trap_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
 	6 : EntitySpawner.SpawnType.TRAP_FALLING_PLATFORM,
 	7 : EntitySpawner.SpawnType.TRAP_TRAMPOLINE,
 	8 : EntitySpawner.SpawnType.TRAP_POWER_TRAMPOLINE,
+	9 : EntitySpawner.SpawnType.TRAP_FANS,
+	10 : EntitySpawner.SpawnType.TRAP_PATHFINDING_POINT,
 }
 
 const enemy_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {

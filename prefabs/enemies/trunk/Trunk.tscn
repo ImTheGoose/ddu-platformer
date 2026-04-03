@@ -88,7 +88,7 @@ path_detection_component = NodePath("../PathDetectionComponent")
 metadata/_custom_type_script = "uid://b2vo6nwgt4fvn"
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="." unique_id=1271751318]
-position = Vector2(-18, -2)
+position = Vector2(-18, -4)
 script = ExtResource("10_83xog")
 projectile = ExtResource("11_047al")
 metadata/_custom_type_script = "uid://cphqtnahepgoh"

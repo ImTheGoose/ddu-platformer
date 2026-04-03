@@ -25,6 +25,7 @@ enum Axis {
 
 func _ready() -> void:
 	collide_with_areas = true
+	set_collision_mask_value(5, true)
 	
 	if entity_node:
 		entity_node.entity_reset.connect(_on_entity_reset)
@@ -36,12 +37,15 @@ func _process(delta: float) -> void:
 		else:
 			seconds_since_points_check = 0.0
 			_search_for_points()
+	else:
+		enabled = false
 
 func _on_entity_reset() -> void:
 	point_positive = null
 	point_negative = null
 	taget_point = null
 	seconds_since_points_check = 0.0
+	enabled = true
 	return
 
 func _get_axis_direction() -> Vector2:

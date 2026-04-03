@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://clkaqpool53jm"]
+
+[ext_resource type="Script" uid="uid://dfcq6m1m584lo" path="res://prefabs/traps/fan/fan.gd" id="1_gclda"]
+[ext_resource type="SpriteFrames" uid="uid://b2r28kr17tgqr" path="res://prefabs/traps/fan/fan_frames.tres" id="2_gclda"]
+[ext_resource type="Script" uid="uid://b7v47xq5y5enq" path="res://prefabs/traps/TrapPathDetectionComponent.gd" id="3_lh4mi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh4mi"]
+size = Vector2(20, 74)
+
+[node name="Fan" type="Node2D" unique_id=6863559 node_paths=PackedStringArray("path_detection_component")]
+script = ExtResource("1_gclda")
+path_detection_component = NodePath("TrapPathDetectionComponent")
+area_velocity = 700.0
+entity_type = 15
+metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2140512996]
+unique_name_in_owner = true
+position = Vector2(-1, 4)
+sprite_frames = ExtResource("2_gclda")
+animation = &"On"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1950760294]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 8
+gravity_point_unit_distance = 113.642
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+gravity = 967.224
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=96442652]
+unique_name_in_owner = true
+position = Vector2(-0.5, -37)
+shape = SubResource("RectangleShape2D_lh4mi")
+debug_color = Color(0.65885, 0.32132068, 1, 0.41960785)
+
+[node name="TrapPathDetectionComponent" type="RayCast2D" parent="." unique_id=1633930375 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("3_lh4mi")
+entity_node = NodePath("..")
+use_terrain_as_point = true
+max_distance_to_terrain = 128.0
+metadata/_custom_type_script = "uid://b7v47xq5y5enq"

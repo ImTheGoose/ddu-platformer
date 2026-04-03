@@ -1,10 +1,12 @@
 [gd_resource type="TileSet" format=3 uid="uid://m5ulicf6wm0o"]
 
 [ext_resource type="PackedScene" uid="uid://dwyc1xb3bavyv" path="res://prefabs/traps/spikes/Spikes.tscn" id="1_o7k5h"]
+[ext_resource type="PackedScene" uid="uid://b5jetmt6yygr8" path="res://prefabs/traps/TrapPathfindingPoint.tscn" id="2_1ix3v"]
 [ext_resource type="PackedScene" uid="uid://cocuafbfox40i" path="res://prefabs/traps/fire_plate/FirePlate.tscn" id="2_vhhxk"]
 [ext_resource type="PackedScene" uid="uid://cq0dyrn14nfnf" path="res://prefabs/traps/trampolines/Trampoline.tscn" id="4_nrwcp"]
 [ext_resource type="PackedScene" uid="uid://bh3pdvlpgdufq" path="res://prefabs/traps/trampolines/Power_Trampoline.tscn" id="5_1ix3v"]
 [ext_resource type="PackedScene" uid="uid://ei14acu5wr3o" path="res://prefabs/traps/falling_platform/PlaceholderFallingPlatform.tscn" id="6_7i324"]
+[ext_resource type="PackedScene" uid="uid://clkaqpool53jm" path="res://prefabs/traps/fan/fan.tscn" id="6_nrwcp"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_83s44"]
 resource_name = "Traps"
@@ -16,6 +18,8 @@ scenes/5/scene = ExtResource("2_vhhxk")
 scenes/6/scene = ExtResource("6_7i324")
 scenes/7/scene = ExtResource("4_nrwcp")
 scenes/8/scene = ExtResource("5_1ix3v")
+scenes/9/scene = ExtResource("6_nrwcp")
+scenes/10/scene = ExtResource("2_1ix3v")
 
 [resource]
 sources/0 = SubResource("TileSetScenesCollectionSource_83s44")
