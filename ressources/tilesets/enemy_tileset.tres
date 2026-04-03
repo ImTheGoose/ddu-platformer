@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" format=3 uid="uid://2v32sa53s5e0"]
 
-[ext_resource type="PackedScene" uid="uid://dvuu00ynhqps7" path="res://prefabs/old_enemies/PathfindingPoint.tscn" id="1_gac34"]
-[ext_resource type="PackedScene" uid="uid://iuq2rd7sy2yw" path="res://prefabs/old_enemies/mushroom/MushroomSpawnPlaceholder.tscn" id="2_77kvj"]
-[ext_resource type="PackedScene" uid="uid://5ocddr3le6j7" path="res://prefabs/old_enemies/trunk/TrunkSpawnPlaceholder.tscn" id="3_g4pij"]
+[ext_resource type="PackedScene" uid="uid://dvuu00ynhqps7" path="res://prefabs/enemies/PathfindingPoint.tscn" id="1_gac34"]
+[ext_resource type="PackedScene" uid="uid://cotlp2mae8vp7" path="res://prefabs/enemies/mushroom/Mushroom.tscn" id="2_f278o"]
+[ext_resource type="PackedScene" uid="uid://daa708mlqvqkn" path="res://prefabs/enemies/trunk/Trunk.tscn" id="3_f278o"]
 [ext_resource type="PackedScene" uid="uid://c1mt2bnj7pmli" path="res://prefabs/enemies/plant/Plant.tscn" id="4_g4pij"]
 [ext_resource type="PackedScene" uid="uid://c011nvwhwv1ii" path="res://prefabs/enemies/bird/Bird.tscn" id="5_55lxm"]
 [ext_resource type="PackedScene" uid="uid://bihwcphf4kctd" path="res://prefabs/enemies/ghost/Ghost.tscn" id="6_rg5j0"]
@@ -12,8 +12,8 @@
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_wrtas"]
 resource_name = "Enemies"
 scenes/1/scene = ExtResource("1_gac34")
-scenes/2/scene = ExtResource("2_77kvj")
-scenes/4/scene = ExtResource("3_g4pij")
+scenes/2/scene = ExtResource("2_f278o")
+scenes/4/scene = ExtResource("3_f278o")
 scenes/5/scene = ExtResource("4_g4pij")
 scenes/6/scene = ExtResource("5_55lxm")
 scenes/7/scene = ExtResource("6_rg5j0")

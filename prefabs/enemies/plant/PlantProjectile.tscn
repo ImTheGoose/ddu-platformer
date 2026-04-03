@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bfdotq0wp28bp"]
 
-[ext_resource type="Script" uid="uid://yakm4ys46ld4" path="res://prefabs/old_enemies/trunk/Projectile.gd" id="1_w0010"]
+[ext_resource type="Script" uid="uid://yakm4ys46ld4" path="res://prefabs/enemies/Projectile.gd" id="1_w0010"]
 [ext_resource type="Texture2D" uid="uid://dssh41a4kt13u" path="res://assets/pixel_adventure_assets/Enemies/Plant/Bullet.png" id="2_tisoo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vcn0"]

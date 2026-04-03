@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="7_f8aov"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="8_fiqdt"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="9_pi7pd"]
-[ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/PointTargetingComponent.gd" id="9_tma4l"]
+[ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_tma4l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8aov"]
 size = Vector2(18, 18)
@@ -59,10 +59,9 @@ script = ExtResource("7_f8aov")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://ddrne3nd443y"
 
-[node name="MovementComponent" type="Node" parent="." unique_id=1332190548 node_paths=PackedStringArray("entity_root", "path_detection_component", "health_component")]
+[node name="MovementComponent" type="Node" parent="." unique_id=1332190548 node_paths=PackedStringArray("entity_root", "health_component")]
 script = ExtResource("8_fiqdt")
 entity_root = NodePath("..")
-path_detection_component = NodePath("../PathDetectionComponent")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
