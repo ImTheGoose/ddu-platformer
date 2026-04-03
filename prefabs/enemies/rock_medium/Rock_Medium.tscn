@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="7_hfx2y"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_jmnr6"]
 [ext_resource type="Script" uid="uid://ck12efevamnkb" path="res://prefabs/enemies/components/EntitySpawnerComponent.gd" id="9_gem11"]
+[ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/PointTargetingComponent.gd" id="10_rx2f2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54pcy"]
 radius = 12.0
@@ -61,9 +62,7 @@ script = ExtResource("7_hfx2y")
 entity_root = NodePath("..")
 path_detection_component = NodePath("../PathDetectionComponent")
 health_component = NodePath("../HealthComponent")
-speed = 110
-edge_offset = -1.0
-seconds_waiting_at_target = 1.6
+speed = 120
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]
@@ -81,3 +80,12 @@ movement_component = NodePath("../MovementComponent")
 health_component = NodePath("../HealthComponent")
 entity_type = 9
 metadata/_custom_type_script = "uid://ck12efevamnkb"
+
+[node name="PointTargetingComponent" type="Node" parent="." unique_id=2114443401 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
+script = ExtResource("10_rx2f2")
+entity_node = NodePath("..")
+path_detection_component = NodePath("../PathDetectionComponent")
+movement_component = NodePath("../MovementComponent")
+edge_offset = -2.0
+seconds_waiting_at_target = 1.6
+metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"

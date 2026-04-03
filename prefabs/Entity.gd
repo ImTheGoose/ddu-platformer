@@ -36,7 +36,6 @@ func _on_disable() -> void:
 func enable(new_gpos: Vector2 = Vector2.ZERO, modifiers: Array[int] = []) -> void:
 	enabled_modifiers = modifiers
 	is_disabled = false
-	reset()
 	visible = true
 	process_mode = initial_process_mode
 	if new_gpos != Vector2.ZERO:
@@ -50,7 +49,8 @@ func enable(new_gpos: Vector2 = Vector2.ZERO, modifiers: Array[int] = []) -> voi
 				rotation_degrees = 180
 			EntityModifiers.ROTATE_270:
 				rotation_degrees = 270
-	
+	reset()
+	enabled.emit()
 	_on_enable()
 	return
 

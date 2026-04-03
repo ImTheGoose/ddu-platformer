@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cphqtnahepgoh" path="res://prefabs/enemies/components/ProjectileSpawnerComponent.gd" id="10_83xog"]
 [ext_resource type="PackedScene" uid="uid://dxnatyslk4ik6" path="res://prefabs/enemies/trunk/TrunkProjectile.tscn" id="11_047al"]
 [ext_resource type="Script" uid="uid://xj5blqpn2j3h" path="res://prefabs/enemies/components/AttackComponent.gd" id="12_047al"]
+[ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/PointTargetingComponent.gd" id="13_w8q7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts0j5"]
 size = Vector2(19, 24)
@@ -99,3 +100,10 @@ player_detecting_component = NodePath("../PlayerDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 sprite_component = NodePath("../EnemySpriteComponent")
 metadata/_custom_type_script = "uid://xj5blqpn2j3h"
+
+[node name="PointTargetingComponent" type="Node" parent="." unique_id=1784755187 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
+script = ExtResource("13_w8q7n")
+entity_node = NodePath("..")
+path_detection_component = NodePath("../PathDetectionComponent")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"

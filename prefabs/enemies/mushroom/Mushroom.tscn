@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="7_f8aov"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="8_fiqdt"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="9_pi7pd"]
+[ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/PointTargetingComponent.gd" id="9_tma4l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8aov"]
 size = Vector2(18, 18)
@@ -72,3 +73,10 @@ metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=869701399]
 position = Vector2(0, -8)
+
+[node name="PointTargetingComponent" type="Node" parent="." unique_id=353468636 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
+script = ExtResource("9_tma4l")
+entity_node = NodePath("..")
+path_detection_component = NodePath("../PathDetectionComponent")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"

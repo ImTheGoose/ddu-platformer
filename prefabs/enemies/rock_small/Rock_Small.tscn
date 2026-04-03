@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="6_edyse"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="7_l6cjm"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_tj6be"]
+[ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/PointTargetingComponent.gd" id="9_l2phw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54pcy"]
 radius = 8.0
@@ -59,9 +60,9 @@ script = ExtResource("7_l6cjm")
 entity_root = NodePath("..")
 path_detection_component = NodePath("../PathDetectionComponent")
 health_component = NodePath("../HealthComponent")
-speed = 160
-edge_offset = 2.0
-seconds_waiting_at_target = 1.2
+speed = 180
+accelleration = 0.3
+deaccelleration = 0.3
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]
@@ -71,3 +72,12 @@ metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=910548544]
 position = Vector2(0, -2)
+
+[node name="PointTargetingComponent" type="Node" parent="." unique_id=49850681 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
+script = ExtResource("9_l2phw")
+entity_node = NodePath("..")
+path_detection_component = NodePath("../PathDetectionComponent")
+movement_component = NodePath("../MovementComponent")
+edge_offset = 1.0
+seconds_waiting_at_target = 1.2
+metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"

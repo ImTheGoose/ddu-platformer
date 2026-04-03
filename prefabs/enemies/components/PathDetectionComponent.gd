@@ -82,12 +82,12 @@ func _search_for_points() -> void:
 			point_negative = cached_neg_point
 	
 	if is_valid_path():
-		valid_path_detected.emit()
-		
 		if entity_node.enabled_modifiers.has(Entity.EntityModifiers.INITIAL_DIRECTION_NEGATIVE):
 			taget_point = point_negative
 		else:
 			taget_point = point_positive
+		
+		valid_path_detected.emit()
 	
 	direction_changed.emit(get_direction())
 	
