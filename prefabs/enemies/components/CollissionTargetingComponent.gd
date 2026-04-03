@@ -8,6 +8,7 @@ class_name CollissionTargetingComponent
 @export var detection_range :int = 1000
 @export_range(1,15,0.1) var fall_speed_multiplier :float = 6.0
 var original_speed :int = 0
+var original_deaccelleration :float = 0.0
 
 @export_category("Movement Config")
 @export_range(0,5, 0.1) var seconds_waiting_at_target :float = 2.0
@@ -20,6 +21,7 @@ func _ready() -> void:
 	if movement_component:
 		movement_component.target_reached.connect(_on_target_reached)
 		original_speed = movement_component.speed
+		original_deaccelleration = movement_component.deaccelleration
 	
 	if entity_node:
 		entity_node.entity_reset.connect(_on_entity_reset)
@@ -54,11 +56,13 @@ func _update_movement_target() -> void:
 	if not moving_towards_collission:
 		movement_component.set_target(origin_position)
 		movement_component.speed = original_speed
+		movement_component.deaccelleration = movement_component.accelleration
 		return
 	
 	if not is_colliding():
 		return
 	
+	movement_component.deaccelleration = original_deaccelleration
 	movement_component.speed = original_speed * fall_speed_multiplier
 	var gpos :Vector2 = get_collision_point()
 	movement_component.set_target(gpos)

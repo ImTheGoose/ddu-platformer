@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="9_fcof4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_foyj3"]
-size = Vector2(22, 27)
+size = Vector2(22, 28)
 
 [node name="FatBird" type="Node2D" unique_id=278432552 node_paths=PackedStringArray("health_component", "sprite_component", "player_detection_component", "movement_component", "collission_targeting_component")]
 script = ExtResource("1_foyj3")
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://brmbno0bah8v4"
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=421255713 node_paths=PackedStringArray("entity_node", "health_component")]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("2_jtfo8")
-animation = &"Ground"
+animation = &"Idle"
 script = ExtResource("3_qejqu")
 entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
@@ -45,11 +45,12 @@ script = ExtResource("5_foyj3")
 knockback_origin_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 kill_height_node = NodePath("../HeadPosition")
+kill_veloctiy_treshold = 100.0
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1575995734]
-position = Vector2(0, -8.5)
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_foyj3")
 debug_color = Color(0.9024265, 0.30941275, 0, 0.41960785)
 
