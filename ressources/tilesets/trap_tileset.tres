@@ -13,8 +13,11 @@
 resource_name = "Traps"
 scenes/1/scene = ExtResource("1_o7k5h")
 scenes/2/scene = ExtResource("2_m8xwj")
+scenes/2/display_placeholder = true
 scenes/3/scene = ExtResource("3_qy4mu")
+scenes/3/display_placeholder = true
 scenes/4/scene = ExtResource("4_r04i4")
+scenes/4/display_placeholder = true
 scenes/5/scene = ExtResource("5_mxggr")
 scenes/6/scene = ExtResource("6_7i324")
 scenes/7/scene = ExtResource("7_kpskg")

@@ -7,8 +7,8 @@ signal projectile_spawned
 
 func spawn_projectile(direction: Vector2) -> Node2D:
 	var p: Projectile = projectile.instantiate()
-	p.direction = direction
 	add_sibling(p)
+	p.global_rotation = direction.rotated(global_rotation).angle()
 	
 	# Changes offset based on direction
 	var pos :Vector2 = Vector2(-position.x, 0)
