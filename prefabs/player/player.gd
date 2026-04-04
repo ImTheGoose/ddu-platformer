@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 class_name Player 
 
-@export var jump_strength :int = 1250
-@export var speed_per_second :int = 3000
-@export var max_speed :int = 450
+@export var jump_strength :int = 400
+@export var speed_per_second :int = 1000
+@export var max_speed :int = 150
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
 @export_range(0,100,1.0) var peer_lerp_speed :float = 30
@@ -135,19 +135,19 @@ func _apply_gravity(delta: float, gravity_scale: float = 1) -> void:
 	velocity += get_gravity() * delta * gravity_scale
 
 func _limit_horizontal_velocity(max_vel: int) -> void:
-	if velocity.x > 20:
+	if velocity.x > 5:
 		if velocity.x > max_vel:
 			velocity.x = max_vel
-	elif velocity.x < -20:
+	elif velocity.x < -5:
 		if velocity.x < -max_vel:
 			velocity.x = -max_vel
 	else:
 		velocity.x = 0
 
 func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void:
-	if velocity.x < -20:
+	if velocity.x < -5:
 		velocity.x += amount_per_second * delta
-	elif velocity.x > 20:
+	elif velocity.x > 5:
 		velocity.x -= amount_per_second * delta
 	else:
 		velocity.x = 0

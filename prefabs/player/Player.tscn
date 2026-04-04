@@ -43,7 +43,7 @@ collision_mask = 15
 safe_margin = 2.5
 script = ExtResource("1_jfcio")
 peer_lerp_speed = 20.0
-snap_distance = 90.0
+snap_distance = 30.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("player_controller")]
 modulate = Color(0.33518517, 0.59265137, 0.8908548, 1)

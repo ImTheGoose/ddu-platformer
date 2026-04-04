@@ -85,8 +85,10 @@ animation = &"On"
 autoplay = "On"
 
 [node name="PlayerDetection" type="Area2D" parent="FallingPlatform" unique_id=1860361649]
+unique_name_in_owner = true
 scale = Vector2(3, 3)
 collision_mask = 9
+collision_priority = 3.025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallingPlatform/PlayerDetection" unique_id=1188523863]
 position = Vector2(-3.967197e-14, -7)
@@ -94,4 +96,3 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qbmik")
 
 [connection signal="entity_reset" from="." to="FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
-[connection signal="body_entered" from="FallingPlatform/PlayerDetection" to="FallingPlatform" method="_on_player_detection_body_entered"]

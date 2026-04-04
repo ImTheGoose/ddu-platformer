@@ -1,7 +1,7 @@
 extends Camera2D
 
-@export var speed :int = 90
-@export var safe_distance :int = 400
+@export var speed :int = 30
+@export var safe_distance :int = 100
 @onready var origin_position :Vector2 = position
 
 var nudge_camera :bool = true

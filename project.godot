@@ -165,10 +165,11 @@ buffering/agile_event_flushing=true
 2d_physics/layer_4="Players"
 2d_physics/layer_5="Enemy Pathfinding"
 2d_physics/layer_6="Trap Pathfinding"
+2d_physics/layer_7="Big Trap Pathfinding"
 
 [physics]
 
-2d/default_gravity_vector=Vector2(0, 4.5)
+2d/default_gravity_vector=Vector2(0, 1.5)
 
 [rendering]
 

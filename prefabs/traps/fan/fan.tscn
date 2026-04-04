@@ -11,7 +11,7 @@ size = Vector2(20, 74)
 [node name="Fan" type="Node2D" unique_id=6863559 node_paths=PackedStringArray("path_detection_component")]
 script = ExtResource("1_gclda")
 path_detection_component = NodePath("TrapPathDetectionComponent")
-area_velocity = 700.0
+area_velocity = 230.0
 entity_type = 15
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 

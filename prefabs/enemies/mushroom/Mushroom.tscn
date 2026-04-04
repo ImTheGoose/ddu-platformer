@@ -63,6 +63,7 @@ metadata/_custom_type_script = "uid://ddrne3nd443y"
 script = ExtResource("8_fiqdt")
 entity_root = NodePath("..")
 health_component = NodePath("../HealthComponent")
+speed = 33
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="AudioComponent" type="Node" parent="." unique_id=1564607356 node_paths=PackedStringArray("health_component")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://balet5fb7m7s"]
+[gd_scene format=3 uid="uid://balet5fb7m7s"]
 
 [ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_j3seb"]
 
@@ -11,20 +11,20 @@ gradient = SubResource("Gradient_8t6hx")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8t6hx"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(960, 28.635, 0)
+emission_box_extents = Vector3(300, 9, 0)
 angle_min = -49.99999
 angle_max = 65.40001
 direction = Vector3(0, -1, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 85.34
-angular_velocity_min = -19.200016
-angular_velocity_max = 7.6799836
+initial_velocity_min = 19.0
+initial_velocity_max = 40.0
+angular_velocity_min = 5.999984
+angular_velocity_max = 5.999984
 gravity = Vector3(0, 48, 0)
-scale_min = 5.0
-scale_max = 12.0
+scale_min = 1.5999999
+scale_max = 4.0
 color_ramp = SubResource("GradientTexture1D_rq4tw")
 
-[node name="bottom_cloud" type="GPUParticles2D"]
+[node name="bottom_cloud" type="GPUParticles2D" unique_id=1123358041]
 process_mode = 1
 z_index = 11
 amount = 250
