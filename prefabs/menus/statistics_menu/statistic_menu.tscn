@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ydagk3w3a17a"]
 
 [ext_resource type="Script" uid="uid://07w71pvnll6q" path="res://prefabs/menus/statistics_menu/statistic_menu.gd" id="1_88qfe"]
+[ext_resource type="Script" uid="uid://b57r8k3xawmcj" path="res://prefabs/menus/statistics_menu/FoldableTextLabel.gd" id="2_88qfe"]
+[ext_resource type="Script" uid="uid://bnp760uj0ka0y" path="res://prefabs/menus/statistics_menu/StatRichLabel.gd" id="2_jeby3"]
 
 [node name="StatisticMenu" type="VBoxContainer" unique_id=1022312052 node_paths=PackedStringArray("initial_focus", "back_button")]
 anchors_preset = 8
@@ -26,6 +28,12 @@ theme_type_variation = &"HeaderLarge"
 text = "Statistics"
 horizontal_alignment = 1
 
+[node name="StatisticsList" type="VBoxContainer" parent="." unique_id=661438016]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1805799840]
 layout_mode = 2
 
@@ -39,10 +47,223 @@ size_flags_vertical = 0
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="StatisticsList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=661438016]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=658180526]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="time_played" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=950825604]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/time (16x16).png[/img] Time played - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+value_type = 2
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="time_alive" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=82526747]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/heart_red (16x16).png[/img] Time alive - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 1
+value_type = 2
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="time_highscore" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1070272379]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/star (16x16).png[/img] Highscore - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 3
+value_type = 2
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="apple_highscore" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2017577591]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/star_red (16x16).png[/img] Most apples in a round - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 4
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="total_apples" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=295613199]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] Apples collected - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 2
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="foldable_jumps" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1366917880 node_paths=PackedStringArray("child_control")]
+layout_mode = 2
+focus_mode = 2
+bbcode_enabled = true
+text = "Total Jumps - %s"
+fit_content = true
+script = ExtResource("2_88qfe")
+child_control = NodePath("../jumps_container")
+stat_group = 1
+value_type = 3
+metadata/_custom_type_script = "uid://b57r8k3xawmcj"
+
+[node name="jumps_container" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=394175593]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/jumps_container" unique_id=36489610]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/jumps_container/VBoxContainer" unique_id=533014233]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/ground (16x16).png[/img] Ground jumps - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 12
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/jumps_container/VBoxContainer" unique_id=1164157581]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/wall (16x16).png[/img] Wall jumps - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 13
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/jumps_container/VBoxContainer" unique_id=640795417]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/double_jump (16x16).png[/img] Double jumps - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 14
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/jumps_container/VBoxContainer" unique_id=954683323]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/trampoline (16x16).png[/img] Trampoline jumps - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 15
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/jumps_container/VBoxContainer" unique_id=2080053330]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/dual_enemy (16x16).png[/img] Enemy jumps - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 16
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="foldable_kills" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=739881737 node_paths=PackedStringArray("child_control")]
+layout_mode = 2
+focus_mode = 2
+bbcode_enabled = true
+text = "Total Kills - %s"
+fit_content = true
+script = ExtResource("2_88qfe")
+child_control = NodePath("../kills_container")
+stat_group = 2
+value_type = 3
+metadata/_custom_type_script = "uid://b57r8k3xawmcj"
+
+[node name="kills_container" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1746382585]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container" unique_id=453618327]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=335325694]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms killed - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 10
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=1095923474]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks killed - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 11
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="foldable_deaths" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1286291476 node_paths=PackedStringArray("child_control")]
+layout_mode = 2
+focus_mode = 2
+bbcode_enabled = true
+text = "Total Deaths - %s"
+fit_content = true
+script = ExtResource("2_88qfe")
+child_control = NodePath("../death_container/VBoxContainer")
+value_type = 3
+metadata/_custom_type_script = "uid://b57r8k3xawmcj"
+
+[node name="death_container" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=34805257]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container" unique_id=684090609]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=2104306857]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms deaths - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 5
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=984926104]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks deaths - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 6
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1087446217]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Traps/Spikes/Icon (16x16).png[/img] Spike deaths - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 7
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1524161121]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Traps/Fire/Icon (16x16).png[/img] Fire deaths - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 8
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
+[node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=218111666]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Other/Dust Particle.png[/img] Cloud deaths - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 9
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
 [node name="back" type="Button" parent="." unique_id=1387869707]
 layout_mode = 2

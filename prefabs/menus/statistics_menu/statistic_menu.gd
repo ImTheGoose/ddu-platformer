@@ -145,6 +145,7 @@ func _on_show() -> void:
 	_refresh_stat_list()
 
 func _refresh_stat_list() -> void:
+	return
 	_clear_children()
 	for entry: Dictionary in statistics_entries:
 		_instantiate_entry(entry)
