@@ -1,5 +1,5 @@
 extends RigidBody2D
-
+@onready var player_detection: Area2D = %PlayerDetection
 @onready var origin_pos :Vector2 = position
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var col :CollisionShape2D = $CollisionShape2D
@@ -10,6 +10,14 @@ var touched :bool = false
 
 
 func _process(delta: float) -> void:
+	if not touched:
+		for body in player_detection.get_overlapping_bodies():
+			if body is Player:
+				if body.is_on_floor():
+					if body.is_multiplayer_authority():
+						rpc("show_touched")
+
+	
 	if fall_time > seconds_before_reappear + seconds_before_fall:
 		_initiate_platform_reappear()
 	
@@ -38,12 +46,6 @@ func _initiate_platform_fall() -> void:
 @rpc("any_peer","call_local","reliable")
 func show_touched() -> void:
 	touched = true
-
-func _on_player_detection_body_entered(body: Node2D) -> void:
-	if body is Player:
-		if body.is_on_floor():
-			if body.is_multiplayer_authority():
-				rpc("show_touched")
 
 
 func _on_falling_platform_entity_entity_reset() -> void:

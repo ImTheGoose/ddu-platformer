@@ -74,8 +74,9 @@ func set_target(gpos: Vector2) -> void:
 	target_position = gpos
 
 func is_able_to_move() -> bool:
-	if health_component.is_dead():
-		return false
+	if health_component:
+		if health_component.is_dead():
+			return false
 	
 	if movement_blocked:
 		return false

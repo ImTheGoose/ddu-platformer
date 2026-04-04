@@ -32,6 +32,8 @@ var seconds_since_clear :float = 0
 	SpawnType.TRAP_POWER_TRAMPOLINE: preload("uid://bh3pdvlpgdufq"),
 	SpawnType.TRAP_FANS: preload("uid://clkaqpool53jm"),
 	SpawnType.COLLECTABLE_APPLE: preload("uid://btu7xbmgfkame"),
+	SpawnType.BIG_ENEMY_PATHFINDING_POINT : preload("uid://cguvqe11b0yep"),
+	SpawnType.ENEMY_MOVING_HEAD : preload("uid://coh68rs8aoqfu"),
 }
 
 enum SpawnType {
@@ -51,10 +53,11 @@ enum SpawnType {
 	TRAP_TRAMPOLINE,
 	TRAP_POWER_TRAMPOLINE,
 	TRAP_FANS,
-	TRAP_MOVING_BOX,
-	TRAP_SPIKED_MOVING_BOX,
+	ENEMY_MOVING_HEAD,
+	ENEMY_SPIKED_MOVING_HEAD,
 	TRAP_PATHFINDING_POINT,
 	COLLECTABLE_APPLE,
+	BIG_ENEMY_PATHFINDING_POINT,
 }
 var spawned_entities :Dictionary[SpawnType, Array] = {}
 var unused_entities :Dictionary[SpawnType, Array] = {}
