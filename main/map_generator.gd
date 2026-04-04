@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var top_safe_distance :int = 900
+@export var top_safe_distance :int = 300
 
 @export var initial_height :int = 360
 @export var multiplayer_spawner :MultiplayerSpawner

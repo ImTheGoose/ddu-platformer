@@ -8,6 +8,7 @@ class_name PathDetectionComponent
 signal direction_changed(new_dir: Vector2)
 signal valid_path_detected
 
+var forced_point_direction :int = 0
 var point_negative :PathfindingPoint
 var point_positive :PathfindingPoint
 var taget_point :PathfindingPoint:
@@ -41,6 +42,8 @@ func _process(delta: float) -> void:
 		enabled = false
 
 func _on_entity_reset() -> void:
+	
+	forced_point_direction = 0
 	point_positive = null
 	point_negative = null
 	taget_point = null
@@ -91,11 +94,18 @@ func _search_for_points() -> void:
 		else:
 			taget_point = point_positive
 		
+		if forced_point_direction == -1:
+			taget_point = point_negative
+		elif forced_point_direction == 1:
+			taget_point = point_positive
+		
 		valid_path_detected.emit()
 	
 	direction_changed.emit(get_direction())
 	
 	return
+
+
 
 func _is_collission_inside() -> bool:
 	return get_collision_point() == global_position
@@ -122,6 +132,15 @@ func swap_target() -> void:
 		taget_point = point_negative
 	else:
 		taget_point = point_positive
+
+@rpc("authority", "call_local", "reliable")
+func set_target(to_positive_point: bool) -> void:
+	if to_positive_point:
+		forced_point_direction = 1
+		taget_point = point_positive
+	else:
+		forced_point_direction = -1
+		taget_point = point_negative
 
 func get_direction() -> Vector2:
 	if is_valid_path():

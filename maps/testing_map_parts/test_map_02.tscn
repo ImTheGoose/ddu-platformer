@@ -31,13 +31,13 @@ navigation_enabled = false
 
 [node name="TrapTiles" type="TileMapLayer" parent="." unique_id=878189664]
 position = Vector2(0, -16)
-tile_map_data = PackedByteArray("AAACABgAAAAAAAAACAAOABgAAAAAAAAABwAOABUAAAAAAAAABwAOABEAAAAAAAAABwAlAAQAAAAAAAAAB2AlAAgAAAAAAAAACGAVAA0AAAAAAAAACQAWABEAAAAAAAAACVAbAAkAAAAAAAAACgAbAAEAAAAAAAAACTAFABgAAAAAAAAABgAHABUAAAAAAAAABgAEABMAAAAAAAAABgA=")
+tile_map_data = PackedByteArray("AAACABgAAAAAAAAACAAOABgAAAAAAAAABwAOABUAAAAAAAAABwAOABEAAAAAAAAABwAlAAQAAAAAAAAAB2AlAAgAAAAAAAAACGAVAA0AAAAAAAAACQAbAAkAAAAAAAAACgAbAAEAAAAAAAAACTAFABgAAAAAAAAABgAHABUAAAAAAAAABgAEABMAAAAAAAAABgASAA0AAAAAAAAABmASAAsAAAAAAAAABmAgAAgAAAAAAAAABmAMAAwAAAAAAAAABlA=")
 tile_set = ExtResource("4_xwbxi")
 navigation_enabled = false
 
 [node name="EnemyTiles" type="TileMapLayer" parent="." unique_id=800936386]
 position = Vector2(0, -16)
-tile_map_data = PackedByteArray("AAAYABgAAAAAAAAAAgAbABgAAAAAAAAAAgAeABgAAAAAAAAAAgAWABgAAAAAAAAAAQAhABgAAAAAAAAAAQAJAAwAAAAAAAAABgAGAAwAAAAAAAAABgALAAwAAAAAAAAAAQAFAAUAAAAAAAAABwACAAUAAAAAAAAAAQAJAAUAAAAAAAAAAQANAAIAAAAAAAAACQATAAIAAAAAAAAACQADAAwAAAAAAAAAAQAQAA8AAAAAAAAACgATAA8AAAAAAAAACgATABgAAAAAAAAACgAQABgAAAAAAAAACgAQABQAAAAAAAAADAATABMAAAAAAAAACwA=")
+tile_map_data = PackedByteArray("AAAYABgAAAAAAAAAAgAbABgAAAAAAAAAAgAeABgAAAAAAAAAAgAWABgAAAAAAAAAAQAhABgAAAAAAAAAAQAJAAwAAAAAAAAABgAGAAwAAAAAAAAABgALAAwAAAAAAAAAAQAFAAUAAAAAAAAABwACAAUAAAAAAAAAAQAJAAUAAAAAAAAAAQANAAIAAAAAAAAACQATAAIAAAAAAAAACQADAAwAAAAAAAAAAQAQAA8AAAAAAAAACgATAA8AAAAAAAAACgATABgAAAAAAAAACgAQABgAAAAAAAAACgAQABQAAAAAAAAADAATABMAAAAAAAAACwAcABEAAAAAAAAACAAaAAkAAAAAAAAABQAfABEAAAAAAAAAAQAZABEAAAAAAAAAAQA=")
 tile_set = ExtResource("5_heyx2")
 navigation_enabled = false
 
@@ -47,11 +47,15 @@ tile_set = ExtResource("6_v1pdw")
 navigation_enabled = false
 
 [connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@308372" to="TrapTiles/@Area2D@308372" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@308373" to="TrapTiles/@Area2D@308373" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@308374" to="TrapTiles/@Area2D@308374" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@308375" to="TrapTiles/@Area2D@308375" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@308376" to="TrapTiles/@Area2D@308376" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@46985" to="TrapTiles/@Area2D@46985" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@46986" to="TrapTiles/@Area2D@46986" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@46987" to="TrapTiles/@Area2D@46987" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@46988" to="TrapTiles/@Area2D@46988" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@46989" to="TrapTiles/@Area2D@46989" method="_on_body_entered"]
 [connection signal="entity_reset" from="TrapTiles/FallingPlatformEntity" to="TrapTiles/FallingPlatformEntity/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
-[connection signal="entity_reset" from="TrapTiles/@Node2D@308392" to="TrapTiles/@Node2D@308392/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
-[connection signal="entity_reset" from="TrapTiles/@Node2D@308393" to="TrapTiles/@Node2D@308393/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
+[connection signal="entity_reset" from="TrapTiles/@Node2D@46991" to="TrapTiles/@Node2D@46991/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
+[connection signal="entity_reset" from="TrapTiles/@Node2D@46992" to="TrapTiles/@Node2D@46992/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
+[connection signal="entity_reset" from="TrapTiles/@Node2D@46993" to="TrapTiles/@Node2D@46993/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
+[connection signal="entity_reset" from="TrapTiles/@Node2D@46994" to="TrapTiles/@Node2D@46994/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
+[connection signal="entity_reset" from="TrapTiles/@Node2D@46995" to="TrapTiles/@Node2D@46995/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
+[connection signal="entity_reset" from="TrapTiles/@Node2D@46996" to="TrapTiles/@Node2D@46996/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]

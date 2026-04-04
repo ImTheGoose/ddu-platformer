@@ -18,6 +18,7 @@ enum EntityModifiers {
 	ROTATE_270,
 	INITIAL_DIRECTION_POSITIVE,
 	INITIAL_DIRECTION_NEGATIVE,
+	BLOCK_RANDOMISE,
 }
 
 @rpc("authority","call_local","reliable")

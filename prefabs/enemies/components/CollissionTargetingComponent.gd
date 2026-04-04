@@ -37,12 +37,11 @@ func _process(delta: float) -> void:
 		return
 	else:
 		movement_component.resume_movement()
-	
+
 	if player_detection_component.is_detecting_player():
-		_update_movement_target()
-		moving_towards_collission = true
-		movement_component.start_moving()
-	
+		if not moving_towards_collission:
+			rpc("_start_falling")
+		return
 	if movement_component.is_at_target():
 		seconds_waited += delta
 	
@@ -51,6 +50,13 @@ func _process(delta: float) -> void:
 		seconds_waited = 0.0
 		_update_movement_target()
 		movement_component.start_moving()
+
+@rpc("any_peer", "call_local", "reliable")
+func _start_falling() -> void:
+	moving_towards_collission = true
+	_update_movement_target()
+	movement_component.start_moving()
+	return
 
 func _update_movement_target() -> void:
 	if not moving_towards_collission:

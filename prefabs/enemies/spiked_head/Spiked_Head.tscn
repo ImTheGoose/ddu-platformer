@@ -25,7 +25,7 @@ entity_root = NodePath("..")
 speed = 200
 accelleration = 0.8
 deaccelleration = 1e-05
-target_reached_distance = 0.05
+target_reached_distance = 0.1
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="P2PTargetingComponent" type="RayCast2D" parent="." unique_id=2060190266 node_paths=PackedStringArray("entity_node", "movement_component")]

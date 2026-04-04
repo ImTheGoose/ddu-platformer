@@ -2,7 +2,7 @@ extends MultiplayerSpawner
 
 class_name EntitySpawner 
 
-@export var bottom_safe_distance :int = 1600
+@export var bottom_safe_distance :int = 300
 @export var seconds_between_clear :int = 5
 var seconds_since_clear :float = 0
 @export var map_gen_node :Node2D
@@ -11,7 +11,12 @@ var seconds_since_clear :float = 0
 
 @export var local_types :Array[SpawnType] = [
 	SpawnType.ENEMY_PATHFINDING_POINT,
+	SpawnType.TRAP_PATHFINDING_POINT,
+	SpawnType.BIG_ENEMY_PATHFINDING_POINT,
+	SpawnType.ENEMY_MOVING_HEAD,
+	SpawnType.ENEMY_SPIKED_MOVING_HEAD,
 	SpawnType.TRAP_SPIKE,
+	SpawnType.TRAP_FANS,
 ]
 @export var entity_prefabs :Dictionary[SpawnType, PackedScene] = {
 	SpawnType.ENEMY_PATHFINDING_POINT : preload("uid://dvuu00ynhqps7"),
@@ -190,10 +195,15 @@ func _clear_unused_multiplayer_children() -> void:
 	var cleared :int = 0
 	var disabled :int = 0
 	
-	var children :Array[Node] = spawn_node.get_children()
-	children.append_array(map_gen_node.get_children())
+	for child: Node in map_gen_node.get_children():
+		if child is not Node2D or child is Player:
+			continue
+		
+		if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance * 3:
+			cleared += 1
+			child.queue_free()
 	
-	for child: Node in children:
+	for child: Node in spawn_node.get_children():
 		if child is not Node2D or child is Player:
 			continue
 		
@@ -210,8 +220,8 @@ func _clear_unused_multiplayer_children() -> void:
 			else:
 				cleared += 1
 				child.queue_free()
-	#print("Cleared a total of %s objects" % cleared)
-	#print("Disabled %s networked objects" % disabled)
+	print("Cleared a total of %s objects" % cleared)
+	print("Disabled %s networked objects" % disabled)
 
 func _clear_unused_local_children() -> void:
 	var lowest_player :Player = get_lowest_player()
@@ -231,7 +241,7 @@ func _clear_unused_local_children() -> void:
 				child.disable()
 				add_node_to_unused(child)
 	
-	#print("Disabled %s local objects" % disabled)
+	print("Disabled %s local objects" % disabled)
 
 func get_lowest_player() -> Player:
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")

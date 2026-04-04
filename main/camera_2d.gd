@@ -24,11 +24,10 @@ func _process(delta: float) -> void:
 		return
 	
 	nudge_camera = GameManager.get_gamemode() == GameManager.Gamemode.GAMEMODE_STANDARD
-	
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
 	if players.size() > 0 && nudge_camera:
 		for p in players:
-			if !p or p is not CharacterBody2D:
+			if !p or p is not Player:
 				continue
 			if p.global_position.y < global_position.y + safe_distance:
 				var target_y :float = p.global_position.y - safe_distance

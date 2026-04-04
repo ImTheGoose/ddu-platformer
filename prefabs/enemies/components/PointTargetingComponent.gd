@@ -19,7 +19,8 @@ func _ready() -> void:
 		entity_node.entity_reset.connect(_on_entity_reset)
 	
 	if path_detection_component:
-		path_detection_component.valid_path_detected.connect(_update_movement_target)
+		path_detection_component.valid_path_detected.connect(_on_valid_path_detected)
+		path_detection_component.direction_changed.connect(_on_direction_changed)
 	
 	_update_movement_target()
 	movement_component.start_moving()
@@ -39,6 +40,38 @@ func _process(delta: float) -> void:
 		path_detection_component.swap_target()
 		_update_movement_target()
 		movement_component.start_moving()
+
+func _on_valid_path_detected() -> void:
+	_randomise_path()
+
+func _randomise_path() -> void:
+	if !multiplayer.is_server():
+		return
+	
+	if !path_detection_component.is_valid_path():
+		return
+	
+	if entity_node.enabled_modifiers.has(Entity.EntityModifiers.BLOCK_RANDOMISE):
+		return
+	
+	var gpos_posi :Vector2 = path_detection_component.point_positive.global_position
+	var gpos_nega :Vector2 = path_detection_component.point_negative.global_position
+	var gpos :Vector2 = gpos_posi.lerp(gpos_nega, randf())
+	movement_component.rpc("set_position", gpos)
+	
+	var modi :Array[int] = entity_node.enabled_modifiers
+	if modi.has(Entity.EntityModifiers.INITIAL_DIRECTION_POSITIVE) or modi.has(Entity.EntityModifiers.INITIAL_DIRECTION_NEGATIVE):
+		return
+	
+	if randf() > 0.5:
+		path_detection_component.rpc("set_target", true)
+		print("Forced direction positive for %s" % entity_node.name)
+	else:
+		path_detection_component.rpc("set_target", false)
+		print("Forced direction Negative for %s" % entity_node.name)
+
+func _on_direction_changed(new_dir: Vector2) -> void:
+	_update_movement_target()
 
 func _update_movement_target() -> void:
 	var target_node:Node2D = path_detection_component.get_target()

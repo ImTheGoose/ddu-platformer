@@ -207,6 +207,7 @@ spawn_node = NodePath("../entity_container")
 [node name="Camera2D" parent="." unique_id=1311093804 instance=ExtResource("24_hhcpw")]
 
 [node name="moving_background" type="TextureRect" parent="Camera2D" unique_id=621308851]
+process_mode = 3
 z_index = -50
 texture_repeat = 2
 material = SubResource("ShaderMaterial_byxo4")

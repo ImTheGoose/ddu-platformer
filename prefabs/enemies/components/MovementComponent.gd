@@ -87,6 +87,10 @@ func set_target(gpos: Vector2) -> void:
 func get_target_position() -> Vector2:
 	return target_position
 
+@rpc("authority","call_local","reliable")
+func set_position(gpos: Vector2) -> void:
+	entity_root.global_position = gpos
+
 func is_able_to_move() -> bool:
 	if health_component:
 		if health_component.is_dead():

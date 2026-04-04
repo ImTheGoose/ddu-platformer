@@ -34,4 +34,5 @@ func spawn_entities(type: EntitySpawner.SpawnType = entity_type) -> void:
 			spawn_entity(gpos, type, [Entity.EntityModifiers.INITIAL_DIRECTION_POSITIVE])
 
 func spawn_entity(gpos: Vector2, type: EntitySpawner.SpawnType, modifiers: Array[int] = []) -> void:
+	modifiers.append(Entity.EntityModifiers.BLOCK_RANDOMISE)
 	GameManager.spawn_entity.emit(gpos, type, modifiers)
