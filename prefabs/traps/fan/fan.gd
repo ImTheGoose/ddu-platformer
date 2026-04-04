@@ -5,7 +5,8 @@ extends Entity
 @onready var area_2d: Area2D = %Area2D
 @onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 @export var path_detection_component :TrapPathDetectionComponent
-@export_range(-500, 500, 1.0) var area_velocity :float = 100
+@export_range(-500, 500, 1.0) var area_minimum_velocity :float = 100
+@export_range(-500, 500, 1.0) var area_accelleration :float = 5.0
 var default_shape :RectangleShape2D
 
 var default_particle_amount :int = 0
@@ -56,7 +57,9 @@ func _physics_process(delta: float) -> void:
 
 				var velocity_up :float = body.velocity.dot(dir_up)
 
-				if velocity_up < area_velocity:
-					var difference :float = area_velocity - velocity_up
+				if velocity_up < area_minimum_velocity:
+					var difference :float = area_minimum_velocity - velocity_up
 					body.velocity += dir_up * difference
+				
+				body.velocity += dir_up * area_accelleration * delta
 				

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://daa708mlqvqkn" path="res://prefabs/enemies/trunk/Trunk.tscn" id="3_f278o"]
 [ext_resource type="PackedScene" uid="uid://coh68rs8aoqfu" path="res://prefabs/enemies/moving_head/Moving_Head.tscn" id="3_s88g3"]
 [ext_resource type="PackedScene" uid="uid://c1mt2bnj7pmli" path="res://prefabs/enemies/plant/Plant.tscn" id="4_g4pij"]
+[ext_resource type="PackedScene" uid="uid://driakspag286k" path="res://prefabs/enemies/spiked_head/Spiked_Head.tscn" id="4_okn7g"]
 [ext_resource type="PackedScene" uid="uid://c011nvwhwv1ii" path="res://prefabs/enemies/bird/Bird.tscn" id="5_55lxm"]
 [ext_resource type="PackedScene" uid="uid://bihwcphf4kctd" path="res://prefabs/enemies/ghost/Ghost.tscn" id="6_rg5j0"]
 [ext_resource type="PackedScene" uid="uid://do5gbabi2agsb" path="res://prefabs/enemies/rock_big/Rock_Big.tscn" id="7_p1tn0"]
@@ -23,6 +24,7 @@ scenes/8/scene = ExtResource("7_p1tn0")
 scenes/9/scene = ExtResource("8_f278o")
 scenes/10/scene = ExtResource("2_lwe8c")
 scenes/11/scene = ExtResource("3_s88g3")
+scenes/12/scene = ExtResource("4_okn7g")
 
 [resource]
 sources/0 = SubResource("TileSetScenesCollectionSource_wrtas")

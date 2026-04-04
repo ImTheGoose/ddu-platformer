@@ -7,12 +7,16 @@ class_name MovementComponent
 @export var health_component :HealthComponent
 
 @export_category("Movement Config")
+@export var distance_for_event :float = 0.0
+var distance_event_fired :bool = false
 @export var speed :int = 35
 var velocity :float = 0
 @export_exp_easing("inout") var accelleration :float = .5
 @export_exp_easing("attenuation") var deaccelleration :float = .5
+@export var target_reached_distance :float = 1.0
 
-
+signal distance_event
+signal target_changed 
 signal target_reached
 var target_position :Vector2 = Vector2.ZERO
 
@@ -49,6 +53,11 @@ func _process(delta: float) -> void:
 	# Keep velocity within bounds
 	velocity = clamp(velocity, 0, speed)
 	
+	if distance_for_event > entity_root.global_position.distance_to(target_position):
+		if not distance_event_fired:
+			distance_event_fired = true
+			distance_event.emit()
+	
 	if is_at_target():
 		target_reached.emit()
 		return
@@ -62,7 +71,7 @@ func _move_towards_position(delta: float, gpos: Vector2) -> void:
 func is_at_target() -> bool:	
 	var distance :float = entity_root.global_position.distance_to(target_position)
 	
-	if distance < 1:
+	if distance < target_reached_distance:
 		return true
 		
 	return false
@@ -72,6 +81,11 @@ func _on_entity_reset() -> void:
 
 func set_target(gpos: Vector2) -> void:
 	target_position = gpos
+	target_changed.emit()
+	distance_event_fired = false
+
+func get_target_position() -> Vector2:
+	return target_position
 
 func is_able_to_move() -> bool:
 	if health_component:

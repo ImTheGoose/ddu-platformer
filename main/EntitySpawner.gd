@@ -34,6 +34,7 @@ var seconds_since_clear :float = 0
 	SpawnType.COLLECTABLE_APPLE: preload("uid://btu7xbmgfkame"),
 	SpawnType.BIG_ENEMY_PATHFINDING_POINT : preload("uid://cguvqe11b0yep"),
 	SpawnType.ENEMY_MOVING_HEAD : preload("uid://coh68rs8aoqfu"),
+	SpawnType.ENEMY_SPIKED_MOVING_HEAD : preload("uid://driakspag286k"),
 }
 
 enum SpawnType {

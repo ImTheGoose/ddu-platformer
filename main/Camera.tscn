@@ -32,7 +32,7 @@ bus = &"Music"
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 0
-position = Vector2(322, 372)
+position = Vector2(322, 357.83)
 emitting = false
 script = ExtResource("17_8t6hx")
 
@@ -43,7 +43,7 @@ kill_type = 4
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=1055681207]
-position = Vector2(323.4375, 368)
+position = Vector2(320, 382)
 shape = SubResource("RectangleShape2D_3b0ty")
 
 [node name="game_backdrop" type="TileMapLayer" parent="." unique_id=519154735]

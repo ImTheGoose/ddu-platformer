@@ -31,6 +31,7 @@ const enemy_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
 	9 : EntitySpawner.SpawnType.ENEMY_FAT_BIRD,
 	10 : EntitySpawner.SpawnType.BIG_ENEMY_PATHFINDING_POINT,
 	11 : EntitySpawner.SpawnType.ENEMY_MOVING_HEAD,
+	12 : EntitySpawner.SpawnType.ENEMY_SPIKED_MOVING_HEAD,
 }
 
 const collectable_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
