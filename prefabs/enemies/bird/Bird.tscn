@@ -25,8 +25,8 @@ script = ExtResource("4_b1qvx")
 entity_root = NodePath("..")
 health_component = NodePath("../HealthComponent")
 speed = 50
-accelleration = 0.8
-deaccelleration = 0.8
+accelleration = 1.2
+deaccelleration = 1.2
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=1341756393 node_paths=PackedStringArray("entity_node")]
@@ -38,7 +38,7 @@ metadata/_custom_type_script = "uid://ddrne3nd443y"
 script = ExtResource("4_gykmu")
 entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
-offset_amount = 2.0
+offset_amount = 4.0
 metadata/_custom_type_script = "uid://b57ve0vv8rfq2"
 
 [node name="HitBoxComponent" type="Area2D" parent="SinusOffsetComponent" unique_id=190973524 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
