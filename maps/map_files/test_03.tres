@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_f48in")
-map_id = "test_03"
+map_id = "enemy_test_map"
 prefab = ExtResource("1_sgvnc")
 bottom_connection_type = 2
 top_connection_type = 2

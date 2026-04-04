@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="5_w7o6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uc8s0"]
-size = Vector2(28, 5)
+size = Vector2(32, 5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wl3vo"]
 atlas = ExtResource("1_sldf8")
