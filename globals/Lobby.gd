@@ -270,5 +270,6 @@ func close_connection() -> void:
 	GameManager.server_reset.emit()
 	GameManager.client_reset.emit()
 	GameManager.reset_settings_to_default()
+	Steamworks.update_discord_presense()
 
 #endregion

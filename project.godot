@@ -54,6 +54,7 @@ Alerts="*uid://5k1jf2wcmw7"
 Maps="*uid://bi6ay7ka3lyrd"
 Stats="*uid://c56ybmb52mjm8"
 Achivements="*uid://cpnd22fp4a2j2"
+DiscordRPCLoader="*uid://bf4o1ip5ilttb"
 
 [debug]
 
@@ -74,7 +75,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/better_packedscenes_inspector/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg")
+enabled=PackedStringArray("res://addons/better_packedscenes_inspector/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg")
 
 [file_customization]
 
