@@ -7,7 +7,7 @@ class_name MovementComponent
 @export var health_component :HealthComponent
 
 @export_category("Movement Config")
-@export var speed :int = 100
+@export var speed :int = 35
 var velocity :float = 0
 @export_exp_easing("inout") var accelleration :float = .5
 @export_exp_easing("attenuation") var deaccelleration :float = .5

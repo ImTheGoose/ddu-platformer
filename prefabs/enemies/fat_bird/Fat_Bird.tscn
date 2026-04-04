@@ -79,6 +79,6 @@ metadata/_custom_type_script = "uid://dk2s2jlcdkchw"
 script = ExtResource("9_fcof4")
 entity_root = NodePath("..")
 health_component = NodePath("../HealthComponent")
-speed = 130
+speed = 45
 deaccelleration = 7.258272e-05
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"

@@ -5,7 +5,7 @@ class_name CollissionTargetingComponent
 @export var entity_node :Entity
 @export var player_detection_component :PlayerDetectionComponent
 @export var movement_component :MovementComponent
-@export var detection_range :int = 1000
+@export var detection_range :int = 500
 @export_range(1,15,0.1) var fall_speed_multiplier :float = 6.0
 var original_speed :int = 0
 var original_deaccelleration :float = 0.0

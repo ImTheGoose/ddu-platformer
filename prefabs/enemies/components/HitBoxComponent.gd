@@ -44,7 +44,7 @@ func _on_body_entered(body: Node2D) -> void:
 		print("Dir: %s" % dir)
 		if dir.y < 0 or body.velocity.y > kill_veloctiy_treshold or health_component.is_immune():
 			health_component.rpc("die")
-			body.knockback(Vector2(0, -1), 1000, true)
+			body.knockback(Vector2(0, -1), 350, true)
 		else:
 			body.hit(knockback_origin_node.global_position.direction_to(body.global_position))
 			killed_peer_id = body.get_multiplayer_authority()

@@ -6,7 +6,7 @@ signal player_detected
 
 @export var health_component :HealthComponent
 @export var path_detection_component :PathDetectionComponent
-@export var detection_range :int = 1000
+@export var detection_range :int = 500
 
 func _ready() -> void:
 	if path_detection_component:

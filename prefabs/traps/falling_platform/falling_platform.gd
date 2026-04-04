@@ -28,9 +28,9 @@ func _process(delta: float) -> void:
 		_initiate_platform_fall()
 
 func _initiate_platform_reappear() -> void:
+	freeze = true
 	anim.play("On")
 	anim.frame = 0
-	gravity_scale = 0
 	position = origin_pos
 	rotation_degrees = 0
 	col.disabled = false
@@ -39,9 +39,9 @@ func _initiate_platform_reappear() -> void:
 	linear_velocity.y = 0
 	
 func _initiate_platform_fall() -> void:
+	freeze = false
 	anim.pause()
 	col.disabled = true
-	gravity_scale = 1
 
 @rpc("any_peer","call_local","reliable")
 func show_touched() -> void:

@@ -1,6 +1,6 @@
 extends Entity
 
-@export var jump_force :int = 1600
+@export var jump_force :int = 550
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 @onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")

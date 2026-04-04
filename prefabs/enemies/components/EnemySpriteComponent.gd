@@ -36,7 +36,7 @@ func _on_direction_changed(new_dir: Vector2) -> void:
 func _on_death() -> void:
 	play("Hit")
 	target_rotation = randf_range(-35, 35)
-	velocity = Vector2(randf_range(-150, 150), randf_range(-100, -600))
+	velocity = Vector2(randf_range(-50, 50), randf_range(-50, -200))
 
 func _on_entity_reset() -> void:
 	target_rotation = 0.0
@@ -48,6 +48,6 @@ func _process(delta: float) -> void:
 	if target_rotation == 0:
 		return
 
-	velocity.y += 1100 * delta
+	velocity.y += 350 * delta
 	global_position += velocity * delta
 	rotation = lerp_angle(rotation, target_rotation, delta)

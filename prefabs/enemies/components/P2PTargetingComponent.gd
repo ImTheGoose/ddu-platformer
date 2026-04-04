@@ -85,7 +85,7 @@ func get_detected_points() -> Array:
 	return detected_points
 
 func get_point(direction: Vector2) -> PathfindingPoint:
-	target_position = direction * 1000
+	target_position = direction * 500
 	force_raycast_update()
 	if is_colliding():
 		var col :Object = get_collider()

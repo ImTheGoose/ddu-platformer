@@ -41,7 +41,7 @@ debug_color = Color(0.65885, 0.32132068, 1, 0.41960785)
 script = ExtResource("3_lh4mi")
 entity_node = NodePath("..")
 use_terrain_as_point = true
-max_distance_to_terrain = 512.0
+max_distance_to_terrain = 200.0
 metadata/_custom_type_script = "uid://b7v47xq5y5enq"
 
 [node name="GPUParticles2D" parent="." unique_id=928541509 instance=ExtResource("4_cd2da")]

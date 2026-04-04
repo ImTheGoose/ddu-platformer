@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 collision_mask = 64
 collide_with_areas = true
 script = ExtResource("3_2dthm")
-node = NodePath("../AnimatableBody2D")
+node = NodePath("")
 entity_node = NodePath("..")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://b1me8nwobge5x"
@@ -40,10 +40,12 @@ script = ExtResource("5_c6tca")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
-[node name="AnimatableBody2D" type="RigidBody2D" parent="." unique_id=717693758]
+[node name="AnimatableBody2D" type="RigidBody2D" parent="." unique_id=151869227]
 collision_mask = 0
 gravity_scale = 0.0
+lock_rotation = true
 freeze = true
+freeze_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=688367780]
 position = Vector2(8, -8)

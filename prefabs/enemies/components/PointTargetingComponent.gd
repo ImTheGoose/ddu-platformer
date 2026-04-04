@@ -46,7 +46,7 @@ func _update_movement_target() -> void:
 		return
 	
 	var gpos :Vector2 = target_node.global_position
-	var offset :Vector2 = edge_offset * entity_node.global_scale * path_detection_component.get_direction()
+	var offset :Vector2 = edge_offset * path_detection_component.get_direction()
 	movement_component.set_target(gpos + offset)
 
 func _on_entity_reset() -> void:

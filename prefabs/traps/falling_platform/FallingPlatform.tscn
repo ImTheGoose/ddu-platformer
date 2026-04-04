@@ -66,27 +66,23 @@ entity_type = 12
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="FallingPlatform" type="RigidBody2D" parent="." unique_id=2143142840]
-gravity_scale = 0.0
-contact_monitor = true
-max_contacts_reported = 1000
+freeze = true
+freeze_mode = 1
 script = ExtResource("1_qbmik")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallingPlatform" unique_id=476389620]
-position = Vector2(-4.7683716e-07, -7)
-scale = Vector2(3, 3)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_uc8s0")
 one_way_collision = true
 one_way_collision_margin = 4.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FallingPlatform" unique_id=1840363800]
-scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ncobn")
 animation = &"On"
 autoplay = "On"
 
 [node name="PlayerDetection" type="Area2D" parent="FallingPlatform" unique_id=1860361649]
 unique_name_in_owner = true
-scale = Vector2(3, 3)
 collision_mask = 9
 collision_priority = 3.025
 

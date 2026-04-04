@@ -2,7 +2,7 @@ extends Area2D
 
 class_name Projectile
 
-@export var speed :int = 300
+@export var speed :int = 100
 @onready var col :CollisionShape2D = $CollisionShape2D
 var direction :Vector2 = Vector2(1, 0)
 

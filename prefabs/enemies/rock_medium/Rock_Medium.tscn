@@ -57,12 +57,11 @@ script = ExtResource("6_vvjuo")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://ddrne3nd443y"
 
-[node name="MovementComponent" type="Node" parent="." unique_id=923064961 node_paths=PackedStringArray("entity_root", "path_detection_component", "health_component")]
+[node name="MovementComponent" type="Node" parent="." unique_id=923064961 node_paths=PackedStringArray("entity_root", "health_component")]
 script = ExtResource("7_hfx2y")
 entity_root = NodePath("..")
-path_detection_component = NodePath("../PathDetectionComponent")
 health_component = NodePath("../HealthComponent")
-speed = 120
+speed = 40
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]

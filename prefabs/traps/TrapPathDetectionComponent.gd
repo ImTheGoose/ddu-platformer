@@ -6,7 +6,7 @@ class_name TrapPathDetectionComponent
 @export var search_direction :SearchDirection = SearchDirection.UP
 
 @export var use_terrain_as_point :bool = false
-@export_range(256, 1024, 1.0) var max_distance_to_terrain :float = 0
+@export_range(64, 512, 1.0) var max_distance_to_terrain :float = 0
 
 signal path_changed
 

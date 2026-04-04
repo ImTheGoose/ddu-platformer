@@ -205,7 +205,6 @@ local_spawn_node = NodePath("../local_entity_container")
 spawn_node = NodePath("../entity_container")
 
 [node name="Camera2D" parent="." unique_id=1311093804 instance=ExtResource("24_hhcpw")]
-zoom = Vector2(3, 3)
 
 [node name="moving_background" type="TextureRect" parent="Camera2D" unique_id=621308851]
 z_index = -50

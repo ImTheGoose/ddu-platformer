@@ -5,7 +5,7 @@ extends Entity
 @onready var area_2d: Area2D = %Area2D
 @onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 @export var path_detection_component :TrapPathDetectionComponent
-@export_range(-1000, 1000, 1.0) var area_velocity :float = -20.0
+@export_range(-500, 500, 1.0) var area_velocity :float = 100
 var default_shape :RectangleShape2D
 
 var default_particle_amount :int = 0
