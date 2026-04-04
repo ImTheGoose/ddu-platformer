@@ -29,7 +29,8 @@ target_reached_distance = 0.1
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="P2PTargetingComponent" type="RayCast2D" parent="." unique_id=2060190266 node_paths=PackedStringArray("entity_node", "movement_component")]
-collision_mask = 64
+position = Vector2(8, -8)
+collision_mask = 65
 collide_with_areas = true
 script = ExtResource("3_v6g4s")
 entity_node = NodePath("..")

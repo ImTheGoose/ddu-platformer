@@ -11,7 +11,7 @@
 size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o70q"]
-size = Vector2(13, 28)
+size = Vector2(5, 28)
 
 [node name="MovingHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component", "hit_area")]
 z_index = -1
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://brmbno0bah8v4"
 [node name="MovementComponent" type="Node" parent="." unique_id=1975777366 node_paths=PackedStringArray("entity_root")]
 script = ExtResource("2_bjg5y")
 entity_root = NodePath("..")
-distance_for_event = 24.0
+distance_for_event = 8.0
 speed = 200
 accelleration = 0.8
 deaccelleration = 1e-05
@@ -34,7 +34,8 @@ target_reached_distance = 0.1
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
 [node name="P2PTargetingComponent" type="RayCast2D" parent="." unique_id=2060190266 node_paths=PackedStringArray("entity_node", "movement_component")]
-collision_mask = 64
+position = Vector2(8, -8)
+collision_mask = 65
 collide_with_areas = true
 script = ExtResource("3_2dthm")
 entity_node = NodePath("..")
@@ -51,6 +52,7 @@ entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="AnimatableBody2D" type="RigidBody2D" parent="." unique_id=151869227]
+collision_layer = 128
 collision_mask = 0
 gravity_scale = 0.0
 lock_rotation = true
@@ -69,6 +71,6 @@ script = ExtResource("6_2dthm")
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=90746367]
-position = Vector2(22.5, 0)
+position = Vector2(18.5, 0)
 shape = SubResource("RectangleShape2D_1o70q")
 debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)

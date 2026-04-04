@@ -166,6 +166,7 @@ buffering/agile_event_flushing=true
 2d_physics/layer_5="Enemy Pathfinding"
 2d_physics/layer_6="Trap Pathfinding"
 2d_physics/layer_7="Big Trap Pathfinding"
+2d_physics/layer_8="Physics Entities"
 
 [physics]
 
