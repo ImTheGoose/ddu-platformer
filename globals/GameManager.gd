@@ -359,8 +359,6 @@ func reset_client() -> void:
 	round_scores.clear()
 	pause_game(false)
 
-
-
 @rpc("any_peer","call_local","reliable")
 func player_died(peer_id: int) -> void:
 	player_death.emit(peer_id)

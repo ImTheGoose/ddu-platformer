@@ -16,7 +16,7 @@ const statistics_entries = [
 	},
 	{
 		"bbcode": "[img]res://assets/icons/star (16x16).png[/img] Highscore",
-		"stat_type": Stats.StatType.HIGHSCORE_TIME,
+		"stat_type": Stats.StatType.HIGHSCORE_TIME_VERY_EASY,
 		"stat_group" : -1,
 		"value_type": ValueType.TYPE_FORMATTED_TIME
 	},
@@ -24,7 +24,7 @@ const statistics_entries = [
 	# --- APPLE STATISTICS ---
 	{
 		"bbcode": "[img]res://assets/icons/star_red (16x16).png[/img] Most apples in a round",
-		"stat_type": Stats.StatType.HIGHSCORE_APPLE,
+		"stat_type": Stats.StatType.HIGHSCORE_TIME_VERY_EASY,
 		"stat_group" : -1,
 		"value_type": ValueType.TYPE_INT
 	},

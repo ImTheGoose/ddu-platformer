@@ -13,6 +13,7 @@ enum ValueType {
 	TYPE_FLOAT,
 	TYPE_FORMATTED_TIME,
 	TYPE_GROUP_TOTAL,
+	TYPE_GROUP_MAX,
 }
 
 var original_bbcode :String = ""
@@ -71,6 +72,13 @@ func _refresh_label() -> void:
 
 func _get_string_value() -> String:
 	match value_type:
+		ValueType.TYPE_GROUP_MAX:
+			var float_value :float = Stats.get_group_max(stat_group)
+			if is_equal_approx(float_value, round(float_value)):
+				return str( int( float_value))
+			else:
+				return TimeFormat.get_time_string(float_value, 0.1)
+		
 		ValueType.TYPE_GROUP_TOTAL:
 			return str( int( Stats.get_group_total(stat_group)))
 		ValueType.TYPE_FORMATTED_TIME:

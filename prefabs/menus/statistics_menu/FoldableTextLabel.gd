@@ -4,8 +4,8 @@ class_name FoldableTextLabel
 
 
 const arrow_bbcode :Dictionary[bool, String] = {
-	true : "[img]res://assets/icons/arrow_right (16x16).png[/img] ",
-	false : "[img]res://assets/icons/arrow_down (16x16).png[/img] ",
+	true : "[img]res://assets/icons/arrow_right (16x16).png[/img]",
+	false : "[img]res://assets/icons/arrow_down (16x16).png[/img]",
 }
 
 @export var child_control :Control

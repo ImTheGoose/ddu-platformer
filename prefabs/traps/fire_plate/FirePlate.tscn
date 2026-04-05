@@ -115,7 +115,7 @@ collision_mask = 9
 monitoring = false
 monitorable = false
 script = ExtResource("5_s08ra")
-kill_type = 3
+kill_type = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=367398664]
 visible = false

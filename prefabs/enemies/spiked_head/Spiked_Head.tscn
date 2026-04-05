@@ -50,6 +50,7 @@ metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("6_vkaj0")
+kill_type = 7
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=963365083]
