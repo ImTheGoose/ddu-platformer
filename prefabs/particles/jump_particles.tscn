@@ -17,7 +17,7 @@ curve = SubResource("Curve_rwuho")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhksc"]
 particle_flag_disable_z = true
-emission_shape_scale = Vector3(10, 1, 1)
+emission_shape_scale = Vector3(8, 1, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 angle_min = -236.2
@@ -28,8 +28,8 @@ spread = 180.0
 initial_velocity_min = 5.0
 initial_velocity_max = 24.689999
 gravity = Vector3(0, 15, 0)
-scale_min = 10.0
-scale_max = 10.0
+scale_min = 3.0
+scale_max = 4.0
 scale_curve = SubResource("CurveTexture_yhksc")
 color_ramp = SubResource("GradientTexture1D_634ti")
 

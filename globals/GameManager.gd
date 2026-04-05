@@ -9,7 +9,7 @@ signal prespawn_entities
 signal spawn_level
 signal player_death(peer_id: int)
 signal game_settings_changed()
-signal spawn_entity(global_position: Vector2, spawn_type: int, rotation: float)
+signal spawn_entity(global_position: Vector2, spawn_type: int, modifiers: Entity.EntityModifiers)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
 var game_paused :bool = false
@@ -44,9 +44,9 @@ var difficulty_settings :Dictionary = {
 		"enemy_spawn_rate": 0.70,
 		"collectable_spawn_rate": 0.7,
 	},difficulty.NORMAL : {
-		"camera_speed" : 1,
-		"enemy_spawn_rate": 0.85,
-		"collectable_spawn_rate": 1.0,
+		"camera_speed" : 0.1, #default 1
+		"enemy_spawn_rate": 1, #default 0.85
+		"collectable_spawn_rate": 0, #default 1.0
 	},difficulty.HARD : {
 		"camera_speed" : 1.1,
 		"enemy_spawn_rate": 1.0,
@@ -358,8 +358,6 @@ func reset_client() -> void:
 	players_dead = 0
 	round_scores.clear()
 	pause_game(false)
-
-
 
 @rpc("any_peer","call_local","reliable")
 func player_died(peer_id: int) -> void:

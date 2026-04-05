@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dvuu00ynhqps7"]
+
+[ext_resource type="Script" uid="uid://c4w1smgmv08vw" path="res://prefabs/enemies/PathfindingPoint.gd" id="1_ucder"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ifti"]
+size = Vector2(8, 8)
+
+[node name="EnemyPathfindingPoint" type="Area2D" unique_id=1024474863]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_ucder")
+block_rotation = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=403003484]
+shape = SubResource("RectangleShape2D_1ifti")
+debug_color = Color(0.7269425, 0.47625583, 5.7756904e-07, 1)

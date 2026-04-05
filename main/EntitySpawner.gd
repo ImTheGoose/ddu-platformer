@@ -2,7 +2,7 @@ extends MultiplayerSpawner
 
 class_name EntitySpawner 
 
-@export var bottom_safe_distance :int = 1600
+@export var bottom_safe_distance :int = 300
 @export var seconds_between_clear :int = 5
 var seconds_since_clear :float = 0
 @export var map_gen_node :Node2D
@@ -11,30 +11,59 @@ var seconds_since_clear :float = 0
 
 @export var local_types :Array[SpawnType] = [
 	SpawnType.ENEMY_PATHFINDING_POINT,
+	SpawnType.TRAP_PATHFINDING_POINT,
+	SpawnType.BIG_ENEMY_PATHFINDING_POINT,
+	SpawnType.ENEMY_MOVING_HEAD,
+	SpawnType.ENEMY_SPIKED_MOVING_HEAD,
 	SpawnType.TRAP_SPIKE,
+	SpawnType.TRAP_FANS,
 ]
 @export var entity_prefabs :Dictionary[SpawnType, PackedScene] = {
 	SpawnType.ENEMY_PATHFINDING_POINT : preload("uid://dvuu00ynhqps7"),
-	SpawnType.ENEMY_MUSHROOM: preload("uid://bm73fykqwqf6j"),
-	SpawnType.ENEMY_TRUNK: preload("uid://cl3ty1bxj7fwe"),
+	SpawnType.TRAP_PATHFINDING_POINT : preload("uid://b5jetmt6yygr8"),
+	SpawnType.ENEMY_MUSHROOM: preload("uid://cotlp2mae8vp7"),
+	SpawnType.ENEMY_TRUNK: preload("uid://daa708mlqvqkn"),
+	SpawnType.ENEMY_PLANT: preload("uid://c1mt2bnj7pmli"),
+	SpawnType.ENEMY_BIRD : preload("uid://c011nvwhwv1ii"),
+	SpawnType.ENEMY_GHOST : preload("uid://bihwcphf4kctd"),
+	SpawnType.ENEMY_ROCKS_BIG : preload("uid://do5gbabi2agsb"),
+	SpawnType.ENEMY_ROCKS_MEDIUM : preload("uid://72kyayuiloib"),
+	SpawnType.ENEMY_ROCKS_SMALL : preload("uid://b14td6vruqott"),
+	SpawnType.ENEMY_FAT_BIRD : preload("uid://bbtr8h0akbyoy"),
 	SpawnType.TRAP_SPIKE : preload("uid://dwyc1xb3bavyv"),
 	SpawnType.TRAP_FIRE_PLATE: preload("uid://cocuafbfox40i"),
 	SpawnType.TRAP_FALLING_PLATFORM: preload("uid://cc8s1kq0yww6p"),
 	SpawnType.TRAP_TRAMPOLINE: preload("uid://cq0dyrn14nfnf"),
 	SpawnType.TRAP_POWER_TRAMPOLINE: preload("uid://bh3pdvlpgdufq"),
+	SpawnType.TRAP_FANS: preload("uid://clkaqpool53jm"),
 	SpawnType.COLLECTABLE_APPLE: preload("uid://btu7xbmgfkame"),
+	SpawnType.BIG_ENEMY_PATHFINDING_POINT : preload("uid://cguvqe11b0yep"),
+	SpawnType.ENEMY_MOVING_HEAD : preload("uid://coh68rs8aoqfu"),
+	SpawnType.ENEMY_SPIKED_MOVING_HEAD : preload("uid://driakspag286k"),
 }
 
 enum SpawnType {
 	ENEMY_PATHFINDING_POINT,
 	ENEMY_MUSHROOM,
 	ENEMY_TRUNK,
+	ENEMY_PLANT,
+	ENEMY_BIRD,
+	ENEMY_FAT_BIRD,
+	ENEMY_GHOST,
+	ENEMY_ROCKS_BIG,
+	ENEMY_ROCKS_MEDIUM,
+	ENEMY_ROCKS_SMALL,
 	TRAP_SPIKE,
 	TRAP_FIRE_PLATE,
 	TRAP_FALLING_PLATFORM,
 	TRAP_TRAMPOLINE,
 	TRAP_POWER_TRAMPOLINE,
+	TRAP_FANS,
+	ENEMY_MOVING_HEAD,
+	ENEMY_SPIKED_MOVING_HEAD,
+	TRAP_PATHFINDING_POINT,
 	COLLECTABLE_APPLE,
+	BIG_ENEMY_PATHFINDING_POINT,
 }
 var spawned_entities :Dictionary[SpawnType, Array] = {}
 var unused_entities :Dictionary[SpawnType, Array] = {}
@@ -54,25 +83,25 @@ func _on_client_reset() -> void:
 			child.disable()
 			add_node_to_unused(child)
 
-func _spawn_local_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
+func _spawn_local_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int]) -> void:
 	if !entity_prefabs.has(spawn_type):
 		printerr("No entity prefab for entity with type : %s" % spawn_type)
 	
 	if unused_entities.has(spawn_type) && gpos != Vector2(-1, -1):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.enable(gpos, rotation)
+			node.enable(gpos, modifiers)
 			return
 	
-	var e :Node2D = entity_prefabs[spawn_type].instantiate()
+	var e :Entity = entity_prefabs[spawn_type].instantiate()
 	local_spawn_node.add_child(e)
-	e.global_position = gpos
-	e.rotation_degrees = rotation
 	
 	if gpos == Vector2(-1, -1):
 		if e is Entity:
 			e.disable()
 			add_node_to_unused(e)
+	else:
+		e.enable(gpos, modifiers)
 	
 	add_node_to_spawned(e)
 
@@ -96,15 +125,15 @@ func _on_server_reset() -> void:
 	for child in map_gen_node.get_children():
 		child.queue_free()
 
-func _on_spawn_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
+func _on_spawn_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int] = []) -> void:
 	if is_local(spawn_type):
-		_spawn_local_entity(gpos, spawn_type, rotation)
+		_spawn_local_entity(gpos, spawn_type, modifiers)
 		return
 	
 	if multiplayer.is_server():
-		_spawn_online_entity(gpos, spawn_type, rotation)
+		_spawn_online_entity(gpos, spawn_type, modifiers)
 
-func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0) -> void:
+func _spawn_online_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int]) -> void:
 	var spawn_rate :float = get_spawnrate(spawn_type)
 	var rand_float :float = randf()
 	if rand_float > spawn_rate:
@@ -113,16 +142,17 @@ func _spawn_online_entity(gpos: Vector2, spawn_type: int, rotation: float = 0.0)
 	if unused_entities.has(spawn_type) && gpos != Vector2(-1, -1):
 		if unused_entities[spawn_type].size() > 0:
 			var node: Entity = unused_entities[spawn_type].pop_back()
-			node.rpc("enable", gpos, rotation)
+			node.rpc("enable", gpos, modifiers)
 			return
 	
-	var node :Node = spawn([gpos, spawn_type, rotation, randf(), randf()])
+	var node :Node = spawn([gpos, spawn_type])
 	
-	if gpos == Vector2(-1, -1):
-		if node is Entity:
-			node.disable()
+	if node is Entity:
+		if gpos == Vector2(-1, -1):
+			node.rpc("disable")
 			add_node_to_unused(node)
-	
+		else:
+			node.rpc("enable", gpos, modifiers)
 	add_node_to_spawned(node)
 
 func _online_spawner_function(data: Array) -> Node:
@@ -130,16 +160,7 @@ func _online_spawner_function(data: Array) -> Node:
 		printerr("No entity prefab for entity with type : %s" % data[1])
 		return entity_prefabs[0].instantiate()
 	
-	var e :Node2D = entity_prefabs[data[1]].instantiate()
-	
-	e.tree_entered.connect(
-		func() -> void:
-			e.global_position = data[0]
-			e.rotation_degrees = data[2]
-			
-			if e is PathfindingEnemy:
-				e.random_floats.append_array([data[3], data[4]])
-			)
+	var e :Entity = entity_prefabs[data[1]].instantiate()
 	
 	return e
 
@@ -172,12 +193,17 @@ func _clear_unused_multiplayer_children() -> void:
 		return
 		
 	var cleared :int = 0
-	var disabled = 0
+	var disabled :int = 0
 	
-	var children :Array[Node] = spawn_node.get_children()
-	children.append_array(map_gen_node.get_children())
+	for child: Node in map_gen_node.get_children():
+		if child is not Node2D or child is Player:
+			continue
+		
+		if child.global_position.y > lowest_player.global_position.y + bottom_safe_distance * 3:
+			cleared += 1
+			child.queue_free()
 	
-	for child: Node in children:
+	for child: Node in spawn_node.get_children():
 		if child is not Node2D or child is Player:
 			continue
 		

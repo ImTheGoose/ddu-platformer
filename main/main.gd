@@ -18,3 +18,5 @@ func _ready() -> void:
 		await get_tree().create_timer(0.2).timeout
 		
 		DisplayServer.window_set_title("Session : %s" % session_num)
+	
+	

@@ -16,6 +16,6 @@ func _process(delta: float) -> void:
 	var theme_name :String = DataManager.get_value("selected_accent")
 	
 	var mat: ShaderMaterial = material
-	mat.set_shader_parameter("offset", global_position * position_scale)
+	mat.set_shader_parameter("offset", get_viewport().get_camera_2d().global_position * position_scale)
 	
 	texture = background_textures[theme_name]

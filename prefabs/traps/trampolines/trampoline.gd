@@ -1,6 +1,6 @@
 extends Entity
 
-@export var jump_force :int = 1600
+@export var jump_force :int = 550
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 @onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")
@@ -8,7 +8,7 @@ extends Entity
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if body.is_multiplayer_authority():
-			body.velocity.y = -jump_force
+			body.knockback(Vector2.UP.rotated(global_rotation), jump_force)
 			Stats.add_recording_value(Stats.StatType.JUMPS_TRAMPOLINE, 1)
 			rpc("show_hit")
 

@@ -257,6 +257,7 @@ func unlock_lobby() -> void:
 
 func close_connection() -> void:
 	Steamworks.set_rich_presense("#InMenu")
+	Stats.save_and_clear_match_scores()
 	created_player_infos.clear()
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
@@ -270,5 +271,6 @@ func close_connection() -> void:
 	GameManager.server_reset.emit()
 	GameManager.client_reset.emit()
 	GameManager.reset_settings_to_default()
+	Steamworks.update_discord_presense()
 
 #endregion

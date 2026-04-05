@@ -1,24 +1,25 @@
 [gd_resource type="TileSet" format=3 uid="uid://m5ulicf6wm0o"]
 
 [ext_resource type="PackedScene" uid="uid://dwyc1xb3bavyv" path="res://prefabs/traps/spikes/Spikes.tscn" id="1_o7k5h"]
-[ext_resource type="PackedScene" uid="uid://cnh6641embbwk" path="res://prefabs/traps/spikes/Spikes_down.tscn" id="2_m8xwj"]
-[ext_resource type="PackedScene" uid="uid://b21toqgef4rn1" path="res://prefabs/traps/spikes/Spikes_left.tscn" id="3_qy4mu"]
-[ext_resource type="PackedScene" uid="uid://bnicsngp8cud0" path="res://prefabs/traps/spikes/Spikes_right.tscn" id="4_r04i4"]
-[ext_resource type="PackedScene" uid="uid://icj618q5goku" path="res://prefabs/traps/fire_plate/FirePlateSpawnPlaceholder.tscn" id="5_mxggr"]
-[ext_resource type="PackedScene" uid="uid://ei14acu5wr3o" path="res://prefabs/traps/falling_platform/PlaceholderFallingPlatform.tscn" id="6_7i324"]
-[ext_resource type="PackedScene" uid="uid://c1ebi1uemwhmm" path="res://prefabs/traps/trampolines/TrampolineSpawnPlaceholder.tscn" id="7_kpskg"]
-[ext_resource type="PackedScene" uid="uid://nf08485g42p5" path="res://prefabs/traps/trampolines/PowerTrampolineSpawnPlaceholder.tscn" id="8_8xo7y"]
+[ext_resource type="PackedScene" uid="uid://b5jetmt6yygr8" path="res://prefabs/traps/TrapPathfindingPoint.tscn" id="2_1ix3v"]
+[ext_resource type="PackedScene" uid="uid://cocuafbfox40i" path="res://prefabs/traps/fire_plate/FirePlate.tscn" id="2_vhhxk"]
+[ext_resource type="PackedScene" uid="uid://cc8s1kq0yww6p" path="res://prefabs/traps/falling_platform/FallingPlatform.tscn" id="4_1ix3v"]
+[ext_resource type="PackedScene" uid="uid://cq0dyrn14nfnf" path="res://prefabs/traps/trampolines/Trampoline.tscn" id="4_nrwcp"]
+[ext_resource type="PackedScene" uid="uid://bh3pdvlpgdufq" path="res://prefabs/traps/trampolines/Power_Trampoline.tscn" id="5_1ix3v"]
+[ext_resource type="PackedScene" uid="uid://clkaqpool53jm" path="res://prefabs/traps/fan/fan.tscn" id="6_nrwcp"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_83s44"]
 resource_name = "Traps"
 scenes/1/scene = ExtResource("1_o7k5h")
-scenes/2/scene = ExtResource("2_m8xwj")
-scenes/3/scene = ExtResource("3_qy4mu")
-scenes/4/scene = ExtResource("4_r04i4")
-scenes/5/scene = ExtResource("5_mxggr")
-scenes/6/scene = ExtResource("6_7i324")
-scenes/7/scene = ExtResource("7_kpskg")
-scenes/8/scene = ExtResource("8_8xo7y")
+scenes/2/display_placeholder = true
+scenes/3/display_placeholder = true
+scenes/4/display_placeholder = true
+scenes/5/scene = ExtResource("2_vhhxk")
+scenes/6/scene = ExtResource("4_1ix3v")
+scenes/7/scene = ExtResource("4_nrwcp")
+scenes/8/scene = ExtResource("5_1ix3v")
+scenes/9/scene = ExtResource("6_nrwcp")
+scenes/10/scene = ExtResource("2_1ix3v")
 
 [resource]
 sources/0 = SubResource("TileSetScenesCollectionSource_83s44")

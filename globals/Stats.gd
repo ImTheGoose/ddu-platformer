@@ -1,48 +1,95 @@
 extends Node
 
 #region Steam Handling
-const STAT_IDS :Dictionary[StatType, String] = {
-	StatType.TIME_PlAYED : "time_played",
-	StatType.TIME_ALIVE : "time_alive",
-	StatType.TOTAL_APPLES_COLLECTED : "total_apples",
-	StatType.HIGHSCORE_TIME : "highscore_time",
-	StatType.HIGHSCORE_APPLE : "highscore_apple",
-	StatType.DEATH_MUSHROOM : "death_mushroom",
-	StatType.DEATH_TRUNK : "death_trunk",
-	StatType.DEATH_SPIKE : "death_spike",
-	StatType.DEATH_FIRE : "death_fire",
-	StatType.DEATH_CLOUD : "death_cloud",
-	StatType.KILLS_MUSHROOM : "kills_mushroom",
-	StatType.KILLS_TRUNK : "kills_trunk",
-	StatType.JUMPS_GROUND : "jumps_ground",
-	StatType.JUMPS_WALL : "jumps_wall",
-	StatType.JUMPS_DOUBLE : "jumps_double",
-	StatType.JUMPS_TRAMPOLINE : "jumps_trampoline",
-	StatType.JUMPS_KILL : "jumps_kill",
-	StatType.GROUP_TOTAL_DEATHS : "group_total_deaths",
-	StatType.GROUP_TOTAL_KILLS : "group_total_kills",
-	StatType.GROUP_TOTAL_JUMPS : "group_total_jumps",
-	
+const STAT_API_NAMES :Dictionary[StatType, String] = {
+	StatType.TIME_PlAYED : "TIME_PlAYED",
+	StatType.TIME_ALIVE : "TIME_ALIVE",
+	StatType.TOTAL_APPLES_COLLECTED : "TOTAL_APPLES_COLLECTED",
+	StatType.JUMPS_GROUND : "JUMPS_GROUND",
+	StatType.JUMPS_WALL : "JUMPS_WALL",
+	StatType.JUMPS_DOUBLE : "JUMPS_DOUBLE",
+	StatType.JUMPS_TRAMPOLINE : "JUMPS_TRAMPOLINE",
+	StatType.JUMPS_KILL : "JUMPS_KILL",
+	StatType.GROUP_TOTAL_DEATHS : "GROUP_TOTAL_DEATHS",
+	StatType.GROUP_TOTAL_KILLS : "GROUP_TOTAL_KILLS",
+	StatType.GROUP_TOTAL_JUMPS : "GROUP_TOTAL_JUMPS",
+	StatType.HIGHSCORE_TIME_VERY_EASY : "HIGHSCORE_TIME_VERY_EASY",
+	StatType.HIGHSCORE_TIME_EASY : "HIGHSCORE_TIME_EASY",
+	StatType.HIGHSCORE_TIME_NORMAL : "HIGHSCORE_TIME_NORMAL",
+	StatType.HIGHSCORE_TIME_HARD : "HIGHSCORE_TIME_HARD",
+	StatType.HIGHSCORE_TIME_IMPOSSIBLE : "HIGHSCORE_TIME_IMPOSSIBLE",
+	StatType.HIGHSCORE_APPLE_VERY_EASY : "HIGHSCORE_APPLE_VERY_EASY",
+	StatType.HIGHSCORE_APPLE_EASY : "HIGHSCORE_APPLE_EASY",
+	StatType.HIGHSCORE_APPLE_NORMAL : "HIGHSCORE_APPLE_NORMAL",
+	StatType.HIGHSCORE_APPLE_HARD : "HIGHSCORE_APPLE_HARD",
+	StatType.HIGHSCORE_APPLE_IMPOSSIBLE : "HIGHSCORE_APPLE_IMPOSSIBLE",
+	StatType.DEATH_MUSHROOM : "DEATH_MUSHROOM",
+	StatType.DEATH_TRUNK : "DEATH_TRUNK",
+	StatType.DEATH_PLANT : "DEATH_PLANT",
+	StatType.DEATH_BIRD : "DEATH_BIRD",
+	StatType.DEATH_FAT_BIRD : "DEATH_FAT_BIRD",
+	StatType.DEATH_GHOST : "DEATH_GHOST",
+	StatType.DEATH_ROCKS : "DEATH_ROCKS",
+	StatType.DEATH_MOVING_HEAD : "DEATH_MOVING_HEAD",
+	StatType.DEATH_SPIKED_HEAD : "DEATH_SPIKED_HEAD",
+	StatType.DEATH_SPIKE : "DEATH_SPIKE",
+	StatType.DEATH_FIRE : "DEATH_FIRE",
+	StatType.DEATH_CLOUD : "DEATH_CLOUD",
+	StatType.KILLS_MUSHROOM : "KILLS_MUSHROOM",
+	StatType.KILLS_TRUNK : "KILLS_TRUNK",
+	StatType.KILLS_PLANT : "KILLS_PLANT",
+	StatType.KILLS_BIRD : "KILLS_BIRD",
+	StatType.KILLS_FAT_BIRD : "KILLS_FAT_BIRD",
+	StatType.KILLS_GHOST : "KILLS_GHOST",
+	StatType.KILLS_ROCKS : "KILLS_ROCKS",
+	StatType.MULTIPLAYER_MATCHES_WON : "MULTIPLAYER_MATCHES_WON",
+	StatType.MULTIPLAYER_MATCHES_LOST : "MULTIPLAYER_MATCHES_LOST",
+	StatType.MULTIPLAYER_ROUNDS_WON : "MULTIPLAYER_ROUNDS_WON",
+	StatType.MULTIPLAYER_ROUNDS_LOST : "MULTIPLAYER_ROUNDS_LOST",
 }
 
 enum StatType {
 	TIME_PlAYED,
 	TIME_ALIVE,
 	TOTAL_APPLES_COLLECTED,
-	HIGHSCORE_TIME,
-	HIGHSCORE_APPLE,
+	HIGHSCORE_TIME_VERY_EASY,
+	HIGHSCORE_TIME_EASY,
+	HIGHSCORE_TIME_NORMAL,
+	HIGHSCORE_TIME_HARD,
+	HIGHSCORE_TIME_IMPOSSIBLE,
+	HIGHSCORE_APPLE_VERY_EASY,
+	HIGHSCORE_APPLE_EASY,
+	HIGHSCORE_APPLE_NORMAL,
+	HIGHSCORE_APPLE_HARD,
+	HIGHSCORE_APPLE_IMPOSSIBLE,
 	DEATH_MUSHROOM,
 	DEATH_TRUNK,
+	DEATH_PLANT,
+	DEATH_BIRD,
+	DEATH_FAT_BIRD,
+	DEATH_GHOST,
+	DEATH_ROCKS,
+	DEATH_MOVING_HEAD,
+	DEATH_SPIKED_HEAD,
 	DEATH_SPIKE,
 	DEATH_FIRE,
 	DEATH_CLOUD,
 	KILLS_MUSHROOM,
 	KILLS_TRUNK,
+	KILLS_PLANT,
+	KILLS_BIRD,
+	KILLS_FAT_BIRD,
+	KILLS_GHOST,
+	KILLS_ROCKS,
 	JUMPS_GROUND,
 	JUMPS_WALL,
 	JUMPS_DOUBLE,
 	JUMPS_TRAMPOLINE,
 	JUMPS_KILL,
+	MULTIPLAYER_MATCHES_WON,
+	MULTIPLAYER_MATCHES_LOST,
+	MULTIPLAYER_ROUNDS_WON,
+	MULTIPLAYER_ROUNDS_LOST,
 	RECORDING_DEATH_TYPE,
 	GROUP_TOTAL_DEATHS,
 	GROUP_TOTAL_JUMPS,
@@ -53,34 +100,52 @@ enum StatGroup {
 	GROUP_DEATHS,
 	GROUP_JUMPS,
 	GROUP_KILLS,
+	GRPUP_TIME_HIGHSCORE,
+	GROUP_APPLE_HIGHSCORE,
+	GROUP_MULTIPLAYER_MATCHES,
+	GROUP_MULTIPLAYER_ROUNDS,
 }
 
 enum EnemyType {
 	MUSHROOM,
-	TRUNK
+	TRUNK,
+	PLANT,
+	BIRD,
+	FAT_BIRD,
+	GHOST,
+	ROCKS,
+	MOVING_HEAD,
+	SPIKED_HEAD,
 }
 
 enum KillType {
 	MUSHROOM,
 	TRUNK,
+	PLANT,
+	BIRD,
+	FAT_BIRD,
+	GHOST,
+	MOVING_HEAD,
+	SPIKED_HEAD,
+	ROCKS,
 	SPIKE,
 	FIRE,
 	CLOUD,
 }
 
 func get_float_stat(stat: StatType) -> float:
-	var stat_id: String = STAT_IDS[stat]
+	var stat_id: String = STAT_API_NAMES[stat]
 	return Steam.getStatFloat(stat_id)
 
 func get_int_stat(stat: StatType) -> int:
-	var stat_id: String = STAT_IDS[stat]
+	var stat_id: String = STAT_API_NAMES[stat]
 	return Steam.getStatInt(stat_id)
 
 func set_float_stat(stat: StatType, new_value: float, snapped: bool = true) -> void:
 	if !Steam.isSteamRunning():
 		return
 	
-	var stat_id: String = STAT_IDS[stat]
+	var stat_id: String = STAT_API_NAMES[stat]
 	if snapped:
 		snapped(new_value, 0.01)
 	if not Steam.setStatFloat(stat_id, new_value):
@@ -90,7 +155,7 @@ func set_int_stat(stat: StatType, new_value: int) -> void:
 	if !Steam.isSteamRunning():
 		return
 	
-	var stat_id: String = STAT_IDS[stat]
+	var stat_id: String = STAT_API_NAMES[stat]
 	if not Steam.setStatInt(stat_id, new_value):
 		print("Error while setting stat %s to value %s" % [StatType.keys()[stat], new_value])
 
@@ -109,12 +174,37 @@ func sync_group_totals() -> void:
 	set_int_stat(StatType.GROUP_TOTAL_JUMPS, get_group_total(StatGroup.GROUP_JUMPS))
 	set_int_stat(StatType.GROUP_TOTAL_KILLS, get_group_total(StatGroup.GROUP_KILLS))
 
+func get_group_max(group: StatGroup) -> float:
+	var group_values :Array[float] = [0.0]
+	match group:
+		StatGroup.GRPUP_TIME_HIGHSCORE:
+			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_VERY_EASY))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_EASY))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_NORMAL))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_HARD))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_IMPOSSIBLE))
+		StatGroup.GROUP_APPLE_HIGHSCORE:
+			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_VERY_EASY)))
+			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_EASY)))
+			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_NORMAL)))
+			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_HARD)))
+			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_IMPOSSIBLE)))
+
+	return group_values.max()
+
 func get_group_total(group: StatGroup) -> int:
 	var total_value :int = 0
 	match group:
 		StatGroup.GROUP_DEATHS:
 			total_value += get_int_stat(StatType.DEATH_MUSHROOM)
 			total_value += get_int_stat(StatType.DEATH_TRUNK)
+			total_value += get_int_stat(StatType.DEATH_PLANT)
+			total_value += get_int_stat(StatType.DEATH_BIRD)
+			total_value += get_int_stat(StatType.DEATH_FAT_BIRD)
+			total_value += get_int_stat(StatType.DEATH_GHOST)
+			total_value += get_int_stat(StatType.DEATH_ROCKS)
+			total_value += get_int_stat(StatType.DEATH_MOVING_HEAD)
+			total_value += get_int_stat(StatType.DEATH_SPIKED_HEAD)
 			total_value += get_int_stat(StatType.DEATH_SPIKE)
 			total_value += get_int_stat(StatType.DEATH_FIRE)
 			total_value += get_int_stat(StatType.DEATH_CLOUD)
@@ -129,6 +219,19 @@ func get_group_total(group: StatGroup) -> int:
 		StatGroup.GROUP_KILLS:
 			total_value += get_int_stat(StatType.KILLS_MUSHROOM)
 			total_value += get_int_stat(StatType.KILLS_TRUNK)
+			total_value += get_int_stat(StatType.KILLS_PLANT)
+			total_value += get_int_stat(StatType.KILLS_BIRD)
+			total_value += get_int_stat(StatType.KILLS_FAT_BIRD)
+			total_value += get_int_stat(StatType.KILLS_GHOST)
+			total_value += get_int_stat(StatType.KILLS_ROCKS)
+		
+		StatGroup.GROUP_MULTIPLAYER_MATCHES:
+			total_value += get_int_stat(StatType.MULTIPLAYER_MATCHES_WON)
+			total_value += get_int_stat(StatType.MULTIPLAYER_MATCHES_LOST)
+		
+		StatGroup.GROUP_MULTIPLAYER_ROUNDS:
+			total_value += get_int_stat(StatType.MULTIPLAYER_ROUNDS_WON)
+			total_value += get_int_stat(StatType.MULTIPLAYER_ROUNDS_LOST)
 			
 	return total_value
 
@@ -143,6 +246,11 @@ const stat_template :Dictionary[StatType, Variant] = {
 	StatType.RECORDING_DEATH_TYPE : StatType.DEATH_MUSHROOM,
 	StatType.KILLS_MUSHROOM : 0,
 	StatType.KILLS_TRUNK : 0,
+	StatType.KILLS_PLANT : 0,
+	StatType.KILLS_BIRD : 0,
+	StatType.KILLS_FAT_BIRD : 0,
+	StatType.KILLS_GHOST : 0,
+	StatType.KILLS_ROCKS : 0,
 	StatType.JUMPS_GROUND : 0,
 	StatType.JUMPS_WALL : 0,
 	StatType.JUMPS_DOUBLE : 0,
@@ -185,6 +293,20 @@ func _save_recording() -> void:
 						add_int_stat(StatType.DEATH_MUSHROOM)
 					KillType.TRUNK:
 						add_int_stat(StatType.DEATH_TRUNK)
+					KillType.PLANT:
+						add_int_stat(StatType.DEATH_PLANT)
+					KillType.BIRD:
+						add_int_stat(StatType.DEATH_BIRD)
+					KillType.FAT_BIRD:
+						add_int_stat(StatType.DEATH_FAT_BIRD)
+					KillType.GHOST:
+						add_int_stat(StatType.DEATH_GHOST)
+					KillType.ROCKS:
+						add_int_stat(StatType.DEATH_ROCKS)
+					KillType.MOVING_HEAD:
+						add_int_stat(StatType.DEATH_MOVING_HEAD)
+					KillType.SPIKED_HEAD:
+						add_int_stat(StatType.DEATH_SPIKED_HEAD)
 					KillType.SPIKE:
 						add_int_stat(StatType.DEATH_SPIKE)
 					KillType.FIRE:
@@ -194,11 +316,37 @@ func _save_recording() -> void:
 						
 				continue
 			StatType.TIME_ALIVE:
-				if get_float_stat(StatType.HIGHSCORE_TIME) < stat_value:
-					set_float_stat(StatType.HIGHSCORE_TIME, stat_value)
+				var dif_stat_type :StatType = StatType.HIGHSCORE_TIME_VERY_EASY
+				match GameManager.get_difficulty():
+					GameManager.difficulty.VERY_EASY:
+						dif_stat_type = StatType.HIGHSCORE_TIME_VERY_EASY
+					GameManager.difficulty.EASY:
+						dif_stat_type = StatType.HIGHSCORE_TIME_EASY
+					GameManager.difficulty.NORMAL:
+						dif_stat_type = StatType.HIGHSCORE_TIME_NORMAL
+					GameManager.difficulty.HARD:
+						dif_stat_type = StatType.HIGHSCORE_TIME_HARD
+					GameManager.difficulty.IMPOSSIBLE:
+						dif_stat_type = StatType.HIGHSCORE_TIME_IMPOSSIBLE
+						
+				if get_float_stat(dif_stat_type) < stat_value:
+					set_float_stat(dif_stat_type, stat_value)
 			StatType.TOTAL_APPLES_COLLECTED:
-				if get_int_stat(StatType.HIGHSCORE_APPLE) < stat_value:
-					set_int_stat(StatType.HIGHSCORE_APPLE, stat_value)
+				var dif_stat_type :StatType = StatType.HIGHSCORE_APPLE_VERY_EASY
+				match GameManager.get_difficulty():
+					GameManager.difficulty.VERY_EASY:
+						dif_stat_type = StatType.HIGHSCORE_APPLE_VERY_EASY
+					GameManager.difficulty.EASY:
+						dif_stat_type = StatType.HIGHSCORE_APPLE_EASY
+					GameManager.difficulty.NORMAL:
+						dif_stat_type = StatType.HIGHSCORE_APPLE_NORMAL
+					GameManager.difficulty.HARD:
+						dif_stat_type = StatType.HIGHSCORE_APPLE_HARD	
+					GameManager.difficulty.IMPOSSIBLE:
+						dif_stat_type = StatType.HIGHSCORE_APPLE_IMPOSSIBLE
+	
+				if get_int_stat(dif_stat_type) < stat_value:
+					set_int_stat(dif_stat_type, stat_value)
 		
 		if typeof(stat_value) == TYPE_INT:
 			add_int_stat(stat, stat_value)
@@ -251,12 +399,61 @@ func get_recording_group_total(group: StatGroup) -> int:
 			
 	return total_value
 
+func get_enemy_from_entity(entity_type: EntitySpawner.SpawnType) -> EnemyType:
+	match entity_type:
+		EntitySpawner.SpawnType.ENEMY_MUSHROOM:
+			return EnemyType.MUSHROOM
+		EntitySpawner.SpawnType.ENEMY_TRUNK:
+			return EnemyType.TRUNK
+		EntitySpawner.SpawnType.ENEMY_PLANT:
+			return EnemyType.PLANT
+		EntitySpawner.SpawnType.ENEMY_BIRD:
+			return EnemyType.BIRD
+		EntitySpawner.SpawnType.ENEMY_FAT_BIRD:
+			return EnemyType.FAT_BIRD
+		EntitySpawner.SpawnType.ENEMY_GHOST:
+			return EnemyType.GHOST
+		EntitySpawner.SpawnType.ENEMY_ROCKS_BIG, EntitySpawner.SpawnType.ENEMY_ROCKS_MEDIUM, EntitySpawner.SpawnType.ENEMY_ROCKS_SMALL:
+			return EnemyType.ROCKS
+		_:
+			return EnemyType.MOVING_HEAD
+
 func add_kill_to_recording(enemy_type: EnemyType) -> void:
 	match enemy_type:
 		EnemyType.MUSHROOM:
 			add_recording_value(StatType.KILLS_MUSHROOM, 1)
 		EnemyType.TRUNK:
 			add_recording_value(StatType.KILLS_TRUNK, 1)
+		EnemyType.PLANT:
+			add_recording_value(StatType.KILLS_PLANT, 1)
+		EnemyType.BIRD:
+			add_recording_value(StatType.KILLS_BIRD, 1)
+		EnemyType.FAT_BIRD:
+			add_recording_value(StatType.KILLS_FAT_BIRD, 1)
+		EnemyType.GHOST:
+			add_recording_value(StatType.KILLS_GHOST, 1)
+		EnemyType.ROCKS:
+			add_recording_value(StatType.KILLS_ROCKS, 1)
 	return
+
+
+@rpc("authority","call_local","reliable")
+func save_and_clear_match_scores() -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		return
+	
+	var rounds_won :int = GameManager.get_match_score(multiplayer.get_unique_id())
+	var rounds_lost :int = GameManager.get_total_rounds() - rounds_won
+	
+	add_int_stat(Stats.StatType.MULTIPLAYER_ROUNDS_WON, rounds_won)
+	add_int_stat(Stats.StatType.MULTIPLAYER_ROUNDS_LOST, rounds_lost)
+	
+	if GameManager.get_match_placement(multiplayer.get_unique_id()) == 1:
+		add_int_stat(Stats.StatType.MULTIPLAYER_MATCHES_WON)
+	else:
+		add_int_stat(Stats.StatType.MULTIPLAYER_MATCHES_LOST)
+	
+	GameManager.match_scores.clear()
+
 
 #endregion

@@ -1,21 +1,34 @@
-extends PlayerDetectingEnemy
+extends Entity
 
-@export var projectile :PackedScene
-@onready var projectile_spawn :Node2D = %ProjectileSpawn
-@onready var audio_on_fire :AudioStreamMP3 = preload("uid://u1tef53jrusq")
+@export_group("Nodes")
+@export var health_component :HealthComponent
+@export var movement_component :MovementComponent
+@export var path_detection_component :PathDetectionComponent
+@export var sprite_component :EnemySpriteComponent
+@export var projectile_spawner_component :ProjectileSpawnerComponent
+@export var attack_component :AttackComponent
 
-func _attack() -> void:
-	super()
+func _ready() -> void:
+	if attack_component:
+		attack_component.attack_fired.connect(_on_attack_fired)
+
+func _on_reset() -> void:
+	sprite_component.play("Idle")
+
+func _on_attack_fired() -> void:
+	projectile_spawner_component.spawn_projectile(path_detection_component.get_direction())
+
+func _process(delta: float) -> void:
+	if health_component:
+		if health_component.is_dead():
+			return
 	
-	AudioManager.play_global_sound(audio_on_fire, -3)
+	if attack_component.is_attacking():
+		return
 	
-	var p: Projectile = projectile.instantiate()
-	p.direction = _get_direction()
-	add_sibling(p)
-	var pos :Vector2 = projectile_spawn.position
+	if movement_component.is_moving():
+		sprite_component.play("Moving")
+		return
 	
-	projectile_spawn.position.x = pos.x * -_get_direction().x
-	
-	p.global_position = projectile_spawn.global_position 
-	
-	projectile_spawn.position = pos
+	if movement_component.is_at_target() or !path_detection_component.is_valid_path():
+		sprite_component.play("Idle")

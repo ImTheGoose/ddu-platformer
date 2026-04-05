@@ -10,6 +10,22 @@ func _ready() -> void:
 	get_tree().root.ready.connect(_on_tree_ready)
 	Steam.initRelayNetworkAccess()
 	set_rich_presense("#InMenu")
+	DiscordRPC.register_steam(Steam.getSteamID())
+	DiscordRPC.app_id = 1490022810473730333
+	# this is boolean if everything worked
+	print("Discord working: " + str(DiscordRPC.get_is_discord_working()))
+	# Set the first custom text row of the activity here
+	DiscordRPC.details = "An infinite 2D platformer"
+	# Set the second custom text row of the activity here
+	DiscordRPC.state = "Singleplayer"
+	# Image key for small image from "Art Assets" from the Discord Developer website
+	DiscordRPC.large_image = "big_icon"
+	# Tooltip text for the large image
+	DiscordRPC.large_image_text = "Try it now!"
+	
+	DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
+
+	DiscordRPC.refresh() 
 
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
@@ -27,12 +43,25 @@ func _on_tree_ready() -> void:
 	
 	check_command_line()
 
+func update_discord_presense() -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		DiscordRPC.state = "Playing Solo"
+	elif MenuHandler.is_game_visible():
+		DiscordRPC.state = "Playing Online (%s / 4)" % (multiplayer.get_peers().size() + 1)
+	else:
+		DiscordRPC.state = "In Lobby (%s / 4)" % (multiplayer.get_peers().size() + 1)
+	
+	DiscordRPC.refresh()
+	return
+
 func set_rich_presense(token:String, value: String = "") -> void:
 	var setting_presence: bool = false
 	if value == "":
 		setting_presence = Steam.setRichPresence("steam_display", token)
 	else:
 		setting_presence= Steam.setRichPresence(token, value)
+	
+	update_discord_presense()
 
 	# Debug it
 	print("Setting rich presence to %s: %s" % [token, setting_presence])
