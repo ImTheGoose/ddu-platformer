@@ -16,6 +16,7 @@ var folded :bool = false
 
 func _ready() -> void:
 	super()
+	bbcode_spacing = ""
 	bbcode_enabled = true
 	fit_content = true
 	toggle_fold()

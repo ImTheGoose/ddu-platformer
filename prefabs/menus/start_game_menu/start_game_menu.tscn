@@ -32,7 +32,7 @@ unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img]100%[br][img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]100%[br][img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img]100%
+text = "[img]res://assets/icons/Mushroom (16x16).png[/img]100%[br][img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]100%[br][img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img]100%
 "
 fit_content = true
 autowrap_mode = 0

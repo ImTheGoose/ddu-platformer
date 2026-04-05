@@ -4,7 +4,7 @@ extends GameMenu
 @onready var diffculty_stat_label :RichTextLabel = %difficulty_stats
 @onready var map_collection_dropdown: OptionButton = %map_collection_dropdown
 @export var collectable_bbcode :String = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]"
-@export var enemy_bbcode :String = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img]"
+@export var enemy_bbcode :String = "[img]res://assets/icons/Mushroom (16x16).png[/img]"
 @export var speed_bbcode :String = "[img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img]"
 
 

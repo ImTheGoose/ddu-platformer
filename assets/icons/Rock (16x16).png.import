@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c06m2mfugfvdv"
-path="res://.godot/imported/Trunk (16x16).png-bf8434e61a0ad8b3429ef2567f40b1f2.ctex"
+uid="uid://cnghpdhw0w5i6"
+path="res://.godot/imported/Rock (16x16).png-7de986a994f09d0de4e08bfc42e0b5d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png"
-dest_files=["res://.godot/imported/Trunk (16x16).png-bf8434e61a0ad8b3429ef2567f40b1f2.ctex"]
+source_file="res://assets/icons/Rock (16x16).png"
+dest_files=["res://.godot/imported/Rock (16x16).png-7de986a994f09d0de4e08bfc42e0b5d6.ctex"]
 
 [params]
 

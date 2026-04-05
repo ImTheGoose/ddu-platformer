@@ -28,12 +28,6 @@ theme_type_variation = &"HeaderLarge"
 text = "Statistics"
 horizontal_alignment = 1
 
-[node name="StatisticsList" type="VBoxContainer" parent="." unique_id=661438016]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1805799840]
 layout_mode = 2
 
@@ -120,7 +114,7 @@ theme_override_constants/separation = 2
 [node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/multiplayer_container/VBoxContainer/matches_container/VBoxContainer" unique_id=688012475]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Matches Won - %s"
+text = "[img]res://assets/icons/medal (16x16).png[/img] Matches Won - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 37
@@ -129,7 +123,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/multiplayer_container/VBoxContainer/matches_container/VBoxContainer" unique_id=1413781418]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Matches Lost - %s"
+text = "[img]res://assets/icons/bone_skull (16x16).png[/img] Matches Lost - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 38
@@ -158,7 +152,7 @@ theme_override_constants/separation = 2
 [node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/multiplayer_container/VBoxContainer/rounds_container/VBoxContainer" unique_id=1248377136]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Rounds Won - %s"
+text = "[img]res://assets/icons/medal (16x16).png[/img] Rounds Won - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 39
@@ -167,7 +161,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/multiplayer_container/VBoxContainer/rounds_container/VBoxContainer" unique_id=1261548027]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Rounds Lost - %s"
+text = "[img]res://assets/icons/bone_skull (16x16).png[/img] Rounds Lost - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 40
@@ -197,7 +191,7 @@ theme_override_constants/separation = 2
 [node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/time_highscores_container/VBoxContainer" unique_id=637460408]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star (16x16).png[/img] Highscore - Very Easy - %s"
+text = "[img]res://assets/icons/star_1 (16x16).png[/img] Highscore - Very Easy - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 3
@@ -207,7 +201,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/time_highscores_container/VBoxContainer" unique_id=700523401]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star (16x16).png[/img] Highscore - Easy - %s"
+text = "[img]res://assets/icons/star_2 (16x16).png[/img] Highscore - Easy - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 4
@@ -217,7 +211,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/time_highscores_container/VBoxContainer" unique_id=1332792271]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star (16x16).png[/img] Highscore - Normal - %s"
+text = "[img]res://assets/icons/star_3 (16x16).png[/img] Highscore - Normal - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 5
@@ -227,7 +221,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/time_highscores_container/VBoxContainer" unique_id=928199495]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star (16x16).png[/img] Highscore - Hard - %s"
+text = "[img]res://assets/icons/star_4 (16x16).png[/img] Highscore - Hard - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 6
@@ -237,7 +231,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/time_highscores_container/VBoxContainer" unique_id=512000652]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star (16x16).png[/img] Highscore - Impossible - %s"
+text = "[img]res://assets/icons/star_5 (16x16).png[/img] Highscore - Impossible - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 7
@@ -268,7 +262,7 @@ theme_override_constants/separation = 2
 [node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=1628626507]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star_red (16x16).png[/img] Highscore - Very Easy - %s"
+text = "[img]res://assets/icons/red_star_1 (16x16).png[/img] Highscore - Very Easy - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 8
@@ -277,7 +271,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=1328890085]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star_red (16x16).png[/img] Highscore - Easy - %s"
+text = "[img]res://assets/icons/red_star_2 (16x16).png[/img] Highscore - Easy - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 9
@@ -286,7 +280,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=2058255103]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star_red (16x16).png[/img] Highscore - Normal - %s"
+text = "[img]res://assets/icons/red_star_3 (16x16).png[/img] Highscore - Normal - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 10
@@ -295,7 +289,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=14279649]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star_red (16x16).png[/img] Highscore - Hard - %s"
+text = "[img]res://assets/icons/red_star_4 (16x16).png[/img] Highscore - Hard - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 11
@@ -304,7 +298,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=431700121]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/star_red (16x16).png[/img] Highscore - Impossible - %s"
+text = "[img]res://assets/icons/red_star_5 (16x16).png[/img] Highscore - Impossible - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 12
@@ -399,7 +393,7 @@ theme_override_constants/separation = 2
 [node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=335325694]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushrooms killed - %s"
+text = "[img]res://assets/icons/Mushroom (16x16).png[/img] Mushrooms killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 25
@@ -408,7 +402,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=1095923474]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunks killed - %s"
+text = "[img]res://assets/icons/Trunk (16x16).png[/img] Trunks killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 26
@@ -417,7 +411,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=1570019447]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Plants killed - %s"
+text = "[img]res://assets/icons/Plant (16x16).png[/img] Plants killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 27
@@ -426,7 +420,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=166519440]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Birds killed - %s"
+text = "[img]res://assets/icons/Bird (16x16).png[/img] Birds killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 28
@@ -435,7 +429,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=399530894]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Fat Birds killed - %s"
+text = "[img]res://assets/icons/Fat_Bird (16x16).png[/img] Fat Birds killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 29
@@ -444,7 +438,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel6" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=304004322]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Ghosts killed - %s"
+text = "[img]res://assets/icons/Ghost (16x16).png[/img] Ghosts killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 30
@@ -453,7 +447,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel7" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/kills_container/VBoxContainer" unique_id=474096682]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Rocks killed - %s"
+text = "[img]res://assets/icons/Rock (16x16).png[/img] Rocks killed - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 31
@@ -482,7 +476,7 @@ theme_override_constants/separation = 2
 [node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=2104306857]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Mushroom/Icon (16x16).png[/img] Mushroom deaths - %s"
+text = "[img]res://assets/icons/Mushroom (16x16).png[/img] Mushroom deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 13
@@ -491,7 +485,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=984926104]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Trunk/Trunk (16x16).png[/img] Trunk deaths - %s"
+text = "[img]res://assets/icons/Trunk (16x16).png[/img] Trunk deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 14
@@ -500,7 +494,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel6" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=605779817]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Plant deaths - %s"
+text = "[img]res://assets/icons/Plant (16x16).png[/img] Plant deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 15
@@ -509,7 +503,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel7" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1579293165]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Bird deaths - %s"
+text = "[img]res://assets/icons/Bird (16x16).png[/img] Bird deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 16
@@ -518,7 +512,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel8" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1085783068]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Fat Bird deaths - %s"
+text = "[img]res://assets/icons/Fat_Bird (16x16).png[/img] Fat Bird deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 17
@@ -527,7 +521,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel9" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=463062665]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Ghost deaths - %s"
+text = "[img]res://assets/icons/Ghost (16x16).png[/img] Ghost deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 18
@@ -536,7 +530,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel10" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=930447344]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Rock deaths - %s"
+text = "[img]res://assets/icons/Rock (16x16).png[/img] Rock deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 19
@@ -545,7 +539,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel11" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1752519286]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Stone Head deaths - %s"
+text = "[img]res://assets/icons/Moving_Head (16x16).png[/img] Stone Head deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 20
@@ -554,7 +548,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel12" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1704784563]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Enemies/Skull/Red Particle.png[/img] Spike Head deaths - %s"
+text = "[img]res://assets/icons/Spiked_Head (16x16).png[/img] Spike Head deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 21
@@ -563,7 +557,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1087446217]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Traps/Spikes/Icon (16x16).png[/img] Spike deaths - %s"
+text = "[img]res://assets/icons/Spike (16x16).png[/img] Spike deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 22
@@ -572,7 +566,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=1524161121]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Traps/Fire/Icon (16x16).png[/img] Fire deaths - %s"
+text = "[img]res://assets/icons/Fire (16x16).png[/img] Fire deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 23
@@ -581,7 +575,7 @@ metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 [node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/death_container/VBoxContainer" unique_id=218111666]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/pixel_adventure_assets/Other/Dust Particle.png[/img] Cloud deaths - %s"
+text = "[img]res://assets/icons/Cloud (16x16).png[/img] Cloud deaths - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 24

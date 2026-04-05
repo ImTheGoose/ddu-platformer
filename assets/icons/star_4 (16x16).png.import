@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dstiu01k6rs7c"
-path="res://.godot/imported/Icon (16x16).png-79d5320280c1cb00094ee2eab12ae252.ctex"
+uid="uid://bryckfpsg6mu7"
+path="res://.godot/imported/star_4 (16x16).png-c999862507d87f395b7bf3a7a3d0e22e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pixel_adventure_assets/Traps/Spikes/Icon (16x16).png"
-dest_files=["res://.godot/imported/Icon (16x16).png-79d5320280c1cb00094ee2eab12ae252.ctex"]
+source_file="res://assets/icons/star_4 (16x16).png"
+dest_files=["res://.godot/imported/star_4 (16x16).png-c999862507d87f395b7bf3a7a3d0e22e.ctex"]
 
 [params]
 

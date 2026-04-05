@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6jmxnt4jhnxy"
-path="res://.godot/imported/Icon (16x16).png-bfb17f190006a0bc15e856283e445520.ctex"
+uid="uid://ctkplge6bsvui"
+path="res://.godot/imported/Bird (16x16).png-28de1a0fcda54f740c02326df0eaa522.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pixel_adventure_assets/Traps/Fire/Icon (16x16).png"
-dest_files=["res://.godot/imported/Icon (16x16).png-bfb17f190006a0bc15e856283e445520.ctex"]
+source_file="res://assets/icons/Bird (16x16).png"
+dest_files=["res://.godot/imported/Bird (16x16).png-28de1a0fcda54f740c02326df0eaa522.ctex"]
 
 [params]
 

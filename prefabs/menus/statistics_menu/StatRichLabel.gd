@@ -16,6 +16,7 @@ enum ValueType {
 	TYPE_GROUP_MAX,
 }
 
+var bbcode_spacing :String = " "
 var original_bbcode :String = ""
 var original_text :String = ""
 
@@ -63,7 +64,7 @@ func get_menu_root(child: Control) -> GameMenu:
 	return get_menu_root(parent)
 
 func _refresh_label() -> void:
-	var new_text :String = original_bbcode
+	var new_text :String = original_bbcode + bbcode_spacing
 	if original_text.contains("%"):
 		new_text += original_text % _get_string_value()
 	else:
