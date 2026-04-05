@@ -10,6 +10,16 @@ var move_timer: float = 0.0
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
+func _enter_tree() -> void:
+	get_tree().node_added.connect(_on_node_added)
+
+func _on_node_added(node:Node) -> void:
+	print("child added: %s" % node)
+	if node is Button or node is FoldableTextLabel or node is Slider:
+		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		
+	return
+
 func _process(delta: float) -> void:
 	# 1. Get stick strength
 	var move_vec :Vector2 = Vector2(
