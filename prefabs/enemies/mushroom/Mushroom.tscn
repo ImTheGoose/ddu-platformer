@@ -24,8 +24,8 @@ entity_type = 1
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
-collision_layer = 2
-collision_mask = 10
+collision_layer = 4
+collision_mask = 12
 script = ExtResource("4_rr74u")
 kill_type = 0
 knockback_origin_node = NodePath("..")

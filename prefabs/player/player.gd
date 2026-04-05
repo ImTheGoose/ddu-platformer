@@ -15,7 +15,8 @@ class_name Player
 	"jump" : preload("uid://we1luimcp6fb"),
 	"die" : preload("uid://dafct6iqadbur"),
 }
-
+@onready var dead_enemy_killzone: Area2D = %dead_enemy_killzone
+@onready var enemy_killzone: Area2D = %enemy_killzone
 @onready var dust_particles :GPUParticles2D = $dust_particles
 @onready var jump_particles :GPUParticles2D = $jump_particles
 @onready var death_particles :GPUParticles2D = $die_particles
@@ -59,6 +60,9 @@ func _physics_process(delta: float) -> void:
 		sync_position = global_position
 	
 	if dead:
+		dead_enemy_killzone.monitorable = true
+		dead_enemy_killzone.monitoring = true
+		dead_enemy_killzone.visible = true
 		var col :CollisionShape2D = $CollisionShape2D
 		col.disabled = true
 		_limit_horizontal_velocity(max_speed * 4)
@@ -66,6 +70,10 @@ func _physics_process(delta: float) -> void:
 		_apply_gravity(delta, 0.65)
 		move_and_slide()
 		return
+		
+	dead_enemy_killzone.monitorable = false
+	dead_enemy_killzone.monitoring = false
+	dead_enemy_killzone.visible = false
 	
 	var move_axis :float = Input.get_axis("move_left", "move_right")
 	_limit_horizontal_velocity(max_speed)
@@ -88,8 +96,15 @@ func _physics_process(delta: float) -> void:
 		_apply_gravity(delta, wall_gravity_scale)
 	else:
 		_apply_gravity(delta)
-	
 
+	if is_on_floor() or velocity.y < -20:
+		enemy_killzone.monitorable = false
+		enemy_killzone.monitoring = false
+		enemy_killzone.visible = false
+	else:	
+		enemy_killzone.monitorable = true
+		enemy_killzone.monitoring = true
+		enemy_killzone.visible = true
 	move_and_slide()
 	_update_anim(move_axis)
 

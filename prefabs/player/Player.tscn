@@ -23,7 +23,11 @@ shader_parameter/opacity = 1.0
 points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
-size = Vector2(17.670685, 6.0240984)
+size = Vector2(11.958836, 5.087199)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctndf"]
+radius = 6.0
+height = 23.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jfcio"]
 properties/0/path = NodePath(".:sync_position")
@@ -75,18 +79,30 @@ position = Vector2(-0.33333334, 2.3333333)
 volume_db = -20.0
 bus = &"SFX"
 
-[node name="Area2D" type="Area2D" parent="." unique_id=541735558]
+[node name="enemy_killzone" type="Area2D" parent="." unique_id=541735558 node_paths=PackedStringArray("player_parent")]
+unique_name_in_owner = true
 position = Vector2(0, 11.325)
-scale = Vector2(0.83, 0.83)
-collision_layer = 3
-collision_mask = 3
-monitorable = false
-priority = 30
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("7_w51pg")
+player_parent = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=350452057]
-position = Vector2(-4.787522e-08, 2.8212862)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_killzone" unique_id=350452057]
+position = Vector2(0, 5.675)
 shape = SubResource("RectangleShape2D_1nynx")
+debug_color = Color(0.9907276, 0, 0.2804999, 0.41960785)
+
+[node name="dead_enemy_killzone" type="Area2D" parent="." unique_id=540549176 node_paths=PackedStringArray("player_parent")]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+priority = 1
+script = ExtResource("7_w51pg")
+player_parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead_enemy_killzone" unique_id=1309110329]
+position = Vector2(0, 4.4999995)
+shape = SubResource("CapsuleShape2D_ctndf")
 debug_color = Color(0.9907276, 0, 0.2804999, 0.41960785)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2064356115]

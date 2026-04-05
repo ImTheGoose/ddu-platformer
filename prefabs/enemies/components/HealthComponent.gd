@@ -29,5 +29,9 @@ func die() -> void:
 	if is_immune():
 		return
 	
+	var sender :int= multiplayer.get_remote_sender_id()
+	if sender == 0 or sender == multiplayer.get_unique_id():
+		Stats.add_kill_to_recording(Stats.get_enemy_from_entity(entity_node.entity_type))
+	
 	dead = true
 	death.emit()
