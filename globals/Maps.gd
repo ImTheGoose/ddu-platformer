@@ -29,7 +29,7 @@ func _load_all_maps_on_initialise() -> void:
 
 func load_maps_from_folder(path: String) -> void:
 	for sub_path: String in DirAccess.get_directories_at(path):
-		load_maps_from_folder(sub_path)
+		load_maps_from_folder(path + sub_path + "/")
 
 	loaded_map_files.append_array(get_maps_from_folder(path))
 
