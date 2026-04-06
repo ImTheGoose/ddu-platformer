@@ -1,0 +1,466 @@
+[gd_scene format=3 uid="uid://bwjypqfmpettn"]
+
+[ext_resource type="Script" uid="uid://ci6778jvgv16f" path="res://main/main.gd" id="1_w3rk5"]
+[ext_resource type="Script" uid="uid://ctjb6mvogl6by" path="res://main/game_container.gd" id="2_5mvff"]
+[ext_resource type="Script" uid="uid://cycyhb6bopu0n" path="res://main/map_generator.gd" id="3_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="6_38apo"]
+[ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="7_khphd"]
+[ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="8_50616"]
+[ext_resource type="Script" uid="uid://bs1phqh1dv12v" path="res://main/player_spawner.gd" id="10_m4geg"]
+[ext_resource type="Script" uid="uid://dbfq7dddiroth" path="res://main/EntitySpawner.gd" id="11_8bq6g"]
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="14_gv800"]
+[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="15_0d5nc"]
+[ext_resource type="Script" uid="uid://vgpj6rynqpfi" path="res://prefabs/general_UI/moving_background.gd" id="16_sebc1"]
+[ext_resource type="Script" uid="uid://ukg6syf006m4" path="res://prefabs/menus/background_seperator.gd" id="17_x8ve0"]
+[ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="18_i8832"]
+[ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="19_bbhju"]
+[ext_resource type="Script" uid="uid://do22tf2kjinhv" path="res://utility/rich_value_label.gd" id="20_mwi54"]
+[ext_resource type="Script" uid="uid://bxjlfyms6urol" path="res://prefabs/general_UI/time_label.gd" id="21_5eftm"]
+[ext_resource type="Script" uid="uid://ckrs8y06bpf0i" path="res://prefabs/general_UI/fps_label.gd" id="22_x4tdt"]
+[ext_resource type="Script" uid="uid://c8ed372wclpdl" path="res://main/state_label.gd" id="23_bbkfx"]
+[ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="24_0c1fb"]
+[ext_resource type="PackedScene" uid="uid://dxyonb6hgvrx" path="res://main/Camera.tscn" id="24_hhcpw"]
+[ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="25_fw23c"]
+[ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="26_7867i"]
+[ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="27_q4fed"]
+[ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="28_7glbu"]
+[ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="29_eh0ei"]
+[ext_resource type="PackedScene" uid="uid://xvfmjoenq114" path="res://prefabs/menus/shop_menus/shop_skin_menu.tscn" id="30_xqrlm"]
+[ext_resource type="PackedScene" uid="uid://dpql1ujcn3sd7" path="res://prefabs/menus/shop_menus/shop_accent_menu.tscn" id="31_f2dvo"]
+[ext_resource type="PackedScene" uid="uid://ddy24w71nrv3k" path="res://prefabs/menus/shop_menus/shop_theme_menu.tscn" id="32_fcwsn"]
+[ext_resource type="PackedScene" uid="uid://c84ru0s4q2ncy" path="res://prefabs/menus/shop_menus/shop_selection_menu.tscn" id="33_lmgwd"]
+[ext_resource type="PackedScene" uid="uid://dyhe508sj45sf" path="res://prefabs/menus/ingame_menus/pause_menu.tscn" id="34_mm6gd"]
+[ext_resource type="PackedScene" uid="uid://din2cplqt3gvv" path="res://prefabs/menus/ingame_menus/death_menu.tscn" id="35_cyktq"]
+[ext_resource type="PackedScene" uid="uid://bqicsp8cjtktf" path="res://prefabs/menus/popups/changelog_popup.tscn" id="36_dwegs"]
+[ext_resource type="PackedScene" uid="uid://cejmty2271kf5" path="res://prefabs/menus/popups/steam_error_popup.tscn" id="37_jox3r"]
+[ext_resource type="PackedScene" uid="uid://b7emrreriad81" path="res://prefabs/menus/popups/reset_game_popup.tscn" id="38_a50qv"]
+[ext_resource type="PackedScene" uid="uid://sk35yfacs5bb" path="res://prefabs/menus/multiplayer_menus/multiplayer_join_menu.tscn" id="39_fo4ku"]
+[ext_resource type="PackedScene" uid="uid://bychuhet3ynyy" path="res://prefabs/menus/multiplayer_menus/multiplayer_host_type_menu.tscn" id="40_s28qt"]
+[ext_resource type="PackedScene" uid="uid://dpjgsw4yi007c" path="res://prefabs/menus/multiplayer_menus/multiplayer_select_menu.tscn" id="41_cokwo"]
+[ext_resource type="PackedScene" uid="uid://dbsr1vrdfvlc4" path="res://prefabs/menus/start_game_menu/select_play_menu.tscn" id="42_nqj1c"]
+[ext_resource type="PackedScene" uid="uid://1yqq0su5upk6" path="res://prefabs/menus/multiplayer_menus/multiplayer_lobby_menu.tscn" id="43_frehf"]
+[ext_resource type="PackedScene" uid="uid://c2fthjbl5jn4r" path="res://prefabs/menus/multiplayer_menus/multiplayer_status_menu.tscn" id="44_y6p51"]
+[ext_resource type="PackedScene" uid="uid://mwa71iau7eyn" path="res://prefabs/menus/multiplayer_menus/multiplayer_win_menu.tscn" id="45_w5bkj"]
+[ext_resource type="PackedScene" uid="uid://bh0jgwssyi2a1" path="res://prefabs/menus/multiplayer_menus/multiplayer_round_win_menu.tscn" id="46_yq2hq"]
+[ext_resource type="Script" uid="uid://2wk5j2o4ng1c" path="res://main/particle_pre_renderer.gd" id="47_rchyr"]
+[ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="48_5tfui"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="49_38apo"]
+[ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_byxo4"]
+shader = ExtResource("14_gv800")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8io8j"]
+shader = ExtResource("18_i8832")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 0
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = true
+shader_parameter/grid_size = Vector2(16, 9)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/global_x_mirror = false
+shader_parameter/global_y_mirror = false
+shader_parameter/local_x_mirror = false
+shader_parameter/local_y_mirror = false
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/cumulative_stagger_flip = false
+shader_parameter/cumulative_stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 6
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(2, 0)
+
+[sub_resource type="Animation" id="Animation_ggyxd"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/progress_bias")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iix3i"]
+resource_name = "hide_blackout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress_bias")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 1),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, -3, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_o55x0"]
+resource_name = "show_blackout"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 1),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 4, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/progress_bias")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ctog"]
+_data = {
+&"RESET": SubResource("Animation_ggyxd"),
+&"hide_blackout": SubResource("Animation_iix3i"),
+&"show_blackout": SubResource("Animation_o55x0")
+}
+
+[node name="Main" type="Node" unique_id=2321650]
+script = ExtResource("1_w3rk5")
+
+[node name="ParticlePreRenderer" type="Node2D" parent="." unique_id=1987328683]
+top_level = true
+z_index = -150
+position = Vector2(719, 306)
+script = ExtResource("47_rchyr")
+particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616")])
+
+[node name="game_container" type="Node2D" parent="." unique_id=235652747]
+script = ExtResource("2_5mvff")
+
+[node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner")]
+script = ExtResource("3_cm0pq")
+multiplayer_spawner = NodePath("../MultiplayerSpawner")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=987899368]
+spawn_path = NodePath("../map_generator")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=408371865]
+spawn_path = NodePath("../player_container")
+script = ExtResource("10_m4geg")
+
+[node name="player_container" type="Node2D" parent="game_container" unique_id=418401319]
+position = Vector2(-600, 600)
+
+[node name="entity_container" type="Node2D" parent="game_container" unique_id=1006682291]
+
+[node name="local_entity_container" type="Node2D" parent="game_container" unique_id=878193123]
+
+[node name="EntitySpawner" type="MultiplayerSpawner" parent="game_container" unique_id=129003603 node_paths=PackedStringArray("map_gen_node", "local_spawn_node", "spawn_node")]
+spawn_path = NodePath("../entity_container")
+script = ExtResource("11_8bq6g")
+map_gen_node = NodePath("../map_generator")
+local_spawn_node = NodePath("../local_entity_container")
+spawn_node = NodePath("../entity_container")
+
+[node name="Camera2D" parent="." unique_id=1311093804 instance=ExtResource("24_hhcpw")]
+
+[node name="moving_background" type="TextureRect" parent="Camera2D" unique_id=621308851]
+process_mode = 3
+z_index = -50
+texture_repeat = 2
+material = SubResource("ShaderMaterial_byxo4")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -2880.0
+offset_right = 4800.0
+offset_bottom = 500.0
+grow_horizontal = 2
+texture = ExtResource("15_0d5nc")
+stretch_mode = 1
+script = ExtResource("16_sebc1")
+
+[node name="background_seperator" type="ColorRect" parent="Camera2D" unique_id=2085207305]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+script = ExtResource("17_x8ve0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1630751086]
+process_mode = 3
+
+[node name="transition_layer" type="ColorRect" parent="CanvasLayer" unique_id=1136875667 node_paths=PackedStringArray("anim")]
+z_index = 4
+material = SubResource("ShaderMaterial_8io8j")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.12941177, 0.12156863, 0.1882353, 1)
+script = ExtResource("19_bbhju")
+anim = NodePath("transition_animation")
+
+[node name="transition_animation" type="AnimationPlayer" parent="CanvasLayer/transition_layer" unique_id=595721671]
+libraries/ = SubResource("AnimationLibrary_0ctog")
+speed_scale = 1.7
+
+[node name="Control2" type="Control" parent="CanvasLayer" unique_id=402108351]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="UI" type="Control" parent="CanvasLayer/Control2" unique_id=603484217]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+scale = Vector2(4, 4)
+
+[node name="fruit_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=18256417]
+layout_mode = 1
+offset_right = 470.0
+offset_bottom = 16.000002
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img] 0000"
+fit_content = true
+script = ExtResource("20_mwi54")
+
+[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=103873068]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Time: 0"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("21_5eftm")
+
+[node name="fps_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=640249096]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 2.0
+offset_top = 20.45
+offset_right = 473.61
+offset_bottom = 32.450005
+text = "FPS: 1000"
+fit_content = true
+script = ExtResource("22_x4tdt")
+
+[node name="state_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=992608984]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = 2.0
+offset_top = 20.45
+offset_right = 473.61
+offset_bottom = 32.450005
+text = "FPS: 1000"
+fit_content = true
+script = ExtResource("23_bbkfx")
+
+[node name="version_label" type="Label" parent="CanvasLayer/Control2/UI" unique_id=695760526]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.986
+anchor_right = 0.032
+anchor_bottom = 0.986
+offset_top = -13.0
+offset_right = 26.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_font_sizes/font_size = 11
+text = "Content-1"
+
+[node name="Control" type="Control" parent="CanvasLayer/Control2/UI" unique_id=2074147487]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("24_0c1fb")
+
+[node name="Control" type="Control" parent="CanvasLayer/Control2" unique_id=736624335]
+z_index = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+scale = Vector2(4, 4)
+
+[node name="main_menu" parent="CanvasLayer/Control2/Control" unique_id=1922624189 instance=ExtResource("25_fw23c")]
+visible = false
+layout_mode = 1
+
+[node name="settings_menu" parent="CanvasLayer/Control2/Control" unique_id=463999452 instance=ExtResource("26_7867i")]
+visible = false
+layout_mode = 1
+offset_left = -79.5
+offset_right = 79.5
+
+[node name="statistics_menu" parent="CanvasLayer/Control2/Control" unique_id=1022312052 instance=ExtResource("27_q4fed")]
+visible = false
+layout_mode = 1
+
+[node name="keybinds_menu" parent="CanvasLayer/Control2/Control" unique_id=1372291090 instance=ExtResource("28_7glbu")]
+visible = false
+layout_mode = 1
+offset_left = -81.5
+offset_right = 81.5
+
+[node name="start_game_menu" parent="CanvasLayer/Control2/Control" unique_id=1988316049 instance=ExtResource("29_eh0ei")]
+visible = false
+layout_mode = 1
+offset_left = -54.5
+offset_right = 54.5
+
+[node name="shop_skin_menu" parent="CanvasLayer/Control2/Control" unique_id=1491830652 instance=ExtResource("30_xqrlm")]
+visible = false
+layout_mode = 1
+offset_left = -100.0
+offset_right = 100.0
+
+[node name="shop_accent_menu" parent="CanvasLayer/Control2/Control" unique_id=411804758 instance=ExtResource("31_f2dvo")]
+visible = false
+layout_mode = 1
+
+[node name="shop_theme_menu" parent="CanvasLayer/Control2/Control" unique_id=1320604940 instance=ExtResource("32_fcwsn")]
+visible = false
+layout_mode = 1
+
+[node name="shop_selection_menu" parent="CanvasLayer/Control2/Control" unique_id=2104256746 instance=ExtResource("33_lmgwd")]
+visible = false
+layout_mode = 1
+
+[node name="pause_menu" parent="CanvasLayer/Control2/Control" unique_id=710775371 instance=ExtResource("34_mm6gd")]
+visible = false
+layout_mode = 1
+
+[node name="death_menu" parent="CanvasLayer/Control2/Control" unique_id=1525325848 instance=ExtResource("35_cyktq")]
+visible = false
+layout_mode = 1
+
+[node name="changelog_popup" parent="CanvasLayer/Control2/Control" unique_id=272473621 instance=ExtResource("36_dwegs")]
+visible = false
+layout_mode = 1
+
+[node name="steam_error_popup" parent="CanvasLayer/Control2/Control" unique_id=1151020849 instance=ExtResource("37_jox3r")]
+visible = false
+layout_mode = 1
+
+[node name="reset_game_popup" parent="CanvasLayer/Control2/Control" unique_id=337198406 instance=ExtResource("38_a50qv")]
+visible = false
+layout_mode = 1
+
+[node name="MultiplayerJoinMenu" parent="CanvasLayer/Control2/Control" unique_id=1617029824 instance=ExtResource("39_fo4ku")]
+visible = false
+layout_mode = 1
+offset_top = -52.5
+offset_bottom = 52.5
+
+[node name="MultiplayerTypeMenu" parent="CanvasLayer/Control2/Control" unique_id=708408861 instance=ExtResource("40_s28qt")]
+visible = false
+layout_mode = 1
+offset_left = -108.5
+offset_top = -60.5
+offset_right = 108.5
+offset_bottom = 60.5
+
+[node name="MultiplayerSelectMenu" parent="CanvasLayer/Control2/Control" unique_id=846156382 instance=ExtResource("41_cokwo")]
+visible = false
+layout_mode = 1
+offset_left = -103.5
+offset_top = -60.5
+offset_right = 103.5
+offset_bottom = 60.5
+
+[node name="SelectPlayMenu" parent="CanvasLayer/Control2/Control" unique_id=297666541 instance=ExtResource("42_nqj1c")]
+visible = false
+layout_mode = 1
+offset_left = -114.0
+offset_top = -72.0
+offset_right = 114.0
+offset_bottom = 72.0
+
+[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2055560422 instance=ExtResource("43_frehf")]
+visible = false
+layout_mode = 1
+
+[node name="MultiplayerStatusMenu" parent="CanvasLayer/Control2/Control" unique_id=840786237 instance=ExtResource("44_y6p51")]
+layout_mode = 1
+offset_left = -116.5
+offset_top = -37.5
+offset_right = 116.5
+offset_bottom = 37.5
+
+[node name="MultiplayerWinMenu" parent="CanvasLayer/Control2/Control" unique_id=302228853 instance=ExtResource("45_w5bkj")]
+visible = false
+layout_mode = 1
+offset_left = -65.0
+offset_top = -49.0
+offset_right = 65.0
+offset_bottom = 49.0
+
+[node name="MultiplayerRoundWinMenu" parent="CanvasLayer/Control2/Control" unique_id=107251656 instance=ExtResource("46_yq2hq")]
+visible = false
+layout_mode = 1
+offset_left = -99.0
+offset_top = -37.5
+offset_right = 99.0
+offset_bottom = 37.5

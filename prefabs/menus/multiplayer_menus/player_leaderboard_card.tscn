@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c2sykb4hpg0u7"]
+
+[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="1_c1oxp"]
+[ext_resource type="Script" uid="uid://cr0t7eifke4g6" path="res://prefabs/menus/multiplayer_menus/player_leaderboard_card.gd" id="1_xhkxj"]
+
+[node name="sample_leaderboard_card" type="HBoxContainer" unique_id=1052477706]
+script = ExtResource("1_xhkxj")
+
+[node name="placement_label" type="Label" parent="." unique_id=26420844]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 20
+text = "1st"
+
+[node name="avatar_rect" type="TextureRect" parent="." unique_id=1468155087]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("1_c1oxp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1821982858]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+
+[node name="player_name_label" type="Label" parent="VBoxContainer" unique_id=1000173358]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 20
+text = "Im_The_Goose"
+clip_text = true
+
+[node name="player_score_label" type="Label" parent="VBoxContainer" unique_id=1711284036]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Survived - 2m 13s"

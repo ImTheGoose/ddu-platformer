@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cejmty2271kf5"]
+
+[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="1_prdft"]
+[ext_resource type="Script" uid="uid://diaofq1nuc78s" path="res://prefabs/menus/popups/steam_error_popup.gd" id="1_v8fub"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5tuhn"]
+font = ExtResource("1_prdft")
+font_size = 50
+outline_color = Color(0, 0, 0, 0.8117647)
+
+[node name="steam_error_popup" type="VBoxContainer" unique_id=1151020849 node_paths=PackedStringArray("initial_focus")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_v8fub")
+menu_name = "steam_error_popup"
+initial_focus = NodePath("quit_button")
+
+[node name="title" type="Label" parent="." unique_id=197430544]
+layout_mode = 2
+text = "Steam Error"
+label_settings = SubResource("LabelSettings_5tuhn")
+horizontal_alignment = 1
+
+[node name="error_description" type="RichTextLabel" parent="." unique_id=1843648560]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "An issue occured while initialising steam: ...."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="quit_button" type="Button" parent="." unique_id=1684032382]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quit Game"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=569624068]
+layout_mode = 2
+
+[connection signal="pressed" from="quit_button" to="." method="_on_cancel_pressed"]

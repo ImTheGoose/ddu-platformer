@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://ck3jkvpa7fqyv"]
+
+[ext_resource type="Script" uid="uid://cdu4lip2jydf5" path="res://prefabs/menus/start_game_menu/start_game_menu.gd" id="1_myjiq"]
+
+[node name="start_game_menu" type="VBoxContainer" unique_id=1988316049 node_paths=PackedStringArray("initial_focus", "back_button")]
+custom_minimum_size = Vector2(150, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -84.0
+offset_right = 34.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_myjiq")
+menu_name = "start_game_menu"
+initial_focus = NodePath("start_game")
+back_button = NodePath("back")
+
+[node name="Label" type="Label" parent="." unique_id=1519841733]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Setup"
+horizontal_alignment = 1
+
+[node name="difficulty_stats" type="RichTextLabel" parent="." unique_id=1891015459]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/Mushroom (16x16).png[/img]100%[br][img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/img]100%[br][img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img]100%
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="difficulty_dropdown" type="OptionButton" parent="." unique_id=1502559463]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+text_overrun_behavior = 1
+selected = 2
+item_count = 5
+popup/item_0/text = "Very_Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Easy"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Hard"
+popup/item_3/id = 3
+popup/item_4/text = "Impossible"
+popup/item_4/id = 4
+
+[node name="map_collection_dropdown" type="OptionButton" parent="." unique_id=2134683208]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="start_game" type="Button" parent="." unique_id=671084686]
+layout_mode = 2
+text = "Start Game
+"
+
+[node name="back" type="Button" parent="." unique_id=1174858259]
+layout_mode = 2
+text = "Back"
+
+[connection signal="item_selected" from="difficulty_dropdown" to="." method="_on_difficulty_dropdown_item_selected"]
+[connection signal="item_selected" from="map_collection_dropdown" to="." method="_on_map_collection_dropdown_item_selected"]
+[connection signal="pressed" from="start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

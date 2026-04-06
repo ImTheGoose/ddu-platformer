@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://sk35yfacs5bb"]
+
+[ext_resource type="Script" uid="uid://c2ljggywej0pp" path="res://prefabs/menus/multiplayer_menus/multiplayer_join_menu.gd" id="1_x24jx"]
+
+[node name="MultiplayerJoinMenu" type="VBoxContainer" unique_id=1617029824 node_paths=PackedStringArray("initial_focus", "back_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -43.0
+offset_right = 96.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x24jx")
+menu_name = "multiplayer_join_menu"
+initial_focus = NodePath("back_button")
+back_button = NodePath("back_button")
+
+[node name="Label" type="Label" parent="." unique_id=1560500498]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Join Lobby"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=942169456]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=2122488795]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/HBoxContainer" unique_id=1032654013]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter code or local IP..."
+emoji_menu_enabled = false
+
+[node name="join_button" type="Button" parent="PanelContainer/HBoxContainer" unique_id=290900546]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Join"
+
+[node name="back_button" type="Button" parent="." unique_id=337261270]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

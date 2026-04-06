@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://buoywev11r3ts"]
+
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_ipmgv"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_aicb6"]
+
+[sub_resource type="Curve" id="Curve_jeqdm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.09708737, 1), 0.0, 0.0, 0, 0, Vector2(0.7503467, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_eb5qk"]
+curve = SubResource("Curve_jeqdm")
+
+[sub_resource type="Gradient" id="Gradient_cd2da"]
+colors = PackedColorArray(1, 1, 1, 0.09803922, 1, 1, 1, 0.39215687)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jeqdm"]
+gradient = SubResource("Gradient_cd2da")
+
+[sub_resource type="Curve" id="Curve_l5k3m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.073509015, 1), 0.0, 0.0, 0, 0, Vector2(0.75173366, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yl3ec"]
+curve = SubResource("Curve_l5k3m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b13u2"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(11, 0, 1)
+angle_min = -14.9999895
+angle_max = 15.0000105
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 75.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.59999996
+scale_curve = SubResource("CurveTexture_yl3ec")
+color_initial_ramp = SubResource("GradientTexture1D_jeqdm")
+alpha_curve = SubResource("CurveTexture_eb5qk")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=928541509]
+z_index = -1
+amount = 35
+texture = ExtResource("1_ipmgv")
+lifetime = 0.65
+speed_scale = 0.6
+process_material = SubResource("ParticleProcessMaterial_b13u2")
+script = ExtResource("2_aicb6")
