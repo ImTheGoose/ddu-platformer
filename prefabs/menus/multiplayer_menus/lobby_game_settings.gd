@@ -27,6 +27,9 @@ func _ready() -> void:
 func _initialise_collection_dropdown() -> void:
 	map_collection_option.clear()
 	for collection:String in MapFile.CollectionType.keys():
+		if not OS.is_debug_build():
+			if not MapFile.VISIBLE_COLLECTIONS_IN_RELEASE.has(MapFile.CollectionType[collection]):
+				continue
 		map_collection_option.add_item(collection.capitalize(), MapFile.CollectionType[collection])
 	
 	map_collection_option.selected = map_collection_option.get_item_index(GameManager.get_map_collection())

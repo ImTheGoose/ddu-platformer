@@ -24,6 +24,12 @@ class_name MapFile
 # If the map is useable in a multiplayer context
 @export var is_multiplayer_compatible :bool = true
 
+const VISIBLE_COLLECTIONS_IN_RELEASE :Array[CollectionType] = [
+	CollectionType.DEFAULT,
+	CollectionType.LEGACY,
+	CollectionType.TEST_MAPS,
+]
+
 enum CollectionType {
 	DEFAULT,
 	LEGACY,

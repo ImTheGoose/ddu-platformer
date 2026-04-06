@@ -23,6 +23,10 @@ func _on_show() -> void:
 func _initialise_collection_dropdown() -> void:
 	map_collection_dropdown.clear()
 	for collection:String in MapFile.CollectionType.keys():
+		if not OS.is_debug_build():
+			if not MapFile.VISIBLE_COLLECTIONS_IN_RELEASE.has(MapFile.CollectionType[collection]):
+				continue
+		
 		map_collection_dropdown.add_item(collection.capitalize(), MapFile.CollectionType[collection])
 	
 	map_collection_dropdown.select(map_collection_dropdown.get_item_index(GameManager.get_map_collection()))
@@ -46,7 +50,7 @@ func _on_back_pressed() -> void:
 
 
 func _on_difficulty_dropdown_item_selected(index: int) -> void:
-	Difficulty.set_difficulty(difficulty_dropdown.get_item_id(index))
+	Difficulty.set_difficulty(index)
 	_refresh_stats()
 
 

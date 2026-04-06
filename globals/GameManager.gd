@@ -22,7 +22,7 @@ var players_dead :int = 0
 
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
-	"map_collection" : MapFile.CollectionType.LEGACY,
+	"map_collection" : MapFile.CollectionType.DEFAULT,
 	"difficulty" : Difficulty.Type.NORMAL,
 	"gamemode" : Gamemode.GAMEMODE_STANDARD,
 	"total_rounds" : 1,

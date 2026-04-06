@@ -52,7 +52,7 @@ func get_loaded_maps(map_type: MapFile.MapType) -> Array[MapFile]:
 func get_valid_maps(map_type: MapFile.MapType) -> Array[MapFile]:
 	var maps :Array[MapFile] = get_maps_matching_type(map_type, true)
 	if maps.is_empty():
-		printerr("No matching maps of type %s for current conditions. Using defaults" % MapFile.MapType.keys()[map_type])
+		printerr("No matching maps of type %s for current conditions. Ignoring conditions" % MapFile.MapType.keys()[map_type])
 		return get_loaded_maps(map_type)
 	return maps
 	
