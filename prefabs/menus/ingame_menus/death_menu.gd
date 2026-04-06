@@ -41,7 +41,7 @@ func _on_show() -> void:
 func _refresh_stat_text() -> void:
 	var text :String = ""
 	var time_alive :Variant = Stats.get_recording_value(Stats.StatType.TIME_ALIVE)
-	if time_alive >= Stats.get_float_stat(Stats.StatType.HIGHSCORE_TIME_VERY_EASY):
+	if time_alive >= Stats.get_float_stat(Stats.get_time_highscore_type()):
 		text += time_bbcode + TimeFormat.get_time_string(time_alive) + highscore_suffix + "[br]"
 		for p in time_highscore_particles:
 			p.visible = true
@@ -54,7 +54,7 @@ func _refresh_stat_text() -> void:
 	
 	var apples_collected :int = Stats.get_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED)
 	
-	if apples_collected >= Stats.get_int_stat(Stats.StatType.HIGHSCORE_APPLE_VERY_EASY):
+	if apples_collected >= Stats.get_int_stat(Stats.get_apple_highscore_type()):
 		text += apple_bbcode + str( int(apples_collected)) + highscore_suffix
 		for p in apple_highscore_particles:
 			p.visible = true

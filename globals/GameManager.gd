@@ -23,7 +23,7 @@ var players_dead :int = 0
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
 	"map_collection" : MapFile.CollectionType.LEGACY,
-	"difficulty" : difficulty.NORMAL,
+	"difficulty" : Difficulty.Type.NORMAL,
 	"gamemode" : Gamemode.GAMEMODE_STANDARD,
 	"total_rounds" : 1,
 	"collissions_enabled" : true,
@@ -33,38 +33,6 @@ var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
 var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.LEGACY
-var game_difficulty :difficulty = difficulty.NORMAL
-var difficulty_settings :Dictionary = {
-	difficulty.VERY_EASY : {
-		"camera_speed" : 0.4,
-		"enemy_spawn_rate": 0.15,
-		"collectable_spawn_rate": 0.15,
-	},difficulty.EASY : {
-		"camera_speed" : 0.8,
-		"enemy_spawn_rate": 0.70,
-		"collectable_spawn_rate": 0.7,
-	},difficulty.NORMAL : {
-		"camera_speed" : 0.1, #default 1
-		"enemy_spawn_rate": 1, #default 0.85
-		"collectable_spawn_rate": 0, #default 1.0
-	},difficulty.HARD : {
-		"camera_speed" : 1.1,
-		"enemy_spawn_rate": 1.0,
-		"collectable_spawn_rate": 1.0,
-	},difficulty.IMPOSSIBLE : {
-		"camera_speed" : 1.3,
-		"enemy_spawn_rate": 1.0,
-		"collectable_spawn_rate": 1.0,
-	},
-}
-
-enum difficulty {
-	VERY_EASY,
-	EASY,
-	NORMAL,
-	HARD,
-	IMPOSSIBLE
-}
 
 enum Gamemode {
 	GAMEMODE_STANDARD,
@@ -127,15 +95,8 @@ func set_round_score(peer_id: int, score: float) -> void:
 	round_scores.set(peer_id, score)
 	game_scores_changed.emit()
 
-func get_difficulty_value(key: String) -> Variant:
-	var dif_settings :Dictionary = difficulty_settings[game_difficulty]
-	return dif_settings[key]
-
 func get_map_collection() -> MapFile.CollectionType:
 	return game_map_collection
-
-func get_difficulty() -> difficulty:
-	return game_difficulty
 
 func is_collissions_enabled() -> bool:
 	return game_collissions_enabled
@@ -149,11 +110,6 @@ func get_total_rounds() -> int:
 @rpc("authority","call_local","reliable")
 func set_map_collection(collection: MapFile.CollectionType) -> void:
 	game_map_collection = collection
-	game_settings_changed.emit()
-
-@rpc("authority","call_local","reliable")
-func set_difficulty(dif: difficulty) -> void:
-	game_difficulty = dif
 	game_settings_changed.emit()
 
 @rpc("authority","call_local","reliable")
@@ -196,14 +152,14 @@ func next_round() -> void:
 func sync_settings_to_peers() -> void:
 	if multiplayer.is_server():
 		rpc("set_map_collection", get_map_collection())
-		rpc("set_difficulty", get_difficulty())
+		Difficulty.rpc("set_difficulty", Difficulty.get_difficulty())
 		rpc("set_total_rounds", get_total_rounds())
 		rpc("set_collisions_enabled", is_collissions_enabled())
 		rpc("set_gamemode", get_gamemode())
 
 func reset_settings_to_default() -> void:
 	set_map_collection(default_game_settings["map_collection"])
-	set_difficulty(default_game_settings["difficulty"])
+	Difficulty.set_difficulty(default_game_settings["difficulty"])
 	set_total_rounds(default_game_settings["total_rounds"])
 	set_collisions_enabled(default_game_settings["collissions_enabled"])
 	set_gamemode(default_game_settings["gamemode"])
@@ -236,10 +192,14 @@ func get_state() -> STATE:
 #endregion
 
 func _ready() -> void:
+	Difficulty.difficulty_changed.connect(_on_difficulty_changed)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	MenuHandler.game_is_covered.connect(_on_game_covered)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	reset_settings_to_default()
+
+func _on_difficulty_changed() -> void:
+	game_settings_changed.emit()
 
 func _on_peer_connected(peer_id: int) -> void:
 	sync_settings_to_peers()
@@ -273,7 +233,6 @@ func _on_game_covered() -> void:
 		MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
 		
 	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
-		rpc("set_difficulty", get_difficulty())
 		rpc("reset_client")
 		server_reset.emit()
 		rpc("spawn_game")

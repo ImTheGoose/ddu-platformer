@@ -5,7 +5,7 @@ extends RigidBody2D
 @onready var col :CollisionShape2D = $CollisionShape2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var gpu_particles_2d: GPUParticles2D = %GPUParticles2D
-@export var seconds_before_reappear :float = 5
+@export var seconds_before_reappear :float = 3
 @export var seconds_before_fall :float = 1
 var fall_time :float = 0
 var touched :bool = false
@@ -20,13 +20,13 @@ func _process(delta: float) -> void:
 						rpc("show_touched")
 
 	
-	if fall_time > seconds_before_reappear + seconds_before_fall:
+	if fall_time > (seconds_before_reappear / Difficulty.get_setting(Difficulty.Settings.TRAP_TIMER_SPEED_SCALE, 1.0)) + (seconds_before_fall * Difficulty.get_setting(Difficulty.Settings.TRAP_TIMER_SPEED_SCALE, 1.0)):
 		_initiate_platform_reappear()
 	
 	if touched:
 		fall_time += delta
 		
-	if fall_time > seconds_before_fall:
+	if fall_time > (seconds_before_fall * Difficulty.get_setting(Difficulty.Settings.TRAP_TIMER_SPEED_SCALE, 1.0)):
 		_initiate_platform_fall()
 
 func _initiate_platform_reappear() -> void:
@@ -58,3 +58,4 @@ func show_touched() -> void:
 
 func _on_falling_platform_entity_entity_reset() -> void:
 	_initiate_platform_reappear()
+	animation_player.play("RESET")

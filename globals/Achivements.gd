@@ -76,7 +76,7 @@ func _check_highscore_achivements() -> void:
 			set_achievement(Type.HIGHSCORE_60)
 	
 	if not is_achived(Type.HIGHSCORE_IMP_120):
-		if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) > 120 && GameManager.get_difficulty() == GameManager.difficulty.IMPOSSIBLE:
+		if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) > 120 && Difficulty.get_difficulty() == Difficulty.Type.IMPOSSIBLE:
 			set_achievement(Type.HIGHSCORE_IMP_120)
 	
 	if not is_achived(Type.HIGHSCORE_APL_100):

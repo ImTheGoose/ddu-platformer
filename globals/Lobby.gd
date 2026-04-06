@@ -256,6 +256,9 @@ func unlock_lobby() -> void:
 			Steam.setLobbyJoinable(STEAM_LOBBY_ID, true)
 
 func close_connection() -> void:
+	if multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
+		GameManager.reset_settings_to_default()
+	
 	Steamworks.set_rich_presense("#InMenu")
 	Stats.save_and_clear_match_scores()
 	created_player_infos.clear()
@@ -270,7 +273,6 @@ func close_connection() -> void:
 	GameManager.clear_players.emit()
 	GameManager.server_reset.emit()
 	GameManager.client_reset.emit()
-	GameManager.reset_settings_to_default()
 	Steamworks.update_discord_presense()
 
 #endregion

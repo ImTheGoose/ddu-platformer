@@ -52,7 +52,7 @@ func _on_rounds_selected(index: int) -> void:
 	GameManager.sync_settings_to_peers()
 
 func _on_difficulty_selected(index: int) -> void:
-	GameManager.set_difficulty(index)
+	Difficulty.set_difficulty(index)
 	GameManager.sync_settings_to_peers()
 
 func _on_game_settings_changed() -> void:
@@ -70,7 +70,7 @@ func refresh_settings() -> void:
 		collission_label.text = "Collissions: "
 		gamemode_label.text = "Gamemode: "
 		map_collection_label.text = "Collection: "
-		diff_option.selected = GameManager.get_difficulty()
+		diff_option.selected = Difficulty.get_difficulty()
 		
 		rounds_option.selected = rounds_option.get_item_index(GameManager.get_total_rounds())
 		map_collection_option.selected = map_collection_option.get_item_index(GameManager.get_map_collection())
@@ -82,7 +82,7 @@ func refresh_settings() -> void:
 		collission_option.visible = false
 		gamemode_option.visible = false
 		map_collection_option.visible = false
-		diff_label.text = "Difficulty: %s" % diff_option.get_item_text(GameManager.get_difficulty())
+		diff_label.text = "Difficulty: %s" % diff_option.get_item_text(Difficulty.get_difficulty())
 		rounds_label.text = "Rounds to Win: %s" % rounds_option.get_item_text(rounds_option.get_item_index(GameManager.get_total_rounds()))
 		if GameManager.is_collissions_enabled():
 			collission_label.text = "Collissions: enabled"

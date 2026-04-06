@@ -13,8 +13,6 @@ var seconds_since_clear :float = 0
 	SpawnType.ENEMY_PATHFINDING_POINT,
 	SpawnType.TRAP_PATHFINDING_POINT,
 	SpawnType.BIG_ENEMY_PATHFINDING_POINT,
-	SpawnType.ENEMY_MOVING_HEAD,
-	SpawnType.ENEMY_SPIKED_MOVING_HEAD,
 	SpawnType.TRAP_SPIKE,
 	SpawnType.TRAP_FANS,
 ]
@@ -71,6 +69,11 @@ var unused_entities :Dictionary[SpawnType, Array] = {}
 
 #region Local Spawning
 func is_local(type: SpawnType) -> bool:
+	match type:
+		SpawnType.TRAP_SPIKE:
+			if Difficulty.has_setting(Difficulty.Settings.SPIKE_SPAWN_RATE):
+				return false
+	
 	return local_types.has(type)
 
 func _on_client_reset() -> void:	
@@ -83,7 +86,7 @@ func _on_client_reset() -> void:
 			child.disable()
 			add_node_to_unused(child)
 
-func _spawn_local_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int]) -> void:
+func _spawn_local_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int]) -> void:	
 	if !entity_prefabs.has(spawn_type):
 		printerr("No entity prefab for entity with type : %s" % spawn_type)
 	
@@ -168,9 +171,13 @@ func _online_spawner_function(data: Array) -> Node:
 
 
 func get_spawn_amount(type: SpawnType) -> int:
+	if is_enemy(type, false):
+		return 15
+	
+	if is_enemy(type):
+		return 3
+
 	match type:
-		SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK:
-			return 15
 		SpawnType.COLLECTABLE_APPLE:
 			return 50
 		SpawnType.TRAP_SPIKE:
@@ -304,6 +311,23 @@ func _process(delta: float) -> void:
 
 #region Helper Functions
 
+func is_enemy(type: SpawnType, include_heads: bool = true) -> bool:
+	var enemy_types :Array[SpawnType]
+	enemy_types.append(SpawnType.ENEMY_MUSHROOM)
+	enemy_types.append(SpawnType.ENEMY_TRUNK)
+	enemy_types.append(SpawnType.ENEMY_PLANT)
+	enemy_types.append(SpawnType.ENEMY_BIRD)
+	enemy_types.append(SpawnType.ENEMY_FAT_BIRD)
+	enemy_types.append(SpawnType.ENEMY_GHOST)
+	enemy_types.append(SpawnType.ENEMY_ROCKS_BIG)
+	enemy_types.append(SpawnType.ENEMY_ROCKS_MEDIUM)
+	enemy_types.append(SpawnType.ENEMY_ROCKS_SMALL)
+	if include_heads:
+		enemy_types.append(SpawnType.ENEMY_MOVING_HEAD)
+		enemy_types.append(SpawnType.ENEMY_SPIKED_MOVING_HEAD)
+	
+	return enemy_types.has(type)
+
 func get_entity_count(included_types: Array) -> int:
 	var total_entites :int = 0
 	for type:int in spawned_entities.keys():
@@ -312,11 +336,15 @@ func get_entity_count(included_types: Array) -> int:
 	return total_entites
 
 func get_spawnrate(spawn_type: int) -> float:
+	if is_enemy(spawn_type):
+		return min(Difficulty.get_setting(Difficulty.Settings.ENEMY_SPAWN_RATE), 1.0)
+	
 	match spawn_type:
-		SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK:
-			return min(GameManager.get_difficulty_value("enemy_spawn_rate"), 1.0)
 		SpawnType.COLLECTABLE_APPLE:
-			return min(GameManager.get_difficulty_value("collectable_spawn_rate"), 1.0)
+			return min(Difficulty.get_setting(Difficulty.Settings.COLLECTABLE_SPAWN_RATE), 1.0)
+		SpawnType.TRAP_SPIKE:
+			if Difficulty.has_setting(Difficulty.Settings.SPIKE_SPAWN_RATE):
+				return min(Difficulty.get_setting(Difficulty.Settings.SPIKE_SPAWN_RATE), 1.0)
 	
 	return 1.0
 

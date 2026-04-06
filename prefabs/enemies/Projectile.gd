@@ -10,6 +10,9 @@ func _init() -> void:
 	body_entered.connect(_on_body_entered)
 	GameManager.client_reset.connect(queue_free)
 
+func _ready() -> void:
+	speed *= Difficulty.get_setting(Difficulty.Settings.PROJECTILE_SPEED_SCALE, 1.0)
+
 func _process(delta: float) -> void:
 	global_position += direction.rotated(global_rotation) * speed * delta
 	

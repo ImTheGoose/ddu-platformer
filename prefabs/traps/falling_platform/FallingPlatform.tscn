@@ -186,8 +186,8 @@ shape = SubResource("CapsuleShape2D_qbmik")
 [node name="GPUParticles2D" parent="FallingPlatform" unique_id=928541509 instance=ExtResource("5_w7o6b")]
 unique_name_in_owner = true
 rotation = 3.1415927
-amount = 25
-lifetime = 0.75
+amount = 15
+lifetime = 0.25
 visibility_rect = Rect2(-50, -100, 100, 150)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=956471525]

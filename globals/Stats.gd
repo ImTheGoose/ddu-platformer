@@ -282,7 +282,6 @@ func _save_recording() -> void:
 	if saved_recording:
 		print(PREFIX, "Error attempted to save recording another time.")
 		return
-
 	for stat in stat_recording.keys():
 		var stat_value = stat_recording[stat]
 		
@@ -316,34 +315,12 @@ func _save_recording() -> void:
 						
 				continue
 			StatType.TIME_ALIVE:
-				var dif_stat_type :StatType = StatType.HIGHSCORE_TIME_VERY_EASY
-				match GameManager.get_difficulty():
-					GameManager.difficulty.VERY_EASY:
-						dif_stat_type = StatType.HIGHSCORE_TIME_VERY_EASY
-					GameManager.difficulty.EASY:
-						dif_stat_type = StatType.HIGHSCORE_TIME_EASY
-					GameManager.difficulty.NORMAL:
-						dif_stat_type = StatType.HIGHSCORE_TIME_NORMAL
-					GameManager.difficulty.HARD:
-						dif_stat_type = StatType.HIGHSCORE_TIME_HARD
-					GameManager.difficulty.IMPOSSIBLE:
-						dif_stat_type = StatType.HIGHSCORE_TIME_IMPOSSIBLE
+				var dif_stat_type :StatType = get_time_highscore_type()
 						
 				if get_float_stat(dif_stat_type) < stat_value:
 					set_float_stat(dif_stat_type, stat_value)
 			StatType.TOTAL_APPLES_COLLECTED:
-				var dif_stat_type :StatType = StatType.HIGHSCORE_APPLE_VERY_EASY
-				match GameManager.get_difficulty():
-					GameManager.difficulty.VERY_EASY:
-						dif_stat_type = StatType.HIGHSCORE_APPLE_VERY_EASY
-					GameManager.difficulty.EASY:
-						dif_stat_type = StatType.HIGHSCORE_APPLE_EASY
-					GameManager.difficulty.NORMAL:
-						dif_stat_type = StatType.HIGHSCORE_APPLE_NORMAL
-					GameManager.difficulty.HARD:
-						dif_stat_type = StatType.HIGHSCORE_APPLE_HARD	
-					GameManager.difficulty.IMPOSSIBLE:
-						dif_stat_type = StatType.HIGHSCORE_APPLE_IMPOSSIBLE
+				var dif_stat_type :StatType = get_apple_highscore_type()
 	
 				if get_int_stat(dif_stat_type) < stat_value:
 					set_int_stat(dif_stat_type, stat_value)
@@ -358,6 +335,36 @@ func _save_recording() -> void:
 	Steamworks.store_steam_data()
 
 #region Helper Function
+
+func get_time_highscore_type(difficulty: int = -1) -> StatType:
+	if difficulty == -1:
+		difficulty = Difficulty.get_difficulty()
+	match difficulty:
+		Difficulty.Type.IMPOSSIBLE:
+			return StatType.HIGHSCORE_TIME_IMPOSSIBLE
+		Difficulty.Type.HARD:
+			return StatType.HIGHSCORE_TIME_HARD
+		Difficulty.Type.NORMAL:
+			return StatType.HIGHSCORE_TIME_NORMAL
+		Difficulty.Type.EASY:
+			return StatType.HIGHSCORE_TIME_EASY
+		_:
+			return StatType.HIGHSCORE_TIME_VERY_EASY
+
+func get_apple_highscore_type(difficulty: int = -1) -> StatType:
+	if difficulty == -1:
+		difficulty = Difficulty.get_difficulty()
+	match difficulty as Difficulty.Type:
+		Difficulty.Type.IMPOSSIBLE:
+			return StatType.HIGHSCORE_APPLE_IMPOSSIBLE
+		Difficulty.Type.HARD:
+			return StatType.HIGHSCORE_APPLE_HARD
+		Difficulty.Type.NORMAL:
+			return StatType.HIGHSCORE_APPLE_NORMAL
+		Difficulty.Type.EASY:
+			return StatType.HIGHSCORE_APPLE_EASY
+		_:
+			return StatType.HIGHSCORE_APPLE_VERY_EASY
 
 func set_recording_value(stat: StatType, new_value: Variant) -> void:
 	if not stat_recording.has(stat):
@@ -442,6 +449,9 @@ func save_and_clear_match_scores() -> void:
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
 		return
 	
+	if GameManager.played_rounds == 0:
+		return
+	
 	var rounds_won :int = GameManager.get_match_score(multiplayer.get_unique_id())
 	var rounds_lost :int = GameManager.get_total_rounds() - rounds_won
 	
@@ -454,6 +464,7 @@ func save_and_clear_match_scores() -> void:
 		add_int_stat(Stats.StatType.MULTIPLAYER_MATCHES_LOST)
 	
 	GameManager.match_scores.clear()
+	GameManager.played_rounds = 0
 
 
 #endregion

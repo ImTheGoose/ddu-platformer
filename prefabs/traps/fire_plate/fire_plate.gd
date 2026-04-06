@@ -14,11 +14,11 @@ func _process(delta: float) -> void:
 	if hit:
 		time_since_hit += delta
 	
-	if time_since_hit >= seconds_before_fire + seconds_burning_for:
+	if time_since_hit >= (seconds_before_fire * Difficulty.get_setting(Difficulty.Settings.TRAP_TIMER_SPEED_SCALE, 1.0)) + seconds_burning_for:
 		_reset_plate()
 		return
 	
-	if time_since_hit >= seconds_before_fire && hit_area.monitoring == false:
+	if time_since_hit >= (seconds_before_fire * Difficulty.get_setting(Difficulty.Settings.TRAP_TIMER_SPEED_SCALE, 1.0)) && hit_area.monitoring == false:
 		_start_burning()
 
 func _reset_plate() -> void:

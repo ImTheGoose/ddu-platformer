@@ -1,7 +1,7 @@
 extends Camera2D
 
-@export var speed :int = 30
-@export var safe_distance :int = 100
+@export var speed :int = 25
+@export var safe_distance :int = 90
 @onready var origin_position :Vector2 = position
 
 var nudge_camera :bool = true
@@ -40,5 +40,5 @@ func _process(delta: float) -> void:
 	
 	
 	if !GameManager.is_game_paused():
-		var speed_scale :Variant = GameManager.get_difficulty_value("camera_speed")
+		var speed_scale :Variant = Difficulty.get_setting(Difficulty.Settings.CAMERA_SPEED_SCALE)
 		position.y -= speed_scale * speed * delta
