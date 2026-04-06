@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://cc8s1kq0yww6p"]
+
+[ext_resource type="Script" uid="uid://brmbno0bah8v4" path="res://prefabs/Entity.gd" id="1_j7ywd"]
+[ext_resource type="Script" uid="uid://bu4kmalsf2m24" path="res://prefabs/traps/falling_platform/falling_platform.gd" id="1_qbmik"]
+[ext_resource type="Texture2D" uid="uid://de8t21k7x71ab" path="res://assets/pixel_adventure_assets/Traps/Falling Platforms/Off.png" id="1_sldf8"]
+[ext_resource type="Texture2D" uid="uid://dk5d75udjikfn" path="res://assets/pixel_adventure_assets/Traps/Falling Platforms/On (32x10).png" id="2_qbmik"]
+[ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="5_w7o6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uc8s0"]
+size = Vector2(32, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl3vo"]
+atlas = ExtResource("1_sldf8")
+region = Rect2(0, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bexw"]
+atlas = ExtResource("2_qbmik")
+region = Rect2(0, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptcfv"]
+atlas = ExtResource("2_qbmik")
+region = Rect2(32, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2e6yh"]
+atlas = ExtResource("2_qbmik")
+region = Rect2(64, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uq7p"]
+atlas = ExtResource("2_qbmik")
+region = Rect2(96, 0, 32, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncobn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl3vo")
+}],
+"loop": true,
+"name": &"Off",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bexw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptcfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2e6yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uq7p")
+}],
+"loop": true,
+"name": &"On",
+"speed": 20.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbmik"]
+radius = 2.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_jm831"]
+resource_name = "Appear"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, -0.24999346, -0.004568366, 0.2, 0.0036547885, 1.0003083, -0.5, -0.024514139, 0, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_bkiey"]
+resource_name = "Disappear"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(1, -0.24999346, -0.004568366, 0.2, 0.0036547885, 0, -0.5, -0.024514139, 0, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_j7ywd"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FallingPlatform:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FallingPlatform:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.0792131, -0.00016666668, -0.17986888, 0, 0),
+"times": PackedFloat32Array(0, 0.001)
+}
+
+[sub_resource type="Animation" id="Animation_w7o6b"]
+resource_name = "Touched"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FallingPlatform:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2, 2),
+"points": PackedFloat32Array(0, -0.27512854, -4.322979, 0.1, 1.571258, 7.0391703, -0.066666685, -0.12887716, 0.08885612, 0.17177282, -2.8205287, -0.12790005, 0.117749274, 0.0333333, -0.030687809, 0, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.16666669, 0.4, 0.6)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jm831"]
+_data = {
+&"Appear": SubResource("Animation_jm831"),
+&"Disappear": SubResource("Animation_bkiey"),
+&"RESET": SubResource("Animation_j7ywd"),
+&"Touched": SubResource("Animation_w7o6b")
+}
+
+[node name="FallingPlatformEntity" type="Node2D" unique_id=22592096]
+script = ExtResource("1_j7ywd")
+entity_type = 12
+metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="FallingPlatform" type="RigidBody2D" parent="." unique_id=2143142840]
+collision_layer = 128
+collision_mask = 0
+freeze = true
+freeze_mode = 1
+script = ExtResource("1_qbmik")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingPlatform" unique_id=476389620]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_uc8s0")
+one_way_collision = true
+one_way_collision_margin = 4.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FallingPlatform" unique_id=1840363800]
+sprite_frames = SubResource("SpriteFrames_ncobn")
+animation = &"On"
+autoplay = "On"
+
+[node name="PlayerDetection" type="Area2D" parent="FallingPlatform" unique_id=1860361649]
+unique_name_in_owner = true
+collision_mask = 9
+collision_priority = 3.025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingPlatform/PlayerDetection" unique_id=1188523863]
+position = Vector2(-3.967197e-14, -7)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qbmik")
+
+[node name="GPUParticles2D" parent="FallingPlatform" unique_id=928541509 instance=ExtResource("5_w7o6b")]
+unique_name_in_owner = true
+rotation = 3.1415927
+amount = 15
+lifetime = 0.25
+visibility_rect = Rect2(-50, -100, 100, 150)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=956471525]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_jm831")
+
+[connection signal="entity_reset" from="." to="FallingPlatform" method="_on_falling_platform_entity_entity_reset"]

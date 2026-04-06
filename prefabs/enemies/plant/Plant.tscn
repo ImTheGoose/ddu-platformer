@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://c1mt2bnj7pmli"]
+
+[ext_resource type="Script" uid="uid://uuqmd0t4drcg" path="res://prefabs/enemies/plant/plant.gd" id="1_1s8mq"]
+[ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="2_qlmjq"]
+[ext_resource type="SpriteFrames" uid="uid://d1kbdatac330x" path="res://prefabs/enemies/plant/plant_frames.tres" id="3_joegr"]
+[ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_vmiiw"]
+[ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="5_1s8mq"]
+[ext_resource type="Script" uid="uid://xj5blqpn2j3h" path="res://prefabs/enemies/components/AttackComponent.gd" id="6_oaj10"]
+[ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="7_op3u3"]
+[ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="8_6laea"]
+[ext_resource type="Script" uid="uid://cphqtnahepgoh" path="res://prefabs/enemies/components/ProjectileSpawnerComponent.gd" id="9_t4iwn"]
+[ext_resource type="PackedScene" uid="uid://bfdotq0wp28bp" path="res://prefabs/enemies/plant/PlantProjectile.tscn" id="10_rw7x6"]
+[ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="11_oaj10"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksn0j"]
+size = Vector2(16, 32)
+
+[node name="Plant" type="Node2D" unique_id=563616430 node_paths=PackedStringArray("health_component", "path_detection_component", "sprite_component", "projectile_spawner_component", "attack_component")]
+script = ExtResource("1_1s8mq")
+health_component = NodePath("HealthComponent")
+path_detection_component = NodePath("PathDetectionComponent")
+sprite_component = NodePath("EnemySpriteComponent")
+projectile_spawner_component = NodePath("ProjectileSpawnerComponent")
+attack_component = NodePath("AttackComponent")
+entity_type = 3
+metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="HitBoxComponent" type="Area2D" parent="." unique_id=961640626 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
+collision_layer = 4
+collision_mask = 12
+script = ExtResource("2_qlmjq")
+kill_type = 2
+knockback_origin_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+kill_height_node = NodePath("../HeadPosition")
+kill_veloctiy_treshold = 100.0
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1790231367]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ksn0j")
+debug_color = Color(0.8687555, 0.35290557, 3.85046e-07, 0.41960785)
+
+[node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1700392675 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
+position = Vector2(0, -13)
+sprite_frames = ExtResource("3_joegr")
+animation = &"Idle"
+offset = Vector2(-4, 0)
+script = ExtResource("3_vmiiw")
+entity_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+path_detection_component = NodePath("../PathDetectionComponent")
+flip_x_offset = true
+metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=580562693 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("5_1s8mq")
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
+
+[node name="AttackComponent" type="Node" parent="." unique_id=769617888 node_paths=PackedStringArray("player_detecting_component", "sprite_component")]
+script = ExtResource("6_oaj10")
+player_detecting_component = NodePath("../PlayerDetectionComponent")
+sprite_component = NodePath("../EnemySpriteComponent")
+attack_frame = 4
+seconds_between_attacks = 1.4
+metadata/_custom_type_script = "uid://xj5blqpn2j3h"
+
+[node name="PlayerDetectionComponent" type="RayCast2D" parent="." unique_id=457834454 node_paths=PackedStringArray("health_component", "path_detection_component")]
+position = Vector2(0, -15)
+collision_mask = 9
+script = ExtResource("7_op3u3")
+health_component = NodePath("../HealthComponent")
+path_detection_component = NodePath("../PathDetectionComponent")
+metadata/_custom_type_script = "uid://b2vo6nwgt4fvn"
+
+[node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=345418589 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("8_6laea")
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://ddrne3nd443y"
+
+[node name="HeadPosition" type="Node2D" parent="." unique_id=491420849]
+position = Vector2(0, -18)
+
+[node name="ProjectileSpawnerComponent" type="Node2D" parent="." unique_id=1713270775]
+position = Vector2(-23, -15)
+script = ExtResource("9_t4iwn")
+projectile = ExtResource("10_rw7x6")
+metadata/_custom_type_script = "uid://cphqtnahepgoh"
+
+[node name="AudioComponent" type="Node" parent="." unique_id=956791494 node_paths=PackedStringArray("health_component", "projectile_spawner")]
+script = ExtResource("11_oaj10")
+health_component = NodePath("../HealthComponent")
+projectile_spawner = NodePath("../ProjectileSpawnerComponent")
+metadata/_custom_type_script = "uid://c5lwrhejxb5m0"

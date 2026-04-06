@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bfdotq0wp28bp"]
+
+[ext_resource type="Script" uid="uid://yakm4ys46ld4" path="res://prefabs/enemies/Projectile.gd" id="1_w0010"]
+[ext_resource type="Texture2D" uid="uid://dssh41a4kt13u" path="res://assets/pixel_adventure_assets/Enemies/Plant/Bullet.png" id="2_tisoo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vcn0"]
+size = Vector2(7, 7)
+
+[node name="TrunkProjectile" type="Area2D" unique_id=476840123]
+collision_mask = 9
+script = ExtResource("1_w0010")
+speed = 80
+metadata/_custom_type_script = "uid://csjcberb4rmwa"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790626015]
+position = Vector2(0.5, -0.5)
+texture = ExtResource("2_tisoo")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1865158731]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6vcn0")

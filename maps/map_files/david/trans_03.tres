@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://yjb44bdyxvi5"]
+
+[ext_resource type="PackedScene" uid="uid://dmne47u6n5s8e" path="res://maps/prefabs/transition_prefabs/david_trans/trans_C_to_A.tscn" id="1_b2y7d"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_dtnja"]
+
+[resource]
+script = ExtResource("1_dtnja")
+map_id = "trans_03"
+prefab = ExtResource("1_b2y7d")
+bottom_connection_type = 2
+type = 1
+related_collections = Array[int]([1])
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

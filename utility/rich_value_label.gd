@@ -6,6 +6,6 @@ extends RichTextLabel
 func _process(delta: float) -> void:
 	_update_text()
 
-func _update_text():
-	var value = DataManager.get_value(data_key)
+func _update_text() -> void:
+	var value :float = DataManager.get_value(data_key)
 	text = BB_Code + str(int(value))

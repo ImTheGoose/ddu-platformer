@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://2np6goag7nic"]
+
+[ext_resource type="Script" uid="uid://doovow1ubdcjp" path="res://prefabs/menus/settings_menu/settings_menu.gd" id="1_j2ip3"]
+[ext_resource type="Script" uid="uid://bbqfxplkacax7" path="res://prefabs/menus/SliderValueLabel.gd" id="2_j2ip3"]
+
+[node name="SettingsMenu" type="VBoxContainer" unique_id=463999452 node_paths=PackedStringArray("initial_focus", "back_button")]
+custom_minimum_size = Vector2(220, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -103.0
+offset_right = 100.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_j2ip3")
+menu_name = "settings_menu"
+seperate_from_game = true
+initial_focus = NodePath("back")
+back_button = NodePath("back")
+
+[node name="Label" type="Label" parent="." unique_id=1151351386]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1321806846]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1229917897]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=618003197]
+custom_minimum_size = Vector2(0, 108)
+layout_mode = 2
+size_flags_vertical = 0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="SettingsList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=597925487]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=1526854827]
+layout_mode = 2
+
+[node name="master_volume_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer" unique_id=2096946806]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="master_volume" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer" unique_id=179081952]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -25.0
+max_value = 20.0
+
+[node name="master_volume_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer" unique_id=670444459 node_paths=PackedStringArray("assigned_slider")]
+layout_mode = 2
+text = "22db "
+script = ExtResource("2_j2ip3")
+assigned_slider = NodePath("../master_volume")
+value_suffix = "db "
+display_as_int = true
+metadata/_custom_type_script = "uid://bbqfxplkacax7"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=1271489551]
+layout_mode = 2
+
+[node name="music_volume_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2" unique_id=306952451]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="music_volume" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2" unique_id=1335843368]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -72.0
+max_value = 20.0
+
+[node name="music_volume_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer2" unique_id=1125820331 node_paths=PackedStringArray("assigned_slider")]
+layout_mode = 2
+text = "10db "
+script = ExtResource("2_j2ip3")
+assigned_slider = NodePath("../music_volume")
+value_suffix = "db "
+display_as_int = true
+metadata/_custom_type_script = "uid://bbqfxplkacax7"
+
+[node name="fullscreen_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=77290920]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="particles_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=1228362983]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Particles"
+
+[node name="skip_transitions_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=1979636143]
+unique_name_in_owner = true
+layout_mode = 2
+text = "skip transitions"
+
+[node name="vsync_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=210024663]
+unique_name_in_owner = true
+layout_mode = 2
+text = "V-Sync"
+
+[node name="fps_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=511141788]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show FPS"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=1135312266]
+layout_mode = 2
+
+[node name="fps_limit_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3" unique_id=406396330]
+layout_mode = 2
+text = "Max framerate"
+
+[node name="fps_limit" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3" unique_id=329633066]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 600.0
+value = 144.0
+exp_edit = true
+
+[node name="fps_limit_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/HBoxContainer3" unique_id=1776702884 node_paths=PackedStringArray("assigned_slider")]
+layout_mode = 2
+text = "144fps "
+script = ExtResource("2_j2ip3")
+assigned_slider = NodePath("../fps_limit")
+value_suffix = "fps "
+display_as_int = true
+string_at_max = "unlimited"
+metadata/_custom_type_script = "uid://bbqfxplkacax7"
+
+[node name="keybinds" type="Button" parent="PanelContainer/VBoxContainer/ScrollContainer/SettingsList" unique_id=1538550654]
+layout_mode = 2
+text = "Keybindings"
+
+[node name="clear_game_data" type="Button" parent="." unique_id=1315414766]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear Game Data"
+
+[node name="back" type="Button" parent="." unique_id=667139389]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ScrollContainer/SettingsList/keybinds" to="." method="_on_keybinds_pressed"]
+[connection signal="pressed" from="clear_game_data" to="." method="_on_clear_game_data_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
