@@ -15,11 +15,18 @@ const DIFFICULTY_SETTINGS :Dictionary[Type, Dictionary] = {
 		Settings.SPIKE_SPAWN_RATE : 0.2,
 		Settings.PROJECTILE_SPEED_SCALE : 0.4,
 		Settings.TRAP_TIMER_SPEED_SCALE : 1.4,
+		Settings.ENEMY_SPEED_SCALE : 0.7,
+		Settings.ENEMY_WAIT_TIME : 1.3,
 	},
 	Type.EASY : {
 		Settings.CAMERA_SPEED_SCALE : 0.8,
 		Settings.ENEMY_SPAWN_RATE : 0.7,
 		Settings.COLLECTABLE_SPAWN_RATE : 0.7,
+		Settings.SPIKE_SPAWN_RATE : 0.75,
+		Settings.PROJECTILE_SPEED_SCALE : 0.7,
+		Settings.TRAP_TIMER_SPEED_SCALE : 1.2,
+		Settings.ENEMY_SPEED_SCALE : 0.8,
+		Settings.ENEMY_WAIT_TIME : 1.2,
 	},
 	Type.NORMAL : {
 		Settings.CAMERA_SPEED_SCALE : 1.0,
@@ -30,6 +37,8 @@ const DIFFICULTY_SETTINGS :Dictionary[Type, Dictionary] = {
 		Settings.CAMERA_SPEED_SCALE : 1.1,
 		Settings.ENEMY_SPAWN_RATE : 1.0,
 		Settings.COLLECTABLE_SPAWN_RATE : 1.0,
+		Settings.PROJECTILE_SPEED_SCALE : 1.1,
+		Settings.TRAP_TIMER_SPEED_SCALE : 0.8,
 	},
 	Type.IMPOSSIBLE : {
 		Settings.CAMERA_SPEED_SCALE : 1.3,
@@ -37,6 +46,8 @@ const DIFFICULTY_SETTINGS :Dictionary[Type, Dictionary] = {
 		Settings.COLLECTABLE_SPAWN_RATE : 1.0,
 		Settings.TRAP_TIMER_SPEED_SCALE : 0.65,
 		Settings.PROJECTILE_SPEED_SCALE : 1.25,
+		Settings.ENEMY_WAIT_TIME : 0.8,
+		Settings.ENEMY_SPEED_SCALE : 1.2,
 	},
 }
 
@@ -55,6 +66,8 @@ enum Settings {
 	SPIKE_SPAWN_RATE,
 	TRAP_TIMER_SPEED_SCALE,
 	PROJECTILE_SPEED_SCALE,
+	ENEMY_WAIT_TIME,
+	ENEMY_SPEED_SCALE,
 }
 
 @rpc("authority", "call_local","reliable")

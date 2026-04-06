@@ -227,8 +227,8 @@ func _clear_unused_multiplayer_children() -> void:
 			else:
 				cleared += 1
 				child.queue_free()
-	print("Cleared a total of %s objects" % cleared)
-	print("Disabled %s networked objects" % disabled)
+	#print("Cleared a total of %s objects" % cleared)
+	#print("Disabled %s networked objects" % disabled)
 
 func _clear_unused_local_children() -> void:
 	var lowest_player :Player = get_lowest_player()
@@ -248,7 +248,7 @@ func _clear_unused_local_children() -> void:
 				child.disable()
 				add_node_to_unused(child)
 	
-	print("Disabled %s local objects" % disabled)
+	#print("Disabled %s local objects" % disabled)
 
 func get_lowest_player() -> Player:
 	var players :Array[Node] = get_tree().get_nodes_in_group("Players")
@@ -295,7 +295,7 @@ func _ready() -> void:
 	GameManager.server_reset.connect(_on_server_reset)
 	GameManager.client_reset.connect(_on_client_reset)
 	Performance.add_custom_monitor("game/Total_Entities", get_entity_count, [[]])
-	Performance.add_custom_monitor("game/enemies", get_entity_count, [[SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_TRUNK]])
+	Performance.add_custom_monitor("game/enemies", get_entity_count, [range(SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_SPIKED_MOVING_HEAD)])
 	Performance.add_custom_monitor("game/Traps", get_entity_count, [range(SpawnType.TRAP_SPIKE, SpawnType.TRAP_POWER_TRAMPOLINE)])
 	Performance.add_custom_monitor("game/Collectables", get_entity_count, [[SpawnType.COLLECTABLE_APPLE]])
 

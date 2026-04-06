@@ -10,6 +10,7 @@ class_name MovementComponent
 @export var distance_for_event :float = 0.0
 var distance_event_fired :bool = false
 @export var speed :int = 35
+var scaled_speed :float = 0
 var velocity :float = 0
 @export_exp_easing("inout") var accelleration :float = .5
 @export_exp_easing("attenuation") var deaccelleration :float = .5
@@ -33,11 +34,13 @@ func _process(delta: float) -> void:
 	if not should_move:
 		return
 	
+	scaled_speed = speed * Difficulty.get_setting(Difficulty.Settings.ENEMY_SPEED_SCALE, 1.0)
+	
 	var distance_to_target := entity_root.global_position.distance_to(target_position)
 
 	# 1. Calculate our effective deceleration rate (pixels/s^2)
 	# Using your logic: speed / deaccelleration
-	var braking_rate := float(speed) / deaccelleration
+	var braking_rate := float(scaled_speed) / deaccelleration
 
 	# 2. Calculate stopping distance: (v^2) / (2 * a)
 	var stopping_distance := (velocity * velocity) / (2.0 * braking_rate)
@@ -48,10 +51,10 @@ func _process(delta: float) -> void:
 		velocity -= braking_rate * delta
 	else:
 		# ACCELERATE
-		var accel_rate := float(speed) / accelleration
+		var accel_rate := float(scaled_speed) / accelleration
 		velocity += accel_rate * delta 
 	# Keep velocity within bounds
-	velocity = clamp(velocity, 0, speed)
+	velocity = clamp(velocity, 0, scaled_speed)
 	
 	if distance_for_event > entity_root.global_position.distance_to(target_position):
 		if not distance_event_fired:
@@ -77,7 +80,7 @@ func is_at_target() -> bool:
 	return false
 	
 func _on_entity_reset() -> void:
-	velocity = speed
+	velocity = scaled_speed
 
 func set_target(gpos: Vector2) -> void:
 	target_position = gpos

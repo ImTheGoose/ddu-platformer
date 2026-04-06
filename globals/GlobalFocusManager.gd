@@ -14,7 +14,6 @@ func _enter_tree() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
 func _on_node_added(node:Node) -> void:
-	print("child added: %s" % node)
 	if node is Button or node is FoldableTextLabel or node is Slider:
 		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		

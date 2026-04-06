@@ -90,7 +90,6 @@ script = ExtResource("1_vhx8u")
 entity_type = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1136785909]
-visible = false
 position = Vector2(-2.3841858e-07, 0.5)
 shape = SubResource("RectangleShape2D_uc8s0")
 one_way_collision_margin = 4.0

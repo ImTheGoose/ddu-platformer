@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	if movement_component.is_at_target():
 		seconds_waited += delta
 	
-	if seconds_waited > seconds_waiting_at_target:
+	if seconds_waited > (seconds_waiting_at_target * Difficulty.get_setting(Difficulty.Settings.ENEMY_WAIT_TIME, 1.0)):
 		seconds_waited = 0.0
 		path_detection_component.swap_target()
 		_update_movement_target()
@@ -65,10 +65,8 @@ func _randomise_path() -> void:
 	
 	if randf() > 0.5:
 		path_detection_component.rpc("set_target", true)
-		print("Forced direction positive for %s" % entity_node.name)
 	else:
 		path_detection_component.rpc("set_target", false)
-		print("Forced direction Negative for %s" % entity_node.name)
 
 func _on_direction_changed(new_dir: Vector2) -> void:
 	_update_movement_target()

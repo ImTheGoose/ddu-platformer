@@ -134,6 +134,9 @@ func is_map_valid(map_file: MapFile) -> bool:
 		if not map_file.is_multiplayer_compatible:
 			return false
 	
+	if map_file.blacklisted_difficulties.has(Difficulty.get_difficulty()):
+		return false
+	
 	if not map_file.related_collections.has(GameManager.get_map_collection()):
 		return false
 	

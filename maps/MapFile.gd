@@ -17,14 +17,19 @@ class_name MapFile
 @export var type :MapType = MapType.REGULAR_MAP
 
 # Collections that the maps is a part of.
-@export var related_collections :Array[CollectionType] = []
+@export var related_collections :Array[CollectionType] = [CollectionType.UNDER_DEVELOPMENT]
+
+@export var blacklisted_difficulties :Array[Difficulty.Type] = []
 
 # If the map is useable in a multiplayer context
 @export var is_multiplayer_compatible :bool = true
 
 enum CollectionType {
+	DEFAULT,
 	LEGACY,
-	TESTING,
+	UNDER_DEVELOPMENT,
+	IN_REVIEW,
+	TEST_MAPS,
 }
 
 # Transition maps arent a part of the map pool, and can therefore be shown multiple times per map clean.

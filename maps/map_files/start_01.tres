@@ -9,5 +9,5 @@ map_id = "start_01"
 prefab = ExtResource("1_qxkud")
 top_connection_type = 3
 type = 2
-related_collections = Array[int]([0])
+related_collections = Array[int]([1])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cuupl36k6ljx3"]
+[gd_scene format=4 uid="uid://gf6hy4gprvtt"]
 
 [ext_resource type="Script" uid="uid://cuqgqv7w3oopv" path="res://maps/MapRoot.gd" id="1_uo3g2"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="2_sn25b"]
@@ -67,4 +67,6 @@ position = Vector2(464, 288)
 script = ExtResource("7_e35o1")
 spawn_idx = 2
 
+[connection signal="body_entered" from="TrapTiles/@Area2D@45982" to="TrapTiles/@Area2D@45982" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@45983" to="TrapTiles/@Area2D@45983" method="_on_body_entered"]
 [connection signal="body_entered" from="game_start_area" to="game_start_area" method="_on_body_entered"]

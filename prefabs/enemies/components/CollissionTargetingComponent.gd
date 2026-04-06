@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 	if movement_component.is_at_target():
 		seconds_waited += delta
 	
-	if seconds_waited > seconds_waiting_at_target:
+	if seconds_waited > (seconds_waiting_at_target * Difficulty.get_setting(Difficulty.Settings.ENEMY_WAIT_TIME, 1.0)):
 		moving_towards_collission = false
 		seconds_waited = 0.0
 		_update_movement_target()

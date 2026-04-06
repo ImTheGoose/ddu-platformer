@@ -20,7 +20,7 @@ shader_parameter/add_margins = false
 shader_parameter/opacity = 1.0
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1nynx"]
-points = PackedVector2Array(-8, 11, -8, 7, -8, -9, -4, -12, 4, -12, 8, -9, 8, 7, 8, 11)
+points = PackedVector2Array(-7.5, 11, -7.5, -9, -4, -12, 4, -12, 7.5, -9, 7.5, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
 size = Vector2(11.958836, 5.087199)

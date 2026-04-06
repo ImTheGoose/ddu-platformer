@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		movement_component.resume_movement()
 	
 	if movement_component.is_at_target():
-		if seconds_waited < seconds_waiting_at_target:
+		if seconds_waited < (seconds_waiting_at_target * Difficulty.get_setting(Difficulty.Settings.ENEMY_WAIT_TIME, 1.0)):
 			seconds_waited += delta
 		else:
 			seconds_waited = 0.0
