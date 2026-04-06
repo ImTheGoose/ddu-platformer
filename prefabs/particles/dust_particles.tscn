@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dpjwyw8kvil3y"]
 
-[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="2_mxusi"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_mxusi"]
 
 [sub_resource type="Gradient" id="Gradient_yhksc"]
 colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
@@ -32,7 +32,8 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_yhksc")
 color_ramp = SubResource("GradientTexture1D_634ti")
 
-[node name="dust_particles" type="GPUParticles2D" unique_id=184980021]
+[node name="dust_particles" type="GPUParticles2D" unique_id=303894581]
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_rwuho")
 script = ExtResource("2_mxusi")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"

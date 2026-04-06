@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://buoywev11r3ts"]
 
 [ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_ipmgv"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_aicb6"]
 
 [sub_resource type="Curve" id="Curve_jeqdm"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.09708737, 1), 0.0, 0.0, 0, 0, Vector2(0.7503467, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -47,3 +48,4 @@ texture = ExtResource("1_ipmgv")
 lifetime = 0.65
 speed_scale = 0.6
 process_material = SubResource("ParticleProcessMaterial_b13u2")
+script = ExtResource("2_aicb6")

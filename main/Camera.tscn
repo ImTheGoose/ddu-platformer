@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://main/camera_2d.gd" id="1_a0f6b"]
 [ext_resource type="AudioStream" uid="uid://bi7c73m7bggnj" path="res://assets/audio/music/looped_song1.mp3" id="2_ibjqg"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
-[ext_resource type="Script" uid="uid://bnk08qohdlepr" path="res://prefabs/general_UI/bottom_cloud.gd" id="17_8t6hx"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="28_mg1ud"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="29_anor8"]
@@ -33,7 +32,6 @@ bus = &"Music"
 z_index = 0
 position = Vector2(322, 357.83)
 emitting = false
-script = ExtResource("17_8t6hx")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=913652253]
 collision_mask = 9

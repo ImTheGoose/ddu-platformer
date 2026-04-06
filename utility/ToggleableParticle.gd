@@ -1,4 +1,6 @@
-extends Node2D
+extends GPUParticles2D
+
+class_name ToggleableParticle 
 
 ## If visibillity should be updated in process. If not then will not be visible, unless set by script.
 @export var process_updated :bool = true
@@ -9,8 +11,7 @@ func _ready() -> void:
 
 func _on_visible_changed() -> void:
 	var video_settings :Dictionary = DataManager.get_video_settings()
-	if !video_settings.particles_enabled:
-		visible = false
+	visible = video_settings.particles_enabled
 
 func _process(delta: float) -> void:
 	if process_updated:

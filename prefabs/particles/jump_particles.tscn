@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0itpxkfhya41"]
 
-[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/toggable_particle.gd" id="2_as8up"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_as8up"]
 
 [sub_resource type="Gradient" id="Gradient_yhksc"]
 colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
@@ -33,7 +33,7 @@ scale_max = 4.0
 scale_curve = SubResource("CurveTexture_yhksc")
 color_ramp = SubResource("GradientTexture1D_634ti")
 
-[node name="jump_particles" type="GPUParticles2D" unique_id=1351646493]
+[node name="jump_particles" type="GPUParticles2D" unique_id=2081916230]
 emitting = false
 amount = 20
 lifetime = 0.3
@@ -41,3 +41,4 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_yhksc")
 script = ExtResource("2_as8up")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"
