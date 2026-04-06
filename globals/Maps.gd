@@ -1,7 +1,10 @@
 extends Node
 
 const MAP_FOLDER_PATHS :Dictionary[String, String] = {
-	"default" : "res://maps/map_files/"
+	"default" : "res://maps/map_files/default/",
+	"wilfred" : "res://maps/map_files/wilfred/",
+	"willum" : "res://maps/map_files/willum/",
+	"david" : "res://maps/map_files/david/",
 }
 
 # A directory of every map that is loaded into memory. Not intended to be manipulated.
@@ -25,6 +28,9 @@ func _load_all_maps_on_initialise() -> void:
 		load_maps_from_folder(path)
 
 func load_maps_from_folder(path: String) -> void:
+	for sub_path: String in DirAccess.get_directories_at(path):
+		load_maps_from_folder(sub_path)
+
 	loaded_map_files.append_array(get_maps_from_folder(path))
 
 func get_maps_from_folder(path: String) -> Array[MapFile]:
