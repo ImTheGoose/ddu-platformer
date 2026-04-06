@@ -37,6 +37,7 @@ const VISIBLE_COLLECTIONS_IN_RELEASE :Array[CollectionType] = [
 enum CollectionType {
 	DEFAULT,
 	LEGACY,
+	NEW_MAPS,
 	UNDER_DEVELOPMENT,
 	IN_REVIEW,
 	TEST_MAPS,
