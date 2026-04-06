@@ -41,6 +41,7 @@ horizontal_alignment = 1
 [node name="difficulty_dropdown" type="OptionButton" parent="." unique_id=1502559463]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"BigOption"
 alignment = 1
 text_overrun_behavior = 1
 selected = 2
@@ -59,6 +60,7 @@ popup/item_4/id = 4
 [node name="map_collection_dropdown" type="OptionButton" parent="." unique_id=2134683208]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"BigOption"
 alignment = 1
 
 [node name="start_game" type="Button" parent="." unique_id=671084686]

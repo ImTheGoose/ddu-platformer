@@ -11,7 +11,7 @@ signal save_game_completed
 var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
-	"save_version" : 0.3,
+	"save_version" : 0.4,
 	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
