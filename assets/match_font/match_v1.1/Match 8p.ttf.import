@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bhqewh7cbuaet"
-path="res://.godot/imported/Sabo-Filled.otf-73d67fe62f612491190422716441d5e1.fontdata"
+uid="uid://bcqwhr1plg6sa"
+path="res://.godot/imported/Match 8p.ttf-7506f8cc9ba9025133f95a10b356e623.fontdata"
 
 [deps]
 
-source_file="res://assets/Sabo-Filled.otf"
-dest_files=["res://.godot/imported/Sabo-Filled.otf-73d67fe62f612491190422716441d5e1.fontdata"]
+source_file="res://assets/match_font/match_v1.1/Match 8p.ttf"
+dest_files=["res://.godot/imported/Match 8p.ttf-7506f8cc9ba9025133f95a10b356e623.fontdata"]
 
 [params]
 
@@ -23,19 +23,14 @@ allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=4
 keep_rounding_remainders=true
-oversampling=10.0
+oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[{
-"chars": [],
-"glyphs": [],
-"name": "New Configuration",
-"size": Vector2i(16, 0)
-}]
+preload=[]
 language_support={}
 script_support={}
 opentype_features={}
