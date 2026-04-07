@@ -17,6 +17,7 @@ var current_start_pool :Array[MapFile] = []
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_load_all_maps_on_initialise()
+	
 
 func _ready() -> void:
 	refresh_map_pools()
@@ -37,6 +38,7 @@ func get_maps_from_folder(path: String) -> Array[MapFile]:
 	var folder_map_files :Array[MapFile]
 	
 	for file_name in DirAccess.get_files_at(path):
+		var full_file_name :String = file_name
 		if file_name.get_extension() == "import": # On export files are moved, and need to be checked for file extensions.
 			file_name = file_name.replace(".import", "")
 		if file_name.get_extension() == "remap":
@@ -46,7 +48,7 @@ func get_maps_from_folder(path: String) -> Array[MapFile]:
 		if loaded_file is MapFile:
 			folder_map_files.append(loaded_file)
 		else:
-			printerr("Loaded unknown ressource from mapfile folder. Filename is: ", file_name, " And ressource is: ", loaded_file)
+			printerr("Loaded unknown ressource from mapfile folder. Filename is: ", file_name, " File script is: ", loaded_file.get_script(), " Full filename is: ", full_file_name, " And ressource is: ", loaded_file)
 		
 	return folder_map_files
 #endregion

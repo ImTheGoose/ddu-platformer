@@ -1,6 +1,6 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://cfs3ooaj7hmgn"]
 
-[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://ui_assets_fixed/sprites/gdp_styles.png" id="1_2xnue"]
+[ext_resource type="Texture2D" uid="uid://cmxwe65ra8mc2" path="res://assets/ui_assets_fixed/sprites/gdp_styles.png" id="1_2xnue"]
 
 [resource]
 content_margin_left = 0.0

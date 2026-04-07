@@ -61,9 +61,12 @@ enum ConnectionType {
 #region Map Creation Tool
 const SAMPLE_MAP_UID :String = "uid://ddwqswon7sfyp"
 const DEFAULT_DIRECTORY :String = "res://maps/prefabs/"
-var file_dialog :EditorFileDialog
+var file_dialog
 
 func editor_button_pressed() -> void:
+	if not Engine.is_editor_hint():
+		return
+	
 	if prefab:
 		printerr("A map prefab is already assigned to this Mapfile.")
 		return
@@ -82,11 +85,13 @@ func editor_button_pressed() -> void:
 	_show_save_dialog(dir, file_name)
 
 func _show_save_dialog(dir: String, file_name: String) -> void:
+	if not Engine.is_editor_hint():
+		return
 	reference()
-	file_dialog = EditorFileDialog.new()
+	file_dialog = ClassDB.instantiate("EditorFileDialog")
 	
-	file_dialog.file_mode = EditorFileDialog.FILE_MODE_SAVE_FILE
-	file_dialog.access = EditorFileDialog.ACCESS_RESOURCES
+	file_dialog.file_mode = 4 # EditorFileDialog.FILE_MODE_SAVE_FILE = 4
+	file_dialog.access = 0# EditorFileDialog.ACCESS_RESOURCES = 0
 	file_dialog.add_filter("*.tscn", "Scene File")
 	
 	file_dialog.current_dir = dir
@@ -95,10 +100,13 @@ func _show_save_dialog(dir: String, file_name: String) -> void:
 	file_dialog.confirmed.connect(_on_confirmed)
 	file_dialog.canceled.connect(_remove_ref)
 	
-	EditorInterface.get_base_control().add_child(file_dialog)
+	Engine.get_singleton("EditorInterface").get_base_control().add_child(file_dialog)
 	file_dialog.popup_centered_ratio(0.4)
 
 func _on_confirmed() -> void:
+	if not Engine.is_editor_hint():
+		return
+		
 	var sample_map_path :String = ResourceUID.get_id_path(ResourceUID.text_to_id(SAMPLE_MAP_UID))
 	var path :String = file_dialog.current_path
 	if not FileAccess.file_exists(path):
@@ -123,13 +131,15 @@ func _on_confirmed() -> void:
 	if err != OK:
 		push_error("Something went wrong when saving ressource file to system. Error says %s with code: %s" % [error_string(err), err])
 	
-	EditorInterface.get_resource_filesystem().scan()
-	EditorInterface.open_scene_from_path(path)
-	var tree = EditorInterface.get_base_control().get_tree()
+	
+	var editor_interface :Object = Engine.get_singleton("EditorInterface")
+	editor_interface.get_resource_filesystem().scan()
+	editor_interface.open_scene_from_path(path)
+	var tree = editor_interface.get_base_control().get_tree()
 	await tree.process_frame
 	await tree.process_frame
 	await tree.process_frame
-	EditorInterface.set_main_screen_editor("2D")
+	editor_interface.set_main_screen_editor("2D")
 	notify_property_list_changed()
 
 func _remove_ref() -> void:

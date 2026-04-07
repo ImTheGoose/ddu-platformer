@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bhqewh7cbuaet"
-path="res://.godot/imported/Sabo-Filled.otf-73d67fe62f612491190422716441d5e1.fontdata"
+uid="uid://b1s6rd35x8oc1"
+path="res://.godot/imported/Match 7.ttf-67af66aa1dd3e726efc84ef84a0df83f.fontdata"
 
 [deps]
 
-source_file="res://assets/Sabo-Filled.otf"
-dest_files=["res://.godot/imported/Sabo-Filled.otf-73d67fe62f612491190422716441d5e1.fontdata"]
+source_file="res://assets/match_font/match_7_v2/Match 7.ttf"
+dest_files=["res://.godot/imported/Match 7.ttf-67af66aa1dd3e726efc84ef84a0df83f.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
@@ -22,19 +22,20 @@ msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
-hinting=1
+hinting=0
 subpixel_positioning=1
 keep_rounding_remainders=true
-oversampling=10.0
+oversampling=6.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
-compress=true
+compress=false
 preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0)
+"size": Vector2i(16, 0),
+&"variation_embolden": 0.0
 }]
 language_support={}
 script_support={}
