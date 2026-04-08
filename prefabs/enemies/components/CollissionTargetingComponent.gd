@@ -13,6 +13,7 @@ var original_deaccelleration :float = 0.0
 @export_category("Movement Config")
 @export_range(0,5, 0.1) var seconds_waiting_at_target :float = 2.0
 var seconds_waited :float = 0.0
+@export var collission_distance :float = 5
 
 var origin_position :Vector2 = global_position
 var moving_towards_collission :bool = false
@@ -53,6 +54,7 @@ func _process(delta: float) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func _start_falling() -> void:
+	seconds_waited = 0.0
 	moving_towards_collission = true
 	_update_movement_target()
 	movement_component.start_moving()
@@ -71,7 +73,8 @@ func _update_movement_target() -> void:
 	movement_component.deaccelleration = original_deaccelleration
 	movement_component.speed = original_speed * fall_speed_multiplier
 	var gpos :Vector2 = get_collision_point()
-	movement_component.set_target(gpos)
+	var offset :Vector2 = Vector2.UP * collission_distance
+	movement_component.set_target(gpos + offset)
 
 func _on_entity_reset() -> void:
 	origin_position = entity_node.global_position
