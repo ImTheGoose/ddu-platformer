@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://ddwqswon7sfyp"]
+[gd_scene format=4 uid="uid://doifns5b1x68q"]
 
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="1_si0pi"]
 [ext_resource type="Script" uid="uid://cuqgqv7w3oopv" path="res://maps/MapRoot.gd" id="1_v3v4a"]
@@ -43,6 +43,3 @@ navigation_enabled = false
 tile_map_data = PackedByteArray("AAACABYAAAAAAAAAAQACABUAAAAAAAAAAQACAA0AAAAAAAAAAQABAAMAAAAAAAAAAQABAAIAAAAAAAAAAQAlABUAAAAAAAAAAQAjAA4AAAAAAAAAAQAkAA4AAAAAAAAAAQAOABMAAAAAAAAAAQANABMAAAAAAAAAAQAcAAsAAAAAAAAAAQADAAwAAAAAAAAAAQACAAsAAAAAAAAAAQAEAA0AAAAAAAAAAQAEAAsAAAAAAAAAAQAlABcAAAAAAAAAAQAlABkAAAAAAAAAAQAlABsAAAAAAAAAAQANAAcAAAAAAAAAAQA=")
 tile_set = ExtResource("6_lhnv5")
 navigation_enabled = false
-
-[connection signal="entity_reset" from="TrapTiles/FallingPlatformEntity" to="TrapTiles/FallingPlatformEntity/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
-[connection signal="entity_reset" from="TrapTiles/@Node2D@21835" to="TrapTiles/@Node2D@21835/FallingPlatform" method="_on_falling_platform_entity_entity_reset"]

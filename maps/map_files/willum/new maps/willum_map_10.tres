@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://dvjxpbelw12da"]
 
-[ext_resource type="PackedScene" uid="uid://ddwqswon7sfyp" path="res://maps/prefabs/map_prefabs/willum/new maps/willum_map_10.tscn" id="1_ajsss"]
+[ext_resource type="PackedScene" uid="uid://doifns5b1x68q" path="res://maps/prefabs/map_prefabs/willum/new maps/willum_map_10.tscn" id="1_ajsss"]
 [ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_u7rex"]
 
 [resource]
