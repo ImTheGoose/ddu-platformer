@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cn1x1bxgo5rj0"]
+
+[ext_resource type="Script" uid="uid://2j7al23qnikn" path="res://prefabs/menus/campaign/level_card.gd" id="1_76lxp"]
+[ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="1_ph74s"]
+
+[node name="LevelCard" type="PanelContainer" unique_id=2033289344]
+custom_minimum_size = Vector2(45, 45)
+script = ExtResource("1_76lxp")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=27197159]
+layout_mode = 2
+theme_override_constants/margin_top = -3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1166824350]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="button_index_label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1422863222]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ph74s")
+theme_override_font_sizes/font_size = 30
+text = "99"
+horizontal_alignment = 1
+
+[node name="play_level_button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=93818528]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+text = "Play"

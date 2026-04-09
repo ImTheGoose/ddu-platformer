@@ -21,7 +21,9 @@
 [ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="24_0c1fb"]
 [ext_resource type="PackedScene" uid="uid://dxyonb6hgvrx" path="res://main/Camera.tscn" id="24_hhcpw"]
 [ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="25_fw23c"]
+[ext_resource type="PackedScene" uid="uid://dxg76o8gmmyhd" path="res://prefabs/menus/campaign/level_select_menu.tscn" id="26_0d5nc"]
 [ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="26_7867i"]
+[ext_resource type="PackedScene" uid="uid://btxm2umevuq7b" path="res://main/level_overview_menu.tscn" id="26_sebc1"]
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="27_q4fed"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="28_7glbu"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="29_eh0ei"]
@@ -350,6 +352,13 @@ scale = Vector2(4, 4)
 visible = false
 layout_mode = 1
 
+[node name="level_overview_menu" parent="CanvasLayer/Control2/Control" unique_id=1150293006 instance=ExtResource("26_sebc1")]
+layout_mode = 1
+
+[node name="level_select_menu" parent="CanvasLayer/Control2/Control" unique_id=160876120 instance=ExtResource("26_0d5nc")]
+visible = false
+layout_mode = 1
+
 [node name="settings_menu" parent="CanvasLayer/Control2/Control" unique_id=463999452 instance=ExtResource("26_7867i")]
 visible = false
 layout_mode = 1
@@ -445,6 +454,7 @@ visible = false
 layout_mode = 1
 
 [node name="MultiplayerStatusMenu" parent="CanvasLayer/Control2/Control" unique_id=840786237 instance=ExtResource("44_y6p51")]
+visible = false
 layout_mode = 1
 offset_left = -116.5
 offset_top = -37.5

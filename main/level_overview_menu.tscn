@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://btxm2umevuq7b"]
+
+[ext_resource type="Script" uid="uid://cj1i5km40t0yb" path="res://prefabs/menus/campaign/level_overview_menu.gd" id="1_31vbg"]
+
+[node name="level_overview_menu" type="Control" unique_id=1414970705 node_paths=PackedStringArray("initial_focus", "back_button")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_31vbg")
+menu_name = "level_overview_menu"
+initial_focus = NodePath("VBoxContainer/VBoxContainer/play_button")
+back_button = NodePath("VBoxContainer/VBoxContainer/back_button")
+metadata/_custom_type_script = "uid://dh48bnsmn0fh0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=657079989]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -58.0
+offset_right = 43.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=982450532]
+custom_minimum_size = Vector2(130, 105)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=912059192]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="level_label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1054426160]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Level - 99"
+horizontal_alignment = 1
+
+[node name="highscore_label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1999166375]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/star_5 (16x16).png[/img][color=white ] Score - 4m 51s"
+fit_content = true
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=781648164]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="medals_label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1043092172]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/icons/medal (16x16).png[/img][color=Goldenrod ] Gold - 2m 32s
+[img]res://assets/icons/medal (16x16).png[/img] [color=silver]Silver - 3m 10s
+[img]res://assets/icons/medal (16x16).png[/img] [color=Chocolate  ]Bronze - 3m 45s"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=860450108]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="play_button" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=2030958101]
+layout_mode = 2
+text = "Play Level"
+
+[node name="back_button" type="Button" parent="VBoxContainer/VBoxContainer" unique_id=1056483433]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
