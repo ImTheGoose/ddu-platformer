@@ -1,4 +1,5 @@
 extends RigidBody2D
+@export var entity_node :Entity
 @onready var player_detection: Area2D = %PlayerDetection
 @onready var origin_pos :Vector2 = position
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
@@ -10,6 +11,8 @@ extends RigidBody2D
 var fall_time :float = 0
 var touched :bool = false
 
+func _ready() -> void:
+	entity_node.entity_reset.connect(_on_entity_reset)
 
 func _process(delta: float) -> void:
 	if not touched:
@@ -56,6 +59,6 @@ func show_touched() -> void:
 	animation_player.play("Touched")
 
 
-func _on_falling_platform_entity_entity_reset() -> void:
+func _on_entity_reset() -> void:
 	_initiate_platform_reappear()
 	animation_player.play("RESET")
