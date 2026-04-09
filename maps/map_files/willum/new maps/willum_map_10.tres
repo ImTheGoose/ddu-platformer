@@ -10,4 +10,5 @@ prefab = ExtResource("1_ajsss")
 bottom_connection_type = 3
 top_connection_type = 3
 related_collections = Array[int]([3, 2])
+blacklisted_difficulties = Array[int]([4, 3])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
