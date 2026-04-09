@@ -193,5 +193,3 @@ visibility_rect = Rect2(-50, -100, 100, 150)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=956471525]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_jm831")
-
-[connection signal="entity_reset" from="." to="FallingPlatform" method="_on_falling_platform_entity_entity_reset"]
