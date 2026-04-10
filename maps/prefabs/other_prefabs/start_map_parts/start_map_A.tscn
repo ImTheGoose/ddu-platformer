@@ -66,4 +66,8 @@ position = Vector2(336, 224)
 script = ExtResource("7_e41cp")
 spawn_idx = 2
 
+[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@31515" to="TrapTiles/@Area2D@31515" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@31516" to="TrapTiles/@Area2D@31516" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@31517" to="TrapTiles/@Area2D@31517" method="_on_body_entered"]
 [connection signal="body_entered" from="game_start_area" to="game_start_area" method="_on_body_entered"]

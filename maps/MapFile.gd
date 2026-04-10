@@ -48,6 +48,7 @@ enum MapType {
 	REGULAR_MAP,
 	TRANSITION_MAP,
 	START_MAP,
+	END_MAP,
 }
 
 enum ConnectionType {
