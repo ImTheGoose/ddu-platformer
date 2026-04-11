@@ -12,11 +12,6 @@ func _ready() -> void:
 	original_level_text = level_label.text
 	original_highscore_text = highscore_label.text
 	original_medals_text = medals_label.text
-	
-	Levels.selected_level_changed.connect(_on_selected_level_changed)
-
-func _on_selected_level_changed(level_index: int) -> void:
-	_refresh_values()
 
 func _on_show() -> void:
 	_refresh_values()
