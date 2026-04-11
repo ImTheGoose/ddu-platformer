@@ -29,6 +29,7 @@ var default_game_settings :Dictionary = {
 	"collissions_enabled" : true,
 }
 
+var game_is_level :bool = false
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
@@ -269,6 +270,7 @@ func restart_game() -> void:
 
 @rpc("authority","call_local","reliable")
 func spawn_game() -> void:
+	Maps.mount_level(Levels.get_level_index())
 	spawn_level.emit()
 	set_state(STATE.PREGAME)
 
@@ -285,17 +287,23 @@ func clear_game() -> void:
 	clear_entities.emit()
 
 @rpc("authority","call_local","reliable")
-func prepare_game() -> void:
+func prepare_game(is_level: bool = false) -> void:
+	game_is_level = is_level
+	
 	clear_game()
 	prespawn_entities.emit()
 	
 	if multiplayer.is_server():
 		Maps.refresh_map_pools()
+		Maps.mount_level(Levels.get_level_index())
 		MenuHandler.rpc("show_blackout")
 		rpc("set_rounds_played", 0)
 		match_scores.clear()
 		sync_match_scores()
 		next_round()
+
+func is_playing_level() -> bool:
+	return game_is_level
 
 @rpc("any_peer","call_local","reliable")
 func start_game() -> void:

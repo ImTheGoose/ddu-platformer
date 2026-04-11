@@ -62,15 +62,13 @@ func _process(delta: float) -> void:
 			distance_event.emit()
 	
 	if is_at_target():
-		if entity_root.entity_type == EntitySpawner.SpawnType.ENEMY_MOVING_HEAD:
-			print("At TARGET")
 		target_reached.emit()
 		return
 
 	_move_towards_position(delta, target_position)
 	
 func _move_towards_position(delta: float, gpos: Vector2) -> void:
-	var dist_to_target = entity_root.global_position.distance_to(gpos)
+	var dist_to_target :float = entity_root.global_position.distance_to(gpos)
 	var move_distance :float = velocity * delta
 	
 	if move_distance >= dist_to_target:

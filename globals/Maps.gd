@@ -7,12 +7,18 @@ const MAP_FOLDER_PATHS :Dictionary[String, String] = {
 	"david" : "res://maps/map_files/david/",
 }
 
+var blank_space_map :MapFile = preload("uid://dvlawnyo64yfv")
+
 # A directory of every map that is loaded into memory. Not intended to be manipulated.
 var loaded_map_files :Array[MapFile] = []
 
 var current_map_pool :Array[MapFile] = []
 var current_transition_pool :Array[MapFile] = []
 var current_start_pool :Array[MapFile] = []
+
+var current_level_file :LevelFile
+var current_level_maps :Array[MapFile]
+var spawned_level_end :bool = false
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -74,6 +80,17 @@ func get_maps_matching_type(type: MapFile.MapType, check_valid: bool = false) ->
 	return matching_map_files
 #endregion
 
+func mount_level(index: int) -> void:
+	spawned_level_end = false
+	if GameManager.is_playing_level():
+		current_level_file = Levels.get_level(index)
+		current_level_maps = current_level_file.ordered_map_files.duplicate()
+	else:
+		current_level_file = null
+		current_level_maps = []
+	
+	return
+
 func refresh_map_pools() -> void:
 	current_map_pool = get_valid_maps(MapFile.MapType.REGULAR_MAP)
 	current_transition_pool = get_valid_maps(MapFile.MapType.TRANSITION_MAP)
@@ -82,6 +99,9 @@ func refresh_map_pools() -> void:
 	current_start_pool.shuffle()
 
 func get_start_map() -> MapFile:
+	if GameManager.is_playing_level():
+		return current_level_file.start_map_file
+	
 	if current_start_pool.is_empty():
 		current_start_pool = get_valid_maps(MapFile.MapType.START_MAP)
 		current_start_pool.shuffle()
@@ -89,6 +109,17 @@ func get_start_map() -> MapFile:
 
 # Gets the next map, with nescessary transitions earlier in the array.
 func get_next_map_section(current_connection: MapFile.ConnectionType) -> Array[MapFile]:
+	if GameManager.is_playing_level():
+		if not current_level_maps.is_empty():
+			return [current_level_maps.pop_front()]
+		
+		if not spawned_level_end:
+			spawned_level_end = true
+			return [current_level_file.end_map_file]
+		
+		return [blank_space_map]
+		
+	
 	var section :Array[MapFile] = []
 
 	if current_map_pool.is_empty():

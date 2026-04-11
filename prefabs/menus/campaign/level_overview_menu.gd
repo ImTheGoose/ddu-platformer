@@ -29,8 +29,7 @@ func _refresh_values() -> void:
 	medals_label.text = original_medals_text % [gold_seconds, silver_seconds, bronze_seconds]
 
 func _on_play_button_pressed() -> void:
-	pass # Replace with function body.
-
+	GameManager.prepare_game(true)
 
 func _on_back_button_pressed() -> void:
 	MenuHandler.change_menu("level_select_menu")
