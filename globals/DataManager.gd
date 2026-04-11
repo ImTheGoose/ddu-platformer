@@ -232,9 +232,4 @@ func get_keybindings() -> Dictionary:
 		
 	return keybindings
 
-func is_level_playable(idx : int) -> bool:
-	if get_value("unlocked_level") >= idx:
-		return true
-	return false
-
 #endregion

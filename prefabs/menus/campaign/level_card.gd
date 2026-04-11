@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _update_state() -> void:
 	button_index_label.text = str(_get_index())
-	if DataManager.is_level_playable(_get_index()):
+	if Levels.is_level_playable(_get_index()):
 		play_level_button.disabled = false
 		button_index_label.remove_theme_color_override("font_color")
 	else:
@@ -32,9 +32,13 @@ func _update_level_index(index_offset: int) -> void:
 	_on_foucs()
 
 func _on_foucs() -> void:
+	if not Levels.is_level_playable(_get_index()):
+		return
+	
 	if DataManager.get_value("unlocked_level") == _get_index():
 		play_level_button.grab_focus()
 
 func _pressed() -> void:
+	Levels.select_level(_get_index())
 	MenuHandler.change_menu("level_overview_menu")
 	#GameManager.play_level(_get_index())

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://disqa2pjlt1hx"]
+
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="2_op0df"]
+[ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="5_we70n"]
+
+[resource]
+script = ExtResource("5_we70n")
+map_index = 2
+metadata/_custom_type_script = "uid://h3dsm18hywkb"

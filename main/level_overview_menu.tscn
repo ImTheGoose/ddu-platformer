@@ -46,10 +46,11 @@ theme_override_constants/separation = 0
 [node name="level_label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1054426160]
 layout_mode = 2
 theme_type_variation = &"HeaderMedium"
-text = "Level - 99"
+text = "Level - %s"
 horizontal_alignment = 1
 
 [node name="highscore_label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1999166375]
+unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "[img]res://assets/icons/star_5 (16x16).png[/img][color=white ] Score - 4m 51s"
@@ -60,11 +61,12 @@ layout_mode = 2
 size_flags_vertical = 6
 
 [node name="medals_label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1043092172]
+unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/medal (16x16).png[/img][color=Goldenrod ] Gold - 2m 32s
-[img]res://assets/icons/medal (16x16).png[/img] [color=silver]Silver - 3m 10s
-[img]res://assets/icons/medal (16x16).png[/img] [color=Chocolate  ]Bronze - 3m 45s"
+text = "[img]res://assets/icons/medal (16x16).png[/img][color=Goldenrod ] Gold - %s
+[img]res://assets/icons/medal (16x16).png[/img] [color=silver]Silver - %s
+[img]res://assets/icons/medal (16x16).png[/img] [color=Chocolate  ]Bronze - %s"
 fit_content = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=860450108]

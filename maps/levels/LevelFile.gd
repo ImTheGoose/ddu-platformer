@@ -4,9 +4,9 @@ extends Resource
 class_name LevelFile 
 
 @export var map_index :int
-@export var gold_medal_seconds :int = 0
-@export var silver_medal_seconds :int = 0
-@export var bronze_medal_seconds :int = 0
+@export_range(0, 300, 1.0,"or_greater") var gold_medal_seconds :float = 0
+@export_range(0, 300, 1.0,"or_greater") var silver_medal_seconds :float = 0
+@export_range(0, 300, 1.0,"or_greater") var bronze_medal_seconds :float = 0
 
 @export_category("Map Files")
 @export_tool_button("Verify Map Files", "ImportCheck")
@@ -42,7 +42,7 @@ func _verify_map_files() -> void:
 			printerr("Map at index %s is null" % i)
 			continue
 		
-		if map.type != MapFile.MapType.REGULAR_MAP:
+		if map.type != MapFile.MapType.REGULAR_MAP && map.type != MapFile.MapType.TRANSITION_MAP:
 			printerr("Non regular map part at index %s in level body." % i)
 			continue
 		
@@ -62,16 +62,43 @@ func _verify_map_files() -> void:
 	if last_map && last_map.top_connection_type != end_map_file.bottom_connection_type:
 		printerr("Last map doesnt match connection of end map(%s != %s)" % [MapFile.MapType.keys()[last_map.top_connection_type], MapFile.MapType.keys()[end_map_file.bottom_connection_type]])
 	
-
+	if gold_medal_seconds == 0:
+		printerr("Gold medal times not set")
+	if silver_medal_seconds == 0:
+		printerr("Silver medal times not set")
+	if bronze_medal_seconds == 0:
+		printerr("Bronze medal times not set")
 		
 	
 	return
 
-func attempt_fill_missing() -> void:
-	if fill_missing_on_runtime:
-		fill_missing()
-
-func fill_missing() -> void:
-	print("LEVEL AUTO FILLING NOT IMPLEMENTED")
+func is_valid() -> bool:
+	if not start_map_file:
+		return false
 	
-	return
+	if not end_map_file:
+		return false
+	
+	if ordered_map_files.is_empty():
+		return false
+	
+	var first_map: MapFile = ordered_map_files.get(0)
+	if start_map_file.top_connection_type != first_map.bottom_connection_type:
+		return false
+	
+	var last_map :MapFile = ordered_map_files.back()
+	if last_map.top_connection_type != end_map_file.bottom_connection_type:
+		return false
+	
+	for i: int in range(ordered_map_files.size()):
+		var map: MapFile = ordered_map_files[i]
+		if not map:
+			return false
+		
+		if i > 0:
+			var prev_map: MapFile = ordered_map_files[i - 1]
+			if prev_map:
+				if prev_map.top_connection_type != map.bottom_connection_type:
+					return false
+	
+	return true
