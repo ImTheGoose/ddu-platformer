@@ -76,6 +76,7 @@ func _get_time_color(time: float) -> String:
 func _on_next_pressed() -> void:
 	var new_index :int = Levels.get_level_index() + 1
 	if Levels.is_level_playable(new_index):
+		Levels.select_level(new_index)
 		GameManager.restart_game()
 	else:
 		GameManager.quit_to_main()
