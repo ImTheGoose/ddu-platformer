@@ -119,7 +119,7 @@ func load_save_data() -> void:
 			continue
 		
 		game_data = json.data
-		if float(game_data["save_version"]) < float(default_game_data["save_version"]) or true:
+		if float(game_data["save_version"]) < float(default_game_data["save_version"]):
 			update_game_data()
 		
 		print(PREFIX, "Succesfully loaded save data: ", json.data)
