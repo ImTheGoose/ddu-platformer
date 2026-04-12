@@ -112,6 +112,23 @@ func fill_missing_on_level(level_file: LevelFile) -> void:
 
 #endregion
 
+func update_level_time() -> void:
+	var level_index :int = Levels.get_level_index()
+	var level_times :Dictionary = DataManager.get_value("level_times")
+	var time :float = level_times.get(str(level_index), 0.0)
+	var new_time :float = Stats.get_recording_value(Stats.StatType.TIME_ALIVE)
+	
+	if new_time < time or time <= 0.0:
+		level_times.set(str(level_index), new_time)
+		DataManager.set_value("level_times", level_times)
+		print("Updated level times")
+	
+	return
+
+func get_level_time(index: int) -> float:
+	var level_times :Dictionary = DataManager.get_value("level_times")
+	return level_times.get(str(index), 0.0)
+
 func select_level(index: int) -> void:
 	selected_level = index
 	selected_level_changed.emit(index)

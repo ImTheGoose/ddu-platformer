@@ -85,6 +85,7 @@ func mount_level(index: int) -> void:
 	if GameManager.is_playing_level():
 		current_level_file = Levels.get_level(index)
 		current_level_maps = current_level_file.ordered_map_files.duplicate()
+		Difficulty.set_difficulty(Difficulty.Type.HARD)
 	else:
 		current_level_file = null
 		current_level_maps = []

@@ -17,6 +17,7 @@ var default_game_data: Dictionary = {
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
 	"selected_outline_hex" : "#ffffff",
+	"level_times" : {}, #"index" : 0.1,
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
@@ -81,6 +82,7 @@ func update_game_data() -> void:
 	
 	if v < 0.5:
 		game_data["unlocked_level"] = default_game_data["unlocked_level"]
+		game_data["level_times"] = default_game_data["level_times"]
 	
 	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
@@ -117,7 +119,7 @@ func load_save_data() -> void:
 			continue
 		
 		game_data = json.data
-		if float(game_data["save_version"]) < float(default_game_data["save_version"]):
+		if float(game_data["save_version"]) < float(default_game_data["save_version"]) or true:
 			update_game_data()
 		
 		print(PREFIX, "Succesfully loaded save data: ", json.data)

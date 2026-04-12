@@ -7,6 +7,11 @@
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="5_jgwxk"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="6_spolw"]
 [ext_resource type="TileSet" uid="uid://dm0uv7n0xo0sl" path="res://ressources/tilesets/collectables_tileset.tres" id="7_cf30f"]
+[ext_resource type="Script" uid="uid://dpjjjqd1blvh2" path="res://maps/finish_point.gd" id="8_fta44"]
+[ext_resource type="SpriteFrames" uid="uid://dcol8m7ayv6vi" path="res://maps/finish_point_frames.tres" id="9_of4hd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20q22"]
+size = Vector2(5, 41)
 
 [node name="Map" type="Node2D" unique_id=206266118 node_paths=PackedStringArray("terrain_tiles", "trap_tiles", "enemy_tiles", "collectable_tiles", "guide_tiles")]
 texture_filter = 1
@@ -40,3 +45,20 @@ navigation_enabled = false
 [node name="CollectableTiles" type="TileMapLayer" parent="." unique_id=421186081]
 tile_set = ExtResource("7_cf30f")
 navigation_enabled = false
+
+[node name="finish_point" type="Area2D" parent="." unique_id=1475231713]
+position = Vector2(384, 128)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("8_fta44")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="finish_point" unique_id=1638064259]
+unique_name_in_owner = true
+sprite_frames = ExtResource("9_of4hd")
+animation = &"Idle"
+frame_progress = 0.26331365
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="finish_point" unique_id=1784362789]
+position = Vector2(-8.5, 10.5)
+shape = SubResource("RectangleShape2D_20q22")
+debug_color = Color(0.62973833, 0.3470706, 1, 0.41960785)
