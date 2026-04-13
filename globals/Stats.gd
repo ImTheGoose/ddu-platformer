@@ -315,11 +315,17 @@ func _save_recording() -> void:
 						
 				continue
 			StatType.TIME_ALIVE:
+				if GameManager.is_playing_level():
+					continue
+				
 				var dif_stat_type :StatType = get_time_highscore_type()
 						
 				if get_float_stat(dif_stat_type) < stat_value:
 					set_float_stat(dif_stat_type, stat_value)
 			StatType.TOTAL_APPLES_COLLECTED:
+				if GameManager.is_playing_level():
+					continue
+				
 				var dif_stat_type :StatType = get_apple_highscore_type()
 	
 				if get_int_stat(dif_stat_type) < stat_value:

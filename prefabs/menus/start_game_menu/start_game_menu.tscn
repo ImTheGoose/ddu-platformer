@@ -18,17 +18,40 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_myjiq")
 menu_name = "start_game_menu"
-initial_focus = NodePath("start_game")
-back_button = NodePath("back")
+initial_focus = NodePath("VBoxContainer/start_game")
+back_button = NodePath("VBoxContainer/back")
 
 [node name="Label" type="Label" parent="." unique_id=1519841733]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Setup"
 horizontal_alignment = 1
 
+[node name="time_highscore_label" type="RichTextLabel" parent="." unique_id=932337836]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "[img]res://assets/icons/star_%s (16x16).png[/img] Time Highscore - %s"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="apple_highscore_label" type="RichTextLabel" parent="." unique_id=1217826367]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "[img]res://assets/icons/red_star_%s (16x16).png[/img] Apple Highscore - %s
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
 [node name="difficulty_stats" type="RichTextLabel" parent="." unique_id=1891015459]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 layout_mode = 2
 bbcode_enabled = true
@@ -38,7 +61,18 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="difficulty_dropdown" type="OptionButton" parent="." unique_id=1502559463]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1890858506]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="map_collection_dropdown" type="OptionButton" parent="VBoxContainer" unique_id=2134683208]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BigOption"
+alignment = 1
+
+[node name="difficulty_dropdown" type="OptionButton" parent="VBoxContainer" unique_id=1502559463]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"BigOption"
@@ -57,22 +91,16 @@ popup/item_3/id = 3
 popup/item_4/text = "Impossible"
 popup/item_4/id = 4
 
-[node name="map_collection_dropdown" type="OptionButton" parent="." unique_id=2134683208]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"BigOption"
-alignment = 1
-
-[node name="start_game" type="Button" parent="." unique_id=671084686]
+[node name="start_game" type="Button" parent="VBoxContainer" unique_id=671084686]
 layout_mode = 2
 text = "Start Game
 "
 
-[node name="back" type="Button" parent="." unique_id=1174858259]
+[node name="back" type="Button" parent="VBoxContainer" unique_id=1174858259]
 layout_mode = 2
 text = "Back"
 
-[connection signal="item_selected" from="difficulty_dropdown" to="." method="_on_difficulty_dropdown_item_selected"]
-[connection signal="item_selected" from="map_collection_dropdown" to="." method="_on_map_collection_dropdown_item_selected"]
-[connection signal="pressed" from="start_game" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="item_selected" from="VBoxContainer/map_collection_dropdown" to="." method="_on_map_collection_dropdown_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/difficulty_dropdown" to="." method="_on_difficulty_dropdown_item_selected"]
+[connection signal="pressed" from="VBoxContainer/start_game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

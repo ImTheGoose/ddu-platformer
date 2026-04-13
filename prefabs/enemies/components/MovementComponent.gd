@@ -68,8 +68,15 @@ func _process(delta: float) -> void:
 	_move_towards_position(delta, target_position)
 	
 func _move_towards_position(delta: float, gpos: Vector2) -> void:
-	var dir :Vector2 = entity_root.global_position.direction_to(gpos)
-	entity_root.global_position += dir * velocity * delta
+	var dist_to_target :float = entity_root.global_position.distance_to(gpos)
+	var move_distance :float = velocity * delta
+	
+	if move_distance >= dist_to_target:
+		entity_root.global_position = gpos
+		velocity = 0.0
+	else:
+		var dir :Vector2 = entity_root.global_position.direction_to(gpos)
+		entity_root.global_position += dir * move_distance
 
 func is_at_target() -> bool:	
 	var distance :float = entity_root.global_position.distance_to(target_position)

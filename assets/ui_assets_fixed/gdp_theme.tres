@@ -37,7 +37,9 @@
 [ext_resource type="FontFile" uid="uid://b1s6rd35x8oc1" path="res://assets/match_font/match_7_v2/Match 7.ttf" id="35_ymv0j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dyv63"]
+content_margin_left = 0.0
 content_margin_top = 0.0
+content_margin_right = 0.0
 content_margin_bottom = 1.0
 texture = ExtResource("6_4qquo")
 texture_margin_left = 10.0

@@ -24,6 +24,10 @@ text = "Select Game"
 layout_mode = 2
 text = "Singleplayer"
 
+[node name="campaign_button" type="Button" parent="." unique_id=723540081]
+layout_mode = 2
+text = "Challenge Levels"
+
 [node name="local_multiplayer" type="Button" parent="." unique_id=298402140]
 layout_mode = 2
 disabled = true
@@ -39,6 +43,7 @@ layout_mode = 2
 text = "Back"
 
 [connection signal="pressed" from="singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="campaign_button" to="." method="_on_campaign_button_pressed"]
 [connection signal="pressed" from="local_multiplayer" to="." method="_on_local_multiplayer_pressed"]
 [connection signal="pressed" from="online_multiplayer" to="." method="_on_online_multiplayer_pressed"]
 [connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

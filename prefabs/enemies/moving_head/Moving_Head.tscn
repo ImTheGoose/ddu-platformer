@@ -19,7 +19,7 @@ script = ExtResource("1_bjg5y")
 enemy_sprite_component = NodePath("EnemySpriteComponent")
 movement_component = NodePath("MovementComponent")
 hit_area = NodePath("HitArea")
-entity_type = 16
+entity_type = 10
 block_rotation = true
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 

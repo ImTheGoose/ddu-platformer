@@ -48,6 +48,7 @@ enum MapType {
 	REGULAR_MAP,
 	TRANSITION_MAP,
 	START_MAP,
+	END_MAP,
 }
 
 enum ConnectionType {
@@ -110,7 +111,10 @@ enum ConnectionType {
 	#var sample_map_path :String = ResourceUID.get_id_path(ResourceUID.text_to_id(SAMPLE_MAP_UID))
 	#var path :String = file_dialog.current_path
 	#if not FileAccess.file_exists(path):
-		#var err :Error = DirAccess.copy_absolute(sample_map_path, path)
+		#var sample_scene :PackedScene = load(sample_map_path).duplicate()
+		#
+		#
+		#var err :Error = ResourceSaver.save(sample_scene, path)
 		#
 		#if err == OK:
 			#print("Map prefab successfully created at: ", path)

@@ -11,11 +11,13 @@ signal save_game_completed
 var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
-	"save_version" : 0.4,
+	"unlocked_level" : 1,
+	"save_version" : 0.5,
 	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
 	"selected_outline_hex" : "#ffffff",
+	"level_times" : {}, #"index" : 0.1,
 	"owned_skin": {
 		"Osvald": true,
 		"Castro": false,
@@ -77,6 +79,10 @@ func update_game_data() -> void:
 	
 	if v < 0.2:
 		game_data["selected_outline_hex"] = default_game_data["selected_outline_hex"]
+	
+	if v < 0.5:
+		game_data["unlocked_level"] = default_game_data["unlocked_level"]
+		game_data["level_times"] = default_game_data["level_times"]
 	
 	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
@@ -227,5 +233,5 @@ func get_keybindings() -> Dictionary:
 		keybindings[key] = input_event
 		
 	return keybindings
-	
+
 #endregion

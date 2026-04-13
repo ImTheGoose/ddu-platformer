@@ -21,7 +21,9 @@
 [ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="24_0c1fb"]
 [ext_resource type="PackedScene" uid="uid://dxyonb6hgvrx" path="res://main/Camera.tscn" id="24_hhcpw"]
 [ext_resource type="PackedScene" uid="uid://bjj0iiithk4ua" path="res://prefabs/menus/main_menu/main_menu.tscn" id="25_fw23c"]
+[ext_resource type="PackedScene" uid="uid://dxg76o8gmmyhd" path="res://prefabs/menus/campaign/level_select_menu.tscn" id="26_0d5nc"]
 [ext_resource type="PackedScene" uid="uid://2np6goag7nic" path="res://prefabs/menus/settings_menu/settings_menu.tscn" id="26_7867i"]
+[ext_resource type="PackedScene" uid="uid://btxm2umevuq7b" path="res://main/level_overview_menu.tscn" id="26_sebc1"]
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="27_q4fed"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="28_7glbu"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="29_eh0ei"]
@@ -255,9 +257,17 @@ speed_scale = 1.7
 [node name="Control2" type="Control" parent="CanvasLayer" unique_id=402108351]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="UI" type="Control" parent="CanvasLayer/Control2" unique_id=603484217]
 custom_minimum_size = Vector2(480, 270)
@@ -327,7 +337,7 @@ offset_right = 26.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 16
-text = "Content-2"
+text = "Content-3"
 
 [node name="Control" type="Control" parent="CanvasLayer/Control2/UI" unique_id=2074147487]
 layout_mode = 1
@@ -347,6 +357,13 @@ offset_bottom = 270.0
 scale = Vector2(4, 4)
 
 [node name="main_menu" parent="CanvasLayer/Control2/Control" unique_id=1922624189 instance=ExtResource("25_fw23c")]
+visible = false
+layout_mode = 1
+
+[node name="level_overview_menu" parent="CanvasLayer/Control2/Control" unique_id=1150293006 instance=ExtResource("26_sebc1")]
+layout_mode = 1
+
+[node name="level_select_menu" parent="CanvasLayer/Control2/Control" unique_id=160876120 instance=ExtResource("26_0d5nc")]
 visible = false
 layout_mode = 1
 
@@ -445,6 +462,7 @@ visible = false
 layout_mode = 1
 
 [node name="MultiplayerStatusMenu" parent="CanvasLayer/Control2/Control" unique_id=840786237 instance=ExtResource("44_y6p51")]
+visible = false
 layout_mode = 1
 offset_left = -116.5
 offset_top = -37.5

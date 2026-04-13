@@ -7,6 +7,7 @@ class_name Player
 @export var max_speed :int = 150
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
+@export var wall_max_velcoity :int = 500
 @export_range(0,100,1.0) var peer_lerp_speed :float = 30
 @export_range(0,200, 5) var snap_distance :float = 100
 
@@ -94,6 +95,9 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_wall_only() && velocity.y > 0:
 		_apply_gravity(delta, wall_gravity_scale)
+		if velocity.y > wall_max_velcoity:
+			velocity.y = wall_max_velcoity
+		
 	else:
 		_apply_gravity(delta)
 
