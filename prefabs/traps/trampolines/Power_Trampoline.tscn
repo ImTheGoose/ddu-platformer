@@ -84,7 +84,7 @@ size = Vector2(21, 12)
 collision_mask = 9
 script = ExtResource("1_7fog4")
 jump_force = 1000
-entity_type = 14
+entity_type = 16
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=805781376]
 position = Vector2(0, -6)

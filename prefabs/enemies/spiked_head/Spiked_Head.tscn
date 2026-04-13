@@ -15,7 +15,7 @@ z_index = -1
 script = ExtResource("1_n5yrm")
 enemy_sprite_component = NodePath("EnemySpriteComponent")
 movement_component = NodePath("MovementComponent")
-entity_type = 17
+entity_type = 11
 block_rotation = true
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
