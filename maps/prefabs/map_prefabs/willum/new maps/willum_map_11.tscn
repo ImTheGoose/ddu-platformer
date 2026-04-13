@@ -46,4 +46,4 @@ tile_set = ExtResource("7_0awf4")
 navigation_enabled = false
 
 [connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@31490" to="TrapTiles/@Area2D@31490" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@30267" to="TrapTiles/@Area2D@30267" method="_on_body_entered"]

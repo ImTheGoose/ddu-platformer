@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://cl6h4nc37de5o"]
+
+[ext_resource type="PackedScene" uid="uid://cy2tl2gd6oqhk" path="res://maps/prefabs/map_prefabs/willum/new transitions/willum_trans_01.tscn" id="1_ov7wt"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="2_wmvqw"]
+
+[resource]
+script = ExtResource("2_wmvqw")
+prefab = ExtResource("1_ov7wt")
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
