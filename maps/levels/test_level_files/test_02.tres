@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://5t4gdu333d6x"]
+
+[ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="1_05d2s"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="2_op0df"]
+[ext_resource type="Resource" uid="uid://bovfvgp78chv8" path="res://maps/map_files/wilfred/wilf_trans_01.tres" id="3_05d2s"]
+[ext_resource type="Resource" uid="uid://6f8mbpcmnysd" path="res://maps/map_files/david/trans_05.tres" id="4_op0df"]
+[ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="5_we70n"]
+[ext_resource type="Resource" uid="uid://blns56by1a47x" path="res://maps/map_files/default/start_01.tres" id="6_fvr6q"]
+
+[resource]
+script = ExtResource("5_we70n")
+map_index = 2
+gold_medal_seconds = 45.0
+silver_medal_seconds = 145.0
+bronze_medal_seconds = 181.0
+end_map_file = ExtResource("1_05d2s")
+ordered_map_files = Array[ExtResource("2_op0df")]([ExtResource("3_05d2s"), ExtResource("4_op0df")])
+start_map_file = ExtResource("6_fvr6q")
+metadata/_custom_type_script = "uid://h3dsm18hywkb"

@@ -83,8 +83,7 @@ size = Vector2(21, 12)
 [node name="Trampoline" type="Area2D" unique_id=1944955003]
 collision_mask = 9
 script = ExtResource("1_e7khr")
-jump_force = 550
-entity_type = 13
+entity_type = 15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2076110011]
 position = Vector2(0, -6)

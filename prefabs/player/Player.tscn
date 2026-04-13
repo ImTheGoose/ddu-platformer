@@ -45,6 +45,8 @@ visibility_layer = 3
 collision_layer = 8
 collision_mask = 143
 script = ExtResource("1_jfcio")
+wall_gravity_scale = 0.06
+wall_max_velcoity = 120
 peer_lerp_speed = 20.0
 snap_distance = 30.0
 

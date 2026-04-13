@@ -13,7 +13,7 @@ script = ExtResource("1_gclda")
 path_detection_component = NodePath("TrapPathDetectionComponent")
 area_minimum_velocity = 230.0
 area_accelleration = 50.0
-entity_type = 15
+entity_type = 17
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2140512996]

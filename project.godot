@@ -45,7 +45,6 @@ buses/default_bus_layout="res://main/default_bus_layout.tres"
 GameManager="*res://globals/GameManager.gd"
 DataManager="*res://globals/DataManager.gd"
 AudioManager="*res://globals/AudioManager.gd"
-GameHandler="*uid://dapkibmitjx82"
 MenuHandler="*uid://boqav6yfiyrq2"
 GlobalFocusManager="*uid://cej3huoix0m5b"
 Steamworks="*uid://bddun8wjf3s46"
@@ -56,6 +55,7 @@ Stats="*uid://c56ybmb52mjm8"
 Achivements="*uid://cpnd22fp4a2j2"
 DiscordRPCLoader="*uid://bf4o1ip5ilttb"
 Difficulty="*uid://dvejhyr7h42vq"
+Levels="*uid://r210485y1kfv"
 
 [debug]
 
@@ -71,7 +71,6 @@ window/size/always_on_top=true
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_height"
 window/vsync/vsync_mode=0
 
 [editor_plugins]

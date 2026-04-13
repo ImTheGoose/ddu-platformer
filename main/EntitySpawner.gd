@@ -51,14 +51,14 @@ enum SpawnType {
 	ENEMY_ROCKS_BIG,
 	ENEMY_ROCKS_MEDIUM,
 	ENEMY_ROCKS_SMALL,
+	ENEMY_MOVING_HEAD,
+	ENEMY_SPIKED_MOVING_HEAD,
 	TRAP_SPIKE,
 	TRAP_FIRE_PLATE,
 	TRAP_FALLING_PLATFORM,
 	TRAP_TRAMPOLINE,
 	TRAP_POWER_TRAMPOLINE,
 	TRAP_FANS,
-	ENEMY_MOVING_HEAD,
-	ENEMY_SPIKED_MOVING_HEAD,
 	TRAP_PATHFINDING_POINT,
 	COLLECTABLE_APPLE,
 	BIG_ENEMY_PATHFINDING_POINT,
@@ -155,6 +155,7 @@ func _spawn_online_entity(gpos: Vector2, spawn_type: int, modifiers: Array[int])
 			node.rpc("disable")
 			add_node_to_unused(node)
 		else:
+			print("Spawned node of type %s as none is unused" % SpawnType.find_key(spawn_type))
 			node.rpc("enable", gpos, modifiers)
 	add_node_to_spawned(node)
 
@@ -295,8 +296,10 @@ func _ready() -> void:
 	GameManager.server_reset.connect(_on_server_reset)
 	GameManager.client_reset.connect(_on_client_reset)
 	Performance.add_custom_monitor("game/Total_Entities", get_entity_count, [[]])
-	Performance.add_custom_monitor("game/enemies", get_entity_count, [range(SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_SPIKED_MOVING_HEAD)])
-	Performance.add_custom_monitor("game/Traps", get_entity_count, [range(SpawnType.TRAP_SPIKE, SpawnType.TRAP_POWER_TRAMPOLINE)])
+	Performance.add_custom_monitor("game/Total_Local_Entities", get_entity_count, [[], true])
+	Performance.add_custom_monitor("game/Enemies", get_entity_count, [range(SpawnType.ENEMY_MUSHROOM, SpawnType.ENEMY_SPIKED_MOVING_HEAD + 1)])
+	Performance.add_custom_monitor("game/Pathfinding Points", get_entity_count, [[SpawnType.ENEMY_PATHFINDING_POINT, SpawnType.TRAP_PATHFINDING_POINT, SpawnType.BIG_ENEMY_PATHFINDING_POINT]])
+	Performance.add_custom_monitor("game/Traps", get_entity_count, [range(SpawnType.TRAP_SPIKE, SpawnType.TRAP_FANS + 1)])
 	Performance.add_custom_monitor("game/Collectables", get_entity_count, [[SpawnType.COLLECTABLE_APPLE]])
 
 
@@ -328,10 +331,13 @@ func is_enemy(type: SpawnType, include_heads: bool = true) -> bool:
 	
 	return enemy_types.has(type)
 
-func get_entity_count(included_types: Array) -> int:
+func get_entity_count(included_types: Array, exclude_online: bool = false) -> int:
 	var total_entites :int = 0
 	for type:int in spawned_entities.keys():
 		if included_types.has(type) or included_types.is_empty():
+			if exclude_online && not is_local(type):
+				continue
+			
 			total_entites += spawned_entities[type].size()
 	return total_entites
 
