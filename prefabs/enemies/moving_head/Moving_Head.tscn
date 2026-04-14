@@ -5,20 +5,21 @@
 [ext_resource type="Script" uid="uid://b1me8nwobge5x" path="res://prefabs/enemies/components/P2PTargetingComponent.gd" id="3_2dthm"]
 [ext_resource type="SpriteFrames" uid="uid://dd3dlvofd7sdt" path="res://prefabs/enemies/moving_head/moving_head_frames.tres" id="4_1o70q"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="5_c6tca"]
+[ext_resource type="Script" uid="uid://db74wj2cj44ty" path="res://prefabs/enemies/components/CollissionActivatorComponent.gd" id="6_1o70q"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_2dthm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjg5y"]
 size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o70q"]
-size = Vector2(5, 28)
+size = Vector2(6, 12)
 
-[node name="MovingHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component", "hit_area")]
+[node name="MovingHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component", "wall_killer")]
 z_index = -1
 script = ExtResource("1_bjg5y")
 enemy_sprite_component = NodePath("EnemySpriteComponent")
 movement_component = NodePath("MovementComponent")
-hit_area = NodePath("HitArea")
+wall_killer = NodePath("wall_kill_handler")
 entity_type = 10
 block_rotation = true
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
@@ -63,15 +64,45 @@ freeze_mode = 1
 position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_bjg5y")
 
-[node name="HitArea" type="Area2D" parent="." unique_id=1468002046]
+[node name="wall_kill_handler" type="Node2D" parent="." unique_id=1114229715]
 position = Vector2(8, -8)
+
+[node name="TopCheck" type="RayCast2D" parent="wall_kill_handler" unique_id=1977732063 node_paths=PackedStringArray("hit_area")]
+position = Vector2(0, -8)
+target_position = Vector2(25, 0)
+script = ExtResource("6_1o70q")
+hit_area = NodePath("HitArea")
+metadata/_custom_type_script = "uid://db74wj2cj44ty"
+
+[node name="HitArea" type="Area2D" parent="wall_kill_handler/TopCheck" unique_id=1468002046]
+position = Vector2(0, 8)
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("6_2dthm")
 kill_type = 6
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=90746367]
-position = Vector2(18.5, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_kill_handler/TopCheck/HitArea" unique_id=90746367]
+position = Vector2(18, -8)
+shape = SubResource("RectangleShape2D_1o70q")
+debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)
+
+[node name="BottomCheck" type="RayCast2D" parent="wall_kill_handler" unique_id=542339521 node_paths=PackedStringArray("hit_area")]
+position = Vector2(0, 8)
+target_position = Vector2(25, 0)
+script = ExtResource("6_1o70q")
+hit_area = NodePath("HitArea2")
+metadata/_custom_type_script = "uid://db74wj2cj44ty"
+
+[node name="HitArea2" type="Area2D" parent="wall_kill_handler/BottomCheck" unique_id=1896307664]
+position = Vector2(0, 8)
+collision_layer = 4
+collision_mask = 12
+script = ExtResource("6_2dthm")
+kill_type = 6
+metadata/_custom_type_script = "uid://csjcberb4rmwa"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_kill_handler/BottomCheck/HitArea2" unique_id=165334849]
+position = Vector2(18, -8)
 shape = SubResource("RectangleShape2D_1o70q")
 debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)
