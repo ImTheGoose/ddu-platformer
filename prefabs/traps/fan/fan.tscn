@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfcq6m1m584lo" path="res://prefabs/traps/fan/fan.gd" id="1_gclda"]
 [ext_resource type="SpriteFrames" uid="uid://b2r28kr17tgqr" path="res://prefabs/traps/fan/fan_frames.tres" id="2_gclda"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="3_jeqdm"]
 [ext_resource type="Script" uid="uid://b7v47xq5y5enq" path="res://prefabs/traps/TrapPathDetectionComponent.gd" id="3_lh4mi"]
 [ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="4_cd2da"]
 
@@ -22,6 +23,13 @@ position = Vector2(-1, 4)
 sprite_frames = ExtResource("2_gclda")
 animation = &"On"
 frame_progress = 0.42862552
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=2050493279 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = ExtResource("2_gclda")
+animation = &"On"
+script = ExtResource("3_jeqdm")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1950760294]
 unique_name_in_owner = true

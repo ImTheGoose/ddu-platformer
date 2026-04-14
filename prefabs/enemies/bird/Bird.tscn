@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="5_gykmu"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="6_4c0v1"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="7_cmvfg"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="8_4c0v1"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_gykmu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gykmu"]
@@ -69,6 +70,13 @@ health_component = NodePath("../../HealthComponent")
 path_detection_component = NodePath("../../PathDetectionComponent")
 flip_x_offset = true
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="SinusOffsetComponent/EnemySpriteComponent" unique_id=1691061344 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = ExtResource("3_b1qvx")
+animation = &"Moving"
+script = ExtResource("8_4c0v1")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="HeadPosition" type="Node2D" parent="SinusOffsetComponent" unique_id=815590570]
 position = Vector2(0, -5)

@@ -1,0 +1,39 @@
+extends AnimatedSprite2D
+
+class_name AnimatedShadowSprite2D 
+
+@export var reference_sprite :AnimatedSprite2D
+@export var shadow_dir :Vector2 = Vector2(-1.5, 1)
+
+func _ready() -> void:
+	if not sprite_frames:
+		return
+	
+	if reference_sprite:
+		reference_sprite.ready.connect(sync_animation_to_reference)
+		reference_sprite.animation_changed.connect(_on_animation_changed)
+		sprite_frames = reference_sprite.sprite_frames
+		show_behind_parent = true
+		modulate = Color8(0,0,0, 50)
+		position += shadow_dir
+		sync_animation_to_reference()
+
+func _process(delta: float) -> void:
+	sync_animation_to_reference()
+
+func _on_animation_changed() -> void:
+	sync_animation_to_reference()
+	return
+
+func sync_animation_to_reference() -> void:
+	position = Vector2.ZERO
+	global_position += shadow_dir
+	offset = reference_sprite.offset
+	flip_h = reference_sprite.flip_h
+	flip_v = reference_sprite.flip_v
+	animation = reference_sprite.animation
+	frame = reference_sprite.frame
+	frame_progress = reference_sprite.frame_progress
+	if reference_sprite.is_playing():
+		play()
+	return

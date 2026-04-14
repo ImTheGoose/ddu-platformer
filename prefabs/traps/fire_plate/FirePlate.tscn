@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c0jpup3cmereq" path="res://assets/pixel_adventure_assets/Traps/Fire/Hit (16x32).png" id="2_0dhi1"]
 [ext_resource type="Texture2D" uid="uid://cij8w400ojbyr" path="res://assets/pixel_adventure_assets/Traps/Fire/Off.png" id="3_s08ra"]
 [ext_resource type="Texture2D" uid="uid://djm51vgtccqc4" path="res://assets/pixel_adventure_assets/Traps/Fire/On (16x32).png" id="4_vdro8"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="5_po4gm"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="5_s08ra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uc8s0"]
@@ -99,6 +100,13 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_n5ysy")
 animation = &"On"
 autoplay = "Off"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=2112449665 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = SubResource("SpriteFrames_n5ysy")
+animation = &"On"
+script = ExtResource("5_po4gm")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1565565911]
 collision_mask = 9

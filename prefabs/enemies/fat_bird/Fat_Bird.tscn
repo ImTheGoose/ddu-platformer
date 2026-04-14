@@ -4,6 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b8sgm7cw3iye1" path="res://prefabs/enemies/fat_bird/fat_bird_frames.tres" id="2_jtfo8"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_qejqu"]
 [ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="4_ah2eh"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_fs2bb"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="5_foyj3"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="6_x8y3c"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="7_fcof4"]
@@ -31,6 +32,13 @@ script = ExtResource("3_qejqu")
 entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1506809828 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = ExtResource("2_jtfo8")
+animation = &"Idle"
+script = ExtResource("4_fs2bb")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="PlayerDetectionComponent" type="RayCast2D" parent="." unique_id=1332057884 node_paths=PackedStringArray("health_component")]
 collision_mask = 9

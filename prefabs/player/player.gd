@@ -78,7 +78,6 @@ func _physics_process(delta: float) -> void:
 	
 	var height_reached :float = Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED)
 	var height :float = (spawn_position.y - global_position.y) / 16
-	print("Height R: %s Height: %s" % [height_reached, height])
 	if height > height_reached:
 		Stats.set_recording_value(Stats.StatType.HEIGHT_REACHED, height)
 	

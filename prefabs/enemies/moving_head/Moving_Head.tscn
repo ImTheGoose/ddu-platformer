@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="5_c6tca"]
 [ext_resource type="Script" uid="uid://db74wj2cj44ty" path="res://prefabs/enemies/components/CollissionActivatorComponent.gd" id="6_1o70q"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_2dthm"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="6_c6tca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjg5y"]
 size = Vector2(30, 30)
@@ -51,6 +52,13 @@ animation = &"Idle"
 script = ExtResource("5_c6tca")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1364744094 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = ExtResource("4_1o70q")
+animation = &"Idle"
+script = ExtResource("6_c6tca")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="AnimatableBody2D" type="RigidBody2D" parent="." unique_id=151869227]
 collision_layer = 128

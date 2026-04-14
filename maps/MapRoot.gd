@@ -41,6 +41,14 @@ const collectable_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
 func _enter_tree() -> void:
 	if not terrain_tiles:
 		print(PREFIX, "Terrain tiles not assigned to: %s" % scene_file_path.get_file())
+	else:
+		var shadow_tiles :TileMapLayer = terrain_tiles.duplicate()
+		shadow_tiles.collision_enabled = false
+		shadow_tiles.occlusion_enabled = false
+		shadow_tiles.modulate = Color8(0,0,0, 50)
+		shadow_tiles.z_index = -1
+		add_child(shadow_tiles)
+		shadow_tiles.position += Vector2(-2, 2)
 
 	if trap_tiles:
 		trap_tiles.enabled = false

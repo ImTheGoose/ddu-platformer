@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="4_ei2c2"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="5_yhhnt"]
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="6_dx1i4"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="6_yhhnt"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="7_5m813"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_4rm02"]
 [ext_resource type="Script" uid="uid://ck12efevamnkb" path="res://prefabs/enemies/components/EntitySpawnerComponent.gd" id="9_fim2q"]
@@ -54,6 +55,13 @@ entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 path_detection_component = NodePath("../PathDetectionComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=321543222 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = ExtResource("3_fim2q")
+animation = &"Idle"
+script = ExtResource("6_yhhnt")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=941408710 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("6_dx1i4")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dckcrbhtnaktm" path="res://prefabs/traps/trampolines/trampoline.gd" id="1_e7khr"]
 [ext_resource type="Texture2D" uid="uid://o0blm0n4stvq" path="res://assets/pixel_adventure_assets/Traps/Trampoline/Idle.png" id="1_lrq2o"]
 [ext_resource type="Texture2D" uid="uid://784do5ff726h" path="res://assets/pixel_adventure_assets/Traps/Trampoline/Jump (28x28).png" id="2_tqlc0"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_0ojem"]
 [ext_resource type="AudioStream" uid="uid://c6gwifyj7f1wd" path="res://assets/audio/sfx/boing.mp3" id="4_6n1a3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e7khr"]
@@ -90,6 +91,13 @@ position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_me3ve")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=637512659 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = SubResource("SpriteFrames_me3ve")
+animation = &"Idle"
+script = ExtResource("4_0ojem")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708159839]
 position = Vector2(-0.5, 2)
