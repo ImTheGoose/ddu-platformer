@@ -14,13 +14,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_foyj3"]
 size = Vector2(22, 28)
 
-[node name="FatBird" type="Node2D" unique_id=278432552 node_paths=PackedStringArray("health_component", "sprite_component", "player_detection_component", "movement_component", "collission_targeting_component")]
+[node name="FatBird" type="Node2D" unique_id=278432552 node_paths=PackedStringArray("health_component", "sprite_component", "player_detection_component", "movement_component", "collission_targeting_component", "on_screen")]
 script = ExtResource("1_foyj3")
 health_component = NodePath("HealthComponent")
 sprite_component = NodePath("EnemySpriteComponent")
 player_detection_component = NodePath("PlayerDetectionComponent")
 movement_component = NodePath("MovementComponent")
 collission_targeting_component = NodePath("CollissionTargetingComponent")
+on_screen = NodePath("VisibleOnScreenNotifier2D")
 entity_type = 5
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
@@ -33,10 +34,11 @@ entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1506809828 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1506809828 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = ExtResource("2_jtfo8")
 animation = &"Idle"
 script = ExtResource("4_fs2bb")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
@@ -91,3 +93,7 @@ health_component = NodePath("../HealthComponent")
 speed = 45
 deaccelleration = 7.258272e-05
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1320379512]
+position = Vector2(0, -13)
+rect = Rect2(-10, 3, 20, 14)

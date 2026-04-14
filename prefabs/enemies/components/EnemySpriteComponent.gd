@@ -11,6 +11,8 @@ var target_rotation :float = 0.0
 var velocity :Vector2 = Vector2.ZERO
 var origin_pos :Vector2 = position
 
+signal flipped_h
+
 func _ready() -> void:
 	if health_component:
 		health_component.death.connect(_on_death)
@@ -32,6 +34,7 @@ func _on_direction_changed(new_dir: Vector2) -> void:
 		if flip_x_offset:
 			offset.x = unflipped_x_offset
 		flip_h = false
+	flipped_h.emit()
 
 func _on_death() -> void:
 	play("Hit")

@@ -101,11 +101,13 @@ sprite_frames = SubResource("SpriteFrames_n5ysy")
 animation = &"On"
 autoplay = "Off"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=2112449665 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=2112449665 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = SubResource("SpriteFrames_n5ysy")
 animation = &"On"
 script = ExtResource("5_po4gm")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
+process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1565565911]

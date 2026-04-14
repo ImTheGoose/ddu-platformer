@@ -80,6 +80,7 @@ func _on_play_again_button_pressed() -> void:
 	GameManager.prepare_game()
 
 func _on_return_to_lobby_pressed() -> void:
+	Stats.rpc("save_and_clear_match_scores")
 	GameManager.return_to_lobby()
 
 func _on_settings_button_pressed() -> void:

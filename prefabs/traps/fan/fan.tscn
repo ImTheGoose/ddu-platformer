@@ -24,10 +24,11 @@ sprite_frames = ExtResource("2_gclda")
 animation = &"On"
 frame_progress = 0.42862552
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=2050493279 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=2050493279 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = ExtResource("2_gclda")
 animation = &"On"
 script = ExtResource("3_jeqdm")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 

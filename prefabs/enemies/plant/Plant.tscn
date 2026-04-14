@@ -55,11 +55,13 @@ path_detection_component = NodePath("../PathDetectionComponent")
 flip_x_offset = true
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=288663269 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=288663269 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = ExtResource("3_joegr")
 animation = &"Idle"
 script = ExtResource("5_op3u3")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
+process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=580562693 node_paths=PackedStringArray("entity_node")]

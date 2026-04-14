@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 class_name AnimatedShadowSprite2D 
 
+@export var entity_node :Entity
 @export var reference_sprite :AnimatedSprite2D
 @export var shadow_dir :Vector2 = Vector2(-1, 1)
 
@@ -9,7 +10,13 @@ func _ready() -> void:
 	if not sprite_frames:
 		return
 	
+	if entity_node:
+		entity_node.enabled.connect(sync_animation_to_reference)
+	
 	if reference_sprite:
+		if reference_sprite is EnemySpriteComponent:
+			reference_sprite.flipped_h.connect(sync_animation_to_reference)
+			
 		reference_sprite.ready.connect(sync_animation_to_reference)
 		reference_sprite.animation_changed.connect(_on_animation_changed)
 		sprite_frames = reference_sprite.sprite_frames
@@ -17,9 +24,6 @@ func _ready() -> void:
 		modulate = Color8(0,0,0, 50)
 		position += shadow_dir
 		sync_animation_to_reference()
-
-func _process(delta: float) -> void:
-	sync_animation_to_reference()
 
 func _on_animation_changed() -> void:
 	sync_animation_to_reference()

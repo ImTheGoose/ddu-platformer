@@ -15,15 +15,19 @@ size = Vector2(30, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o70q"]
 size = Vector2(6, 12)
 
-[node name="MovingHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component", "wall_killer")]
+[node name="MovingHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component", "wall_killer", "on_screen")]
 z_index = -1
 script = ExtResource("1_bjg5y")
 enemy_sprite_component = NodePath("EnemySpriteComponent")
 movement_component = NodePath("MovementComponent")
 wall_killer = NodePath("wall_kill_handler")
+on_screen = NodePath("VisibleOnScreenNotifier2D")
 entity_type = 10
 block_rotation = true
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=623801276]
+rect = Rect2(-8, -24, 37, 32)
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1975777366 node_paths=PackedStringArray("entity_root")]
 script = ExtResource("2_bjg5y")
@@ -53,10 +57,11 @@ script = ExtResource("5_c6tca")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1364744094 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1364744094 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = ExtResource("4_1o70q")
 animation = &"Idle"
 script = ExtResource("6_c6tca")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 

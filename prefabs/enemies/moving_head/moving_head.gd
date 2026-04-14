@@ -3,6 +3,7 @@ extends Entity
 @export var enemy_sprite_component :EnemySpriteComponent
 @export var movement_component :MovementComponent
 @export var wall_killer :Node2D
+@export var on_screen :VisibleOnScreenNotifier2D
 
 var direction :Vector2 = Vector2.UP
 
@@ -30,6 +31,8 @@ func _on_animation_finished() -> void:
 	enemy_sprite_component.play("Idle")
 
 func _on_target_reached() -> void:
+	if on_screen && on_screen.is_on_screen():
+		GameManager.add_camera_trauma.emit(0.25)
 	match direction:
 		Vector2.UP:
 			enemy_sprite_component.play("Top_Hit")

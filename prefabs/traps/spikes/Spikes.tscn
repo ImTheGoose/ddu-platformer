@@ -38,10 +38,12 @@ script = ExtResource("1_fysbu")
 [node name="Idle" type="AnimatedSprite2D" parent="Spike" unique_id=2098424668]
 sprite_frames = SubResource("SpriteFrames_l6lit")
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="Spike/Idle" unique_id=2132126169 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="Spike/Idle" unique_id=2132126169 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = SubResource("SpriteFrames_l6lit")
 script = ExtResource("4_gcmt1")
+entity_node = NodePath("../../..")
 reference_sprite = NodePath("..")
+process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spike" unique_id=1252797556]

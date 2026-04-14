@@ -199,11 +199,13 @@ sprite_frames = SubResource("SpriteFrames_32j7d")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1639753354 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1639753354 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = SubResource("SpriteFrames_32j7d")
 animation = &"Idle"
 script = ExtResource("4_womrj")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
+process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

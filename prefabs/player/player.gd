@@ -200,6 +200,7 @@ func show_reset() -> void:
 	rotation = 0
 
 func _die() -> void: #TEMPOARY
+	GameManager.add_camera_trauma.emit(0.9)
 	reset_ready = false
 	GameManager.rpc("player_died", get_multiplayer_authority())
 	rpc("show_death")

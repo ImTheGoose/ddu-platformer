@@ -93,11 +93,13 @@ sprite_frames = SubResource("SpriteFrames_7fog4")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1008060900 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1008060900 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = SubResource("SpriteFrames_7fog4")
 animation = &"Idle"
 script = ExtResource("4_7sp7v")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
+process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342050869]

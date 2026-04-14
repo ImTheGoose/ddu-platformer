@@ -8,18 +8,24 @@ var nudge_camera :bool = true
 
 func _ready() -> void:
 	GameManager.client_reset.connect(_reset_position)
-	get_viewport().size_changed.connect(_on_viewport_size_changed)
-
-func _on_viewport_size_changed() -> void:
-	var rect :Rect2 = get_viewport_rect()
-	var boundary_size :Vector2 = rect.size - Vector2(1920, 1080)
-	var pos_offset :Vector2 = boundary_size / 2
-	offset.x = -pos_offset.x
+	GameManager.add_camera_trauma.connect(add_trauma)
+	noise.seed = randi()
 
 func _reset_position() -> void:
 	position = origin_position
+	offset = Vector2.ZERO
+	trauma = 0.0
 
 func _process(delta: float) -> void:
+	if trauma:
+		trauma = max(trauma - decay * delta, 0)
+		shake()
+  #optional
+	elif offset.x != 0 or offset.y != 0 or rotation != 0:
+		lerp(offset.x,0.0,1)
+		lerp(offset.y,0.0,1)
+		lerp(rotation,0.0,1)
+	
 	if !GameManager.is_game_running():
 		return
 	
@@ -42,3 +48,23 @@ func _process(delta: float) -> void:
 	if !GameManager.is_game_paused():
 		var speed_scale :Variant = Difficulty.get_setting(Difficulty.Settings.CAMERA_SPEED_SCALE)
 		position.y -= speed_scale * speed * delta
+
+@export var decay := 0.8 #How quickly shaking will stop [0,1].
+@export var max_offset := Vector2(100,75) #Maximum displacement in pixels.
+@export var max_roll := 0.1 #Maximum rotation in radians (use sparingly).
+@export var noise : FastNoiseLite #The source of random values.
+
+var noise_y :float = 0.0 #Value used to move through the noise
+
+var trauma := 0.0 #Current shake strength
+var trauma_pwr := 1.9 #Trauma exponent. Use [2,3]
+
+func add_trauma(amount : float) -> void:
+	trauma = min(trauma + amount, 1.0)
+
+func shake() -> void: 
+	var amt :float = pow(trauma, trauma_pwr)
+	noise_y += 1
+	rotation = max_roll * amt * noise.get_noise_2d(noise.seed,noise_y)
+	offset.x = max_offset.x * amt * noise.get_noise_2d(noise.seed*2,noise_y)
+	offset.y = max_offset.y * amt * noise.get_noise_2d(noise.seed*3,noise_y)

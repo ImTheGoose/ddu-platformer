@@ -92,11 +92,13 @@ sprite_frames = SubResource("SpriteFrames_me3ve")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=637512659 node_paths=PackedStringArray("reference_sprite")]
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=637512659 node_paths=PackedStringArray("entity_node", "reference_sprite")]
 sprite_frames = SubResource("SpriteFrames_me3ve")
 animation = &"Idle"
 script = ExtResource("4_0ojem")
+entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
+process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708159839]
