@@ -3,7 +3,7 @@ extends AnimatedSprite2D
 class_name AnimatedShadowSprite2D 
 
 @export var reference_sprite :AnimatedSprite2D
-@export var shadow_dir :Vector2 = Vector2(-1.5, 1)
+@export var shadow_dir :Vector2 = Vector2(-1, 1)
 
 func _ready() -> void:
 	if not sprite_frames:
