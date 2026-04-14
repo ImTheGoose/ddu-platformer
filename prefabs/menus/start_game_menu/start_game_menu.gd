@@ -40,10 +40,10 @@ func _initialise_collection_dropdown() -> void:
 
 func _refresh_stats() -> void:
 	var time_highscore :float = Stats.get_float_stat(Stats.get_time_highscore_type())
-	time_highscore_label.text = time_original_string % [Difficulty.get_difficulty() + 1, TimeFormat.get_time_string(time_highscore)]
+	time_highscore_label.text = time_original_string % [Difficulty.get_difficulty() + 1, Format.get_time_string(time_highscore)]
 	
 	var apple_highscore :float = Stats.get_int_stat(Stats.get_apple_highscore_type())
-	apple_highscore_label.text = apple_original_string % [Difficulty.get_difficulty() + 1, TimeFormat.get_time_string(apple_highscore)]
+	apple_highscore_label.text = apple_original_string % [Difficulty.get_difficulty() + 1, Format.get_time_string(apple_highscore)]
 	
 	time_highscore_label.bbcode_enabled = true
 	apple_highscore_label.bbcode_enabled = true

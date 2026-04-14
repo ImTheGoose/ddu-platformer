@@ -1,6 +1,26 @@
 extends Node
 
-class_name TimeFormat
+class_name Format
+
+static func get_height_string(h: float, height_precision: float = 1.0) -> String:
+	var meters :float = get_meters(h)
+	var kilometers :float = get_kilometers(h)
+	
+	var heigt_string :String = ""
+	if kilometers >= 1:
+		heigt_string += str( int(kilometers)) + "km "
+	if height_precision == 1.0:
+		heigt_string += str( int(meters)) + "m "
+	else:
+		heigt_string += str( snappedf(meters, height_precision)) + "m "
+	return heigt_string
+
+static func get_meters(h: float) -> float:
+	var kmts :float = floor(h/1000)
+	return h - (kmts * 1000)
+
+static func get_kilometers(h: float) -> float:
+	return floor(h/1000)
 
 static func get_time_string(t: float, second_precision: float = 0.1) -> String:	
 	var seconds :float = get_seconds(t)

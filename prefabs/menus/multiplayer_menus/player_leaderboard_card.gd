@@ -24,7 +24,7 @@ func _on_scores_changed() -> void:
 
 func refresh_labels() -> void:
 	player_name_label.text = assigned_player_info.DISPLAY_NAME
-	player_score_label.text = "Time alive - %s" % TimeFormat.get_time_string(GameManager.get_score(assigned_peer_id), 0.01)
+	player_score_label.text = "Time alive - %s" % Format.get_time_string(GameManager.get_score(assigned_peer_id), 0.01)
 	var placement:int = GameManager.get_placement(assigned_peer_id)
 	match placement:
 		1:

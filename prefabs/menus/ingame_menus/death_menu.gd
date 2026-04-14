@@ -42,13 +42,13 @@ func _refresh_stat_text() -> void:
 	var text :String = ""
 	var time_alive :Variant = Stats.get_recording_value(Stats.StatType.TIME_ALIVE)
 	if time_alive >= Stats.get_float_stat(Stats.get_time_highscore_type()):
-		text += time_bbcode + TimeFormat.get_time_string(time_alive) + highscore_suffix + "[br]"
+		text += time_bbcode + Format.get_time_string(time_alive) + highscore_suffix + "[br]"
 		for p in time_highscore_particles:
 			p.visible = true
 			p.restart()
 			p.emitting = true
 	else:
-		text += time_bbcode + TimeFormat.get_time_string(time_alive) +  "[br]"
+		text += time_bbcode + Format.get_time_string(time_alive) +  "[br]"
 		for p in time_highscore_particles:
 			p.visible = false
 	

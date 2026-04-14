@@ -94,6 +94,7 @@ enum StatType {
 	GROUP_TOTAL_DEATHS,
 	GROUP_TOTAL_JUMPS,
 	GROUP_TOTAL_KILLS,
+	HEIGHT_REACHED,
 }
 
 enum StatGroup {
@@ -243,6 +244,7 @@ var stat_recording :Dictionary = stat_template.duplicate()
 const stat_template :Dictionary[StatType, Variant] = {
 	StatType.TIME_ALIVE : 0.0,
 	StatType.TOTAL_APPLES_COLLECTED : 0,
+	StatType.HEIGHT_REACHED : 0.0,
 	StatType.RECORDING_DEATH_TYPE : StatType.DEATH_MUSHROOM,
 	StatType.KILLS_MUSHROOM : 0,
 	StatType.KILLS_TRUNK : 0,
