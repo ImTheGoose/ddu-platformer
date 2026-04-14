@@ -38,12 +38,12 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="apple_highscore_label" type="RichTextLabel" parent="." unique_id=1217826367]
+[node name="height_highscore_label" type="RichTextLabel" parent="." unique_id=1217826367]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "[img]res://assets/icons/red_star_%s (16x16).png[/img] Apple Highscore - %s
+text = "[img]res://assets/icons/white_star_%s (16x16).png[/img] Height Highscore - %s
 "
 fit_content = true
 autowrap_mode = 0

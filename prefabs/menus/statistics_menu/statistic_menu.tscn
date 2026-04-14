@@ -238,70 +238,75 @@ stat_type = 7
 value_type = 2
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
-[node name="foldable_apple_highscores" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=632693766 node_paths=PackedStringArray("child_control")]
+[node name="foldable_height_highscores" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=632693766 node_paths=PackedStringArray("child_control")]
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
-text = "Highest Apples Highscore - %s"
+text = "Highest Height Reached - %s"
 fit_content = true
 script = ExtResource("2_88qfe")
-child_control = NodePath("../apple_highscores_container")
-stat_group = 4
+child_control = NodePath("../height_highscores_container")
+stat_group = 7
 value_type = 4
 metadata/_custom_type_script = "uid://b57r8k3xawmcj"
 
-[node name="apple_highscores_container" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=4739886]
+[node name="height_highscores_container" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=4739886]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container" unique_id=1050653182]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/height_highscores_container" unique_id=1050653182]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=1628626507]
+[node name="StatRichLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/height_highscores_container/VBoxContainer" unique_id=1628626507]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/red_star_1 (16x16).png[/img] Highscore - Very Easy - %s"
+text = "[img]res://assets/icons/white_star_1 (16x16).png[/img] Highscore - Very Easy - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 8
+value_type = 5
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
-[node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=1328890085]
+[node name="StatRichLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/height_highscores_container/VBoxContainer" unique_id=1328890085]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/red_star_2 (16x16).png[/img] Highscore - Easy - %s"
+text = "[img]res://assets/icons/white_star_2 (16x16).png[/img] Highscore - Easy - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 9
+value_type = 5
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
-[node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=2058255103]
+[node name="StatRichLabel3" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/height_highscores_container/VBoxContainer" unique_id=2058255103]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/red_star_3 (16x16).png[/img] Highscore - Normal - %s"
+text = "[img]res://assets/icons/white_star_3 (16x16).png[/img] Highscore - Normal - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 10
+value_type = 5
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
-[node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=14279649]
+[node name="StatRichLabel4" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/height_highscores_container/VBoxContainer" unique_id=14279649]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/red_star_4 (16x16).png[/img] Highscore - Hard - %s"
+text = "[img]res://assets/icons/white_star_4 (16x16).png[/img] Highscore - Hard - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 11
+value_type = 5
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
-[node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/apple_highscores_container/VBoxContainer" unique_id=431700121]
+[node name="StatRichLabel5" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/height_highscores_container/VBoxContainer" unique_id=431700121]
 layout_mode = 2
 bbcode_enabled = true
-text = "[img]res://assets/icons/red_star_5 (16x16).png[/img] Highscore - Impossible - %s"
+text = "[img]res://assets/icons/white_star_5 (16x16).png[/img] Highscore - Impossible - %s"
 fit_content = true
 script = ExtResource("2_jeby3")
 stat_type = 12
+value_type = 5
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
 [node name="foldable_jumps" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1366917880 node_paths=PackedStringArray("child_control")]

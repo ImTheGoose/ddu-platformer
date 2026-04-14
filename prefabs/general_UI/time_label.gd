@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-@export var prefix :String = "Time: "
+@export var prefix :String = "Height: "
 var time :float = 0
 
 func _ready() -> void:
@@ -18,7 +18,8 @@ func _process(delta: float) -> void:
 	if GameManager.is_game_running():
 		time += delta
 	
-	text = prefix + Format.get_time_string(time)
+	var height_reached :float = Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED)
+	text = prefix + Format.get_height_string(height_reached)
 
 func _on_game_visibillity_changed(isVisible: bool ) -> void:
 	visible = isVisible

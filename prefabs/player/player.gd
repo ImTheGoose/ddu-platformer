@@ -28,11 +28,15 @@ class_name Player
 @onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
 @export var sync_position: Vector2 = Vector2.ZERO
 @export var sync_velocity: Vector2 = Vector2.ZERO
+var spawn_position :Vector2 = Vector2.ZERO
 
 var reset_ready :bool = true
 var dead :bool = false #TEMPOARY
 @export var double_jumped :bool = false
 var air_time :float = 0
+
+func _ready() -> void:
+	spawn_position = Vector2(0, -500)
 
 func _physics_process(delta: float) -> void:
 	if !MenuHandler.is_game_visible():
@@ -71,7 +75,13 @@ func _physics_process(delta: float) -> void:
 		_apply_gravity(delta, 0.65)
 		move_and_slide()
 		return
-		
+	
+	var height_reached :float = Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED)
+	var height :float = (spawn_position.y - global_position.y) / 16
+	print("Height R: %s Height: %s" % [height_reached, height])
+	if height > height_reached:
+		Stats.set_recording_value(Stats.StatType.HEIGHT_REACHED, height)
+	
 	dead_enemy_killzone.monitorable = false
 	dead_enemy_killzone.monitoring = false
 	dead_enemy_killzone.visible = false
@@ -177,6 +187,8 @@ func reset_player(gpos:Vector2) -> void:
 	col.disabled = false
 	velocity = Vector2.ZERO
 	global_position = gpos
+	spawn_position = Vector2(0, -500)
+	Stats.set_recording_value(Stats.StatType.HEIGHT_REACHED, 0.0)
 	rpc("show_reset")
 	reset_ready = true
 

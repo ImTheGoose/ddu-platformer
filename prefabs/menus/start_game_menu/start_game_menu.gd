@@ -9,14 +9,14 @@ extends GameMenu
 
 @onready var time_highscore_label: RichTextLabel = %time_highscore_label
 var time_original_string: String = ""
-@onready var apple_highscore_label: RichTextLabel = %apple_highscore_label
-var apple_original_string: String = ""
+@onready var height_highscore_label: RichTextLabel = %height_highscore_label
+var height_original_string :String = ""
 const highscore_embedded_string :String = ""
 
 func _ready() -> void:
 	super()
 	time_original_string = time_highscore_label.text
-	apple_original_string = apple_highscore_label.text
+	height_original_string = height_highscore_label.text
 	var dif :Difficulty.Type = Difficulty.get_difficulty()
 	difficulty_dropdown.selected = difficulty_dropdown.get_item_index(dif)
 	_refresh_stats()
@@ -42,11 +42,11 @@ func _refresh_stats() -> void:
 	var time_highscore :float = Stats.get_float_stat(Stats.get_time_highscore_type())
 	time_highscore_label.text = time_original_string % [Difficulty.get_difficulty() + 1, Format.get_time_string(time_highscore)]
 	
-	var apple_highscore :float = Stats.get_int_stat(Stats.get_apple_highscore_type())
-	apple_highscore_label.text = apple_original_string % [Difficulty.get_difficulty() + 1, Format.get_time_string(apple_highscore)]
+	var height_highscore :float = Stats.get_float_stat(Stats.get_height_highscore_type())
+	height_highscore_label.text = height_original_string % [Difficulty.get_difficulty() + 1, Format.get_height_string(height_highscore)]
 	
 	time_highscore_label.bbcode_enabled = true
-	apple_highscore_label.bbcode_enabled = true
+	height_highscore_label.bbcode_enabled = true
 	
 	var tex :String = enemy_bbcode
 	

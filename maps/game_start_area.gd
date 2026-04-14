@@ -8,13 +8,15 @@ func _on_body_entered(body: Node2D) -> void:
 		if !MenuHandler.is_game_visible():
 			return
 			
-		if GameManager.get_state() != GameManager.STATE.PREGAME:
-			return
-			
 		if body.dead:
 			return
 			
 		if !body.reset_ready:
+			return
+			
+		body.spawn_position.y = get_child(0).global_position.y
+		
+		if GameManager.get_state() != GameManager.STATE.PREGAME:
 			return
 			
 		print("Starting Game from: %s "% multiplayer.get_unique_id())
