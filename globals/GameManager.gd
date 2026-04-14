@@ -9,7 +9,7 @@ signal prespawn_entities
 signal spawn_level
 signal player_death(peer_id: int)
 signal game_settings_changed()
-signal add_camera_trauma(amount: float)
+signal add_camera_shake(strenght: float, dir: Vector2, amount: float)
 signal spawn_entity(global_position: Vector2, spawn_type: int, modifiers: Entity.EntityModifiers)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()

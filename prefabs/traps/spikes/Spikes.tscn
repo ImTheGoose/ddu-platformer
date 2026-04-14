@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cd23tadwq2v3c" path="res://assets/pixel_adventure_assets/Traps/Spikes/Idle.png" id="1_xh5ig"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_gcmt1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fysbu"]
+size = Vector2(11, 5)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_yevsy"]
 atlas = ExtResource("1_xh5ig")
 region = Rect2(0, 0, 16, 16)
@@ -20,9 +23,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fysbu"]
-size = Vector2(11, 5)
-
 [node name="SpikeEntity" type="Node2D" unique_id=1931637813]
 z_index = -1
 script = ExtResource("1_xbr47")
@@ -35,6 +35,10 @@ collision_mask = 9
 monitorable = false
 script = ExtResource("1_fysbu")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike" unique_id=1252797556]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_fysbu")
+
 [node name="Idle" type="AnimatedSprite2D" parent="Spike" unique_id=2098424668]
 sprite_frames = SubResource("SpriteFrames_l6lit")
 
@@ -43,10 +47,4 @@ sprite_frames = SubResource("SpriteFrames_l6lit")
 script = ExtResource("4_gcmt1")
 entity_node = NodePath("../../..")
 reference_sprite = NodePath("..")
-process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike" unique_id=1252797556]
-visible = false
-position = Vector2(-0.5, 5.5)
-shape = SubResource("RectangleShape2D_fysbu")

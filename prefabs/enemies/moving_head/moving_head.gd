@@ -32,7 +32,7 @@ func _on_animation_finished() -> void:
 
 func _on_target_reached() -> void:
 	if on_screen && on_screen.is_on_screen():
-		GameManager.add_camera_trauma.emit(0.25)
+		GameManager.add_camera_shake.emit(.8, direction, 5)
 	match direction:
 		Vector2.UP:
 			enemy_sprite_component.play("Top_Hit")

@@ -14,7 +14,7 @@ func _on_target_reached() -> void:
 	if collission_targeting_component.moving_towards_collission:
 		sprite_component.play("Ground")
 		if on_screen && on_screen.is_on_screen():
-			GameManager.add_camera_trauma.emit(0.3)
+			GameManager.add_camera_shake.emit(.7, Vector2.DOWN.rotated(global_rotation), 5)
 
 func _process(delta: float) -> void:
 	if health_component:

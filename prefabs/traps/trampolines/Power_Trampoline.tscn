@@ -99,7 +99,6 @@ animation = &"Idle"
 script = ExtResource("4_7sp7v")
 entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
-process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=342050869]

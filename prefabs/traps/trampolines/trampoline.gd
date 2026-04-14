@@ -11,7 +11,7 @@ func _on_body_entered(body: Node2D) -> void:
 			body.double_jumped = false
 			body.knockback(Vector2.UP.rotated(global_rotation), jump_force)
 			Stats.add_recording_value(Stats.StatType.JUMPS_TRAMPOLINE, 1)
-			GameManager.add_camera_trauma.emit(0.3)
+			GameManager.add_camera_shake.emit(0.5, Vector2.UP.rotated(global_rotation), jump_force / 150)
 			rpc("show_hit")
 
 @rpc("any_peer","call_local","reliable")

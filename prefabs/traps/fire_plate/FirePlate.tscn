@@ -84,7 +84,7 @@ animations = [{
 size = Vector2(14, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vdro8"]
-size = Vector2(10, 14.965)
+size = Vector2(10, 14)
 
 [node name="FallingPlatform" type="StaticBody2D" unique_id=379550939]
 script = ExtResource("1_vhx8u")
@@ -107,7 +107,6 @@ animation = &"On"
 script = ExtResource("5_po4gm")
 entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
-process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1565565911]
@@ -127,8 +126,7 @@ script = ExtResource("5_s08ra")
 kill_type = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=367398664]
-visible = false
-position = Vector2(0, 0.9825001)
+position = Vector2(0, 1.4650002)
 shape = SubResource("RectangleShape2D_vdro8")
 debug_color = Color(0.99999994, 0.007380995, 0.07467092, 0.41960785)
 

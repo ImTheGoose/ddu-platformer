@@ -200,7 +200,6 @@ func show_reset() -> void:
 	rotation = 0
 
 func _die() -> void: #TEMPOARY
-	GameManager.add_camera_trauma.emit(0.9)
 	reset_ready = false
 	GameManager.rpc("player_died", get_multiplayer_authority())
 	rpc("show_death")
@@ -218,6 +217,7 @@ func show_death() -> void:
 func hit(vec: Vector2) -> void:
 	if is_multiplayer_authority() && !dead && GameManager.is_game_running():
 		knockback(vec, max_speed * 1.5)
+		GameManager.add_camera_shake.emit(1.8, -vec, 15)
 		_die()
 
 func knockback(dir: Vector2, power: float, reset_jump: bool = false) -> void:
