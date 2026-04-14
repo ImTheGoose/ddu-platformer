@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beometrwptcme"
-path="res://.godot/imported/medal (16x16).png-04ca99cfaff2bab684f39fb0b1463e8b.ctex"
+uid="uid://c4u4hyhgsp5nr"
+path="res://.godot/imported/white_medal (16x16).png-a6e08cca8f5ff1aade727c7000671fb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/medal (16x16).png"
-dest_files=["res://.godot/imported/medal (16x16).png-04ca99cfaff2bab684f39fb0b1463e8b.ctex"]
+source_file="res://assets/icons/white_medal (16x16).png"
+dest_files=["res://.godot/imported/white_medal (16x16).png-a6e08cca8f5ff1aade727c7000671fb5.ctex"]
 
 [params]
 
