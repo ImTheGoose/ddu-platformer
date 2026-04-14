@@ -15,7 +15,6 @@ stream_0 = ExtResource("2_ibjqg")
 size = Vector2(655.125, 42.5)
 
 [node name="Camera2D" type="Camera2D" unique_id=1354953116]
-z_index = 20
 anchor_mode = 0
 zoom = Vector2(3, 3)
 script = ExtResource("1_a0f6b")
@@ -31,7 +30,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
-z_index = 0
+z_index = 9
 position = Vector2(322, 357.83)
 emitting = false
 

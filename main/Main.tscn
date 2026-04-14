@@ -244,7 +244,7 @@ offset_right = 1277.0
 offset_bottom = 952.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.39215687)
+color = Color(0, 0, 0, 0.5882353)
 script = ExtResource("17_x8ve0")
 
 [node name="game_backdrop" type="TileMapLayer" parent="CameraFollow" unique_id=917935964]

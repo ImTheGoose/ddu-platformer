@@ -196,7 +196,9 @@ func show_reset() -> void:
 	set_collision_mask_value(5, GameManager.is_collissions_enabled())
 	dead = false
 	anim.play("Idle")
+	death_particles.restart()
 	death_particles.emitting = false
+	dust_particles.restart()
 	rotation = 0
 
 func _die() -> void: #TEMPOARY

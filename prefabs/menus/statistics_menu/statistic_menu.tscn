@@ -64,6 +64,16 @@ stat_type = 1
 value_type = 2
 metadata/_custom_type_script = "uid://bnp760uj0ka0y"
 
+[node name="height_total" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=138435171]
+layout_mode = 2
+bbcode_enabled = true
+text = "[img]res://assets/pixel_adventure_assets/Other/dust (16x16).png[/img] Total Height - %s"
+fit_content = true
+script = ExtResource("2_jeby3")
+stat_type = 45
+value_type = 5
+metadata/_custom_type_script = "uid://bnp760uj0ka0y"
+
 [node name="total_apples" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=295613199]
 layout_mode = 2
 bbcode_enabled = true

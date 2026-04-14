@@ -38,7 +38,7 @@ config/icon="uid://dx78aab6600bl"
 
 [audio]
 
-buses/default_bus_layout="res://main/default_bus_layout.tres"
+buses/default_bus_layout="uid://cau7ycky2xiyc"
 
 [autoload]
 
