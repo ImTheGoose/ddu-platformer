@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b28tug1pb14y6"]
 
 [ext_resource type="Texture2D" uid="uid://v23un5c06fl1" path="res://assets/pixel_adventure_assets/Enemies/Plant/Bullet Pieces.png" id="1_yysfg"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_w1s6x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yysfg"]
 atlas = ExtResource("1_yysfg")
@@ -17,12 +18,13 @@ gravity = Vector3(0, 294, 0)
 scale_min = 0.79999995
 scale_max = 1.1999999
 
-[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1113188052]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1802564202]
 z_index = -2
-emitting = false
 amount = 2
 texture = SubResource("AtlasTexture_yysfg")
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_5dmat")
+script = ExtResource("2_w1s6x")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"

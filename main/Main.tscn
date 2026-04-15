@@ -16,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="14_gv800"]
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="15_0d5nc"]
 [ext_resource type="Script" uid="uid://vgpj6rynqpfi" path="res://prefabs/general_UI/moving_background.gd" id="16_sebc1"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="17_fw23c"]
 [ext_resource type="Script" uid="uid://ukg6syf006m4" path="res://prefabs/menus/background_seperator.gd" id="17_x8ve0"]
 [ext_resource type="Resource" uid="uid://bsemolhnnavr3" path="res://prefabs/menus/shop_menus/SharedBackground.tres" id="18_5eftm"]
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="18_i8832"]
@@ -56,6 +57,36 @@
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="49_i8832"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="50_bbhju"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
+
+[sub_resource type="Curve" id="Curve_7867i"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.40201002, 1), -0.078966714, -0.078966714, 0, 0, Vector2(0.5992462, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_q4fed"]
+curve = SubResource("Curve_7867i")
+
+[sub_resource type="Gradient" id="Gradient_7glbu"]
+offsets = PackedFloat32Array(0.13826999, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eh0ei"]
+gradient = SubResource("Gradient_7glbu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xqrlm"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(320, 180, 0)
+emission_shape_scale = Vector3(320, 180, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -114.399994
+angle_max = 105.90001
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 1.1999999
+color_initial_ramp = SubResource("GradientTexture1D_eh0ei")
+alpha_curve = SubResource("CurveTexture_q4fed")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byxo4"]
 shader = ExtResource("14_gv800")
@@ -218,6 +249,13 @@ spawn_node = NodePath("../entity_container")
 [node name="CameraFollow" type="Node2D" parent="." unique_id=29674834 node_paths=PackedStringArray("camera")]
 script = ExtResource("13_bbhju")
 camera = NodePath("../Camera2D")
+
+[node name="ToggleableParticle" type="GPUParticles2D" parent="CameraFollow" unique_id=112695860]
+amount = 30
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_xqrlm")
+script = ExtResource("17_fw23c")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"
 
 [node name="moving_background" type="TextureRect" parent="CameraFollow" unique_id=621308851]
 process_mode = 3

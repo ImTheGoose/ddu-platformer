@@ -39,7 +39,7 @@ scale_max = 0.35
 scale_curve = SubResource("CurveTexture_37epm")
 turbulence_influence_max = 0.19800001
 
-[node name="CollissionParticle" type="GPUParticles2D" unique_id=1020078032]
+[node name="CollissionParticle" type="GPUParticles2D" unique_id=2052262902]
 rotation = 1.5707964
 emitting = false
 amount = 12
@@ -49,3 +49,4 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_5ll00")
 script = ExtResource("2_rtofg")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"

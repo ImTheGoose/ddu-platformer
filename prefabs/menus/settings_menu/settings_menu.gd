@@ -16,6 +16,8 @@ extends GameMenu
 func _ready() -> void:
 	super()
 	_load_config_variables()
+	var video_settings :Dictionary = DataManager.get_video_settings()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	master_vol_slider.value_changed.connect(_on_volume_value_changed)
 	music_vol_slider.value_changed.connect(_on_music_volume_value_changed)
 	max_fps_slider.value_changed.connect(_on_fps_limit_value_changed)
@@ -48,8 +50,8 @@ func _load_config_variables() -> void:
 	_on_fps_limit_value_changed(video_settings.max_fps)
 	max_fps_slider.value = video_settings.max_fps
 	vsync_toggle.button_pressed = video_settings.vsync
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
-	fullscreen_toggle.button_pressed = video_settings.fullscreen
+	
+	fullscreen_toggle.button_pressed = true if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN else false
 	particle_toggle.button_pressed = video_settings.particles_enabled
 	
 	var audio_settings :Dictionary = DataManager.get_audio_settings()

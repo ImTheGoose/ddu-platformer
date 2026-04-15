@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://db74wj2cj44ty" path="res://prefabs/enemies/components/CollissionActivatorComponent.gd" id="6_1o70q"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_2dthm"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="6_c6tca"]
+[ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="9_heisp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjg5y"]
 size = Vector2(30, 30)
@@ -27,7 +28,8 @@ block_rotation = true
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=623801276]
-rect = Rect2(-8, -24, 37, 32)
+position = Vector2(-9, -3)
+rect = Rect2(4, -18, 25, 26)
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1975777366 node_paths=PackedStringArray("entity_root")]
 script = ExtResource("2_bjg5y")
@@ -119,3 +121,9 @@ metadata/_custom_type_script = "uid://csjcberb4rmwa"
 position = Vector2(18, -8)
 shape = SubResource("RectangleShape2D_1o70q")
 debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)
+
+[node name="AudioComponent" type="Node" parent="." unique_id=1771336455 node_paths=PackedStringArray("on_screen_notifier", "movement_component")]
+script = ExtResource("9_heisp")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://c5lwrhejxb5m0"

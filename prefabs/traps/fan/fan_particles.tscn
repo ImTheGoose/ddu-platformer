@@ -41,7 +41,7 @@ scale_curve = SubResource("CurveTexture_yl3ec")
 color_initial_ramp = SubResource("GradientTexture1D_jeqdm")
 alpha_curve = SubResource("CurveTexture_eb5qk")
 
-[node name="GPUParticles2D" type="GPUParticles2D" unique_id=928541509]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1599908049]
 z_index = -1
 amount = 35
 texture = ExtResource("1_ipmgv")
@@ -49,3 +49,4 @@ lifetime = 0.65
 speed_scale = 0.6
 process_material = SubResource("ParticleProcessMaterial_b13u2")
 script = ExtResource("2_aicb6")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"

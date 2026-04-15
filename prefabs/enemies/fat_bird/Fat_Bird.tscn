@@ -33,7 +33,6 @@ entity_type = 5
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_37epm")]
-emitting = false
 amount = 7
 texture = SubResource("AtlasTexture_88jqj")
 
@@ -98,9 +97,12 @@ position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_37epm")
 debug_color = Color(0.9024265, 0.30941275, 0, 0.41960785)
 
-[node name="AudioComponent" type="Node" parent="." unique_id=1964496988 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=1964496988 node_paths=PackedStringArray("on_screen_notifier", "health_component", "movement_component", "target_reached_collision_ray")]
 script = ExtResource("6_x8y3c")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+movement_component = NodePath("../MovementComponent")
+target_reached_collision_ray = NodePath("../GroundParticleCheck")
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=383185221 node_paths=PackedStringArray("entity_node")]

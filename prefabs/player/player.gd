@@ -252,6 +252,9 @@ func _update_anim(move_axis: float) -> void:
 				audio_stream.pitch_scale = randf_range(0.9, 1.1)
 				audio_stream.play()
 	elif !is_on_wall_only():
+		if audio_stream.playing:
+			if audio_stream.stream == audio_files["running"]:
+				audio_stream.stop()
 		if velocity.y < 0 && !double_jumped:
 			dust_particles.emitting = false
 			anim.play("Jump")
