@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://daa708mlqvqkn"]
 
 [ext_resource type="Script" uid="uid://cc0ggureuvne0" path="res://prefabs/enemies/trunk/trunk.gd" id="1_83xog"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="2_5pxfo"]
 [ext_resource type="SpriteFrames" uid="uid://6yvmnskdicaf" path="res://prefabs/enemies/trunk/trunk_frames.tres" id="2_8wpmd"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_8ttg1"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="4_24vhn"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dxnatyslk4ik6" path="res://prefabs/enemies/trunk/TrunkProjectile.tscn" id="11_047al"]
 [ext_resource type="Script" uid="uid://xj5blqpn2j3h" path="res://prefabs/enemies/components/AttackComponent.gd" id="12_047al"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="13_w8q7n"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="16_j5g1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts0j5"]
 size = Vector2(19, 24)
@@ -29,6 +31,12 @@ projectile_spawner_component = NodePath("ProjectileSpawnerComponent")
 attack_component = NodePath("AttackComponent")
 entity_type = 2
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("2_5pxfo")]
+modulate = Color(0.7254902, 0.43137255, 0.32941177, 1)
+position = Vector2(0, 7)
+amount = 13
+speed_scale = 0.5
 
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=1996084647 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
 collision_layer = 4
@@ -115,3 +123,9 @@ entity_node = NodePath("..")
 path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=541706602 node_paths=PackedStringArray("movement_component", "moving_particles")]
+script = ExtResource("16_j5g1t")
+movement_component = NodePath("../MovementComponent")
+moving_particles = [NodePath("../dust_particles")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://do5gbabi2agsb"]
 
 [ext_resource type="Script" uid="uid://c6tnyu176t8sk" path="res://prefabs/enemies/rock_big/rock_big.gd" id="1_fim2q"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="2_5m813"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="2_54pcy"]
 [ext_resource type="SpriteFrames" uid="uid://hwllhcfkyyj7" path="res://prefabs/enemies/rock_big/rock_big_frames.tres" id="3_fim2q"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="4_ei2c2"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_4rm02"]
 [ext_resource type="Script" uid="uid://ck12efevamnkb" path="res://prefabs/enemies/components/EntitySpawnerComponent.gd" id="9_fim2q"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_ei2c2"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="13_4rm02"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54pcy"]
 radius = 16.0
@@ -24,12 +26,19 @@ sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 7
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
+[node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("2_5m813")]
+modulate = Color(0.6862745, 0.73333335, 0.7647059, 1)
+position = Vector2(0, 7)
+amount = 15
+speed_scale = 0.5
+
 [node name="HealthComponent" type="Node" parent="." unique_id=386238058 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("2_54pcy")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=654769224 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
+position = Vector2(0, -1)
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("5_yhhnt")
@@ -47,7 +56,7 @@ shape = SubResource("CircleShape2D_54pcy")
 debug_color = Color(0.8055124, 0.41657114, 5.7756904e-07, 0.41960785)
 
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1333216415 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
-position = Vector2(0, -8)
+position = Vector2(0, -9)
 sprite_frames = ExtResource("3_fim2q")
 animation = &"Idle"
 script = ExtResource("4_ei2c2")
@@ -100,3 +109,9 @@ path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 edge_offset = -5.0
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=390198306 node_paths=PackedStringArray("movement_component", "moving_particles")]
+script = ExtResource("13_4rm02")
+movement_component = NodePath("../MovementComponent")
+moving_particles = [NodePath("../dust_particles")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

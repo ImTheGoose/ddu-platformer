@@ -3,7 +3,11 @@ extends Entity
 @export var jump_force :int = 550
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
+var origin_stream :AudioStream
 @onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")
+
+func _ready() -> void:
+	origin_stream = audio_stream.stream
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -29,4 +33,5 @@ func _on_animatable_body_2d_animation_finished() -> void:
 	anim.play("Idle")
 
 func _on_reset() -> void:
+	audio_stream.stream = origin_stream
 	anim.play("Idle")

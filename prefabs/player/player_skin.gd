@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 @export var chosen_skin_string :String = "Osvald"
 @export var chosen_outline_color :Color = Color.BLACK
+@export var outline_modulate_nodes :Array[CanvasItem] = []
 @export var player_controller :Player
 @onready var skin_sprites :Dictionary[String, SpriteFrames]= {
 	"Osvald": preload("uid://b4t3asxpw884d"),
@@ -36,7 +37,16 @@ func _process(delta: float) -> void:
 
 func refresh_cosmetics() -> void:
 	sprite_frames = skin_sprites[player_info.SELECTED_SKIN_NAME]
-	get_material().set_shader_parameter("color", Color(player_info.SELECTED_OUTLINE_HEX))
+	var outline_color :Color = Color(player_info.SELECTED_OUTLINE_HEX)
+	get_material().set_shader_parameter("color", outline_color)
+	for canvas_item: CanvasItem in outline_modulate_nodes:
+		match outline_color:
+			Color.TRANSPARENT:
+				canvas_item.modulate = Color.WHITE
+			_:
+				canvas_item.modulate = outline_color
+		
+	
 	if GameManager.is_collissions_enabled() or is_multiplayer_authority():
 		get_material().set_shader_parameter("opacity", 1.0)
 	else:

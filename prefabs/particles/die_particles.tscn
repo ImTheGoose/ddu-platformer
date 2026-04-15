@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_x8b13"]
 
 [sub_resource type="Gradient" id="Gradient_yhksc"]
-colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
+colors = PackedColorArray(1, 1, 1, 1, 0.92, 0.92, 0.92, 0.45882353)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_634ti"]
 gradient = SubResource("Gradient_yhksc")
@@ -34,7 +34,7 @@ gravity = Vector3(0, 60, 0)
 scale_min = 0.5
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_yhksc")
-color = Color(0.81960785, 0, 0.05490196, 1)
+color = Color(0.92, 0.1373867, 0.110400006, 1)
 color_ramp = SubResource("GradientTexture1D_634ti")
 
 [node name="die_particles" type="GPUParticles2D" unique_id=1852783007]

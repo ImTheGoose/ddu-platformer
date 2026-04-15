@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bbtr8h0akbyoy"]
 
 [ext_resource type="Script" uid="uid://blh7npni3bejc" path="res://prefabs/enemies/fat_bird/fat_bird.gd" id="1_foyj3"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/enemies/fat_bird/collission_particle.tscn" id="2_ienmw"]
 [ext_resource type="SpriteFrames" uid="uid://b8sgm7cw3iye1" path="res://prefabs/enemies/fat_bird/fat_bird_frames.tres" id="2_jtfo8"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_qejqu"]
 [ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="4_ah2eh"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="7_fcof4"]
 [ext_resource type="Script" uid="uid://dk2s2jlcdkchw" path="res://prefabs/enemies/components/CollissionTargetingComponent.gd" id="8_x8y3c"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="9_fcof4"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="11_ienmw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_foyj3"]
 size = Vector2(22, 28)
@@ -25,16 +27,37 @@ on_screen = NodePath("VisibleOnScreenNotifier2D")
 entity_type = 5
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
+[node name="CollissionParticle" parent="." unique_id=1020078032 instance=ExtResource("2_ienmw")]
+position = Vector2(0, 6.255)
+
+[node name="CollissionParticle2" parent="." unique_id=710180536 instance=ExtResource("2_ienmw")]
+position = Vector2(0, 6.255)
+rotation = -1.5707964
+
+[node name="FlyParticle" parent="." unique_id=973619285 instance=ExtResource("2_ienmw")]
+position = Vector2(1, 2)
+rotation = 1.7453293
+amount = 5
+lifetime = 0.4
+
+[node name="FlyParticle2" parent="." unique_id=566555960 instance=ExtResource("2_ienmw")]
+position = Vector2(-1, 2)
+rotation = 4.537856
+amount = 5
+lifetime = 0.4
+
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=421255713 node_paths=PackedStringArray("entity_node", "health_component")]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("2_jtfo8")
 animation = &"Idle"
+frame = 4
 script = ExtResource("3_qejqu")
 entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1506809828 node_paths=PackedStringArray("entity_node", "reference_sprite")]
+visible = false
 sprite_frames = ExtResource("2_jtfo8")
 animation = &"Idle"
 script = ExtResource("4_fs2bb")
@@ -97,3 +120,17 @@ metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1320379512]
 position = Vector2(0, -13)
 rect = Rect2(-10, 3, 20, 14)
+
+[node name="GroundParticleCheck" type="RayCast2D" parent="." unique_id=576451006]
+target_position = Vector2(0, 10)
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2060654447 node_paths=PackedStringArray("movement_component", "target_reached_particles", "target_reached_collision_ray", "sprite_component", "frame_emitted_particles")]
+script = ExtResource("11_ienmw")
+movement_component = NodePath("../MovementComponent")
+target_reached_particles = [NodePath("../CollissionParticle2"), NodePath("../CollissionParticle")]
+target_reached_collision_ray = NodePath("../GroundParticleCheck")
+sprite_component = NodePath("../EnemySpriteComponent")
+animation_name = "Idle"
+animation_frame = 3
+frame_emitted_particles = [NodePath("../FlyParticle"), NodePath("../FlyParticle2")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

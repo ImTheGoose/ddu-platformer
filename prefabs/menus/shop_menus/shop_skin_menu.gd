@@ -41,6 +41,7 @@ func _select_item(item_name: String) -> void:
 	_refresh_shop_contents()
 
 @onready var color_hex_array :Array[String] = [
+	Color.TRANSPARENT.to_html(true),
 	Color.WHITE.to_html(false),
 	Color.LIGHT_CORAL.to_html(false),        # 1. Soft Red
 	Color.SALMON.to_html(false),             # 2. Red-Orange

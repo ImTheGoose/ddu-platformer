@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="8_fiqdt"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="9_pi7pd"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_tma4l"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="11_o56dn"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="12_jmno3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8aov"]
 size = Vector2(18, 18)
@@ -23,6 +25,12 @@ path_detection_component = NodePath("PathDetectionComponent")
 sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 1
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("11_o56dn")]
+modulate = Color(0.89411765, 0.7882353, 0.5921569, 1)
+position = Vector2(0, 7)
+amount = 10
+speed_scale = 0.5
 
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
 collision_layer = 4
@@ -88,3 +96,9 @@ entity_node = NodePath("..")
 path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2002162266 node_paths=PackedStringArray("movement_component", "moving_particles")]
+script = ExtResource("12_jmno3")
+movement_component = NodePath("../MovementComponent")
+moving_particles = [NodePath("../dust_particles")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

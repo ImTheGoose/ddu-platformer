@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c011nvwhwv1ii"]
 
 [ext_resource type="Script" uid="uid://bf88wq0gxyrja" path="res://prefabs/enemies/bird/bird.gd" id="1_lwlss"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/enemies/fat_bird/collission_particle.tscn" id="2_f1s47"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="2_h6xyl"]
 [ext_resource type="SpriteFrames" uid="uid://bvybev70nuads" path="res://prefabs/enemies/bird/bird_frames.tres" id="3_b1qvx"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_lwlss"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="7_cmvfg"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="8_4c0v1"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_gykmu"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="13_taac1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gykmu"]
 
@@ -20,6 +22,12 @@ health_component = NodePath("HealthComponent")
 sprite_component = NodePath("SinusOffsetComponent/EnemySpriteComponent")
 entity_type = 4
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="CollissionParticle" parent="." unique_id=1020078032 instance=ExtResource("2_f1s47")]
+position = Vector2(5.0000005, -1)
+rotation = 2.958333
+amount = 5
+lifetime = 0.5
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1722081687 node_paths=PackedStringArray("entity_root", "health_component")]
 script = ExtResource("4_b1qvx")
@@ -61,8 +69,7 @@ debug_color = Color(0.81166184, 0.41114002, 3.85046e-07, 0.41960785)
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="SinusOffsetComponent" unique_id=810956275 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
 sprite_frames = ExtResource("3_b1qvx")
 animation = &"Moving"
-frame = 1
-frame_progress = 0.55360276
+frame = 4
 offset = Vector2(-5, 0)
 script = ExtResource("3_lwlss")
 entity_node = NodePath("../..")
@@ -72,6 +79,7 @@ flip_x_offset = true
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="SinusOffsetComponent/EnemySpriteComponent" unique_id=1691061344 node_paths=PackedStringArray("reference_sprite")]
+visible = false
 sprite_frames = ExtResource("3_b1qvx")
 animation = &"Moving"
 script = ExtResource("8_4c0v1")
@@ -98,3 +106,11 @@ path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 seconds_waiting_at_target = 0.0
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=1070509741 node_paths=PackedStringArray("sprite_component", "frame_emitted_particles")]
+script = ExtResource("13_taac1")
+sprite_component = NodePath("../SinusOffsetComponent/EnemySpriteComponent")
+animation_name = "Moving"
+animation_frame = 4
+frame_emitted_particles = [NodePath("../CollissionParticle")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"
