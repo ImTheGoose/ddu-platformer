@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://yakm4ys46ld4" path="res://prefabs/enemies/Projectile.gd" id="1_w0010"]
 [ext_resource type="Texture2D" uid="uid://dssh41a4kt13u" path="res://assets/pixel_adventure_assets/Enemies/Plant/Bullet.png" id="2_tisoo"]
+[ext_resource type="PackedScene" uid="uid://b28tug1pb14y6" path="res://prefabs/enemies/plant/plant_projectile_particles.tscn" id="3_q84xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vcn0"]
 size = Vector2(7, 7)
 
-[node name="TrunkProjectile" type="Area2D" unique_id=476840123]
+[node name="TrunkProjectile" type="Area2D" unique_id=476840123 node_paths=PackedStringArray("particles")]
 collision_mask = 9
 script = ExtResource("1_w0010")
 speed = 80
+particles = NodePath("")
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790626015]
@@ -20,3 +22,5 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1865158731]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_6vcn0")
+
+[node name="GPUParticles2D" parent="." unique_id=1113188052 instance=ExtResource("3_q84xb")]

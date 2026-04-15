@@ -2,14 +2,21 @@
 
 [ext_resource type="Script" uid="uid://yakm4ys46ld4" path="res://prefabs/enemies/Projectile.gd" id="1_6vcn0"]
 [ext_resource type="Texture2D" uid="uid://bxcjhs0rkn1ie" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Bullet.png" id="1_uqess"]
+[ext_resource type="PackedScene" uid="uid://b28tug1pb14y6" path="res://prefabs/enemies/plant/plant_projectile_particles.tscn" id="3_v0fd0"]
+[ext_resource type="Texture2D" uid="uid://by146o0kwj486" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Bullet Pieces.png" id="4_gsjny"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vcn0"]
 size = Vector2(9, 5)
 
-[node name="TrunkProjectile" type="Area2D" unique_id=476840123]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2caao"]
+atlas = ExtResource("4_gsjny")
+region = Rect2(0, 0, 16, 16)
+
+[node name="TrunkProjectile" type="Area2D" unique_id=476840123 node_paths=PackedStringArray("particles")]
 collision_mask = 9
 script = ExtResource("1_6vcn0")
 speed = 120
+particles = NodePath("GPUParticles2D")
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790626015]
@@ -19,3 +26,8 @@ flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1865158731]
 shape = SubResource("RectangleShape2D_6vcn0")
+
+[node name="GPUParticles2D" parent="." unique_id=1113188052 instance=ExtResource("3_v0fd0")]
+texture = SubResource("AtlasTexture_2caao")
+
+[editable path="GPUParticles2D"]
