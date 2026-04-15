@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bbtr8h0akbyoy"]
 
 [ext_resource type="Script" uid="uid://blh7npni3bejc" path="res://prefabs/enemies/fat_bird/fat_bird.gd" id="1_foyj3"]
-[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/enemies/fat_bird/collission_particle.tscn" id="2_ienmw"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_37epm"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/particles/cloud_burst_particle.tscn" id="2_ienmw"]
 [ext_resource type="SpriteFrames" uid="uid://b8sgm7cw3iye1" path="res://prefabs/enemies/fat_bird/fat_bird_frames.tres" id="2_jtfo8"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_5ll00"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_qejqu"]
 [ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="4_ah2eh"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_fs2bb"]
@@ -12,6 +14,10 @@
 [ext_resource type="Script" uid="uid://dk2s2jlcdkchw" path="res://prefabs/enemies/components/CollissionTargetingComponent.gd" id="8_x8y3c"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="9_fcof4"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="11_ienmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88jqj"]
+atlas = ExtResource("3_5ll00")
+region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_foyj3"]
 size = Vector2(22, 28)
@@ -26,6 +32,11 @@ collission_targeting_component = NodePath("CollissionTargetingComponent")
 on_screen = NodePath("VisibleOnScreenNotifier2D")
 entity_type = 5
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_37epm")]
+emitting = false
+amount = 7
+texture = SubResource("AtlasTexture_88jqj")
 
 [node name="CollissionParticle" parent="." unique_id=1020078032 instance=ExtResource("2_ienmw")]
 position = Vector2(0, 6.255)
@@ -124,8 +135,11 @@ rect = Rect2(-10, 3, 20, 14)
 [node name="GroundParticleCheck" type="RayCast2D" parent="." unique_id=576451006]
 target_position = Vector2(0, 10)
 
-[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2060654447 node_paths=PackedStringArray("movement_component", "target_reached_particles", "target_reached_collision_ray", "sprite_component", "frame_emitted_particles")]
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2060654447 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "movement_component", "target_reached_particles", "target_reached_collision_ray", "sprite_component", "frame_emitted_particles")]
 script = ExtResource("11_ienmw")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 target_reached_particles = [NodePath("../CollissionParticle2"), NodePath("../CollissionParticle")]
 target_reached_collision_ray = NodePath("../GroundParticleCheck")

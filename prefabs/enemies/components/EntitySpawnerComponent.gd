@@ -24,7 +24,6 @@ func spawn_entities(type: EntitySpawner.SpawnType = entity_type) -> void:
 					spawn_entity(global_position, type)
 					continue
 		var index: float = i - (amount - 1.0) / 2.0
-		print(index)
 		var offset :float = distance_between * index	
 		var gpos :Vector2 = global_position
 		gpos.x += offset

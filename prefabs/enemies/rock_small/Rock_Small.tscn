@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dflyjqrkjf6k4" path="res://prefabs/enemies/rock_small/rock_small.gd" id="1_id37e"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="2_1k8e2"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="2_f08wy"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_r1mu5"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_eqlyw"]
 [ext_resource type="SpriteFrames" uid="uid://dok8qox6lhqu3" path="res://prefabs/enemies/rock_small/rock_small_frames.tres" id="3_id37e"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="4_8wyc2"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="5_ucnnl"]
@@ -12,6 +14,10 @@
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_tj6be"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_l2phw"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="12_44g6y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo6me"]
+atlas = ExtResource("3_eqlyw")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54pcy"]
 radius = 8.0
@@ -24,6 +30,11 @@ path_detection_component = NodePath("PathDetectionComponent")
 sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 9
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_r1mu5")]
+emitting = false
+amount = 3
+texture = SubResource("AtlasTexture_mo6me")
 
 [node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("2_1k8e2")]
 modulate = Color(0.6862745, 0.73333335, 0.7647059, 1)
@@ -100,8 +111,11 @@ edge_offset = 1.0
 seconds_waiting_at_target = 1.2
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
 
-[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=783845602 node_paths=PackedStringArray("movement_component", "moving_particles")]
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=783845602 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "movement_component", "moving_particles")]
 script = ExtResource("12_44g6y")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"

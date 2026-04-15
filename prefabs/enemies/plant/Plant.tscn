@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://uuqmd0t4drcg" path="res://prefabs/enemies/plant/plant.gd" id="1_1s8mq"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="2_qlmjq"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_rw7x6"]
 [ext_resource type="SpriteFrames" uid="uid://d1kbdatac330x" path="res://prefabs/enemies/plant/plant_frames.tres" id="3_joegr"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_ksn0j"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_vmiiw"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="5_1s8mq"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="5_op3u3"]
@@ -12,6 +14,11 @@
 [ext_resource type="Script" uid="uid://cphqtnahepgoh" path="res://prefabs/enemies/components/ProjectileSpawnerComponent.gd" id="9_t4iwn"]
 [ext_resource type="PackedScene" uid="uid://bfdotq0wp28bp" path="res://prefabs/enemies/plant/PlantProjectile.tscn" id="10_rw7x6"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="11_oaj10"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="15_eggbi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6lgx"]
+atlas = ExtResource("3_ksn0j")
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksn0j"]
 size = Vector2(16, 32)
@@ -25,6 +32,10 @@ projectile_spawner_component = NodePath("ProjectileSpawnerComponent")
 attack_component = NodePath("AttackComponent")
 entity_type = 3
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_rw7x6")]
+emitting = false
+texture = SubResource("AtlasTexture_x6lgx")
 
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=961640626 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
 collision_layer = 4
@@ -61,7 +72,6 @@ animation = &"Idle"
 script = ExtResource("5_op3u3")
 entity_node = NodePath("../..")
 reference_sprite = NodePath("..")
-process_update = false
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=580562693 node_paths=PackedStringArray("entity_node")]
@@ -104,3 +114,10 @@ script = ExtResource("11_oaj10")
 health_component = NodePath("../HealthComponent")
 projectile_spawner = NodePath("../ProjectileSpawnerComponent")
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2002856301 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list")]
+script = ExtResource("15_eggbi")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

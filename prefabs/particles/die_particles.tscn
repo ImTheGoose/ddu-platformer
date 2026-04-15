@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_x8b13"]
 
+[sub_resource type="Curve" id="Curve_kqngu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.335779, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_06cxy"]
+curve = SubResource("Curve_kqngu")
+
 [sub_resource type="Gradient" id="Gradient_yhksc"]
 colors = PackedColorArray(1, 1, 1, 1, 0.92, 0.92, 0.92, 0.45882353)
 
@@ -9,7 +16,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.92, 0.92, 0.92, 0.45882353)
 gradient = SubResource("Gradient_yhksc")
 
 [sub_resource type="Curve" id="Curve_rwuho"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5947059), -1.00219, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.69691384, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_yhksc"]
@@ -30,12 +37,15 @@ direction = Vector3(0, -1, 0)
 spread = 180.0
 initial_velocity_min = 15.0
 initial_velocity_max = 60.0
+angular_velocity_min = -201.56001
+angular_velocity_max = 152.01997
 gravity = Vector3(0, 60, 0)
 scale_min = 0.5
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_yhksc")
-color = Color(0.92, 0.1373867, 0.110400006, 1)
+color = Color(0.92, 0.92, 0.92, 1)
 color_ramp = SubResource("GradientTexture1D_634ti")
+alpha_curve = SubResource("CurveTexture_06cxy")
 
 [node name="die_particles" type="GPUParticles2D" unique_id=1852783007]
 emitting = false

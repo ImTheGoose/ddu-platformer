@@ -11,7 +11,7 @@ size = Vector2(7, 7)
 collision_mask = 9
 script = ExtResource("1_w0010")
 speed = 80
-particles = NodePath("")
+particles = NodePath("GPUParticles2D")
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790626015]
@@ -24,3 +24,4 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_6vcn0")
 
 [node name="GPUParticles2D" parent="." unique_id=1113188052 instance=ExtResource("3_q84xb")]
+emitting = true

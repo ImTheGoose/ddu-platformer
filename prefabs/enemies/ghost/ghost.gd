@@ -17,13 +17,13 @@ func _on_animation_finished() -> void:
 		return
 	
 	if sprite_component.animation.contains("Dis"):
-		visible = false
+		sprite_component.visible = false
 		return
 	
 	return
 
 func is_ghost_hidden() -> bool:
-	return !visible
+	return !sprite_component.visible
 
 func _process(delta: float) -> void:
 	if health_component:
@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	if seconds_since_state_change > seconds_between_states:
 		seconds_since_state_change = 0.0
 		if is_ghost_hidden():
-			visible = true
+			sprite_component.visible = true
 			sprite_component.play("Appear")
 		else:
 			hitbox_component.disable_hitbox()
@@ -43,5 +43,5 @@ func _process(delta: float) -> void:
 		
 
 func _on_reset() -> void:
-	visible = true
+	sprite_component.visible = true
 	sprite_component.play("Moving")

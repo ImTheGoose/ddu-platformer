@@ -1,6 +1,7 @@
 extends Node
 
 class_name ParticleEmitionComponent 
+@export var entity_node :Entity
 
 @export_group("Death Particles")
 @export var health_compnent :HealthComponent
@@ -14,6 +15,7 @@ class_name ParticleEmitionComponent
 
 @export_group("Animation Particles")
 @export var sprite_component :AnimatedSprite2D
+@export var emit_follow_sprite_visible :bool = true
 @export var position_follows_flip :bool = true
 var origin_positions :Array[Vector2] = []
 @export var animation_name :String
@@ -21,6 +23,9 @@ var origin_positions :Array[Vector2] = []
 @export var frame_emitted_particles :Array[GPUParticles2D]
 
 func _ready() -> void:
+	if entity_node:
+		entity_node.entity_reset.connect(_on_entity_reset)
+	
 	if health_compnent:
 		health_compnent.death.connect(_on_death)
 	
@@ -28,10 +33,24 @@ func _ready() -> void:
 		movement_component.target_reached.connect(_on_target_reached)
 	
 	if sprite_component:
+		if emit_follow_sprite_visible:
+			sprite_component.visibility_changed.connect(_on_sprite_visible_changed)
+		
 		sprite_component.frame_changed.connect(_on_frame_changed)
 		for p in frame_emitted_particles:
 			origin_positions.append(p.position)
-		
+
+func _on_sprite_visible_changed() -> void:
+	if not sprite_component.visible:
+		_emit_from_array(moving_particles, false, false)
+		_emit_from_array(frame_emitted_particles, false, false)
+
+func _on_entity_reset() -> void:
+	_emit_from_array(death_particle_list, true, false)
+	_emit_from_array(moving_particles, true, false)
+	_emit_from_array(target_reached_particles, true, false)
+	_emit_from_array(frame_emitted_particles, true, false)
+	
 
 func _process(delta: float) -> void:
 	if movement_component:
@@ -39,6 +58,10 @@ func _process(delta: float) -> void:
 			_emit_from_array(moving_particles, false)
 		else:
 			_emit_from_array(moving_particles, false, false)
+	
+	if sprite_component:
+		if emit_follow_sprite_visible:
+			_on_sprite_visible_changed()
 
 func _on_target_reached() -> void:
 	if target_reached_collision_ray:

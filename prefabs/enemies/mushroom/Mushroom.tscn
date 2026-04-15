@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bhxdi46is6o2x" path="res://prefabs/enemies/mushroom/mushroom.gd" id="1_fiqdt"]
 [ext_resource type="SpriteFrames" uid="uid://f1m6kqgyba88" path="res://prefabs/enemies/mushroom/mushroom_frames.tres" id="2_4l0vp"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_joj1d"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_1rpio"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_joj1d"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="4_f8aov"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="4_rr74u"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="5_tma4l"]
@@ -12,6 +14,10 @@
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_tma4l"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="11_o56dn"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="12_jmno3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yn7t"]
+atlas = ExtResource("3_joj1d")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8aov"]
 size = Vector2(18, 18)
@@ -25,6 +31,12 @@ path_detection_component = NodePath("PathDetectionComponent")
 sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 1
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_joj1d")]
+position = Vector2(0, -6)
+emitting = false
+amount = 5
+texture = SubResource("AtlasTexture_5yn7t")
 
 [node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("11_o56dn")]
 modulate = Color(0.89411765, 0.7882353, 0.5921569, 1)
@@ -97,8 +109,11 @@ path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
 
-[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2002162266 node_paths=PackedStringArray("movement_component", "moving_particles")]
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2002162266 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "movement_component", "moving_particles")]
 script = ExtResource("12_jmno3")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"

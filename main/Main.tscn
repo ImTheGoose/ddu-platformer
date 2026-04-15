@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="8_50616"]
 [ext_resource type="PackedScene" uid="uid://b28tug1pb14y6" path="res://prefabs/enemies/plant/plant_projectile_particles.tscn" id="9_mwi54"]
 [ext_resource type="Script" uid="uid://bs1phqh1dv12v" path="res://main/player_spawner.gd" id="10_m4geg"]
-[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/enemies/fat_bird/collission_particle.tscn" id="10_x4tdt"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/particles/cloud_burst_particle.tscn" id="10_x4tdt"]
 [ext_resource type="Script" uid="uid://dbfq7dddiroth" path="res://main/EntitySpawner.gd" id="11_8bq6g"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="11_bbkfx"]
 [ext_resource type="Script" uid="uid://dd5i23q3b2qqm" path="res://main/camera_follow.gd" id="13_bbhju"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="14_gv800"]
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="15_0d5nc"]
@@ -180,9 +181,9 @@ script = ExtResource("1_w3rk5")
 [node name="ParticlePreRenderer" type="Node2D" parent="." unique_id=1987328683]
 top_level = true
 z_index = -150
-position = Vector2(719, 306)
+position = Vector2(-985, -153)
 script = ExtResource("47_rchyr")
-particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616"), ExtResource("9_mwi54"), ExtResource("10_x4tdt")])
+particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616"), ExtResource("9_mwi54"), ExtResource("10_x4tdt"), ExtResource("11_bbkfx")])
 
 [node name="game_container" type="Node2D" parent="." unique_id=235652747]
 script = ExtResource("2_5mvff")
