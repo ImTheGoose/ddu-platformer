@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="15_0d5nc"]
 [ext_resource type="Script" uid="uid://vgpj6rynqpfi" path="res://prefabs/general_UI/moving_background.gd" id="16_sebc1"]
 [ext_resource type="Script" uid="uid://ukg6syf006m4" path="res://prefabs/menus/background_seperator.gd" id="17_x8ve0"]
+[ext_resource type="Resource" uid="uid://bsemolhnnavr3" path="res://prefabs/menus/shop_menus/SharedBackground.tres" id="18_5eftm"]
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="18_i8832"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="19_bbhju"]
 [ext_resource type="Script" uid="uid://do22tf2kjinhv" path="res://utility/rich_value_label.gd" id="20_mwi54"]
@@ -231,6 +232,7 @@ grow_horizontal = 2
 texture = ExtResource("15_0d5nc")
 stretch_mode = 1
 script = ExtResource("16_sebc1")
+shared_texture = ExtResource("18_5eftm")
 
 [node name="background_seperator" type="ColorRect" parent="CameraFollow" unique_id=2085207305]
 z_index = 10

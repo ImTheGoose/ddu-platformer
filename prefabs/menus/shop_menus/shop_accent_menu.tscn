@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dpql1ujcn3sd7"]
 
 [ext_resource type="Script" uid="uid://cru13khgiwkpx" path="res://prefabs/menus/shop_menus/shop_accent_menu.gd" id="1_dfh52"]
+[ext_resource type="Resource" uid="uid://bsemolhnnavr3" path="res://prefabs/menus/shop_menus/SharedBackground.tres" id="2_l2ws1"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="3_naxsf"]
-[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="4_pij7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg1ud"]
 shader = ExtResource("3_naxsf")
@@ -24,6 +24,7 @@ offset_bottom = 112.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dfh52")
+shared_texture = ExtResource("2_l2ws1")
 display_rect = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/display_rect")
 shop_category = "accent"
 price_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/price_tag")
@@ -94,7 +95,6 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_mg1ud")
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-texture = ExtResource("4_pij7p")
 expand_mode = 2
 stretch_mode = 5
 
