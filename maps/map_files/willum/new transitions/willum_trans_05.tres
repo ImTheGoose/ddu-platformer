@@ -8,4 +8,6 @@ script = ExtResource("1_lyano")
 prefab = ExtResource("1_kmipn")
 bottom_connection_type = 3
 top_connection_type = 4
+type = 1
+related_collections = Array[int]([2])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
