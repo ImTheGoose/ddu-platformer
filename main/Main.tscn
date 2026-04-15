@@ -84,12 +84,12 @@ direction = Vector3(0, -1, 0)
 spread = 90.0
 initial_velocity_min = 4.0
 initial_velocity_max = 18.0
-angular_velocity_min = -27.340015
-angular_velocity_max = 46.119984
+angular_velocity_min = -104.20001
+angular_velocity_max = 102.499985
 gravity = Vector3(0, 8, 0)
 scale_min = 0.5
 scale_max = 1.3
-color = Color(1, 1, 1, 0.7137255)
+color = Color(1, 1, 1, 0.74509805)
 color_initial_ramp = SubResource("GradientTexture1D_eh0ei")
 alpha_curve = SubResource("CurveTexture_q4fed")
 
