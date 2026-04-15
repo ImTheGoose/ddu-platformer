@@ -19,8 +19,8 @@
 atlas = ExtResource("3_ulrtf")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nn18"]
-size = Vector2(23, 25)
+[sub_resource type="CircleShape2D" id="CircleShape2D_skmkc"]
+radius = 13.038404
 
 [node name="Ghost" type="Node2D" unique_id=1122069586 node_paths=PackedStringArray("health_component", "hitbox_component", "sprite_component")]
 script = ExtResource("1_4nn18")
@@ -62,7 +62,7 @@ metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1105444755]
 position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_4nn18")
+shape = SubResource("CircleShape2D_skmkc")
 debug_color = Color(0.82193947, 0.40174487, 7.70092e-07, 0.41960785)
 
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1093400066 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]

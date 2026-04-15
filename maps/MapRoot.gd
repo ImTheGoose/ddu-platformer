@@ -48,7 +48,7 @@ func _enter_tree() -> void:
 		shadow_tiles.modulate = Color8(0,0,0, 50)
 		shadow_tiles.z_index = -1
 		add_child(shadow_tiles)
-		shadow_tiles.position += Vector2(-2, 2)
+		shadow_tiles.position += Vector2(-1, 1)
 
 	if trap_tiles:
 		trap_tiles.enabled = false

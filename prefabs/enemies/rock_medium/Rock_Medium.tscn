@@ -33,8 +33,7 @@ entity_type = 8
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_kesvd")]
-position = Vector2(0, -11)
-emitting = false
+position = Vector2(0, 4)
 amount = 4
 texture = SubResource("AtlasTexture_q1xod")
 

@@ -26,5 +26,5 @@ func _process(delta: float) -> void:
 		sprite_component.play("Idle")
 
 func _on_reset() -> void:
-	visible = true
+	sprite_component.visible = true
 	sprite_component.play("Idle")

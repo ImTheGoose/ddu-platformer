@@ -2,6 +2,7 @@ extends Entity
 
 @onready var audio_burning :AudioStreamMP3 = preload("uid://dfk3ua7m2563v")
 @onready var audio_clicked :AudioStreamMP3 = preload("uid://m6484ap3pala")
+@onready var fire_particle: ToggleableParticle = %Fire_Particle
 
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_area :HitArea = $HitArea
@@ -31,6 +32,8 @@ func _stop_burning() -> void:
 	hit_area.monitoring = false
 	
 func _start_burning() -> void:
+	fire_particle.restart()
+	fire_particle.emitting = true
 	anim.play("On")
 	hit_area.monitoring = true
 	AudioManager.play_global_sound(audio_burning, -10)

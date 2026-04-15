@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c5k441vitmiwu"]
 
-[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_qx0ep"]
-[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_baaq6"]
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_bea26"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_rtofg"]
 
 [sub_resource type="Curve" id="Curve_ienmw"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -42,10 +42,10 @@ turbulence_influence_max = 0.19800001
 [node name="CollissionParticle" type="GPUParticles2D" unique_id=1020078032]
 rotation = 1.5707964
 emitting = false
-amount = 20
-texture = ExtResource("1_qx0ep")
+amount = 12
+texture = ExtResource("1_bea26")
 lifetime = 0.9
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_5ll00")
-script = ExtResource("2_baaq6")
+script = ExtResource("2_rtofg")

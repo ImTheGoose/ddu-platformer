@@ -19,8 +19,8 @@
 atlas = ExtResource("3_joj1d")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8aov"]
-size = Vector2(18, 18)
+[sub_resource type="CircleShape2D" id="CircleShape2D_joj1d"]
+radius = 9.055386
 
 [node name="Mushroom" type="Node2D" unique_id=920916629 node_paths=PackedStringArray("health_component", "movement_component", "path_detection_component", "sprite_component")]
 z_index = 10
@@ -58,7 +58,7 @@ metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=2094285354]
 position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_f8aov")
+shape = SubResource("CircleShape2D_joj1d")
 debug_color = Color(0.9098039, 0.29803923, 0.06666667, 0.41960785)
 
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=668066771 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/particles/cloud_burst_particle.tscn" id="10_x4tdt"]
 [ext_resource type="Script" uid="uid://dbfq7dddiroth" path="res://main/EntitySpawner.gd" id="11_8bq6g"]
 [ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="11_bbkfx"]
+[ext_resource type="PackedScene" uid="uid://ct6sgk0u8c5fx" path="res://prefabs/particles/fire_particle.tscn" id="12_0c1fb"]
 [ext_resource type="Script" uid="uid://dd5i23q3b2qqm" path="res://main/camera_follow.gd" id="13_bbhju"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="14_gv800"]
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="15_0d5nc"]
@@ -183,7 +184,7 @@ top_level = true
 z_index = -150
 position = Vector2(-985, -153)
 script = ExtResource("47_rchyr")
-particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616"), ExtResource("9_mwi54"), ExtResource("10_x4tdt"), ExtResource("11_bbkfx")])
+particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616"), ExtResource("9_mwi54"), ExtResource("10_x4tdt"), ExtResource("11_bbkfx"), ExtResource("12_0c1fb")])
 
 [node name="game_container" type="Node2D" parent="." unique_id=235652747]
 script = ExtResource("2_5mvff")

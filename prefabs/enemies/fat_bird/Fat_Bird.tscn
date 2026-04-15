@@ -19,8 +19,7 @@
 atlas = ExtResource("3_5ll00")
 region = Rect2(32, 16, 16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_foyj3"]
-size = Vector2(22, 28)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37epm"]
 
 [node name="FatBird" type="Node2D" unique_id=278432552 node_paths=PackedStringArray("health_component", "sprite_component", "player_detection_component", "movement_component", "collission_targeting_component", "on_screen")]
 script = ExtResource("1_foyj3")
@@ -96,7 +95,7 @@ metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1575995734]
 position = Vector2(0, -9)
-shape = SubResource("RectangleShape2D_foyj3")
+shape = SubResource("CapsuleShape2D_37epm")
 debug_color = Color(0.9024265, 0.30941275, 0, 0.41960785)
 
 [node name="AudioComponent" type="Node" parent="." unique_id=1964496988 node_paths=PackedStringArray("health_component")]

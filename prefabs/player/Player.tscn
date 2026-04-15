@@ -58,7 +58,7 @@ animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
 script = ExtResource("3_6dlbe")
-outline_modulate_nodes = [NodePath("../dust_particles"), NodePath("../jump_particles")]
+outline_modulate_nodes = [NodePath("../dust_particles"), NodePath("../jump_particles"), NodePath("../die_particles")]
 player_controller = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]

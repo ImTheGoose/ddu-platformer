@@ -32,8 +32,8 @@ entity_type = 9
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_r1mu5")]
-emitting = false
-amount = 3
+position = Vector2(0, 2)
+amount = 2
 texture = SubResource("AtlasTexture_mo6me")
 
 [node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("2_1k8e2")]
