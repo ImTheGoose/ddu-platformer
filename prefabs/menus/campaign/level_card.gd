@@ -27,6 +27,8 @@ func _update_state() -> void:
 		button_index_label.remove_theme_color_override("font_color")
 		button_index_label.add_theme_color_override("font_color", Color.WEB_GRAY)
 		button_index_label.text = original_button_text % ["white", "white", _get_index()]
+	
+	button_index_label.bbcode_enabled = true
 		
 
 func _get_index() -> int:

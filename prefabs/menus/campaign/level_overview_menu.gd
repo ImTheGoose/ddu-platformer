@@ -57,7 +57,7 @@ func _refresh_values() -> void:
 	var bronze_seconds :String = Format.get_time_string(level_file.bronze_medal_seconds)
 	
 	medals_label.text = original_medals_text % [gold_seconds, silver_seconds, bronze_seconds]
-
+	highscore_label.bbcode_enabled = true
 
 	
 

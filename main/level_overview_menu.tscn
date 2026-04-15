@@ -59,7 +59,6 @@ horizontal_alignment = 1
 [node name="highscore_label" type="RichTextLabel" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1999166375]
 unique_name_in_owner = true
 layout_mode = 2
-bbcode_enabled = true
 text = "[img]res://assets/icons/%s_medal (16x16).png[/img][color=%s] Best Time - %s"
 fit_content = true
 

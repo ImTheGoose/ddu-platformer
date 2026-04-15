@@ -40,20 +40,26 @@ func _select_item(item_name: String) -> void:
 	Lobby.transmit_data_to_lobby(Lobby.DataRequestType.COSMETIC_SKIN)
 	_refresh_shop_contents()
 
-
-
-
-func _on_outline_pressed() -> void:
-	var random_color: Color = Color(randf(),randf(),randf())
-	var random_hex :String = "#%s" % random_color.to_html(false)
-	DataManager.set_value("selected_outline_hex", random_hex)
-	_refresh_shop_contents()
-	Lobby.transmit_data_to_lobby(Lobby.DataRequestType.COSMETIC_OUTLINE)
-
 @onready var color_hex_array :Array[String] = [
-	Color.GOLDENROD.to_html(false),
-	Color.AQUA.to_html(false),
-	Color.DARK_MAGENTA.to_html(false),
+	Color.WHITE.to_html(false),
+	Color.LIGHT_CORAL.to_html(false),        # 1. Soft Red
+	Color.SALMON.to_html(false),             # 2. Red-Orange
+	Color.CORAL.to_html(false),              # 3. Orange
+	Color.SANDY_BROWN.to_html(false),        # 4. Golden-Orange
+	Color.GOLDENROD.to_html(false),          # 5. Warm Yellow
+	Color.PALE_GOLDENROD.to_html(false),     # 6. Soft Yellow
+	Color.GREEN_YELLOW.to_html(false),       # 7. Chartreuse
+	Color.LIGHT_GREEN.to_html(false),        # 8. Bright Green
+	Color.MEDIUM_SPRING_GREEN.to_html(false),# 9. Spring Green
+	Color.MEDIUM_AQUAMARINE.to_html(false),  # 10. Mint/Teal
+	Color.MEDIUM_TURQUOISE.to_html(false),   # 11. Cyan/Aqua
+	Color.SKY_BLUE.to_html(false),           # 12. Light Blue
+	Color.CORNFLOWER_BLUE.to_html(false),    # 13. Periwinkle Blue
+	Color.MEDIUM_SLATE_BLUE.to_html(false),  # 14. Indigo-ish
+	Color.MEDIUM_PURPLE.to_html(false),      # 15. Violet
+	Color.ORCHID.to_html(false),             # 16. Magenta/Purple
+	Color.HOT_PINK.to_html(false),           # 17. Pink
+	Color.LIGHT_PINK.to_html(false)          # 18. Rose/Red-Pink
 ]
 
 func _get_color_index_from_hex(hex: String) -> int:
@@ -63,7 +69,12 @@ func _get_color_index_from_hex(hex: String) -> int:
 	return 0
 
 func _on_prev_color_pressed() -> void:
-	pass # Replace with function body.
+	var prev_color_index :int = _get_color_index_from_hex(DataManager.get_value("selected_outline_hex"))
+	match prev_color_index:
+		0:
+			_select_color(color_hex_array.size() - 1)
+		_:
+			_select_color(prev_color_index - 1)
 
 
 func _on_random_color_pressed() -> void:
@@ -76,7 +87,13 @@ func _on_random_color_pressed() -> void:
 
 
 func _on_next_color_pressed() -> void:
-	pass # Replace with function body.
+	var prev_color_index :int = _get_color_index_from_hex(DataManager.get_value("selected_outline_hex"))
+	var max_index :int = color_hex_array.size() - 1
+	match prev_color_index:
+		max_index:
+			_select_color(0)
+		_:
+			_select_color(prev_color_index + 1)
 
 func _select_color(index: int) -> void:
 	var hex :String = color_hex_array.get(index)
