@@ -134,12 +134,12 @@ func _create_new_save_data() -> void:
 	return
 
 func set_value(key: String, value: Variant) -> void:
-	game_data[key] = value
+	game_data.set(key, value)
 
 func get_value(key: String) -> Variant:
-	var val :Variant = game_data[key]
+	var val :Variant = game_data.get(key)
 	if val == null:
-		print(PREFIX, "Value missing for key: ", key)
+		printerr(PREFIX, "Value missing for key: ", key)
 		return null
 			
 	return val
