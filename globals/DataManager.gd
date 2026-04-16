@@ -153,8 +153,8 @@ func create_config() -> void:
 	config.set_value("keybinding", "restart", "R")
 	config.set_value("keybinding", "escape", "Escape")
 	
-	config.set_value("audio", "master_volume", 0)
-	config.set_value("audio", "music_volume", -15)
+	config.set_value("audio", "master_volume", 0.5)
+	config.set_value("audio", "music_volume", 0.5)
 	
 	config.set_value("video", "max_fps", 600)
 	config.set_value("video", "show_fps", false)

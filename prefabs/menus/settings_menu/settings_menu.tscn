@@ -64,16 +64,20 @@ text = "Master Volume"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -25.0
-max_value = 20.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 
 [node name="master_volume_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=670444459 node_paths=PackedStringArray("assigned_slider")]
 layout_mode = 2
 text = "22db "
 script = ExtResource("2_j2ip3")
 assigned_slider = NodePath("../master_volume")
-value_suffix = "db "
+value_suffix = "%"
 display_as_int = true
+value_multiplier = 100.0
+string_at_minimum = "Off"
+string_at_max = "Max"
 metadata/_custom_type_script = "uid://bbqfxplkacax7"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList" unique_id=1271489551]
@@ -87,16 +91,19 @@ text = "Music Volume"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = -72.0
-max_value = 20.0
+max_value = 1.0
+step = 0.01
 
 [node name="music_volume_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer2" unique_id=1125820331 node_paths=PackedStringArray("assigned_slider")]
 layout_mode = 2
 text = "10db "
 script = ExtResource("2_j2ip3")
 assigned_slider = NodePath("../music_volume")
-value_suffix = "db "
+value_suffix = "%"
 display_as_int = true
+value_multiplier = 100.0
+string_at_minimum = "Off"
+string_at_max = "Max"
 metadata/_custom_type_script = "uid://bbqfxplkacax7"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList" unique_id=1482936434]

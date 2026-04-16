@@ -5,6 +5,7 @@ class_name SliderValueLabel
 @export var assigned_slider :HSlider
 @export var value_suffix :String = ""
 @export var display_as_int :bool = false
+@export var value_multiplier :float = -1
 
 ## Custom string when slider is at minimum. Leave blanc to ignore.
 @export var string_at_minimum :String = ""
@@ -24,6 +25,9 @@ func _on_value_changed(value: float) -> void:
 	if value <= assigned_slider.min_value && string_at_minimum != "":
 		text = string_at_minimum
 		return
+	
+	if value_multiplier != -1:
+		value *= value_multiplier
 	
 	if display_as_int:
 		text = str( int(value)) + value_suffix

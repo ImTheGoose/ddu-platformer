@@ -40,34 +40,34 @@ func _on_show() -> void:
 
 func _load_config_variables() -> void:
 	var video_settings :Dictionary = DataManager.get_video_settings()
-	if video_settings.vsync == true:
+	if video_settings.get("vsync", true) == true:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	
-	skip_transitions_toggle.button_pressed = video_settings.skip_transitions
-	fps_toggle.button_pressed = video_settings.show_fps
-	_on_fps_limit_value_changed(video_settings.max_fps)
-	max_fps_slider.value = video_settings.max_fps
-	vsync_toggle.button_pressed = video_settings.vsync
+	skip_transitions_toggle.button_pressed = video_settings.get("skip_transitions", false)
+	fps_toggle.button_pressed = video_settings.get("show_fps", false)
+	_on_fps_limit_value_changed(video_settings.get("max_fps", 600))
+	max_fps_slider.value = video_settings.get("max_fps", 600)
+	vsync_toggle.button_pressed = video_settings.get("vsync", true)
 	
 	fullscreen_toggle.button_pressed = true if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN else false
-	particle_toggle.button_pressed = video_settings.particles_enabled
+	particle_toggle.button_pressed = video_settings.get("particles_enabled", true)
 	
 	var audio_settings :Dictionary = DataManager.get_audio_settings()
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), audio_settings.master_volume)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), audio_settings.music_volume)
-	master_vol_slider.value = audio_settings.master_volume
-	music_vol_slider.value = audio_settings.music_volume
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), audio_settings.get("master_volume", 0.5))
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), audio_settings.get("music_volume", 0.5))
+	master_vol_slider.value = audio_settings.get("master_volume", 0)
+	music_vol_slider.value = audio_settings.get("music_volume", 0)
 
 func _on_volume_value_changed(value: float) -> void:
 	DataManager.save_audio_setting("master_volume", value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
 	pass # Replace with function body.
 
 func _on_music_volume_value_changed(value: float) -> void:
 	DataManager.save_audio_setting("music_volume", value)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), value)
 
 
 func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
