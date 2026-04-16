@@ -17,18 +17,18 @@ class_name AudioComponent
 @export var target_reached_collision_ray :RayCast2D
 @export var target_reached_sounds :Dictionary[AudioStream, float]
 @export var footstep_sounds :Dictionary[AudioStream, float] = {
-	preload("uid://c6j2hoc4wymal") : 0.07,
-	preload("uid://oharaq54bnb7") : 0.07,
-	preload("uid://doieij1l416q4") : 0.07,
-	preload("uid://d508bpeswjo2") : 0.07,
-	preload("uid://cv8h3ffkelp3p") : 0.07,
-	preload("uid://bfvky0in4lm5m") : 0.07,
-	preload("uid://mn7nnq2ff54i") : 0.07,
-	preload("uid://c2vtllrrqwp2c") : 0.07,
-	preload("uid://kmgk7llkwmhb") : 0.07,
-	preload("uid://ckv2j5nn4t23i") : 0.07,
-	preload("uid://cxmmcbvtppmhv") : 0.07,
-	preload("uid://bjicby1naax2x") : 0.07,
+	preload("uid://c6j2hoc4wymal") : 0.1,
+	preload("uid://oharaq54bnb7") : 0.1,
+	preload("uid://doieij1l416q4") : 0.1,
+	preload("uid://d508bpeswjo2") : 0.1,
+	preload("uid://cv8h3ffkelp3p") : 0.1,
+	preload("uid://bfvky0in4lm5m") : 0.1,
+	preload("uid://mn7nnq2ff54i") : 0.1,
+	preload("uid://c2vtllrrqwp2c") : 0.1,
+	preload("uid://kmgk7llkwmhb") : 0.1,
+	preload("uid://ckv2j5nn4t23i") : 0.1,
+	preload("uid://cxmmcbvtppmhv") : 0.1,
+	preload("uid://bjicby1naax2x") : 0.1,
 }
 @export_range(0, 2, .01) var footstep_pitch_offset :float = 1.0
 @export_range(-0.01,0.5) var seconds_between_footsteps :float = -0.01

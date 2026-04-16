@@ -14,7 +14,10 @@
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_jmnr6"]
 [ext_resource type="Script" uid="uid://ck12efevamnkb" path="res://prefabs/enemies/components/EntitySpawnerComponent.gd" id="9_gem11"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_rx2f2"]
+[ext_resource type="AudioStream" uid="uid://brmichqkp427p" path="res://assets/audio/sfx/enemies/rocks/rock_impact1.ogg" id="13_hysmj"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="13_j2iqv"]
+[ext_resource type="AudioStream" uid="uid://c267c1n7yvpkq" path="res://assets/audio/sfx/enemies/rocks/rock_impact2.ogg" id="14_o85pl"]
+[ext_resource type="AudioStream" uid="uid://cmpx5pkh7xdwi" path="res://assets/audio/sfx/enemies/rocks/rock_impact3.ogg" id="15_fo1ox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q1xod"]
 atlas = ExtResource("3_uuqhu")
@@ -93,9 +96,18 @@ health_component = NodePath("../HealthComponent")
 speed = 40
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("on_screen_notifier", "health_component", "movement_component")]
 script = ExtResource("8_jmnr6")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("13_hysmj"): 0.3,
+ExtResource("14_o85pl"): 0.5,
+ExtResource("15_fo1ox"): 0.5
+})
+movement_component = NodePath("../MovementComponent")
+footstep_pitch_offset = 0.6
+seconds_between_footsteps = 0.38
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=910548544]
@@ -126,3 +138,6 @@ death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1782222059]
+rect = Rect2(-10, -10, 20, 17)

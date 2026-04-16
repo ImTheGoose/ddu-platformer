@@ -13,12 +13,11 @@
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="7_fcof4"]
 [ext_resource type="Script" uid="uid://dk2s2jlcdkchw" path="res://prefabs/enemies/components/CollissionTargetingComponent.gd" id="8_x8y3c"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="9_fcof4"]
+[ext_resource type="AudioStream" uid="uid://ccam8uwgu68nw" path="res://assets/audio/sfx/enemies/fat_bird/new_slap1.ogg" id="11_1thfl"]
 [ext_resource type="AudioStream" uid="uid://wn6cslqr0mhm" path="res://assets/audio/sfx/enemies/fat_bird/impact3.ogg" id="11_88jqj"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="11_ienmw"]
-[ext_resource type="AudioStream" uid="uid://ddla360s57g3o" path="res://assets/audio/sfx/enemies/fat_bird/slap1.ogg" id="11_t8jii"]
 [ext_resource type="AudioStream" uid="uid://bc0hcq0jr2x36" path="res://assets/audio/sfx/enemies/fat_bird/impact4.ogg" id="12_2uvec"]
-[ext_resource type="AudioStream" uid="uid://cex4gqrcip47b" path="res://assets/audio/sfx/enemies/fat_bird/slap2.ogg" id="12_eo26k"]
-[ext_resource type="AudioStream" uid="uid://dry1l54d3eegx" path="res://assets/audio/sfx/enemies/fat_bird/slap3.ogg" id="13_n136l"]
+[ext_resource type="AudioStream" uid="uid://ylikehdo4a8i" path="res://assets/audio/sfx/enemies/fat_bird/new_slap2.ogg" id="12_t8jii"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88jqj"]
 atlas = ExtResource("3_5ll00")
@@ -107,15 +106,14 @@ script = ExtResource("6_x8y3c")
 on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
 death_sounds = Dictionary[AudioStream, float]({
-ExtResource("11_t8jii"): 1.15,
-ExtResource("12_eo26k"): 1.15,
-ExtResource("13_n136l"): 1.15
+ExtResource("11_1thfl"): 1.0,
+ExtResource("12_t8jii"): 1.0
 })
 movement_component = NodePath("../MovementComponent")
 target_reached_collision_ray = NodePath("../GroundParticleCheck")
 target_reached_sounds = Dictionary[AudioStream, float]({
-ExtResource("11_88jqj"): 2.2,
-ExtResource("12_2uvec"): 2.4
+ExtResource("11_88jqj"): 2.6,
+ExtResource("12_2uvec"): 2.8
 })
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 

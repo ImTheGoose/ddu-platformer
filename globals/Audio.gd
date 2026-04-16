@@ -54,6 +54,13 @@ func play_random(sounds: Dictionary[AudioStream, float], pitch: float = 1.0) -> 
 		
 
 func _on_node_added(node: Node) -> void:
+	if node is OptionButton:
+		node.pressed.connect(_play_ui_down)
+		return
+	
+	if node is PopupMenu:
+		node.index_pressed.connect(func (idx): _play_ui_up())
+	
 	if node is Button:
 		node.button_down.connect(_play_ui_down)
 		node.button_up.connect(_play_ui_up)

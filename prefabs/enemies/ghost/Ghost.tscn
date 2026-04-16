@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="7_owrbq"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_skmkc"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_6c45l"]
+[ext_resource type="AudioStream" uid="uid://ntifmvg2vhyl" path="res://assets/audio/sfx/enemies/ghost/ghost_death1.ogg" id="13_ulrtf"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="14_5f2wn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pc8i7"]
@@ -32,7 +33,6 @@ metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_skmkc")]
 position = Vector2(0, -12)
-emitting = false
 amount = 5
 texture = SubResource("AtlasTexture_pc8i7")
 
@@ -92,9 +92,13 @@ script = ExtResource("7_owrbq")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=613337506 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=613337506 node_paths=PackedStringArray("on_screen_notifier", "health_component")]
 script = ExtResource("8_skmkc")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("13_ulrtf"): 1.0
+})
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=1481963309]
@@ -118,3 +122,7 @@ moving_particles = [NodePath("../dust_particles")]
 sprite_component = NodePath("../EnemySpriteComponent")
 position_follows_flip = false
 metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=550146343]
+position = Vector2(0, -5)
+rect = Rect2(-10, -3, 20, 13)

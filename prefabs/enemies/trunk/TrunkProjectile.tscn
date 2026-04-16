@@ -35,4 +35,8 @@ shape = SubResource("RectangleShape2D_6vcn0")
 emitting = false
 texture = SubResource("AtlasTexture_2caao")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1520489619]
+position = Vector2(-8, -8)
+rect = Rect2(6, 5, 4, 5)
+
 [editable path="GPUParticles2D"]

@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_tj6be"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_l2phw"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="12_44g6y"]
+[ext_resource type="AudioStream" uid="uid://brmichqkp427p" path="res://assets/audio/sfx/enemies/rocks/rock_impact1.ogg" id="13_bfppo"]
+[ext_resource type="AudioStream" uid="uid://c267c1n7yvpkq" path="res://assets/audio/sfx/enemies/rocks/rock_impact2.ogg" id="14_2r7hg"]
+[ext_resource type="AudioStream" uid="uid://cmpx5pkh7xdwi" path="res://assets/audio/sfx/enemies/rocks/rock_impact3.ogg" id="15_rtrcu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mo6me"]
 atlas = ExtResource("3_eqlyw")
@@ -94,9 +97,18 @@ accelleration = 0.3
 deaccelleration = 0.3
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("on_screen_notifier", "health_component", "movement_component")]
 script = ExtResource("8_tj6be")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("13_bfppo"): 0.3,
+ExtResource("14_2r7hg"): 0.5,
+ExtResource("15_rtrcu"): 0.5
+})
+movement_component = NodePath("../MovementComponent")
+footstep_pitch_offset = 1.1
+seconds_between_footsteps = 0.32
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=910548544]
@@ -119,3 +131,7 @@ death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2139897564]
+position = Vector2(-6, -4)
+rect = Rect2(0, 1, 12, 9)

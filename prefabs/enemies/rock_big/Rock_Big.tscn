@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://ck12efevamnkb" path="res://prefabs/enemies/components/EntitySpawnerComponent.gd" id="9_fim2q"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_ei2c2"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="13_4rm02"]
+[ext_resource type="AudioStream" uid="uid://brmichqkp427p" path="res://assets/audio/sfx/enemies/rocks/rock_impact1.ogg" id="13_usspw"]
+[ext_resource type="AudioStream" uid="uid://c267c1n7yvpkq" path="res://assets/audio/sfx/enemies/rocks/rock_impact2.ogg" id="14_1ulus"]
+[ext_resource type="AudioStream" uid="uid://cmpx5pkh7xdwi" path="res://assets/audio/sfx/enemies/rocks/rock_impact3.ogg" id="15_ivpap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m11pq"]
 atlas = ExtResource("3_m4qp6")
@@ -101,8 +104,13 @@ metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 script = ExtResource("8_4rm02")
 on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("13_usspw"): 0.3,
+ExtResource("14_1ulus"): 0.5,
+ExtResource("15_ivpap"): 0.5
+})
 movement_component = NodePath("../MovementComponent")
-footstep_pitch_offset = 0.4
+footstep_pitch_offset = 0.5
 seconds_between_footsteps = 0.42
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
