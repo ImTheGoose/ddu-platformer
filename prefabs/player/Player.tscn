@@ -70,13 +70,16 @@ one_way_collision_margin = 30.0
 
 [node name="dust_particles" parent="." unique_id=1559674720 instance=ExtResource("4_00uvl")]
 position = Vector2(0, 16)
+enabled_at_setting = 1
 
 [node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_dcg2g")]
 position = Vector2(0, 16)
+enabled_at_setting = 1
 
 [node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_uiiwv")]
 modulate = Color(0.92156863, 0.13725491, 0.10980392, 1)
 position = Vector2(-0.33333334, 2.3333333)
+enabled_at_setting = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=473809169]
 volume_db = -20.0

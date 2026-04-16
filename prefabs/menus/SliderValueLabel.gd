@@ -16,6 +16,7 @@ class_name SliderValueLabel
 func _ready() -> void:
 	if assigned_slider:
 		assigned_slider.value_changed.connect(_on_value_changed)
+		_on_value_changed(assigned_slider.value)
 
 func _on_value_changed(value: float) -> void:
 	if value >= assigned_slider.max_value && string_at_max != "":

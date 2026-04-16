@@ -4,9 +4,10 @@ extends GameMenu
 @onready var master_vol_slider :HSlider = %master_volume
 @onready var music_vol_slider :HSlider = %music_volume
 @onready var max_fps_slider :HSlider= %fps_limit
-@onready var fps_toggle :CheckBox = %fps_toggle
+@onready var camera_shake_toggle: CheckBox = %camera_shake_toggle
+@onready var fps_toggle: CheckBox = %fps_toggle
 @onready var fullscreen_toggle :CheckBox = %fullscreen_toggle
-@onready var particle_toggle :CheckBox = %particles_toggle
+@onready var particle_amount_dropdown: OptionButton = %particle_amount_dropdown
 @onready var vsync_toggle :CheckBox = %vsync_toggle
 @onready var skip_transitions_toggle :CheckBox = %skip_transitions_toggle
 @onready var clear_game_data: Button = %clear_game_data
@@ -21,9 +22,10 @@ func _ready() -> void:
 	master_vol_slider.value_changed.connect(_on_volume_value_changed)
 	music_vol_slider.value_changed.connect(_on_music_volume_value_changed)
 	max_fps_slider.value_changed.connect(_on_fps_limit_value_changed)
-	fps_toggle.toggled.connect(_on_fps_toggle_toggled)
+	fps_toggle.toggled.connect(_on_fps_toggled)
+	camera_shake_toggle.toggled.connect(_on_camera_shake_toggled)
 	fullscreen_toggle.toggled.connect(_on_fullscreen_toggle_toggled)
-	particle_toggle.toggled.connect(_on_particles_toggle_toggled)
+	particle_amount_dropdown.item_selected.connect(_on_particle_amount_selected)
 	vsync_toggle.toggled.connect(_on_vsync_toggle_toggled)
 	skip_transitions_toggle.toggled.connect(_on_skip_transition_toggle_toggled)
 	
@@ -46,13 +48,13 @@ func _load_config_variables() -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	
 	skip_transitions_toggle.button_pressed = video_settings.get("skip_transitions", false)
-	fps_toggle.button_pressed = video_settings.get("show_fps", false)
+	camera_shake_toggle.button_pressed = video_settings.get("camera_shake_enabled", true)
 	_on_fps_limit_value_changed(video_settings.get("max_fps", 600))
 	max_fps_slider.value = video_settings.get("max_fps", 600)
 	vsync_toggle.button_pressed = video_settings.get("vsync", true)
 	
 	fullscreen_toggle.button_pressed = true if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN else false
-	particle_toggle.button_pressed = video_settings.get("particles_enabled", true)
+	particle_amount_dropdown.selected = particle_amount_dropdown.get_item_index(video_settings.get("particle_amount", ToggleableParticle.ParticleAmount.ALL))
 	
 	var audio_settings :Dictionary = DataManager.get_audio_settings()
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), audio_settings.get("master_volume", 0.5))
@@ -73,10 +75,9 @@ func _on_music_volume_value_changed(value: float) -> void:
 func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("fullscreen", toggled_on)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED)
-	
 
-func _on_particles_toggle_toggled(toggled_on: bool) -> void:
-	DataManager.save_video_setting("particles_enabled", toggled_on)
+func _on_particle_amount_selected(index: int) -> void:
+	DataManager.save_video_setting("particle_amount", particle_amount_dropdown.get_item_id(index))
 	
 func _on_skip_transition_toggle_toggled(toggled_on: bool) -> void:
 	DataManager.save_video_setting("skip_transitions", toggled_on)
@@ -90,6 +91,9 @@ func _on_vsync_toggle_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 
+func _on_fps_toggled(toggled_on: bool) -> void:
+	DataManager.save_video_setting("show_fps", toggled_on)
+
 func _on_fps_limit_value_changed(value: float) -> void:
 	DataManager.save_video_setting("max_fps", value)
 	if value >= max_fps_slider.max_value:
@@ -97,14 +101,11 @@ func _on_fps_limit_value_changed(value: float) -> void:
 	else:
 		Engine.max_fps = int(value)
 
-func _on_fps_toggle_toggled(toggled_on: bool) -> void:
-	DataManager.save_video_setting("show_fps", toggled_on)
-
+func _on_camera_shake_toggled(toggled_on: bool) -> void:
+	DataManager.save_video_setting("camera_shake_enabled", toggled_on)
 
 func _on_back_pressed() -> void:
 	MenuHandler.change_menu(MenuHandler.get_previous_menu())
-	pass # Replace with function body.
-
 
 func _on_keybinds_pressed() -> void:
 	MenuHandler.change_menu("keybinding_menu")

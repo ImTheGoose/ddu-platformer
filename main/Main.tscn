@@ -260,6 +260,7 @@ amount = 30
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_xqrlm")
 script = ExtResource("17_fw23c")
+enabled_at_setting = 3
 metadata/_custom_type_script = "uid://djwnl3rysx6jb"
 
 [node name="moving_background" type="TextureRect" parent="CameraFollow" unique_id=621308851]

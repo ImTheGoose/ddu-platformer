@@ -12,7 +12,7 @@ var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"unlocked_level" : 1,
-	"save_version" : 0.5,
+	"save_version" : 0.6,
 	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
@@ -83,6 +83,10 @@ func update_game_data() -> void:
 	if v < 0.5:
 		game_data["unlocked_level"] = default_game_data["unlocked_level"]
 		game_data["level_times"] = default_game_data["level_times"]
+	
+	if v < 0.6:
+		create_config()
+		
 	
 	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
@@ -162,7 +166,8 @@ func create_config() -> void:
 	config.set_value("video", "fullscreen", false)
 	config.set_value("video", "color_theme", "Brown")
 	config.set_value("video", "color_theme_id", 0)
-	config.set_value("video", "particles_enabled", true)
+	config.set_value("video", "camera_shake_enabled", true)
+	config.set_value("video", "particle_amount", ToggleableParticle.ParticleAmount.ALL)
 	config.set_value("video", "skip_transitions", false)
 	config.set_value("general", "default_controls", true)
 	

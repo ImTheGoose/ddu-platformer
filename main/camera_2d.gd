@@ -21,18 +21,18 @@ func _ready() -> void:
 	GameManager.client_reset.connect(_reset_position)
 	GameManager.add_camera_shake.connect(add_shake)
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.is_pressed():
-			match event.keycode:
-				KEY_J:
-					add_shake(1.5, Vector2.RIGHT, 10)
-				KEY_H:
-					add_shake(1.5, Vector2.LEFT, 10)
-				KEY_U:
-					add_shake(1.5, Vector2.UP, 10)
-				KEY_N:
-					add_shake(1.5, Vector2.DOWN, 10)
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventKey:
+		#if event.is_pressed():
+			#match event.keycode:
+				#KEY_J:
+					#add_shake(1.5, Vector2.RIGHT, 10)
+				#KEY_H:
+					#add_shake(1.5, Vector2.LEFT, 10)
+				#KEY_U:
+					#add_shake(1.5, Vector2.UP, 10)
+				#KEY_N:
+					#add_shake(1.5, Vector2.DOWN, 10)
 
 func _reset_position() -> void:
 	position = origin_position
@@ -40,27 +40,33 @@ func _reset_position() -> void:
 
 
 func _process(delta: float) -> void:
-	# 1. Physics: The Spring Equation (F = -kx - cv)
-	# This pulls the camera back to center and adds "friction" (damping)
-	var force = -stiffness * displacement - damping * velocity
-	velocity += force * delta
-	displacement += velocity * delta
-	
-	# 2. Random Jitter (Exponential decay is fine here for the "fuzz")
-	jitter_energy = jitter_energy * exp(-jitter_decay * delta)
-	
-	# 3. Apply the results
-	if displacement.length() > 0.1 or jitter_energy > 0.1:
-		var random_offset = Vector2(
-			randf_range(-jitter_energy, jitter_energy),
-			randf_range(-jitter_energy, jitter_energy)
-		)
-		offset = displacement + random_offset
+	var video_settings: Dictionary = DataManager.get_video_settings()
+	if video_settings.get("camera_shake_enabled", true):
+		# 1. Physics: The Spring Equation (F = -kx - cv)
+		# This pulls the camera back to center and adds "friction" (damping)
+		var force = -stiffness * displacement - damping * velocity
+		velocity += force * delta
+		displacement += velocity * delta
+		
+		# 2. Random Jitter (Exponential decay is fine here for the "fuzz")
+		jitter_energy = jitter_energy * exp(-jitter_decay * delta)
+		
+		# 3. Apply the results
+		if displacement.length() > 0.1 or jitter_energy > 0.1:
+			var random_offset = Vector2(
+				randf_range(-jitter_energy, jitter_energy),
+				randf_range(-jitter_energy, jitter_energy)
+			)
+			offset = displacement + random_offset
+		else:
+			offset = Vector2.ZERO
+			velocity = Vector2.ZERO
+			displacement = Vector2.ZERO
 	else:
 		offset = Vector2.ZERO
 		velocity = Vector2.ZERO
 		displacement = Vector2.ZERO
-	
+
 	if !GameManager.is_game_running():
 		return
 	

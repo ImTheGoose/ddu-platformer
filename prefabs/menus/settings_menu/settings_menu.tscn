@@ -115,25 +115,45 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="particles_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=1228362983]
+[node name="vsync_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=210024663]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Particles"
+text = "V-Sync"
+
+[node name="fps_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=918952349]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show FPS"
 
 [node name="skip_transitions_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=1979636143]
 unique_name_in_owner = true
 layout_mode = 2
 text = "skip transitions"
 
-[node name="vsync_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=210024663]
+[node name="camera_shake_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=511141788]
 unique_name_in_owner = true
 layout_mode = 2
-text = "V-Sync"
+text = "Camera Shake"
 
-[node name="fps_toggle" type="CheckBox" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/VBoxContainer" unique_id=511141788]
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList" unique_id=739427719]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer4" unique_id=2005959107]
+layout_mode = 2
+text = "Particles: "
+
+[node name="particle_amount_dropdown" type="OptionButton" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer4" unique_id=1097470867]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Show FPS"
+item_count = 4
+popup/item_0/text = "All"
+popup/item_0/id = 3
+popup/item_1/text = "Medium"
+popup/item_1/id = 2
+popup/item_2/text = "Minimal"
+popup/item_2/id = 1
+popup/item_3/text = "Disabled"
+popup/item_3/id = 0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList" unique_id=1135312266]
 layout_mode = 2
