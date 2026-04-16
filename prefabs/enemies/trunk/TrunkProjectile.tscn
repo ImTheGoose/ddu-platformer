@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://yakm4ys46ld4" path="res://prefabs/enemies/Projectile.gd" id="1_6vcn0"]
 [ext_resource type="Texture2D" uid="uid://bxcjhs0rkn1ie" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Bullet.png" id="1_uqess"]
+[ext_resource type="AudioStream" uid="uid://celh1qv04jl2k" path="res://assets/audio/sfx/enemies/trunk/wood_col1.ogg" id="2_gsjny"]
 [ext_resource type="PackedScene" uid="uid://b28tug1pb14y6" path="res://prefabs/enemies/plant/plant_projectile_particles.tscn" id="3_v0fd0"]
 [ext_resource type="Texture2D" uid="uid://by146o0kwj486" path="res://assets/pixel_adventure_assets/Enemies/Trunk/Bullet Pieces.png" id="4_gsjny"]
 
@@ -17,6 +18,9 @@ collision_mask = 9
 script = ExtResource("1_6vcn0")
 speed = 120
 particles = NodePath("GPUParticles2D")
+collission_sounds = Dictionary[AudioStream, float]({
+ExtResource("2_gsjny"): 0.35
+})
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790626015]
@@ -28,6 +32,7 @@ flip_h = true
 shape = SubResource("RectangleShape2D_6vcn0")
 
 [node name="GPUParticles2D" parent="." unique_id=1113188052 instance=ExtResource("3_v0fd0")]
+emitting = false
 texture = SubResource("AtlasTexture_2caao")
 
 [editable path="GPUParticles2D"]

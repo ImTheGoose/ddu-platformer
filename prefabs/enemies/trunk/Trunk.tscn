@@ -14,8 +14,13 @@
 [ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="9_8ttg1"]
 [ext_resource type="Script" uid="uid://cphqtnahepgoh" path="res://prefabs/enemies/components/ProjectileSpawnerComponent.gd" id="10_83xog"]
 [ext_resource type="PackedScene" uid="uid://dxnatyslk4ik6" path="res://prefabs/enemies/trunk/TrunkProjectile.tscn" id="11_047al"]
+[ext_resource type="AudioStream" uid="uid://bpcgpj6lkrgng" path="res://assets/audio/sfx/enemies/trunk/wood_hit1.ogg" id="11_esp81"]
+[ext_resource type="AudioStream" uid="uid://btsw5ju4jtwrd" path="res://assets/audio/sfx/enemies/trunk/wood_hit2.ogg" id="12_7imxp"]
 [ext_resource type="Script" uid="uid://xj5blqpn2j3h" path="res://prefabs/enemies/components/AttackComponent.gd" id="12_047al"]
+[ext_resource type="AudioStream" uid="uid://dy47q2pkhcyjd" path="res://assets/audio/sfx/enemies/trunk/wood_hit3.ogg" id="13_js1pj"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="13_w8q7n"]
+[ext_resource type="AudioStream" uid="uid://d4bo4hn7vofkc" path="res://assets/audio/sfx/enemies/trunk/wood_proj1.ogg" id="14_esp81"]
+[ext_resource type="AudioStream" uid="uid://cmpqjr4l0yc53" path="res://assets/audio/sfx/enemies/trunk/wood_proj2.ogg" id="15_7imxp"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="16_j5g1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts0j5"]
@@ -35,7 +40,6 @@ metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_j5g1t")]
 position = Vector2(0, -9)
-emitting = false
 amount = 6
 
 [node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("2_5pxfo")]
@@ -88,10 +92,23 @@ entity_root = NodePath("..")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=1499323178 node_paths=PackedStringArray("health_component", "projectile_spawner")]
+[node name="AudioComponent" type="Node" parent="." unique_id=1499323178 node_paths=PackedStringArray("on_screen_notifier", "health_component", "projectile_spawner", "movement_component")]
 script = ExtResource("7_w8q7n")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("11_esp81"): 0.8,
+ExtResource("12_7imxp"): 0.8,
+ExtResource("13_js1pj"): 0.8
+})
 projectile_spawner = NodePath("../ProjectileSpawnerComponent")
+projectile_sounds = Dictionary[AudioStream, float]({
+ExtResource("14_esp81"): 0.7,
+ExtResource("15_7imxp"): 0.7
+})
+movement_component = NodePath("../MovementComponent")
+footstep_pitch_offset = 0.7
+seconds_between_footsteps = 0.39999999999999997
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1668236908 node_paths=PackedStringArray("entity_node")]
@@ -138,3 +155,7 @@ death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1132575652]
+position = Vector2(-2, -3)
+rect = Rect2(-6, -4, 16, 14)

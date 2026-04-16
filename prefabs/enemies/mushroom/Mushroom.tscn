@@ -34,7 +34,6 @@ metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_joj1d")]
 position = Vector2(0, -6)
-emitting = false
 amount = 5
 texture = SubResource("AtlasTexture_5yn7t")
 
@@ -94,9 +93,13 @@ entity_root = NodePath("..")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=1564607356 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=1564607356 node_paths=PackedStringArray("on_screen_notifier", "health_component", "movement_component")]
 script = ExtResource("9_pi7pd")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+movement_component = NodePath("../MovementComponent")
+footstep_pitch_offset = 1.2
+seconds_between_footsteps = 0.38
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=869701399]
@@ -117,3 +120,7 @@ death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=872326401]
+position = Vector2(-2, -4)
+rect = Rect2(-5, -3, 15, 13)

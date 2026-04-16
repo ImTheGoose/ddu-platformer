@@ -1,7 +1,7 @@
 extends Entity
 
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
-@onready var audio_collect :AudioStreamMP3 = preload("uid://cyi6b5lna87oj")
+@export var collect_sounds :Dictionary[AudioStream, float]
 var is_collected :bool = false
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _on_body_entered(body: Node2D) -> void:
 func show_collect() -> void:
 	is_collected = true
 	anim.play("Collect")
-	AudioManager.play_global_sound(audio_collect, -9)
+	Audio.play_random(collect_sounds, randf_range(0.6, 1))
 
 func _on_animation_finished() -> void:
 	if is_collected:

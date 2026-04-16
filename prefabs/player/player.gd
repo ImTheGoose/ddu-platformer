@@ -2,37 +2,41 @@ extends CharacterBody2D
 
 class_name Player 
 
+@export_group("Movement Settings")
 @export var jump_strength :int = 400
 @export var speed_per_second :int = 1000
 @export var max_speed :int = 150
 @export var jump_buffer_time :float = 0.1
 @export var wall_gravity_scale :float = 0.15
 @export var wall_max_velcoity :int = 500
+
+@export_group("Multiplayer Settings")
 @export_range(0,100,1.0) var peer_lerp_speed :float = 30
 @export_range(0,200, 5) var snap_distance :float = 100
 
-@onready var audio_files :Dictionary[String, AudioStreamMP3]= {
-	"running" : preload("uid://cap73awyf8ake"),
-	"jump" : preload("uid://we1luimcp6fb"),
-	"die" : preload("uid://dafct6iqadbur"),
-}
+@export_group("Sound Settings")
+@export var death_sounds :Dictionary[AudioStream, float] = {preload("uid://dafct6iqadbur") : 0.7}
+@export var jump_sounds :Dictionary[AudioStream, float] = {preload("uid://we1luimcp6fb") : 0.2}
+@export var footstep_sounds :Dictionary[AudioStream, float] = {preload("uid://cap73awyf8ake") : 0.3}
+@export_range(0,0.5) var seconds_between_footsteps :float = 0.1
+var seconds_since_footstep :float = 0.0
+
 @onready var dead_enemy_killzone: Area2D = %dead_enemy_killzone
 @onready var enemy_killzone: Area2D = %enemy_killzone
 @onready var dust_particles :GPUParticles2D = $dust_particles
 @onready var jump_particles :GPUParticles2D = $jump_particles
 @onready var death_particles :GPUParticles2D = $die_particles
-@onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var feet_position: Node2D = %feet_position
 
 @onready var multi_sync :MultiplayerSynchronizer = $MultiplayerSynchronizer
-@export var sync_position: Vector2 = Vector2.ZERO
-@export var sync_velocity: Vector2 = Vector2.ZERO
+var sync_position: Vector2 = Vector2.ZERO
+var sync_velocity: Vector2 = Vector2.ZERO
 var spawn_position :Vector2 = Vector2.ZERO
 
 var reset_ready :bool = true
 var dead :bool = false #TEMPOARY
-@export var double_jumped :bool = false
+var double_jumped :bool = false
 var air_time :float = 0
 
 func _ready() -> void:
@@ -41,6 +45,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if !MenuHandler.is_game_visible():
 		return
+	
+	seconds_since_footstep += delta
 	
 	set_collision_mask_value(4, GameManager.is_collissions_enabled())
 	if !is_multiplayer_authority():
@@ -153,10 +159,7 @@ func show_jump(isDoubleJump: bool = false) -> void:
 		anim.play("Jump")
 		
 	jump_particles.restart(false)
-	audio_stream.stream = audio_files["jump"]
-	audio_stream.volume_db = -20
-	audio_stream.pitch_scale = randf_range(0.8, 1.1)
-	audio_stream.play()
+	Audio.play_random_pitched(jump_sounds)
 	return
 
 func _apply_gravity(delta: float, gravity_scale: float = 1) -> void:
@@ -211,10 +214,7 @@ func show_death() -> void:
 	dead = true
 	death_particles.restart()
 	anim.play("Die")
-	audio_stream.stream = audio_files["die"]
-	audio_stream.volume_db = -8
-	audio_stream.pitch_scale = randf_range(0.9, 1.1)
-	audio_stream.play()
+	Audio.play_random_pitched(death_sounds)
 
 func hit(vec: Vector2) -> void:
 	if is_multiplayer_authority() && !dead && GameManager.is_game_running():
@@ -240,21 +240,14 @@ func _update_anim(move_axis: float) -> void:
 		if move_axis == 0:
 			anim.play("Idle")
 			dust_particles.emitting = false
-			if audio_stream.playing:
-				if audio_stream.stream == audio_files["running"]:
-					audio_stream.stop()
 		else:
 			anim.play("Run")
 			dust_particles.emitting = true
-			if audio_stream.stream != audio_files["running"] or !audio_stream.playing:
-				audio_stream.stream = audio_files["running"]
-				audio_stream.volume_db = -14
-				audio_stream.pitch_scale = randf_range(0.9, 1.1)
-				audio_stream.play()
+			if seconds_since_footstep >= seconds_between_footsteps:
+				seconds_since_footstep = 0.0
+				Audio.play_random(footstep_sounds, 0.9)
+
 	elif !is_on_wall_only():
-		if audio_stream.playing:
-			if audio_stream.stream == audio_files["running"]:
-				audio_stream.stop()
 		if velocity.y < 0 && !double_jumped:
 			dust_particles.emitting = false
 			anim.play("Jump")

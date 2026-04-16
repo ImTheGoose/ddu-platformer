@@ -44,7 +44,7 @@ buses/default_bus_layout="uid://cau7ycky2xiyc"
 
 GameManager="*res://globals/GameManager.gd"
 DataManager="*res://globals/DataManager.gd"
-AudioManager="*res://globals/AudioManager.gd"
+Audio="*res://globals/Audio.gd"
 MenuHandler="*uid://boqav6yfiyrq2"
 GlobalFocusManager="*uid://cej3huoix0m5b"
 Steamworks="*uid://bddun8wjf3s46"

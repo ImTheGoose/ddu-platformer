@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="8_4c0v1"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_gykmu"]
 [ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="13_taac1"]
+[ext_resource type="AudioStream" uid="uid://bvbb5wjetyuvc" path="res://assets/audio/sfx/enemies/bird/bird_death1.ogg" id="14_1wqg6"]
+[ext_resource type="AudioStream" uid="uid://b046nbpiydwf0" path="res://assets/audio/sfx/enemies/bird/bird_death2.ogg" id="15_tjwm1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1wqg6"]
 atlas = ExtResource("3_6swat")
@@ -31,7 +33,6 @@ metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
 [node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_35uqk")]
 position = Vector2(0, -1)
-emitting = false
 amount = 5
 texture = SubResource("AtlasTexture_1wqg6")
 
@@ -109,6 +110,10 @@ metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 [node name="AudioComponent" type="Node" parent="." unique_id=1912445514 node_paths=PackedStringArray("health_component")]
 script = ExtResource("7_cmvfg")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("14_1wqg6"): 1.1,
+ExtResource("15_tjwm1"): 0.9
+})
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="PointTargetingComponent" type="Node" parent="." unique_id=1928668717 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]

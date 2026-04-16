@@ -4,6 +4,7 @@ class_name Projectile
 
 @export var speed :int = 100
 @export var particles :GPUParticles2D
+@export var collission_sounds :Dictionary[AudioStream, float] = {}
 @onready var sprite :Sprite2D = $Sprite2D
 @onready var col :CollisionShape2D = $CollisionShape2D
 var direction :Vector2 = Vector2(1, 0)
@@ -44,6 +45,9 @@ func _on_body_entered(body: Node2D) -> void:
 		_hit_something()
 
 func _hit_something() -> void:
+	if collission_sounds:
+		Audio.play_random_pitched(collission_sounds)
+	
 	particles.restart()
 	particles.emitting = true
 	seconds_since_collission = 0.1

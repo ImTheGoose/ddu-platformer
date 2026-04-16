@@ -97,9 +97,13 @@ accelleration = 0.65
 deaccelleration = 0.65
 metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=101579736 node_paths=PackedStringArray("on_screen_notifier", "health_component", "movement_component")]
 script = ExtResource("8_4rm02")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+movement_component = NodePath("../MovementComponent")
+footstep_pitch_offset = 0.4
+seconds_between_footsteps = 0.42
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=910548544]
@@ -129,3 +133,7 @@ death_particle_list = [NodePath("../enemy_die_particles")]
 movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1422656593]
+position = Vector2(5, -4)
+rect = Rect2(-20, -9, 30, 19)

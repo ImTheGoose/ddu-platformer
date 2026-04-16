@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxmmcbvtppmhv"
+path="res://.godot/imported/Footsteps 11.ogg-3ec2452bf79a54100c9a096fab134c72.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Footsteps 11.ogg"
+dest_files=["res://.godot/imported/Footsteps 11.ogg-3ec2452bf79a54100c9a096fab134c72.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
