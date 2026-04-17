@@ -12,7 +12,6 @@ var level_offset :int = 0
 func _ready() -> void:
 	original_button_text = button_index_label.text
 	play_level_button.pressed.connect(_pressed)
-	_update_state()
 
 func _update_state() -> void:
 	if Levels.is_level_playable(_get_index()):

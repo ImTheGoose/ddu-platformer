@@ -7,13 +7,58 @@ extends GameMenu
 
 func _ready() -> void:
 	super()
+	Lobby.local_player_removed.connect(_on_local_player_removed)
+	
 
 func _on_show() -> void:
-	Lobby.created_player_infos.clear()
-	Lobby.add_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
+	for child in playerlist_container.get_children():
+		child.queue_free()
 	_add_player_card(LocalMultiplayer.LocalID.PLAYER_ONE)
-	_clear_unused_in_playerlist()
 	
+	#Lobby.created_player_infos.clear()
+	#Lobby.add_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
+	#_add_player_card(LocalMultiplayer.LocalID.PLAYER_ONE)
+	#_clear_unused_in_playerlist()
+
+func _on_local_player_removed() -> void:
+	_update_ui_elements()
+	_try_focus_grap()
+
+func _input(event: InputEvent) -> void:
+	if not event.is_pressed():
+		return
+	
+	if not MenuHandler.is_menu_visible(menu_name):
+		return
+
+	if event is InputEventJoypadButton:
+		if event.button_index != JOY_BUTTON_START:
+			return
+		
+	for p_info:PlayerInfo in Lobby.created_player_infos.values():
+		var input :InputConfig = p_info.get_input_from_event(event)
+		if not input:
+			continue
+			
+		if p_info.assigned_input_configs.size() <= 1:
+			return
+		
+		if Lobby.get_lobby_size() >= 4:
+			return
+		
+		p_info.remove_input(input)
+		_create_player_from_input(input)
+		return
+
+func _create_player_from_input(input: InputConfig) -> void:
+	var id: int = LocalMultiplayer.get_next_local_id()
+	Lobby.add_player_info(id)
+	_add_player_card(id)
+	
+	var player_info :PlayerInfo = Lobby.get_player_info(id)
+	player_info.add_input(input)
+	
+
 func _clear_unused_in_playerlist() -> void:
 	var used_ids :Array[int] = Lobby.created_player_infos.keys()
 	for child in playerlist_container.get_children():
@@ -27,6 +72,7 @@ func _add_player_card(peer_id: int) -> void:
 	var player_card :Node = player_card_prefab.instantiate()
 	player_card.assigned_peer_id = peer_id
 	playerlist_container.add_child(player_card)
+	_update_ui_elements()
 
 func _update_ui_elements() -> void:
 	_clear_unused_in_playerlist()

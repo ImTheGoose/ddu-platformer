@@ -6,13 +6,13 @@ extends HBoxContainer
 @onready var kick_button :Button = %kick_button
 
 var assigned_peer_id :int = -1
-var assigned_player_info :PlayerInfo
+var assigned_player_info :PeerPlayerInfo
 
 func _ready() -> void:
 	kick_button.pressed.connect(_on_kick_pressed)
 	assigned_player_info = Lobby.get_player_info(assigned_peer_id)
 	
-	assigned_player_info.persona_name_changed.connect(_on_persona_name_changed)
+	assigned_player_info.display_name_changed.connect(_on_display_name_changed)
 	assigned_player_info.avatar_image_changed.connect(_on_avatar_changed)
 	
 	name_label.text = assigned_player_info.DISPLAY_NAME
@@ -26,7 +26,7 @@ func _ready() -> void:
 func _on_avatar_changed() -> void:
 	player_icon.texture = assigned_player_info.get_avatar_texture(128)
 
-func _on_persona_name_changed(new_name: String) -> void:
+func _on_display_name_changed(new_name: String) -> void:
 	name_label.text = new_name	
 
 func _on_kick_pressed() -> void:

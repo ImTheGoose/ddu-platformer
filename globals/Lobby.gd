@@ -10,6 +10,8 @@ signal lobby_ready()
 signal connection_error(error_reason: String)
 signal peer_linked_to_steam(peer_id: int, steam_id: int)
 signal peer_cosmetic_updated(peer_id: int, data_type:DataRequestType, cosmetic_data: Array[Variant])
+signal local_player_removed()
+signal closed_connection()
 
 func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -207,7 +209,26 @@ func is_lobby_lan() -> bool:
 		return true
 
 func kick_peer(peer_id: int) -> void:
-	multiplayer.multiplayer_peer.disconnect_peer(peer_id)
+	var player_info :PlayerInfo = get_player_info(peer_id)
+	if player_info is LocalPlayerInfo:
+		var p1_info :PlayerInfo = get_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
+		for input:InputConfig in player_info.assigned_input_configs:
+			p1_info.add_input(input)
+		created_player_infos.erase(peer_id)
+		local_player_removed.emit()
+
+		for p_id:int in created_player_infos.keys():
+			if p_id > peer_id:	
+				var p_info :PlayerInfo = created_player_infos.get(p_id)
+				p_info.PEER_ID = p_id - 1
+				created_player_infos.erase(p_id)
+				created_player_infos.set(p_info.PEER_ID, p_info)
+			
+
+		
+		
+	else:
+		multiplayer.multiplayer_peer.disconnect_peer(peer_id)
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	Steamworks.set_rich_presense("lobby_count", str(multiplayer.get_peers().size()+1))
@@ -230,16 +251,21 @@ func get_steam_id_from_peer_id(peer_id: int) -> int:
 	return peer_id
 
 func add_player_info(peer_id: int) -> void:
-	created_player_infos.set(peer_id, PlayerInfo.new(peer_id))
-	
-	request_data_from_peer(peer_id, DataRequestType.STEAM_ID)
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		created_player_infos.set(peer_id, LocalPlayerInfo.new(peer_id))
+	else:
+		created_player_infos.set(peer_id, PeerPlayerInfo.new(peer_id))
+		request_data_from_peer(peer_id, DataRequestType.STEAM_ID)
 
 func get_player_info(peer_id: int) -> PlayerInfo:
-	return created_player_infos[peer_id]
+	return created_player_infos.get(peer_id)
 
 func clear_unused_player_info() -> void:
 	var peers := multiplayer.get_peers()
 	for key in created_player_infos:
+		if LocalMultiplayer.is_id_local(key):
+			continue
+		
 		if !peers.has(key):
 			created_player_infos.erase(key)
 
@@ -274,11 +300,15 @@ func close_connection() -> void:
 	GameManager.server_reset.emit()
 	GameManager.client_reset.emit()
 	Steamworks.update_discord_presense()
+	Lobby.add_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
 
 #endregion
 
 func get_lobby_size() -> int:
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if created_player_infos.size() > 0:
+			return created_player_infos.size()
+		
 		return 1
 	
 	return multiplayer.get_peers().size() + 1

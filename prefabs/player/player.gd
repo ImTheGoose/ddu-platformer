@@ -39,8 +39,24 @@ var dead :bool = false #TEMPOARY
 var double_jumped :bool = false
 var air_time :float = 0
 
+var assigned_peer_id :int = -1
+var assigned_player_info :PlayerInfo
+
+func _enter_tree() -> void:
+	if LocalMultiplayer.is_id_local(assigned_peer_id):
+		set_multiplayer_authority(1)
+	else:
+		set_multiplayer_authority(assigned_peer_id)
+	
+	assigned_player_info = Lobby.get_player_info(assigned_peer_id)
+
 func _ready() -> void:
 	spawn_position = Vector2(0, -500)
+
+func _input(event: InputEvent) -> void:
+	if event.is_pressed():
+		if assigned_player_info.is_jump_event_from_inputs(event):
+			_attempt_jump()
 
 func _physics_process(delta: float) -> void:
 	if !MenuHandler.is_game_visible():
@@ -91,7 +107,8 @@ func _physics_process(delta: float) -> void:
 	dead_enemy_killzone.monitoring = false
 	dead_enemy_killzone.visible = false
 	
-	var move_axis :float = Input.get_axis("move_left", "move_right")
+	var move_axis :float = assigned_player_info.get_movement_axis()
+	print(velocity)
 	_limit_horizontal_velocity(max_speed)
 	if move_axis == 0:
 		_reduce_horizontal_velocity(delta, speed_per_second)
@@ -102,9 +119,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		air_time += delta
 		
-	#Has to be after to ensure air_time is igonered if player jumps while on floor.
-	if Input.is_action_just_pressed("jump"):
-		_attempt_jump()
+	##Has to be after to ensure air_time is igonered if player jumps while on floor.
+	#if assigned_player_info.is_jump_just_pressed():
+		#_attempt_jump()
 
 	velocity.x += move_axis * speed_per_second * delta
 
@@ -126,6 +143,8 @@ func _physics_process(delta: float) -> void:
 		enemy_killzone.visible = true
 	move_and_slide()
 	_update_anim(move_axis)
+
+
 
 func _attempt_jump() -> void:
 	if is_on_wall_only():
@@ -178,8 +197,12 @@ func _limit_horizontal_velocity(max_vel: int) -> void:
 func _reduce_horizontal_velocity(delta: float, amount_per_second: float) -> void:
 	if velocity.x < -5:
 		velocity.x += amount_per_second * delta
+		if velocity.x > 0:
+			velocity.x = 0
 	elif velocity.x > 5:
 		velocity.x -= amount_per_second * delta
+		if velocity.x < 0:
+			velocity.x = 0
 	else:
 		velocity.x = 0
 
