@@ -276,3 +276,9 @@ func close_connection() -> void:
 	Steamworks.update_discord_presense()
 
 #endregion
+
+func get_lobby_size() -> int:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		return 1
+	
+	return multiplayer.get_peers().size() + 1

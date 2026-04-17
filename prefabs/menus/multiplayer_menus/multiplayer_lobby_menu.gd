@@ -12,7 +12,6 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	Lobby.lobby_ready.connect(_on_lobby_created)
-	Steam.lobby_chat_update.connect(_on_steam_lobby_update)
 
 func _on_show() -> void:
 	_clear_unused_in_playerlist()
@@ -27,12 +26,6 @@ func _on_show() -> void:
 func _on_lobby_created() -> void:
 	_add_player_card(multiplayer.get_unique_id())
 	_update_ui_elements()
-
-func _on_steam_lobby_update(lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
-	pass
-	#if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
-		#_add_player_card(Lobby.get_peer_id_from_steam_id(making_change_id))
-	
 
 func _get_local_ip() -> String:
 	var local_adresses := []

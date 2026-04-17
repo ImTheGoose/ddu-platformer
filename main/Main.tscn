@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://dpql1ujcn3sd7" path="res://prefabs/menus/shop_menus/shop_accent_menu.tscn" id="31_f2dvo"]
 [ext_resource type="PackedScene" uid="uid://ddy24w71nrv3k" path="res://prefabs/menus/shop_menus/shop_theme_menu.tscn" id="32_fcwsn"]
 [ext_resource type="PackedScene" uid="uid://c84ru0s4q2ncy" path="res://prefabs/menus/shop_menus/shop_selection_menu.tscn" id="33_lmgwd"]
+[ext_resource type="PackedScene" uid="uid://criga4ycsc7u6" path="res://prefabs/menus/local_multiplayer/local_lobby_menu.tscn" id="34_7867i"]
 [ext_resource type="PackedScene" uid="uid://dyhe508sj45sf" path="res://prefabs/menus/ingame_menus/pause_menu.tscn" id="34_mm6gd"]
 [ext_resource type="PackedScene" uid="uid://din2cplqt3gvv" path="res://prefabs/menus/ingame_menus/death_menu.tscn" id="35_cyktq"]
 [ext_resource type="PackedScene" uid="uid://bqicsp8cjtktf" path="res://prefabs/menus/popups/changelog_popup.tscn" id="36_dwegs"]
@@ -438,6 +439,14 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="LocalLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2055560422 instance=ExtResource("34_7867i")]
+visible = false
+layout_mode = 1
+offset_left = -141.0
+offset_top = -99.0
+offset_right = 141.0
+offset_bottom = 99.0
+
 [node name="settings_menu" parent="CanvasLayer/Control2/Control" unique_id=463999452 instance=ExtResource("26_7867i")]
 visible = false
 layout_mode = 1
@@ -528,7 +537,7 @@ offset_top = -72.0
 offset_right = 114.0
 offset_bottom = 72.0
 
-[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2055560422 instance=ExtResource("43_frehf")]
+[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2130961134 instance=ExtResource("43_frehf")]
 visible = false
 layout_mode = 1
 
