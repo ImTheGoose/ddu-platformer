@@ -1,8 +1,14 @@
 extends Camera2D
 
 @export var speed :int = 25
-@export var safe_distance :int = 90
 @onready var origin_position :Vector2 = position
+
+@export_group("Safe Distance Settings")
+@export var max_safe_distance :int = 20
+@export var max_distance_speed :int = 50 #Max distance beyon trigger
+@export var safe_distance :int = 90 #Trigger distance from camera.y
+@export var safe_speed_curve :Curve
+
 @export_group("Spring Settings")
 @export var stiffness := 250.0      # How "tight" the spring is (higher = faster snaps)
 @export var damping := 15.0        # How "bouncy" it is (lower = more 'boing', higher = less)
@@ -76,13 +82,25 @@ func _process(delta: float) -> void:
 		for p in players:
 			if !p or p is not Player:
 				continue
-			if p.global_position.y < global_position.y + safe_distance:
-				var target_y :float = p.global_position.y - safe_distance
-				var distance :float = abs(target_y - global_position.y)
-
-				var m_speed :float = distance * distance * 0.0045
+			#if p.global_position.y < global_position.y + safe_distance:
+			var trigger_y :float = global_position.y + safe_distance
+			
+			var distance_beyond_trigger :float = trigger_y - p.global_position.y
+			
+			if distance_beyond_trigger > 0:
+				var ratio :float = distance_beyond_trigger / max_safe_distance
+				var clammed_ration :float = clamp(ratio, 0.0, 1.0)
+				var curve_multiplyer :float = safe_speed_curve.sample(clammed_ration)
 				
+				var m_speed :float = curve_multiplyer * max_distance_speed
+				if ratio > 1.0:
+					m_speed *= ratio
+				
+				
+				var target_y :float = p.global_position.y - safe_distance
+			
 				global_position.y = move_toward(global_position.y, target_y, m_speed * delta)
+				
 
 	
 	

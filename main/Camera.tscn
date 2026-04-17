@@ -5,6 +5,10 @@
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 
+[sub_resource type="Curve" id="Curve_tmh5c"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.3878176, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
 shuffle = true
 fade_time = 0.2
@@ -18,7 +22,10 @@ size = Vector2(655.125, 42.5)
 anchor_mode = 0
 zoom = Vector2(3, 3)
 script = ExtResource("1_a0f6b")
-safe_distance = 150
+max_safe_distance = 180
+max_distance_speed = 500
+safe_distance = 120
+safe_speed_curve = SubResource("Curve_tmh5c")
 stiffness = 150.0
 damping = 10.0
 jitter_decay = 7.0
