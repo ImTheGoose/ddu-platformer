@@ -12,7 +12,8 @@ func _ready() -> void:
 
 func _on_show() -> void:
 	for child in playerlist_container.get_children():
-		child.queue_free()
+		if child.assigned_peer_id:
+			child.assigned_peer_id = -1
 	_add_player_card(LocalMultiplayer.LocalID.PLAYER_ONE)
 	
 	#Lobby.created_player_infos.clear()
@@ -52,7 +53,7 @@ func _input(event: InputEvent) -> void:
 
 func _create_player_from_input(input: InputConfig) -> void:
 	var id: int = LocalMultiplayer.get_next_local_id()
-	Lobby.add_player_info(id)
+	Lobby.add_player_info(id, true)
 	_add_player_card(id)
 	
 	var player_info :PlayerInfo = Lobby.get_player_info(id)

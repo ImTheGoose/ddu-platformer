@@ -41,7 +41,9 @@ func _on_avatar_loaded(avatar_id: int, avatar_size: int, avatar_buffer: Array) -
 	if avatar_id != STEAM_ID:
 		return
 
-	AVATAR_IMAGE = Image.create_from_data(avatar_size, avatar_size, false, Image.FORMAT_RGBA8, avatar_buffer)
+	var avatar_image :Image = Image.create_from_data(avatar_size, avatar_size, false, Image.FORMAT_RGBA8, avatar_buffer)
+	avatar_image.resize(128, 128)
+	AVATAR_TEXTURE = ImageTexture.create_from_image(avatar_image)
 
 func _on_peer_cosmetic_updated(peer_id: int, data_type: int, data: Array[Variant]) -> void:
 	if peer_id != PEER_ID:
@@ -54,8 +56,3 @@ func _on_peer_cosmetic_updated(peer_id: int, data_type: int, data: Array[Variant
 			SELECTED_OUTLINE_HEX = data[0]
 	
 	cosmetics_changed.emit()
-
-func get_avatar_texture(texture_size: int) -> ImageTexture:
-	var img :Image = AVATAR_IMAGE.duplicate()
-	img.resize(texture_size, texture_size)
-	return ImageTexture.create_from_image(img)

@@ -16,7 +16,7 @@ func _ready() -> void:
 	GameManager.game_scores_changed.connect(_on_scores_changed)
 	
 	assigned_player_info = Lobby.get_player_info(assigned_peer_id)
-	avatar_rect.texture = assigned_player_info.get_avatar_texture(128)
+	avatar_rect.texture = assigned_player_info.AVATAR_TEXTURE
 	refresh_labels()
 
 func _on_scores_changed() -> void:

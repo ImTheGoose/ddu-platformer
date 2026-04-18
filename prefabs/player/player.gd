@@ -108,7 +108,6 @@ func _physics_process(delta: float) -> void:
 	dead_enemy_killzone.visible = false
 	
 	var move_axis :float = assigned_player_info.get_movement_axis()
-	print(velocity)
 	_limit_horizontal_velocity(max_speed)
 	if move_axis == 0:
 		_reduce_horizontal_velocity(delta, speed_per_second)
@@ -118,10 +117,6 @@ func _physics_process(delta: float) -> void:
 		air_time = 0
 	else:
 		air_time += delta
-		
-	##Has to be after to ensure air_time is igonered if player jumps while on floor.
-	#if assigned_player_info.is_jump_just_pressed():
-		#_attempt_jump()
 
 	velocity.x += move_axis * speed_per_second * delta
 

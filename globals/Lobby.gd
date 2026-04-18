@@ -250,8 +250,8 @@ func get_steam_id_from_peer_id(peer_id: int) -> int:
 		return multiplayer.multiplayer_peer.get_steam_id_for_peer_id(peer_id)
 	return peer_id
 
-func add_player_info(peer_id: int) -> void:
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+func add_player_info(peer_id: int, use_local: bool = false) -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && use_local:
 		created_player_infos.set(peer_id, LocalPlayerInfo.new(peer_id))
 	else:
 		created_player_infos.set(peer_id, PeerPlayerInfo.new(peer_id))
@@ -300,7 +300,6 @@ func close_connection() -> void:
 	GameManager.server_reset.emit()
 	GameManager.client_reset.emit()
 	Steamworks.update_discord_presense()
-	Lobby.add_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
 
 #endregion
 

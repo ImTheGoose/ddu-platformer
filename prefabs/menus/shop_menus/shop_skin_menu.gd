@@ -60,7 +60,7 @@ func _select_item(item_name: String) -> void:
 	Color.MEDIUM_PURPLE.to_html(false),      # 15. Violet
 	Color.ORCHID.to_html(false),             # 16. Magenta/Purple
 	Color.HOT_PINK.to_html(false),           # 17. Pink
-	Color.LIGHT_PINK.to_html(false)          # 18. Rose/Red-Pink
+	Color.LIGHT_PINK.to_html(false),          # 18. Rose/Red-Pink
 ]
 
 func _get_color_index_from_hex(hex: String) -> int:

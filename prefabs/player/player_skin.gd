@@ -16,15 +16,15 @@ var player_info :PlayerInfo
 func _ready() -> void:
 	GameManager.spawn_player.connect(_on_spawn_player)
 	GameManager.game_settings_changed.connect(refresh_cosmetics)
-	player_info = Lobby.get_player_info(get_multiplayer_authority())
+	player_info = Lobby.get_player_info(player_controller.assigned_peer_id)
 	player_info.cosmetics_changed.connect(_on_cosmetics_changed)
 	refresh_cosmetics()
 
 func _process(delta: float) -> void:
-	if !player_info or player_info.PEER_ID != get_multiplayer_authority():
+	if !player_info or player_info.PEER_ID != player_controller.assigned_peer_id:
 		if player_info && player_info.cosmetics_changed.is_connected(_on_cosmetics_changed):
 			player_info.cosmetics_changed.disconnect(_on_cosmetics_changed)
-		player_info = Lobby.get_player_info(get_multiplayer_authority())
+		player_info = Lobby.get_player_info(player_controller.assigned_peer_id)
 		player_info.cosmetics_changed.connect(_on_cosmetics_changed)
 	
 	if player_controller.dead:

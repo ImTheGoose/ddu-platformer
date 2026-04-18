@@ -25,12 +25,24 @@ func _refresh_visuals() -> void:
 	match PEER_ID:
 		LocalMultiplayer.LocalID.PLAYER_ONE:
 			DISPLAY_NAME = "Player 1"
+			SELECTED_SKIN_NAME = "Osvald"
+			SELECTED_OUTLINE_HEX = Color.GREEN_YELLOW.to_html(false)
+			AVATAR_TEXTURE = load("uid://boqjobpu65xsa")
 		LocalMultiplayer.LocalID.PLAYER_TWO:
 			DISPLAY_NAME = "Player 2"
+			SELECTED_SKIN_NAME = "Castro"
+			SELECTED_OUTLINE_HEX = Color.WHITE.to_html(false)
+			AVATAR_TEXTURE = load("uid://c6vxl4bmc78k2")
 		LocalMultiplayer.LocalID.PLAYER_THREE:
 			DISPLAY_NAME = "Player 3"
+			SELECTED_SKIN_NAME = "Tiki"
+			SELECTED_OUTLINE_HEX = Color.HOT_PINK.to_html(false)
+			AVATAR_TEXTURE = load("uid://hwtu0ruywc7s")
 		LocalMultiplayer.LocalID.PLAYER_FOUR:
 			DISPLAY_NAME = "Player 4"
+			SELECTED_SKIN_NAME = "Edward"
+			SELECTED_OUTLINE_HEX = Color.MEDIUM_TURQUOISE.to_html(false)
+			AVATAR_TEXTURE = load("uid://dyjqt68qoppon")
 		_:
 			DISPLAY_NAME = "ERROR"
 

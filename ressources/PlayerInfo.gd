@@ -6,19 +6,25 @@ class_name PlayerInfo
 	set(value):
 		PEER_ID = value
 		peer_id_changed.emit()
-		
-@export var AVATAR_IMAGE :Image:
+
+@export var AVATAR_TEXTURE :Texture2D:
 	set(value):
-		AVATAR_IMAGE = value
-		avatar_image_changed.emit()
+		AVATAR_TEXTURE = value
+		avatar_texture_changed.emit()
 		
 @export var DISPLAY_NAME: String = "lan_placeholder":
 	set(value):
 		DISPLAY_NAME = value
 		display_name_changed.emit(value)
 
-@export var SELECTED_SKIN_NAME: String = "Osvald"
-@export var SELECTED_OUTLINE_HEX: String = "#ffffff"
+@export var SELECTED_SKIN_NAME: String = "Osvald":
+	set(value):
+		SELECTED_SKIN_NAME = value
+		cosmetics_changed.emit()
+@export var SELECTED_OUTLINE_HEX: String = "#ffffff":
+	set(value):
+		SELECTED_OUTLINE_HEX = value
+		cosmetics_changed.emit()
 
 @export var assigned_input_configs :Array[InputConfig] = []:
 	set(value):
@@ -27,7 +33,7 @@ class_name PlayerInfo
 
 signal cosmetics_changed()
 signal display_name_changed(new_name: String)
-signal avatar_image_changed()
+signal avatar_texture_changed()
 signal assigned_input_changed()
 signal peer_id_changed()
 
