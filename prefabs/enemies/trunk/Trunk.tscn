@@ -108,7 +108,7 @@ ExtResource("15_7imxp"): 0.7
 })
 movement_component = NodePath("../MovementComponent")
 footstep_pitch_offset = 0.7
-seconds_between_footsteps = 0.39999999999999997
+seconds_between_footsteps = 0.4
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1668236908 node_paths=PackedStringArray("entity_node")]

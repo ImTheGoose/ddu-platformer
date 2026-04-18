@@ -211,7 +211,7 @@ func is_lobby_lan() -> bool:
 func kick_peer(peer_id: int) -> void:
 	var player_info :PlayerInfo = get_player_info(peer_id)
 	if player_info is LocalPlayerInfo:
-		var p1_info :PlayerInfo = get_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
+		var p1_info :PlayerInfo = get_player_info(Lobby.LocalID.PLAYER_ONE)
 		for input:InputConfig in player_info.assigned_input_configs:
 			p1_info.add_input(input)
 		created_player_infos.erase(peer_id)
@@ -263,7 +263,7 @@ func get_player_info(peer_id: int) -> PlayerInfo:
 func clear_unused_player_info() -> void:
 	var peers := multiplayer.get_peers()
 	for key in created_player_infos:
-		if LocalMultiplayer.is_id_local(key):
+		if is_id_local(key):
 			continue
 		
 		if !peers.has(key):
@@ -311,3 +311,17 @@ func get_lobby_size() -> int:
 		return 1
 	
 	return multiplayer.get_peers().size() + 1
+
+
+#region Local stuff
+enum LocalID {
+	PLAYER_ONE = 1,
+	PLAYER_TWO = 2,
+	PLAYER_THREE = 3,
+	PLAYER_FOUR = 4,
+}
+
+func is_id_local(peer_id: int) -> bool:
+	return LocalID.values().has(peer_id)
+	
+#endregion

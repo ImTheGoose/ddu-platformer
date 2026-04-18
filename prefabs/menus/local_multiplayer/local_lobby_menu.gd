@@ -15,12 +15,7 @@ func _on_show() -> void:
 	for child in playerlist_container.get_children():
 		if child.assigned_peer_id:
 			child.assigned_peer_id = -1
-	_add_player_card(LocalMultiplayer.LocalID.PLAYER_ONE)
-	
-	#Lobby.created_player_infos.clear()
-	#Lobby.add_player_info(LocalMultiplayer.LocalID.PLAYER_ONE)
-	#_add_player_card(LocalMultiplayer.LocalID.PLAYER_ONE)
-	#_clear_unused_in_playerlist()
+	_add_player_card(Lobby.LocalID.PLAYER_ONE)
 
 func _on_local_player_removed() -> void:
 	_update_ui_elements()
@@ -53,7 +48,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 func _create_player_from_input(input: InputConfig) -> void:
-	var id: int = LocalMultiplayer.get_next_local_id()
+	var id: int = Lobby.get_lobby_size() + 1
 	Lobby.add_player_info(id, true)
 	_add_player_card(id)
 	
@@ -105,4 +100,3 @@ func _on_customize_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	MenuHandler.change_menu("settings_menu", true)
-	

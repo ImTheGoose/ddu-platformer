@@ -20,7 +20,7 @@ func _on_singleplayer_pressed() -> void:
 
 func _on_local_multiplayer_pressed() -> void:
 	Lobby.created_player_infos.clear()
-	Lobby.add_player_info(LocalMultiplayer.LocalID.PLAYER_ONE, true)
+	Lobby.add_player_info(Lobby.LocalID.PLAYER_ONE, true)
 	MenuHandler.change_menu("local_lobby_menu")
 
 

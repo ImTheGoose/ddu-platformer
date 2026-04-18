@@ -17,9 +17,10 @@ func _on_parent_ready() -> void:
 	if Lobby.get_lobby_size() < spawn_idx:
 		return
 
-	var peers :PackedInt32Array = multiplayer.get_peers()
+	var peers :Array[int] = [multiplayer.get_unique_id()]
+	peers.append_array(multiplayer.get_peers())
 	
-	_request_player_spawn(peers[spawn_idx - 2])
+	_request_player_spawn(peers[spawn_idx - 1])
 	
 func _request_player_spawn(peer_id: int) -> void:
 	GameManager.spawn_player.emit(global_position, peer_id)

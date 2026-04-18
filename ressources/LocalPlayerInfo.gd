@@ -7,7 +7,7 @@ func _init(assigned_peer_id: int) -> void:
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	peer_id_changed.connect(_on_peer_id_changed)
 	
-	if assigned_peer_id == LocalMultiplayer.LocalID.PLAYER_ONE:
+	if assigned_peer_id == Lobby.LocalID.PLAYER_ONE:
 		add_input(load("uid://ckd85umeubwsw")) #WASD movement
 
 		add_input(load("uid://b050s1jybuwad")) #ARROW movement
@@ -23,22 +23,22 @@ func _on_peer_id_changed() -> void:
 
 func _refresh_visuals() -> void:
 	match PEER_ID:
-		LocalMultiplayer.LocalID.PLAYER_ONE:
+		Lobby.LocalID.PLAYER_ONE:
 			DISPLAY_NAME = "Player 1"
 			SELECTED_SKIN_NAME = "Osvald"
 			SELECTED_OUTLINE_HEX = Color.GREEN_YELLOW.to_html(false)
 			AVATAR_TEXTURE = load("uid://boqjobpu65xsa")
-		LocalMultiplayer.LocalID.PLAYER_TWO:
+		Lobby.LocalID.PLAYER_TWO:
 			DISPLAY_NAME = "Player 2"
 			SELECTED_SKIN_NAME = "Castro"
 			SELECTED_OUTLINE_HEX = Color.WHITE.to_html(false)
 			AVATAR_TEXTURE = load("uid://c6vxl4bmc78k2")
-		LocalMultiplayer.LocalID.PLAYER_THREE:
+		Lobby.LocalID.PLAYER_THREE:
 			DISPLAY_NAME = "Player 3"
 			SELECTED_SKIN_NAME = "Tiki"
 			SELECTED_OUTLINE_HEX = Color.HOT_PINK.to_html(false)
 			AVATAR_TEXTURE = load("uid://hwtu0ruywc7s")
-		LocalMultiplayer.LocalID.PLAYER_FOUR:
+		Lobby.LocalID.PLAYER_FOUR:
 			DISPLAY_NAME = "Player 4"
 			SELECTED_SKIN_NAME = "Edward"
 			SELECTED_OUTLINE_HEX = Color.MEDIUM_TURQUOISE.to_html(false)
@@ -48,7 +48,7 @@ func _refresh_visuals() -> void:
 
 func _on_joy_connection_changed(id: int, connected: bool) -> void:
 	if connected:
-		if PEER_ID == LocalMultiplayer.LocalID.PLAYER_ONE:
+		if PEER_ID == Lobby.LocalID.PLAYER_ONE:
 			for input: InputConfig in assigned_input_configs:
 				if input.joypad_id == id:
 					return
@@ -65,7 +65,7 @@ func _on_joy_connection_changed(id: int, connected: bool) -> void:
 		assigned_input_configs = new_assinged_inputs
 
 func get_input_icons_bbcode() -> String:
-	if PEER_ID == LocalMultiplayer.LocalID.PLAYER_ONE:
+	if PEER_ID == Lobby.LocalID.PLAYER_ONE:
 		return assigned_input_configs.get(0).get_icon_bbcode()
 	
 	var icon_string :String = ""

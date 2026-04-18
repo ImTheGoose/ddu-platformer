@@ -43,7 +43,7 @@ var assigned_peer_id :int = -1
 var assigned_player_info :PlayerInfo
 
 func _enter_tree() -> void:
-	if LocalMultiplayer.is_id_local(assigned_peer_id):
+	if Lobby.is_id_local(assigned_peer_id):
 		set_multiplayer_authority(1)
 	else:
 		set_multiplayer_authority(assigned_peer_id)
