@@ -54,6 +54,9 @@ func _ready() -> void:
 	spawn_position = Vector2(0, -500)
 
 func _input(event: InputEvent) -> void:
+	if not is_multiplayer_authority() or dead:
+		return
+	
 	if event.is_pressed():
 		if assigned_player_info.is_jump_event_from_inputs(event):
 			_attempt_jump()

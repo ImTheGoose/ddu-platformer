@@ -19,22 +19,28 @@ stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=215357993]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = -2
+theme_override_constants/separation = -5
 
 [node name="name_label" type="Label" parent="VBoxContainer" unique_id=1720613919]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_type_variation = &"HeaderLarge"
-theme_override_font_sizes/font_size = 13
-text = "Im_The_Goose"
+theme_override_font_sizes/font_size = 16
+text = "Placeholder"
 vertical_alignment = 1
-clip_text = true
 
-[node name="inputs_label" type="Label" parent="VBoxContainer" unique_id=1333938313]
+[node name="inputs_label" type="RichTextLabel" parent="." unique_id=540108304]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
 
 [node name="kick_button" type="Button" parent="." unique_id=804100480]
 unique_name_in_owner = true

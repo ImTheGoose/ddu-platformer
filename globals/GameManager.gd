@@ -341,7 +341,7 @@ func player_died(peer_id: int) -> void:
 		return
 	
 	players_dead += 1
-	if players_dead < multiplayer.get_peers().size() + 1:
+	if players_dead < Lobby.get_lobby_size():
 		return
 	
 	

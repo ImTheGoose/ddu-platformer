@@ -65,6 +65,9 @@ func _on_joy_connection_changed(id: int, connected: bool) -> void:
 		assigned_input_configs = new_assinged_inputs
 
 func get_input_icons_bbcode() -> String:
+	if PEER_ID == LocalMultiplayer.LocalID.PLAYER_ONE:
+		return assigned_input_configs.get(0).get_icon_bbcode()
+	
 	var icon_string :String = ""
 	for input_config: InputConfig in assigned_input_configs:
 		icon_string += input_config.get_icon_bbcode()

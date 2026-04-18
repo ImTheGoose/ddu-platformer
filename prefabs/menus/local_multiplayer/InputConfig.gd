@@ -7,18 +7,33 @@ class_name InputConfig
 @export var move_left_action :String = ""
 @export var move_right_action :String = ""
 @export var joypad_id :int = -1
-@export var input_icon_bbcode :String = ""
+
+func get_icon_path() -> String:
+	if joypad_id == -1:
+		return "res://assets/icons/controllers/keyboard.png"
+	
+	var name: String = Input.get_joy_info(joypad_id).raw_name
+	name = name.to_lower()
+	if name.contains("xbox"):
+		if name.containsn("360"):
+			return "res://assets/icons/controllers/controller_xbox_360.png"
+		if name.containsn("one"):
+			return "res://assets/icons/controllers/controller_xbox_ONE.png"
+		else:
+			return "res://assets/icons/controllers/controller_xbox_X.png"
+	if name.containsn("dualsense") or name.containsn("ps5"):
+		return "res://assets/icons/controllers/controller_ps5.png"
+	
+	if name.containsn("dualshock") or name.containsn("ps4") or name.containsn("ps3"):
+		return "res://assets/icons/controllers/controller_ps4.png"
+	
+	if name.containsn("nintendo") or name.containsn("switch"):
+		return "res://assets/icons/controllers/controller_switch.png"
+	
+	return "res://assets/icons/controllers/controller_generic.png"
 
 func get_icon_bbcode() -> String:
-	match joypad_id:
-		0:
-			return "C1 "
-		1:
-			return "C2 "
-		2:
-			return "C3 "
-
-	return input_icon_bbcode
+	return "[img=\"height=22\"]%s[/img]" % get_icon_path()
 
 func is_event_input_activation(event: InputEvent) -> bool:
 	if event is InputEventJoypadButton:

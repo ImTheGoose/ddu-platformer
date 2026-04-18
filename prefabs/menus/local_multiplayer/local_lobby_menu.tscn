@@ -60,9 +60,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer2/player_parts" unique_id=324653494]
-visible = false
+[node name="instruction_label" type="Label" parent="PanelContainer/HBoxContainer2/player_parts/VBoxContainer" unique_id=1480753635]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6666667)
 layout_mode = 2
+text = "   Press START or W to join..."
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer2" unique_id=1792225327]
 layout_mode = 2

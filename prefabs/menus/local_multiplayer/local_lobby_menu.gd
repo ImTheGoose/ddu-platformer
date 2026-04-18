@@ -3,6 +3,7 @@ extends GameMenu
 @onready var playerlist_container :VBoxContainer = %playerlist
 @onready var start_game_button:Button = %start_game_button
 @onready var player_amount_label :Label = %player_amount_label
+@onready var instruction_label: Label = %instruction_label
 @export var player_card_prefab :PackedScene = preload("uid://dkbiwh5gdqn8c")
 
 func _ready() -> void:
@@ -77,6 +78,8 @@ func _add_player_card(peer_id: int) -> void:
 
 func _update_ui_elements() -> void:
 	_clear_unused_in_playerlist()
+	
+	instruction_label.visible = Lobby.get_lobby_size() < 4
 	player_amount_label.text = "Players: %s of 4" % Lobby.get_lobby_size()
 	
 	if multiplayer.is_server():

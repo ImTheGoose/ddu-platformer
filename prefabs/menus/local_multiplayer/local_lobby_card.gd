@@ -2,7 +2,7 @@ extends HBoxContainer
 
 @onready var player_icon :TextureRect = %player_icon
 @onready var name_label :Label = %name_label
-@onready var inputs_label :Label = %inputs_label
+@onready var inputs_label :RichTextLabel = %inputs_label
 @onready var kick_button :Button = %kick_button
 
 var assigned_peer_id :int = -1
