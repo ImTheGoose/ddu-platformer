@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="5_o85lf"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="6_fg2lk"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_vkaj0"]
+[ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_lui05"]
+[ext_resource type="AudioStream" uid="uid://dbbc4xa7ylpnu" path="res://assets/audio/sfx/enemies/moving_heads/spiked_impact1.ogg" id="9_x3dsx"]
+[ext_resource type="AudioStream" uid="uid://daa1cvcmci7xl" path="res://assets/audio/sfx/enemies/moving_heads/spiked_impact2.ogg" id="10_1n1w0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh6ld"]
 size = Vector2(20, 39.5)
@@ -75,4 +78,15 @@ shape = SubResource("RectangleShape2D_eh6ld")
 debug_color = Color(0.7426777, 0.46525377, 0, 0.41960785)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=511306129]
-rect = Rect2(-10, -26, 36, 36)
+position = Vector2(-8, -3)
+rect = Rect2(4, -18, 25, 26)
+
+[node name="AudioComponent" type="Node" parent="." unique_id=1759392244 node_paths=PackedStringArray("on_screen_notifier", "movement_component")]
+script = ExtResource("8_lui05")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
+movement_component = NodePath("../MovementComponent")
+target_reached_sounds = Dictionary[AudioStream, float]({
+ExtResource("10_1n1w0"): 0.25,
+ExtResource("9_x3dsx"): 0.25
+})
+metadata/_custom_type_script = "uid://c5lwrhejxb5m0"

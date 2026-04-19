@@ -1,13 +1,30 @@
 [gd_scene format=3 uid="uid://cjjbmvmx1ilce"]
 
 [ext_resource type="Script" uid="uid://cyq6tog44vwtx" path="res://prefabs/player/player.gd" id="1_jfcio"]
+[ext_resource type="AudioStream" uid="uid://8cb7rt5cnivn" path="res://assets/audio/sfx/jumps/Jump.ogg" id="2_aveir"]
 [ext_resource type="Shader" uid="uid://4e5mx13fnoig" path="res://prefabs/player/Player.gdshader" id="2_ctndf"]
 [ext_resource type="SpriteFrames" uid="uid://b4t3asxpw884d" path="res://ressources/spriteframes/osvald_spriteframes.tres" id="2_ivj8r"]
+[ext_resource type="AudioStream" uid="uid://c6j2hoc4wymal" path="res://assets/audio/sfx/footsteps/Footsteps 1.ogg" id="2_xvkw1"]
 [ext_resource type="Script" uid="uid://dl4rq4567t0nm" path="res://prefabs/player/player_skin.gd" id="3_6dlbe"]
+[ext_resource type="AudioStream" uid="uid://jkuebaijvlb4" path="res://assets/audio/sfx/death/spla_death1.ogg" id="3_aveir"]
+[ext_resource type="AudioStream" uid="uid://oharaq54bnb7" path="res://assets/audio/sfx/footsteps/Footsteps 2.ogg" id="3_wx5su"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_00uvl"]
+[ext_resource type="AudioStream" uid="uid://5m7ui8183qof" path="res://assets/audio/sfx/death/spla_death2.ogg" id="4_67sq4"]
+[ext_resource type="AudioStream" uid="uid://doieij1l416q4" path="res://assets/audio/sfx/footsteps/Footsteps 3.ogg" id="4_mgxji"]
+[ext_resource type="AudioStream" uid="uid://0wlpq6hlraxd" path="res://assets/audio/sfx/jumps/Ninja Jump 03.ogg" id="4_tm0px"]
+[ext_resource type="AudioStream" uid="uid://b21shfsm0w1tb" path="res://assets/audio/sfx/death/spla_death3.ogg" id="4_wijaa"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="5_dcg2g"]
+[ext_resource type="AudioStream" uid="uid://d508bpeswjo2" path="res://assets/audio/sfx/footsteps/Footsteps 4.ogg" id="5_dqyk1"]
+[ext_resource type="AudioStream" uid="uid://cv8h3ffkelp3p" path="res://assets/audio/sfx/footsteps/Footsteps 5.ogg" id="6_5c6o6"]
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="6_uiiwv"]
+[ext_resource type="AudioStream" uid="uid://bfvky0in4lm5m" path="res://assets/audio/sfx/footsteps/Footsteps 6.ogg" id="7_m4kmh"]
 [ext_resource type="Script" uid="uid://4868s15agld" path="res://prefabs/player/enemy_kill_area.gd" id="7_w51pg"]
+[ext_resource type="AudioStream" uid="uid://mn7nnq2ff54i" path="res://assets/audio/sfx/footsteps/Footsteps 7.ogg" id="8_esnuv"]
+[ext_resource type="AudioStream" uid="uid://c2vtllrrqwp2c" path="res://assets/audio/sfx/footsteps/Footsteps 8.ogg" id="9_aveir"]
+[ext_resource type="AudioStream" uid="uid://kmgk7llkwmhb" path="res://assets/audio/sfx/footsteps/Footsteps 9.ogg" id="10_67sq4"]
+[ext_resource type="AudioStream" uid="uid://ckv2j5nn4t23i" path="res://assets/audio/sfx/footsteps/Footsteps 10.ogg" id="11_tm0px"]
+[ext_resource type="AudioStream" uid="uid://cxmmcbvtppmhv" path="res://assets/audio/sfx/footsteps/Footsteps 11.ogg" id="12_wijaa"]
+[ext_resource type="AudioStream" uid="uid://bjicby1naax2x" path="res://assets/audio/sfx/footsteps/Footsteps 12.ogg" id="13_vwmwt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr8rp"]
 resource_local_to_scene = true
@@ -23,7 +40,7 @@ shader_parameter/opacity = 1.0
 points = PackedVector2Array(-8.5, 11, -8.5, -9, -4, -12, 4, -12, 8.5, -9, 8.5, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nynx"]
-size = Vector2(11.958836, 5.087199)
+size = Vector2(14.489709, 5.087199)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctndf"]
 radius = 6.0
@@ -49,9 +66,32 @@ wall_gravity_scale = 0.06
 wall_max_velcoity = 120
 peer_lerp_speed = 20.0
 snap_distance = 30.0
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("3_aveir"): 0.8,
+ExtResource("4_67sq4"): 0.9,
+ExtResource("4_wijaa"): 0.8
+})
+jump_sounds = Dictionary[AudioStream, float]({
+ExtResource("2_aveir"): 0.9,
+ExtResource("4_tm0px"): 0.8
+})
+footstep_sounds = Dictionary[AudioStream, float]({
+ExtResource("2_xvkw1"): 0.6,
+ExtResource("3_wx5su"): 0.6,
+ExtResource("4_mgxji"): 0.6,
+ExtResource("5_dqyk1"): 0.6,
+ExtResource("6_5c6o6"): 0.6,
+ExtResource("7_m4kmh"): 0.6,
+ExtResource("8_esnuv"): 0.6,
+ExtResource("9_aveir"): 0.6,
+ExtResource("10_67sq4"): 0.6,
+ExtResource("11_tm0px"): 0.6,
+ExtResource("12_wijaa"): 0.6,
+ExtResource("13_vwmwt"): 0.6
+})
+seconds_between_footsteps = 0.23
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("player_controller")]
-modulate = Color(0.33518517, 0.59265137, 0.8908548, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1869280151 node_paths=PackedStringArray("outline_modulate_nodes", "player_controller")]
 visibility_layer = 7
 material = SubResource("ShaderMaterial_hr8rp")
 sprite_frames = ExtResource("2_ivj8r")
@@ -59,6 +99,7 @@ animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
 script = ExtResource("3_6dlbe")
+outline_modulate_nodes = [NodePath("../dust_particles"), NodePath("../jump_particles"), NodePath("../die_particles")]
 player_controller = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786516878]
@@ -73,13 +114,12 @@ position = Vector2(0, 16)
 
 [node name="jump_particles" parent="." unique_id=2087833924 instance=ExtResource("5_dcg2g")]
 position = Vector2(0, 16)
+enabled_at_setting = 1
 
 [node name="die_particles" parent="." unique_id=1269224737 instance=ExtResource("6_uiiwv")]
+modulate = Color(0.92156863, 0.13725491, 0.10980392, 1)
 position = Vector2(-0.33333334, 2.3333333)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=473809169]
-volume_db = -20.0
-bus = &"SFX"
+enabled_at_setting = 1
 
 [node name="enemy_killzone" type="Area2D" parent="." unique_id=541735558 node_paths=PackedStringArray("player_parent")]
 unique_name_in_owner = true

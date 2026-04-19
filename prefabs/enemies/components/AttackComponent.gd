@@ -42,9 +42,9 @@ func is_attacking() -> bool:
 func attempt_attack() -> void:
 	if seconds_since_attack < seconds_between_attacks:
 		return
-	_initiate_attack()
+	rpc("_initiate_attack")
 
-
+@rpc("any_peer", "call_local", "reliable")
 func _initiate_attack() -> void:
 	seconds_since_attack = 0.0
 	attack_initiated.emit()

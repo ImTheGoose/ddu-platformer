@@ -31,13 +31,26 @@ extends ShopMenu
 	},
 ]
 
+@export var shared_texture :SharedTexture
 @export var display_rect :TextureRect
 
+func _select_item(item_name: String) -> void:
+	super(item_name)
+
 func _ready() -> void:
+	shared_texture.texture_changed.connect(_on_texture_changed)
 	shop_items = accent_items.duplicate()
 	super()
+
+func _on_hide() -> void:
+	var item :Dictionary = shop_items[_get_index_from_name(DataManager.get_value("selected_" + shop_category))]
+	shared_texture.current_texture = item["texture"]
+
+func _on_texture_changed(new_texture: Texture2D) -> void:
+	display_rect.texture = new_texture
 
 func _refresh_shop_contents() -> void:
 	super()
 	var item :Dictionary = shop_items[current_shop_index]
-	display_rect.texture = item["texture"]
+	shared_texture.current_texture = item["texture"]
+	

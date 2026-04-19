@@ -30,59 +30,67 @@ script = ExtResource("1_wdrp6")
 menu_name = "multiplayer_lobby_menu"
 initial_focus = NodePath("VBoxContainer/quit_lobby")
 
-[node name="Label" type="Label" parent="." unique_id=1013216083]
+[node name="VBoxContainer3" type="VBoxContainer" parent="." unique_id=599114787]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer3" unique_id=1978211525]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="Label" type="Label" parent="VBoxContainer3/VBoxContainer2" unique_id=1013216083]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Lobby"
 horizontal_alignment = 1
 
-[node name="player_amount_label" type="Label" parent="." unique_id=50092993]
+[node name="player_amount_label" type="Label" parent="VBoxContainer3/VBoxContainer2" unique_id=50092993]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Players: 1 of 4"
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1010588640]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer3" unique_id=1010588640]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer" unique_id=1840384036]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer3/PanelContainer" unique_id=1840384036]
 layout_mode = 2
 
-[node name="player_parts" type="VBoxContainer" parent="PanelContainer/HBoxContainer2" unique_id=1644860830]
+[node name="player_parts" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2" unique_id=1644860830]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer2/player_parts" unique_id=1472002521]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/player_parts" unique_id=1472002521]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="playerlist" type="VBoxContainer" parent="PanelContainer/HBoxContainer2/player_parts/VBoxContainer" unique_id=1445892829]
+[node name="playerlist" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/player_parts/VBoxContainer" unique_id=1445892829]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer2/player_parts" unique_id=324653494]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/player_parts" unique_id=324653494]
 visible = false
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer2" unique_id=1792225327]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer3/PanelContainer/HBoxContainer2" unique_id=1792225327]
 layout_mode = 2
 theme_override_constants/separation = 12
 theme_override_styles/separator = SubResource("StyleBoxLine_wdrp6")
 
-[node name="settings_parts" type="VBoxContainer" parent="PanelContainer/HBoxContainer2" unique_id=56313280]
+[node name="settings_parts" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2" unique_id=56313280]
 layout_mode = 2
 script = ExtResource("2_wdrp6")
 
-[node name="difficulty_setting" type="HBoxContainer" parent="PanelContainer/HBoxContainer2/settings_parts" unique_id=609237484]
+[node name="difficulty_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=609237484]
 layout_mode = 2
 
-[node name="difficulty_label" type="Label" parent="PanelContainer/HBoxContainer2/settings_parts/difficulty_setting" unique_id=1069863179]
+[node name="difficulty_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/difficulty_setting" unique_id=1069863179]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 13.54)
 layout_mode = 2
 text = "Difficulty: "
 vertical_alignment = 1
 
-[node name="difficulty_option" type="OptionButton" parent="PanelContainer/HBoxContainer2/settings_parts/difficulty_setting" unique_id=207483185]
+[node name="difficulty_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/difficulty_setting" unique_id=207483185]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -99,17 +107,17 @@ popup/item_3/id = 3
 popup/item_4/text = "Impossible"
 popup/item_4/id = 4
 
-[node name="rounds_setting" type="HBoxContainer" parent="PanelContainer/HBoxContainer2/settings_parts" unique_id=1092571187]
+[node name="rounds_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=1092571187]
 layout_mode = 2
 
-[node name="rounds_label" type="Label" parent="PanelContainer/HBoxContainer2/settings_parts/rounds_setting" unique_id=1413498397]
+[node name="rounds_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/rounds_setting" unique_id=1413498397]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 13.54)
 layout_mode = 2
 text = "Rounds to Win: "
 vertical_alignment = 1
 
-[node name="rounds_option" type="OptionButton" parent="PanelContainer/HBoxContainer2/settings_parts/rounds_setting" unique_id=55691499]
+[node name="rounds_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/rounds_setting" unique_id=55691499]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -128,17 +136,17 @@ popup/item_4/id = 10
 popup/item_5/text = "20 rounds"
 popup/item_5/id = 20
 
-[node name="collision_setting" type="HBoxContainer" parent="PanelContainer/HBoxContainer2/settings_parts" unique_id=316799556]
+[node name="collision_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=316799556]
 layout_mode = 2
 
-[node name="collission_label" type="Label" parent="PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1683623384]
+[node name="collission_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1683623384]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 13.54)
 layout_mode = 2
 text = "Collissions: "
 vertical_alignment = 1
 
-[node name="collission_option" type="OptionButton" parent="PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1977480241]
+[node name="collission_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1977480241]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -149,17 +157,17 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
-[node name="gamemode_setting" type="HBoxContainer" parent="PanelContainer/HBoxContainer2/settings_parts" unique_id=2070748707]
+[node name="gamemode_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=2070748707]
 layout_mode = 2
 
-[node name="gamemode_label" type="Label" parent="PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1660634735]
+[node name="gamemode_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1660634735]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 13.54)
 layout_mode = 2
 text = "Gamemode: "
 vertical_alignment = 1
 
-[node name="gamemode_option" type="OptionButton" parent="PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1291943177]
+[node name="gamemode_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1291943177]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -170,17 +178,17 @@ popup/item_0/id = 0
 popup/item_1/text = "Constant"
 popup/item_1/id = 1
 
-[node name="map_collection_setting" type="HBoxContainer" parent="PanelContainer/HBoxContainer2/settings_parts" unique_id=68486791]
+[node name="map_collection_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=68486791]
 layout_mode = 2
 
-[node name="map_collection_label" type="Label" parent="PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=117222289]
+[node name="map_collection_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=117222289]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 13.54)
 layout_mode = 2
 text = "Collection: "
 vertical_alignment = 1
 
-[node name="map_collection_option" type="OptionButton" parent="PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=1183251566]
+[node name="map_collection_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=1183251566]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

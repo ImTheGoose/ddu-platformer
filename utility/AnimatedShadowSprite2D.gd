@@ -20,6 +20,7 @@ func _ready() -> void:
 		reference_sprite.ready.connect(sync_animation_to_reference)
 		reference_sprite.animation_changed.connect(_on_animation_changed)
 		sprite_frames = reference_sprite.sprite_frames
+		visible = true
 		show_behind_parent = true
 		modulate = Color8(0,0,0, 50)
 		position += shadow_dir

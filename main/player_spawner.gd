@@ -35,11 +35,11 @@ func _on_peer_disconnected(peer_id: int) -> void:
 	
 
 func _spawn_player(data: Array) -> Node:
-	var p :Node2D = prefab.instantiate()
+	var p :Player = prefab.instantiate()
 	p.name = str(data[1])
+	p.assigned_peer_id = data[1]
 	p.tree_entered.connect(
 		func() -> void:
-			p.set_multiplayer_authority(data[1])
 			p.global_position = data[0]
 			)
 	

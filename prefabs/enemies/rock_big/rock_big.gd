@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _on_animation_finished() -> void:
 	if sprite_component.animation == "Hit":
-		visible = false
+		sprite_component.visible = false
 
 func _process(delta: float) -> void:
 	if health_component:
@@ -26,5 +26,5 @@ func _process(delta: float) -> void:
 		sprite_component.play("Idle")
 
 func _on_reset() -> void:
-	visible = true
+	sprite_component.visible = true
 	sprite_component.play("Idle")

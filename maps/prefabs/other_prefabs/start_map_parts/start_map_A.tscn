@@ -66,8 +66,8 @@ position = Vector2(336, 224)
 script = ExtResource("7_e41cp")
 spawn_idx = 2
 
-[connection signal="body_entered" from="TrapTiles/@Area2D@94021" to="TrapTiles/@Area2D@94021" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@94022" to="TrapTiles/@Area2D@94022" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@94023" to="TrapTiles/@Area2D@94023" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@94024" to="TrapTiles/@Area2D@94024" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@76845" to="TrapTiles/@Area2D@76845" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@76846" to="TrapTiles/@Area2D@76846" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@76847" to="TrapTiles/@Area2D@76847" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@76848" to="TrapTiles/@Area2D@76848" method="_on_body_entered"]
 [connection signal="body_entered" from="game_start_area" to="game_start_area" method="_on_body_entered"]

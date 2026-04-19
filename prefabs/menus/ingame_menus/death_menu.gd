@@ -68,7 +68,7 @@ func _refresh_stat_text() -> void:
 	text += apple_bbcode + str( int(apples_collected))
 	
 	if text.contains("highscore"):
-		AudioManager.play_global_sound(new_highscore_sound, -3)
+		Audio.play_global_pitched(new_highscore_sound, 0.9)
 	
 	stat_text_node.text = text
 

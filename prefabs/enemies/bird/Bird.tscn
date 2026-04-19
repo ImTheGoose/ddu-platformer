@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://c011nvwhwv1ii"]
 
 [ext_resource type="Script" uid="uid://bf88wq0gxyrja" path="res://prefabs/enemies/bird/bird.gd" id="1_lwlss"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_35uqk"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/particles/cloud_burst_particle.tscn" id="2_f1s47"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="2_h6xyl"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_6swat"]
 [ext_resource type="SpriteFrames" uid="uid://bvybev70nuads" path="res://prefabs/enemies/bird/bird_frames.tres" id="3_b1qvx"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_lwlss"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="4_b1qvx"]
@@ -11,6 +14,13 @@
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="7_cmvfg"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="8_4c0v1"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="10_gykmu"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="13_taac1"]
+[ext_resource type="AudioStream" uid="uid://bvbb5wjetyuvc" path="res://assets/audio/sfx/enemies/bird/bird_death1.ogg" id="14_1wqg6"]
+[ext_resource type="AudioStream" uid="uid://b046nbpiydwf0" path="res://assets/audio/sfx/enemies/bird/bird_death2.ogg" id="15_tjwm1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wqg6"]
+atlas = ExtResource("3_6swat")
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gykmu"]
 
@@ -20,6 +30,17 @@ health_component = NodePath("HealthComponent")
 sprite_component = NodePath("SinusOffsetComponent/EnemySpriteComponent")
 entity_type = 4
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_35uqk")]
+position = Vector2(0, -1)
+amount = 5
+texture = SubResource("AtlasTexture_1wqg6")
+
+[node name="CollissionParticle" parent="." unique_id=1020078032 instance=ExtResource("2_f1s47")]
+position = Vector2(5.0000005, -1)
+rotation = 2.958333
+amount = 5
+lifetime = 0.5
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1722081687 node_paths=PackedStringArray("entity_root", "health_component")]
 script = ExtResource("4_b1qvx")
@@ -61,8 +82,7 @@ debug_color = Color(0.81166184, 0.41114002, 3.85046e-07, 0.41960785)
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="SinusOffsetComponent" unique_id=810956275 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
 sprite_frames = ExtResource("3_b1qvx")
 animation = &"Moving"
-frame = 1
-frame_progress = 0.55360276
+frame = 4
 offset = Vector2(-5, 0)
 script = ExtResource("3_lwlss")
 entity_node = NodePath("../..")
@@ -72,6 +92,7 @@ flip_x_offset = true
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="SinusOffsetComponent/EnemySpriteComponent" unique_id=1691061344 node_paths=PackedStringArray("reference_sprite")]
+visible = false
 sprite_frames = ExtResource("3_b1qvx")
 animation = &"Moving"
 script = ExtResource("8_4c0v1")
@@ -89,6 +110,10 @@ metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 [node name="AudioComponent" type="Node" parent="." unique_id=1912445514 node_paths=PackedStringArray("health_component")]
 script = ExtResource("7_cmvfg")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("14_1wqg6"): 1.1,
+ExtResource("15_tjwm1"): 0.9
+})
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="PointTargetingComponent" type="Node" parent="." unique_id=1928668717 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
@@ -98,3 +123,14 @@ path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 seconds_waiting_at_target = 0.0
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=1070509741 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "sprite_component", "frame_emitted_particles")]
+script = ExtResource("13_taac1")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
+sprite_component = NodePath("../SinusOffsetComponent/EnemySpriteComponent")
+animation_name = "Moving"
+animation_frame = 4
+frame_emitted_particles = [NodePath("../CollissionParticle")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

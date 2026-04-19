@@ -4,6 +4,7 @@ extends Node2D
 
 @export var initial_height :int = 360
 @export var multiplayer_spawner :MultiplayerSpawner
+var current_map_section :Array[MapFile]
 
 var px_per_tile :int = 16
 var height :float = 0
@@ -15,6 +16,7 @@ func _ready() -> void:
 	multiplayer_spawner.spawn_function = spawn_map_prefab
 
 func clear_map() -> void:
+	current_map_section.clear()
 	if multiplayer.is_server():
 		print("clearing map")
 		for child: Node in get_children():
@@ -30,20 +32,21 @@ func _on_spawn_level() -> void:
 		height = initial_height
 		spawn_map_file(Maps.get_start_map())
 
-func spawn_map_section(map_section: Array[MapFile]) -> void:
-	for map_file in map_section:
-		spawn_map_file(map_file)
-
 func spawn_map_file(map_file: MapFile) -> void:
 	current_connection_type = map_file.top_connection_type
 	var map_node :Node2D = multiplayer_spawner.spawn([map_file.prefab.resource_path, get_map_global_position()])
 
-	
 	height -= get_height_from_map_instance(map_node)
 
 func next_map_section() -> void:
 	var section :Array[MapFile] = Maps.get_next_map_section(current_connection_type)
-	spawn_map_section(section)
+	current_map_section = section
+
+func spawn_next_map_part() -> void:
+	if current_map_section.is_empty():
+		next_map_section()
+	
+	spawn_map_file(current_map_section.pop_front())
 
 func get_height_from_map_instance(node: Node2D) -> float:
 	var terrain_node :TileMapLayer = node.get_node("TerrainTiles")
@@ -79,7 +82,7 @@ func _process(delta: float) -> void:
 			lowest_player = p
 	
 	if highest_player.global_position.y < global_height + top_safe_distance:
-		next_map_section()
+		spawn_next_map_part()
 
 
 

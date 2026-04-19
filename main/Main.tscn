@@ -6,17 +6,22 @@
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="6_38apo"]
 [ext_resource type="PackedScene" uid="uid://f1jx5l623brv" path="res://prefabs/particles/apple_highscore_particles.tscn" id="7_khphd"]
 [ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="8_50616"]
+[ext_resource type="PackedScene" uid="uid://b28tug1pb14y6" path="res://prefabs/enemies/plant/plant_projectile_particles.tscn" id="9_mwi54"]
 [ext_resource type="Script" uid="uid://bs1phqh1dv12v" path="res://main/player_spawner.gd" id="10_m4geg"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/particles/cloud_burst_particle.tscn" id="10_x4tdt"]
 [ext_resource type="Script" uid="uid://dbfq7dddiroth" path="res://main/EntitySpawner.gd" id="11_8bq6g"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="11_bbkfx"]
+[ext_resource type="PackedScene" uid="uid://ct6sgk0u8c5fx" path="res://prefabs/particles/fire_particle.tscn" id="12_0c1fb"]
 [ext_resource type="Script" uid="uid://dd5i23q3b2qqm" path="res://main/camera_follow.gd" id="13_bbhju"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="14_gv800"]
 [ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="15_0d5nc"]
 [ext_resource type="Script" uid="uid://vgpj6rynqpfi" path="res://prefabs/general_UI/moving_background.gd" id="16_sebc1"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="17_fw23c"]
 [ext_resource type="Script" uid="uid://ukg6syf006m4" path="res://prefabs/menus/background_seperator.gd" id="17_x8ve0"]
+[ext_resource type="Resource" uid="uid://bsemolhnnavr3" path="res://prefabs/menus/shop_menus/SharedBackground.tres" id="18_5eftm"]
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="18_i8832"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="19_bbhju"]
 [ext_resource type="Script" uid="uid://do22tf2kjinhv" path="res://utility/rich_value_label.gd" id="20_mwi54"]
-[ext_resource type="Script" uid="uid://bxjlfyms6urol" path="res://prefabs/general_UI/time_label.gd" id="21_5eftm"]
 [ext_resource type="Script" uid="uid://ckrs8y06bpf0i" path="res://prefabs/general_UI/fps_label.gd" id="22_x4tdt"]
 [ext_resource type="Script" uid="uid://c8ed372wclpdl" path="res://main/state_label.gd" id="23_bbkfx"]
 [ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="24_0c1fb"]
@@ -28,10 +33,12 @@
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="27_q4fed"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="28_7glbu"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="29_eh0ei"]
+[ext_resource type="Script" uid="uid://c3p1cg5swuvmo" path="res://prefabs/general_UI/game_state_labels.gd" id="30_7867i"]
 [ext_resource type="PackedScene" uid="uid://xvfmjoenq114" path="res://prefabs/menus/shop_menus/shop_skin_menu.tscn" id="30_xqrlm"]
 [ext_resource type="PackedScene" uid="uid://dpql1ujcn3sd7" path="res://prefabs/menus/shop_menus/shop_accent_menu.tscn" id="31_f2dvo"]
 [ext_resource type="PackedScene" uid="uid://ddy24w71nrv3k" path="res://prefabs/menus/shop_menus/shop_theme_menu.tscn" id="32_fcwsn"]
 [ext_resource type="PackedScene" uid="uid://c84ru0s4q2ncy" path="res://prefabs/menus/shop_menus/shop_selection_menu.tscn" id="33_lmgwd"]
+[ext_resource type="PackedScene" uid="uid://criga4ycsc7u6" path="res://prefabs/menus/local_multiplayer/local_lobby_menu.tscn" id="34_7867i"]
 [ext_resource type="PackedScene" uid="uid://dyhe508sj45sf" path="res://prefabs/menus/ingame_menus/pause_menu.tscn" id="34_mm6gd"]
 [ext_resource type="PackedScene" uid="uid://din2cplqt3gvv" path="res://prefabs/menus/ingame_menus/death_menu.tscn" id="35_cyktq"]
 [ext_resource type="PackedScene" uid="uid://bqicsp8cjtktf" path="res://prefabs/menus/popups/changelog_popup.tscn" id="36_dwegs"]
@@ -51,6 +58,41 @@
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="49_i8832"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="50_bbhju"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
+
+[sub_resource type="Curve" id="Curve_7867i"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.40201002, 1), -0.078966714, -0.078966714, 0, 0, Vector2(0.5992462, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_q4fed"]
+curve = SubResource("Curve_7867i")
+
+[sub_resource type="Gradient" id="Gradient_7glbu"]
+offsets = PackedFloat32Array(0.13826999, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eh0ei"]
+gradient = SubResource("Gradient_7glbu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xqrlm"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(320, 180, 0)
+emission_shape_scale = Vector3(320, 180, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -114.399994
+angle_max = 105.90001
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 4.0
+initial_velocity_max = 18.0
+angular_velocity_min = -104.20001
+angular_velocity_max = 102.499985
+gravity = Vector3(0, 8, 0)
+scale_min = 0.5
+scale_max = 1.3
+color = Color(1, 1, 1, 0.74509805)
+color_initial_ramp = SubResource("GradientTexture1D_eh0ei")
+alpha_curve = SubResource("CurveTexture_q4fed")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byxo4"]
 shader = ExtResource("14_gv800")
@@ -171,15 +213,17 @@ _data = {
 &"show_blackout": SubResource("Animation_o55x0")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_7867i"]
+
 [node name="Main" type="Node" unique_id=2321650]
 script = ExtResource("1_w3rk5")
 
 [node name="ParticlePreRenderer" type="Node2D" parent="." unique_id=1987328683]
 top_level = true
 z_index = -150
-position = Vector2(719, 306)
+position = Vector2(-985, -153)
 script = ExtResource("47_rchyr")
-particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616")])
+particle_nodes = Array[PackedScene]([ExtResource("48_5tfui"), ExtResource("49_38apo"), ExtResource("50_khphd"), ExtResource("6_38apo"), ExtResource("7_khphd"), ExtResource("8_50616"), ExtResource("9_mwi54"), ExtResource("10_x4tdt"), ExtResource("11_bbkfx"), ExtResource("12_0c1fb")])
 
 [node name="game_container" type="Node2D" parent="." unique_id=235652747]
 script = ExtResource("2_5mvff")
@@ -214,6 +258,14 @@ spawn_node = NodePath("../entity_container")
 script = ExtResource("13_bbhju")
 camera = NodePath("../Camera2D")
 
+[node name="ToggleableParticle" type="GPUParticles2D" parent="CameraFollow" unique_id=112695860]
+amount = 30
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_xqrlm")
+script = ExtResource("17_fw23c")
+enabled_at_setting = 3
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"
+
 [node name="moving_background" type="TextureRect" parent="CameraFollow" unique_id=621308851]
 process_mode = 3
 z_index = -50
@@ -230,6 +282,7 @@ grow_horizontal = 2
 texture = ExtResource("15_0d5nc")
 stretch_mode = 1
 script = ExtResource("16_sebc1")
+shared_texture = ExtResource("18_5eftm")
 
 [node name="background_seperator" type="ColorRect" parent="CameraFollow" unique_id=2085207305]
 z_index = 10
@@ -307,20 +360,36 @@ text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/i
 fit_content = true
 script = ExtResource("20_mwi54")
 
-[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=103873068]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/UI" unique_id=198991718 node_paths=PackedStringArray("time_label", "height_label")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -100.0
-offset_right = 100.0
-offset_bottom = 33.0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
 grow_horizontal = 2
+theme_override_constants/separation = -2
+script = ExtResource("30_7867i")
+time_label = NodePath("time_label")
+height_label = NodePath("height_label")
+
+[node name="height_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI/VBoxContainer" unique_id=146384529]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
-text = "Time: 0"
+text = "Height: %s"
 fit_content = true
 horizontal_alignment = 1
-script = ExtResource("21_5eftm")
+
+[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI/VBoxContainer" unique_id=103873068]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_7867i")
+theme_override_font_sizes/normal_font_size = 20
+text = "Time: %s"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="fps_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=640249096]
 layout_mode = 1
@@ -382,11 +451,20 @@ visible = false
 layout_mode = 1
 
 [node name="level_overview_menu" parent="CanvasLayer/Control2/Control" unique_id=1150293006 instance=ExtResource("26_sebc1")]
+visible = false
 layout_mode = 1
 
 [node name="level_select_menu" parent="CanvasLayer/Control2/Control" unique_id=160876120 instance=ExtResource("26_0d5nc")]
 visible = false
 layout_mode = 1
+
+[node name="LocalLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2055560422 instance=ExtResource("34_7867i")]
+visible = false
+layout_mode = 1
+offset_left = -141.0
+offset_top = -99.0
+offset_right = 141.0
+offset_bottom = 99.0
 
 [node name="settings_menu" parent="CanvasLayer/Control2/Control" unique_id=463999452 instance=ExtResource("26_7867i")]
 visible = false
@@ -478,7 +556,7 @@ offset_top = -72.0
 offset_right = 114.0
 offset_bottom = 72.0
 
-[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2055560422 instance=ExtResource("43_frehf")]
+[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2130961134 instance=ExtResource("43_frehf")]
 visible = false
 layout_mode = 1
 

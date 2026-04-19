@@ -12,7 +12,7 @@ var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"unlocked_level" : 1,
-	"save_version" : 0.5,
+	"save_version" : 0.6,
 	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
@@ -84,6 +84,10 @@ func update_game_data() -> void:
 		game_data["unlocked_level"] = default_game_data["unlocked_level"]
 		game_data["level_times"] = default_game_data["level_times"]
 	
+	if v < 0.6:
+		create_config()
+		
+	
 	game_data["save_version"] = default_game_data["save_version"]
 	save_game_data()
 	
@@ -134,12 +138,12 @@ func _create_new_save_data() -> void:
 	return
 
 func set_value(key: String, value: Variant) -> void:
-	game_data[key] = value
+	game_data.set(key, value)
 
 func get_value(key: String) -> Variant:
-	var val :Variant = game_data[key]
+	var val :Variant = game_data.get(key)
 	if val == null:
-		print(PREFIX, "Value missing for key: ", key)
+		printerr(PREFIX, "Value missing for key: ", key)
 		return null
 			
 	return val
@@ -153,8 +157,8 @@ func create_config() -> void:
 	config.set_value("keybinding", "restart", "R")
 	config.set_value("keybinding", "escape", "Escape")
 	
-	config.set_value("audio", "master_volume", 0)
-	config.set_value("audio", "music_volume", -15)
+	config.set_value("audio", "sfx_volume", 0.5)
+	config.set_value("audio", "music_volume", 0.5)
 	
 	config.set_value("video", "max_fps", 600)
 	config.set_value("video", "show_fps", false)
@@ -162,7 +166,8 @@ func create_config() -> void:
 	config.set_value("video", "fullscreen", false)
 	config.set_value("video", "color_theme", "Brown")
 	config.set_value("video", "color_theme_id", 0)
-	config.set_value("video", "particles_enabled", true)
+	config.set_value("video", "camera_shake_enabled", true)
+	config.set_value("video", "particle_amount", ToggleableParticle.ParticleAmount.ALL)
 	config.set_value("video", "skip_transitions", false)
 	config.set_value("general", "default_controls", true)
 	

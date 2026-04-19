@@ -9,16 +9,18 @@ func _on_parent_ready() -> void:
 	if !multiplayer.is_server():
 		return
 	
-	if spawn_idx == 1:
-		_request_player_spawn(1)
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if Lobby.get_lobby_size() >= spawn_idx:
+			_request_player_spawn(spawn_idx)
+			return
+
+	if Lobby.get_lobby_size() < spawn_idx:
 		return
 
-	var peers :PackedInt32Array = multiplayer.get_peers()
+	var peers :Array[int] = [multiplayer.get_unique_id()]
+	peers.append_array(multiplayer.get_peers())
 	
-	if peers.size() < spawn_idx - 1:
-		return
-	
-	_request_player_spawn(peers[spawn_idx - 2])
+	_request_player_spawn(peers[spawn_idx - 1])
 	
 func _request_player_spawn(peer_id: int) -> void:
 	GameManager.spawn_player.emit(global_position, peer_id)

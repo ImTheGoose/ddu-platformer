@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://bbtr8h0akbyoy"]
 
 [ext_resource type="Script" uid="uid://blh7npni3bejc" path="res://prefabs/enemies/fat_bird/fat_bird.gd" id="1_foyj3"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_37epm"]
+[ext_resource type="PackedScene" uid="uid://c5k441vitmiwu" path="res://prefabs/particles/cloud_burst_particle.tscn" id="2_ienmw"]
 [ext_resource type="SpriteFrames" uid="uid://b8sgm7cw3iye1" path="res://prefabs/enemies/fat_bird/fat_bird_frames.tres" id="2_jtfo8"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_5ll00"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_qejqu"]
 [ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="4_ah2eh"]
 [ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_fs2bb"]
@@ -10,9 +13,17 @@
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="7_fcof4"]
 [ext_resource type="Script" uid="uid://dk2s2jlcdkchw" path="res://prefabs/enemies/components/CollissionTargetingComponent.gd" id="8_x8y3c"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="9_fcof4"]
+[ext_resource type="AudioStream" uid="uid://ccam8uwgu68nw" path="res://assets/audio/sfx/enemies/fat_bird/new_slap1.ogg" id="11_1thfl"]
+[ext_resource type="AudioStream" uid="uid://wn6cslqr0mhm" path="res://assets/audio/sfx/enemies/fat_bird/impact3.ogg" id="11_88jqj"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="11_ienmw"]
+[ext_resource type="AudioStream" uid="uid://bc0hcq0jr2x36" path="res://assets/audio/sfx/enemies/fat_bird/impact4.ogg" id="12_2uvec"]
+[ext_resource type="AudioStream" uid="uid://ylikehdo4a8i" path="res://assets/audio/sfx/enemies/fat_bird/new_slap2.ogg" id="12_t8jii"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_foyj3"]
-size = Vector2(22, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_88jqj"]
+atlas = ExtResource("3_5ll00")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37epm"]
 
 [node name="FatBird" type="Node2D" unique_id=278432552 node_paths=PackedStringArray("health_component", "sprite_component", "player_detection_component", "movement_component", "collission_targeting_component", "on_screen")]
 script = ExtResource("1_foyj3")
@@ -25,16 +36,41 @@ on_screen = NodePath("VisibleOnScreenNotifier2D")
 entity_type = 5
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
 
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_37epm")]
+amount = 7
+texture = SubResource("AtlasTexture_88jqj")
+
+[node name="CollissionParticle" parent="." unique_id=1020078032 instance=ExtResource("2_ienmw")]
+position = Vector2(0, 6.255)
+
+[node name="CollissionParticle2" parent="." unique_id=710180536 instance=ExtResource("2_ienmw")]
+position = Vector2(0, 6.255)
+rotation = -1.5707964
+
+[node name="FlyParticle" parent="." unique_id=973619285 instance=ExtResource("2_ienmw")]
+position = Vector2(1, 2)
+rotation = 1.7453293
+amount = 5
+lifetime = 0.4
+
+[node name="FlyParticle2" parent="." unique_id=566555960 instance=ExtResource("2_ienmw")]
+position = Vector2(-1, 2)
+rotation = 4.537856
+amount = 5
+lifetime = 0.4
+
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=421255713 node_paths=PackedStringArray("entity_node", "health_component")]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("2_jtfo8")
 animation = &"Idle"
+frame = 4
 script = ExtResource("3_qejqu")
 entity_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
 [node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1506809828 node_paths=PackedStringArray("entity_node", "reference_sprite")]
+visible = false
 sprite_frames = ExtResource("2_jtfo8")
 animation = &"Idle"
 script = ExtResource("4_fs2bb")
@@ -62,12 +98,23 @@ metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1575995734]
 position = Vector2(0, -9)
-shape = SubResource("RectangleShape2D_foyj3")
+shape = SubResource("CapsuleShape2D_37epm")
 debug_color = Color(0.9024265, 0.30941275, 0, 0.41960785)
 
-[node name="AudioComponent" type="Node" parent="." unique_id=1964496988 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=1964496988 node_paths=PackedStringArray("on_screen_notifier", "health_component", "movement_component", "target_reached_collision_ray")]
 script = ExtResource("6_x8y3c")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("11_1thfl"): 1.0,
+ExtResource("12_t8jii"): 1.0
+})
+movement_component = NodePath("../MovementComponent")
+target_reached_collision_ray = NodePath("../GroundParticleCheck")
+target_reached_sounds = Dictionary[AudioStream, float]({
+ExtResource("11_88jqj"): 2.6,
+ExtResource("12_2uvec"): 2.8
+})
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=383185221 node_paths=PackedStringArray("entity_node")]
@@ -97,3 +144,20 @@ metadata/_custom_type_script = "uid://bu6nkb8bdte24"
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1320379512]
 position = Vector2(0, -13)
 rect = Rect2(-10, 3, 20, 14)
+
+[node name="GroundParticleCheck" type="RayCast2D" parent="." unique_id=576451006]
+target_position = Vector2(0, 10)
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2060654447 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "movement_component", "target_reached_particles", "target_reached_collision_ray", "sprite_component", "frame_emitted_particles")]
+script = ExtResource("11_ienmw")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
+movement_component = NodePath("../MovementComponent")
+target_reached_particles = [NodePath("../CollissionParticle2"), NodePath("../CollissionParticle")]
+target_reached_collision_ray = NodePath("../GroundParticleCheck")
+sprite_component = NodePath("../EnemySpriteComponent")
+animation_name = "Idle"
+animation_frame = 3
+frame_emitted_particles = [NodePath("../FlyParticle"), NodePath("../FlyParticle2")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cd8r0bbbiidae"
+path="res://.godot/imported/TOONBoing_Cartoon Boing Bouncing Jump 03.ogg-bb0f796efe3fa50599d61a8cf58aae30.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/traps/trampolines/TOONBoing_Cartoon Boing Bouncing Jump 03.ogg"
+dest_files=["res://.godot/imported/TOONBoing_Cartoon Boing Bouncing Jump 03.ogg-bb0f796efe3fa50599d61a8cf58aae30.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

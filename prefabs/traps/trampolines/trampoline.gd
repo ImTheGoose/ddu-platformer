@@ -2,7 +2,7 @@ extends Entity
 
 @export var jump_force :int = 550
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
-@onready var audio_stream :AudioStreamPlayer = $AudioStreamPlayer
+@export var boing_sounds :Dictionary[AudioStream, float] = {}
 @onready var boing_easteregg_file :AudioStreamMP3 = preload("uid://cuebrmqg0kvff")
 
 func _on_body_entered(body: Node2D) -> void:
@@ -18,11 +18,10 @@ func _on_body_entered(body: Node2D) -> void:
 func show_hit() -> void:
 	anim.play("Jump")
 	
-	if randf() < 0.01:
-		audio_stream.stream = boing_easteregg_file
-	
-	audio_stream.pitch_scale = randf_range(0.9, 1.1)
-	audio_stream.play()
+	if randf() < 0.02:
+		Audio.play_global(boing_easteregg_file, .8)
+	else:
+		Audio.play_random_pitched(boing_sounds)
 
 
 func _on_animatable_body_2d_animation_finished() -> void:

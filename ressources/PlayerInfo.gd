@@ -2,75 +2,72 @@ extends Resource
 
 class_name PlayerInfo
 
-@export var STEAM_ID :int = -1
-@export var PEER_ID :int = -1
-@export var AVATAR_IMAGE :Image:
+@export var PEER_ID :int = -1:
 	set(value):
-		AVATAR_IMAGE = value
-		avatar_image_changed.emit()
+		PEER_ID = value
+		peer_id_changed.emit()
+
+@export var AVATAR_TEXTURE :Texture2D:
+	set(value):
+		AVATAR_TEXTURE = value
+		avatar_texture_changed.emit()
 		
 @export var DISPLAY_NAME: String = "lan_placeholder":
 	set(value):
 		DISPLAY_NAME = value
-		persona_name_changed.emit(value)
+		display_name_changed.emit(value)
 
-@export var SELECTED_SKIN_NAME: String = "Osvald"
-@export var SELECTED_OUTLINE_HEX: String = "#ffffff"
+@export var SELECTED_SKIN_NAME: String = "Osvald":
+	set(value):
+		SELECTED_SKIN_NAME = value
+		cosmetics_changed.emit()
+@export var SELECTED_OUTLINE_HEX: String = "#ffffff":
+	set(value):
+		SELECTED_OUTLINE_HEX = value
+		cosmetics_changed.emit()
+
+@export var assigned_input_configs :Array[InputConfig] = []:
+	set(value):
+		assigned_input_configs = value
+		assigned_input_changed.emit()
 
 signal cosmetics_changed()
-signal persona_name_changed(new_name: String)
-signal avatar_image_changed()
+signal display_name_changed(new_name: String)
+signal avatar_texture_changed()
+signal assigned_input_changed()
+signal peer_id_changed()
 
 func _init(assigned_peer_id: int) -> void:
 	PEER_ID = assigned_peer_id
-	
-	Steam.persona_state_change.connect(_on_persona_state_change)
-	Steam.avatar_loaded.connect(_on_avatar_loaded)
-	Lobby.peer_linked_to_steam.connect(_on_peer_linked_to_steam)
-	Lobby.peer_cosmetic_updated.connect(_on_peer_cosmetic_updated)
-	
-	if Lobby.is_lobby_lan():
-		return
-	
-	STEAM_ID = Lobby.get_steam_id_from_peer_id(PEER_ID)
-	Steam.getPlayerAvatar(2, STEAM_ID)
-	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
 
-func _on_peer_linked_to_steam(peer_id: int, steam_id: int) -> void:
-	if peer_id != PEER_ID or steam_id < 1:
-		return
+func get_movement_axis() -> float:
+	var axis :float = 0.0
+	for input: InputConfig in assigned_input_configs:
+		axis += input.get_move_axis()
 	
-	STEAM_ID = steam_id
-	Steam.getPlayerAvatar(2, STEAM_ID)
-	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
-	Lobby.request_data_from_peer(PEER_ID, Lobby.DataRequestType.COSMETIC_SKIN)
-	Lobby.request_data_from_peer(PEER_ID, Lobby.DataRequestType.COSMETIC_OUTLINE)
-
-func _on_persona_state_change(steam_id: int, flags: int) -> void:
-	if steam_id != STEAM_ID:
-		return
+	if axis < 0.2 && axis > -0.2:
+		return 0
 	
-	DISPLAY_NAME = Steam.getFriendPersonaName(STEAM_ID)
+	return clamp(axis, -1.0, 1.0)
 
-func _on_avatar_loaded(avatar_id: int, avatar_size: int, avatar_buffer: Array) -> void:
-	if avatar_id != STEAM_ID:
-		return
+func is_jump_event_from_inputs(event: InputEvent) -> bool:
+	for input: InputConfig in assigned_input_configs:
+		if input.is_event_from_jump_input(event):
+			return true
+	return false
 
-	AVATAR_IMAGE = Image.create_from_data(avatar_size, avatar_size, false, Image.FORMAT_RGBA8, avatar_buffer)
+func get_input_from_event(event: InputEvent) -> InputConfig:
+	for input_config: InputConfig in assigned_input_configs:
+		if input_config.is_event_input_activation(event):
+			return input_config
+	return null
 
-func _on_peer_cosmetic_updated(peer_id: int, data_type: int, data: Array[Variant]) -> void:
-	if peer_id != PEER_ID:
-		return
+func add_input(input: InputConfig) -> void:
+	assigned_input_configs.append(input)
+	assigned_input_changed.emit()
+
+func remove_input(input: InputConfig) -> void:
+	assigned_input_configs.erase(input)
+	assigned_input_changed.emit()
 	
-	match data_type:
-		Lobby.DataRequestType.COSMETIC_SKIN:
-			SELECTED_SKIN_NAME = data[0]
-		Lobby.DataRequestType.COSMETIC_OUTLINE:
-			SELECTED_OUTLINE_HEX = data[0]
 	
-	cosmetics_changed.emit()
-
-func get_avatar_texture(texture_size: int) -> ImageTexture:
-	var img :Image = AVATAR_IMAGE.duplicate()
-	img.resize(texture_size, texture_size)
-	return ImageTexture.create_from_image(img)

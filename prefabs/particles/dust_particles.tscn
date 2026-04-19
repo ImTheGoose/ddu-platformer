@@ -36,4 +36,5 @@ color_ramp = SubResource("GradientTexture1D_634ti")
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_rwuho")
 script = ExtResource("2_mxusi")
+enabled_at_setting = 1
 metadata/_custom_type_script = "uid://djwnl3rysx6jb"
