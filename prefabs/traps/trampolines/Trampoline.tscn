@@ -89,11 +89,11 @@ size = Vector2(21, 12)
 collision_mask = 9
 script = ExtResource("1_e7khr")
 boing_sounds = Dictionary[AudioStream, float]({
-ExtResource("2_75f8s"): 0.6,
-ExtResource("3_l8wb1"): 0.6,
-ExtResource("4_kcuuv"): 0.6,
-ExtResource("5_ys0bf"): 0.6,
-ExtResource("6_53iyi"): 0.6
+ExtResource("2_75f8s"): 0.45,
+ExtResource("3_l8wb1"): 0.45,
+ExtResource("4_kcuuv"): 0.45,
+ExtResource("5_ys0bf"): 0.45,
+ExtResource("6_53iyi"): 0.45
 })
 entity_type = 15
 

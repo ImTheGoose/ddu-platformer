@@ -37,8 +37,6 @@ func sync_animation_to_reference() -> void:
 	flip_h = reference_sprite.flip_h
 	flip_v = reference_sprite.flip_v
 	animation = reference_sprite.animation
-	frame = reference_sprite.frame
-	frame_progress = reference_sprite.frame_progress
-	if reference_sprite.is_playing():
-		play()
+	set_frame_and_progress(reference_sprite.frame, reference_sprite.frame_progress)
+	play()
 	return

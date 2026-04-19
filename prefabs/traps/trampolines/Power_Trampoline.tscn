@@ -90,11 +90,11 @@ collision_mask = 9
 script = ExtResource("1_7fog4")
 jump_force = 1000
 boing_sounds = Dictionary[AudioStream, float]({
-ExtResource("2_at4h7"): 0.6,
-ExtResource("3_6dr5c"): 0.6,
-ExtResource("4_2y3a1"): 0.6,
-ExtResource("5_gbjl4"): 0.6,
-ExtResource("6_n1i7f"): 0.6
+ExtResource("2_at4h7"): 0.45,
+ExtResource("3_6dr5c"): 0.45,
+ExtResource("4_2y3a1"): 0.45,
+ExtResource("5_gbjl4"): 0.45,
+ExtResource("6_n1i7f"): 0.45
 })
 entity_type = 16
 

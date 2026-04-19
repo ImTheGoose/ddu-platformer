@@ -7,6 +7,6 @@
 script = ExtResource("1_2618f")
 prefab = ExtResource("1_j8weh")
 bottom_connection_type = 3
-top_connection_type = 4
-related_collections = Array[int]([2])
+top_connection_type = 2
+related_collections = Array[int]([2, 0])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

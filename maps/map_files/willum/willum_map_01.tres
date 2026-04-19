@@ -9,6 +9,6 @@ map_id = "willum_map_01"
 prefab = ExtResource("1_odia0")
 bottom_connection_type = 3
 top_connection_type = 4
-related_collections = Array[int]([1])
+related_collections = Array[int]([1, 0])
 blacklisted_difficulties = Array[int]([0])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
