@@ -227,7 +227,7 @@ func show_reset() -> void:
 
 func _die() -> void: #TEMPOARY
 	reset_ready = false
-	GameManager.rpc("player_died", assigned_peer_id)
+	GameManager.rpc("player_died", assigned_peer_id, GameManager.round_seconds_passed)
 	rpc("show_death")
 
 @rpc("authority","call_local","reliable")

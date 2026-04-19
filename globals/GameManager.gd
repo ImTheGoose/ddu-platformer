@@ -43,7 +43,7 @@ enum Gamemode {
 }
 
 func _process(delta: float) -> void:
-	if is_game_running():
+	if is_game_running() && not is_game_paused():
 		round_seconds_passed += delta
 
 func get_score(peer_id: int) -> float:
@@ -349,7 +349,7 @@ func reset_client() -> void:
 	pause_game(false)
 
 @rpc("any_peer","call_local","reliable")
-func player_died(peer_id: int) -> void:
+func player_died(peer_id: int, time_at_death: float = 0.0) -> void:
 	player_death.emit(peer_id)
 	
 	if not Lobby.is_lobby_local():
@@ -359,8 +359,11 @@ func player_died(peer_id: int) -> void:
 	
 	if !multiplayer.is_server():
 		return
-
-	rpc("set_round_score", peer_id, round_seconds_passed)
+	
+	if time_at_death == 0.0:
+		rpc("set_round_score", peer_id, round_seconds_passed)
+	else:
+		rpc("set_round_score", peer_id, time_at_death)
 	
 	dead_players.append(peer_id)
 	if dead_players.size() < Lobby.get_lobby_size() - 1:
