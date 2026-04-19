@@ -256,7 +256,6 @@ var saved_recording :bool = true
 var stat_recording :Dictionary = stat_template.duplicate()
 const stat_template :Dictionary[StatType, Variant] = {
 	StatType.TIME_ALIVE : 0.0,
-	StatType.TOTAL_APPLES_COLLECTED : 0,
 	StatType.HEIGHT_REACHED : 0.0,
 	StatType.RECORDING_DEATH_TYPE : StatType.DEATH_MUSHROOM,
 	StatType.KILLS_MUSHROOM : 0,
@@ -306,6 +305,11 @@ func _save_recording() -> void:
 		return
 	for stat in stat_recording.keys():
 		var stat_value = stat_recording[stat]
+		if stat != StatType.RECORDING_DEATH_TYPE:
+			if typeof(stat_value) == TYPE_INT:
+				add_int_stat(stat, stat_value)
+			if typeof(stat_value) == TYPE_FLOAT:
+				add_float_stat(stat, stat_value)
 		
 		match stat:
 			StatType.RECORDING_DEATH_TYPE:
@@ -335,24 +339,28 @@ func _save_recording() -> void:
 					KillType.CLOUD:
 						add_int_stat(StatType.DEATH_CLOUD)
 						
-				continue
 			StatType.TIME_ALIVE:
-				if not GameManager.is_playing_level():
-					var dif_stat_type :StatType = get_time_highscore_type()
-							
-					if get_float_stat(dif_stat_type) < stat_value:
-						set_float_stat(dif_stat_type, stat_value)
-			StatType.HEIGHT_REACHED:
-				if not GameManager.is_playing_level():
-					var dif_stat_type :StatType = get_height_highscore_type()
+				if GameManager.is_playing_level():
+					continue
 					
-					if get_float_stat(dif_stat_type) < stat_value:
-						set_float_stat(dif_stat_type, stat_value)
-		
-		if typeof(stat_value) == TYPE_INT:
-			add_int_stat(stat, stat_value)
-		if typeof(stat_value) == TYPE_FLOAT:
-			add_float_stat(stat, stat_value)
+				if not GameManager.is_playing_singleplayer():
+					continue
+					
+				var dif_stat_type :StatType = get_time_highscore_type()
+						
+				if get_float_stat(dif_stat_type) < stat_value:
+					set_float_stat(dif_stat_type, stat_value)
+			StatType.HEIGHT_REACHED:
+				if GameManager.is_playing_level():
+					continue
+				
+				if not GameManager.is_playing_singleplayer():
+					continue
+
+				var dif_stat_type :StatType = get_height_highscore_type()
+				
+				if get_float_stat(dif_stat_type) < stat_value:
+					set_float_stat(dif_stat_type, stat_value)
 	
 	Achivements.check_achivements()
 	saved_recording = true

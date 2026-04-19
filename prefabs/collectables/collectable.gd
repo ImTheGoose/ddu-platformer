@@ -15,7 +15,7 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			var money :Variant = DataManager.get_value("money")
 			DataManager.set_value("money", money + 1) 
-			Stats.add_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED, 1)
+			Stats.add_int_stat(Stats.StatType.TOTAL_APPLES_COLLECTED, 1)
 			rpc("show_collect")
 			
 @rpc("any_peer","call_local","reliable")

@@ -19,7 +19,7 @@ signal game_scores_changed()
 var match_scores :Dictionary[int, int] = {}
 var round_scores :Dictionary[int, float] = {}
 var played_rounds :int = 0
-var players_dead :int = 0
+var dead_players :Array[int] = []
 
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
@@ -201,6 +201,7 @@ func _ready() -> void:
 	Difficulty.difficulty_changed.connect(_on_difficulty_changed)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	MenuHandler.game_is_covered.connect(_on_game_covered)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	reset_settings_to_default()
 
@@ -209,6 +210,11 @@ func _on_difficulty_changed() -> void:
 
 func _on_peer_connected(peer_id: int) -> void:
 	sync_settings_to_peers()
+
+func _on_peer_disconnected(peer_id: int) -> void:
+	dead_players.erase(peer_id)
+	match_scores.erase(peer_id)
+	
 
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
@@ -338,7 +344,7 @@ func start_client() -> void:
 func reset_client() -> void:
 	client_reset.emit()
 	set_state(STATE.PREGAME)
-	players_dead = 0
+	dead_players.clear()
 	round_scores.clear()
 	pause_game(false)
 
@@ -356,21 +362,23 @@ func player_died(peer_id: int) -> void:
 
 	rpc("set_round_score", peer_id, round_seconds_passed)
 	
-	players_dead += 1
-	if players_dead < Lobby.get_lobby_size():
+	dead_players.append(peer_id)
+	if dead_players.size() < Lobby.get_lobby_size() - 1:
 		return
 	
+	for id:int in Lobby.created_player_infos.keys():
+		if not dead_players.has(id):
+			rpc("set_round_score", id, 999999)
 	
-	if multiplayer.is_server():
-		rpc("set_state", STATE.POST_GAME)
-		
-		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && not Lobby.is_lobby_local():
-			MenuHandler.rpc("change_menu", "death_menu")
-		elif get_total_rounds() > played_rounds:
-			MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
-		else:
-			MenuHandler.rpc("show_blackout")
-			set_state(STATE.AWAITING_GAME_CONCLUSION)
+	rpc("set_state", STATE.POST_GAME)
+	
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && not Lobby.is_lobby_local():
+		MenuHandler.rpc("change_menu", "death_menu")
+	elif get_total_rounds() > played_rounds:
+		MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
+	else:
+		MenuHandler.rpc("show_blackout")
+		set_state(STATE.AWAITING_GAME_CONCLUSION)
 
 
 

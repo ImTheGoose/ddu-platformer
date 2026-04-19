@@ -231,6 +231,8 @@ func kick_peer(peer_id: int) -> void:
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	Steamworks.set_rich_presense("lobby_count", str(multiplayer.get_peers().size()+1))
+	if created_player_infos.has(peer_id):
+		created_player_infos.erase(peer_id)
 	if multiplayer.get_peers().size() == 0 && multiplayer.is_server() && !MenuHandler.is_menu_visible("multiplayer_lobby_menu"):
 		GameManager.return_to_lobby()
 		Alerts.push_default("Empty Lobby", "Returning to lobby menu.")
