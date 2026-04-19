@@ -182,6 +182,7 @@ string_at_max = "unlimited"
 metadata/_custom_type_script = "uid://bbqfxplkacax7"
 
 [node name="keybinds" type="Button" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList" unique_id=1538550654]
+visible = false
 layout_mode = 2
 text = "Keybindings"
 

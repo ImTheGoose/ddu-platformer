@@ -300,6 +300,7 @@ func return_to_lobby() -> void:
 @rpc("authority","call_local","reliable")
 func clear_game() -> void:
 	clear_entities.emit()
+	clear_players.emit()
 
 @rpc("authority","call_local","reliable")
 func prepare_game(is_level: bool = false) -> void:

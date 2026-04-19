@@ -218,10 +218,9 @@ func kick_peer(peer_id: int) -> void:
 
 		for p_id:int in created_player_infos.keys():
 			if p_id > peer_id:	
-				var p_info :PlayerInfo = created_player_infos.get(p_id)
-				p_info.PEER_ID = p_id - 1
+				created_player_infos.set(p_id - 1, created_player_infos[p_id])
+				created_player_infos[p_id].PEER_ID = p_id - 1
 				created_player_infos.erase(p_id)
-				created_player_infos.set(p_info.PEER_ID, p_info)
 			
 
 		
@@ -259,7 +258,7 @@ func add_player_info(peer_id: int, use_local: bool = false) -> void:
 		request_data_from_peer(peer_id, DataRequestType.STEAM_ID)
 
 func get_player_info(peer_id: int) -> PlayerInfo:
-	return created_player_infos.get(peer_id)
+	return created_player_infos[peer_id]
 
 func clear_unused_player_info() -> void:
 	var peers := multiplayer.get_peers()

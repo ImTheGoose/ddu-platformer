@@ -8,6 +8,7 @@ extends GameMenu
 var new_highscore_sound :AudioStreamMP3 = preload("uid://dp8k0xj5ljst1")
 @onready var stat_text_node :RichTextLabel = %stat_label
 @export var time_highscore_particles :Array[GPUParticles2D] = []
+@export var height_highscore_particles :Array[GPUParticles2D] = []
 
 @onready var play_again_button :Button = %play_again_button
 @onready var main_menu_button :Button = %back_button
@@ -55,17 +56,17 @@ func _refresh_stat_text() -> void:
 	var height_reached :Variant = Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED)
 	if height_reached >= Stats.get_float_stat(Stats.get_height_highscore_type()) && not GameManager.is_playing_level():
 		text += height_bbcode + Format.get_height_string(height_reached) + highscore_suffix + "[br]"
-		#for p in time_highscore_particles:
-			#p.visible = true
-			#p.restart()
-			#p.emitting = true
+		for p in height_highscore_particles:
+			p.visible = true
+			p.restart()
+			p.emitting = true
 	else:
 		text += height_bbcode + Format.get_height_string(height_reached) +  "[br]"
-		#for p in time_highscore_particles:
-			#p.visible = false
+		for p in height_highscore_particles:
+			p.visible = false
 	
-	var apples_collected :int = Stats.get_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED)
-	text += apple_bbcode + str( int(apples_collected))
+	#var apples_collected :int = Stats.get_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED)
+	#text += apple_bbcode + str( int(apples_collected))
 	
 	if text.contains("highscore"):
 		Audio.play_global_pitched(new_highscore_sound, 0.9)
