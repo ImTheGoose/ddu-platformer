@@ -22,7 +22,6 @@
 [ext_resource type="Shader" uid="uid://cn7np8uoc07hm" path="res://assets/shaders/transition.gdshader" id="18_i8832"]
 [ext_resource type="Script" uid="uid://b2f4uqr5jtwb7" path="res://prefabs/menus/transition_layer.gd" id="19_bbhju"]
 [ext_resource type="Script" uid="uid://do22tf2kjinhv" path="res://utility/rich_value_label.gd" id="20_mwi54"]
-[ext_resource type="Script" uid="uid://bxjlfyms6urol" path="res://prefabs/general_UI/time_label.gd" id="21_5eftm"]
 [ext_resource type="Script" uid="uid://ckrs8y06bpf0i" path="res://prefabs/general_UI/fps_label.gd" id="22_x4tdt"]
 [ext_resource type="Script" uid="uid://c8ed372wclpdl" path="res://main/state_label.gd" id="23_bbkfx"]
 [ext_resource type="Script" uid="uid://bav3oi7x367yu" path="res://globals/Alerts/alert_displayer.gd" id="24_0c1fb"]
@@ -34,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://ydagk3w3a17a" path="res://prefabs/menus/statistics_menu/statistic_menu.tscn" id="27_q4fed"]
 [ext_resource type="PackedScene" uid="uid://wt05n2fmbgyy" path="res://prefabs/menus/settings_menu/keybinds_menu.tscn" id="28_7glbu"]
 [ext_resource type="PackedScene" uid="uid://ck3jkvpa7fqyv" path="res://prefabs/menus/start_game_menu/start_game_menu.tscn" id="29_eh0ei"]
+[ext_resource type="Script" uid="uid://c3p1cg5swuvmo" path="res://prefabs/general_UI/game_state_labels.gd" id="30_7867i"]
 [ext_resource type="PackedScene" uid="uid://xvfmjoenq114" path="res://prefabs/menus/shop_menus/shop_skin_menu.tscn" id="30_xqrlm"]
 [ext_resource type="PackedScene" uid="uid://dpql1ujcn3sd7" path="res://prefabs/menus/shop_menus/shop_accent_menu.tscn" id="31_f2dvo"]
 [ext_resource type="PackedScene" uid="uid://ddy24w71nrv3k" path="res://prefabs/menus/shop_menus/shop_theme_menu.tscn" id="32_fcwsn"]
@@ -213,6 +213,8 @@ _data = {
 &"show_blackout": SubResource("Animation_o55x0")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_7867i"]
+
 [node name="Main" type="Node" unique_id=2321650]
 script = ExtResource("1_w3rk5")
 
@@ -358,20 +360,36 @@ text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/i
 fit_content = true
 script = ExtResource("20_mwi54")
 
-[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=103873068]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/UI" unique_id=198991718 node_paths=PackedStringArray("time_label", "height_label")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -100.0
-offset_right = 100.0
-offset_bottom = 33.0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
 grow_horizontal = 2
+theme_override_constants/separation = -2
+script = ExtResource("30_7867i")
+time_label = NodePath("time_label")
+height_label = NodePath("height_label")
+
+[node name="height_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI/VBoxContainer" unique_id=146384529]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
-text = "Time: 0"
+text = "Height: %s"
 fit_content = true
 horizontal_alignment = 1
-script = ExtResource("21_5eftm")
+
+[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI/VBoxContainer" unique_id=103873068]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_7867i")
+theme_override_font_sizes/normal_font_size = 20
+text = "Time: %s"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="fps_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=640249096]
 layout_mode = 1
@@ -433,6 +451,7 @@ visible = false
 layout_mode = 1
 
 [node name="level_overview_menu" parent="CanvasLayer/Control2/Control" unique_id=1150293006 instance=ExtResource("26_sebc1")]
+visible = false
 layout_mode = 1
 
 [node name="level_select_menu" parent="CanvasLayer/Control2/Control" unique_id=160876120 instance=ExtResource("26_0d5nc")]

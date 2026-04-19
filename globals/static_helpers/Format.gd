@@ -38,7 +38,11 @@ static func get_time_string(t: float, second_precision: float = 0.1) -> String:
 	if second_precision == 1.0:
 		time_string += str( int(seconds)) + "s "
 	else:
-		time_string += str( snappedf(seconds, second_precision)) + "s "
+		var snapped_time_string :String = str(snappedf(seconds, second_precision))
+		var decimal_count :int = step_decimals(second_precision)
+		snapped_time_string.pad_decimals(decimal_count)
+			
+		time_string += snapped_time_string + "s "
 	return time_string
 
 

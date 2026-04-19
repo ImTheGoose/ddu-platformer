@@ -203,10 +203,9 @@ func _on_steam_lobby_joined(lobby: int, permission: int, locked: bool, response:
 #region Lobby helper functions
 
 func is_lobby_lan() -> bool:	
-	if multiplayer.multiplayer_peer is SteamMultiplayerPeer:
-		return false
-	else:
+	if multiplayer.multiplayer_peer is ENetMultiplayerPeer:
 		return true
+	return false
 
 func kick_peer(peer_id: int) -> void:
 	var player_info :PlayerInfo = get_player_info(peer_id)
@@ -320,6 +319,14 @@ enum LocalID {
 	PLAYER_THREE = 3,
 	PLAYER_FOUR = 4,
 }
+
+func is_lobby_local() -> bool:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if created_player_infos.values().get(0) is LocalPlayerInfo:
+			return true
+
+	return false
+	
 
 func is_id_local(peer_id: int) -> bool:
 	return LocalID.values().has(peer_id)

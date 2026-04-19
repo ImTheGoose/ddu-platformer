@@ -30,6 +30,7 @@ var default_game_settings :Dictionary = {
 	"collissions_enabled" : true,
 }
 
+var round_seconds_passed :float = 0.0
 var game_is_level :bool = false
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
@@ -41,6 +42,9 @@ enum Gamemode {
 	GAMEMODE_CONSTANT,
 }
 
+func _process(delta: float) -> void:
+	if is_game_running():
+		round_seconds_passed += delta
 
 func get_score(peer_id: int) -> float:
 	return round_scores.get(peer_id, 0.0)
@@ -232,7 +236,10 @@ func _on_game_covered() -> void:
 		server_reset.emit()
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_game")
-		MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
+		if Lobby.is_lobby_local():
+			MenuHandler.rpc("change_menu", "local_lobby_menu")
+		else:
+			MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
 		
 	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
 		rpc("reset_client")
@@ -271,6 +278,7 @@ func restart_game() -> void:
 
 @rpc("authority","call_local","reliable")
 func spawn_game() -> void:
+	round_seconds_passed = 0.0
 	Maps.mount_level(Levels.get_level_index())
 	spawn_level.emit()
 	set_state(STATE.PREGAME)
@@ -306,6 +314,13 @@ func prepare_game(is_level: bool = false) -> void:
 func is_playing_level() -> bool:
 	return game_is_level
 
+func is_playing_singleplayer() -> bool:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if not Lobby.is_lobby_local():
+			return true
+	
+	return false
+
 @rpc("any_peer","call_local","reliable")
 func start_game() -> void:
 	if !multiplayer.is_server():
@@ -331,14 +346,15 @@ func reset_client() -> void:
 func player_died(peer_id: int) -> void:
 	player_death.emit(peer_id)
 	
-	if peer_id == multiplayer.get_unique_id():
-		rpc("set_round_score", multiplayer.get_unique_id(), Stats.get_recording_value(Stats.StatType.TIME_ALIVE))
-		if get_state() != STATE.POST_GAME:
-			set_state(STATE.DEAD)
-		
+	if not Lobby.is_lobby_local():
+		if multiplayer.get_unique_id() == peer_id:
+			if get_state() != STATE.POST_GAME:
+				set_state(STATE.DEAD)
 	
 	if !multiplayer.is_server():
 		return
+
+	rpc("set_round_score", peer_id, round_seconds_passed)
 	
 	players_dead += 1
 	if players_dead < Lobby.get_lobby_size():
@@ -347,7 +363,8 @@ func player_died(peer_id: int) -> void:
 	
 	if multiplayer.is_server():
 		rpc("set_state", STATE.POST_GAME)
-		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		
+		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && not Lobby.is_lobby_local():
 			MenuHandler.rpc("change_menu", "death_menu")
 		elif get_total_rounds() > played_rounds:
 			MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")

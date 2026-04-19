@@ -15,7 +15,9 @@ func _on_show() -> void:
 	for child in playerlist_container.get_children():
 		if child.assigned_peer_id:
 			child.assigned_peer_id = -1
-	_add_player_card(Lobby.LocalID.PLAYER_ONE)
+	
+	for id: int in Lobby.created_player_infos.keys():
+		_add_player_card(id)
 
 func _on_local_player_removed() -> void:
 	_update_ui_elements()

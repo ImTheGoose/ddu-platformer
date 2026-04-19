@@ -46,8 +46,7 @@ func update_board() -> void:
 
 
 func build_leaderboard() -> void:
-	var peer_list :PackedInt32Array = multiplayer.get_peers()
-	peer_list.append(multiplayer.get_unique_id())
+	var peer_list :Array[int] = Lobby.created_player_infos.keys()
 	
 	for peer: int in peer_list:
 		var card :Control = leaderboard_card.instantiate()

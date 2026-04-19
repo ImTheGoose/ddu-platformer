@@ -290,10 +290,17 @@ func _on_player_death(peer_id: int) -> void:
 		_save_recording()
 
 func _process(delta: float) -> void:
+	if Lobby.is_lobby_local():
+		return
+	
 	if GameManager.is_game_running() && !GameManager.is_game_paused() && GameManager.is_alive():
 		add_recording_value(StatType.TIME_ALIVE, delta)
 
 func _save_recording() -> void:
+	if Lobby.is_lobby_local():
+		print(PREFIX, "Stats doesnt apply to local games")
+		return
+	
 	if saved_recording:
 		print(PREFIX, "Error attempted to save recording another time.")
 		return
