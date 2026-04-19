@@ -39,5 +39,6 @@ tile_set = ExtResource("5_bjy8i")
 navigation_enabled = false
 
 [node name="CollectableTiles" type="TileMapLayer" parent="." unique_id=1122798044]
+tile_map_data = PackedByteArray("AAASABMAAAAAAAAAAQATABMAAAAAAAAAAQAUABMAAAAAAAAAAQAaAA0AAAAAAAAAAQAbAA0AAAAAAAAAAQAcAA0AAAAAAAAAAQARAA0AAAAAAAAAAQAQAA0AAAAAAAAAAQAPAA0AAAAAAAAAAQA=")
 tile_set = ExtResource("6_0lt88")
 navigation_enabled = false

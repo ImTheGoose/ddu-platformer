@@ -39,5 +39,8 @@ tile_set = ExtResource("5_av17e")
 navigation_enabled = false
 
 [node name="CollectableTiles" type="TileMapLayer" parent="." unique_id=1773731300]
+tile_map_data = PackedByteArray("AAATABEAAAAAAAAAAQATABIAAAAAAAAAAQAKAAsAAAAAAAAAAQAJAAsAAAAAAAAAAQAFAAkAAAAAAAAAAQATAA0AAAAAAAAAAQASAA0AAAAAAAAAAQAUAA0AAAAAAAAAAQA=")
 tile_set = ExtResource("6_pg8u4")
 navigation_enabled = false
+
+[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
