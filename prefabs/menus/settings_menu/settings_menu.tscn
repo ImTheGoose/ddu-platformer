@@ -56,11 +56,11 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList" unique_id=1526854827]
 layout_mode = 2
 
-[node name="master_volume_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=2096946806]
+[node name="sfx_volume_label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=2096946806]
 layout_mode = 2
-text = "Master Volume"
+text = "SFX Volume"
 
-[node name="master_volume" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=179081952]
+[node name="sfx_volume" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=179081952]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -68,11 +68,11 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="master_volume_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=670444459 node_paths=PackedStringArray("assigned_slider")]
+[node name="sfx_volume_value" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/HBoxContainer" unique_id=670444459 node_paths=PackedStringArray("assigned_slider")]
 layout_mode = 2
 text = "22db "
 script = ExtResource("2_j2ip3")
-assigned_slider = NodePath("../master_volume")
+assigned_slider = NodePath("../sfx_volume")
 value_suffix = "%"
 display_as_int = true
 value_multiplier = 100.0

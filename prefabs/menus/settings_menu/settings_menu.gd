@@ -1,7 +1,7 @@
 extends GameMenu
 
 
-@onready var master_vol_slider :HSlider = %master_volume
+@onready var sfx_vol_slider :HSlider = %sfx_volume
 @onready var music_vol_slider :HSlider = %music_volume
 @onready var max_fps_slider :HSlider= %fps_limit
 @onready var camera_shake_toggle: CheckBox = %camera_shake_toggle
@@ -19,7 +19,7 @@ func _ready() -> void:
 	_load_config_variables()
 	var video_settings :Dictionary = DataManager.get_video_settings()
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if video_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
-	master_vol_slider.value_changed.connect(_on_volume_value_changed)
+	sfx_vol_slider.value_changed.connect(_on_volume_value_changed)
 	music_vol_slider.value_changed.connect(_on_music_volume_value_changed)
 	max_fps_slider.value_changed.connect(_on_fps_limit_value_changed)
 	fps_toggle.toggled.connect(_on_fps_toggled)
@@ -57,14 +57,14 @@ func _load_config_variables() -> void:
 	particle_amount_dropdown.selected = particle_amount_dropdown.get_item_index(video_settings.get("particle_amount", ToggleableParticle.ParticleAmount.ALL))
 	
 	var audio_settings :Dictionary = DataManager.get_audio_settings()
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), audio_settings.get("master_volume", 0.5))
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), audio_settings.get("sfx_volume", 0.5))
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), audio_settings.get("music_volume", 0.5))
-	master_vol_slider.value = audio_settings.get("master_volume", 0)
+	sfx_vol_slider.value = audio_settings.get("sfx_volume", 0)
 	music_vol_slider.value = audio_settings.get("music_volume", 0)
 
 func _on_volume_value_changed(value: float) -> void:
-	DataManager.save_audio_setting("master_volume", value)
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
+	DataManager.save_audio_setting("sfx_volume", value)
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value)
 	pass # Replace with function body.
 
 func _on_music_volume_value_changed(value: float) -> void:

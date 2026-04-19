@@ -19,6 +19,7 @@ func _init() -> void:
 func _enter_tree() -> void:
 	# Create an audio player
 	var player :AudioStreamPlayer = AudioStreamPlayer.new()
+	player.bus = "SFX"
 	add_child(player)
 
 	# Create a polyphonic stream so we can play sounds directly from it
@@ -28,6 +29,7 @@ func _enter_tree() -> void:
 	player.play()
 	# Get the polyphonic playback stream to play sounds
 	playback = player.get_stream_playback()
+
 	
 	get_tree().node_added.connect(_on_node_added)
 
