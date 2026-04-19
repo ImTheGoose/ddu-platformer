@@ -83,15 +83,16 @@ shape = SubResource("RectangleShape2D_bjg5y")
 [node name="wall_kill_handler" type="Node2D" parent="." unique_id=1114229715]
 position = Vector2(8, -8)
 
-[node name="TopCheck" type="RayCast2D" parent="wall_kill_handler" unique_id=1977732063 node_paths=PackedStringArray("hit_area")]
+[node name="TopCheck" type="RayCast2D" parent="wall_kill_handler" unique_id=1977732063 node_paths=PackedStringArray("hit_area", "movement_component")]
 position = Vector2(0, -8)
 target_position = Vector2(25, 0)
 script = ExtResource("6_1o70q")
 hit_area = NodePath("HitArea")
+movement_component = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://db74wj2cj44ty"
 
 [node name="HitArea" type="Area2D" parent="wall_kill_handler/TopCheck" unique_id=1468002046]
-position = Vector2(0, 8)
+position = Vector2(-6.5, 8)
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("6_2dthm")
@@ -103,15 +104,16 @@ position = Vector2(18, -8)
 shape = SubResource("RectangleShape2D_1o70q")
 debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)
 
-[node name="BottomCheck" type="RayCast2D" parent="wall_kill_handler" unique_id=542339521 node_paths=PackedStringArray("hit_area")]
+[node name="BottomCheck" type="RayCast2D" parent="wall_kill_handler" unique_id=542339521 node_paths=PackedStringArray("hit_area", "movement_component")]
 position = Vector2(0, 8)
 target_position = Vector2(25, 0)
 script = ExtResource("6_1o70q")
 hit_area = NodePath("HitArea2")
+movement_component = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://db74wj2cj44ty"
 
 [node name="HitArea2" type="Area2D" parent="wall_kill_handler/BottomCheck" unique_id=1896307664]
-position = Vector2(0, 8)
+position = Vector2(-6.5, 8)
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("6_2dthm")

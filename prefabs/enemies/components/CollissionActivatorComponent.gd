@@ -3,6 +3,7 @@ extends RayCast2D
 class_name CollissionActivatorComponent 
 
 @export var hit_area :HitArea
+@export var movement_component :MovementComponent
 
 func _process(delta: float) -> void:
 	if not hit_area:
