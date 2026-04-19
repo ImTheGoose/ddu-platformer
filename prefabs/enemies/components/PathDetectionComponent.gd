@@ -112,7 +112,7 @@ func _is_collission_inside() -> bool:
 
 func _get_ray_collission(dir: Vector2, inside_hit: bool = true) -> PathfindingPoint:
 	hit_from_inside = inside_hit
-	target_position = dir * 1000
+	target_position = dir * 2000
 	force_raycast_update()
 	
 	if get_collider() is PathfindingPoint:
