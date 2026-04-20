@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://w2kt6mh7bu5g"]
+
+[ext_resource type="Script" uid="uid://b1fdite3708m2" path="res://main/map_viewer/map_card.gd" id="1_o332b"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=483465680]
+script = ExtResource("1_o332b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1926477058]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -4
+
+[node name="filename_label" type="Label" parent="VBoxContainer" unique_id=268286934]
+unique_name_in_owner = true
+layout_mode = 2
+text = "wilf_A_to_C.tscn"
+
+[node name="map_type_label" type="Label" parent="VBoxContainer" unique_id=1626850757]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Transition"
+
+[node name="load_button" type="Button" parent="." unique_id=1651068802]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+text = "View"

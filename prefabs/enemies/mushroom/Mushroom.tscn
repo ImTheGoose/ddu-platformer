@@ -22,8 +22,9 @@
 atlas = ExtResource("3_joj1d")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_joj1d"]
-radius = 9.055386
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4axyd"]
+radius = 6.0
+height = 22.0
 
 [node name="Mushroom" type="Node2D" unique_id=920916629 node_paths=PackedStringArray("health_component", "movement_component", "path_detection_component", "sprite_component")]
 z_index = 10
@@ -46,23 +47,6 @@ position = Vector2(0, 7)
 amount = 10
 speed_scale = 0.5
 
-[node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
-collision_layer = 4
-collision_mask = 12
-script = ExtResource("4_rr74u")
-kill_type = 0
-knockback_origin_node = NodePath("..")
-health_component = NodePath("../HealthComponent")
-kill_height_node = NodePath("../HeadPosition")
-kill_veloctiy_treshold = 100.0
-entity_node = NodePath("..")
-metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=2094285354]
-position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_joj1d")
-debug_color = Color(0.9098039, 0.29803923, 0.06666667, 0.41960785)
-
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=668066771 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_4l0vp")
@@ -79,6 +63,24 @@ animation = &"Idle"
 script = ExtResource("5_tma4l")
 reference_sprite = NodePath("..")
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
+
+[node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
+collision_layer = 4
+collision_mask = 12
+script = ExtResource("4_rr74u")
+kill_type = 0
+knockback_origin_node = NodePath("..")
+health_component = NodePath("../HealthComponent")
+kill_height_node = NodePath("../HeadPosition")
+kill_veloctiy_treshold = 100.0
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=2094285354]
+position = Vector2(0, -3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_4axyd")
+debug_color = Color(0.9098039, 0.29803923, 0.06666667, 0.41960785)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1978801922 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("4_f8aov")

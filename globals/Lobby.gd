@@ -88,6 +88,9 @@ enum DataRequestType {
 
 func _on_server_disconnected() -> void:
 	Alerts.push_error("Disconnected", "The lobby host has left.")
+	var old_peer :MultiplayerPeer = multiplayer.multiplayer_peer
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	old_peer.close()
 	close_connection()
 	MenuHandler.change_menu("main_menu")
 	GameManager.reset_client()

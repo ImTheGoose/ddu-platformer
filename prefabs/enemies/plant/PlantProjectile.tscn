@@ -9,7 +9,7 @@
 size = Vector2(7, 7)
 
 [node name="TrunkProjectile" type="Area2D" unique_id=476840123 node_paths=PackedStringArray("particles")]
-collision_mask = 9
+collision_mask = 137
 script = ExtResource("1_w0010")
 speed = 80
 particles = NodePath("GPUParticles2D")

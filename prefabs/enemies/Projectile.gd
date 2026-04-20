@@ -37,13 +37,12 @@ func _on_area_entered(area: Area2D) -> void:
 		_hit_something()
 
 func _on_body_entered(body: Node2D) -> void:
+	_hit_something()
 	if body is CharacterBody2D:
 		if body.is_multiplayer_authority():
 			Stats.set_recording_value(Stats.StatType.RECORDING_DEATH_TYPE, Stats.StatType.DEATH_TRUNK)
 			body.hit(col.global_position.direction_to(body.global_position))
-			_hit_something()
-	if body is TileMapLayer:
-		_hit_something()
+
 
 func _hit_something() -> void:
 	if collission_sounds:

@@ -140,7 +140,6 @@ popup/item_5/text = "20 rounds"
 popup/item_5/id = 20
 
 [node name="collision_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=316799556]
-visible = false
 layout_mode = 2
 
 [node name="collission_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1683623384]
@@ -162,7 +161,6 @@ popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
 [node name="gamemode_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=2070748707]
-visible = false
 layout_mode = 2
 
 [node name="gamemode_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1660634735]

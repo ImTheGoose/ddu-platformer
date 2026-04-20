@@ -13,4 +13,6 @@ func _on_texture_changed(new_texture: Texture2D) -> void:
 
 func _process(delta: float) -> void:
 	var mat: ShaderMaterial = material
-	mat.set_shader_parameter("offset", get_viewport().get_camera_2d().global_position * position_scale)
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		mat.set_shader_parameter("offset", camera.global_position * position_scale)

@@ -14,7 +14,7 @@ atlas = ExtResource("4_gsjny")
 region = Rect2(0, 0, 16, 16)
 
 [node name="TrunkProjectile" type="Area2D" unique_id=476840123 node_paths=PackedStringArray("particles")]
-collision_mask = 9
+collision_mask = 137
 script = ExtResource("1_6vcn0")
 speed = 120
 particles = NodePath("GPUParticles2D")
