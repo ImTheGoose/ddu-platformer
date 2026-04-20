@@ -76,7 +76,7 @@ func clear_leaderboard() -> void:
 
 func _on_play_again_button_pressed() -> void:
 	Stats.rpc("save_and_clear_match_scores")
-	GameManager.prepare_game()
+	GameManager.replay_game()
 
 func _on_return_to_lobby_pressed() -> void:
 	Stats.rpc("save_and_clear_match_scores")

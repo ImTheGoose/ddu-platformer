@@ -302,6 +302,15 @@ func clear_game() -> void:
 	clear_entities.emit()
 	clear_players.emit()
 
+@rpc("authority", "call_local", "reliable")
+func replay_game() -> void:
+	if multiplayer.is_server():
+		MenuHandler.rpc("show_blackout")
+		rpc("set_rounds_played", 0)
+		match_scores.clear()
+		next_round()
+		
+
 @rpc("authority","call_local","reliable")
 func prepare_game(is_level: bool = false) -> void:
 	game_is_level = is_level
