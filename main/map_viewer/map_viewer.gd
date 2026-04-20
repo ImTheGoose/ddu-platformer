@@ -122,6 +122,11 @@ func _on_height_slider_value_changed(value: float) -> void:
 	
 	# Apply scroll upward
 	var offset = height_slider.value * overspill
+
+	if total_map_height <= visible_height:
+			var center_y = (map_bottom - total_map_height) + visible_height / 2.0
+			camera_2d.global_position.y = center_y
+			return
 	
 	camera_2d.global_position.y = base_y - offset
 
