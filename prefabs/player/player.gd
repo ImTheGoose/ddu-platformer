@@ -157,12 +157,8 @@ func _attempt_jump() -> void:
 		rpc("show_jump")
 	
 	elif is_on_floor() or air_time < jump_buffer_time:
-		var added_velocity :float = 0.0
-		if is_on_floor()  && velocity.y > 0:
-			added_velocity = -velocity.y
-		
 		air_time = jump_buffer_time
-		velocity.y = -jump_strength + added_velocity
+		velocity.y = -jump_strength
 		Stats.add_recording_value(Stats.StatType.JUMPS_GROUND, 1)
 		rpc("show_jump")
 

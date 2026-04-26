@@ -1,5 +1,6 @@
 extends Entity
 @export_group("Nodes")
+@export var anim_player :AnimationPlayer
 @export var health_component :HealthComponent
 @export var hitbox_component :HitBoxComponent
 @export var sprite_component :EnemySpriteComponent
@@ -17,13 +18,13 @@ func _on_animation_finished() -> void:
 		return
 	
 	if sprite_component.animation.contains("Dis"):
-		sprite_component.visible = false
+		sprite_component.play("Moving")
 		return
 	
 	return
 
 func is_ghost_hidden() -> bool:
-	return !sprite_component.visible
+	return !modulate == Color.WHITE
 
 func _process(delta: float) -> void:
 	if health_component:
@@ -35,13 +36,13 @@ func _process(delta: float) -> void:
 	if seconds_since_state_change > seconds_between_states:
 		seconds_since_state_change = 0.0
 		if is_ghost_hidden():
-			sprite_component.visible = true
-			sprite_component.play("Appear")
+			anim_player.play("Appear")
 		else:
+			anim_player.play("Disappear")
 			hitbox_component.disable_hitbox()
-			sprite_component.play("Disappear")
 		
 
 func _on_reset() -> void:
-	sprite_component.visible = true
+	modulate = Color.WHITE
+	anim_player.play("RESET")
 	sprite_component.play("Moving")

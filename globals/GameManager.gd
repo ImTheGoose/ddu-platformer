@@ -35,7 +35,7 @@ var game_is_level :bool = false
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
-var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.LEGACY
+var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.DEFAULT
 
 enum Gamemode {
 	GAMEMODE_STANDARD,

@@ -361,7 +361,7 @@ func _save_recording() -> void:
 				
 				if get_float_stat(dif_stat_type) < stat_value:
 					set_float_stat(dif_stat_type, stat_value)
-	
+	Achivements._check_any_highscore_69()
 	Achivements.check_achivements()
 	saved_recording = true
 	Steamworks.store_steam_data()
@@ -478,11 +478,17 @@ func add_kill_to_recording(enemy_type: EnemyType) -> void:
 
 @rpc("authority","call_local","reliable")
 func save_and_clear_match_scores() -> void:
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		return
-	
 	if GameManager.played_rounds == 0:
 		return
+
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if Lobby.is_lobby_local():
+			if not Achivements.is_achived(Achivements.Type.MULTIPLAYER_1):
+				Achivements.set_achievement(Achivements.Type.MULTIPLAYER_1)
+		return
+	
+	if not Achivements.is_achived(Achivements.Type.MULTIPLAYER_1):
+		Achivements.set_achievement(Achivements.Type.MULTIPLAYER_1)
 	
 	var rounds_won :int = GameManager.get_match_score(multiplayer.get_unique_id())
 	var rounds_lost :int = GameManager.get_total_rounds() - rounds_won

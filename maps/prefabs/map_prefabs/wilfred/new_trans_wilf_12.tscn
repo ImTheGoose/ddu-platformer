@@ -31,7 +31,7 @@ navigation_enabled = false
 script = ExtResource("4_lubhj")
 
 [node name="TrapTiles" type="TileMapLayer" parent="." unique_id=1914058104]
-tile_map_data = PackedByteArray("AAALADkAAAAAAAAAAQAMADkAAAAAAAAAAQAHADcAAAAAAAAAATAGADcAAAAAAAAAATABADIAAAAAAAAAATACADIAAAAAAAAAATA=")
+tile_map_data = PackedByteArray("AAALADkAAAAAAAAAAQAGADcAAAAAAAAAATABADIAAAAAAAAAATACADIAAAAAAAAAATA=")
 tile_set = ExtResource("5_52swi")
 navigation_enabled = false
 

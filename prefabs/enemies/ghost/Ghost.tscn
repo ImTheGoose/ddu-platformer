@@ -23,8 +23,88 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_skmkc"]
 radius = 13.038404
 
-[node name="Ghost" type="Node2D" unique_id=1122069586 node_paths=PackedStringArray("health_component", "hitbox_component", "sprite_component")]
+[sub_resource type="Animation" id="Animation_ulrtf"]
+resource_name = "Appear"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0.2, -0.2494831, -0.043099068, 0.06666667, 0.011516899, 1, -0.03333333, -0.15019119, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySpriteComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Appear", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_f726f"]
+resource_name = "Disappear"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.033333335, -0.24807626, 0.2, -0.100000024, 0.06045942, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySpriteComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Disappear", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5f2wn"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc8i7"]
+_data = {
+&"Appear": SubResource("Animation_ulrtf"),
+&"Disappear": SubResource("Animation_f726f"),
+&"RESET": SubResource("Animation_5f2wn")
+}
+
+[node name="Ghost" type="Node2D" unique_id=1122069586 node_paths=PackedStringArray("anim_player", "health_component", "hitbox_component", "sprite_component")]
 script = ExtResource("1_4nn18")
+anim_player = NodePath("AnimationPlayer")
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("HitBoxComponent")
 sprite_component = NodePath("EnemySpriteComponent")
@@ -126,3 +206,6 @@ metadata/_custom_type_script = "uid://duvb1g24g8584"
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=550146343]
 position = Vector2(0, -5)
 rect = Rect2(-10, -3, 20, 13)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2094058686]
+libraries/ = SubResource("AnimationLibrary_pc8i7")
