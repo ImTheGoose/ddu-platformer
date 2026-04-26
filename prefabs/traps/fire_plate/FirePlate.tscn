@@ -102,7 +102,8 @@ one_way_collision_margin = 4.0
 
 [node name="HitArea" type="Area2D" parent="." unique_id=263688076]
 position = Vector2(0, -16.465)
-collision_mask = 9
+collision_layer = 2
+collision_mask = 10
 monitoring = false
 monitorable = false
 script = ExtResource("5_s08ra")

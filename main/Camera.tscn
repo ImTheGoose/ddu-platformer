@@ -1,19 +1,13 @@
 [gd_scene format=3 uid="uid://dxyonb6hgvrx"]
 
 [ext_resource type="Script" uid="uid://wu768aqamx02" path="res://main/camera_2d.gd" id="1_a0f6b"]
-[ext_resource type="AudioStream" uid="uid://bi7c73m7bggnj" path="res://assets/audio/music/looped_song1.mp3" id="2_ibjqg"]
+[ext_resource type="AudioStream" uid="uid://csvqm85laxptb" path="res://assets/audio/music/new_music_01.ogg" id="2_tmh5c"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="7_tim8x"]
 [ext_resource type="PackedScene" uid="uid://balet5fb7m7s" path="res://prefabs/particles/bottom_cloud.tscn" id="28_anor8"]
 
 [sub_resource type="Curve" id="Curve_tmh5c"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.3878176, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_j253g"]
-shuffle = true
-fade_time = 0.2
-stream_count = 1
-stream_0 = ExtResource("2_ibjqg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3b0ty"]
 size = Vector2(655.125, 42.5)
@@ -33,9 +27,11 @@ max_jitter = 15.0
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1631409553]
 process_mode = 3
-stream = SubResource("AudioStreamPlaylist_j253g")
+stream = ExtResource("2_tmh5c")
+volume_db = -18.0
 autoplay = true
 bus = &"Music"
+parameters/looping = false
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 9

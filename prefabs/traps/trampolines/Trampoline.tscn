@@ -86,7 +86,8 @@ animations = [{
 size = Vector2(21, 12)
 
 [node name="Trampoline" type="Area2D" unique_id=1944955003]
-collision_mask = 9
+collision_layer = 2
+collision_mask = 10
 script = ExtResource("1_e7khr")
 boing_sounds = Dictionary[AudioStream, float]({
 ExtResource("2_75f8s"): 0.45,
