@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://grvweyjporcq"]
+
+[ext_resource type="Script" uid="uid://bi61rhwhudtop" path="res://main/map_viewer/map_viewer.gd" id="1_q7p1s"]
+[ext_resource type="PackedScene" uid="uid://w2kt6mh7bu5g" path="res://main/map_viewer/map_card.tscn" id="2_ld451"]
+[ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="3_tkpjd"]
+[ext_resource type="Texture2D" uid="uid://djvdn4edth2po" path="res://assets/pixel_adventure_assets/Background/Brown.png" id="4_piyws"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_frg1e"]
+shader = ExtResource("3_tkpjd")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.2
+shader_parameter/offset = Vector2(0, 0)
+
+[node name="MapViewer" type="Node" unique_id=863083711]
+script = ExtResource("1_q7p1s")
+
+[node name="loaded_map_container" type="Node2D" parent="." unique_id=1490564688]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=495544533]
+unique_name_in_owner = true
+offset = Vector2(320, 0)
+zoom = Vector2(3, 3)
+
+[node name="moving_background" type="TextureRect" parent="Camera2D" unique_id=64687254]
+process_mode = 3
+z_index = -50
+texture_repeat = 2
+material = SubResource("ShaderMaterial_frg1e")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -656.99994
+offset_top = -597.9999
+offset_right = 2955.766
+offset_bottom = 2070.085
+grow_horizontal = 2
+scale = Vector2(0.615, 0.615)
+texture = ExtResource("4_piyws")
+stretch_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=596483217]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1788243426]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1440.0
+offset_bottom = -810.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/Control" unique_id=296158876]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -164.5
+offset_top = -26.445007
+offset_right = 164.5
+offset_bottom = -6.4450073
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/AspectRatioContainer" unique_id=813904866]
+layout_mode = 2
+
+[node name="previous" type="Button" parent="CanvasLayer/Control/AspectRatioContainer/HBoxContainer" unique_id=2012824119]
+layout_mode = 2
+text = "<"
+
+[node name="overview" type="Button" parent="CanvasLayer/Control/AspectRatioContainer/HBoxContainer" unique_id=1826780151]
+layout_mode = 2
+text = "Overview"
+
+[node name="next" type="Button" parent="CanvasLayer/Control/AspectRatioContainer/HBoxContainer" unique_id=42193248]
+layout_mode = 2
+text = ">"
+
+[node name="overview_panel" type="PanelContainer" parent="CanvasLayer/Control" unique_id=1053392446]
+custom_minimum_size = Vector2(160, 220)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -123.0
+offset_right = 80.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/overview_panel" unique_id=982007075]
+layout_mode = 2
+theme_override_constants/scrollbar_h_separation = 2
+
+[node name="map_card_list" type="VBoxContainer" parent="CanvasLayer/Control/overview_panel/ScrollContainer" unique_id=1829157974]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" parent="CanvasLayer/Control/overview_panel/ScrollContainer/map_card_list" unique_id=483465680 instance=ExtResource("2_ld451")]
+layout_mode = 2
+
+[node name="height_slider" type="VSlider" parent="CanvasLayer/Control" unique_id=1527936487]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -120.0
+offset_right = -10.0
+offset_bottom = 120.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1.0
+step = 0.0
+
+[node name="zoom_slider" type="HSlider" parent="CanvasLayer/Control" unique_id=348502743]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.88
+offset_top = -19.25
+offset_right = -44.880005
+offset_bottom = -13.249756
+grow_horizontal = 0
+grow_vertical = 0
+max_value = 1.0
+step = 0.0
+
+[node name="zoom_to_fit" type="CheckButton" parent="CanvasLayer/Control" unique_id=150501252]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.972
+anchor_right = 0.012
+anchor_bottom = 0.972
+offset_top = -15.0
+offset_right = 80.0
+grow_vertical = 0
+text = "Zoom To Fit"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=361410452]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 125.0
+offset_bottom = 40.0
+theme_override_constants/separation = -7
+
+[node name="file_name_label" type="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=1190407886]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="map_type_label" type="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=158315501]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+
+[connection signal="pressed" from="CanvasLayer/Control/AspectRatioContainer/HBoxContainer/previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/AspectRatioContainer/HBoxContainer/overview" to="." method="_on_overview_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/AspectRatioContainer/HBoxContainer/next" to="." method="_on_next_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Control/height_slider" to="." method="_on_height_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Control/zoom_slider" to="." method="_on_zoom_slider_value_changed"]

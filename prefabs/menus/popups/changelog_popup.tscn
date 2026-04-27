@@ -18,11 +18,11 @@ alignment = 1
 script = ExtResource("1_vgh5j")
 title = "Enemy Update!"
 added_bbcode = "[color=green]+ "
-added_list = Array[String](["Added Plant Enemy", "Added Bird Enemy", "Added Fat Bird Enemy", "Added Rock Enemies", "Added Ghost Enemy", "Added Moving Head Enemy", "Added Spiked Head Enemy", "Added Fan Trap", "Added multiplayer stats", "Added stats for new enemies", "Added several start maps", "Added individual highscores based on difficulties", "Added A lot of icons to stat screen.", "Added map collection setting", "Added discord rich presence"])
+added_list = Array[String](["Added Local Multiplayer", "Added 44 new Maps", "Added 26 new Transition ;Maps", "Added A lot of particle Effects", "Added Camera Shake", "Addes shadows", "Added A Lot of unique sounds", "Added Height based highscore"])
 changed_bbcode = "[color=orange]~ "
-changed_list = Array[String](["Remade falling platform, with animation and particles", "Changed Difficulty settings to have a wider effect", "Changed UI Font to more readable", "Changed stats to have foldable containers", "Changed game scaling method, to fix various physics bugs.", "Changed enemey killzone to be more reliable", "Fixed various bugs"])
+changed_list = Array[String](["Tweaked various existing Maps", "Made player particles match player outline", "Changes to sound settings", "Fixed various bugs", "Made multiplayer end when 1 player is alive."])
 removed_bbcode = "[color=red]- "
-removed_list = Array[String]([])
+removed_list = Array[String](["Removed Keybindings Menu", "Removed Apple Highscore"])
 menu_name = "changelog"
 initial_focus = NodePath("close")
 

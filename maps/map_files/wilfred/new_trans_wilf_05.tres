@@ -8,5 +8,6 @@ script = ExtResource("1_bgvtv")
 prefab = ExtResource("1_38a4n")
 bottom_connection_type = 4
 top_connection_type = 2
-related_collections = Array[int]([2])
+type = 1
+related_collections = Array[int]([2, 0])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

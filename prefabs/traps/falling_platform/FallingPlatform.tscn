@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bu4kmalsf2m24" path="res://prefabs/traps/falling_platform/falling_platform.gd" id="1_qbmik"]
 [ext_resource type="Texture2D" uid="uid://de8t21k7x71ab" path="res://assets/pixel_adventure_assets/Traps/Falling Platforms/Off.png" id="1_sldf8"]
 [ext_resource type="Texture2D" uid="uid://dk5d75udjikfn" path="res://assets/pixel_adventure_assets/Traps/Falling Platforms/On (32x10).png" id="2_qbmik"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="5_jm831"]
 [ext_resource type="PackedScene" uid="uid://buoywev11r3ts" path="res://prefabs/traps/fan/fan_particles.tscn" id="5_w7o6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uc8s0"]
@@ -173,6 +174,12 @@ one_way_collision_margin = 4.0
 sprite_frames = SubResource("SpriteFrames_ncobn")
 animation = &"On"
 autoplay = "On"
+
+[node name="Shadow" type="AnimatedSprite2D" parent="FallingPlatform/AnimatedSprite2D" unique_id=974315997 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = SubResource("SpriteFrames_ncobn")
+animation = &"On"
+script = ExtResource("5_jm831")
+reference_sprite = NodePath("..")
 
 [node name="PlayerDetection" type="Area2D" parent="FallingPlatform" unique_id=1860361649]
 unique_name_in_owner = true

@@ -2,15 +2,29 @@
 
 [ext_resource type="Script" uid="uid://uuqmd0t4drcg" path="res://prefabs/enemies/plant/plant.gd" id="1_1s8mq"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="2_qlmjq"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_rw7x6"]
 [ext_resource type="SpriteFrames" uid="uid://d1kbdatac330x" path="res://prefabs/enemies/plant/plant_frames.tres" id="3_joegr"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_ksn0j"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="3_vmiiw"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="5_1s8mq"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="5_op3u3"]
 [ext_resource type="Script" uid="uid://xj5blqpn2j3h" path="res://prefabs/enemies/components/AttackComponent.gd" id="6_oaj10"]
 [ext_resource type="Script" uid="uid://b2vo6nwgt4fvn" path="res://prefabs/enemies/components/PlayerDetectionComponent.gd" id="7_op3u3"]
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="8_6laea"]
 [ext_resource type="Script" uid="uid://cphqtnahepgoh" path="res://prefabs/enemies/components/ProjectileSpawnerComponent.gd" id="9_t4iwn"]
 [ext_resource type="PackedScene" uid="uid://bfdotq0wp28bp" path="res://prefabs/enemies/plant/PlantProjectile.tscn" id="10_rw7x6"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="11_oaj10"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="15_eggbi"]
+[ext_resource type="AudioStream" uid="uid://dlm3hegfvr574" path="res://assets/audio/sfx/enemies/plant/juicy_death1.ogg" id="15_mmfyh"]
+[ext_resource type="AudioStream" uid="uid://c8aljxvx1dhqs" path="res://assets/audio/sfx/enemies/plant/juicy_death2.ogg" id="16_gwcgb"]
+[ext_resource type="AudioStream" uid="uid://rbjlfxs701bw" path="res://assets/audio/sfx/enemies/plant/juicy_death3.ogg" id="17_oqlvt"]
+[ext_resource type="AudioStream" uid="uid://4e864kgv0cb7" path="res://assets/audio/sfx/enemies/plant/juicy_death4.ogg" id="18_4x1em"]
+[ext_resource type="AudioStream" uid="uid://co8ydjpomc3j6" path="res://assets/audio/sfx/enemies/plant/proj1.ogg" id="19_7vdub"]
+[ext_resource type="AudioStream" uid="uid://tujwvgitj6r" path="res://assets/audio/sfx/enemies/plant/proj2.ogg" id="20_5g45v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6lgx"]
+atlas = ExtResource("3_ksn0j")
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksn0j"]
 size = Vector2(16, 32)
@@ -24,6 +38,9 @@ projectile_spawner_component = NodePath("ProjectileSpawnerComponent")
 attack_component = NodePath("AttackComponent")
 entity_type = 3
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_rw7x6")]
+texture = SubResource("AtlasTexture_x6lgx")
 
 [node name="HitBoxComponent" type="Area2D" parent="." unique_id=961640626 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
 collision_layer = 4
@@ -53,6 +70,14 @@ health_component = NodePath("../HealthComponent")
 path_detection_component = NodePath("../PathDetectionComponent")
 flip_x_offset = true
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=288663269 node_paths=PackedStringArray("entity_node", "reference_sprite")]
+sprite_frames = ExtResource("3_joegr")
+animation = &"Idle"
+script = ExtResource("5_op3u3")
+entity_node = NodePath("../..")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=580562693 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("5_1s8mq")
@@ -89,8 +114,29 @@ script = ExtResource("9_t4iwn")
 projectile = ExtResource("10_rw7x6")
 metadata/_custom_type_script = "uid://cphqtnahepgoh"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=956791494 node_paths=PackedStringArray("health_component", "projectile_spawner")]
+[node name="AudioComponent" type="Node" parent="." unique_id=956791494 node_paths=PackedStringArray("on_screen_notifier", "health_component", "projectile_spawner")]
 script = ExtResource("11_oaj10")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("15_mmfyh"): 0.8,
+ExtResource("16_gwcgb"): 1.0,
+ExtResource("17_oqlvt"): 1.3,
+ExtResource("18_4x1em"): 1.2
+})
 projectile_spawner = NodePath("../ProjectileSpawnerComponent")
+projectile_sounds = Dictionary[AudioStream, float]({
+ExtResource("19_7vdub"): 0.7,
+ExtResource("20_5g45v"): 0.6
+})
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2002856301 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list")]
+script = ExtResource("15_eggbi")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
+metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2099809572]
+position = Vector2(1, -3)

@@ -2,24 +2,125 @@
 
 [ext_resource type="Script" uid="uid://barbjxf5atu7o" path="res://prefabs/enemies/ghost/ghost.gd" id="1_4nn18"]
 [ext_resource type="Script" uid="uid://bu6nkb8bdte24" path="res://prefabs/enemies/components/MovementComponent.gd" id="2_4nn18"]
+[ext_resource type="PackedScene" uid="uid://cls4fr816qabu" path="res://prefabs/particles/enemy_die_particles.tscn" id="2_skmkc"]
 [ext_resource type="Script" uid="uid://ctdx2sf6uo7rq" path="res://prefabs/enemies/components/HitBoxComponent.gd" id="3_6c45l"]
+[ext_resource type="Texture2D" uid="uid://dl2ppc64h4t6l" path="res://assets/pixel_adventure_assets/Enemies/death_particle_atlas.png" id="3_ulrtf"]
+[ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="4_f726f"]
 [ext_resource type="SpriteFrames" uid="uid://cgdhandcs2oxt" path="res://prefabs/enemies/ghost/ghost_frames.tres" id="4_iicmi"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="5_pptc2"]
 [ext_resource type="Script" uid="uid://ddrne3nd443y" path="res://prefabs/enemies/components/PathDetectionComponent.gd" id="6_hnhmm"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="6_iicmi"]
 [ext_resource type="Script" uid="uid://dmdcnr1nt4d2p" path="res://prefabs/enemies/components/HealthComponent.gd" id="7_owrbq"]
 [ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_skmkc"]
 [ext_resource type="Script" uid="uid://bcsj0r6b8j5fv" path="res://prefabs/enemies/components/PointTargetingComponent.gd" id="9_6c45l"]
+[ext_resource type="AudioStream" uid="uid://ntifmvg2vhyl" path="res://assets/audio/sfx/enemies/ghost/ghost_death1.ogg" id="13_ulrtf"]
+[ext_resource type="Script" uid="uid://duvb1g24g8584" path="res://prefabs/enemies/components/ParticleEmitionComponent.gd" id="14_5f2wn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nn18"]
-size = Vector2(23, 25)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc8i7"]
+atlas = ExtResource("3_ulrtf")
+region = Rect2(48, 0, 16, 16)
 
-[node name="Ghost" type="Node2D" unique_id=1122069586 node_paths=PackedStringArray("health_component", "hitbox_component", "sprite_component")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_skmkc"]
+radius = 13.038404
+
+[sub_resource type="Animation" id="Animation_ulrtf"]
+resource_name = "Appear"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0.2, -0.2494831, -0.043099068, 0.06666667, 0.011516899, 1, -0.03333333, -0.15019119, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySpriteComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Appear", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_f726f"]
+resource_name = "Disappear"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.033333335, -0.24807626, 0.2, -0.100000024, 0.06045942, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySpriteComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Disappear", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5f2wn"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc8i7"]
+_data = {
+&"Appear": SubResource("Animation_ulrtf"),
+&"Disappear": SubResource("Animation_f726f"),
+&"RESET": SubResource("Animation_5f2wn")
+}
+
+[node name="Ghost" type="Node2D" unique_id=1122069586 node_paths=PackedStringArray("anim_player", "health_component", "hitbox_component", "sprite_component")]
 script = ExtResource("1_4nn18")
+anim_player = NodePath("AnimationPlayer")
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("HitBoxComponent")
 sprite_component = NodePath("EnemySpriteComponent")
 entity_type = 6
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
+
+[node name="enemy_die_particles" parent="." unique_id=1929315284 instance=ExtResource("2_skmkc")]
+position = Vector2(0, -12)
+amount = 5
+texture = SubResource("AtlasTexture_pc8i7")
+
+[node name="dust_particles" parent="." unique_id=303894581 instance=ExtResource("4_f726f")]
+modulate = Color(0.18431373, 0.6745098, 0.85490197, 1)
+position = Vector2(0, 5)
+amount = 8
+speed_scale = 0.5
 
 [node name="MovementComponent" type="Node" parent="." unique_id=94383533 node_paths=PackedStringArray("entity_root", "health_component")]
 script = ExtResource("2_4nn18")
@@ -41,7 +142,7 @@ metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1105444755]
 position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_4nn18")
+shape = SubResource("CircleShape2D_skmkc")
 debug_color = Color(0.82193947, 0.40174487, 7.70092e-07, 0.41960785)
 
 [node name="EnemySpriteComponent" type="AnimatedSprite2D" parent="." unique_id=1093400066 node_paths=PackedStringArray("entity_node", "health_component", "path_detection_component")]
@@ -54,6 +155,13 @@ health_component = NodePath("../HealthComponent")
 path_detection_component = NodePath("../PathDetectionComponent")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1979763495 node_paths=PackedStringArray("reference_sprite")]
+sprite_frames = ExtResource("4_iicmi")
+animation = &"Moving"
+script = ExtResource("6_iicmi")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
+
 [node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=893078161 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("6_hnhmm")
 entity_node = NodePath("..")
@@ -64,9 +172,13 @@ script = ExtResource("7_owrbq")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 
-[node name="AudioComponent" type="Node" parent="." unique_id=613337506 node_paths=PackedStringArray("health_component")]
+[node name="AudioComponent" type="Node" parent="." unique_id=613337506 node_paths=PackedStringArray("on_screen_notifier", "health_component")]
 script = ExtResource("8_skmkc")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 health_component = NodePath("../HealthComponent")
+death_sounds = Dictionary[AudioStream, float]({
+ExtResource("13_ulrtf"): 1.0
+})
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
 [node name="HeadPosition" type="Node2D" parent="." unique_id=1481963309]
@@ -79,3 +191,21 @@ path_detection_component = NodePath("../PathDetectionComponent")
 movement_component = NodePath("../MovementComponent")
 seconds_waiting_at_target = 0.3
 metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
+
+[node name="ParticleEmitionComponent" type="Node" parent="." unique_id=1006437649 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "movement_component", "moving_particles", "sprite_component")]
+script = ExtResource("14_5f2wn")
+entity_node = NodePath("..")
+health_compnent = NodePath("../HealthComponent")
+death_particle_list = [NodePath("../enemy_die_particles")]
+movement_component = NodePath("../MovementComponent")
+moving_particles = [NodePath("../dust_particles")]
+sprite_component = NodePath("../EnemySpriteComponent")
+position_follows_flip = false
+metadata/_custom_type_script = "uid://duvb1g24g8584"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=550146343]
+position = Vector2(0, -5)
+rect = Rect2(-10, -3, 20, 13)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2094058686]
+libraries/ = SubResource("AnimationLibrary_pc8i7")

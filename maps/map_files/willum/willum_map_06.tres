@@ -8,5 +8,5 @@ script = ExtResource("1_ih1lp")
 map_id = "willum_map_06"
 prefab = ExtResource("1_l5j86")
 top_connection_type = 2
-related_collections = Array[int]([1])
+related_collections = Array[int]([1, 0])
 metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

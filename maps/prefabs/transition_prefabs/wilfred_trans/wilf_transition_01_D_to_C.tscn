@@ -34,7 +34,7 @@ tile_set = ExtResource("4_f2hcb")
 navigation_enabled = false
 
 [node name="EnemyTiles" type="TileMapLayer" parent="." unique_id=2076029191]
-tile_map_data = PackedByteArray("AAAkABMAAAAAAAAAAgAmABMAAAAAAAAAAQAhABMAAAAAAAAAAQAPAAwAAAAAAAAAAQASAAwAAAAAAAAAAgAUAAwAAAAAAAAAAQAWAAwAAAAAAAAAAgAZAAwAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAkABMAAAAAAAAAAgAmABMAAAAAAAAAAQAhABMAAAAAAAAAAQAPAAwAAAAAAAAAAQASAAwAAAAAAAAAAgAiAAwAAAAAAAAAAQAVAAwAAAAAAAAAAQAZAAwAAAAAAAAAAgA=")
 tile_set = ExtResource("5_siuoq")
 navigation_enabled = false
 

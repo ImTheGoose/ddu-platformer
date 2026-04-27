@@ -51,32 +51,30 @@ horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1685428298]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer" unique_id=1829212079]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer" unique_id=1693590564]
 layout_mode = 2
-theme_override_constants/separation = 29
+theme_override_constants/separation = 17
 alignment = 1
 
-[node name="previous" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=2089647149]
+[node name="previous_skin" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=2089647149]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../next")
-focus_neighbor_top = NodePath("../next")
-focus_neighbor_right = NodePath("../next")
+focus_neighbor_left = NodePath("../next_skin")
+focus_neighbor_top = NodePath("../next_skin")
+focus_neighbor_right = NodePath("../next_skin")
 text = "<"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=122796798]
 layout_mode = 2
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer" unique_id=234420602]
 layout_mode = 2
@@ -112,29 +110,43 @@ vertical_alignment = 1
 
 [node name="buy_button" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1760919881]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../../previous")
-focus_neighbor_right = NodePath("../../../next")
+focus_neighbor_left = NodePath("../../../previous_skin")
+focus_neighbor_right = NodePath("../../../next_skin")
 text = "Buy"
 
-[node name="next" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=1336492967]
+[node name="next_skin" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=1336492967]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../previous")
+focus_neighbor_left = NodePath("../previous_skin")
 focus_neighbor_top = NodePath("../../../../back")
-focus_neighbor_right = NodePath("../previous")
+focus_neighbor_right = NodePath("../previous_skin")
 text = ">"
 
-[node name="outline_button" type="Button" parent="VBoxContainer" unique_id=1233984865]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1327285407]
 layout_mode = 2
-text = "Color?"
+
+[node name="prev_color" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1268148893]
+layout_mode = 2
+text = "<"
+
+[node name="random_color" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1682341156]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Random Color"
+
+[node name="next_color" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1717975956]
+layout_mode = 2
+text = ">"
 
 [node name="back" type="Button" parent="VBoxContainer" unique_id=498519230]
 layout_mode = 2
 text = "Back"
 
-[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/previous_skin" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/next_skin" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/prev_color" to="." method="_on_prev_color_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/random_color" to="." method="_on_random_color_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/next_color" to="." method="_on_next_color_pressed"]
 [connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

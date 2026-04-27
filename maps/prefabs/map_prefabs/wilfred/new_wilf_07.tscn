@@ -44,4 +44,4 @@ tile_map_data = PackedByteArray("AAAQAEEAAAAAAAAAAQARAEEAAAAAAAAAAQAlAD8AAAAAAAA
 tile_set = ExtResource("7_yhygu")
 navigation_enabled = false
 
-[connection signal="body_entered" from="TrapTiles/@Area2D@73147" to="TrapTiles/@Area2D@73147" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]

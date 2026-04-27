@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cklcemgqre0yq"
+path="res://.godot/imported/spring boink pitched_1.ogg-e4480fc09c3a3a01d47d3bcacc8e5066.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/traps/trampolines/spring boink pitched_1.ogg"
+dest_files=["res://.godot/imported/spring boink pitched_1.ogg-e4480fc09c3a3a01d47d3bcacc8e5066.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

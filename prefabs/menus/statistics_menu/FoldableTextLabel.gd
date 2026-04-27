@@ -37,7 +37,7 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_pressed() -> void:
 	toggle_fold()
-	AudioManager._play_pressed()
+	Audio._play_ui_up()
 
 func toggle_fold() -> void:
 	folded = !folded

@@ -18,11 +18,6 @@ const STAT_API_NAMES :Dictionary[StatType, String] = {
 	StatType.HIGHSCORE_TIME_NORMAL : "HIGHSCORE_TIME_NORMAL",
 	StatType.HIGHSCORE_TIME_HARD : "HIGHSCORE_TIME_HARD",
 	StatType.HIGHSCORE_TIME_IMPOSSIBLE : "HIGHSCORE_TIME_IMPOSSIBLE",
-	StatType.HIGHSCORE_APPLE_VERY_EASY : "HIGHSCORE_APPLE_VERY_EASY",
-	StatType.HIGHSCORE_APPLE_EASY : "HIGHSCORE_APPLE_EASY",
-	StatType.HIGHSCORE_APPLE_NORMAL : "HIGHSCORE_APPLE_NORMAL",
-	StatType.HIGHSCORE_APPLE_HARD : "HIGHSCORE_APPLE_HARD",
-	StatType.HIGHSCORE_APPLE_IMPOSSIBLE : "HIGHSCORE_APPLE_IMPOSSIBLE",
 	StatType.DEATH_MUSHROOM : "DEATH_MUSHROOM",
 	StatType.DEATH_TRUNK : "DEATH_TRUNK",
 	StatType.DEATH_PLANT : "DEATH_PLANT",
@@ -46,6 +41,12 @@ const STAT_API_NAMES :Dictionary[StatType, String] = {
 	StatType.MULTIPLAYER_MATCHES_LOST : "MULTIPLAYER_MATCHES_LOST",
 	StatType.MULTIPLAYER_ROUNDS_WON : "MULTIPLAYER_ROUNDS_WON",
 	StatType.MULTIPLAYER_ROUNDS_LOST : "MULTIPLAYER_ROUNDS_LOST",
+	StatType.HEIGHT_REACHED : "HEIGHT_REACHED",
+	StatType.HIGHSCORE_HEIGHT_IMPOSSIBLE : "HIGHSCORE_HEIGHT_IMPOSSIBLE",
+	StatType.HIGHSCORE_HEIGHT_HARD : "HIGHSCORE_HEIGHT_HARD",
+	StatType.HIGHSCORE_HEIGHT_NORMAL : "HIGHSCORE_HEIGHT_NORMAL",
+	StatType.HIGHSCORE_HEIGHT_EASY : "HIGHSCORE_HEIGHT_EASY",
+	StatType.HIGHSCORE_HEIGHT_VERY_EASY : "HIGHSCORE_HEIGHT_VERY_EASY",
 }
 
 enum StatType {
@@ -57,11 +58,11 @@ enum StatType {
 	HIGHSCORE_TIME_NORMAL,
 	HIGHSCORE_TIME_HARD,
 	HIGHSCORE_TIME_IMPOSSIBLE,
-	HIGHSCORE_APPLE_VERY_EASY,
-	HIGHSCORE_APPLE_EASY,
-	HIGHSCORE_APPLE_NORMAL,
-	HIGHSCORE_APPLE_HARD,
-	HIGHSCORE_APPLE_IMPOSSIBLE,
+	HIGHSCORE_HEIGHT_VERY_EASY,
+	HIGHSCORE_HEIGHT_EASY,
+	HIGHSCORE_HEIGHT_NORMAL,
+	HIGHSCORE_HEIGHT_HARD,
+	HIGHSCORE_HEIGHT_IMPOSSIBLE,
 	DEATH_MUSHROOM,
 	DEATH_TRUNK,
 	DEATH_PLANT,
@@ -94,6 +95,8 @@ enum StatType {
 	GROUP_TOTAL_DEATHS,
 	GROUP_TOTAL_JUMPS,
 	GROUP_TOTAL_KILLS,
+	HEIGHT_REACHED,
+
 }
 
 enum StatGroup {
@@ -104,6 +107,7 @@ enum StatGroup {
 	GROUP_APPLE_HIGHSCORE,
 	GROUP_MULTIPLAYER_MATCHES,
 	GROUP_MULTIPLAYER_ROUNDS,
+	GROUP_HEIGHT_HIGHSCORE,
 }
 
 enum EnemyType {
@@ -134,18 +138,25 @@ enum KillType {
 }
 
 func get_float_stat(stat: StatType) -> float:
-	var stat_id: String = STAT_API_NAMES[stat]
+	var stat_id: String = STAT_API_NAMES.get(stat, "")
+	if stat_id == "":
+		return -1.0
 	return Steam.getStatFloat(stat_id)
 
 func get_int_stat(stat: StatType) -> int:
-	var stat_id: String = STAT_API_NAMES[stat]
+	var stat_id: String = STAT_API_NAMES.get(stat, "")
+	if stat_id == "":
+		return -1
 	return Steam.getStatInt(stat_id)
 
 func set_float_stat(stat: StatType, new_value: float, snapped: bool = true) -> void:
 	if !Steam.isSteamRunning():
 		return
 	
-	var stat_id: String = STAT_API_NAMES[stat]
+	var stat_id: String = STAT_API_NAMES.get(stat, "")
+	if stat_id == "":
+		return
+		
 	if snapped:
 		snapped(new_value, 0.01)
 	if not Steam.setStatFloat(stat_id, new_value):
@@ -155,7 +166,10 @@ func set_int_stat(stat: StatType, new_value: int) -> void:
 	if !Steam.isSteamRunning():
 		return
 	
-	var stat_id: String = STAT_API_NAMES[stat]
+	var stat_id: String = STAT_API_NAMES.get(stat, "")
+	if stat_id == "":
+		return
+		
 	if not Steam.setStatInt(stat_id, new_value):
 		print("Error while setting stat %s to value %s" % [StatType.keys()[stat], new_value])
 
@@ -183,12 +197,12 @@ func get_group_max(group: StatGroup) -> float:
 			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_NORMAL))
 			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_HARD))
 			group_values.append(get_float_stat(StatType.HIGHSCORE_TIME_IMPOSSIBLE))
-		StatGroup.GROUP_APPLE_HIGHSCORE:
-			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_VERY_EASY)))
-			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_EASY)))
-			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_NORMAL)))
-			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_HARD)))
-			group_values.append(float(get_int_stat(StatType.HIGHSCORE_APPLE_IMPOSSIBLE)))
+		StatGroup.GROUP_HEIGHT_HIGHSCORE:
+			group_values.append(get_float_stat(StatType.HIGHSCORE_HEIGHT_VERY_EASY))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_HEIGHT_EASY))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_HEIGHT_NORMAL))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_HEIGHT_HARD))
+			group_values.append(get_float_stat(StatType.HIGHSCORE_HEIGHT_IMPOSSIBLE))
 
 	return group_values.max()
 
@@ -242,7 +256,7 @@ var saved_recording :bool = true
 var stat_recording :Dictionary = stat_template.duplicate()
 const stat_template :Dictionary[StatType, Variant] = {
 	StatType.TIME_ALIVE : 0.0,
-	StatType.TOTAL_APPLES_COLLECTED : 0,
+	StatType.HEIGHT_REACHED : 0.0,
 	StatType.RECORDING_DEATH_TYPE : StatType.DEATH_MUSHROOM,
 	StatType.KILLS_MUSHROOM : 0,
 	StatType.KILLS_TRUNK : 0,
@@ -275,15 +289,27 @@ func _on_player_death(peer_id: int) -> void:
 		_save_recording()
 
 func _process(delta: float) -> void:
+	if Lobby.is_lobby_local():
+		return
+	
 	if GameManager.is_game_running() && !GameManager.is_game_paused() && GameManager.is_alive():
 		add_recording_value(StatType.TIME_ALIVE, delta)
 
 func _save_recording() -> void:
+	if Lobby.is_lobby_local():
+		print(PREFIX, "Stats doesnt apply to local games")
+		return
+	
 	if saved_recording:
 		print(PREFIX, "Error attempted to save recording another time.")
 		return
 	for stat in stat_recording.keys():
 		var stat_value = stat_recording[stat]
+		if stat != StatType.RECORDING_DEATH_TYPE:
+			if typeof(stat_value) == TYPE_INT:
+				add_int_stat(stat, stat_value)
+			if typeof(stat_value) == TYPE_FLOAT:
+				add_float_stat(stat, stat_value)
 		
 		match stat:
 			StatType.RECORDING_DEATH_TYPE:
@@ -313,29 +339,29 @@ func _save_recording() -> void:
 					KillType.CLOUD:
 						add_int_stat(StatType.DEATH_CLOUD)
 						
-				continue
 			StatType.TIME_ALIVE:
 				if GameManager.is_playing_level():
 					continue
-				
+					
+				if not GameManager.is_playing_singleplayer():
+					continue
+					
 				var dif_stat_type :StatType = get_time_highscore_type()
 						
 				if get_float_stat(dif_stat_type) < stat_value:
 					set_float_stat(dif_stat_type, stat_value)
-			StatType.TOTAL_APPLES_COLLECTED:
+			StatType.HEIGHT_REACHED:
 				if GameManager.is_playing_level():
 					continue
 				
-				var dif_stat_type :StatType = get_apple_highscore_type()
-	
-				if get_int_stat(dif_stat_type) < stat_value:
-					set_int_stat(dif_stat_type, stat_value)
-		
-		if typeof(stat_value) == TYPE_INT:
-			add_int_stat(stat, stat_value)
-		if typeof(stat_value) == TYPE_FLOAT:
-			add_float_stat(stat, stat_value)
-	
+				if not GameManager.is_playing_singleplayer():
+					continue
+
+				var dif_stat_type :StatType = get_height_highscore_type()
+				
+				if get_float_stat(dif_stat_type) < stat_value:
+					set_float_stat(dif_stat_type, stat_value)
+	Achivements._check_any_highscore_69()
 	Achivements.check_achivements()
 	saved_recording = true
 	Steamworks.store_steam_data()
@@ -357,20 +383,20 @@ func get_time_highscore_type(difficulty: int = -1) -> StatType:
 		_:
 			return StatType.HIGHSCORE_TIME_VERY_EASY
 
-func get_apple_highscore_type(difficulty: int = -1) -> StatType:
+func get_height_highscore_type(difficulty: int = -1) -> StatType:
 	if difficulty == -1:
 		difficulty = Difficulty.get_difficulty()
 	match difficulty as Difficulty.Type:
 		Difficulty.Type.IMPOSSIBLE:
-			return StatType.HIGHSCORE_APPLE_IMPOSSIBLE
+			return StatType.HIGHSCORE_HEIGHT_IMPOSSIBLE
 		Difficulty.Type.HARD:
-			return StatType.HIGHSCORE_APPLE_HARD
+			return StatType.HIGHSCORE_HEIGHT_HARD
 		Difficulty.Type.NORMAL:
-			return StatType.HIGHSCORE_APPLE_NORMAL
+			return StatType.HIGHSCORE_HEIGHT_NORMAL
 		Difficulty.Type.EASY:
-			return StatType.HIGHSCORE_APPLE_EASY
+			return StatType.HIGHSCORE_HEIGHT_EASY
 		_:
-			return StatType.HIGHSCORE_APPLE_VERY_EASY
+			return StatType.HIGHSCORE_HEIGHT_VERY_EASY
 
 func set_recording_value(stat: StatType, new_value: Variant) -> void:
 	if not stat_recording.has(stat):
@@ -452,11 +478,17 @@ func add_kill_to_recording(enemy_type: EnemyType) -> void:
 
 @rpc("authority","call_local","reliable")
 func save_and_clear_match_scores() -> void:
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		return
-	
 	if GameManager.played_rounds == 0:
 		return
+
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if Lobby.is_lobby_local():
+			if not Achivements.is_achived(Achivements.Type.MULTIPLAYER_1):
+				Achivements.set_achievement(Achivements.Type.MULTIPLAYER_1)
+		return
+	
+	if not Achivements.is_achived(Achivements.Type.MULTIPLAYER_1):
+		Achivements.set_achievement(Achivements.Type.MULTIPLAYER_1)
 	
 	var rounds_won :int = GameManager.get_match_score(multiplayer.get_unique_id())
 	var rounds_lost :int = GameManager.get_total_rounds() - rounds_won

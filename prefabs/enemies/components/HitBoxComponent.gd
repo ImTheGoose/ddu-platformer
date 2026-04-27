@@ -42,8 +42,7 @@ func _on_body_entered(body: Node2D) -> void:
 		var gpos :Vector2 = kill_height_node.global_position
 		var feet_gpos :Vector2 = body.get_feet_node().global_position
 		var dir :Vector2 = gpos.direction_to(feet_gpos)
-		if dir.y < 0 or body.velocity.y > kill_veloctiy_treshold:
-			return
+
 
 		Stats.set_recording_value(Stats.StatType.RECORDING_DEATH_TYPE, kill_type)
 		body.hit(knockback_origin_node.global_position.direction_to(body.global_position))

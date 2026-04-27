@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kmgk7llkwmhb"
+path="res://.godot/imported/Footsteps 9.ogg-9358cfb82b8d57678743c37fb5b17ce0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/footsteps/Footsteps 9.ogg"
+dest_files=["res://.godot/imported/Footsteps 9.ogg-9358cfb82b8d57678743c37fb5b17ce0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://c5k441vitmiwu"]
+
+[ext_resource type="Texture2D" uid="uid://ddjwg4wlhf0w2" path="res://assets/pixel_adventure_assets/Other/Dust Particle.png" id="1_bea26"]
+[ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_rtofg"]
+
+[sub_resource type="Curve" id="Curve_ienmw"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 182.3628, 0, 0, Vector2(0.9924624, 75.385864), -28.024675, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_si0cq"]
+curve = SubResource("Curve_ienmw")
+
+[sub_resource type="Curve" id="Curve_si0cq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7562814, 0.2254929), -2.8965533, -2.8965533, 0, 0, Vector2(1, 0), -0.096750356, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_37epm"]
+curve = SubResource("Curve_si0cq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5ll00"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1.83, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 5.015, 1)
+angle_min = 45.00001
+angle_max = 45.00001
+angle_curve = SubResource("CurveTexture_si0cq")
+direction = Vector3(0, -1, 0)
+spread = 13.796
+flatness = 1.0
+initial_velocity_min = 33.219997
+initial_velocity_max = 78.299995
+damping_min = 39.881
+damping_max = 55.088
+scale_min = 0.14
+scale_max = 0.35
+scale_curve = SubResource("CurveTexture_37epm")
+turbulence_influence_max = 0.19800001
+
+[node name="CollissionParticle" type="GPUParticles2D" unique_id=2052262902]
+rotation = 1.5707964
+emitting = false
+amount = 12
+texture = ExtResource("1_bea26")
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5ll00")
+script = ExtResource("2_rtofg")
+metadata/_custom_type_script = "uid://djwnl3rysx6jb"

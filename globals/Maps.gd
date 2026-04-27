@@ -145,20 +145,32 @@ func get_transition_section(from: MapFile.ConnectionType, to: MapFile.Connection
 	first_transition = get_transition(from, MapFile.ConnectionType.TYPE_C)
 	var second_transition :MapFile = get_transition(MapFile.ConnectionType.TYPE_C, to)
 	
+	if not first_transition:
+		first_transition = get_transition(from, MapFile.ConnectionType.TYPE_C, true)
+		print("Missing transition from: %s to Type C. Using any." % MapFile.ConnectionType.find_key(from))
+	
+	if not second_transition:
+		second_transition = get_transition(MapFile.ConnectionType.TYPE_C, to, true)
+		print("Missing transition from Type C to: %s. Using any." % MapFile.ConnectionType.find_key(from))
+	
 	return [first_transition, second_transition]
 
 # Gets a random transition that matches the types
-func get_transition(from: MapFile.ConnectionType, to: MapFile.ConnectionType) -> MapFile:
-	var transitions :Array[MapFile] = get_matching_transitions(from, to)
+func get_transition(from: MapFile.ConnectionType, to: MapFile.ConnectionType, ignore_pool: bool = false) -> MapFile:
+	var transitions :Array[MapFile] = get_matching_transitions(from, to, ignore_pool)
 	if transitions.is_empty():
 		return null
 	else:
 		return transitions.pick_random()
 
 # Returns all matching transitions
-func get_matching_transitions(from: MapFile.ConnectionType, to: MapFile.ConnectionType) -> Array[MapFile]:
+func get_matching_transitions(from: MapFile.ConnectionType, to: MapFile.ConnectionType, ignore_pool: bool = false) -> Array[MapFile]:
 	var matches :Array[MapFile] = []
-	for trans in current_transition_pool:
+	var transition_list :Array[MapFile] = current_transition_pool
+	if ignore_pool:
+		transition_list = get_loaded_maps(MapFile.MapType.TRANSITION_MAP)
+		
+	for trans in transition_list:
 		if trans.bottom_connection_type == from && trans.top_connection_type == to:
 			matches.append(trans)
 	return matches

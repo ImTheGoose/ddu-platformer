@@ -48,29 +48,17 @@ func _refresh_values() -> void:
 	
 	var level_time :float = Levels.get_level_time(level_index)
 	if level_time > 0:
-		highscore_label.text = original_highscore_text % [_get_time_color(level_time), TimeFormat.get_time_string(level_time)]
+		highscore_label.text = original_highscore_text % [level_file.get_time_color_string(level_time), level_file.get_time_color_string(level_time), Format.get_time_string(level_time)]
 	else:
-		highscore_label.text = original_highscore_text % ["white", "None"]
+		highscore_label.text = original_highscore_text % [level_file.get_time_color_string(99999), level_file.get_time_color_string(99999), "None"]
 	
-	var gold_seconds :String = TimeFormat.get_time_string(level_file.gold_medal_seconds)
-	var silver_seconds :String = TimeFormat.get_time_string(level_file.silver_medal_seconds)
-	var bronze_seconds :String = TimeFormat.get_time_string(level_file.bronze_medal_seconds)
+	var gold_seconds :String = Format.get_time_string(level_file.gold_medal_seconds)
+	var silver_seconds :String = Format.get_time_string(level_file.silver_medal_seconds)
+	var bronze_seconds :String = Format.get_time_string(level_file.bronze_medal_seconds)
 	
 	medals_label.text = original_medals_text % [gold_seconds, silver_seconds, bronze_seconds]
+	highscore_label.bbcode_enabled = true
 
-func _get_time_color(time: float) -> String:
-	var level_index :int = Levels.get_level_index()
-	var level_file :LevelFile = Levels.get_level(level_index)
-	if time <= level_file.gold_medal_seconds:
-		return "goldenrod"
-	
-	if time <= level_file.silver_medal_seconds:
-		return "silver"
-	
-	if time <= level_file.bronze_medal_seconds:
-		return "chocolate"
-	
-	return "white"
 	
 
 func _on_next_pressed() -> void:

@@ -16,7 +16,7 @@ func _ready() -> void:
 	GameManager.game_scores_changed.connect(_on_scores_changed)
 	
 	assigned_player_info = Lobby.get_player_info(assigned_peer_id)
-	avatar_rect.texture = assigned_player_info.get_avatar_texture(128)
+	avatar_rect.texture = assigned_player_info.AVATAR_TEXTURE
 	refresh_labels()
 
 func _on_scores_changed() -> void:
@@ -24,7 +24,11 @@ func _on_scores_changed() -> void:
 
 func refresh_labels() -> void:
 	player_name_label.text = assigned_player_info.DISPLAY_NAME
-	player_score_label.text = "Time alive - %s" % TimeFormat.get_time_string(GameManager.get_score(assigned_peer_id), 0.01)
+	var player_score :float = GameManager.get_score(assigned_peer_id)
+	if player_score >= 999999:
+		player_score_label.text = "Round Winner"
+	else:
+		player_score_label.text = "Time alive - %s" % Format.get_time_string(player_score, 0.01)
 	var placement:int = GameManager.get_placement(assigned_peer_id)
 	match placement:
 		1:

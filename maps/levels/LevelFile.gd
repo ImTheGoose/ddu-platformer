@@ -4,9 +4,9 @@ extends Resource
 class_name LevelFile 
 
 @export var map_index :int
-@export_range(0, 300, 1.0,"or_greater") var gold_medal_seconds :float = 0
-@export_range(0, 300, 1.0,"or_greater") var silver_medal_seconds :float = 0
-@export_range(0, 300, 1.0,"or_greater") var bronze_medal_seconds :float = 0
+@export_range(0, 120, 0.1,"or_greater") var gold_medal_seconds :float = 0
+@export_range(0, 120, 0.1,"or_greater") var silver_medal_seconds :float = 0
+@export_range(0, 120, 0.1,"or_greater") var bronze_medal_seconds :float = 0
 
 @export_category("Map Files")
 @export_tool_button("Verify Map Files", "ImportCheck")
@@ -71,6 +71,30 @@ func _verify_map_files() -> void:
 		
 	
 	return
+
+func get_time_color_string(time: float) -> String:
+	if time <= gold_medal_seconds:
+		return "goldenrod"
+	
+	if time <= silver_medal_seconds:
+		return "silver"
+	
+	if time <= bronze_medal_seconds:
+		return "chocolate"
+	
+	return "white"
+
+func get_time_color(time: float) -> Color:
+	if time <= gold_medal_seconds:
+		return Color.GOLDENROD
+	
+	if time <= silver_medal_seconds:
+		return Color.SILVER
+	
+	if time <= bronze_medal_seconds:
+		return Color.CHOCOLATE
+	
+	return Color.WHITE
 
 func is_valid() -> bool:
 	if not start_map_file:

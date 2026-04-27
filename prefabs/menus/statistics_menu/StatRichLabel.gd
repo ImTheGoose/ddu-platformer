@@ -14,6 +14,7 @@ enum ValueType {
 	TYPE_FORMATTED_TIME,
 	TYPE_GROUP_TOTAL,
 	TYPE_GROUP_MAX,
+	TYPE_FORMATTED_DISTANCE,
 }
 
 var bbcode_spacing :String = " "
@@ -77,14 +78,19 @@ func _get_string_value() -> String:
 			var float_value :float = Stats.get_group_max(stat_group)
 			if is_equal_approx(float_value, round(float_value)):
 				return str( int( float_value))
+			elif stat_group == Stats.StatGroup.GROUP_HEIGHT_HIGHSCORE:
+				return Format.get_height_string(float_value)
 			else:
-				return TimeFormat.get_time_string(float_value, 0.1)
+				return Format.get_time_string(float_value, 0.1)
 		
 		ValueType.TYPE_GROUP_TOTAL:
 			return str( int( Stats.get_group_total(stat_group)))
 		ValueType.TYPE_FORMATTED_TIME:
 			var value :float = Stats.get_float_stat(stat_type)
-			return TimeFormat.get_time_string(value, 0.1)
+			return Format.get_time_string(value, 0.1)
+		ValueType.TYPE_FORMATTED_DISTANCE:
+			var value :float = Stats.get_float_stat(stat_type)
+			return Format.get_height_string(value)
 		ValueType.TYPE_FLOAT:
 			return str( float( Stats.get_float_stat(stat_type)))
 	

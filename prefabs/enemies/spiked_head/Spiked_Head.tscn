@@ -5,16 +5,21 @@
 [ext_resource type="Script" uid="uid://b1me8nwobge5x" path="res://prefabs/enemies/components/P2PTargetingComponent.gd" id="3_v6g4s"]
 [ext_resource type="SpriteFrames" uid="uid://daop4gaffakuj" path="res://prefabs/enemies/spiked_head/spiked_head_frames.tres" id="4_us5oj"]
 [ext_resource type="Script" uid="uid://bf7yc2pucyxtn" path="res://prefabs/enemies/components/EnemySpriteComponent.gd" id="5_o85lf"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="6_fg2lk"]
 [ext_resource type="Script" uid="uid://csjcberb4rmwa" path="res://prefabs/traps/HitArea.gd" id="6_vkaj0"]
+[ext_resource type="Script" uid="uid://c5lwrhejxb5m0" path="res://prefabs/enemies/components/AudioComponent.gd" id="8_lui05"]
+[ext_resource type="AudioStream" uid="uid://dbbc4xa7ylpnu" path="res://assets/audio/sfx/enemies/moving_heads/spiked_impact1.ogg" id="9_x3dsx"]
+[ext_resource type="AudioStream" uid="uid://daa1cvcmci7xl" path="res://assets/audio/sfx/enemies/moving_heads/spiked_impact2.ogg" id="10_1n1w0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh6ld"]
 size = Vector2(20, 39.5)
 
-[node name="SpikedHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component")]
+[node name="SpikedHead" type="Node2D" unique_id=808669643 node_paths=PackedStringArray("enemy_sprite_component", "movement_component", "on_screen")]
 z_index = -1
 script = ExtResource("1_n5yrm")
 enemy_sprite_component = NodePath("EnemySpriteComponent")
 movement_component = NodePath("MovementComponent")
+on_screen = NodePath("VisibleOnScreenNotifier2D")
 entity_type = 11
 block_rotation = true
 metadata/_custom_type_script = "uid://brmbno0bah8v4"
@@ -46,6 +51,14 @@ script = ExtResource("5_o85lf")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://bf7yc2pucyxtn"
 
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="EnemySpriteComponent" unique_id=1514325288 node_paths=PackedStringArray("entity_node", "reference_sprite")]
+sprite_frames = ExtResource("4_us5oj")
+animation = &"Idle"
+script = ExtResource("6_fg2lk")
+entity_node = NodePath("../..")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
+
 [node name="HitArea" type="Area2D" parent="." unique_id=1250478023]
 collision_layer = 4
 collision_mask = 12
@@ -63,3 +76,17 @@ position = Vector2(8, -8)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_eh6ld")
 debug_color = Color(0.7426777, 0.46525377, 0, 0.41960785)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=511306129]
+position = Vector2(-8, -3)
+rect = Rect2(4, -18, 25, 26)
+
+[node name="AudioComponent" type="Node" parent="." unique_id=1759392244 node_paths=PackedStringArray("on_screen_notifier", "movement_component")]
+script = ExtResource("8_lui05")
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
+movement_component = NodePath("../MovementComponent")
+target_reached_sounds = Dictionary[AudioStream, float]({
+ExtResource("10_1n1w0"): 0.25,
+ExtResource("9_x3dsx"): 0.25
+})
+metadata/_custom_type_script = "uid://c5lwrhejxb5m0"

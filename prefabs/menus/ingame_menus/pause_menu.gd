@@ -17,7 +17,7 @@ func _on_show() -> void:
 		leave_game_button.disabled = false
 		return
 	
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+	if GameManager.is_playing_singleplayer():
 		back_to_lobby.visible = false
 		back_to_lobby.disabled = true
 		back_to_main.visible = true

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InputConfig" format=3 uid="uid://b050s1jybuwad"]
+
+[ext_resource type="Script" uid="uid://da5dmwn6um75g" path="res://prefabs/menus/local_multiplayer/InputConfig.gd" id="1_xel1j"]
+
+[resource]
+script = ExtResource("1_xel1j")
+jump_action = "jump_arrows"
+move_left_action = "move_left_arrows"
+move_right_action = "move_right_arrows"
+input_icon_bbcode = "A1 "
+metadata/_custom_type_script = "uid://da5dmwn6um75g"

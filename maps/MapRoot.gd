@@ -4,6 +4,8 @@ class_name MapRoot
 
 const PREFIX :String = "[MapRoot] "
 
+var overwrite_spawner :bool = false
+
 @export var terrain_tiles :TileMapLayer
 @export var trap_tiles :TileMapLayer
 @export var enemy_tiles :TileMapLayer
@@ -39,8 +41,19 @@ const collectable_tile_id_types :Dictionary[int, EntitySpawner.SpawnType] = {
 }
 
 func _enter_tree() -> void:
+	if overwrite_spawner:
+		return
+	
 	if not terrain_tiles:
 		print(PREFIX, "Terrain tiles not assigned to: %s" % scene_file_path.get_file())
+	else:
+		var shadow_tiles :TileMapLayer = terrain_tiles.duplicate()
+		shadow_tiles.collision_enabled = false
+		shadow_tiles.occlusion_enabled = false
+		shadow_tiles.modulate = Color8(0,0,0, 50)
+		shadow_tiles.z_index = -1
+		add_child(shadow_tiles)
+		shadow_tiles.position += Vector2(-1, 1)
 
 	if trap_tiles:
 		trap_tiles.enabled = false
@@ -63,6 +76,9 @@ func _enter_tree() -> void:
 		print(PREFIX, "GUIDE tiles not assigned to: %s" % scene_file_path.get_file())
 
 func _ready() -> void:
+	if overwrite_spawner:
+		return
+		
 	if trap_tiles:
 		_spawn_tiles_from_types(trap_tiles, trap_tile_id_types)
 	

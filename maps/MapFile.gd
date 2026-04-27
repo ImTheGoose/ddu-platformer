@@ -31,7 +31,7 @@ class_name MapFile
 const VISIBLE_COLLECTIONS_IN_RELEASE :Array[CollectionType] = [
 	CollectionType.DEFAULT,
 	CollectionType.LEGACY,
-	CollectionType.TEST_MAPS,
+	CollectionType.NEW_MAPS,
 ]
 
 enum CollectionType {
