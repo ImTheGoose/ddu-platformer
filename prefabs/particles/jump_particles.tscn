@@ -9,34 +9,36 @@ colors = PackedColorArray(1, 1, 1, 1, 0.92156863, 0.92156863, 0.92156863, 0)
 gradient = SubResource("Gradient_yhksc")
 
 [sub_resource type="Curve" id="Curve_rwuho"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5947059), -1.00219, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6818578, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_yhksc"]
 curve = SubResource("Curve_rwuho")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yhksc"]
+lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(8, 1, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
-angle_min = -236.2
-angle_max = 174.70001
+angle_min = -101.29999
+angle_max = 114.90001
 velocity_pivot = Vector3(1, 1, 0)
 direction = Vector3(0, -1, 0)
 spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 24.689999
-gravity = Vector3(0, 15, 0)
-scale_min = 3.0
-scale_max = 4.0
+initial_velocity_min = 7.0
+initial_velocity_max = 30.0
+angular_velocity_min = -85.41001
+angular_velocity_max = 90.52998
+scale_min = 2.0
+scale_max = 3.5
 scale_curve = SubResource("CurveTexture_yhksc")
 color_ramp = SubResource("GradientTexture1D_634ti")
 
 [node name="jump_particles" type="GPUParticles2D" unique_id=2081916230]
 emitting = false
 amount = 20
-lifetime = 0.3
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_yhksc")

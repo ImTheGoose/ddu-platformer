@@ -47,6 +47,7 @@ func _initiate_platform_reappear() -> void:
 	
 func _initiate_platform_fall() -> void:
 	animation_player.play("Disappear")
+	anim.play("Off")
 	gpu_particles_2d.emitting = false
 	freeze = false
 	anim.pause()

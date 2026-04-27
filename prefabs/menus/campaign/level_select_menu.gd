@@ -16,7 +16,6 @@ func _ready() -> void:
 	next_button.pressed.connect(_next)
 	previous_button.pressed.connect(_previous)
 	_instatiate_cards()
-	_update_limits()
 
 func _on_show() -> void:
 	_update_limits()
@@ -61,7 +60,6 @@ func _instatiate_cards() -> void:
 		else:
 			bottom_half.add_child(card)
 		
-	index_offset_changed.emit(level_index_offset)
 
 func _force_focus() -> void:
 	var unl_lvl :int = DataManager.get_value("unlocked_level") 

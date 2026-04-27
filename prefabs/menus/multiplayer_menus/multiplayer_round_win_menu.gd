@@ -40,15 +40,16 @@ func _on_show() -> void:
 
 func update_board() -> void:
 	sort_leaderboard()
-	if GameManager.get_placement(multiplayer.get_unique_id()) == 1:
+	if Lobby.is_lobby_local():
+		round_label.text = "Round Scores"
+	elif GameManager.get_placement(multiplayer.get_unique_id()) == 1:
 		round_label.text = "Round Won"
 	else:
 		round_label.text = "Round Lost"
 
 
 func build_leaderboard() -> void:
-	var peer_list :PackedInt32Array = multiplayer.get_peers()
-	peer_list.append(multiplayer.get_unique_id())
+	var peer_list :Array[int] = Lobby.created_player_infos.keys()
 	
 	for peer: int in peer_list:
 		var card :Control = leaderboard_card.instantiate()

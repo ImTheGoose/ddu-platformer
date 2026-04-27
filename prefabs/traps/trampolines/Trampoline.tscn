@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dckcrbhtnaktm" path="res://prefabs/traps/trampolines/trampoline.gd" id="1_e7khr"]
 [ext_resource type="Texture2D" uid="uid://o0blm0n4stvq" path="res://assets/pixel_adventure_assets/Traps/Trampoline/Idle.png" id="1_lrq2o"]
+[ext_resource type="AudioStream" uid="uid://crmtplqmsoxmf" path="res://assets/audio/sfx/traps/trampolines/cartoon-spring-boing-01.ogg" id="2_75f8s"]
 [ext_resource type="Texture2D" uid="uid://784do5ff726h" path="res://assets/pixel_adventure_assets/Traps/Trampoline/Jump (28x28).png" id="2_tqlc0"]
-[ext_resource type="AudioStream" uid="uid://c6gwifyj7f1wd" path="res://assets/audio/sfx/boing.mp3" id="4_6n1a3"]
+[ext_resource type="AudioStream" uid="uid://cu3n5vm12n8dd" path="res://assets/audio/sfx/traps/trampolines/spring boink pitched.ogg" id="3_l8wb1"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_0ojem"]
+[ext_resource type="AudioStream" uid="uid://cklcemgqre0yq" path="res://assets/audio/sfx/traps/trampolines/spring boink pitched_1.ogg" id="4_kcuuv"]
+[ext_resource type="AudioStream" uid="uid://bsx50wrg7qyf8" path="res://assets/audio/sfx/traps/trampolines/TOONBoing_Cartoon Boing Bouncing Jump 01.ogg" id="5_ys0bf"]
+[ext_resource type="AudioStream" uid="uid://cd8r0bbbiidae" path="res://assets/audio/sfx/traps/trampolines/TOONBoing_Cartoon Boing Bouncing Jump 03.ogg" id="6_53iyi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e7khr"]
 atlas = ExtResource("2_tqlc0")
@@ -81,8 +86,16 @@ animations = [{
 size = Vector2(21, 12)
 
 [node name="Trampoline" type="Area2D" unique_id=1944955003]
-collision_mask = 9
+collision_layer = 2
+collision_mask = 10
 script = ExtResource("1_e7khr")
+boing_sounds = Dictionary[AudioStream, float]({
+ExtResource("2_75f8s"): 0.45,
+ExtResource("3_l8wb1"): 0.45,
+ExtResource("4_kcuuv"): 0.45,
+ExtResource("5_ys0bf"): 0.45,
+ExtResource("6_53iyi"): 0.45
+})
 entity_type = 15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2076110011]
@@ -91,13 +104,17 @@ sprite_frames = SubResource("SpriteFrames_me3ve")
 animation = &"Idle"
 autoplay = "Idle"
 
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=637512659 node_paths=PackedStringArray("entity_node", "reference_sprite")]
+sprite_frames = SubResource("SpriteFrames_me3ve")
+animation = &"Idle"
+script = ExtResource("4_0ojem")
+entity_node = NodePath("../..")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708159839]
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_6n1a3")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=233426327]
-stream = ExtResource("4_6n1a3")
-volume_db = 1.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animatable_body_2d_animation_finished"]

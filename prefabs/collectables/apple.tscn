@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://mad1mjpf5sha" path="res://prefabs/collectables/collectable.gd" id="1_t0ghb"]
 [ext_resource type="Texture2D" uid="uid://ccmn1mxq1jsip" path="res://assets/pixel_adventure_assets/Items/Fruits/Collected.png" id="2_womrj"]
+[ext_resource type="AudioStream" uid="uid://c2vgevl1dcy6f" path="res://assets/audio/sfx/apple/apple2.ogg" id="3_324jp"]
 [ext_resource type="Texture2D" uid="uid://rguh3d36k7fr" path="res://assets/pixel_adventure_assets/Items/Fruits/Apple.png" id="3_mcnd8"]
+[ext_resource type="AudioStream" uid="uid://bpex4t6dseaci" path="res://assets/audio/sfx/apple/apple3.ogg" id="4_ki0jn"]
+[ext_resource type="Script" uid="uid://chtpoo5ghxe81" path="res://utility/AnimatedShadowSprite2D.gd" id="4_womrj"]
+[ext_resource type="AudioStream" uid="uid://w4wdn5hxbh8d" path="res://assets/audio/sfx/apple/apple4.ogg" id="5_wn53m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fbuy2"]
 radius = 6.0
@@ -181,12 +185,17 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Area2D" type="Area2D" unique_id=1697054240]
+[node name="Apple" type="Area2D" unique_id=1697054240]
 z_index = -1
 texture_filter = 1
 collision_layer = 2
 collision_mask = 10
 script = ExtResource("1_t0ghb")
+collect_sounds = Dictionary[AudioStream, float]({
+ExtResource("3_324jp"): 2.0,
+ExtResource("4_ki0jn"): 2.0,
+ExtResource("5_wn53m"): 2.0
+})
 entity_type = 19
 block_rotation = true
 
@@ -197,5 +206,13 @@ shape = SubResource("CircleShape2D_fbuy2")
 sprite_frames = SubResource("SpriteFrames_32j7d")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="AnimatedShadowSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1639753354 node_paths=PackedStringArray("entity_node", "reference_sprite")]
+sprite_frames = SubResource("SpriteFrames_32j7d")
+animation = &"Idle"
+script = ExtResource("4_womrj")
+entity_node = NodePath("../..")
+reference_sprite = NodePath("..")
+metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

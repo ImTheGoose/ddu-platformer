@@ -30,7 +30,6 @@ text = "Challenge Levels"
 
 [node name="local_multiplayer" type="Button" parent="." unique_id=298402140]
 layout_mode = 2
-disabled = true
 text = "Local Multiplayer"
 
 [node name="online_multiplayer" type="Button" parent="." unique_id=1218321654]

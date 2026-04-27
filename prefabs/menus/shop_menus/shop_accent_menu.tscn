@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dpql1ujcn3sd7"]
 
 [ext_resource type="Script" uid="uid://cru13khgiwkpx" path="res://prefabs/menus/shop_menus/shop_accent_menu.gd" id="1_dfh52"]
+[ext_resource type="Resource" uid="uid://bsemolhnnavr3" path="res://prefabs/menus/shop_menus/SharedBackground.tres" id="2_l2ws1"]
 [ext_resource type="Shader" uid="uid://bah5yvcvtejnk" path="res://assets/shaders/UV_scroll.gdshader" id="3_naxsf"]
-[ext_resource type="Texture2D" uid="uid://hwtu0ruywc7s" path="res://assets/pixel_adventure_assets/Main Characters/Mask Dude/Jump (32x32).png" id="4_pij7p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg1ud"]
 shader = ExtResource("3_naxsf")
@@ -24,13 +24,13 @@ offset_bottom = 112.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dfh52")
+shared_texture = ExtResource("2_l2ws1")
 display_rect = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/display_rect")
 shop_category = "accent"
 price_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/price_tag")
 buy_button = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/buy_button")
 name_tag = NodePath("VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer/skin_name_tag")
 menu_name = "shop_accent_menu"
-seperate_from_game = true
 initial_focus = NodePath("VBoxContainer/back")
 back_button = NodePath("VBoxContainer/back")
 
@@ -72,8 +72,8 @@ text = "<"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer" unique_id=2003282560]
 layout_mode = 2
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer" unique_id=837817182]
 layout_mode = 2
@@ -94,7 +94,6 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_mg1ud")
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-texture = ExtResource("4_pij7p")
 expand_mode = 2
 stretch_mode = 5
 

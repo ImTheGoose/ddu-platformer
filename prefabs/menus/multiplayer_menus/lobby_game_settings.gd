@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+@onready var playerlist_container :VBoxContainer = %playerlist
 @onready var diff_label: Label = %difficulty_label
 @onready var diff_option: OptionButton = %difficulty_option
 @onready var rounds_label: Label = %rounds_label
@@ -14,6 +15,8 @@ extends VBoxContainer
 func _ready() -> void:
 	GameManager.game_settings_changed.connect(_on_game_settings_changed)
 	multiplayer.connected_to_server.connect(refresh_settings)
+	
+	playerlist_container.child_order_changed.connect(_refresh_focus)
 	
 	diff_option.item_selected.connect(_on_difficulty_selected)
 	rounds_option.item_selected.connect(_on_rounds_selected)
@@ -33,6 +36,39 @@ func _initialise_collection_dropdown() -> void:
 		map_collection_option.add_item(collection.capitalize(), MapFile.CollectionType[collection])
 	
 	map_collection_option.selected = map_collection_option.get_item_index(GameManager.get_map_collection())
+
+func _refresh_focus() -> void:
+	if not multiplayer.is_server():
+		return
+	var player_cards :Array[Node] = playerlist_container.get_children()
+	player_cards.pop_front()
+	if player_cards.size() > 0:
+		var kick_button :Button = player_cards.get(0).kick_button
+		diff_option.focus_neighbor_left = kick_button.get_path()
+		rounds_option.focus_neighbor_left = kick_button.get_path()
+		collission_option.focus_neighbor_left = kick_button.get_path()
+		gamemode_option.focus_neighbor_left = kick_button.get_path()
+		map_collection_option.focus_neighbor_left = kick_button.get_path()
+		kick_button.focus_neighbor_right = rounds_option.get_path()
+		
+		if player_cards.size() > 1:
+			kick_button = player_cards.get(1).kick_button
+			collission_option.focus_neighbor_left = kick_button.get_path()
+			gamemode_option.focus_neighbor_left = kick_button.get_path()
+			map_collection_option.focus_neighbor_left = kick_button.get_path()
+			kick_button.focus_neighbor_right = gamemode_option.get_path()
+		if player_cards.size() > 2:
+			kick_button = player_cards.get(2).kick_button
+			map_collection_option.focus_neighbor_left = player_cards.get(2).kick_button.get_path()
+			kick_button.focus_neighbor_right = map_collection_option.get_path()
+			
+		
+	else:
+		diff_option.focus_neighbor_left = NodePath("")
+		rounds_option.focus_neighbor_left = NodePath("")
+		collission_option.focus_neighbor_left = NodePath("")
+		gamemode_option.focus_neighbor_left = NodePath("")
+		map_collection_option.focus_neighbor_left = NodePath("")
 
 func _on_collissions_selected(index: int) -> void:
 	if index == 0:
@@ -62,7 +98,7 @@ func _on_game_settings_changed() -> void:
 	refresh_settings()
 
 func refresh_settings() -> void:
-	if multiplayer.is_server():
+	if multiplayer.is_server():		
 		diff_option.visible = true
 		rounds_option.visible = true
 		collission_option.visible = true

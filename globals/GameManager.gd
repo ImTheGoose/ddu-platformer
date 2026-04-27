@@ -9,6 +9,7 @@ signal prespawn_entities
 signal spawn_level
 signal player_death(peer_id: int)
 signal game_settings_changed()
+signal add_camera_shake(strenght: float, dir: Vector2, amount: float)
 signal spawn_entity(global_position: Vector2, spawn_type: int, modifiers: Entity.EntityModifiers)
 signal spawn_player(global_position: Vector2, peer_id: int)
 signal clear_players()
@@ -18,7 +19,7 @@ signal game_scores_changed()
 var match_scores :Dictionary[int, int] = {}
 var round_scores :Dictionary[int, float] = {}
 var played_rounds :int = 0
-var players_dead :int = 0
+var dead_players :Array[int] = []
 
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
@@ -29,17 +30,21 @@ var default_game_settings :Dictionary = {
 	"collissions_enabled" : true,
 }
 
+var round_seconds_passed :float = 0.0
 var game_is_level :bool = false
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
-var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.LEGACY
+var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.DEFAULT
 
 enum Gamemode {
 	GAMEMODE_STANDARD,
 	GAMEMODE_CONSTANT,
 }
 
+func _process(delta: float) -> void:
+	if is_game_running() && not is_game_paused():
+		round_seconds_passed += delta
 
 func get_score(peer_id: int) -> float:
 	return round_scores.get(peer_id, 0.0)
@@ -196,6 +201,7 @@ func _ready() -> void:
 	Difficulty.difficulty_changed.connect(_on_difficulty_changed)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	MenuHandler.game_is_covered.connect(_on_game_covered)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	reset_settings_to_default()
 
@@ -204,6 +210,11 @@ func _on_difficulty_changed() -> void:
 
 func _on_peer_connected(peer_id: int) -> void:
 	sync_settings_to_peers()
+
+func _on_peer_disconnected(peer_id: int) -> void:
+	dead_players.erase(peer_id)
+	match_scores.erase(peer_id)
+	
 
 func _on_game_covered() -> void:
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
@@ -231,7 +242,10 @@ func _on_game_covered() -> void:
 		server_reset.emit()
 		MenuHandler.rpc("hide_blackout")
 		MenuHandler.rpc("hide_game")
-		MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
+		if Lobby.is_lobby_local():
+			MenuHandler.rpc("change_menu", "local_lobby_menu")
+		else:
+			MenuHandler.rpc("change_menu", "multiplayer_lobby_menu")
 		
 	elif state == STATE.AWAITING_RESTART && multiplayer.is_server():
 		rpc("reset_client")
@@ -270,6 +284,7 @@ func restart_game() -> void:
 
 @rpc("authority","call_local","reliable")
 func spawn_game() -> void:
+	round_seconds_passed = 0.0
 	Maps.mount_level(Levels.get_level_index())
 	spawn_level.emit()
 	set_state(STATE.PREGAME)
@@ -285,6 +300,16 @@ func return_to_lobby() -> void:
 @rpc("authority","call_local","reliable")
 func clear_game() -> void:
 	clear_entities.emit()
+	clear_players.emit()
+
+@rpc("authority", "call_local", "reliable")
+func replay_game() -> void:
+	if multiplayer.is_server():
+		MenuHandler.rpc("show_blackout")
+		rpc("set_rounds_played", 0)
+		match_scores.clear()
+		next_round()
+		
 
 @rpc("authority","call_local","reliable")
 func prepare_game(is_level: bool = false) -> void:
@@ -305,6 +330,13 @@ func prepare_game(is_level: bool = false) -> void:
 func is_playing_level() -> bool:
 	return game_is_level
 
+func is_playing_singleplayer() -> bool:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if not Lobby.is_lobby_local():
+			return true
+	
+	return false
+
 @rpc("any_peer","call_local","reliable")
 func start_game() -> void:
 	if !multiplayer.is_server():
@@ -322,37 +354,44 @@ func start_client() -> void:
 func reset_client() -> void:
 	client_reset.emit()
 	set_state(STATE.PREGAME)
-	players_dead = 0
+	dead_players.clear()
 	round_scores.clear()
 	pause_game(false)
 
 @rpc("any_peer","call_local","reliable")
-func player_died(peer_id: int) -> void:
+func player_died(peer_id: int, time_at_death: float = 0.0) -> void:
 	player_death.emit(peer_id)
 	
-	if peer_id == multiplayer.get_unique_id():
-		rpc("set_round_score", multiplayer.get_unique_id(), Stats.get_recording_value(Stats.StatType.TIME_ALIVE))
-		if get_state() != STATE.POST_GAME:
-			set_state(STATE.DEAD)
-		
+	if not Lobby.is_lobby_local():
+		if multiplayer.get_unique_id() == peer_id:
+			if get_state() != STATE.POST_GAME:
+				set_state(STATE.DEAD)
 	
 	if !multiplayer.is_server():
 		return
 	
-	players_dead += 1
-	if players_dead < multiplayer.get_peers().size() + 1:
+	if time_at_death == 0.0:
+		rpc("set_round_score", peer_id, round_seconds_passed)
+	else:
+		rpc("set_round_score", peer_id, time_at_death)
+	
+	dead_players.append(peer_id)
+	if dead_players.size() < Lobby.get_lobby_size() - 1:
 		return
 	
+	for id:int in Lobby.created_player_infos.keys():
+		if not dead_players.has(id):
+			rpc("set_round_score", id, 999999)
 	
-	if multiplayer.is_server():
-		rpc("set_state", STATE.POST_GAME)
-		if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-			MenuHandler.rpc("change_menu", "death_menu")
-		elif get_total_rounds() > played_rounds:
-			MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
-		else:
-			MenuHandler.rpc("show_blackout")
-			set_state(STATE.AWAITING_GAME_CONCLUSION)
+	rpc("set_state", STATE.POST_GAME)
+	
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && not Lobby.is_lobby_local():
+		MenuHandler.rpc("change_menu", "death_menu")
+	elif get_total_rounds() > played_rounds:
+		MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
+	else:
+		MenuHandler.rpc("show_blackout")
+		set_state(STATE.AWAITING_GAME_CONCLUSION)
 
 
 

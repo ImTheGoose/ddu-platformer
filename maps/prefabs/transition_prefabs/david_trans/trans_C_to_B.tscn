@@ -34,7 +34,7 @@ tile_set = ExtResource("3_bm22b")
 navigation_enabled = false
 
 [node name="EnemyTiles" type="TileMapLayer" parent="." unique_id=1990731973]
-tile_map_data = PackedByteArray("AAAKABIAAAAAAAAAAQAIABIAAAAAAAAABAA=")
+tile_map_data = PackedByteArray("AAAKABIAAAAAAAAABwAMABIAAAAAAAAAAQAIABIAAAAAAAAAAQA=")
 tile_set = ExtResource("4_kghtb")
 navigation_enabled = false
 
@@ -42,3 +42,6 @@ navigation_enabled = false
 tile_map_data = PackedByteArray("AAANABQAAAAAAAAAAQAaABQAAAAAAAAAAQAZABQAAAAAAAAAAQAeABAAAAAAAAAAAQAeAA8AAAAAAAAAAQALABAAAAAAAAAAAQALAA8AAAAAAAAAAQATABQAAAAAAAAAAQAUABQAAAAAAAAAAQA=")
 tile_set = ExtResource("6_0rb31")
 navigation_enabled = false
+
+[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@66293" to="TrapTiles/@Area2D@66293" method="_on_body_entered"]

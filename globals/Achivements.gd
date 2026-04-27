@@ -4,28 +4,41 @@ var data_upload_queued :bool = false
 
 var ACHIVEMENT_STATES :Dictionary[Type, bool] = {}
 const ACHIVEMENT_IDS :Dictionary[Type, String] = {
-	Type.DEATHS_50 : "DEATHS_1", #AUTO
-	Type.DEATHS_150 : "DEATHS_2", #AUTO
-	Type.HIGHSCORE_60 : "HIGHSCORE_1", 
-	Type.HIGHSCORE_IMP_120 : "HIGHSCORE_2",
-	Type.JUMP_TRAMP_100 : "JUMPS_1", #AUTO
-	Type.HIGHSCORE_APL_100 : "HIGHSCORE_APPLE_1",
-	Type.APPLE_TOTAL_5k : "APPLE_1",
+	Type.HUNTER_1: "HUNTER_1",
+	Type.ALL_DEATHS_1: "ALL_DEATHS_1",
+	Type.SHOP_1: "SHOP_1",
+	Type.SHOP_2: "SHOP_2",
+	Type.ANY_HIGHSCORE_60: "ANY_HIGHSCORE_60",
+	Type.ANY_HIGHSCORE_120: "ANY_HIGHSCORE_120",
+	Type.IMP_HIGHSCORE_180: "IMP_HIGHSCORE_180",
+	Type.ANY_HIGHSCORE_EXACT_69: "ANY_HIGHSCORE_69",
+	Type.KILL_MUSHROOM_2: "KILL_MUSHROOM_2",
+	Type.GOLD_MEDALS_1: "GOLD_MEDALS_1",
+	Type.ANY_HEIGHT_500: "ANY_HEIGHT_500",
+	Type.ANY_HEIGHT_1000: "ANY_HEIGHT_1000",
+	Type.MULTIPLAYER_1: "MULTIPLAYER_1",
 }
 
 enum Type {
-	DEATHS_50,
-	DEATHS_150,
-	HIGHSCORE_60,
-	HIGHSCORE_IMP_120,
-	JUMP_TRAMP_100,
-	HIGHSCORE_APL_100,
-	APPLE_TOTAL_5k,
+	HUNTER_1,
+	ALL_DEATHS_1,
+	SHOP_1,
+	SHOP_2,
+	ANY_HIGHSCORE_60,
+	ANY_HIGHSCORE_120,
+	IMP_HIGHSCORE_180,
+	ANY_HIGHSCORE_EXACT_69,
+	KILL_MUSHROOM_2,
+	GOLD_MEDALS_1,
+	ANY_HEIGHT_500,
+	ANY_HEIGHT_1000,
+	MULTIPLAYER_1,
 }
 
 func load_achivement(type: Type) -> void:
 	var ach = Steam.getAchievement(ACHIVEMENT_IDS[type])
 	if not ach:
+		ACHIVEMENT_IDS.set(type, false)
 		return
 	
 	if not ach["ret"]:
@@ -37,7 +50,7 @@ func load_achivement(type: Type) -> void:
 func is_achived(type: Type) -> bool:
 	if !ACHIVEMENT_STATES.has(type):
 		load_achivement(type)
-		return false
+		return is_achived(type)
 		
 	return ACHIVEMENT_STATES.get(type)
 
@@ -57,6 +70,9 @@ func set_achievement(achivement_type: Type) -> void:
 func _init() -> void:
 	set_process(PROCESS_MODE_ALWAYS)
 
+func _ready() -> void:
+	GameManager.client_reset.connect(func(): ACHIVEMENT_STATES.clear())
+
 func _process(delta: float) -> void:
 	if data_upload_queued:
 		Steamworks.store_steam_data(true)
@@ -65,35 +81,174 @@ func _process(delta: float) -> void:
 	check_process_achivements()
 
 func check_process_achivements() -> void:
-	_check_highscore_achivements()
+	_check_any_highscore_60()
+	_check_any_highscore_120()
+	_check_imp_highscore_180()
+	_check_any_height_500()
+	_check_any_height_1000()
 	return
 
 #region Process Achivements
 
-func _check_highscore_achivements() -> void:
-	if not is_achived(Type.HIGHSCORE_60):
-		if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) > 60:
-			set_achievement(Type.HIGHSCORE_60)
-	
-	if not is_achived(Type.HIGHSCORE_IMP_120):
-		if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) > 120 && Difficulty.get_difficulty() == Difficulty.Type.IMPOSSIBLE:
-			set_achievement(Type.HIGHSCORE_IMP_120)
-	
-	if not is_achived(Type.HIGHSCORE_APL_100):
-		if Stats.get_recording_value(Stats.StatType.TOTAL_APPLES_COLLECTED) > 100:
-			set_achievement(Type.HIGHSCORE_APL_100)
+func _check_any_highscore_60() -> void:
+	if not is_achived(Type.ANY_HIGHSCORE_60):
+		if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) >= 60:
+			set_achievement(Type.ANY_HIGHSCORE_60)
+
+func _check_any_highscore_120() -> void:
+	if not is_achived(Type.ANY_HIGHSCORE_120):
+		if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) >= 120:
+			set_achievement(Type.ANY_HIGHSCORE_120)
+
+func _check_imp_highscore_180() -> void:
+	if not is_achived(Type.IMP_HIGHSCORE_180):
+		if Difficulty.get_difficulty() == Difficulty.Type.IMPOSSIBLE:
+			if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) >= 180:
+				set_achievement(Type.IMP_HIGHSCORE_180)
+
+func _check_any_height_500() -> void:
+	if not is_achived(Type.ANY_HEIGHT_500):
+		if Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED) >= 500:
+			set_achievement(Type.ANY_HEIGHT_500)
+
+func _check_any_height_1000() -> void:
+	if not is_achived(Type.ANY_HEIGHT_1000):
+		if Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED) >= 1000:
+			set_achievement(Type.ANY_HEIGHT_1000)
+#endregion
+
+func check_recording_achivements() -> void:
+	_check_hunter_achivement()
+	_check_kill_mushroom_2()
+	return
+
+#region Recording Achivements
+
+func _check_hunter_achivement() -> void:
+	if not is_achived(Type.HUNTER_1):
+		var rec_kills: int = 0
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_MUSHROOM)
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_TRUNK)
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_PLANT)
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_BIRD)
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_FAT_BIRD)
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_GHOST)
+		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_ROCKS)
+		
+		if rec_kills <= 0:
+			set_achievement(Type.HUNTER_1)
+
+func _check_kill_mushroom_2() -> void:
+	if not is_achived(Type.KILL_MUSHROOM_2):
+		if Stats.get_recording_value(Stats.StatType.KILLS_MUSHROOM) >= 20:
+			set_achievement(Type.KILL_MUSHROOM_2)
 
 #endregion
 
+
 func check_achivements() -> void:
-	_check_apple_achivements()
+	_check_all_deaths_1()
+	_check_shop_1()
+	_check_shop_2()
+	_check_gold_medals_1()
 	return
 
 #region Regular Acgivements
 
-func _check_apple_achivements() -> void:
-	if not is_achived(Type.APPLE_TOTAL_5k):
-		if DataManager.get_value("money") > 5000:
-			set_achievement(Type.APPLE_TOTAL_5k)
+func _check_all_deaths_1() -> void:
+	if not is_achived(Type.ALL_DEATHS_1):
+		if Stats.get_int_stat(Stats.StatType.DEATH_MUSHROOM) < 10:
+			return
+			
+		if Stats.get_int_stat(Stats.StatType.DEATH_TRUNK) < 10:
+			return
+
+		if Stats.get_int_stat(Stats.StatType.DEATH_PLANT) < 10:
+			return
+			
+		if Stats.get_int_stat(Stats.StatType.DEATH_BIRD) < 10:
+			return
+
+		if Stats.get_int_stat(Stats.StatType.DEATH_FAT_BIRD) < 10:
+			return
+			
+		if Stats.get_int_stat(Stats.StatType.DEATH_GHOST) < 10:
+			return
+
+		if Stats.get_int_stat(Stats.StatType.DEATH_ROCKS) < 10:
+			return
+			
+		if Stats.get_int_stat(Stats.StatType.DEATH_MOVING_HEAD) < 10:
+			return
+
+		if Stats.get_int_stat(Stats.StatType.DEATH_SPIKED_HEAD) < 10:
+			return
+
+		if Stats.get_int_stat(Stats.StatType.DEATH_SPIKE) < 10:
+			return
+			
+		if Stats.get_int_stat(Stats.StatType.DEATH_FIRE) < 10:
+			return
+			
+		if Stats.get_int_stat(Stats.StatType.DEATH_CLOUD) < 10:
+			return
+		
+		set_achievement(Type.ALL_DEATHS_1)
+
+func _check_shop_1() -> void:
+	if not is_achived(Type.SHOP_1):
+		var owned_skins :Dictionary = DataManager.get_value("owned_skin")
+		if owned_skins.values().has(false):
+			return
+		
+		var owned_accents :Dictionary = DataManager.get_value("owned_accent")
+		if owned_accents.values().has(false):
+			return
+			
+		var owned_themes :Dictionary = DataManager.get_value("owned_theme")
+		if owned_themes.values().has(false):
+			return
+	
+		set_achievement(Type.SHOP_1)
+
+func _check_shop_2() -> void:
+	if not is_achived(Type.SHOP_2):
+		var owned_skins :Dictionary = DataManager.get_value("owned_skin")
+		if not owned_skins.values().has(true):
+			return
+		
+		var owned_accents :Dictionary = DataManager.get_value("owned_accent")
+		if not owned_accents.values().has(true):
+			return
+			
+		var owned_themes :Dictionary = DataManager.get_value("owned_theme")
+		if not owned_themes.values().has(true):
+			return
+	
+		set_achievement(Type.SHOP_2)
+
+func _check_any_highscore_69() -> void:
+	if not is_achived(Type.ANY_HIGHSCORE_EXACT_69):
+		var time: float = Stats.get_recording_value(Stats.StatType.TIME_ALIVE)
+		if time >= 69.0 && time < 70.0:
+			set_achievement(Type.ANY_HIGHSCORE_EXACT_69)
+
+func _check_gold_medals_1() -> void:
+	if not is_achived(Type.GOLD_MEDALS_1):
+		var medal_times :Dictionary = DataManager.get_value("level_times")
+		var gold_medals: int = 0
+		for lvl_idx: String in medal_times.keys():
+			var idx: int = int(lvl_idx)
+			if not Levels.is_level_playable(idx):
+				continue
+			
+			var time: float = medal_times.get(lvl_idx)
+			var lvl_file :LevelFile = Levels.get_level(idx)
+			if time > lvl_file.gold_medal_seconds:
+				gold_medals += 1
+		
+		if gold_medals >= 10:
+			set_achievement(Type.GOLD_MEDALS_1)
+
 
 #endregion

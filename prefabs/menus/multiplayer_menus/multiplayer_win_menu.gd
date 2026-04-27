@@ -46,8 +46,7 @@ func update_board() -> void:
 
 
 func build_leaderboard() -> void:
-	var peer_list :PackedInt32Array = multiplayer.get_peers()
-	peer_list.append(multiplayer.get_unique_id())
+	var peer_list :Array[int] = Lobby.created_player_infos.keys()
 	
 	for peer: int in peer_list:
 		var card :Control = leaderboard_card.instantiate()
@@ -77,9 +76,10 @@ func clear_leaderboard() -> void:
 
 func _on_play_again_button_pressed() -> void:
 	Stats.rpc("save_and_clear_match_scores")
-	GameManager.prepare_game()
+	GameManager.replay_game()
 
 func _on_return_to_lobby_pressed() -> void:
+	Stats.rpc("save_and_clear_match_scores")
 	GameManager.return_to_lobby()
 
 func _on_settings_button_pressed() -> void:

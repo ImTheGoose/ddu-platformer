@@ -41,3 +41,5 @@ navigation_enabled = false
 tile_map_data = PackedByteArray("AAAJABAAAAAAAAAAAQAJAA8AAAAAAAAAAQAQABEAAAAAAAAAAQAXABEAAAAAAAAAAQAeABAAAAAAAAAAAQAeAA8AAAAAAAAAAQA=")
 tile_set = ExtResource("6_cioyv")
 navigation_enabled = false
+
+[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]

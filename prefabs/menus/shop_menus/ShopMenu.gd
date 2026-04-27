@@ -17,7 +17,8 @@ func _ready() -> void:
 	_refresh_shop_contents()
 
 func _on_show() -> void:
-		_refresh_shop_contents()
+	current_shop_index = _get_index_from_name(DataManager.get_value("selected_" + shop_category))
+	_refresh_shop_contents()
 
 func _on_back_pressed() -> void:
 	MenuHandler.change_menu("shop_selection_menu")
@@ -39,6 +40,13 @@ func _refresh_shop_contents() -> void:
 	else:
 		buy_button.text = "Buy"
 		price_tag.text = price_BBCode_Icon + str( int( item["price"]))
+
+func _get_index_from_name(name: String) -> int:
+	for i in shop_items.size():
+		if shop_items.get(i).name == name:
+			return i
+		
+	return 0
 
 func _on_next_pressed() -> void:
 	current_shop_index += 1

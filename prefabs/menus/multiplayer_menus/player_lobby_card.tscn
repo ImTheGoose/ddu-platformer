@@ -40,6 +40,8 @@ text = "Ping: 10ms"
 
 [node name="kick_button" type="Button" parent="." unique_id=804100480]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 8
 text = "Kick"

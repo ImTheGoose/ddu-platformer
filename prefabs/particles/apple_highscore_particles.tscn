@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://f1jx5l623brv"]
 
-[ext_resource type="Texture2D" uid="uid://u83i0nghdq00" path="res://assets/icons/star_red (16x16).png" id="1_2jmvl"]
+[ext_resource type="Texture2D" uid="uid://sy58nk467of7" path="res://assets/icons/white_star_4 (16x16).png" id="1_x1363"]
 [ext_resource type="Script" uid="uid://djwnl3rysx6jb" path="res://utility/ToggleableParticle.gd" id="2_x1363"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x1363"]
@@ -17,11 +17,11 @@ gravity = Vector3(0, 784, 0)
 scale_min = 3.0
 scale_max = 3.0
 
-[node name="apple_highscore_particles" type="GPUParticles2D" unique_id=649081215]
+[node name="height_highscore_particles" type="GPUParticles2D" unique_id=649081215]
 rotation = 0.2617994
 emitting = false
 amount = 60
-texture = ExtResource("1_2jmvl")
+texture = ExtResource("1_x1363")
 lifetime = 10.0
 one_shot = true
 explosiveness = 1.0

@@ -1,7 +1,12 @@
 extends Entity 
 
-@onready var audio_burning :AudioStreamMP3 = preload("uid://dfk3ua7m2563v")
-@onready var audio_clicked :AudioStreamMP3 = preload("uid://m6484ap3pala")
+@onready var fire_sounds :Dictionary[AudioStream, float] = {
+	preload("uid://bcaume7howqo6") : .85,
+}
+@onready var click_sounds :Dictionary[AudioStream, float] = {
+	preload("uid://m6484ap3pala") : 1.2,
+}
+@onready var fire_particle: ToggleableParticle = %Fire_Particle
 
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_area :HitArea = $HitArea
@@ -31,15 +36,17 @@ func _stop_burning() -> void:
 	hit_area.monitoring = false
 	
 func _start_burning() -> void:
+	fire_particle.restart()
+	fire_particle.emitting = true
 	anim.play("On")
 	hit_area.monitoring = true
-	AudioManager.play_global_sound(audio_burning, -10)
+	Audio.play_random_pitched(fire_sounds)
 
 @rpc("any_peer","call_local","reliable")
 func show_hit() -> void:
 	hit = true
 	anim.play("Hit")
-	AudioManager.play_global_sound(audio_clicked, -4)
+	Audio.play_random_pitched(click_sounds)
 
 func _on_player_detection_body_entered(body: Node2D) -> void:
 	if body is Player:

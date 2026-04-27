@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://cgqtqm238wgs2"]
+
+[ext_resource type="PackedScene" uid="uid://b43u7w1camr18" path="res://maps/prefabs/map_prefabs/wilfred/new_trans_wilf_04.tscn" id="1_nggk3"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="2_iscgq"]
+
+[resource]
+script = ExtResource("2_iscgq")
+prefab = ExtResource("1_nggk3")
+bottom_connection_type = 3
+top_connection_type = 4
+type = 1
+related_collections = Array[int]([2, 0])
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"

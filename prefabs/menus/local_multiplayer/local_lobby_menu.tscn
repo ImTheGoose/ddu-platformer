@@ -1,0 +1,238 @@
+[gd_scene format=3 uid="uid://criga4ycsc7u6"]
+
+[ext_resource type="Script" uid="uid://kpfe0p8lgisg" path="res://prefabs/menus/local_multiplayer/local_lobby_menu.gd" id="1_aje52"]
+[ext_resource type="Script" uid="uid://c3w0wymavhaq6" path="res://prefabs/menus/multiplayer_menus/lobby_game_settings.gd" id="2_bni2x"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wdrp6"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+color = Color(1, 1, 1, 0.09019608)
+grow_begin = 2.0
+grow_end = 2.0
+thickness = 3
+vertical = true
+
+[node name="LocalLobbyMenu" type="VBoxContainer" unique_id=2055560422 node_paths=PackedStringArray("initial_focus", "back_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.5
+offset_top = -79.0
+offset_right = 128.5
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aje52")
+menu_name = "local_lobby_menu"
+initial_focus = NodePath("VBoxContainer/quit_lobby")
+back_button = NodePath("VBoxContainer/quit_lobby")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="." unique_id=651735823]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer3" unique_id=34160722]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="Label" type="Label" parent="VBoxContainer3/VBoxContainer2" unique_id=1013216083]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Multiplayer"
+horizontal_alignment = 1
+
+[node name="player_amount_label" type="Label" parent="VBoxContainer3/VBoxContainer2" unique_id=50092993]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Players: 1 of 4"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer3" unique_id=1010588640]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer3/PanelContainer" unique_id=1840384036]
+layout_mode = 2
+
+[node name="player_parts" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2" unique_id=1644860830]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/player_parts" unique_id=1472002521]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="playerlist" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/player_parts/VBoxContainer" unique_id=1445892829]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="instruction_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/player_parts/VBoxContainer" unique_id=1480753635]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6666667)
+layout_mode = 2
+text = "   Press START or W to join..."
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer3/PanelContainer/HBoxContainer2" unique_id=1792225327]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxLine_wdrp6")
+
+[node name="settings_parts" type="VBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2" unique_id=56313280]
+layout_mode = 2
+script = ExtResource("2_bni2x")
+
+[node name="difficulty_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=609237484]
+layout_mode = 2
+
+[node name="difficulty_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/difficulty_setting" unique_id=1069863179]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Difficulty: "
+vertical_alignment = 1
+
+[node name="difficulty_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/difficulty_setting" unique_id=207483185]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 5
+popup/item_0/text = "Very Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Easy"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Hard"
+popup/item_3/id = 3
+popup/item_4/text = "Impossible"
+popup/item_4/id = 4
+
+[node name="rounds_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=1092571187]
+layout_mode = 2
+
+[node name="rounds_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/rounds_setting" unique_id=1413498397]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Rounds to Win: "
+vertical_alignment = 1
+
+[node name="rounds_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/rounds_setting" unique_id=55691499]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 6
+popup/item_0/text = "1 round"
+popup/item_0/id = 1
+popup/item_1/text = "2 rounds"
+popup/item_1/id = 2
+popup/item_2/text = "3 rounds"
+popup/item_2/id = 3
+popup/item_3/text = "5 rounds"
+popup/item_3/id = 5
+popup/item_4/text = "10 rounds"
+popup/item_4/id = 10
+popup/item_5/text = "20 rounds"
+popup/item_5/id = 20
+
+[node name="collision_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=316799556]
+layout_mode = 2
+
+[node name="collission_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1683623384]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Collissions: "
+vertical_alignment = 1
+
+[node name="collission_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/collision_setting" unique_id=1977480241]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 2
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+
+[node name="gamemode_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=2070748707]
+layout_mode = 2
+
+[node name="gamemode_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1660634735]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Gamemode: "
+vertical_alignment = 1
+
+[node name="gamemode_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1291943177]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "Standard"
+popup/item_0/id = 0
+popup/item_1/text = "Constant"
+popup/item_1/id = 1
+
+[node name="map_collection_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=68486791]
+layout_mode = 2
+
+[node name="map_collection_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=117222289]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Collection: "
+vertical_alignment = 1
+
+[node name="map_collection_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=1183251566]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "Standard"
+popup/item_0/id = 0
+popup/item_1/text = "Constant"
+popup/item_1/id = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1200886208]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="start_game_button" type="Button" parent="VBoxContainer" unique_id=1649323693]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../HBoxContainer2/customize_button")
+disabled = true
+text = "Start Game"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1001106178]
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=2071466162]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="customize_button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1576135162]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Customize"
+
+[node name="quit_lobby" type="Button" parent="VBoxContainer" unique_id=1172475521]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer2/customize_button")
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/customize_button" to="." method="_on_customize_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/quit_lobby" to="." method="_on_quit_lobby_pressed"]
