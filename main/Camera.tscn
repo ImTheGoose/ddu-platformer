@@ -31,7 +31,6 @@ stream = ExtResource("2_tmh5c")
 volume_db = -18.0
 autoplay = true
 bus = &"Music"
-parameters/looping = false
 
 [node name="bottom_cloud" parent="." unique_id=1132194549 instance=ExtResource("28_anor8")]
 z_index = 9
