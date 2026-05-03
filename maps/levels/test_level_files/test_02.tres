@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("5_we70n")
-map_index = 2
+map_index = 16
 end_map_file = ExtResource("1_05d2s")
 ordered_map_files = Array[ExtResource("2_op0df")]([ExtResource("3_05d2s"), ExtResource("4_op0df")])
 start_map_file = ExtResource("6_fvr6q")
