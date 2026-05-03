@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_b1uas")
-map_index = 15
+map_index = 1
 gold_medal_seconds = 50.0
 silver_medal_seconds = 97.0
 end_map_file = ExtResource("1_xq8a7")

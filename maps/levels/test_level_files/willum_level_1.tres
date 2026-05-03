@@ -14,7 +14,7 @@
 
 [resource]
 script = ExtResource("2_yv7mi")
-map_index = 1
+map_index = 3
 gold_medal_seconds = 30.0
 silver_medal_seconds = 40.0
 bronze_medal_seconds = 50.0

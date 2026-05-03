@@ -3,12 +3,20 @@
 [ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_5vpfw"]
 [ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="1_pgd6b"]
 [ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="2_q7f06"]
-[ext_resource type="Resource" uid="uid://mophq801tnow" path="res://maps/map_files/default/start_02.tres" id="4_ej8x6"]
+[ext_resource type="Resource" uid="uid://34bww7sykwsp" path="res://maps/map_files/willum/new maps/willum_map_13.tres" id="3_56et5"]
+[ext_resource type="Resource" uid="uid://c5o1tf0kulhlm" path="res://maps/map_files/willum/new transitions/willum_trans_12.tres" id="4_uxomc"]
+[ext_resource type="Resource" uid="uid://cccjhsdtd6ekk" path="res://maps/map_files/willum/new maps/willum_map_18.tres" id="5_ouj6w"]
+[ext_resource type="Resource" uid="uid://c5o14gvumcxt7" path="res://maps/map_files/wilfred/new_trans_wilf_06.tres" id="6_cwrjb"]
+[ext_resource type="Resource" uid="uid://dvjxpbelw12da" path="res://maps/map_files/willum/new maps/willum_map_10.tres" id="7_m8xlf"]
+[ext_resource type="Resource" uid="uid://ipf4xtebc2sp" path="res://maps/map_files/default/start_04.tres" id="9_56et5"]
 
 [resource]
 script = ExtResource("2_q7f06")
-map_index = 9
+map_index = 13
+gold_medal_seconds = 40.0
+silver_medal_seconds = 45.0
+bronze_medal_seconds = 50.0
 end_map_file = ExtResource("1_pgd6b")
-ordered_map_files = Array[ExtResource("1_5vpfw")]([null])
-start_map_file = ExtResource("4_ej8x6")
+ordered_map_files = Array[ExtResource("1_5vpfw")]([ExtResource("3_56et5"), ExtResource("4_uxomc"), ExtResource("5_ouj6w"), ExtResource("6_cwrjb"), ExtResource("7_m8xlf")])
+start_map_file = ExtResource("9_56et5")
 metadata/_custom_type_script = "uid://h3dsm18hywkb"

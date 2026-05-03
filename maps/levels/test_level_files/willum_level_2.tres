@@ -13,7 +13,7 @@
 
 [resource]
 script = ExtResource("2_putac")
-map_index = 2
+map_index = 4
 gold_medal_seconds = 35.0
 silver_medal_seconds = 40.0
 bronze_medal_seconds = 45.0
