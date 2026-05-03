@@ -38,7 +38,7 @@ enum Type {
 func load_achivement(type: Type) -> void:
 	var ach = Steam.getAchievement(ACHIVEMENT_IDS[type])
 	if not ach:
-		ACHIVEMENT_IDS.set(type, false)
+		ACHIVEMENT_STATES.set(type, false)
 		return
 	
 	if not ach["ret"]:
@@ -126,17 +126,22 @@ func check_recording_achivements() -> void:
 
 func _check_hunter_achivement() -> void:
 	if not is_achived(Type.HUNTER_1):
-		var rec_kills: int = 0
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_MUSHROOM)
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_TRUNK)
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_PLANT)
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_BIRD)
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_FAT_BIRD)
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_GHOST)
-		rec_kills += Stats.get_recording_value(Stats.StatType.KILLS_ROCKS)
-		
-		if rec_kills <= 0:
-			set_achievement(Type.HUNTER_1)
+		if Stats.get_recording_value(Stats.StatType.KILLS_MUSHROOM) <= 0:
+			return
+		if Stats.get_recording_value(Stats.StatType.KILLS_TRUNK) <= 0:
+			return
+		if Stats.get_recording_value(Stats.StatType.KILLS_PLANT) <= 0:
+			return
+		if Stats.get_recording_value(Stats.StatType.KILLS_BIRD) <= 0:
+			return
+		if Stats.get_recording_value(Stats.StatType.KILLS_FAT_BIRD) <= 0:
+			return
+		if Stats.get_recording_value(Stats.StatType.KILLS_GHOST) <= 0:
+			return
+		if Stats.get_recording_value(Stats.StatType.KILLS_ROCKS) <= 0:
+			return
+			
+		set_achievement(Type.HUNTER_1)
 
 func _check_kill_mushroom_2() -> void:
 	if not is_achived(Type.KILL_MUSHROOM_2):

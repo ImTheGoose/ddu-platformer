@@ -16,10 +16,10 @@ func _on_body_entered(body: Node2D) -> void:
 		if not body.is_multiplayer_authority():
 			return
 
-		await get_tree().physics_frame
-		if hitbox_component:
-			if hitbox_component.killed_peer_id == body.get_multiplayer_authority():
-				return
+		#await get_tree().physics_frame
+		#if hitbox_component:
+			#if hitbox_component.killed_peer_id == body.get_multiplayer_authority():
+				#return
 		
 
 		if not health_component.is_dead():

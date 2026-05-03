@@ -64,16 +64,13 @@ script = ExtResource("5_tma4l")
 reference_sprite = NodePath("..")
 metadata/_custom_type_script = "uid://chtpoo5ghxe81"
 
-[node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component", "kill_height_node", "entity_node")]
+[node name="HitBoxComponent" type="Area2D" parent="." unique_id=765693302 node_paths=PackedStringArray("knockback_origin_node", "health_component")]
 collision_layer = 4
 collision_mask = 12
 script = ExtResource("4_rr74u")
 kill_type = 0
 knockback_origin_node = NodePath("..")
 health_component = NodePath("../HealthComponent")
-kill_height_node = NodePath("../HeadPosition")
-kill_veloctiy_treshold = 100.0
-entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://ctdx2sf6uo7rq"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=2094285354]
@@ -82,15 +79,22 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_4axyd")
 debug_color = Color(0.9098039, 0.29803923, 0.06666667, 0.41960785)
 
-[node name="HealthComponent" type="Node" parent="." unique_id=1978801922 node_paths=PackedStringArray("entity_node")]
-script = ExtResource("4_f8aov")
-entity_node = NodePath("..")
-metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
-
 [node name="PathDetectionComponent" type="RayCast2D" parent="." unique_id=907221168 node_paths=PackedStringArray("entity_node")]
 script = ExtResource("7_f8aov")
 entity_node = NodePath("..")
 metadata/_custom_type_script = "uid://ddrne3nd443y"
+
+[node name="HeadPosition" type="Node2D" parent="." unique_id=869701399]
+position = Vector2(0, -8)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=872326401]
+position = Vector2(-2, -4)
+rect = Rect2(-5, -3, 15, 13)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1978801922 node_paths=PackedStringArray("entity_node")]
+script = ExtResource("4_f8aov")
+entity_node = NodePath("..")
+metadata/_custom_type_script = "uid://dmdcnr1nt4d2p"
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1332190548 node_paths=PackedStringArray("entity_root", "health_component")]
 script = ExtResource("8_fiqdt")
@@ -112,16 +116,6 @@ footstep_pitch_offset = 1.2
 seconds_between_footsteps = 0.38
 metadata/_custom_type_script = "uid://c5lwrhejxb5m0"
 
-[node name="HeadPosition" type="Node2D" parent="." unique_id=869701399]
-position = Vector2(0, -8)
-
-[node name="PointTargetingComponent" type="Node" parent="." unique_id=353468636 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
-script = ExtResource("9_tma4l")
-entity_node = NodePath("..")
-path_detection_component = NodePath("../PathDetectionComponent")
-movement_component = NodePath("../MovementComponent")
-metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"
-
 [node name="ParticleEmitionComponent" type="Node" parent="." unique_id=2002162266 node_paths=PackedStringArray("entity_node", "health_compnent", "death_particle_list", "movement_component", "moving_particles")]
 script = ExtResource("12_jmno3")
 entity_node = NodePath("..")
@@ -131,6 +125,9 @@ movement_component = NodePath("../MovementComponent")
 moving_particles = [NodePath("../dust_particles")]
 metadata/_custom_type_script = "uid://duvb1g24g8584"
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=872326401]
-position = Vector2(-2, -4)
-rect = Rect2(-5, -3, 15, 13)
+[node name="PointTargetingComponent" type="Node" parent="." unique_id=353468636 node_paths=PackedStringArray("entity_node", "path_detection_component", "movement_component")]
+script = ExtResource("9_tma4l")
+entity_node = NodePath("..")
+path_detection_component = NodePath("../PathDetectionComponent")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://bcsj0r6b8j5fv"

@@ -92,3 +92,4 @@ func _buy(item: Dictionary) -> void:
 	owned_contents[item["name"]] = true
 	DataManager.set_value("owned_" + shop_category, owned_contents)
 	DataManager.save_game_data()
+	Achivements.check_achivements()

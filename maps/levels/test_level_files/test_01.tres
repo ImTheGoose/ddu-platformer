@@ -9,9 +9,10 @@
 [resource]
 script = ExtResource("2_b1uas")
 map_index = 1
-gold_medal_seconds = 50.0
-silver_medal_seconds = 97.0
+gold_medal_seconds = 10.0
+silver_medal_seconds = 15.0
+bronze_medal_seconds = 22.5
 end_map_file = ExtResource("1_xq8a7")
-ordered_map_files = Array[ExtResource("1_7r4gq")]([ExtResource("3_ixo04")])
+ordered_map_files = Array[ExtResource("1_7r4gq")]([ExtResource("3_ixo04"), null, null, null, null, null, null, null, null, null])
 start_map_file = ExtResource("6_4dpi2")
 metadata/_custom_type_script = "uid://h3dsm18hywkb"

@@ -107,10 +107,16 @@ func is_valid() -> bool:
 		return false
 	
 	var first_map: MapFile = ordered_map_files.get(0)
+	if not first_map:
+		return false
+	
 	if start_map_file.top_connection_type != first_map.bottom_connection_type:
 		return false
 	
 	var last_map :MapFile = ordered_map_files.back()
+	if not last_map:
+		return false
+		
 	if last_map.top_connection_type != end_map_file.bottom_connection_type:
 		return false
 	

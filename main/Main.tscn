@@ -231,17 +231,17 @@ script = ExtResource("2_5mvff")
 [node name="map_generator" type="Node2D" parent="game_container" unique_id=490215912 node_paths=PackedStringArray("multiplayer_spawner")]
 script = ExtResource("3_cm0pq")
 initial_height = 400
-multiplayer_spawner = NodePath("../MultiplayerSpawner")
+multiplayer_spawner = NodePath("../MapSpawner")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=987899368]
+[node name="MapSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=987899368]
 spawn_path = NodePath("../map_generator")
+
+[node name="player_container" type="Node2D" parent="game_container" unique_id=418401319]
+position = Vector2(-600, 600)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="game_container" unique_id=408371865]
 spawn_path = NodePath("../player_container")
 script = ExtResource("10_m4geg")
-
-[node name="player_container" type="Node2D" parent="game_container" unique_id=418401319]
-position = Vector2(-600, 600)
 
 [node name="entity_container" type="Node2D" parent="game_container" unique_id=1006682291]
 
@@ -328,7 +328,7 @@ anim = NodePath("transition_animation")
 libraries/ = SubResource("AnimationLibrary_0ctog")
 speed_scale = 1.7
 
-[node name="Control2" type="Control" parent="CanvasLayer" unique_id=402108351]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=402108351]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 8
@@ -343,14 +343,14 @@ offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UI" type="Control" parent="CanvasLayer/Control2" unique_id=603484217]
+[node name="UI" type="Control" parent="CanvasLayer/Control" unique_id=603484217]
 custom_minimum_size = Vector2(480, 270)
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 270.0
 scale = Vector2(4, 4)
 
-[node name="fruit_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=18256417]
+[node name="fruit_label" type="RichTextLabel" parent="CanvasLayer/Control/UI" unique_id=18256417]
 layout_mode = 1
 offset_right = 470.0
 offset_bottom = 16.000002
@@ -360,7 +360,7 @@ text = "[img]res://assets/pixel_adventure_assets/Items/Fruits/Apple_16x16.png[/i
 fit_content = true
 script = ExtResource("20_mwi54")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/UI" unique_id=198991718 node_paths=PackedStringArray("time_label", "height_label")]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/UI" unique_id=198991718 node_paths=PackedStringArray("time_label", "height_label")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -374,7 +374,7 @@ script = ExtResource("30_7867i")
 time_label = NodePath("time_label")
 height_label = NodePath("height_label")
 
-[node name="height_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI/VBoxContainer" unique_id=146384529]
+[node name="height_label" type="RichTextLabel" parent="CanvasLayer/Control/UI/VBoxContainer" unique_id=146384529]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -382,7 +382,7 @@ text = "Height: %s"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI/VBoxContainer" unique_id=103873068]
+[node name="time_label" type="RichTextLabel" parent="CanvasLayer/Control/UI/VBoxContainer" unique_id=103873068]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/normal_font = SubResource("FontVariation_7867i")
@@ -391,7 +391,7 @@ text = "Time: %s"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="fps_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=640249096]
+[node name="fps_label" type="RichTextLabel" parent="CanvasLayer/Control/UI" unique_id=640249096]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 2.0
@@ -403,7 +403,7 @@ text = "FPS: 1000"
 fit_content = true
 script = ExtResource("22_x4tdt")
 
-[node name="state_label" type="RichTextLabel" parent="CanvasLayer/Control2/UI" unique_id=992608984]
+[node name="state_label" type="RichTextLabel" parent="CanvasLayer/Control/UI" unique_id=992608984]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -415,7 +415,7 @@ text = "FPS: 1000"
 fit_content = true
 script = ExtResource("23_bbkfx")
 
-[node name="version_label" type="Label" parent="CanvasLayer/Control2/UI" unique_id=695760526]
+[node name="version_label" type="Label" parent="CanvasLayer/Control/UI" unique_id=695760526]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.008
@@ -429,7 +429,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
 theme_override_font_sizes/font_size = 16
 text = "Visual-4"
 
-[node name="Control" type="Control" parent="CanvasLayer/Control2/UI" unique_id=2074147487]
+[node name="Control" type="Control" parent="CanvasLayer/Control/UI" unique_id=2074147487]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -439,26 +439,26 @@ offset_bottom = 40.0
 grow_horizontal = 0
 script = ExtResource("24_0c1fb")
 
-[node name="Control" type="Control" parent="CanvasLayer/Control2" unique_id=736624335]
+[node name="Menus" type="Control" parent="CanvasLayer/Control" unique_id=736624335]
 z_index = 3
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 270.0
 scale = Vector2(4, 4)
 
-[node name="main_menu" parent="CanvasLayer/Control2/Control" unique_id=1922624189 instance=ExtResource("25_fw23c")]
+[node name="main_menu" parent="CanvasLayer/Control/Menus" unique_id=1922624189 instance=ExtResource("25_fw23c")]
 visible = false
 layout_mode = 1
 
-[node name="level_overview_menu" parent="CanvasLayer/Control2/Control" unique_id=1150293006 instance=ExtResource("26_sebc1")]
+[node name="level_overview_menu" parent="CanvasLayer/Control/Menus" unique_id=1150293006 instance=ExtResource("26_sebc1")]
 visible = false
 layout_mode = 1
 
-[node name="level_select_menu" parent="CanvasLayer/Control2/Control" unique_id=160876120 instance=ExtResource("26_0d5nc")]
+[node name="level_select_menu" parent="CanvasLayer/Control/Menus" unique_id=160876120 instance=ExtResource("26_0d5nc")]
 visible = false
 layout_mode = 1
 
-[node name="LocalLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2055560422 instance=ExtResource("34_7867i")]
+[node name="LocalLobbyMenu" parent="CanvasLayer/Control/Menus" unique_id=2055560422 instance=ExtResource("34_7867i")]
 visible = false
 layout_mode = 1
 offset_left = -141.0
@@ -466,73 +466,73 @@ offset_top = -99.0
 offset_right = 141.0
 offset_bottom = 99.0
 
-[node name="settings_menu" parent="CanvasLayer/Control2/Control" unique_id=463999452 instance=ExtResource("26_7867i")]
+[node name="settings_menu" parent="CanvasLayer/Control/Menus" unique_id=463999452 instance=ExtResource("26_7867i")]
 visible = false
 layout_mode = 1
 offset_left = -79.5
 offset_right = 79.5
 
-[node name="statistics_menu" parent="CanvasLayer/Control2/Control" unique_id=1022312052 instance=ExtResource("27_q4fed")]
+[node name="statistics_menu" parent="CanvasLayer/Control/Menus" unique_id=1022312052 instance=ExtResource("27_q4fed")]
 visible = false
 layout_mode = 1
 
-[node name="keybinds_menu" parent="CanvasLayer/Control2/Control" unique_id=1372291090 instance=ExtResource("28_7glbu")]
+[node name="keybinds_menu" parent="CanvasLayer/Control/Menus" unique_id=1372291090 instance=ExtResource("28_7glbu")]
 visible = false
 layout_mode = 1
 offset_left = -81.5
 offset_right = 81.5
 
-[node name="start_game_menu" parent="CanvasLayer/Control2/Control" unique_id=1988316049 instance=ExtResource("29_eh0ei")]
+[node name="start_game_menu" parent="CanvasLayer/Control/Menus" unique_id=1988316049 instance=ExtResource("29_eh0ei")]
 visible = false
 layout_mode = 1
 offset_left = -54.5
 offset_right = 54.5
 
-[node name="shop_skin_menu" parent="CanvasLayer/Control2/Control" unique_id=1491830652 instance=ExtResource("30_xqrlm")]
+[node name="shop_skin_menu" parent="CanvasLayer/Control/Menus" unique_id=1491830652 instance=ExtResource("30_xqrlm")]
 visible = false
 layout_mode = 1
 offset_left = -100.0
 offset_right = 100.0
 
-[node name="shop_accent_menu" parent="CanvasLayer/Control2/Control" unique_id=411804758 instance=ExtResource("31_f2dvo")]
+[node name="shop_accent_menu" parent="CanvasLayer/Control/Menus" unique_id=411804758 instance=ExtResource("31_f2dvo")]
 visible = false
 layout_mode = 1
 
-[node name="shop_theme_menu" parent="CanvasLayer/Control2/Control" unique_id=1320604940 instance=ExtResource("32_fcwsn")]
+[node name="shop_theme_menu" parent="CanvasLayer/Control/Menus" unique_id=1320604940 instance=ExtResource("32_fcwsn")]
 visible = false
 layout_mode = 1
 
-[node name="shop_selection_menu" parent="CanvasLayer/Control2/Control" unique_id=2104256746 instance=ExtResource("33_lmgwd")]
+[node name="shop_selection_menu" parent="CanvasLayer/Control/Menus" unique_id=2104256746 instance=ExtResource("33_lmgwd")]
 visible = false
 layout_mode = 1
 
-[node name="pause_menu" parent="CanvasLayer/Control2/Control" unique_id=710775371 instance=ExtResource("34_mm6gd")]
+[node name="pause_menu" parent="CanvasLayer/Control/Menus" unique_id=710775371 instance=ExtResource("34_mm6gd")]
 visible = false
 layout_mode = 1
 
-[node name="death_menu" parent="CanvasLayer/Control2/Control" unique_id=1525325848 instance=ExtResource("35_cyktq")]
+[node name="death_menu" parent="CanvasLayer/Control/Menus" unique_id=1525325848 instance=ExtResource("35_cyktq")]
 visible = false
 layout_mode = 1
 
-[node name="changelog_popup" parent="CanvasLayer/Control2/Control" unique_id=272473621 instance=ExtResource("36_dwegs")]
+[node name="changelog_popup" parent="CanvasLayer/Control/Menus" unique_id=272473621 instance=ExtResource("36_dwegs")]
 visible = false
 layout_mode = 1
 
-[node name="steam_error_popup" parent="CanvasLayer/Control2/Control" unique_id=1151020849 instance=ExtResource("37_jox3r")]
+[node name="steam_error_popup" parent="CanvasLayer/Control/Menus" unique_id=1151020849 instance=ExtResource("37_jox3r")]
 visible = false
 layout_mode = 1
 
-[node name="reset_game_popup" parent="CanvasLayer/Control2/Control" unique_id=337198406 instance=ExtResource("38_a50qv")]
+[node name="reset_game_popup" parent="CanvasLayer/Control/Menus" unique_id=337198406 instance=ExtResource("38_a50qv")]
 visible = false
 layout_mode = 1
 
-[node name="MultiplayerJoinMenu" parent="CanvasLayer/Control2/Control" unique_id=1617029824 instance=ExtResource("39_fo4ku")]
+[node name="MultiplayerJoinMenu" parent="CanvasLayer/Control/Menus" unique_id=1617029824 instance=ExtResource("39_fo4ku")]
 visible = false
 layout_mode = 1
 offset_top = -52.5
 offset_bottom = 52.5
 
-[node name="MultiplayerTypeMenu" parent="CanvasLayer/Control2/Control" unique_id=708408861 instance=ExtResource("40_s28qt")]
+[node name="MultiplayerTypeMenu" parent="CanvasLayer/Control/Menus" unique_id=708408861 instance=ExtResource("40_s28qt")]
 visible = false
 layout_mode = 1
 offset_left = -108.5
@@ -540,7 +540,7 @@ offset_top = -60.5
 offset_right = 108.5
 offset_bottom = 60.5
 
-[node name="MultiplayerSelectMenu" parent="CanvasLayer/Control2/Control" unique_id=846156382 instance=ExtResource("41_cokwo")]
+[node name="MultiplayerSelectMenu" parent="CanvasLayer/Control/Menus" unique_id=846156382 instance=ExtResource("41_cokwo")]
 visible = false
 layout_mode = 1
 offset_left = -103.5
@@ -548,7 +548,7 @@ offset_top = -60.5
 offset_right = 103.5
 offset_bottom = 60.5
 
-[node name="SelectPlayMenu" parent="CanvasLayer/Control2/Control" unique_id=297666541 instance=ExtResource("42_nqj1c")]
+[node name="SelectPlayMenu" parent="CanvasLayer/Control/Menus" unique_id=297666541 instance=ExtResource("42_nqj1c")]
 visible = false
 layout_mode = 1
 offset_left = -114.0
@@ -556,11 +556,11 @@ offset_top = -72.0
 offset_right = 114.0
 offset_bottom = 72.0
 
-[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control2/Control" unique_id=2130961134 instance=ExtResource("43_frehf")]
+[node name="MultiplayerLobbyMenu" parent="CanvasLayer/Control/Menus" unique_id=2130961134 instance=ExtResource("43_frehf")]
 visible = false
 layout_mode = 1
 
-[node name="MultiplayerStatusMenu" parent="CanvasLayer/Control2/Control" unique_id=840786237 instance=ExtResource("44_y6p51")]
+[node name="MultiplayerStatusMenu" parent="CanvasLayer/Control/Menus" unique_id=840786237 instance=ExtResource("44_y6p51")]
 visible = false
 layout_mode = 1
 offset_left = -116.5
@@ -568,7 +568,7 @@ offset_top = -37.5
 offset_right = 116.5
 offset_bottom = 37.5
 
-[node name="MultiplayerWinMenu" parent="CanvasLayer/Control2/Control" unique_id=302228853 instance=ExtResource("45_w5bkj")]
+[node name="MultiplayerWinMenu" parent="CanvasLayer/Control/Menus" unique_id=302228853 instance=ExtResource("45_w5bkj")]
 visible = false
 layout_mode = 1
 offset_left = -65.0
@@ -576,7 +576,7 @@ offset_top = -49.0
 offset_right = 65.0
 offset_bottom = 49.0
 
-[node name="MultiplayerRoundWinMenu" parent="CanvasLayer/Control2/Control" unique_id=107251656 instance=ExtResource("46_yq2hq")]
+[node name="MultiplayerRoundWinMenu" parent="CanvasLayer/Control/Menus" unique_id=107251656 instance=ExtResource("46_yq2hq")]
 visible = false
 layout_mode = 1
 offset_left = -99.0
