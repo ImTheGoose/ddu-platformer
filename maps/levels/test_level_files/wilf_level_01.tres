@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://3nsdxje0qi5e"]
+
+[ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="1_fxl0v"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_uvs5l"]
+[ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="2_yn3we"]
+[ext_resource type="Resource" uid="uid://c1ut1n7sf72y8" path="res://maps/map_files/wilfred/new_wilf_06.tres" id="3_04ggf"]
+[ext_resource type="Resource" uid="uid://b4fdh44xpyuc3" path="res://maps/map_files/david/trans_08.tres" id="3_bpcnx"]
+[ext_resource type="Resource" uid="uid://bek5luyx7cmsy" path="res://maps/map_files/wilfred/new_wilf_20.tres" id="4_1yn6r"]
+[ext_resource type="Resource" uid="uid://dxckta52atfcu" path="res://maps/map_files/david/trans_02.tres" id="5_sdxkh"]
+[ext_resource type="Resource" uid="uid://de7p8kn4l6uuu" path="res://maps/map_files/wilfred/wilf_trans_04.tres" id="7_si1o2"]
+[ext_resource type="Resource" uid="uid://6f8mbpcmnysd" path="res://maps/map_files/david/trans_05.tres" id="8_04ggf"]
+[ext_resource type="Resource" uid="uid://bmh70kb3b7gox" path="res://maps/map_files/default/start_05.tres" id="9_bpcnx"]
+
+[resource]
+script = ExtResource("2_yn3we")
+map_index = 3
+gold_medal_seconds = 29.0
+silver_medal_seconds = 42.0
+bronze_medal_seconds = 60.0
+end_map_file = ExtResource("1_fxl0v")
+ordered_map_files = Array[ExtResource("1_uvs5l")]([ExtResource("3_bpcnx"), ExtResource("3_04ggf"), ExtResource("5_sdxkh"), ExtResource("4_1yn6r"), ExtResource("7_si1o2"), ExtResource("3_bpcnx"), ExtResource("8_04ggf")])
+start_map_file = ExtResource("9_bpcnx")
+metadata/_custom_type_script = "uid://h3dsm18hywkb"

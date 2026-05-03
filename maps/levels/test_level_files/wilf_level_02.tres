@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LevelFile" format=3]
+
+[ext_resource type="Script" path="res://maps/MapFile.gd" id="1_ib1yo"]
+[ext_resource type="Resource" path="res://maps/map_files/default/end_01.tres" id="1_r4jtq"]
+[ext_resource type="Script" path="res://maps/levels/LevelFile.gd" id="2_pdheo"]
+[ext_resource type="Resource" path="res://maps/map_files/david/trans_03.tres" id="3_5fdbn"]
+[ext_resource type="Resource" path="res://maps/map_files/willum/new transitions/willum_trans_03.tres" id="4_5fdbn"]
+[ext_resource type="Resource" path="res://maps/map_files/wilfred/wilf_trans_02.tres" id="6_3pj6v"]
+[ext_resource type="Resource" path="res://maps/map_files/willum/new maps/willum_map_10.tres" id="6_5fdbn"]
+[ext_resource type="Resource" path="res://maps/map_files/wilfred/new_trans_wilf_09.tres" id="7_5fdbn"]
+[ext_resource type="Resource" path="res://maps/map_files/wilfred/new_wilf_13.tres" id="7_8ca7g"]
+[ext_resource type="Resource" path="res://maps/map_files/wilfred/new_trans_wilf_10.tres" id="8_3pj6v"]
+[ext_resource type="Resource" path="res://maps/map_files/default/start_04.tres" id="9_pe1dc"]
+
+[resource]
+script = ExtResource("2_pdheo")
+map_index = 4
+gold_medal_seconds = 33.0
+silver_medal_seconds = 44.0
+bronze_medal_seconds = 55.0
+end_map_file = ExtResource("1_r4jtq")
+ordered_map_files = Array[ExtResource("1_ib1yo")]([ExtResource("3_5fdbn"), ExtResource("4_5fdbn"), ExtResource("6_5fdbn"), ExtResource("6_3pj6v"), ExtResource("7_5fdbn"), ExtResource("8_3pj6v"), ExtResource("7_8ca7g")])
+start_map_file = ExtResource("9_pe1dc")
+metadata/_custom_type_script = "uid://h3dsm18hywkb"

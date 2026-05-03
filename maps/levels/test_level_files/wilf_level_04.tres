@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://diigtqsraylgh"]
+
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_rm1yr"]
+[ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="2_2bfho"]
+[ext_resource type="Resource" uid="uid://dxckta52atfcu" path="res://maps/map_files/david/trans_02.tres" id="3_wtwda"]
+[ext_resource type="Resource" uid="uid://c5q5vdfg4a0bu" path="res://maps/map_files/wilfred/new_trans_wilf_12.tres" id="5_hqkvd"]
+[ext_resource type="Resource" uid="uid://dvfa3pauo8tnm" path="res://maps/map_files/wilfred/wilf_map_13.tres" id="6_bsjhe"]
+[ext_resource type="Resource" uid="uid://qbeawxeev7fd" path="res://maps/map_files/wilfred/new_trans_wilf_11.tres" id="7_5vi7o"]
+[ext_resource type="PackedScene" uid="uid://d0bwtu8rcbmso" path="res://maps/prefabs/map_prefabs/willum/new transitions/willum_trans_08.tscn" id="7_jcjl7"]
+[ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="8_5ghi5"]
+[ext_resource type="Resource" uid="uid://yjb44bdyxvi5" path="res://maps/map_files/david/trans_03.tres" id="9_5ghi5"]
+[ext_resource type="Resource" uid="uid://duv018lfnkilu" path="res://maps/map_files/wilfred/wilf_trans_05.tres" id="9_bsjhe"]
+[ext_resource type="Resource" uid="uid://c5mklq86764k7" path="res://maps/map_files/willum/new transitions/willum_trans_04.tres" id="10_5ghi5"]
+[ext_resource type="Resource" uid="uid://cl6h4nc37de5o" path="res://maps/map_files/willum/new transitions/willum_trans_01.tres" id="11_nfswx"]
+[ext_resource type="Resource" uid="uid://chpdk7h3exelj" path="res://maps/map_files/default/start_03.tres" id="12_bsjhe"]
+
+[sub_resource type="Resource" id="Resource_bsjhe"]
+script = ExtResource("1_rm1yr")
+prefab = ExtResource("7_jcjl7")
+top_connection_type = 3
+type = 1
+related_collections = Array[int]([2, 0])
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
+
+[resource]
+script = ExtResource("2_2bfho")
+map_index = 5
+gold_medal_seconds = 38.0
+silver_medal_seconds = 53.0
+bronze_medal_seconds = 70.0
+end_map_file = ExtResource("8_5ghi5")
+ordered_map_files = Array[ExtResource("1_rm1yr")]([ExtResource("3_wtwda"), ExtResource("6_bsjhe"), ExtResource("5_hqkvd"), ExtResource("7_5vi7o"), SubResource("Resource_bsjhe"), ExtResource("9_bsjhe"), ExtResource("9_5ghi5"), ExtResource("10_5ghi5"), ExtResource("11_nfswx")])
+start_map_file = ExtResource("12_bsjhe")
+metadata/_custom_type_script = "uid://h3dsm18hywkb"
