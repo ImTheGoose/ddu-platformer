@@ -119,10 +119,7 @@ func get_next_map_section(current_connection: MapFile.ConnectionType) -> Array[M
 			return [current_level_file.end_map_file]
 		
 		return [blank_space_map]
-		
 	
-	var section :Array[MapFile] = []
-
 	if current_map_pool.is_empty():
 		current_map_pool = get_valid_maps(MapFile.MapType.REGULAR_MAP)
 		current_map_pool.shuffle()
@@ -131,7 +128,7 @@ func get_next_map_section(current_connection: MapFile.ConnectionType) -> Array[M
 	if next_map.bottom_connection_type == current_connection:
 		return [next_map]
 	
-	section = get_transition_section(current_connection, next_map.bottom_connection_type)
+	var section :Array[MapFile] = get_transition_section(current_connection, next_map.bottom_connection_type)
 	section.append(next_map)
 	
 	return section
@@ -139,16 +136,15 @@ func get_next_map_section(current_connection: MapFile.ConnectionType) -> Array[M
 # Gets an ordered list of transitions from start to finish
 func get_transition_section(from: MapFile.ConnectionType, to: MapFile.ConnectionType) -> Array[MapFile]:
 	var first_transition :MapFile = get_transition(from, to)
-	if first_transition != null:
+	if first_transition:
 		return [first_transition]
 	
 	first_transition = get_transition(from, MapFile.ConnectionType.TYPE_C)
-	var second_transition :MapFile = get_transition(MapFile.ConnectionType.TYPE_C, to)
-	
 	if not first_transition:
 		first_transition = get_transition(from, MapFile.ConnectionType.TYPE_C, true)
 		print("Missing transition from: %s to Type C. Using any." % MapFile.ConnectionType.find_key(from))
 	
+	var second_transition :MapFile = get_transition(MapFile.ConnectionType.TYPE_C, to)
 	if not second_transition:
 		second_transition = get_transition(MapFile.ConnectionType.TYPE_C, to, true)
 		print("Missing transition from Type C to: %s. Using any." % MapFile.ConnectionType.find_key(from))
