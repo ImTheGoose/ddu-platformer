@@ -17,7 +17,7 @@ func _on_client_reset() -> void:
 	height_label.text = height_original_text % Format.get_height_string(0)
 	
 	if GameManager.is_playing_singleplayer():
-		height_label.visible = true
+		height_label.visible = !GameManager.is_playing_level()
 		time_label.visible = true
 	else:
 		height_label.visible = false

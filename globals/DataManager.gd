@@ -12,7 +12,7 @@ var config :ConfigFile = ConfigFile.new()
 var game_data :Dictionary
 var default_game_data: Dictionary = {
 	"unlocked_level" : 1,
-	"save_version" : 0.6,
+	"save_version" : 0.7,
 	"money" : 0,
 	"changelog_seen" : false,
 	"selected_skin" : "Osvald",
@@ -86,6 +86,10 @@ func update_game_data() -> void:
 	
 	if v < 0.6:
 		create_config()
+	
+	if v < 0.7:
+		game_data["unlocked_level"] = default_game_data["unlocked_level"]
+		game_data["level_times"] = default_game_data["level_times"]
 		
 	
 	game_data["save_version"] = default_game_data["save_version"]

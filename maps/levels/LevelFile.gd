@@ -73,6 +73,9 @@ func _verify_map_files() -> void:
 	return
 
 func get_time_color_string(time: float) -> String:
+	if time <= 0.1:
+		return "white"
+	
 	if time <= gold_medal_seconds:
 		return "goldenrod"
 	
@@ -85,6 +88,9 @@ func get_time_color_string(time: float) -> String:
 	return "white"
 
 func get_time_color(time: float) -> Color:
+	if time <= 0.1:
+		return Color.WHITE
+	
 	if time <= gold_medal_seconds:
 		return Color.GOLDENROD
 	

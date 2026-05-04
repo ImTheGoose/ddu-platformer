@@ -26,12 +26,12 @@ enum Type {
 	SHOP_2,
 	ANY_HIGHSCORE_60,
 	ANY_HIGHSCORE_120,
-	IMP_HIGHSCORE_180,
+	IMP_HIGHSCORE_180, #Changed to 120
 	ANY_HIGHSCORE_EXACT_69,
 	KILL_MUSHROOM_2,
 	GOLD_MEDALS_1,
-	ANY_HEIGHT_500,
-	ANY_HEIGHT_1000,
+	ANY_HEIGHT_500, #Changed to 250
+	ANY_HEIGHT_1000, #Changed to 500
 	MULTIPLAYER_1,
 }
 
@@ -103,17 +103,17 @@ func _check_any_highscore_120() -> void:
 func _check_imp_highscore_180() -> void:
 	if not is_achived(Type.IMP_HIGHSCORE_180):
 		if Difficulty.get_difficulty() == Difficulty.Type.IMPOSSIBLE:
-			if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) >= 180:
+			if Stats.get_recording_value(Stats.StatType.TIME_ALIVE) >= 120: #Changed to 120
 				set_achievement(Type.IMP_HIGHSCORE_180)
 
 func _check_any_height_500() -> void:
 	if not is_achived(Type.ANY_HEIGHT_500):
-		if Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED) >= 500:
+		if Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED) >= 250: #Changed to 250
 			set_achievement(Type.ANY_HEIGHT_500)
 
 func _check_any_height_1000() -> void:
 	if not is_achived(Type.ANY_HEIGHT_1000):
-		if Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED) >= 1000:
+		if Stats.get_recording_value(Stats.StatType.HEIGHT_REACHED) >= 500: #Changed to 500
 			set_achievement(Type.ANY_HEIGHT_1000)
 #endregion
 

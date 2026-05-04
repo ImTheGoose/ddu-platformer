@@ -13,7 +13,7 @@
 
 [resource]
 script = ExtResource("2_7toqn")
-map_index = 10
+map_index = 7
 gold_medal_seconds = 39.0
 silver_medal_seconds = 47.0
 bronze_medal_seconds = 60.0

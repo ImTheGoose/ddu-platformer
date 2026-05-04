@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dtgd2w3s54uyt" path="res://assets/Jersey15-Regular.ttf" id="1_ph74s"]
 
 [node name="LevelCard" type="PanelContainer" unique_id=2033289344]
-custom_minimum_size = Vector2(45, 45)
+custom_minimum_size = Vector2(50, 43)
 script = ExtResource("1_76lxp")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=27197159]
@@ -19,7 +19,7 @@ theme_override_constants/separation = -3
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_ph74s")
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 28
 text = "[img]res://assets/icons/%s_medal (16x16).png[/img][color=%s]%s"
 fit_content = true
 horizontal_alignment = 1

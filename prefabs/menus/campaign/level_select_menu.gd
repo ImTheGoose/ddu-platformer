@@ -33,7 +33,7 @@ func _update_limits() -> void:
 		previous_button.self_modulate = Color.WHITE
 		previous_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		
-	if level_index_offset >= Levels.get_highest_level_index() - 10:
+	if level_index_offset >= Levels.get_highest_level_index() - 11:
 		next_button.disabled = true
 		next_button.self_modulate = Color.TRANSPARENT
 		next_button.mouse_default_cursor_shape = Control.CURSOR_ARROW

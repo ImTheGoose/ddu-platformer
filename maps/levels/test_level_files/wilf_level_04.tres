@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
 
 [resource]
 script = ExtResource("2_2bfho")
-map_index = 5
+map_index = 13
 gold_medal_seconds = 38.0
 silver_medal_seconds = 53.0
 bronze_medal_seconds = 70.0
