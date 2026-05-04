@@ -219,14 +219,17 @@ func _check_shop_1() -> void:
 func _check_shop_2() -> void:
 	if not is_achived(Type.SHOP_2):
 		var owned_skins :Dictionary = DataManager.get_value("owned_skin")
+		owned_skins.erase("Osvald")
 		if not owned_skins.values().has(true):
 			return
 		
 		var owned_accents :Dictionary = DataManager.get_value("owned_accent")
+		owned_accents.erase("Brown")
 		if not owned_accents.values().has(true):
 			return
 			
 		var owned_themes :Dictionary = DataManager.get_value("owned_theme")
+		owned_themes.erase("Default")
 		if not owned_themes.values().has(true):
 			return
 	
