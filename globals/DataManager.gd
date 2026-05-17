@@ -66,10 +66,9 @@ func _process(delta: float) -> void:
 	Stats.add_float_stat(Stats.StatType.TIME_PlAYED, delta, false)
 
 func debug_data() -> void:
-	
 	return
 	_create_new_save_data()
-	set_value("money", 12456124)
+	set_value("money", 69420)
 	save_game_data()
 	return
 

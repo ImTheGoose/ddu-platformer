@@ -416,6 +416,7 @@ fit_content = true
 script = ExtResource("23_bbkfx")
 
 [node name="version_label" type="Label" parent="CanvasLayer/Control/UI" unique_id=695760526]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.008
