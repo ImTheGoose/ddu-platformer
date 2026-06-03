@@ -35,12 +35,24 @@
       "resource_name": {
         "visibility": 0.0
       }
+    },
+    "res://maps/maps/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
     }
   },
   "recent_paths": [
     "res://maps/map_files/",
     "res://maps/levels/test_level_files/",
-    "res://maps/map_files/david/"
+    "res://maps/map_files/david/",
+    "res://maps/maps/"
   ],
   "table_functions": {
     "filter": [

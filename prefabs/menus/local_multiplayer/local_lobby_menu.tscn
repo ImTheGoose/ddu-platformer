@@ -131,6 +131,29 @@ popup/item_3/id = 3
 popup/item_4/text = "Impossible"
 popup/item_4/id = 4
 
+[node name="intermission_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=760534949]
+layout_mode = 2
+
+[node name="intermission_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/intermission_setting" unique_id=2121151101]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Leaderboard: "
+vertical_alignment = 1
+
+[node name="intermission_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/intermission_setting" unique_id=408824614]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 3
+popup/item_0/text = "Every Round"
+popup/item_0/id = 0
+popup/item_1/text = "End of Match"
+popup/item_1/id = 1
+popup/item_2/text = "Never"
+popup/item_2/id = 2
+
 [node name="rounds_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=1092571187]
 layout_mode = 2
 
@@ -146,7 +169,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
-item_count = 6
+item_count = 8
 popup/item_0/text = "1 round"
 popup/item_0/id = 1
 popup/item_1/text = "2 rounds"
@@ -159,6 +182,10 @@ popup/item_4/text = "10 rounds"
 popup/item_4/id = 10
 popup/item_5/text = "20 rounds"
 popup/item_5/id = 20
+popup/item_6/text = "50 rounds"
+popup/item_6/id = 50
+popup/item_7/text = "100 rounds"
+popup/item_7/id = 100
 
 [node name="collision_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=316799556]
 layout_mode = 2

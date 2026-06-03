@@ -24,6 +24,7 @@ var dead_players :Array[int] = []
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
 	"map_collection" : MapFile.CollectionType.DEFAULT_MAPS,
+	"intermission" : Intermission.INTERMISSION_END_OF_MATCH,
 	"difficulty" : Difficulty.Type.NORMAL,
 	"gamemode" : Gamemode.GAMEMODE_STANDARD,
 	"total_rounds" : 1,
@@ -35,7 +36,14 @@ var game_is_level :bool = false
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
+var game_intermission :Intermission = Intermission.INTERMISSION_END_OF_MATCH
 var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.DEFAULT_MAPS
+
+enum Intermission {
+	INTERMISSION_EVERY_ROUND,
+	INTERMISSION_END_OF_MATCH,
+	INTERMISSION_NEVER,
+}
 
 enum Gamemode {
 	GAMEMODE_STANDARD,
@@ -110,6 +118,9 @@ func is_collissions_enabled() -> bool:
 func get_gamemode() -> Gamemode:
 	return game_gamemode
 
+func get_intermission() -> Intermission:
+	return game_intermission
+
 func get_total_rounds() -> int:
 	return game_total_rounds
 
@@ -117,6 +128,12 @@ func get_total_rounds() -> int:
 func set_map_collection(collection: MapFile.CollectionType) -> void:
 	game_map_collection = collection
 	game_settings_changed.emit()
+
+@rpc("authority","call_local","reliable")
+func set_intermission(intermission: Intermission) -> void:
+	game_intermission = intermission
+	game_settings_changed.emit()
+	return
 
 @rpc("authority","call_local","reliable")
 func set_gamemode(gamemode: Gamemode) -> void:
@@ -407,10 +424,18 @@ func _handle_post_game() -> void:
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && not Lobby.is_lobby_local():
 		MenuHandler.rpc("change_menu", "death_menu")
 	elif get_total_rounds() > played_rounds:
-		MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
+		if get_intermission() == Intermission.INTERMISSION_EVERY_ROUND:
+			MenuHandler.rpc("change_menu", "multiplayer_round_win_menu")
+		else:
+			next_round()
+			
 	else:
-		MenuHandler.rpc("show_blackout")
-		set_state(STATE.AWAITING_GAME_CONCLUSION)
+		if get_intermission() != Intermission.INTERMISSION_NEVER:
+			MenuHandler.rpc("show_blackout")
+			set_state(STATE.AWAITING_GAME_CONCLUSION)
+		else:
+			Stats.rpc("save_and_clear_match_scores")
+			GameManager.replay_game()
 
 
 
