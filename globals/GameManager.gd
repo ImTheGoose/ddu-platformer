@@ -23,7 +23,7 @@ var dead_players :Array[int] = []
 
 #region Difficulty Handling
 var default_game_settings :Dictionary = {
-	"map_collection" : MapFile.CollectionType.DEFAULT,
+	"map_collection" : MapFile.CollectionType.DEFAULT_MAPS,
 	"difficulty" : Difficulty.Type.NORMAL,
 	"gamemode" : Gamemode.GAMEMODE_STANDARD,
 	"total_rounds" : 1,
@@ -35,7 +35,7 @@ var game_is_level :bool = false
 var game_collissions_enabled: bool = false
 var game_total_rounds: int = 1
 var game_gamemode: Gamemode = Gamemode.GAMEMODE_STANDARD
-var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.DEFAULT
+var game_map_collection: MapFile.CollectionType = MapFile.CollectionType.DEFAULT_MAPS
 
 enum Gamemode {
 	GAMEMODE_STANDARD,
@@ -200,7 +200,7 @@ func get_state() -> STATE:
 func _ready() -> void:
 	Difficulty.difficulty_changed.connect(_on_difficulty_changed)
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	MenuHandler.game_is_covered.connect(_on_game_covered)
+	MenuHandler.game_cover_finished.connect(_on_game_cover_finished)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	reset_settings_to_default()
@@ -216,7 +216,10 @@ func _on_peer_disconnected(peer_id: int) -> void:
 	match_scores.erase(peer_id)
 	
 
-func _on_game_covered() -> void:
+func _on_game_cover_finished(is_covering_game: bool) -> void:
+	if !is_covering_game:
+		return
+
 	if state == STATE.AWAITING_QUIT_TO_MAIN:
 		Lobby.close_connection()
 		rpc("clear_game")
@@ -256,6 +259,12 @@ func _on_game_covered() -> void:
 		MenuHandler.rpc("show_game")
 		if is_game_paused():
 			pause_game(false)
+	elif state == STATE.POST_GAME && multiplayer.is_server():
+		_handle_post_game()
+	elif multiplayer.is_server():
+		MenuHandler.rpc("hide_blackout")
+		MenuHandler.rpc("hide_all_menus")
+		MenuHandler.rpc("show_game")
 
 func pause_game(isPaused: bool) -> void:
 	if multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
@@ -279,8 +288,9 @@ func is_alive() -> bool:
 	return state != STATE.DEAD
 
 func restart_game() -> void:
-	set_state(STATE.AWAITING_RESTART)
-	MenuHandler.rpc("show_blackout")
+	if multiplayer.is_server():
+		set_state(STATE.AWAITING_RESTART)
+		MenuHandler.rpc("show_blackout")
 
 @rpc("authority","call_local","reliable")
 func spawn_game() -> void:
@@ -342,6 +352,10 @@ func start_game() -> void:
 	if !multiplayer.is_server():
 		return
 	
+	if MenuHandler.is_blackout_visible():
+		push_warning("Tried to start game while blackout was visible")
+		return
+	
 	rpc("start_client")
 	server_start.emit()
 
@@ -384,6 +398,11 @@ func player_died(peer_id: int, time_at_death: float = 0.0) -> void:
 			rpc("set_round_score", id, 999999)
 	
 	rpc("set_state", STATE.POST_GAME)
+	_handle_post_game()
+
+func _handle_post_game() -> void:
+	if not multiplayer.is_server():
+		return
 	
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer && not Lobby.is_lobby_local():
 		MenuHandler.rpc("change_menu", "death_menu")

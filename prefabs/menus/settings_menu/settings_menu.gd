@@ -114,3 +114,7 @@ func _on_keybinds_pressed() -> void:
 
 func _on_clear_game_data_pressed() -> void:
 	MenuHandler.change_menu("reset_game_menu")
+
+
+func _on_credits_pressed() -> void:
+	MenuHandler.change_menu("credits_menu")

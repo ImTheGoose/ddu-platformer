@@ -13,9 +13,9 @@
 [resource]
 script = ExtResource("2_hdjd2")
 map_index = 2
-gold_medal_seconds = 25.0
-silver_medal_seconds = 30.0
-bronze_medal_seconds = 35.0
+gold_medal_seconds = 27.5
+silver_medal_seconds = 32.5
+bronze_medal_seconds = 40.0
 end_map_file = ExtResource("1_2q8ca")
 ordered_map_files = Array[ExtResource("1_meeq1")]([ExtResource("3_pbgi6"), ExtResource("4_s72nr"), ExtResource("5_x2ao5"), ExtResource("6_mphk7"), ExtResource("7_r344b")])
 start_map_file = ExtResource("4_5c60l")

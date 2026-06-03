@@ -29,14 +29,14 @@ class_name MapFile
 @export var is_multiplayer_compatible :bool = true
 
 const VISIBLE_COLLECTIONS_IN_RELEASE :Array[CollectionType] = [
-	CollectionType.DEFAULT,
-	CollectionType.LEGACY,
+	CollectionType.DEFAULT_MAPS,
+	CollectionType.LEGACY_MAPS,
 	CollectionType.NEW_MAPS,
 ]
 
 enum CollectionType {
-	DEFAULT,
-	LEGACY,
+	DEFAULT_MAPS,
+	LEGACY_MAPS,
 	NEW_MAPS,
 	UNDER_DEVELOPMENT,
 	IN_REVIEW,

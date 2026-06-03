@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://b1alniwndksnn"]
+
+[ext_resource type="Script" uid="uid://cxm57kpjiftit" path="res://prefabs/menus/settings_menu/credits_menu.gd" id="1_16pk6"]
+
+[node name="credits_menu" type="VBoxContainer" unique_id=36396853 node_paths=PackedStringArray("initial_focus")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -112.0
+offset_right = 98.5
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_16pk6")
+menu_name = "credits_menu"
+seperate_from_game = true
+initial_focus = NodePath("close")
+
+[node name="Label" type="Label" parent="." unique_id=865346555]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1137477444]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=245608253]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=255244053]
+custom_minimum_size = Vector2(268.735, 158.91)
+layout_mode = 2
+size_flags_vertical = 0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ContentList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1973147595]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Changelog_Titel" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/ContentList" unique_id=2130875369]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Made with love by"
+horizontal_alignment = 1
+
+[node name="Changelog_Description" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer/ContentList" unique_id=59241247]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+text = "[b][font_size=20]Game fully developed by[/font_size][/b]
+David Gawin / Im_The_Goose
+
+[b][font_size=20]Maps made by[/font_size][/b]
+Wilfred Heide Pedersen / snowtroll
+Willum lee ravnborg / stat
+
+[b][font_size=20]Assets mainly by[/font_size][/b]
+Pixel frog | Pixel adventrue 1 & 2
+Flatus | Generic Dark Pixel UI"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="close" type="Button" parent="." unique_id=1751123956]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

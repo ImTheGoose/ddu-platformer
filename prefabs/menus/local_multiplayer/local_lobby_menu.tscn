@@ -83,6 +83,27 @@ theme_override_styles/separator = SubResource("StyleBoxLine_wdrp6")
 layout_mode = 2
 script = ExtResource("2_bni2x")
 
+[node name="map_collection_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=68486791]
+layout_mode = 2
+
+[node name="map_collection_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=117222289]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 13.54)
+layout_mode = 2
+text = "Collection: "
+vertical_alignment = 1
+
+[node name="map_collection_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=1183251566]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "Standard"
+popup/item_0/id = 0
+popup/item_1/text = "Constant"
+popup/item_1/id = 1
+
 [node name="difficulty_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=609237484]
 layout_mode = 2
 
@@ -171,27 +192,6 @@ text = "Gamemode: "
 vertical_alignment = 1
 
 [node name="gamemode_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/gamemode_setting" unique_id=1291943177]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-item_count = 2
-popup/item_0/text = "Standard"
-popup/item_0/id = 0
-popup/item_1/text = "Constant"
-popup/item_1/id = 1
-
-[node name="map_collection_setting" type="HBoxContainer" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts" unique_id=68486791]
-layout_mode = 2
-
-[node name="map_collection_label" type="Label" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=117222289]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 13.54)
-layout_mode = 2
-text = "Collection: "
-vertical_alignment = 1
-
-[node name="map_collection_option" type="OptionButton" parent="VBoxContainer3/PanelContainer/HBoxContainer2/settings_parts/map_collection_setting" unique_id=1183251566]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

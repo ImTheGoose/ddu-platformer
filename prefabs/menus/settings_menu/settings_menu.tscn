@@ -191,10 +191,15 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Clear Game Data"
 
+[node name="credits" type="Button" parent="." unique_id=543885900]
+layout_mode = 2
+text = "Credits"
+
 [node name="back" type="Button" parent="." unique_id=667139389]
 layout_mode = 2
 text = "Back"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingsList/keybinds" to="." method="_on_keybinds_pressed"]
 [connection signal="pressed" from="clear_game_data" to="." method="_on_clear_game_data_pressed"]
+[connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

@@ -15,7 +15,9 @@ func _on_viewport_size_changed() -> void:
 
 func _on_animation_finished(anim_name: String) -> void:	
 	if anim_name == "show_blackout":
-		MenuHandler.game_is_covered.emit()
+		MenuHandler.game_cover_finished.emit(true)
+	else:
+		MenuHandler.game_cover_finished.emit(false)
 
 	if anim_name == "show_blackout" && !should_be_shown:
 		hide_animation()
