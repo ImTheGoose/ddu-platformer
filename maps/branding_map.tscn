@@ -97,4 +97,4 @@ sprite_frames = ExtResource("8_p2r7u")
 animation = &"Jump"
 
 [connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
-[connection signal="body_entered" from="TrapTiles/@Area2D@42871" to="TrapTiles/@Area2D@42871" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/@Area2D@46152" to="TrapTiles/@Area2D@46152" method="_on_body_entered"]
