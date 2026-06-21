@@ -33,7 +33,7 @@ func get_icon_path() -> String:
 	return "res://assets/icons/controllers/controller_generic.png"
 
 func get_icon_bbcode() -> String:
-	return "[img=\"height=22\"]%s[/img]" % get_icon_path()
+	return "[img height=1em]%s[/img]" % get_icon_path()
 
 func is_event_input_activation(event: InputEvent) -> bool:
 	if event is InputEventJoypadButton:
