@@ -11,6 +11,8 @@ extends VBoxContainer
 @onready var gamemode_option: OptionButton = %gamemode_option
 @onready var map_collection_label: Label = %map_collection_label
 @onready var map_collection_option: OptionButton = %map_collection_option
+@onready var intermission_label: Label = %intermission_label
+@onready var intermission_option: OptionButton = %intermission_option
 
 func _ready() -> void:
 	GameManager.game_settings_changed.connect(_on_game_settings_changed)
@@ -23,6 +25,7 @@ func _ready() -> void:
 	gamemode_option.item_selected.connect(_on_gamemode_selected)
 	collission_option.item_selected.connect(_on_collissions_selected)
 	map_collection_option.item_selected.connect(_on_map_collection_selected)
+	intermission_option.item_selected.connect(_on_intermission_selected)
 	_initialise_collection_dropdown()
 	
 	refresh_settings()
@@ -49,6 +52,7 @@ func _refresh_focus() -> void:
 		collission_option.focus_neighbor_left = kick_button.get_path()
 		gamemode_option.focus_neighbor_left = kick_button.get_path()
 		map_collection_option.focus_neighbor_left = kick_button.get_path()
+		intermission_option.focus_neighbor_left = kick_button.get_path()
 		kick_button.focus_neighbor_right = rounds_option.get_path()
 		
 		if player_cards.size() > 1:
@@ -57,6 +61,7 @@ func _refresh_focus() -> void:
 			gamemode_option.focus_neighbor_left = kick_button.get_path()
 			map_collection_option.focus_neighbor_left = kick_button.get_path()
 			kick_button.focus_neighbor_right = gamemode_option.get_path()
+			intermission_option.focus_neighbor_left = kick_button.get_path()
 		if player_cards.size() > 2:
 			kick_button = player_cards.get(2).kick_button
 			map_collection_option.focus_neighbor_left = player_cards.get(2).kick_button.get_path()
@@ -69,6 +74,7 @@ func _refresh_focus() -> void:
 		collission_option.focus_neighbor_left = NodePath("")
 		gamemode_option.focus_neighbor_left = NodePath("")
 		map_collection_option.focus_neighbor_left = NodePath("")
+		intermission_option.focus_neighbor_left = NodePath("")
 
 func _on_collissions_selected(index: int) -> void:
 	if index == 0:
@@ -94,6 +100,10 @@ func _on_difficulty_selected(index: int) -> void:
 	Difficulty.set_difficulty(index)
 	GameManager.sync_settings_to_peers()
 
+func _on_intermission_selected(index: int) -> void:
+	GameManager.set_intermission(index)
+	GameManager.sync_settings_to_peers()
+
 func _on_game_settings_changed() -> void:
 	refresh_settings()
 
@@ -105,10 +115,11 @@ func refresh_settings() -> void:
 		gamemode_option.visible = true
 		map_collection_option.visible = true
 		diff_label.text = "Difficulty: "
-		rounds_label.text = "Rounds to Win: "
+		rounds_label.text = "Total Rounds: "
 		collission_label.text = "Collissions: "
 		gamemode_label.text = "Gamemode: "
 		map_collection_label.text = "Collection: "
+		intermission_label.text = "Leaderboard: "
 		diff_option.selected = Difficulty.get_difficulty()
 		
 		rounds_option.selected = rounds_option.get_item_index(GameManager.get_total_rounds())
@@ -121,12 +132,15 @@ func refresh_settings() -> void:
 		collission_option.visible = false
 		gamemode_option.visible = false
 		map_collection_option.visible = false
+		intermission_option.visible = false
 		diff_label.text = "Difficulty: %s" % diff_option.get_item_text(Difficulty.get_difficulty())
-		rounds_label.text = "Rounds to Win: %s" % rounds_option.get_item_text(rounds_option.get_item_index(GameManager.get_total_rounds()))
+		rounds_label.text = "Total Rounds: %s" % rounds_option.get_item_text(rounds_option.get_item_index(GameManager.get_total_rounds()))
 		if GameManager.is_collissions_enabled():
 			collission_label.text = "Collissions: enabled"
 		else:
 			collission_label.text = "Collissions: disabled"
 		gamemode_label.text = "Gamemode: %s" % gamemode_option.get_item_text(GameManager.get_gamemode())
 		map_collection_label.text = "Collection: %s" % map_collection_option.get_item_text(map_collection_option.get_item_index(GameManager.get_map_collection()))
+		intermission_label.text = "Leaderboard: %s" % intermission_option.get_item_text(GameManager.get_intermission())
+		
 	return

@@ -56,6 +56,7 @@
 [ext_resource type="PackedScene" uid="uid://ciguwwv8we0y0" path="res://prefabs/particles/die_particles.tscn" id="48_5tfui"]
 [ext_resource type="PackedScene" uid="uid://dpjwyw8kvil3y" path="res://prefabs/particles/dust_particles.tscn" id="49_38apo"]
 [ext_resource type="TileSet" uid="uid://cgeebl2fbdu4m" path="res://ressources/tilesets/terrain_tileset.tres" id="49_i8832"]
+[ext_resource type="PackedScene" uid="uid://b1alniwndksnn" path="res://prefabs/menus/settings_menu/credits_menu.tscn" id="49_q4fed"]
 [ext_resource type="Script" uid="uid://m1bao5e3p8k7" path="res://utility/hidden_game_visual.gd" id="50_bbhju"]
 [ext_resource type="PackedScene" uid="uid://b0itpxkfhya41" path="res://prefabs/particles/jump_particles.tscn" id="50_khphd"]
 
@@ -416,6 +417,7 @@ fit_content = true
 script = ExtResource("23_bbkfx")
 
 [node name="version_label" type="Label" parent="CanvasLayer/Control/UI" unique_id=695760526]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.008
@@ -517,6 +519,12 @@ layout_mode = 1
 [node name="changelog_popup" parent="CanvasLayer/Control/Menus" unique_id=272473621 instance=ExtResource("36_dwegs")]
 visible = false
 layout_mode = 1
+
+[node name="credits_menu" parent="CanvasLayer/Control/Menus" unique_id=36396853 instance=ExtResource("49_q4fed")]
+visible = false
+layout_mode = 1
+offset_top = -112.5
+offset_bottom = 112.5
 
 [node name="steam_error_popup" parent="CanvasLayer/Control/Menus" unique_id=1151020849 instance=ExtResource("37_jox3r")]
 visible = false

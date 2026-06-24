@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://cxsrwtbvm4dlm"]
 
 [ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_0a8n4"]
-[ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="1_15dqn"]
+[ext_resource type="Resource" uid="uid://q7v4yflptvc8" path="res://maps/map_files/default/end_05.tres" id="1_7txok"]
 [ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="2_4hnmh"]
 [ext_resource type="Resource" uid="uid://pt5k1bd2lkqy" path="res://maps/map_files/wilfred/new_trans_wilf_07.tres" id="3_8tm70"]
 [ext_resource type="Resource" uid="uid://yjb44bdyxvi5" path="res://maps/map_files/david/trans_03.tres" id="3_bt48f"]
@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://b75kkj3soavdg" path="res://maps/map_files/wilfred/new_wilf_03.tres" id="5_ae3h6"]
 [ext_resource type="Resource" uid="uid://08xfpkvqu5rn" path="res://maps/map_files/wilfred/new_wilf_01.tres" id="6_10xw4"]
 [ext_resource type="Resource" uid="uid://c1hipau5vb58c" path="res://maps/map_files/wilfred/new_wilf_23.tres" id="7_wivyy"]
-[ext_resource type="Resource" uid="uid://b37hyo4jxwbl0" path="res://maps/map_files/willum/new transitions/willum_trans_03.tres" id="9_bt48f"]
 [ext_resource type="Resource" uid="uid://blns56by1a47x" path="res://maps/map_files/default/start_01.tres" id="18_hdirt"]
 
 [resource]
@@ -18,7 +17,7 @@ map_index = 18
 gold_medal_seconds = 51.0
 silver_medal_seconds = 60.0
 bronze_medal_seconds = 75.0
-end_map_file = ExtResource("1_15dqn")
-ordered_map_files = Array[ExtResource("1_0a8n4")]([ExtResource("3_8tm70"), ExtResource("4_8bpqf"), ExtResource("5_ae3h6"), ExtResource("6_10xw4"), ExtResource("7_wivyy"), ExtResource("3_bt48f"), ExtResource("9_bt48f")])
+end_map_file = ExtResource("1_7txok")
+ordered_map_files = Array[ExtResource("1_0a8n4")]([ExtResource("3_8tm70"), ExtResource("4_8bpqf"), ExtResource("5_ae3h6"), ExtResource("6_10xw4"), ExtResource("7_wivyy"), ExtResource("3_bt48f")])
 start_map_file = ExtResource("18_hdirt")
 metadata/_custom_type_script = "uid://h3dsm18hywkb"

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://b1dqejjjijjbi"]
 
 [ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_273ta"]
-[ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="1_y8sjv"]
+[ext_resource type="Resource" uid="uid://cbadklyspxfih" path="res://maps/map_files/default/end_02.tres" id="1_jf0xh"]
 [ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="2_7toqn"]
 [ext_resource type="Resource" uid="uid://08xfpkvqu5rn" path="res://maps/map_files/wilfred/new_wilf_01.tres" id="3_jf0xh"]
 [ext_resource type="Resource" uid="uid://blns56by1a47x" path="res://maps/map_files/default/start_01.tres" id="4_1vm6o"]
@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://dqisytgmuya45" path="res://maps/map_files/willum/new transitions/willum_trans_10.tres" id="5_pdu6a"]
 [ext_resource type="Resource" uid="uid://b4fdh44xpyuc3" path="res://maps/map_files/david/trans_08.tres" id="6_pdu6a"]
 [ext_resource type="Resource" uid="uid://dvfa3pauo8tnm" path="res://maps/map_files/wilfred/wilf_map_13.tres" id="7_3u6i3"]
-[ext_resource type="Resource" uid="uid://c5q5vdfg4a0bu" path="res://maps/map_files/wilfred/new_trans_wilf_12.tres" id="9_3u6i3"]
 
 [resource]
 script = ExtResource("2_7toqn")
@@ -17,7 +16,7 @@ map_index = 7
 gold_medal_seconds = 39.0
 silver_medal_seconds = 47.0
 bronze_medal_seconds = 60.0
-end_map_file = ExtResource("1_y8sjv")
-ordered_map_files = Array[ExtResource("1_273ta")]([ExtResource("3_jf0xh"), ExtResource("4_m7w2s"), ExtResource("5_pdu6a"), ExtResource("4_m7w2s"), ExtResource("6_pdu6a"), ExtResource("7_3u6i3"), ExtResource("9_3u6i3")])
+end_map_file = ExtResource("1_jf0xh")
+ordered_map_files = Array[ExtResource("1_273ta")]([ExtResource("3_jf0xh"), ExtResource("4_m7w2s"), ExtResource("5_pdu6a"), ExtResource("4_m7w2s"), ExtResource("6_pdu6a"), ExtResource("7_3u6i3")])
 start_map_file = ExtResource("4_1vm6o")
 metadata/_custom_type_script = "uid://h3dsm18hywkb"

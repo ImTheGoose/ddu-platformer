@@ -18,6 +18,6 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		if GameManager.get_state() != GameManager.STATE.PREGAME:
 			return
-			
+		
 		print("Starting Game from: %s "% multiplayer.get_unique_id())
 		GameManager.rpc_id(1, "start_game")

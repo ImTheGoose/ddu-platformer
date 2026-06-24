@@ -285,7 +285,7 @@ func unlock_lobby() -> void:
 			Steam.setLobbyJoinable(STEAM_LOBBY_ID, true)
 
 func close_connection() -> void:
-	if multiplayer.multiplayer_peer is not OfflineMultiplayerPeer:
+	if multiplayer.multiplayer_peer is not OfflineMultiplayerPeer or Lobby.is_lobby_local():
 		GameManager.reset_settings_to_default()
 	
 	Steamworks.set_rich_presense("#InMenu")
@@ -326,6 +326,9 @@ enum LocalID {
 
 func is_lobby_local() -> bool:
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		if not created_player_infos or created_player_infos.is_empty():
+			return false
+		
 		if created_player_infos.values().get(0) is LocalPlayerInfo:
 			return true
 

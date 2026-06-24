@@ -18,6 +18,14 @@ var map_card :PackedScene = preload("uid://w2kt6mh7bu5g")
 func _ready() -> void:
 	_instatiate_cards()
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.is_pressed():
+			if event.key_label == KEY_J:
+				_on_previous_pressed()
+			elif event.key_label == KEY_K:
+				_on_next_pressed()
+
 func _instatiate_cards() -> void:
 	for child in map_card_list.get_children():
 		child.queue_free()

@@ -9,4 +9,4 @@ func _on_delete_data_pressed() -> void:
 
 
 func _on_cancel_pressed() -> void:
-	MenuHandler.change_menu(MenuHandler.get_previous_menu())
+	MenuHandler.change_menu("settings_menu")

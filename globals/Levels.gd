@@ -62,6 +62,8 @@ func get_levels_from_folder(path: String) -> Dictionary[int, LevelFile]:
 				
 				if loaded_file.is_valid():
 					folder_level_files.set(loaded_file.map_index, loaded_file)
+				else:
+					print("level with name: %s not valid" % file_name)
 				
 			else:
 				printerr("Level with duplicate index. Filename is: ", file_name)

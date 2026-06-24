@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cxb38pfmot842" path="res://assets/audio/sfx/enemies/moving_heads/impact1.ogg" id="10_3y4ws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjg5y"]
-size = Vector2(30, 30)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o70q"]
 size = Vector2(6, 12)
@@ -100,7 +100,7 @@ kill_type = 6
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall_kill_handler/TopCheck/HitArea" unique_id=90746367]
-position = Vector2(18, -8)
+position = Vector2(18.5, -8)
 shape = SubResource("RectangleShape2D_1o70q")
 debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)
 
@@ -121,7 +121,7 @@ kill_type = 6
 metadata/_custom_type_script = "uid://csjcberb4rmwa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall_kill_handler/BottomCheck/HitArea2" unique_id=165334849]
-position = Vector2(18, -8)
+position = Vector2(18.5, -8)
 shape = SubResource("RectangleShape2D_1o70q")
 debug_color = Color(0.7592286, 0.45148844, 0.10965636, 0.41960785)
 

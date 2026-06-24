@@ -3,7 +3,9 @@ extends Node
 signal changed_seperator_visibillity(isVisible: bool)
 signal changed_blackout_visibillity(isVisible: bool)
 signal changed_game_visibillity(isVisible: bool)
-signal game_is_covered()
+signal game_cover_starting(is_going_to_cover: bool)
+signal game_cover_finished(is_covering_game: bool)
+var blackout_is_visible :bool = false
 
 var background_is_visible :bool = false
 var game_is_visible :bool = false
@@ -17,6 +19,19 @@ func _init() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	changed_seperator_visibillity.connect(_background_visible_changed)
 	changed_game_visibillity.connect(_on_game_visible_changed)
+	game_cover_starting.connect(_on_game_cover_starting)
+	game_cover_finished.connect(_on_game_cover_finished)
+
+func _on_game_cover_starting(is_going_to_cover: bool) -> void:
+	if is_going_to_cover:
+		blackout_is_visible = true
+
+func _on_game_cover_finished(is_covering_game: bool) -> void:
+	if not is_covering_game:
+		blackout_is_visible = false
+
+func is_blackout_visible() -> bool:
+	return blackout_is_visible
 
 func register_menu(menu_name : String, root_node : Control) -> void:
 	registered_menus.set(menu_name, root_node)

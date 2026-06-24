@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LevelFile" format=3 uid="uid://cths26dtslira"]
 
-[ext_resource type="Resource" uid="uid://djc5pba3f500o" path="res://maps/map_files/default/end_01.tres" id="1_o1hdh"]
+[ext_resource type="Resource" uid="uid://3ykiohyq6x6r" path="res://maps/map_files/default/end_03.tres" id="1_humua"]
 [ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="1_yfutp"]
 [ext_resource type="Script" uid="uid://h3dsm18hywkb" path="res://maps/levels/LevelFile.gd" id="2_apdsm"]
 [ext_resource type="Resource" uid="uid://bnnnhx6pnkrq7" path="res://maps/map_files/david/trans_07.tres" id="3_rrhdn"]
@@ -20,7 +20,7 @@ map_index = 11
 gold_medal_seconds = 39.0
 silver_medal_seconds = 48.0
 bronze_medal_seconds = 64.0
-end_map_file = ExtResource("1_o1hdh")
-ordered_map_files = Array[ExtResource("1_yfutp")]([ExtResource("3_rrhdn"), ExtResource("4_firfu"), ExtResource("4_04tup"), ExtResource("6_rsaee"), ExtResource("7_t1qs8"), ExtResource("8_sqg0e"), ExtResource("7_t1qs8"), ExtResource("13_1omyv"), ExtResource("10_rrhdn"), ExtResource("13_t1qs8"), ExtResource("3_rrhdn"), ExtResource("4_firfu")])
+end_map_file = ExtResource("1_humua")
+ordered_map_files = Array[ExtResource("1_yfutp")]([ExtResource("3_rrhdn"), ExtResource("4_firfu"), ExtResource("4_04tup"), ExtResource("6_rsaee"), ExtResource("7_t1qs8"), ExtResource("8_sqg0e"), ExtResource("7_t1qs8"), ExtResource("13_1omyv"), ExtResource("10_rrhdn"), ExtResource("13_t1qs8"), ExtResource("3_rrhdn")])
 start_map_file = ExtResource("8_rsaee")
 metadata/_custom_type_script = "uid://h3dsm18hywkb"

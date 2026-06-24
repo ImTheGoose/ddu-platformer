@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjj0iiithk4ua"]
 
 [ext_resource type="Script" uid="uid://qhnvl23gbubp" path="res://prefabs/menus/main_menu/main_menu.gd" id="1_vbl68"]
-[ext_resource type="Texture2D" uid="uid://cfww4vh32t164" path="res://assets/branding/logo.png" id="2_80838"]
+[ext_resource type="Texture2D" uid="uid://qejwf04j0s8b" path="res://assets/branding/steam_branding/new_library/logo_red_cropped.png" id="2_vbl68"]
 
 [node name="MainMenu" type="VBoxContainer" unique_id=1922624189 node_paths=PackedStringArray("initial_focus")]
 anchors_preset = 8
@@ -10,21 +10,21 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -97.5
+offset_top = -135.0
 offset_right = 150.0
-offset_bottom = 97.5
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 26
+theme_override_constants/separation = 8
 alignment = 1
 script = ExtResource("1_vbl68")
 menu_name = "main_menu"
 initial_focus = NodePath("MarginContainer/VBoxContainer/start_game")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1123445028]
-custom_minimum_size = Vector2(300, 58.76)
+custom_minimum_size = Vector2(300, 125)
 layout_mode = 2
-texture = ExtResource("2_80838")
+texture = ExtResource("2_vbl68")
 stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2051793933]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapFile" format=3 uid="uid://cbadklyspxfih"]
+
+[ext_resource type="PackedScene" uid="uid://cghrgvhhmsdrv" path="res://maps/prefabs/other_prefabs/end_map_parts/end_04.tscn" id="1_jxxo6"]
+[ext_resource type="Script" uid="uid://dnyd1i06yb7yg" path="res://maps/MapFile.gd" id="2_1qbh1"]
+
+[resource]
+script = ExtResource("2_1qbh1")
+map_id = "end_02"
+prefab = ExtResource("1_jxxo6")
+bottom_connection_type = 4
+type = 3
+related_collections = Array[int]([])
+metadata/_custom_type_script = "uid://dnyd1i06yb7yg"
