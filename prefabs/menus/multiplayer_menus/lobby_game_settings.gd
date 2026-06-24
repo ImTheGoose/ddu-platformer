@@ -132,6 +132,7 @@ func refresh_settings() -> void:
 		collission_option.visible = false
 		gamemode_option.visible = false
 		map_collection_option.visible = false
+		intermission_option.visible = false
 		diff_label.text = "Difficulty: %s" % diff_option.get_item_text(Difficulty.get_difficulty())
 		rounds_label.text = "Total Rounds: %s" % rounds_option.get_item_text(rounds_option.get_item_index(GameManager.get_total_rounds()))
 		if GameManager.is_collissions_enabled():

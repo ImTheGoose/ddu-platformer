@@ -6,7 +6,7 @@
 [ext_resource type="TileSet" uid="uid://m5ulicf6wm0o" path="res://ressources/tilesets/trap_tileset.tres" id="4_wi67g"]
 [ext_resource type="TileSet" uid="uid://2v32sa53s5e0" path="res://ressources/tilesets/enemy_tileset.tres" id="5_eavox"]
 [ext_resource type="Script" uid="uid://k4wwyi70oref" path="res://maps/game_start_area.gd" id="6_1rb8q"]
-[ext_resource type="Script" uid="uid://h4x8nun4f5ff" path="res://maps/spawnpoint.gd" id="7_1fvdf"]
+[ext_resource type="Script" uid="uid://cqw82kqndg2tb" path="res://maps/playerspawns.gd" id="7_fe71p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tji8"]
 size = Vector2(100, 6.5)
@@ -48,24 +48,21 @@ script = ExtResource("6_1rb8q")
 position = Vector2(502, 136)
 shape = SubResource("RectangleShape2D_6tji8")
 
-[node name="spawnpoint" type="Node2D" parent="." unique_id=890183501]
+[node name="Node2D" type="Node2D" parent="." unique_id=155288768 node_paths=PackedStringArray("spawn_pos_nodes")]
+script = ExtResource("7_fe71p")
+spawn_pos_nodes = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4")]
+
+[node name="spawn1" type="Node2D" parent="Node2D" unique_id=890183501]
 position = Vector2(320, 288)
-script = ExtResource("7_1fvdf")
 
-[node name="spawnpoint2" type="Node2D" parent="." unique_id=2127278485]
+[node name="spawn2" type="Node2D" parent="Node2D" unique_id=2127278485]
 position = Vector2(288, 288)
-script = ExtResource("7_1fvdf")
-spawn_idx = 2
 
-[node name="spawnpoint3" type="Node2D" parent="." unique_id=122264027]
+[node name="spawn3" type="Node2D" parent="Node2D" unique_id=122264027]
 position = Vector2(256, 288)
-script = ExtResource("7_1fvdf")
-spawn_idx = 3
 
-[node name="spawnpoint4" type="Node2D" parent="." unique_id=2110501125]
+[node name="spawn4" type="Node2D" parent="Node2D" unique_id=2110501125]
 position = Vector2(224, 288)
-script = ExtResource("7_1fvdf")
-spawn_idx = 4
 
-[connection signal="body_entered" from="TrapTiles/@Area2D@95680" to="TrapTiles/@Area2D@95680" method="_on_body_entered"]
+[connection signal="body_entered" from="TrapTiles/Trampoline" to="TrapTiles/Trampoline" method="_on_body_entered"]
 [connection signal="body_entered" from="game_start_area" to="game_start_area" method="_on_body_entered"]

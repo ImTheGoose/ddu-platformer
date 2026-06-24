@@ -179,6 +179,7 @@ func sync_settings_to_peers() -> void:
 		rpc("set_total_rounds", get_total_rounds())
 		rpc("set_collisions_enabled", is_collissions_enabled())
 		rpc("set_gamemode", get_gamemode())
+		rpc("set_intermission", get_intermission())
 
 func reset_settings_to_default() -> void:
 	set_map_collection(default_game_settings["map_collection"])
