@@ -112,7 +112,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_arolv")
 }],
-"loop": 0,
+"loop": false,
 "name": &"Appear",
 "speed": 20.0
 }, {
@@ -129,7 +129,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qhxv2")
 }],
-"loop": 0,
+"loop": false,
 "name": &"Disappear",
 "speed": 20.0
 }, {
@@ -149,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0323l")
 }],
-"loop": 0,
+"loop": false,
 "name": &"Hit",
 "speed": 20.0
 }, {
@@ -184,7 +184,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xxlnp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Moving",
 "speed": 20.0
 }]
